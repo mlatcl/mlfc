@@ -1,42 +1,5 @@
-# LaMD Lecture System
+# ML Foundations Course
 
-[![Tests](https://github.com/lawrennd/lamd-lecture/actions/workflows/tests.yml/badge.svg)](https://github.com/lawrennd/lamd-lecture/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/lawrennd/lamd-lecture/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/lawrennd/lamd-lecture)
-
-A template repository for creating academic lecture courses using Jekyll and LaMD (Literate Academic Markdown).
-
-## Quick Install
-
-```bash
-# Clone the template
-git clone https://github.com/lawrennd/lamd-lecture.git my-course
-cd my-course
-
-# Run the installation script
-./install.sh
-```
-
-The installer will:
-1. Ask for your course details
-2. Set up the directory structure
-3. Configure the templates
-4. Initialize git repository
-5. Optionally create a GitHub repository
-
-## Overview
-
-lamd-lecture provides a skeleton structure for building lecture courses with the following features:
-- Multiple output formats (slides, notes, web pages) from a single markdown source
-- Jekyll-based website generation for course materials
-- LaMD macros for consistent content rendering
-
-## Getting Started
-
-1. Use this repository as a template
-2. Configure `_config.yml` with your course details
-3. Update `_lamd/_lamd.yml` with your personal information and output preferences
-4. Add lecture content to the `_lamd` directory
-5. Compile lectures with `maketalk` command
 
 ## Repository Structure
 
