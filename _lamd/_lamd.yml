@@ -1,47 +1,46 @@
 # Author information - update with your details
 author:
-- given: Your
-  family: Name
-  institution: Your Institution
-  url: http://example.com
-
+  - given: Your
+    family: Name
+    institution: Your Institution
+    url: http://example.com
 # Layout and styling
-layout: lecture  # Default layout for lectures
-talkcss: https://example.com/assets/css/talks.css  # CSS for talks
-
+layout: lecture # Default layout for lectures
+talkcss: https://example.com/assets/css/talks.css # CSS for talks
 # Directory paths
-bibdir: $HOME/bibliography  # Bibliography directory
-postsdir: ../_lectures/     # Where compiled lecture HTML files go
-slidesdir: ../slides/       # Where compiled slides go
-notesdir: ../_notes/        # Where compiled notes go
-notebooksdir: ../_notebooks/  # Where compiled notebooks go
-practicalsdir: ../_practicals/  # Where compiled practicals go
-snippetsdir: $HOME/snippets  # Directory for reusable content snippets
-writediagramsdir: .         # Where to write generated diagrams
-scriptsdir: ./scripts/      # Directory for scripts
-diagramsdir: ./slides/diagrams/  # Directory for diagrams
-
+bibdir: $HOME/bibliography # Bibliography directory
+postsdir: ../_lectures/ # Where compiled lecture HTML files go
+slidesdir: ../slides/ # Where compiled slides go
+notesdir: ../_notes/ # Where compiled notes go
+notebooksdir: ../_notebooks/ # Where compiled notebooks go
+practicalsdir: ../_practicals/ # Where compiled practicals go
+snippetsdir: $HOME/snippets # Directory for reusable content snippets
+writediagramsdir: . # Where to write generated diagrams
+scriptsdir: ./scripts/ # Directory for scripts
+diagramsdir: ./slides/diagrams/ # Directory for diagrams
 # Output format settings (True/False)
-posts: True     # Generate HTML lecture pages
-docx: True      # Generate Word documents
+posts: True # Generate HTML lecture pages
+docx: True # Generate Word documents
 notespdf: False # Generate PDF notes
-slidesipynb: False  # Generate Jupyter notebooks for slides
-pptx: True      # Generate PowerPoint presentations
-pdf: False      # Generate PDF lectures
-assignment: False  # Generate assignment format
-ipynb: False    # Generate Jupyter notebooks
-reveal: False   # Use reveal.js for slides
-
+slidesipynb: False # Generate Jupyter notebooks for slides
+pptx: True # Generate PowerPoint presentations
+pdf: False # Generate PDF lectures
+assignment: False # Generate assignment format
+ipynb: False # Generate Jupyter notebooks
+reveal: False # Use reveal.js for slides
 # Website configuration
-baseurl: "lamd-lecture/"  # Subpath of your site
-url: "https://yourusername.github.io/"  # Base hostname & protocol
-
+baseurl: "mlfoundations" # Subpath of your site
+url: "https://inverseprobability.com" # Base hostname & protocol
 # Slide transition effect
-transition: None  # Options: None, fade, slide, convex, concave, zoom
-
+transition: None # Options: None, fade, slide, convex, concave, zoom
 # GitHub Pages configuration
 ghub:
-- organization: yourusername  # Your GitHub username or organization
-  repository: lamd-lecture    # Repository name
-  branch: gh-pages           # Branch for GitHub Pages
-  directory: _lamd           # Directory containing source files 
+  - organization: yourusername # Your GitHub username or organization
+    repository: lamd-lecture # Repository name
+    branch: gh-pages # Branch for GitHub Pages
+    directory: _lamd # Directory containing source files 
+given: Neil
+family: D. Lawrence
+institution: University of Cambridge
+organization: mlatcl
+repository: mlfoundations

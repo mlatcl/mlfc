@@ -1,12 +1,10 @@
-title: LaMD Lecture Course
-description: A template lecture course using LaMD
+title: mlfoundations
+description: mlfoundations - A LaMD-based lecture course
 baseurl: ""
 url: ""
-
 # Build settings
 markdown: kramdown
 permalink: pretty
-
 # Collections
 collections:
   lectures:
@@ -18,7 +16,6 @@ collections:
   practicals:
     output: true
     permalink: /practicals/:name/
-
 # Default front matter
 defaults:
   - scope:
@@ -36,7 +33,6 @@ defaults:
       type: "practicals"
     values:
       layout: "practical"
-
 # Exclude from processing
 exclude:
   - Gemfile
@@ -45,4 +41,4 @@ exclude:
   - vendor
   - .git
   - .github
-  - .DS_Store 
+  - .DS_Store
