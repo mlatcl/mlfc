@@ -1,0 +1,40 @@
+# Ignore coverage and test output
+coverage/
+
+# Ignore Jupyter and notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore OS and editor files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Ignore VSCode workspace settings
+*.code-workspace
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore build artifacts
+*.o
+*.so
+*.out
+*.log
+
+# Ignore node_modules if any JS tooling is used
+node_modules/
+
+# Ignore compiled site output
+_site/
+
+# Ignore Ruby bundler files
+.bundle/
+Gemfile.lock
+
+# Ignore by default all hidden files except .gitignore
+.*
+!.gitignore 

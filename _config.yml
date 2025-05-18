@@ -1,0 +1,48 @@
+title: LaMD Lecture Course
+description: A template lecture course using LaMD
+baseurl: ""
+url: ""
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Collections
+collections:
+  lectures:
+    output: true
+    permalink: /lectures/:name/
+  notebooks:
+    output: true
+    permalink: /notebooks/:name/
+  practicals:
+    output: true
+    permalink: /practicals/:name/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "lectures"
+    values:
+      layout: "lecture"
+  - scope:
+      path: ""
+      type: "notebooks"
+    values:
+      layout: "notebook"
+  - scope:
+      path: ""
+      type: "practicals"
+    values:
+      layout: "practical"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .github
+  - .DS_Store 
