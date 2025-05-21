@@ -5,6 +5,19 @@ url: ""
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+github_username: mlatcl
+colab: https://colab.research.google.com
+nbviewer: https://nbviewer.jupyter.org
+
+slidesdir: slides
+reveal:
+  width: 512
+  height: 384
+youtube:
+  width: 512
+  height: 384
+
 # Collections
 collections:
   lectures:
@@ -33,10 +46,48 @@ defaults:
       type: "practicals"
     values:
       layout: "practical"
+
+ghub:
+  edit: true
+  repository: mlai
+
+# Build settings
+plugins:
+- jekyll-feed
+- jekyll-seo-tag
+- jekyll-remote-theme
+- jekyll-paginate-v2
+sass:
+  sass_dir: _sass
+# Pagination
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page/:num/'
+  title: ':title'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
+remote_theme: mlatcl/jekyll-theme
+twitter_svg: ./assets/images/social-tw.svg
+facebook_svg: ./assets/images/social-fb.svg
+instagram_svg: ./assets/images/social-in.svg
+image_root: ./assets/images/
+  
+
 # Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
+  - slides/reveal.js/plugin/markdown/example
+  - slides/reveal.js/plugin/markdown/example
+  - slides/reveal.js-3.8.0/plugin/markdown/example
+  - slides/reveal.js-3.8.0/test/
+  - slides/reveal.js-3.8.0/css/theme/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
   - node_modules
   - vendor
   - .git
