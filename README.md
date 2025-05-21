@@ -1,5 +1,46 @@
 # ML Foundations Course
 
+## Topics and Resources
+
+### Fundamental Topics
+
+- Probability and probability distributions
+- Linear algebra and linear regression - appropriate factorisations with examples
+- Generalisation and double descent
+- Latent variables - representation learning
+
+#### Advanced Topics
+
+- Bayesian regression
+- Uncertainty quantification
+- Gaussian processes
+- Bayesian optimisation
+- Reinforcement learning
+- Data oriented architectures
+- Data & machine learning systems
+
+### Datasets
+- River water level (time series)
+- Weather (TAHMO, time series) - [TAHMO](https://tahmo.org/)
+- DSAIL porini (images of wild animals) - [DSAIL Porini](https://www.sciencedirect.com/science/article/pii/S2352340922010666)
+- Kieni forest (terrestrial and aerial images)
+- Sensor placement problem
+- UK census data
+- Kenya census data - [Kenya Census 2019](https://www.knbs.or.ke/reports/kenya-census-2019/)
+
+### Dissemination Ideas
+- Video recordings of lectures
+- Dedicated web pages with lecture materials on the DSAIL website
+- Paper on teaching methods and outcome
+
+## Team
+
+- Cedric Kiplimo 
+- Austin Kaburia 
+- Fred Lawrence
+- Neil Lawrence @lawrennd
+- Ciira Maina
+- Radzim Sendyka
 
 ## Repository Structure
 
@@ -39,3 +80,4 @@ See the repositories at [mlphysical](https://github.com/mlatcl/mlphysical) or [a
 ## Learn More
 
 For more information about LaMD, see [the LaMD documentation](https://inverseprobability.com/lamd).
+

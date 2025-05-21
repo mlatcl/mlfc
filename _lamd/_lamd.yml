@@ -5,6 +5,7 @@ author:
     institution: Your Institution
     url: http://example.com
 # Directory paths
+macrosdir: macros # Macro directory
 bibdir: $HOME/lawrennd/bibliography # Bibliography directory
 postsdir: ../_lectures/ # Where compiled lecture HTML files go
 slidesdir: ../slides/ # Where compiled slides go
@@ -24,7 +25,7 @@ posts: True # Generate HTML lecture pages
 docx: False # Generate Word documents
 notespdf: False # Generate PDF notes
 slidesipynb: False # Generate Jupyter notebooks for slides
-pptx: True # Generate PowerPoint presentations
+pptx: False # Generate PowerPoint presentations
 pdf: False # Generate PDF lectures
 assignment: False # Generate assignment format
 ipynb: True # Generate Jupyter notebooks

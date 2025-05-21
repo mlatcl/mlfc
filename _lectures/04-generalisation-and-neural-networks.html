@@ -1,0 +1,47 @@
+---
+title: "Generalization and Neural Networks"
+abstract: "<p>This lecture will cover generalization in machine learning
+with a particular focus on neural architectures. We will review
+classical generalization and explore what’s different about neural
+network models.</p>"
+edit_url: https://github.com/mlatcl/mlfoundations/edit/gh-pages/_lamd/generalisation-and-neural-networks.md
+session: 4
+featured_image: slides/diagrams/ml/olympic_LM_polynomial_number026.svg
+reveal: 04-generalisation-and-neural-networks.slides.html
+ipynb: 04-generalisation-and-neural-networks.ipynb
+pptx: 04-generalisation-and-neural-networks.pptx
+hackmdslides: fhuszar/r1HxvooMd#/
+youtube: "WaauyjcSNhc"
+layout: lecture
+categories:
+- notes
+---
+
+
+
+<p> + _2 ^2 + _3 ^3 + _4 ^4 $$ are <em>linear</em> in the parameters,
+<span class="math inline">\(\mathbf{ w}\)</span>, but
+<em>non-linear</em> in the input <span
+class="math inline">\(x^3\)</span>. Here we are showing a polynomial
+basis for a 1-dimensional input, <span class="math inline">\(x\)</span>,
+but basis functions can also be constructed for multidimensional inputs,
+<span class="math inline">\(\mathbf{ x}\)</span>.}</p>
+<!--include{_ml/includes/bayesian-interpretation-of-regularisation.md}-->
+<p><span class="math display">\[
+f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3
+\phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{
+x}\right)\right)\right).
+\]</span></p>
+<p>\thanks</p>
+<p>bootstrap</p>
+<p>David Hogg’s lecture <a
+href="https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters"
+class="uri">https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters</a></p>
+<p>The Deep Bootstrap <a
+href="https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20"
+class="uri">https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20</a></p>
+<p>Aki Vehtari on Leave One Out Uncertainty: <a
+href="https://arxiv.org/abs/2008.10296"
+class="uri">https://arxiv.org/abs/2008.10296</a> (check for his
+references).</p>
+
