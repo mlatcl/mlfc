@@ -20,32 +20,20 @@ youtube:
 
 # Collections
 collections:
+  updates:
+    output: true
   lectures:
+    permalink: /lectures/:title:output_ext
     output: true
-    permalink: /lectures/:name/
-  notebooks:
+    sort_by: session
+  casestudies:
+    permalink: /casestudies/:title:output_ext
     output: true
-    permalink: /notebooks/:name/
+    sort_by: label
   practicals:
+    permalink: /practicals/:title:output_ext
     output: true
-    permalink: /practicals/:name/
-# Default front matter
-defaults:
-  - scope:
-      path: ""
-      type: "lectures"
-    values:
-      layout: "lecture"
-  - scope:
-      path: ""
-      type: "notebooks"
-    values:
-      layout: "notebook"
-  - scope:
-      path: ""
-      type: "practicals"
-    values:
-      layout: "practical"
+    sort_by: session
 
 ghub:
   edit: true
