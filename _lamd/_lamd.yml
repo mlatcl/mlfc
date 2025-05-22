@@ -14,8 +14,8 @@ notebooksdir: ../_notebooks/ # Where compiled notebooks go
 practicalsdir: ../_practicals/ # Where compiled practicals go
 snippetsdir: $HOME/lawrennd/snippets # Directory for reusable content snippets
 writediagramsdir: . # Where to write generated diagrams
-scriptsdir: ./scripts/ # Directory for scripts
-diagramsdir: ../slides/diagrams/ # Directory for diagrams
+scriptsdir: ../scripts/ # Directory for scripts
+diagramsdir: ./slides/diagrams/ # Directory for diagrams
 # Layout and styling
 slidesheader: slides-header.html
 notation: talk-notation.tex
@@ -32,7 +32,7 @@ ipynb: True # Generate Jupyter notebooks
 reveal: True # Use reveal.js for slides
 # Website configuration
 url: "https://mlatcl.github.io/" # the base hostname & protocol for your site
-baseurl: mlfoundations
+baseurl: mlfoundations/
 talkcss: https://inverseprobability.com/assets/css/talks.css
 people: ../_people/people.yml
 # Slide transition effect
