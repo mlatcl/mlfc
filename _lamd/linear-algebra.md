@@ -7,13 +7,25 @@ abstract: |
 youtube: 5VPr6NbHHjg
 ---
 
-## Introduction
-This lecture explores linear algebra concepts and their application in linear regression, focusing on appropriate factorisations with examples.
+\include{_mlfoundations/includes/mlai-notebook-setup.md}
 
-## Topics
-- Linear algebra fundamentals
-- Linear regression
-- Factorisation techniques
+\subsection{Review}
 
-## References
-- [LaMD Documentation](https://inverseprobability.com/lamd) 
+* Last time: Reviewed Probability.
+
+\include{_ml/includes/regression-examples.md}
+
+\include{_datasets/includes/olympic-100m-data.md}
+
+
+\include{_datasets/includes/olympic-marathon-data.md}
+\include{_ml/includes/sum-of-squares-error.md}
+\include{_ml/includes/linear-algebra-regression.md}
+
+\thanks
+
+\exercises
+
+\reading
+
+\references
