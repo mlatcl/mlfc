@@ -9,6 +9,7 @@ group :jekyll_plugins do
   gem 'webrick'
   gem 'jekyll-remote-theme'
   gem 'jekyll-include-cache'
+  gem 'jekyll-paginate-v2'
 end
 
 # gem "rails"
