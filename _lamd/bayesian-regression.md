@@ -1,5 +1,7 @@
 ---
-session: 6
+week: 4
+session: 1
+date: 2025-09-22
 featured_image: slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg
 title: "Bayesian Regression"
 abstract: "Bayesian formalisms deal with uncertainty in parameters, "

@@ -1,5 +1,7 @@
 ---
-session: 3
+week: 2
+session: 2
+date: 2025-09-09
 featured_image: slides/diagrams/ml/radial_function002.svg
 title: Basis Functions
 abstract: |

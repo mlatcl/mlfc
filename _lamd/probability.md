@@ -1,5 +1,7 @@
 ---
+week: 1
 session: 1
+date: 2025-09-01
 featured_image: slides/diagrams/ml/over_determined_system007.svg
 title: Probability and an Introduction to Jupyter, Python and Pandas
 abstract: |

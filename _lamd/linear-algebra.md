@@ -1,5 +1,7 @@
 ---
-session: 2
+week: 2
+session: 1
+date: 2025-09-08
 featured_image: slides/diagrams/ml/regression_contour_fit028.svg
 title: Linear Algebra and Linear Regression
 abstract: |

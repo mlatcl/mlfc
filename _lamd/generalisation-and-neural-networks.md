@@ -2,7 +2,9 @@
 layout: lecture
 featured_image: slides/diagrams/ml/olympic_LM_polynomial_number026.svg
 title: Generalization and Neural Networks
-session: 4
+week: 3
+session: 1
+date: 2025-09-15
 abstract: >
   This lecture will cover generalization in machine learning with a particular focus on
   neural architectures. We will review classical generalization and explore what's different
