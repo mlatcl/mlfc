@@ -3,7 +3,7 @@ week: 4
 session: 2
 date: 2025-09-23
 featured_image: slides/diagrams/gp/two_point_sample001.svg
-title: "Special Topics: Gaussian Processes"
+title: "Gaussian Processes"
 abstract: 
 youtube: B2XhFoCehy8
 ---
