@@ -28,12 +28,81 @@ categories:
 <!--
 
 -->
-<h2 id="ml-ai-notebook-setup">ML AI Notebook Setup</h2>
-<p>To set up the ML AI notebook for the ML Foundations course, follow
-these steps:</p>
-<ol type="1">
-<li>…</li>
-</ol>
+<h2 id="ml-foundations-notebook-setup">ML Foundations Notebook
+Setup</h2>
+<h2 id="setup">Setup</h2>
+<!--setupplotcode{import seaborn as sns
+sns.set_style('darkgrid')
+sns.set_context('paper')
+sns.set_palette('colorblind')}-->
+<h2 id="notutils">notutils</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/notutils-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/notutils-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>This small package is a helper package for various notebook utilities
+used below.</p>
+<p>The software can be installed using</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/notutils"
+class="uri">https://github.com/lawrennd/notutils</a></p>
+<p>Once <code>notutils</code> is installed, it can be imported in the
+usual manner.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
+<h2 id="pods">pods</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>In Sheffield we created a suite of software tools for ‘Open Data
+Science’. Open data science is an approach to sharing code, models and
+data that should make it easier for companies, health professionals and
+scientists to gain access to data science techniques.</p>
+<p>You can also check this blog post on <a
+href="http://inverseprobability.com/2014/07/01/open-data-science">Open
+Data Science</a>.</p>
+<p>The software can be installed using</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/ods"
+class="uri">https://github.com/lawrennd/ods</a></p>
+<p>Once <code>pods</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<h2 id="mlai">mlai</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span
+class="editsection"
+style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>The <code>mlai</code> software is a suite of helper functions for
+teaching and demonstrating machine learning algorithms. It was first
+used in the Machine Learning and Adaptive Intelligence course in
+Sheffield in 2013.</p>
+<p>The software can be installed using</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<p>from the command prompt where you can access your python
+installation.</p>
+<p>The code is also available on GitHub: <a
+href="https://github.com/lawrennd/mlai"
+class="uri">https://github.com/lawrennd/mlai</a></p>
+<p>Once <code>mlai</code> is installed, it can be imported in the usual
+manner.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> plot</span></code></pre></div>
 <h2 id="nonlinear-regression">Nonlinear Regression</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span
@@ -122,13 +191,13 @@ vector of our inputs with <span class="math inline">\(n\)</span>
 elements.</p>
 <p>Let’s try constructing such a matrix for a set of inputs. First of
 all, we create a function that returns the matrix valued function.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic(x, <span class="op">**</span>kwargs):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Take in a vector of input values and return the design matrix associated </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    with the basis functions.&quot;&quot;&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.hstack([np.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic(x, <span class="op">**</span>kwargs):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Take in a vector of input values and return the design matrix associated </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    with the basis functions.&quot;&quot;&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.hstack([np.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</span></code></pre></div>
 <h2 id="functions-derived-from-quadratic-basis">Functions Derived from
 Quadratic Basis</h2>
 <div style="text-align:right">
@@ -204,13 +273,13 @@ create the function. For example, the fourth order polynomial has five
 components to its basis function. <span class="math display">\[
 \phi_j(x) = x^j
 \]</span></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <div class="figure">
 <div id="polynomial-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfoundations/./slides/diagrams//ml/polynomial_basis004.svg" width="80%" style=" ">
@@ -282,11 +351,11 @@ increases.</p>
 <p><span class="math display">\[
 \phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)
 \]</span></p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> radial</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> radial</span></code></pre></div>
 <div class="figure">
 <div id="radial-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfoundations/./slides/diagrams//ml/radial_basis002.svg" width="80%" style=" ">
@@ -334,13 +403,13 @@ These basis functions start flat, and then become linear functions at a
 certain threshold. <span class="math display">\[
 \phi_j(x) = xH(v_j x+ v_0)
 \]</span></p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu</span></code></pre></div>
 <div class="figure">
 <div id="relu-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfoundations/./slides/diagrams//ml/relu_basis004.svg" width="80%" style=" ">
@@ -387,13 +456,13 @@ lot for neural network models. It’s related to the sigmoid function by a
 scaling. <span class="math display">\[
 \phi_j(x) = \tanh(v_j x+ v_0)
 \]</span></p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> hyperbolic_tangent</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> hyperbolic_tangent</span></code></pre></div>
 <p>Sigmoid or hyperbolic tangent basis was popular in the original
 generation of multilayer perceptron models, or deep networks. These
 basis functions start flat, rise and then saturate.</p>
@@ -446,13 +515,13 @@ sines and cosines. A Fourier basis is a linear weighted sum of these
 functions. <span class="math display">\[
 f(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)
 \]</span></p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> fourier</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> fourier</span></code></pre></div>
 <div class="figure">
 <div id="fourier-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfoundations/./slides/diagrams//ml/fourier_basis004.svg" width="80%" style=" ">
@@ -533,19 +602,17 @@ class="uri">http://bit.ly/16kMKHQ</a></small>
 modelling. The data consists of the pace of Olympic Gold Medal Marathon
 winners for the Olympics from 1896 to present. Let’s load in the data
 and plot.</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfoundations/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
@@ -580,8 +647,8 @@ used for the</p>
 </ol>
 <p>Write your answers in the code box below creating a new vector of
 parameters (in the correct order!) for each basis.</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
 <h2 id="basis-function-models">Basis Function Models</h2>
 <p><span class="math display">\[
   f(\mathbf{ x}_i) = \sum_{j=1}^mw_j \phi_{i, j}
@@ -751,13 +818,13 @@ numerical precision of the model.</p>
 <em>basis functions</em> in the next session. Some systems that can be
 resolved with the QR decomposition cannot be resolved by using solve
 directly.</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(\designVariable)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>\designVariable.columns)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(\designVariable)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>\designVariable.columns)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
 <h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic
 Data</h2>
 <div style="text-align:right">
@@ -765,32 +832,32 @@ Data</h2>
 class="editsection"
 style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>max_basis <span class="op">=</span> <span class="dv">27</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>max_basis <span class="op">=</span> <span class="dv">27</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
 <div class="figure">
 <div id="olympic-lm-polynomial-num-basis-02-figure"
 class="figure-frame">
@@ -902,16 +969,16 @@ href="http://en.wikipedia.org/wiki/QR_decomposition">QR-decomposition</a>.
 Now we will consider an example with non linear basis functions where
 such computation is critical for forming the right answer.</p>
 <p><em>TODO</em> example with polynomials.</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.fourier(x, <span class="dv">5</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.fourier(x, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(np.dot(Phi.T,Phi))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Phi<span class="op">*</span>Phi</span></code></pre></div>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li><p>Section 1.4 of <span class="citation"

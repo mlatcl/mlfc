@@ -8,7 +8,7 @@ abstract: "Bayesian formalisms deal with uncertainty in parameters, "
 youtube: 17zr5dGcUzE
 ---
 
-\include{_mlfoundations/includes/mlai-notebook-setup.md}
+\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 
 \subsection{Overdetermined System}
 

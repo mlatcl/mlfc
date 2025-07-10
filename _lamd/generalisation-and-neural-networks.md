@@ -19,7 +19,7 @@ oldyoutube:
 \define{\errorFunction}{L}
 \define{\designVector}{\boldsymbol{\phi}}
 
-\include{_mlfoundations/includes/mlai-notebook-setup.md}
+\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 
 \subsection{Quadratic Loss and Linear System}
 

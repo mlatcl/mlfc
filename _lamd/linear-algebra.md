@@ -9,7 +9,7 @@ abstract: |
 youtube: 5VPr6NbHHjg
 ---
 
-\include{_mlfoundations/includes/mlai-notebook-setup.md}
+\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 
 \subsection{Review}
 

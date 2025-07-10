@@ -12,10 +12,9 @@ youtube: M67rG3cZoVg
 \include{_mlfoundations/includes/welcome.md}
 \include{_mlfoundations/includes/assumed-knowledge.md}
 \include{_mlfoundations/includes/environment-python-jupyter.md}
-
+\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 \writeassignment{What is probability and why is it important in machine learning?}{10}
 
-\include{_mlfoundations/includes/mlai-notebook-setup.md}
 
 \include{_ml/includes/what-is-ml.md}
 \include{_ml/includes/overdetermined-inaugural.md}

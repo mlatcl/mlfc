@@ -10,7 +10,7 @@ abstract: |
   In this session we will introduce *basis functions* which allow us to implement *non-linear regression models*.
 ---
 
-\include{_mlfoundations/includes/mlai-notebook-setup.md}
+\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 \include{_ml/includes/non-linear-regression-intro.md}
 
 \include{_ml/includes/basis-functions.md}

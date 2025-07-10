@@ -8,7 +8,7 @@ abstract: "In this lecture we turn to *unsupervised learning*. Specifically, we 
 youtube: 0mtK2_rc0IY
 ---
 
-\include{_mlfoundations/includes/mlai-notebook-setup.md}
+\include{_mlfoundations/includes/mlfondations-notebook-setup.md}
 
 \subsection{Review}
 
