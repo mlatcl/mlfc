@@ -44,18 +44,20 @@ plugins:
 - jekyll-feed
 - jekyll-seo-tag
 - jekyll-remote-theme
-- jekyll-paginate-v2
+- jekyll-paginate
 sass:
   sass_dir: _sass
 # Pagination
-pagination:
-  enabled: true
-  per_page: 5
-  permalink: '/page/:num/'
-  title: ':title'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
+#pagination:
+#  enabled: true
+#  per_page: 5
+#  permalink: '/page/:num/'
+#  title: ':title'
+#  limit: 0
+#  sort_field: 'date'
+#  sort_reverse: true
+paginate: 5
+paginate_path: "/page/:num/"
 
 remote_theme: mlatcl/jekyll-theme
 twitter_svg: ./assets/images/social-tw.svg
