@@ -121,7 +121,7 @@ Lectures are compiled using the `maketalk` command:
 
 ```bash
 cd _lamd
-maketalk 01-introduction.md 
+maketalk probability.md 
 ```
 
 ## Configuration
