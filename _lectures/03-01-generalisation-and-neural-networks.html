@@ -1474,13 +1474,13 @@ style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bi
 </div>
 <p>One of Breiman’s ideas for improving predictive performance is known
 as bagging <span class="citation"
-data-cites="Breiman:bagging96">(<strong>Breiman:bagging96?</strong>)</span>.
-The idea is to train a number of models on the data such that they
-overfit (high variance). Then average the predictions of these models.
-The models are trained on different bootstrap samples <span
-class="citation" data-cites="Efron:bootstrap79">(Efron, 1979)</span> and
-their predictions are aggregated giving us the acronym, Bagging. By
-combining decision trees with bagging, we recover random forests <span
+data-cites="Breiman-bagging96">(Breiman, 1996)</span>. The idea is to
+train a number of models on the data such that they overfit (high
+variance). Then average the predictions of these models. The models are
+trained on different bootstrap samples <span class="citation"
+data-cites="Efron:bootstrap79">(Efron, 1979)</span> and their
+predictions are aggregated giving us the acronym, Bagging. By combining
+decision trees with bagging, we recover random forests <span
 class="citation" data-cites="Breiman-forests01">(Breiman,
 2001)</span>.</p>
 <p>Bias and variance can also be estimated through Efron’s bootstrap
@@ -1495,17 +1495,16 @@ end with the Daddy bear on the right (too much variance) and show a dip
 in the middle where the Baby bear (just) right finds themselves.</p>
 <p>The Daddy bear is typically positioned at the point where the model
 can exactly interpolate the data. For a generalized linear model <span
-class="citation" data-cites="McCullagh:gen_linear89">(McCullagh and
+class="citation" data-cites="McCullagh-gen_linear89">(McCullagh and
 Nelder, 1989)</span>, this is the point at which the number of
 parameters is equal to the number of data<a href="#fn1"
 class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a>.</p>
 <p>The bias-variance decomposition <span class="citation"
-data-cites="Geman:biasvariance92">(<strong>Geman:biasvariance92?</strong>)</span>
-considers the expected test error for different variations of the
-<em>training data</em> sampled from, <span
-class="math inline">\(\mathbb{P}(\mathbf{ x}, y)\)</span> <span
-class="math display">\[\begin{align*}
+data-cites="Geman-biasvariance92">(Geman et al., 1992)</span> considers
+the expected test error for different variations of the <em>training
+data</em> sampled from, <span class="math inline">\(\mathbb{P}(\mathbf{
+x}, y)\)</span> <span class="math display">\[\begin{align*}
 R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2
 \mathbb{P}(y, \mathbf{ x}) \text{d}y\text{d}\mathbf{ x}\\
 &amp; \triangleq \mathbb{E}\left[ \left(y- f^*(\mathbf{ x})\right)^2
@@ -1937,6 +1936,10 @@ href="https://doi.org/10.1162/neco.1992.4.4.494">https://doi.org/10.1162/neco.19
 Breiman, L., 2001. Random forests. Mach. Learn. 45, 5–32. <a
 href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>
 </div>
+<div id="ref-Breiman-bagging96" class="csl-entry" role="listitem">
+Breiman, L., 1996. Bagging predictors. Machine Learning 24, 123–140. <a
+href="https://doi.org/10.1007/BF00058655">https://doi.org/10.1007/BF00058655</a>
+</div>
 <div id="ref-Carlini-extracting20" class="csl-entry" role="listitem">
 Carlini, N., Tramèr, F., Wallace, E., Jagielski, M., Herbert-Voss, A.,
 Lee, K., Roberts, A., Brown, T., Song, D., Erlingsson, U., Oprea, A.,
@@ -1946,6 +1949,11 @@ training data from large language models</a>.
 <div id="ref-Efron:bootstrap79" class="csl-entry" role="listitem">
 Efron, B., 1979. Bootstrap methods: Another look at the jackkife. Annals
 of Statistics 7, 1–26.
+</div>
+<div id="ref-Geman-biasvariance92" class="csl-entry" role="listitem">
+Geman, S., Bienenstock, E., Doursat, R., 1992. Neural networks and the
+bias/variance dilemma. Neural Computation 4, 1–58. <a
+href="https://doi.org/10.1162/neco.1992.4.1.1">https://doi.org/10.1162/neco.1992.4.1.1</a>
 </div>
 <div id="ref-Ghahramani:probabilistic15" class="csl-entry"
 role="listitem">
@@ -1977,7 +1985,7 @@ Lawson, C.L., Hanson, R.J., 1995. Solving least squares problems. SIAM.
 <a
 href="https://doi.org/10.1137/1.9781611971217">https://doi.org/10.1137/1.9781611971217</a>
 </div>
-<div id="ref-McCullagh:gen_linear89" class="csl-entry" role="listitem">
+<div id="ref-McCullagh-gen_linear89" class="csl-entry" role="listitem">
 McCullagh, P., Nelder, J.A., 1989. Generalized linear models, 2nd ed.
 Chapman; Hall.
 </div>
