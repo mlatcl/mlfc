@@ -1,5 +1,5 @@
 ---
-title: "Practical 1: Probability"
+title: "Practical 1:  An Introduction to Jupyter, Python and Pandas and Probability"
 practical: 1
 featured_image: assets/images/practical-one.png
 abstract:  >
@@ -25,7 +25,6 @@ ipynb: true
 \include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 \writeassignment{What is probability and why is it important in machine learning?}{10}
 \include{_datasets/includes/nigeria-nmis-data.md}
-\include{_ml/includes/probability-intro.md}
 
 \thanks
 
