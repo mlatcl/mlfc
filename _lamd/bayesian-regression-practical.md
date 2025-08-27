@@ -6,6 +6,7 @@ featured_image: slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg
 title: "Bayesian Regression"
 abstract: "Bayesian formalisms deal with uncertainty in parameters, "
 youtube: 17zr5dGcUzE
+published: 2025-08-27
 ---
 
 \include{_mlfc/includes/mlfc-notebook-setup.md}
@@ -172,12 +173,13 @@ sigma2 = 0.01}
 \addreading{@Rogers:book11}{Section 3.7–3.8 (pg 122–133)}
 \addreading{@Bishop:book06}{Section 3.4 (pg 161–165)}
 
-\reading
-
 \thanks
 
-\references
+\reading
 
+\exercises
+
+\references
 
 
 

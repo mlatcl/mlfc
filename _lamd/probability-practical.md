@@ -15,6 +15,7 @@ author:
   url: http://inverseprobability.com
 time: "15:00"
 date: 2025-09-01
+published: 2025-08-27
 transition: None
 reveal: false
 ipynb: true
