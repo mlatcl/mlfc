@@ -1,16 +1,14 @@
 ---
 title: "Bayesian Regression"
 abstract: "Bayesian formalisms deal with uncertainty in parameters,"
-edit_url: https://github.com/mlatcl/mlfoundations/edit/gh-pages/_lamd/bayesian-regression.md
+edit_url: https://github.com/mlatcl/mlfoundations/edit/gh-pages/_lamd/bayesian-regression-practical.md
 date: 2025-09-22
 published: 2025-09-22
-week: 4
-session: 1
 featured_image: slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg
-reveal: 04-01-bayesian-regression.slides.html
-ipynb: 04-01-bayesian-regression.ipynb
+reveal: 06-bayesian-regression-practical.slides.html
+ipynb: 06-bayesian-regression-practical.ipynb
 youtube: "17zr5dGcUzE"
-layout: lecture
+layout: practical
 categories:
 - notes
 ---
@@ -231,7 +229,7 @@ p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{
 <p>complete the square of the quadratic form to obtain <span class="math display">\[\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},\]</span> where <span class="math inline">\(\tau^2 = \left(n\sigma^{-2} +\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
 <h2 id="the-joint-density">The Joint Density</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/bayesian-regression.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/bayesian-regression.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/bayesian-regression-practical.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/bayesian-regression-practical.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <ul>
 <li>Really want to know the <em>joint</em> posterior density over the parameters <span class="math inline">\(c\)</span> <em>and</em> <span class="math inline">\(m\)</span>.</li>
