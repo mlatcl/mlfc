@@ -22,7 +22,7 @@ postsdir: ../_practicals/ # Where compiled lecture HTML files go
 
 \subsection{Objective Functions}
 
-\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
+\include{_mlfc/includes/mlfc-notebook-setup.md}
 
 \include{_ml/includes/non-linear-regression-intro.md}
 

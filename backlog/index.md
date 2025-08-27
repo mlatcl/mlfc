@@ -11,7 +11,7 @@ This file provides an overview of all current backlog items organized by categor
 
 ### In Progress
 
-*No tasks currently in progress.*
+*No tasks currently in_progress.*
 
 
 ### Proposed
@@ -28,7 +28,7 @@ This file provides an overview of all current backlog items organized by categor
 
 ### In Progress
 
-*No tasks currently in progress.*
+*No tasks currently in_progress.*
 
 
 ### Proposed
@@ -45,12 +45,14 @@ This file provides an overview of all current backlog items organized by categor
 
 ### In Progress
 
-*No tasks currently in progress.*
+*No tasks currently in_progress.*
 
 
 ### Proposed
 
-*No tasks currently proposed.*
+- [Create Missing Lecture Content](features/2025-07-10_create-missing-lecture-content.md)
+
+- [Restructure Lecture Content Based on Feedback](features/2025-07-10_lecture-content-restructuring.md)
 
 
 ## Bugs
@@ -62,12 +64,14 @@ This file provides an overview of all current backlog items organized by categor
 
 ### In Progress
 
-*No tasks currently in progress.*
+*No tasks currently in_progress.*
 
 
 ### Proposed
 
-*No tasks currently proposed.*
+- [Fix Lecture Formatting and Content Issues](bugs/2025-07-10_fix-lecture-formatting-issues.md)
+
+- [Fix Pods Package Python 3.12 Compatibility](bugs/2025-07-10_pods-package-python312-compatibility.md)
 
 
 ---

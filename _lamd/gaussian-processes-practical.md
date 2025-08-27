@@ -1,9 +1,9 @@
 ---
-week: 4
-session: 2
+practical: 7
 date: 2025-09-23
 featured_image: slides/diagrams/gp/two_point_sample001.svg
 title: "Gaussian Processes"
+layout: practical
 abstract: 
 youtube: B2XhFoCehy8
 ---

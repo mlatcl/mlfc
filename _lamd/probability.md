@@ -11,8 +11,8 @@ transition: None
 ipynb: False
 ---
 
-\include{_mlfoundations/includes/welcome.md}
-\include{_mlfoundations/includes/assumed-knowledge.md}
+\include{_mlfc/includes/welcome.md}
+\include{_mlfc/includes/assumed-knowledge.md}
 \include{_ml/includes/what-is-ml.md}
 \include{_ml/includes/what-does-machine-learning-do.md}
 \include{_ml/includes/overdetermined-inaugural.md}

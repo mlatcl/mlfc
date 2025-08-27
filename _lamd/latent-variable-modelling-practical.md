@@ -1,6 +1,6 @@
 ---
-week: 5
-session: 1
+practical: 8
+layout: practical
 date: 2025-09-29
 featured_image: slides/diagrams/dimred/dem_manifold_print002.png
 title: "Dimensionality Reduction: Latent Variable Modelling"

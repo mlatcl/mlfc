@@ -1,9 +1,8 @@
 ---
-layout: lecture
+layout: practical
 featured_image: slides/diagrams/ml/olympic_LM_polynomial_number026.svg
-title: Generalisation and Neural Networks
-week: 3
-session: 1
+title: Generalization and Neural Networks
+practical: 5
 date: 2025-09-15
 abstract: >
   This lecture will cover generalization in machine learning with a particular focus on

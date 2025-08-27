@@ -32,20 +32,6 @@ categories:
 <!--
 
 -->
-<h2 id="setting-up-your-environment">Setting Up Your Environment</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_mlfoundations/includes/environment-python-jupyter.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_mlfoundations/includes/environment-python-jupyter.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>To get started with the ML Foundations course, you need to set up your Python and Jupyter environment. Follow these steps:</p>
-<ol type="1">
-<li><p><strong>Install Python</strong>: Make sure you have Python installed on your system. You can download it from <a href="https://www.python.org/">python.org</a>.</p></li>
-<li><p><strong>Install Jupyter</strong>: Install Jupyter using pip:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter</span></code></pre></div></li>
-<li><p><strong>Launch Jupyter Notebook</strong>: Start Jupyter Notebook by running:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook</span></code></pre></div></li>
-<li><p><strong>Access the Course Materials</strong>: Open the course notebooks from the Jupyter interface.</p></li>
-</ol>
-<p>If you encounter any issues, please refer to the troubleshooting guide or contact support.</p>
 <h2 id="ml-foundations-notebook-setup">ML Foundations Notebook Setup</h2>
 <h2 id="setup">Setup</h2>
 <!--setupplotcode{import seaborn as sns
@@ -58,11 +44,11 @@ sns.set_palette('colorblind')}-->
 </div>
 <p>This small package is a helper package for various notebook utilities used below.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span></code></pre></div>
 <p>from the command prompt where you can access your python installation.</p>
 <p>The code is also available on GitHub: <a href="https://github.com/lawrennd/notutils" class="uri">https://github.com/lawrennd/notutils</a></p>
 <p>Once <code>notutils</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span></code></pre></div>
 <h2 id="pods">pods</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/pods-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/pods-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -70,23 +56,37 @@ sns.set_palette('colorblind')}-->
 <p>In Sheffield we created a suite of software tools for ‘Open Data Science.’ Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
 <p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
 <p>from the command prompt where you can access your python installation.</p>
 <p>The code is also available on GitHub: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
 <p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <h2 id="mlai">mlai</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_software/includes/mlai-software.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_software/includes/mlai-software.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The <code>mlai</code> software is a suite of helper functions for teaching and demonstrating machine learning algorithms. It was first used in the Machine Learning and Adaptive Intelligence course in Sheffield in 2013.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
 <p>from the command prompt where you can access your python installation.</p>
 <p>The code is also available on GitHub: <a href="https://github.com/lawrennd/mlai" class="uri">https://github.com/lawrennd/mlai</a></p>
 <p>Once <code>mlai</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> plot</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> plot</span></code></pre></div>
+<h2 id="setting-up-your-environment">Setting Up Your Environment</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_mlfoundations/includes/environment-python-jupyter.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_mlfoundations/includes/environment-python-jupyter.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>To get started with the ML Foundations course, you need to set up your Python and Jupyter environment. Follow these steps:</p>
+<ol type="1">
+<li><p><strong>Install Python</strong>: Make sure you have Python installed on your system. You can download it from <a href="https://www.python.org/">python.org</a>.</p></li>
+<li><p><strong>Install Jupyter</strong>: Install Jupyter using pip:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter</span></code></pre></div></li>
+<li><p><strong>Launch Jupyter Notebook</strong>: Start Jupyter Notebook by running:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook</span></code></pre></div></li>
+<li><p><strong>Access the Course Materials</strong>: Open the course notebooks from the Jupyter interface.</p></li>
+</ol>
+<p>If you encounter any issues, please refer to the troubleshooting guide or contact support.</p>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>What is probability and why is it important in machine learning?</p>
 <h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>

@@ -19,7 +19,7 @@ reveal: false
 ipynb: true
 postsdir: ../_practicals/ # Where compiled lecture HTML files go
 ---
-\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
+\include{_mlfc/includes/mlfc-notebook-setup.md}
 
 
 \include{_datasets/includes/olympic-marathon-data.md}
