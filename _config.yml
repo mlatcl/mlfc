@@ -1,6 +1,6 @@
 title: mlfoundations
 description: mlfoundations - A LaMD-based lecture course
-baseurl: "/mlfoundations"
+baseurl: "/mlfc"
 url: "https://mlatcl.github.io"
 # Build settings
 markdown: kramdown
@@ -37,7 +37,7 @@ collections:
 
 ghub:
   edit: true
-  repository: mlfoundations
+  repository: mlfc
 
 future: true
   

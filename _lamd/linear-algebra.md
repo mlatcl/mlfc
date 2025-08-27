@@ -9,20 +9,15 @@ abstract: |
 youtube: 5VPr6NbHHjg
 ---
 
-\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 
 \subsection{Review}
 
-* Last time: Reviewed Probability.
+* Last time: Reviewed Objective Functions.
 
 \include{_ml/includes/regression-examples.md}
 
 \include{_datasets/includes/olympic-100m-data.md}
 
-
-\include{_datasets/includes/olympic-marathon-data.md}
-\include{_ml/includes/sum-of-squares-error.md}
-\include{_ml/includes/linear-algebra-regression.md}
 
 \thanks
 

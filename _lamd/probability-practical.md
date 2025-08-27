@@ -14,12 +14,14 @@ author:
   twitter: lawrennd
   url: http://inverseprobability.com
 time: "15:00"
-postsdir: ../../../mlatcl/mlfoundations/_practicals/
 date: 2025-09-01
 transition: None
 reveal: false
 ipynb: true
+postsdir: ../_practicals/ # Where compiled lecture HTML files go
 ---
+
+\include{_mlfoundations/includes/mlfoundations-notebook-setup.md}
 
 \include{_mlfoundations/includes/environment-python-jupyter.md}
 \include{_mlfoundations/includes/mlfoundations-notebook-setup.md}

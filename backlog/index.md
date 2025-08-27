@@ -50,9 +50,7 @@ This file provides an overview of all current backlog items organized by categor
 
 ### Proposed
 
-- [Create Missing Lecture Content](features/2025-07-10_create-missing-lecture-content.md)
-
-- [Restructure Lecture Content Based on Feedback](features/2025-07-10_lecture-content-restructuring.md)
+*No tasks currently proposed.*
 
 
 ## Bugs
@@ -69,9 +67,7 @@ This file provides an overview of all current backlog items organized by categor
 
 ### Proposed
 
-- [Fix Lecture Formatting and Content Issues](bugs/2025-07-10_fix-lecture-formatting-issues.md)
-
-- [Fix Pods Package Python 3.12 Compatibility](bugs/2025-07-10_pods-package-python312-compatibility.md)
+*No tasks currently proposed.*
 
 
 ---

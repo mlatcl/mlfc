@@ -1,38 +1,26 @@
 ---
-week: 1
-session: 2
+title: "Practical 2:  Objective Functions"
+practical: 2
+featured_image: assets/images/practical-two.png
+abstract:  >
+  In this lab session we will review objective functions.
+layout: practical
+venue: 
+author:
+- family: Lawrence
+  given: Neil D.
+  gscholar: r3SJcvoAAAAJ
+  institute: University of Cambridge
+  twitter: lawrennd
+  url: http://inverseprobability.com
 date: 2025-09-02
-featured_image: slides/diagrams/mlai/carthaginian-empire.png
-title: "Objective Functions: A Simple Example with Matrix Factorisation"
-abstract: |
-  In this session we introduce the notion of objective functions and show how they can be used in a simple recommender system based on *matrix factorisation*.
-youtube: Gq6bjcm8AqQ
+transition: None
+reveal: false
+ipynb: true
+postsdir: ../_practicals/ # Where compiled lecture HTML files go
 ---
 
-\include{_mlai/includes/mlai-notebook-setup.md}
-
-\newslide{Objective Function}
-\slides{
-- Last week we motivated the importance of probability.
-- This week we motivate the idea of the 'objective function'.}
-
-\slides{
-\include{_ml/includes/perceptron.md}
-\include{_ml/includes/linear-regression-iterative.md}
-}
-
-
-\newslide{Lab Class}
-
-\slides{
-- You will take the ideas you have learnt.
-- You will apply them in the domain of *matrix factorisation*.
-- Matrix factorization presents a different error function.
-}
-
-\addreading{@Rogers:book11}{Section 1.1.3} for loss functions.
-
-\reading
+\subsection{Objective Functions}
 
 \notes{In \refnotes{the introduction}{intro-probability} we saw how
 we could load in a data set to pandas and use it for some simple data
@@ -58,7 +46,6 @@ fellow researcher can you publish that data on line?}{1}{10}
 \include{_ml/includes/recommender-data.md}
 \include{_ml/includes/matrix-factorization.md}
 
-
 \thanks
 
 \reading
@@ -66,5 +53,3 @@ fellow researcher can you publish that data on line?}{1}{10}
 \exercises
 
 \references
-
-
