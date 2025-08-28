@@ -34,6 +34,7 @@ collections:
     permalink: /practicals/:title:output_ext
     output: true
     sort_by: week
+    directory: _practicals
 
 ghub:
   edit: true
