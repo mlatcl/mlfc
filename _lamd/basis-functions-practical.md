@@ -13,7 +13,7 @@ author:
   institute: University of Cambridge
   twitter: lawrennd
   url: http://inverseprobability.com
-date: 2025-08-28
+date: 2025-09-08
 transition: None
 reveal: false
 ipynb: true
