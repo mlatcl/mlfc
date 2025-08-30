@@ -26,57 +26,43 @@ ipynb: true
 postsdir: ../_practicals/ # Where compiled lecture HTML files go
 ---
 
-\subsection{Code Reuse and Dataset Integration}
-
-\include{_mlfc/includes/mlfc-notebook-setup.md}
-
-\include{_ml/includes/code-reuse-fynesse.md}
+\include{_data-science/includes/code-reuse-fynesse.md}
 
 \writeassignment{Install your Fynesse library from Practical 1, and demonstrate that it works by plotting a city map.}{10}
 
-\subsection{DSAIL-Porini Camera Trap Dataset}
 
 \include{_datasets/includes/dsail-porini-data.md}
 
-\include{_ml/includes/geospatial-data-joining.md}
+\include{_data-science/includes/osm-cities-data-joining.md}
 
 \writeassignment{Find the coordinate information in the dataset, deduplicate the coordinates, and plot them on top of an OSM map.}{15}
 
-\subsection{Access-Assess-Address Framework Implementation}
-
-\include{_ml/includes/access-assess-address-framework.md}
+\include{_data-science/includes/osm-access-assess-address.md}
 
 \subsection{Data Assessment and Preprocessing}
 
-\include{_ml/includes/camera-trap-data-preprocessing.md}
+\include{_data-science/includes/camera-trap-data-preprocessing.md}
 
 \writeassignment{Clean the dataset by handling multi-species sightings, removing invalid entries, and converting to binary sighting data.}{20}
 
-\subsection{Statistical Analysis and Pattern Detection}
-
-\include{_ml/includes/sighting-probability-analysis.md}
+\include{_data-science/includes/camera-trap-sighting-probability-analysis.md}
 
 \writeassignment{Calculate and plot average probabilities for dates, species, and cameras. Determine which relationships are statistically significant.}{20}
 
-\subsection{Naive Bayesian Prediction Models}
 
-\include{_ml/includes/naive-bayes-sighting-prediction.md}
+\include{_ml/includes/camera-trap-naive-bayes.md}
 
-\subsection{Advanced Analysis and Model Improvement}
 
-\include{_ml/includes/correlation-analysis-improvements.md}
+\include{_ml/includes/camera-trap-correlation-analysis-improvements.md}
 
 \writeassignment{Analyze the data to find the strongest relationships for improving predictions. Compare improved model against the baseline.}{15}
-
-\subsection{Database Integration}
 
 \include{_datasets/includes/sqlite-database-creation.md}
 
 \writeassignment{Create a SQLite database with animal sighting and camera coordinate tables. Set appropriate indices and demonstrate with SQL queries.}{20}
 
-\subsection{Extended Analysis}
 
-\include{_ml/includes/burst-detection-analysis.md}
+\include{_ml/includes/camera-trap-burst-detection-analysis.md}
 
 \thanks
 
@@ -85,3 +71,5 @@ postsdir: ../_practicals/ # Where compiled lecture HTML files go
 \exercises
 
 \references
+
+

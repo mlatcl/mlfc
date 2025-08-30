@@ -8,7 +8,7 @@ abstract: |
   In this first session we will introduce *machine learning*, review *probability* and begin familiarization with the Jupyter notebook, python and pandas.
 youtube: M67rG3cZoVg
 transition: None
-ipynb: False
+ipynb: true
 ---
 
 \include{_mlfc/includes/welcome.md}
