@@ -32,7 +32,7 @@ ipynb: True # Generate Jupyter notebooks
 reveal: True # Use reveal.js for slides
 # Website configuration
 url: "https://mlatcl.github.io/" # the base hostname & protocol for your site
-baseurl: mlfoundations/
+baseurl: mlfc/
 talkcss: https://inverseprobability.com/assets/css/talks.css
 people: ../_people/people.yml
 macrosdir: $HOME/lawrennd/lamd/lamd/macros
@@ -43,7 +43,7 @@ dotx: custom-reference.dotx
 # GitHub Pages configuration
 ghub:
   - organization: mlatcl # Your GitHub username or organization
-    repository: mlfoundations # Repository name
+    repository: mlfc # Repository name
     branch: gh-pages # Branch for GitHub Pages
     directory: _lamd # Directory containing source files 
 
