@@ -1,6 +1,6 @@
 ---
 week: 1
-session: 2
+session: 3
 date: 2025-09-02
 featured_image: slides/diagrams/mlai/carthaginian-empire.png
 title: "Objective Functions"
@@ -18,14 +18,6 @@ youtube: Gq6bjcm8AqQ
 \include{_ml/includes/perceptron.md}
 \include{_ml/includes/linear-regression-iterative.md}
 
-
-\newslide{Lab Class}
-
-\slides{
-- You will take the ideas you have learnt.
-- You will apply them in the domain of *matrix factorisation*.
-- Matrix factorization presents a different error function.
-}
 
 \addreading{@Rogers:book11}{Section 1.1.3} for loss functions.
 
