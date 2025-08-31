@@ -1,10 +1,10 @@
 # ML Foundations Course
 
-An introduction to machine learning foundations, designed as a 5-week course with 3 sessions per week. The course will be first run starting *1st September 2025*.
+An introduction to machine learning foundations, designed as a 4-week course with 3 sessions per week. The course will be first run starting *1st September 2025*.
 
 ## Course Structure
 
-*Duration*: 5 weeks  
+*Duration*: 4 weeks  
 *Sessions*: 3 sessions per week  
 *Start Date*: 1st September 2025
 
@@ -43,10 +43,10 @@ An introduction to machine learning foundations, designed as a 5-week course wit
 
 All lecture materials are available in multiple formats:
 
-- *Web Lectures*: [View lectures online](https://mlatcl.github.io/mlfoundations/lectures/)
-- *Slides*: [Download presentation slides](https://mlatcl.github.io/mlfoundations/slides/)
-- *Jupyter Notebooks*: [Interactive notebooks](https://mlatcl.github.io/mlfoundations/notebooks/)
-- *Practical Exercises*: [Hands-on exercises](https://mlatcl.github.io/mlfoundations/practicals/)
+- *Web Lectures*: [View lectures online](https://mlatcl.github.io/mlfc/lectures/)
+- *Slides*: [Download presentation slides](https://mlatcl.github.io/mlfc/slides/)
+- *Jupyter Notebooks*: [Interactive notebooks](https://mlatcl.github.io/mlfc/notebooks/)
+- *Practical Exercises*: [Hands-on exercises](https://mlatcl.github.io/mlfc/practicals/)
 
 ### Available Lectures
 
@@ -99,7 +99,7 @@ The course is designed to be delivered in a hybrid format:
 ## Repository Structure
 
 ```
-mlfoundations/
+mlfc/
 ├── _config.yml           # Jekyll configuration
 ├── _lamd/                # LaMD files containing lecture sources
 │   └── _lamd.yml         # LaMD configuration (author, output formats, paths)
