@@ -72,7 +72,6 @@ def plot_city_map(place_name, latitude, longitude, box_size_km=2, poi_tags=None)
 
 \include{_data-science/includes/osm-access-assess-address.md}
 
-\writeassignment{Using the Access-Assess-Address framework, identify generalisable functionality in your code and organize it into appropriate modules.}{20}
 
 
 \notes{End of Practical 1A
