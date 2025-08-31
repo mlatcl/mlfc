@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
+  <!-- Background -->
+  <rect width="500" height="300" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="250" y="30" text-anchor="middle" font-size="16" font-family="Arial" font-weight="bold">Short Circuit Problem</text>
+  
+  <!-- Original 3D Space (Left) -->
+  <g transform="translate(120,150)">
+    <!-- 3D Axes -->
+    <line x1="0" y1="0" x2="60" y2="-30" stroke="#666" stroke-width="1"/>
+    <line x1="0" y1="0" x2="-30" y2="-30" stroke="#666" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="80" stroke="#666" stroke-width="1"/>
+    
+    <!-- Spiral Path -->
+    <path d="M 0,60 C 30,60 30,0 0,0 C -30,0 -30,-60 0,-60" 
+          fill="none" stroke="#2166ac" stroke-width="2" stroke-dasharray="4"/>
+    
+    <!-- Points on the spiral -->
+    <circle cx="0" cy="60" r="4" fill="#2166ac"/>
+    <circle cx="0" cy="0" r="4" fill="#2166ac"/>
+    <circle cx="0" cy="-60" r="4" fill="#2166ac"/>
+    
+    <!-- Label -->
+    <text x="0" y="100" text-anchor="middle" font-size="14" font-family="Arial">3D Space</text>
+  </g>
+  
+  <!-- Arrow pointing right -->
+  <g transform="translate(240,150)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#666" stroke-width="2"/>
+    <polygon points="40,-5 50,0 40,5" fill="#666"/>
+    <text x="20" y="-10" text-anchor="middle" font-size="12" font-family="Arial">Projection</text>
+  </g>
+  
+  <!-- 2D Projection (Right) -->
+  <g transform="translate(380,150)">
+    <!-- 2D Axes -->
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="#666" stroke-width="1"/>
+    <line x1="0" y1="60" x2="0" y2="-60" stroke="#666" stroke-width="1"/>
+    
+    <!-- Projected Points -->
+    <circle cx="0" cy="60" r="4" fill="#b2182b"/>
+    <circle cx="0" cy="0" r="4" fill="#b2182b"/>
+    <circle cx="0" cy="-60" r="4" fill="#b2182b"/>
+    
+    <!-- Connecting lines showing "short circuit" -->
+    <line x1="0" y1="60" x2="0" y2="-60" stroke="#b2182b" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Label -->
+    <text x="0" y="80" text-anchor="middle" font-size="14" font-family="Arial">2D Projection</text>
+  </g>
+  
+  <!-- Distance Labels -->
+  <g transform="translate(0,0)" font-size="12" font-family="Arial">
+    <text x="120" y="270" text-anchor="middle">Large actual distance</text>
+    <text x="380" y="270" text-anchor="middle">Small projected distance</text>
+  </g>
+</svg>
