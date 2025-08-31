@@ -11,9 +11,13 @@ transition: None
 ipynb: true
 ---
 
+\define{ipynbpath}{_notebooks}
+
 \include{_mlfc/includes/welcome.md}
 \include{_mlfc/includes/assumed-knowledge.md}
+\include{_mlfc/includes/mlfc-notebook-setup.md}
 \include{_ml/includes/what-is-ml.md}
+\include{_software/includes/
 \include{_ml/includes/what-does-machine-learning-do.md}
 \include{_ml/includes/overdetermined-inaugural.md}
 \include{_ml/includes/underdetermined-system.md}
@@ -34,10 +38,10 @@ ipynb: true
 
 - For other material in Bishop read:
 
-\addreading{@Bishop:book06}{Probability densities: Section 1.2.1 (Pages 17–19)}
+\addreading{@Bishop:book06}{Probability densities: Section 1.2.1 (Pages 17-19)}
 \addreading{@Bishop:book06}{Expectations and Covariances: Section 1.2.2 (Pages 19–20)}
 
-\addreading{@Bishop:book06}{The Gaussian density: Section 1.2.4 (Pages 24–28) (don't worry about material on bias)}
+\addreading{@Bishop:book06}{The Gaussian density: Section 1.2.4 (Pages 24-28) (don't worry about material on bias)}
 \addreading{@Bishop:book06}{For material on information theory and KL divergence try Section 1.6 & 1.6.1 (pg 48 onwards)}
 
 - If you are unfamiliar with probabilities you should complete the
