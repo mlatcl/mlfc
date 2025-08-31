@@ -384,10 +384,15 @@ categories:
 <p>Use git to fork this repository: https://github.com/lawrennd/fynesse_template and include your code in the <code>access.py</code>, <code>assess.py</code>, and <code>address.py</code> files.</p>
 <p>Demonstrate this by importing your repository below and calling a couple example functions.</p>
 <p>Using the lessons from the article, have a look at the functionality you created, and identify generalisable Access, Assess and Address functionality that could come in useful in the future.</p>
-<p><strong>Access functionality</strong> we’ve created: - Connection to OpenStreetMap API via OSMnx</p>
+<p><strong>Access functionality</strong></p>
+<p>What we’ve created: - Connection to OpenStreetMap API via OSMnx</p>
+<p>What we might need to have done: - Legal, ethical considerations.</p>
 <p><strong>Assess functionality</strong></p>
-<p>What we’ve created: - <code>plot_city_map()</code>: visualizes OSM data for any location - <code>get_feature_vector()</code>: Extracts quantitative features from geographic coordinates - Visualization of geographic data to understand structure - Feature counting and summarization - Dimensionality reduction for pattern visualization What we could create - Data quality checks (handling missing data, failed queries)</p>
-<p><strong>Address functionality</strong> we’ve created: - Machine learning pipeline for location classification - Evaluation on test sets - Analysis of model performance and potential biases}</p>
+<p>What we’ve created: - <code>plot_city_map()</code>: visualizes OSM data for any location - <code>get_feature_vector()</code>: Extracts quantitative features from geographic coordinates - Visualization of geographic data to understand structure - Feature counting and summarization - Dimensionality reduction for pattern visualization</p>
+<p>What we could create - Data quality checks (handling missing data, failed queries)</p>
+<p><strong>Address functionality</strong></p>
+<p>What we’ve created: - Machine learning pipeline for location classification - Evaluation on test sets - Analysis of model performance and potential biases</p>
+<h2 id="library">Library</h2>
 <p>Consider creating a reusable library structure:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access.py</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -415,17 +420,13 @@ categories:
 <span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_classifier(model, X_test, y_test):</span>
 <span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Address evaluation of performance</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>This modular approach makes code reusable across different projects <span class="kw">and</span> enables systematic data science workflows. Each module has a clear responsibility within the overall pipeline.}{<span class="op">!</span>git clone https:<span class="op">//</span>github.com<span class="op">/</span>YOURGITHUBNAME<span class="op">/</span>fynesse_mlfc.git}{<span class="dv">30</span>}</span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">&quot;/content/fynesse_mlfc&quot;</span>)</span></code></pre></div>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div>
+<p>This modular approach makes code reusable across different projects and enables systematic data science workflows. Each module has a clear responsibility within the overall pipeline.}{!git clone https://github.com/YOURGITHUBNAME/fynesse_mlfc.git}{30}</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">&quot;/content/fynesse_mlfc&quot;</span>)</span></code></pre></div>
 <p>Once you have implemented your functions you should be able to call them to plot the city map.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fynesse</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fynesse.assess.plot_city_map(<span class="st">&#39;Cambridge, England&#39;</span>,  <span class="fl">52.2053</span>, <span class="fl">0.1218</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fynesse</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fynesse.assess.plot_city_map(<span class="st">&#39;Cambridge, England&#39;</span>,  <span class="fl">52.2053</span>, <span class="fl">0.1218</span>, <span class="dv">2</span>)</span></code></pre></div>
 <h2 id="bonus">Bonus</h2>
 <p>If you made changes to the repository after pulling it, you might have issues getting the changes to take effect in the workbook without restarting runtime. Use the workaround below:</p>
 <pre><code>import os, subprocess, importlib, sys
