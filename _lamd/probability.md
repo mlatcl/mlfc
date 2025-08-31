@@ -17,7 +17,6 @@ ipynb: true
 \include{_mlfc/includes/assumed-knowledge.md}
 \include{_mlfc/includes/mlfc-notebook-setup.md}
 \include{_ml/includes/what-is-ml.md}
-\include{_software/includes/
 \include{_ml/includes/what-does-machine-learning-do.md}
 \include{_ml/includes/overdetermined-inaugural.md}
 \include{_ml/includes/underdetermined-system.md}
