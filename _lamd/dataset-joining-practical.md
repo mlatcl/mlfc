@@ -26,45 +26,31 @@ ipynb: true
 postsdir: ../_practicals/ # Where compiled lecture HTML files go
 ---
 
-\include{_data-science/includes/code-reuse-fynesse.md}
-
-\writeassignment{Install your Fynesse library from Practical 1, and demonstrate that it works by plotting a city map.}{10}
-
+\include{_data-science/includes/osm-code-reuse-fynesse.md}
 
 \include{_datasets/includes/dsail-porini-data.md}
 
-\include{_data-science/includes/osm-cities-data-joining.md}
+\include{_data-science/includes/dsail-porini-data-joining.md}
 
-\writeassignment{Find the coordinate information in the dataset, deduplicate the coordinates, and plot them on top of an OSM map.}{15}
+<!-- Dsail Porini Address -->
+\include{_data-science/includes/dsail-porini-data-preprocessing.md}
 
-\include{_data-science/includes/osm-access-assess-address.md}
+\include{_data-science/includes/dsail-porini-probability-analysis.md}
 
-\subsection{Data Assessment and Preprocessing}
-
-\include{_data-science/includes/camera-trap-data-preprocessing.md}
-
-\writeassignment{Clean the dataset by handling multi-species sightings, removing invalid entries, and converting to binary sighting data.}{20}
-
-\include{_data-science/includes/camera-trap-sighting-probability-analysis.md}
-
-\writeassignment{Calculate and plot average probabilities for dates, species, and cameras. Determine which relationships are statistically significant.}{20}
+\include{_ml/includes/dsail-porini-naive-bayes.md}
 
 
-\include{_ml/includes/camera-trap-naive-bayes.md}
-
-
-\include{_ml/includes/camera-trap-correlation-analysis-improvements.md}
+\include{_ml/includes/dsail-porini-correlation-analysis-improvements.md}
 
 \writeassignment{Analyze the data to find the strongest relationships for improving predictions. Compare improved model against the baseline.}{15}
 
-\include{_datasets/includes/sqlite-database-creation.md}
+\include{_datasets/includes/dsail-porini-sqlite-database-creation.md}
 
 \writeassignment{Create a SQLite database with animal sighting and camera coordinate tables. Set appropriate indices and demonstrate with SQL queries.}{20}
 
 
-\include{_ml/includes/camera-trap-burst-detection-analysis.md}
+\include{_ml/includes/dsail-porini-burst-detection-analysis.md}
 
-\thanks
 
 \reading
 
