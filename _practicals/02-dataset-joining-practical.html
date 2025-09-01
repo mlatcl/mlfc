@@ -95,11 +95,23 @@ categories:
 <p>Let’s follow a minimal example of the Access-Assess-Address framework!</p>
 <p>Reminder about Neil’s article on the framework <a href="https://inverseprobability.com/talks/notes/access-assess-address-a-pipeline-for-automated-data-science.html">here</a>.</p>
 <h3 id="access">Access</h3>
-<p>Access is already done, partly years ago by the DSAIL team, and two cells above by us. Example tasks within access would be: - Setting up the cameras in the woods (done) - Collecting the pictures (done) - Labeling the dataset (done) - Making the excel file online accessible (done) - Downloading the file (done just now)}</p>
+<p>Access is already done, partly years ago by the DSAIL team, and two cells above by us. Example tasks within access would be:</p>
+<ul>
+<li>Setting up the cameras in the woods (done)</li>
+<li>Collecting the pictures (done)</li>
+<li>Labeling the dataset (done)</li>
+<li>Making the excel file online accessible (done)</li>
+<li>Downloading the file (done just now)}</li>
+</ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>porini_df.head()</span></code></pre></div>
 <h3 id="assess">Assess</h3>
 <p>Have a look at the dataset for any issues that could stop us from being able to cleanly analyse it.</p>
-<p>Some issues: - Timestamps not readilly available. Hidden in image filenames. - No timestamps available for one of the cameras. - No Camera ID, but can be deduced from coordinates.</p>
+<p>Some issues:</p>
+<ul>
+<li>Timestamps not readilly available. Hidden in image filenames.</li>
+<li>No timestamps available for one of the cameras.</li>
+<li>No Camera ID, but can be deduced from coordinates.</li>
+</ul>
 <p>Decide how it would be best to address these and potentially other issues with the data.</p>
 <p>We would like an output dataframe that has a column for counts each animal was spotted by each camera, and rows for each day in the available range. You might want to use this opportunity to practice <a href="https://pandas.pydata.org/docs/user_guide/advanced.html">Pandas MultiIndex</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -159,7 +171,12 @@ categories:
 <span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(camera_coords)</span>
 <span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>daily.tail()</span></code></pre></div>
-<p>Huh, looks like we have some more issues. - “Impala, Monkey” is not a species - should be counted towards two! - “Can’t Tell” shouldn’t be a species at all. - Some columns don’t exist (eg. <code>C011</code> has no <code>ZEBRA</code>). Let’s just fill them with zeros.</p>
+<p>Huh, looks like we have some more issues.</p>
+<ul>
+<li>“Impala, Monkey” is not a species - should be counted towards two!</li>
+<li>“Can’t Tell” shouldn’t be a species at all.</li>
+<li>Some columns don’t exist (eg. <code>C011</code> has no <code>ZEBRA</code>). Let’s just fill them with zeros.</li>
+</ul>
 <p>Additionally, there probably weren’t <code>1577</code> impalas spotted on Christmas Eve 2021. This is a result of burst shots repetitively capturing the same animal. For now, let’s just treat the data as binary, whether at least one photo was taken on that day.</p>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>Use the cell below to implement the changes discussed above, and potentially additional issues.</p>
