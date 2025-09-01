@@ -91,13 +91,6 @@
 <li>Basic programming skills, preferably in Python</li>
 </ul>
 <p>If you need to brush up on any of these topics, please refer to the recommended reading materials provided in the course.</p>
-</section>
-<section id="ml-foundations-course-notebook-setup" class="slide level2">
-<h2>ML Foundations Course Notebook Setup</h2>
-<!--setupplotcode{import seaborn as sns
-sns.set_style('darkgrid')
-sns.set_context('paper')
-sns.set_palette('colorblind')}-->
 <!-- SECTION What is Machine Learning? -->
 </section>
 <section id="what-is-machine-learning" class="slide level2">
@@ -225,10 +218,253 @@ The logistic function.
 <p><span class="math display">\[ p(\text{bought}) =  \sigma\left(w_0 + w_1 \text{age} + w_2 \text{latitude}\right).\]</span></p>
 <p><span class="math display">\[ p(\text{bought}) =  \sigma\left(\beta_0 + \beta_1 \text{age} + \beta_2 \text{latitude}\right).\]</span></p>
 </section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-optimized-totally-faint-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized-totally-faint.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-optimized-extremely-faint-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized-extremely-faint.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-optimized-very-faint-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized-very-faint.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-optimized-faint-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized-faint.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-optimized-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+A blurry image of Ceres taken from the Hubble space telescope. Piazzi first observed the planet while constructing a star catalogue. He was confirming the position of the stars in a second night of observation when he noted one of them was moving. The name planet is originally from the Greek for ‘wanderer.’
+</aside>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="giuseppe-piazzi-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/giuseppe-piazzi.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Giuseppe Piazzi (1746-1826) was an Italian Catholic priest and an astronomer. Jesuits had been closely involved in education, following their surpression in the Kingdom of Naples and Sicily, Piazzi was recruited as part of a drive to revitalize the University of Palermo. His funding was from King Ferdinand I and enabled him to buy high quality instruments from London.
+</aside>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="monthly-magazine-ceres-piazzi-figure" class="figure-frame">
+<div class="centered" style="">
+<a href="https://play.google.com/books/reader?id=XG43AQAAMAAJ&amp;pg=PA88"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/XG43AQAAMAAJ-PA88.png" /></a>
+</div>
+</div>
+</div>
+<aside class="notes">
+Announcement of Giuseppe Piazzi’s discovery in the “Monthly Magazine” (also known as the British Register). This announcement is made in August 1801, 7 months after Giuseppe Piazzi first observed Ceres.
+</aside>
+</section>
+<section id="titius-bode-law" class="slide level2">
+<h2>Titius-Bode Law</h2>
+<div class="figure">
+<div id="titius-bode-law-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/bodes-law.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The Titius-Bode law was a relatively obscure empirical observation about how the planets are distributed across the solar system. It became well known after the discovery of Uranus by Herschel in 1781 which was found at the location the law predicts for the 8th planet.
+</aside>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="monatliche-correspondenz-piazzi-figure" class="figure-frame">
+<div class="centered" style="">
+<a href="https://play.google.com/books/reader?id=JBw4AAAAMAAJ&amp;pg=PA280"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/JBw4AAAAMAAJ-PA280.png" /></a>
+</div>
+</div>
+</div>
+<aside class="notes">
+Page from the publication <em>Monatliche Correspondenz</em> that shows Piazzi’s observations of the new planet <span class="citation" data-cites="Piazzi-monatliche1801">Piazzi (n.d.)</span> .
+</aside>
+<!--[<div class="centered " style=""><img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-beobachtung-von-piazzi.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle"></div>](https://play.google.com/books/reader?printsec=frontcover&output=reader&id=JBw4AAAAMAAJ&pg=GBS.PA280)-->
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<aside class="notes">
+Image data <code>wget http://server3.sky-map.org/imgcut?survey=DSS2&amp;img_id=all&amp;angle=4&amp;ra=3.5&amp;de=17.25&amp;width=1600&amp;height=1600&amp;projection=tan&amp;interpolation=bicubic&amp;jpeg_quality=0.8&amp;output_type=png</code>
+</aside>
+<div class="figure">
+<div id="ceres-data-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-data.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Plot of the declination and right ascension that Piazzi recorded as Ceres passed through the sky in 1800. Gaps are evenings where Piazzi was unable to make an observation.
+</aside>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="godfrey-kneller-isaac-newton-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/godfrey-kneller-isaac-newton-1689.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Godfrey Kneller portrait of Isaac Newton
+</aside>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="bendixen-carl-friedrich-gauss-1828-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/bendixen-carl-friedrich-gauss-1828.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Carl Friedrich Gauss in 1828. He became internationally famous 27 years earlier for recovering the planet Ceres with a mathematical prediction.
+</aside>
+<aside class="notes">
+Named ceres because Ceres is strongly associated with Sicily
+</aside>
+</section>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="gauss-ceres-prediction-figure" class="figure-frame">
+<div class="centered" style="">
+<a href="https://play.google.com/books/reader?id=JBw4AAAAMAAJ&amp;pg=PA647"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/JBw4AAAAMAAJ-PA647.png" /></a>
+</div>
+</div>
+</div>
+<aside class="notes">
+Gauss’s prediction of Ceres’s orbit as published in Franz von Zach’s Monatliche Correspondenz. He gives the location where the planet may be found, and then some mathematics for making other predictions. He doesn’t share his method, and this later leads to a priority dispute with Legendre around least-squares, which Gauss used to form the fit
+</aside>
+</section>
+<section id="section-12" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="piazzi-cerere-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/piazzi-cerere.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Piazzi achieved his glory after the planet was discovered. Ceres is an agricultural god (in Greek tradition Demeter). She was associated with Sicily, where Piazzi was working when he made the discovery.
+</aside>
+<aside class="notes">
+<p>Use image of the Earth to introduce the unpredictability of the weather.</p>
+<p>http://www.astropa.unipa.it/HISTORY/history.htm</p>
+<p>Surface area Ceres 2,850,000 sq km (a little bigger than Greenland, but a lot colder) Radius Ceres 487.3 (at equator) Radius 1,738.14 Radius 6,378.1 Moon is 0.273 earths wide. Ceres is 0.0764 earths wide.</p>
+</aside>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-moon-earth-figure" class="figure-frame">
+<table>
+<tr>
+<td width>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized.png" width="7%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+<td width>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/full-moon-2010.png" width="27%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+<td width>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/the-earth-seen-from-apollo-17.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<aside class="notes">
+The surface area of Ceres is 2,850,000 square kilometers, it’s a little bigger than Greenland, but quite a lot colder. The moon is about 27% of the width of the Earth. Ceres is 7% of the width of the Earth.
+</aside>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="planets-2008-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/planets-2008.jpg" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+The location of Ceres as ordered in the solar system. While no longer a planet, Ceres is the unique Dwarf Planet in the inner solar system. This image from http://upload.wikimedia.org/wikipedia/commons/c/c4/Planets2008.jpg
+</aside>
+</section>
+<section id="section-15" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="ceres-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres.jpg" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Ceres as photographed by the Dawn Mission. The photo highlights Ceres’s ‘bright spots’ which are thought to be a material with a high level of reflection (perhaps ice or salt). This image from http://www.popsci.com/sites/popsci.com/files/styles/large_1x_/public/dawn-two-bright-spots.jpg?itok=P5oeSRrc
+</aside>
+</section>
 <section id="overdetermined-system" class="slide level2">
 <h2>Overdetermined System</h2>
 </section>
-<section id="section" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 <script>
 showDivs(1, 'over_determined_system');
@@ -284,7 +520,7 @@ showDivs(1, 'over_determined_system');
 <section id="pierre-simon-laplace" class="slide level2">
 <h2>Pierre-Simon Laplace</h2>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="pierre-simon-laplace-image-figure" class="figure-frame">
@@ -297,13 +533,13 @@ showDivs(1, 'over_determined_system');
 Pierre-Simon Laplace 1749-1827.
 </aside>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA2"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA2.png" /></a>
 </div>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="laplaces-determinism-english-figure" class="figure-frame">
@@ -316,7 +552,7 @@ Pierre-Simon Laplace 1749-1827.
 Laplace’s determinsim in English translation.
 </aside>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-20" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="laplaces-demon-cropped-figure" class="figure-frame">
@@ -336,13 +572,13 @@ Laplace’s determinsim in English translation.
 <section id="laplaces-gremlin" class="slide level2">
 <h2>Laplace’s Gremlin</h2>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <a href="https://play.google.com/books/reader?id=1YQPAAAAQAAJ&amp;pg=PR17-IA4"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/1YQPAAAAQAAJ-PR17-IA4.png" /></a>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-22" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="probability-relative-in-part-figure" class="figure-frame">
@@ -355,7 +591,7 @@ Laplace’s determinsim in English translation.
 To Laplace, determinism is a strawman. Ignorance of mechanism and data leads to uncertainty which should be dealt with through probability.
 </aside>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-23" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="probability-relative-in-part-cropped-figure" class="figure-frame">
@@ -406,8 +642,193 @@ p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f
 </div>
 <div class="fragment">
 <p>This is known as a stochastic process.</p>
-<!-- SECTION Underdetermined System -->
+<!--include{_physics/includes/emergent-behaviour.md}-->
+<!--include{_physics/includes/lap-engine.md}-->
+<!--THEORY of IGNORANCE-->
 </div>
+</section>
+<section id="brownian-motion-and-wiener" class="slide level2">
+<h2>Brownian Motion and Wiener</h2>
+<div class="figure">
+<div id="albert-einstein-photo-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Albert_Einstein_photo_1921.jpg" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Albert Einstein’s 1905 paper on Brownian motion introduced stochastic differential equations which can be used to model the ‘curve of a simple molecule of air.’
+</aside>
+</section>
+<section id="section-24" class="slide level2">
+<h2></h2>
+<div class="figure">
+<div id="russell-wiener-russell-figure" class="figure-frame">
+<table>
+<tr>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//philosophy/Bertrand_Russell_1957.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>Betrand Russell</em>
+</center>
+</td>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Albert_Einstein_photo_1921.jpg" width="85%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>Albert Einstein</em>
+</center>
+</td>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Norbert_wiener.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>Norbert Wiener</em>
+</center>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<aside class="notes">
+Bertrand Russell (1872-1970), Albert Einstein (1879-1955), Norbert Wiener, (1894-1964)
+</aside>
+<aside class="notes">
+Wiener came to Cambridge in 1913. Russell showed him Einstein’s 1905 paper on Brownian motion (<span class="citation" data-cites="Einstein-brownian05">Einstein (1905)</span>)
+</aside>
+</section>
+<section id="brownian-motion" class="slide level2">
+<h2>Brownian Motion</h2>
+<div class="figure">
+<div id="brownian-motion-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/brownian-motion.gif" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Brownian motion of a large particle in a group of smaller particles. The movement is known as a <em>Wiener process</em> after Norbert Wiener.
+</aside>
+</section>
+<section id="stochasticity-and-control" class="slide level2">
+<h2>Stochasticity and Control</h2>
+<div class="figure">
+<div id="norbert-wiener-yellow-peril-figure" class="figure-frame">
+<table>
+<tr>
+<td width="45%">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Norbert_wiener.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+<td width="45%">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/wiener-yellow-peril.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<aside class="notes">
+Norbert Wiener (1894 - 1964). Founder of cybernetics and the information era. He used Gibbs’s ideas to develop a “theory of ignorance” that he deployed in early communication. On the right is Wiener’s wartime report that used stochastic processes in forecasting with applications in radar control (image from <span class="citation" data-cites="Coales-yellow14">Coales and Kane (2014)</span>).
+</aside>
+</section>
+<section id="statistical-physics" class="slide level2">
+<h2>Statistical Physics</h2>
+<div class="figure">
+<div id="maxwell-boltzmann-gibbs-figure" class="figure-frame">
+<table>
+<tr>
+<td width="30%">
+<center>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/james-clerk-maxwell.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>James Clerk Maxwell</em>
+</center>
+</td>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/boltzmann2.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>Ludwig Boltzmann</em>
+</center>
+</td>
+<td width="30%">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/j-w-gibbs.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+<center>
+<em>Josiah Willard Gibbs</em>
+</center>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<aside class="notes">
+James Clerk Maxwell (1831-1879), Ludwig Boltzmann (1844-1906) Josiah Willard Gibbs (1839-1903)
+</aside>
+</section>
+<section id="entropy-billiards" class="slide level2">
+<h2>Entropy Billiards</h2>
+<div class="figure">
+<div id="entropy-billiards-js-figure" class="figure-frame">
+<div>
+<div style="width:68%;float:left">
+<canvas id="multiball-canvas" width="700" height="500" style="border:1px solid black;display:inline;text-align:left ">
+</canvas>
+</div>
+<div style="width:28%;float:right;margin:auto">
+<div style="float:right;width:100%;margin:auto">
+Entropy:
+<output id="multiball-entropy">
+</output>
+</div>
+<div id="multiball-histogram-canvas" style="width:300px;height:250px;display:inline-block;text-align:right;margin:auto">
+
+</div>
+</div>
+</div>
+<div>
+<button id="multiball-newball" style="text-align:right">
+New Ball
+</button>
+<button id="multiball-pause" style="text-align:right">
+Pause
+</button>
+<button id="multiball-skip" style="text-align:right">
+Skip 1000s
+</button>
+<button id="multiball-histogram" style="text-align:right">
+Histogram
+</button>
+</div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="../scripts//ballworld/ballworld.js"></script>
+<script src="../scripts//ballworld/multiball.js"></script>
+</div>
+</div>
+<aside class="notes">
+Bernoulli’s simple kinetic models of gases assume that the molecules of air operate like billiard balls.
+</aside>
+<!-- SECTION Underdetermined System -->
 </section>
 <section id="underdetermined-system" class="slide level2">
 <h2>Underdetermined System</h2>
@@ -506,7 +927,7 @@ Location of the over thirty-four thousand health facilities registered in the NM
 <li>We summarise the notation and terminology for these distributions in the following table.</li>
 </ul>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-25" class="slide level2">
 <h2></h2>
 <table>
 <thead>
@@ -914,7 +1335,7 @@ P\left(y|x\right)=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}.
 <li><p>Actually these “data” were sampled from a Gaussian with mean 1.7 and standard deviation 0.15. Are your estimates close to the real values? If not why not?</p></li>
 </ul>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-26" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="mlai-lecture-2012-figure" class="figure-frame">
@@ -972,6 +1393,15 @@ MLAI Lecture 2 from 2012.
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
+</div>
+<div id="ref-Coales-yellow14" class="csl-entry" role="doc-biblioentry">
+Coales, J.F., Kane, S.J., 2014. The <span>“yellow peril”</span> and after. IEEE Control Systems Magazine 34, 65–69. <a href="https://doi.org/10.1109/MCS.2013.2287387">https://doi.org/10.1109/MCS.2013.2287387</a>
+</div>
+<div id="ref-Einstein-brownian05" class="csl-entry" role="doc-biblioentry">
+Einstein, A., 1905. Über die von der molekularkinetischen <span>T</span>heorie der <span>W</span>ärme geforderte <span>B</span>ewegung von in ruhenden <span>F</span>lüssigkeiten suspendierten <span>T</span>eilchen. Annalen der Physik 322, 549–560. <a href="https://doi.org/10.1002/andp.19053220806">https://doi.org/10.1002/andp.19053220806</a>
+</div>
+<div id="ref-Piazzi-monatliche1801" class="csl-entry" role="doc-biblioentry">
+Piazzi, G., n.d. Fortgesetzte <span>N</span>achrichten über den <span>L</span>ängst vermutheten neuen <span>H</span>aupt-<span>P</span>laneten unseres <span>S</span>onnen-<span>S</span>ystems. pp. 279–283.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
 Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.

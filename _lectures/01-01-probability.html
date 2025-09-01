@@ -113,6 +113,243 @@ sns.set_palette('colorblind')}-->
 <p><span class="math display">\[ p(\text{bought}) =  \sigma\left(\beta_0 + \beta_1 \text{age} + \beta_2 \text{latitude}\right).\]</span></p>
 <p>to denote the emphasis is on interpretation of the parameters.</p>
 <p>Another effect of the focus on prediction in machine learning is that <em>non-linear</em> approaches, which can be harder to interpret, are more widely deployedin machine learning – they tend to improve quality of predictions at the expense of interpretability.</p>
+<h2 id="discovery-of-ceres">Discovery of Ceres</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_physics/includes/ceres-discovery.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_physics/includes/ceres-discovery.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>On New Year’s Eve in 1800, Giuseppe Piazzi, an Italian Priest, born in Lombardy, but installed in a new Observatory at the University viewed a faint smudge through his telescope.</p>
+<p>Piazzi was building a star catalogue.</p>
+<p>Unbeknownst to him, Piazzi was also participating in an international search. One that he’d been volunteered for by the Hungarian astronomer Franz von Zach. But without even knowing that he’d joined the search party, Piazzi had discovered their target a new planet.</p>
+<div class="figure">
+<div id="ceres-optimized-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="ceres-optimized-magnify" class="magnify" onclick="magnifyFigure(&#39;ceres-optimized&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="ceres-optimized-caption" class="caption-frame">
+<p>Figure: A blurry image of Ceres taken from the Hubble space telescope. Piazzi first observed the planet while constructing a star catalogue. He was confirming the position of the stars in a second night of observation when he noted one of them was moving. The name planet is originally from the Greek for ‘wanderer.’</p>
+</div>
+</div>
+<div class="figure">
+<div id="giuseppe-piazzi-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/giuseppe-piazzi.png" width="50%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="giuseppe-piazzi-magnify" class="magnify" onclick="magnifyFigure(&#39;giuseppe-piazzi&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="giuseppe-piazzi-caption" class="caption-frame">
+<p>Figure: Giuseppe Piazzi (1746-1826) was an Italian Catholic priest and an astronomer. Jesuits had been closely involved in education, following their surpression in the Kingdom of Naples and Sicily, Piazzi was recruited as part of a drive to revitalize the University of Palermo. His funding was from King Ferdinand I and enabled him to buy high quality instruments from London.</p>
+</div>
+</div>
+<div class="figure">
+<div id="monthly-magazine-ceres-piazzi-figure" class="figure-frame">
+<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=XG43AQAAMAAJ&amp;pg=PA88&amp;output=embed" width="700" height="500">
+</iframe>
+</div>
+<div id="monthly-magazine-ceres-piazzi-magnify" class="magnify" onclick="magnifyFigure(&#39;monthly-magazine-ceres-piazzi&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="monthly-magazine-ceres-piazzi-caption" class="caption-frame">
+<p>Figure: Announcement of Giuseppe Piazzi’s discovery in the “Monthly Magazine” (also known as the British Register). This announcement is made in August 1801, 7 months after Giuseppe Piazzi first observed Ceres.</p>
+</div>
+</div>
+<p>The planet’s location was a prediction. It was a missing planet, other planets had been found through a formula, a law, that represented their distance from the sun: <span class="math display">\[
+a = 0.4 + 0.3 \times 2^m
+\]</span> where <span class="math inline">\(m=-\infty, 0, 1, 2, \dots\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.asarray([<span class="op">-</span>np.inf, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> np.asarray(<span class="bu">range</span>(<span class="bu">len</span>(m)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>planets <span class="op">=</span> [<span class="st">&#39;Mercury&#39;</span>, <span class="st">&#39;Venus&#39;</span>, <span class="st">&#39;Earth&#39;</span>, <span class="st">&#39;Mars&#39;</span>, <span class="st">&#39;*&#39;</span>, <span class="st">&#39;Jupiter&#39;</span>, <span class="st">&#39;Saturn&#39;</span>, <span class="st">&#39;Uranus&#39;</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.5</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span>m</span></code></pre></div>
+<div class="figure">
+<div id="titius-bode-law-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/bodes-law.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="titius-bode-law-magnify" class="magnify" onclick="magnifyFigure(&#39;titius-bode-law&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="titius-bode-law-caption" class="caption-frame">
+<p>Figure: The Titius-Bode law was a relatively obscure empirical observation about how the planets are distributed across the solar system. It became well known after the discovery of Uranus by Herschel in 1781 which was found at the location the law predicts for the 8th planet.</p>
+</div>
+</div>
+<p>When <a href="https://en.wikipedia.org/wiki/Titius%E2%80%93Bode_law">this law</a> was published it fitted all known planets: Mercury, Venus, Earth, Mars, Jupiter and Saturn. Although there was a gap between the fourth and fifth planets (between Mars and Jupiter). In 1781 William Herschel discovered Uranus. It was in the position predicted by the formula. One of the originators of the formula, Johann Elert Bode urged astronomers to search for the missing planet, to be situated between Mars and Jupiter. Franz Xaver von Zach formed the United Astronomical Society, also known as the Celestial Police. But before the celestial police managed to start their search, Piazzi, without even knowing he was a member completed the search. Piazzi first observed the new planet in the early hours of January 1st 1801. He continued to observe it over the next 42 days. Initially he thought it may be a comet, but as he watched it he became convinced he’d found a planet. The international search was over before it started.</p>
+<p>Unfortunately, there was a problem. Once he’d found the planet, Piazzi promptly lost it. Piazzi was keen not just to discover the planet, but to to be known as the determiner of its orbit. He took observations across the months of January and February, working to find the orbit. Unfortunately, he was unable to pin it down. He became ill, and by the time the dat awas revealed to the wider community through von Zach’s journal, Monatlicher Correspondenz, the new planet had been lost behind the sun.</p>
+<div class="figure">
+<div id="monatliche-correspondenz-piazzi-figure" class="figure-frame">
+<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=JBw4AAAAMAAJ&amp;pg=PA280&amp;output=embed" width="700" height="500">
+</iframe>
+</div>
+<div id="monatliche-correspondenz-piazzi-magnify" class="magnify" onclick="magnifyFigure(&#39;monatliche-correspondenz-piazzi&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="monatliche-correspondenz-piazzi-caption" class="caption-frame">
+<p>Figure: Page from the publication <em>Monatliche Correspondenz</em> that shows Piazzi’s observations of the new planet <span class="citation" data-cites="Piazzi-monatliche1801">Piazzi (n.d.)</span> .</p>
+</div>
+</div>
+<!--[<div class="centered " style=""><img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-beobachtung-von-piazzi.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle"></div>](https://play.google.com/books/reader?printsec=frontcover&output=reader&id=JBw4AAAAMAAJ&pg=GBS.PA280)-->
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;http://server3.sky-map.org/imgcut?survey=DSS2&amp;img_id=all&amp;angle=4&amp;ra=3.5&amp;de=17.25&amp;width=1600&amp;height=1600&amp;projection=tan&amp;interpolation=bicubic&amp;jpeg_quality=0.8&amp;output_type=png&#39;</span>,<span class="st">&#39;ceres-sky-background.png&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.ceres()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>right_ascension <span class="op">=</span> data[<span class="st">&#39;data&#39;</span>][<span class="st">&#39;Gerade Aufstig in Zeit&#39;</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>declination <span class="op">=</span> data[<span class="st">&#39;data&#39;</span>][<span class="st">&#39;Nordlich Abweich&#39;</span>]</span></code></pre></div>
+<!--dayPrev = -2;
+    for i = 1:size(ceresData, 1)
+      day = ceresData(i, 1);
+      if day - dayPrev>2
+        if ~isnan(rightAscension(i)) && ~isnan(declination(i))
+          text(rightAscension(i)+0.025, declination(i), datestr(day, '1801/mm/dd'));
+          dayPrev = day;
+        end
+      end
+    end
+    set(a, 'color', blueColor, 'markersize', 12)
+    set(gca, 'xlim', [3.25 3.75])
+    set(gca, 'ylim', [15.5 19])
+    xlim = get(gca, 'xlim');
+    ylim = get(gca, 'ylim');
+    set(gca, 'xtick', [3.25 3.5 3.75])
+    set(gca, 'xticklabel', {'$3$h$15^\\prime$', '$3$h$30^\\prime$', '$3$h$45^\\prime$'})
+    set(gca, 'ytick', [15.5 16 16.5 17 17.5 18 18.5 19])
+    set(gca, 'yticklabel', {'$15^\\circ 30^\\prime$', '$16^\\circ$', '$16^\\circ 30^\\prime$', '$17^\\circ$', '$17^\\circ 30^\\prime$', '$18^\\circ$', '$18^\\circ 30^\\prime$', '$19^\\circ$'})
+    set(gca, 'box', 'off')
+    validData = find(~isnan(declination));
+    times = ceresData(validData, 1);
+    axis off
+    printLatexPlot('ceresData', '../../../ceres/tex/diagrams', 0.9*textWidth)-->
+<div class="figure">
+<div id="ceres-data-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-data.svg" width="60%" style=" ">
+</object>
+</div>
+<div id="ceres-data-magnify" class="magnify" onclick="magnifyFigure(&#39;ceres-data&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="ceres-data-caption" class="caption-frame">
+<p>Figure: Plot of the declination and right ascension that Piazzi recorded as Ceres passed through the sky in 1800. Gaps are evenings where Piazzi was unable to make an observation.</p>
+</div>
+</div>
+<p>Piazzi was able to attempt to predict the orbit because of Kepler’s laws of planetary motion. Johannes Kepler had outlined the way in which planets move according to elliptical shapes, and comets move according to parabolic shapes.</p>
+<div class="figure">
+<div id="godfrey-kneller-isaac-newton-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/godfrey-kneller-isaac-newton-1689.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="godfrey-kneller-isaac-newton-magnify" class="magnify" onclick="magnifyFigure(&#39;godfrey-kneller-isaac-newton&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="godfrey-kneller-isaac-newton-caption" class="caption-frame">
+<p>Figure: Godfrey Kneller portrait of Isaac Newton</p>
+</div>
+</div>
+<p>Later Isaac Newton was able to describe the underlying laws of motion that underpinned Kepler’s laws. This was the enlightenment. An age of science and reason driven by reductionist approaches to the natural world. The enlightenment scientists were able to read and understand each other’s work through the invention of the printing press. Kepler died in 1630, 12 years before Newton was born in 1642. But Kepler’s ideas were able to influence Newton and his peers, and the understanding of gravity became an objective of the nascent Royal Society.</p>
+<p>The sharing of information in printed form had evolved by the time of Piazzi, and the collected discoveries of the astronomic world were being shared in Franz von Zach’s monthly journal. It was here that Piazzi’s observations were eventually published, some 7 months after the planet was lost.</p>
+<p>It was also here that a young German mathematician read about the international hunt for the lost planet. Carl Friedrich Gauss was a 23-year-old mathematician working from Göttingen. He combined Kepler’s laws with Piazzi’s data to make predictions about where the planet would be found. In doing so, he also developed the method of least squares, and incredibly was able to fit the relatively complex model to the data with a high enough degree of accuracy that astronomers were able to look to the skies to try to recover the planet.</p>
+<p>Almost exactly one year after it was lost, Ceres was recovered by Franz von Zach. Gauss had combined model with data to make a prediction and in doing so a new planet was discovered <span class="citation" data-cites="Gauss-monatliche1801">Gauss (1802)</span>.</p>
+<div class="figure">
+<div id="bendixen-carl-friedrich-gauss-1828-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/bendixen-carl-friedrich-gauss-1828.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="bendixen-carl-friedrich-gauss-1828-magnify" class="magnify" onclick="magnifyFigure(&#39;bendixen-carl-friedrich-gauss-1828&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="bendixen-carl-friedrich-gauss-1828-caption" class="caption-frame">
+<p>Figure: Carl Friedrich Gauss in 1828. He became internationally famous 27 years earlier for recovering the planet Ceres with a mathematical prediction.</p>
+</div>
+</div>
+<p>It is this combination of <em>model</em> and <em>data</em> that underpins machine learning but notice that here it has also been delivered through a mechanistic understanding of the way the planets move. This understanding is derived from natural laws that are explicitly incorporated into the model. Kepler’s laws derive from Newton’s mathematical representation of gravity.</p>
+<p>But there was a problem. The laws don’t precisely fit the data.</p>
+<div class="figure">
+<div id="gauss-ceres-prediction-figure" class="figure-frame">
+<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=JBw4AAAAMAAJ&amp;pg=PA647&amp;output=embed" width="700" height="500">
+</iframe>
+</div>
+<div id="gauss-ceres-prediction-magnify" class="magnify" onclick="magnifyFigure(&#39;gauss-ceres-prediction&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="gauss-ceres-prediction-caption" class="caption-frame">
+<p>Figure: Gauss’s prediction of Ceres’s orbit as published in Franz von Zach’s Monatliche Correspondenz. He gives the location where the planet may be found, and then some mathematics for making other predictions. He doesn’t share his method, and this later leads to a priority dispute with Legendre around least-squares, which Gauss used to form the fit</p>
+</div>
+</div>
+<div class="figure">
+<div id="piazzi-cerere-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/piazzi-cerere.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="piazzi-cerere-magnify" class="magnify" onclick="magnifyFigure(&#39;piazzi-cerere&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="piazzi-cerere-caption" class="caption-frame">
+<p>Figure: Piazzi achieved his glory after the planet was discovered. Ceres is an agricultural god (in Greek tradition Demeter). She was associated with Sicily, where Piazzi was working when he made the discovery.</p>
+</div>
+</div>
+<p>Unfortunately, the story doesn’t end so well for the Titsius-Bode law. In 1846 Neptune was discovered, not in the place predicted by the law (it should be closer to where Pluto was eventually found). And Ceres was found to be merely the largest object in the asteroid belt. It was recategorized as a Dwarf planet.</p>
+<div class="figure">
+<div id="ceres-moon-earth-figure" class="figure-frame">
+<table>
+<tr>
+<td width>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres-optimized.png" width="7%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+<td width>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/full-moon-2010.png" width="27%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+<td width>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/the-earth-seen-from-apollo-17.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="ceres-moon-earth-magnify" class="magnify" onclick="magnifyFigure(&#39;ceres-moon-earth&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="ceres-moon-earth-caption" class="caption-frame">
+<p>Figure: The surface area of Ceres is 2,850,000 square kilometers, it’s a little bigger than Greenland, but quite a lot colder. The moon is about 27% of the width of the Earth. Ceres is 7% of the width of the Earth.</p>
+</div>
+</div>
+<div class="figure">
+<div id="planets-2008-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/planets-2008.jpg" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="planets-2008-magnify" class="magnify" onclick="magnifyFigure(&#39;planets-2008&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="planets-2008-caption" class="caption-frame">
+<p>Figure: The location of Ceres as ordered in the solar system. While no longer a planet, Ceres is the unique Dwarf Planet in the inner solar system. This image from http://upload.wikimedia.org/wikipedia/commons/c/c4/Planets2008.jpg</p>
+</div>
+</div>
+<div class="figure">
+<div id="ceres-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ceres/ceres.jpg" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="ceres-magnify" class="magnify" onclick="magnifyFigure(&#39;ceres&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="ceres-caption" class="caption-frame">
+<p>Figure: Ceres as photographed by the Dawn Mission. The photo highlights Ceres’s ‘bright spots’ which are thought to be a material with a high level of reflection (perhaps ice or salt). This image from http://www.popsci.com/sites/popsci.com/files/styles/large_1x_/public/dawn-two-bright-spots.jpg?itok=P5oeSRrc</p>
+</div>
+</div>
 <h2 id="overdetermined-system">Overdetermined System</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/overdetermined-system.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/overdetermined-system.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -250,6 +487,192 @@ sns.set_palette('colorblind')}-->
 <h2 id="a-probabilistic-process">A Probabilistic Process</h2>
 <p>However, it was left to an admirer of Laplace to develop a practical probability density for that purpose. It was Carl Friedrich Gauss who suggested that the <em>Gaussian</em> density (which at the time was unnamed!) should be used to represent this error.</p>
 <p>The result is a <em>noisy</em> function, a function which has a deterministic part, and a stochastic part. This type of function is sometimes known as a probabilistic or stochastic process, to distinguish it from a deterministic process.</p>
+<!--include{_physics/includes/emergent-behaviour.md}-->
+<!--include{_physics/includes/lap-engine.md}-->
+<!--THEORY of IGNORANCE-->
+<h2 id="brownian-motion-and-wiener">Brownian Motion and Wiener</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_physics/includes/brownian-wiener.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_physics/includes/brownian-wiener.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Robert Brown was a botanist who was studying plant pollen in 1827 when he noticed a trembling motion of very small particles contained within cavities within the pollen. He worked hard to eliminate the potential source of the movement by exploring other materials where he found it to be continuously present. Thus, the movement was not associated, as he originally thought, with life.</p>
+<p>In 1905 Albert Einstein produced the first mathematical explanation of the phenomenon. This can be seen as our first model of a ‘curve of a simple molecule of air.’ To model the phenomenon Einstein introduced stochasticity to a differential equation. The particles were being peppered with high-speed water molecules, that was triggering the motion. Einstein modelled this as a stochastic process.</p>
+<div class="figure">
+<div id="albert-einstein-photo-figure" class="figure-frame">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Albert_Einstein_photo_1921.jpg" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="albert-einstein-photo-magnify" class="magnify" onclick="magnifyFigure(&#39;albert-einstein-photo&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="albert-einstein-photo-caption" class="caption-frame">
+<p>Figure: Albert Einstein’s 1905 paper on Brownian motion introduced stochastic differential equations which can be used to model the ‘curve of a simple molecule of air.’</p>
+</div>
+</div>
+<p>Norbert Wiener was a child prodigy, whose father had schooled him in philosophy. He was keen to have his son work with the leading philosophers of the age, so at the age of 18 Wiener arrived in Cambridge (already with a PhD). He was despatched to study with Bertrand Russell but Wiener and Russell didn’t get along. Wiener wasn’t persuaded by Russell’s ideas for theories of knowledge through logic. He was more aligned with Laplace and his desire for a theory of ignorance. In is autobiography he relates it as the first thing he could see his father was proud of (at around the age of 10 or 11) <span class="citation" data-cites="Wiener-exprodigy53">(Wiener, 1953)</span>.</p>
+<div class="figure">
+<div id="russell-wiener-russell-figure" class="figure-frame">
+<table>
+<tr>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//philosophy/Bertrand_Russell_1957.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+</td>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Albert_Einstein_photo_1921.jpg" width="85%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+</td>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Norbert_wiener.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+</td>
+</tr>
+</table>
+</div>
+<div id="russell-wiener-russell-magnify" class="magnify" onclick="magnifyFigure(&#39;russell-wiener-russell&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="russell-wiener-russell-caption" class="caption-frame">
+<p>Figure: Bertrand Russell (1872-1970), Albert Einstein (1879-1955), Norbert Wiener, (1894-1964)</p>
+</div>
+</div>
+<p>But Russell (despite also not getting along well with Wiener) introduced Wiener to Einstein’s works, and Wiener also met G. H. Hardy. He left Cambridge for Göttingen where he studied with Hilbert. He developed the underlying mathematics for proving the existence of the solutions to Einstein’s equation, which are now known as Wiener processes.</p>
+<div class="figure">
+<div id="brownian-motion-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/brownian-motion.gif" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="brownian-motion-magnify" class="magnify" onclick="magnifyFigure(&#39;brownian-motion&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="brownian-motion-caption" class="caption-frame">
+<p>Figure: Brownian motion of a large particle in a group of smaller particles. The movement is known as a <em>Wiener process</em> after Norbert Wiener.</p>
+</div>
+</div>
+<div class="figure">
+<div id="norbert-wiener-yellow-peril-figure" class="figure-frame">
+<table>
+<tr>
+<td width="45%">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/Norbert_wiener.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+<td width="45%">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/wiener-yellow-peril.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="norbert-wiener-yellow-peril-magnify" class="magnify" onclick="magnifyFigure(&#39;norbert-wiener-yellow-peril&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="norbert-wiener-yellow-peril-caption" class="caption-frame">
+<p>Figure: Norbert Wiener (1894 - 1964). Founder of cybernetics and the information era. He used Gibbs’s ideas to develop a “theory of ignorance” that he deployed in early communication. On the right is Wiener’s wartime report that used stochastic processes in forecasting with applications in radar control (image from <span class="citation" data-cites="Coales-yellow14">Coales and Kane (2014)</span>).</p>
+</div>
+</div>
+<p>Wiener himself used the processes in his work. He was focused on mathematical theories of communication. Between the world wars he was based at Massachusetts Institute of Technology where the burgeoning theory of electrical engineering was emerging, with a particular focus on communication lines. Winer developed theories of communication that used Gibbs’s entropy to encode information. He also used the ideas behind the Wiener process for developing tracking methods for radar systems in the second world war. These processes are what we know of now as Gaussian processes (<span class="citation" data-cites="Wiener:yellow49">(<strong>Wiener:yellow49?</strong>)</span>).</p>
+<div class="figure">
+<div id="maxwell-boltzmann-gibbs-figure" class="figure-frame">
+<table>
+<tr>
+<td width="30%">
+<center>
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/james-clerk-maxwell.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>James Clerk Maxwell</em>
+</center>
+</td>
+<td width="30%">
+<center>
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/boltzmann2.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</center>
+<center>
+<em>Ludwig Boltzmann</em>
+</center>
+</td>
+<td width="30%">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//physics/j-w-gibbs.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+<center>
+<em>Josiah Willard Gibbs</em>
+</center>
+</td>
+</tr>
+</table>
+</div>
+<div id="maxwell-boltzmann-gibbs-magnify" class="magnify" onclick="magnifyFigure(&#39;maxwell-boltzmann-gibbs&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="maxwell-boltzmann-gibbs-caption" class="caption-frame">
+<p>Figure: James Clerk Maxwell (1831-1879), Ludwig Boltzmann (1844-1906) Josiah Willard Gibbs (1839-1903)</p>
+</div>
+</div>
+<h2 id="entropy-billiards">Entropy Billiards</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_physics/includes/entropy-billiards.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_physics/includes/entropy-billiards.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="figure">
+<div id="entropy-billiards-js-figure" class="figure-frame">
+<div>
+<div style="width:68%;float:left">
+<canvas id="multiball-canvas" width="700" height="500" style="border:1px solid black;display:inline;text-align:left ">
+</canvas>
+</div>
+<div style="width:28%;float:right;margin:auto">
+<div style="float:right;width:100%;margin:auto">
+Entropy:
+<output id="multiball-entropy">
+</output>
+</div>
+<div id="multiball-histogram-canvas" style="width:300px;height:250px;display:inline-block;text-align:right;margin:auto">
+
+</div>
+</div>
+</div>
+<div>
+<button id="multiball-newball" style="text-align:right">
+New Ball
+</button>
+<button id="multiball-pause" style="text-align:right">
+Pause
+</button>
+<button id="multiball-skip" style="text-align:right">
+Skip 1000s
+</button>
+<button id="multiball-histogram" style="text-align:right">
+Histogram
+</button>
+</div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="../scripts//ballworld/ballworld.js"></script>
+<script src="../scripts//ballworld/multiball.js"></script>
+</div>
+<div id="entropy-billiards-js-magnify" class="magnify" onclick="magnifyFigure(&#39;entropy-billiards-js&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="entropy-billiards-js-caption" class="caption-frame">
+<p>Figure: Bernoulli’s simple kinetic models of gases assume that the molecules of air operate like billiard balls.</p>
+</div>
+</div>
 <h1 id="underdetermined-system">Underdetermined System</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/underdetermined-system.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/underdetermined-system.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -307,26 +730,25 @@ P(Y=y) \approx \frac{n_y}{N}.
 <p>In Sheffield we created a suite of software tools for ‘Open Data Science.’ Open data science is an approach to sharing code, models and data that should make it easier for companies, health professionals and scientists to gain access to data science techniques.</p>
 <p>You can also check this blog post on <a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a>.</p>
 <p>The software can be installed using</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
 <p>from the command prompt where you can access your python installation.</p>
 <p>The code is also available on GitHub: <a href="https://github.com/lawrennd/ods" class="uri">https://github.com/lawrennd/ods</a></p>
 <p>Once <code>pods</code> is installed, it can be imported in the usual manner.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
 <p>Alternatively, you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
 <p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
 <p>We can also find out the dimensions of the dataset using the <code>shape</code> property.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div>
 <p>Dataframes have different functions that you can use to explore and understand your data. In python and the Jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
 <p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
@@ -345,54 +767,54 @@ P(Y=y) \approx \frac{n_y}{N}.
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/nigeria-nmis-data-explore.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/nigeria-nmis-data-explore.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The NMIS facility data is stored in an object known as a ‘data frame.’ Data frames come from the statistical family of programming languages based on <code>S</code>, the most widely used of which is <a href="http://en.wikipedia.org/wiki/R_(programming_language)"><code>R</code></a>. The data frame gives us a convenient object for manipulating data. The describe method summarizes which columns there are in the data frame and gives us counts, means, standard deviations and percentiles for the values in those columns. To access a column directly we can write</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>])</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(data[&#39;num_nurses_fulltime&#39;])</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(data[&#39;num_nurses_fulltime&#39;])</span></span></code></pre></div>
 <p>This shows the number of doctors per facility, number of nurses and number of community health workers (CHEWS). We can plot the number of doctors against the number of nurses as follows.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># this imports the plotting library in python</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># this imports the plotting library in python</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <p>You may be curious what the arguments we give to <code>plt.plot</code> are for, now is the perfect time to look at the documentation</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.plot?</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.plot?</span></code></pre></div>
 <p>We immediately note that some facilities have a lot of nurses, which prevent’s us seeing the detail of the main number of facilities. First lets identify the facilities with the most nurses.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>]</span></code></pre></div>
 <p>Here we are using the command <code>data['num_nurses_fulltime']&gt;100</code> to index the facilities in the pandas data frame which have over 100 nurses. To sort them in order we can also use the <code>sort</code> command. The result of this command on its own is a data <code>Series</code> of <code>True</code> and <code>False</code> values. However, when it is passed to the <code>data</code> data frame it returns a new data frame which contains only those values for which the data series is <code>True</code>. We can also sort the result. To sort the result by the values in the <code>num_nurses_fulltime</code> column in <em>descending</em> order we use the following command.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>].sort_values(by<span class="op">=</span><span class="st">&#39;num_nurses_fulltime&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;num_nurses_fulltime&#39;</span>]<span class="op">&gt;</span><span class="dv">100</span>].sort_values(by<span class="op">=</span><span class="st">&#39;num_nurses_fulltime&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>We now see that the ‘University of Calabar Teaching Hospital’ is a large outlier with 513 nurses. We can try and determine how much of an outlier by histograming the data.</p>
 <h2 id="plotting-the-data">Plotting the Data</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span></code></pre></div>
 <p>We can’t see very much here. Two things are happening. There are so many facilities with zero or one nurse that we don’t see the histogram for hospitals with many nurses. We can try more bins and using a <em>log</em> scale on the <span class="math inline">\(y\)</span>-axis.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">100</span>) <span class="co"># histogram the data with 20 bins.</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;num_nurses_fulltime&#39;</span>].hist(bins<span class="op">=</span><span class="dv">100</span>) <span class="co"># histogram the data with 20 bins.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Number of Nurses&#39;</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>)</span></code></pre></div>
 <p>Let’s try and see how the number of nurses relates to the number of doctors.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>)) </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ax.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic x scale</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic Y scale</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># give the plot some titles and labels</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Number of Nurses against Number of Doctors&#39;</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;number of nurses&#39;</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;number of doctors&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>)) </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>ax.plot(data[<span class="st">&#39;num_doctors_fulltime&#39;</span>], data[<span class="st">&#39;num_nurses_fulltime&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic x scale</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic Y scale</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># give the plot some titles and labels</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Number of Nurses against Number of Doctors&#39;</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;number of nurses&#39;</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;number of doctors&#39;</span>)</span></code></pre></div>
 <p>Note a few things. We are interacting with our data. In particular, we are replotting the data according to what we have learned so far. We are using the progamming language as a <em>scripting</em> language to give the computer one command or another, and then the next command we enter is dependent on the result of the previous. This is a very different paradigm to classical software engineering. In classical software engineering we normally write many lines of code (entire object classes or functions) before compiling the code and running it. Our approach is more similar to the approach we take whilst debugging. Historically, researchers interacted with data using a <em>console</em>. A command line window which allowed command entry. The notebook format we are using is slightly different. Each of the code entry boxes acts like a separate console window. We can move up and down the notebook and run each part in a different order. The <em>state</em> of the program is always as we left it after running the previous part.</p>
 <h2 id="probability-and-the-nmis-data">Probability and the NMIS Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/nigeria-nmis-probability.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/nigeria-nmis-probability.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Let’s use the sum rule to compute the estimate the probability that a facility has more than two nurses.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># number of positive outcomes (in sum True counts as 1, False counts as 0)</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count()</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greather than 2 is:&quot;</span>, prob_large)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># number of positive outcomes (in sum True counts as 1, False counts as 0)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greather than 2 is:&quot;</span>, prob_large)</span></code></pre></div>
 <h1 id="conditioning">Conditioning</h1>
 <p>When predicting whether a coin turns up head or tails, we might think that this event is <em>independent</em> of the year or time of day. If we include an observation such as time, then in a probability this is known as <em>condtioning</em>. We use this notation, <span class="math inline">\(P(Y=y|X=x)\)</span>, to condition the outcome on a second variable (in this case the number of doctors). Or, often, for a shorthand we use <span class="math inline">\(P(y|x)\)</span> to represent this distribution (the <span class="math inline">\(Y=\)</span> and <span class="math inline">\(X=\)</span> being implicit). If two variables are independent then we find that <span class="math display">\[
 P(y|x) = p(y).
 \]</span> However, we might believe that the number of nurses is dependent on the number of doctors. For this we can try estimating <span class="math inline">\(P(Y&gt;2 | X&gt;1)\)</span> and compare the result, for example to <span class="math inline">\(P(Y&gt;2|X\leq 1)\)</span> using our empirical estimate of the probability.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> ((data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>) <span class="op">&amp;</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>)).<span class="bu">sum</span>()</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>total_large_doctors <span class="op">=</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>).<span class="bu">sum</span>()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>prob_both_large <span class="op">=</span> large<span class="op">/</span>total_large_doctors</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greater than 2 given number of doctors is greater than 1 is:&quot;</span>, prob_both_large)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> ((data.num_nurses_fulltime<span class="op">&gt;</span><span class="dv">2</span>) <span class="op">&amp;</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>total_large_doctors <span class="op">=</span> (data.num_doctors_fulltime<span class="op">&gt;</span><span class="dv">1</span>).<span class="bu">sum</span>()</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>prob_both_large <span class="op">=</span> large<span class="op">/</span>total_large_doctors</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of number of nurses being greater than 2 given number of doctors is greater than 1 is:&quot;</span>, prob_both_large)</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>Write code that prints out the probability of nurses being greater than 2 for different numbers of doctors.</p>
 <p>Make sure the plot is included in <em>this</em> notebook file (the Jupyter magic command <code>%matplotlib inline</code> we ran above will do that for you, it only needs to be run once per file).</p>
@@ -487,11 +909,11 @@ P\left(x,y\right)=P\left(y,x\right)
 P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right).
 \]</span> Sometimes I think of this as akin to the way in Python we can write ‘keyword arguments’ in functions. If we use keyword arguments, the ordering of arguments doesn’t matter.</p>
 <p>We’ve now introduced conditioning and independence to the notion of probability and computed some conditional probabilities on a practical example The scatter plot of deaths vs year that we created above can be seen as a <em>joint</em> probability distribution. We represent a joint probability using the notation <span class="math inline">\(P(Y=y, X=x)\)</span> or <span class="math inline">\(P(y, x)\)</span> for short. Computing a joint probability is equivalent to answering the simultaneous questions, what’s the probability that the number of nurses was over 2 and the number of doctors was 1? Or any other question that may occur to us. Again we can easily use pandas to ask such questions.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>num_doctors <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count() <span class="co"># this is total number of films</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of nurses being greater than 2 and number of doctors being&quot;</span>, num_doctors, <span class="st">&quot;is:&quot;</span>, prob_large)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>num_doctors <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>large <span class="op">=</span> (data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>total_facilities <span class="op">=</span> data.num_nurses_fulltime.count() <span class="co"># this is total number of films</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>prob_large <span class="op">=</span> <span class="bu">float</span>(large)<span class="op">/</span><span class="bu">float</span>(total_facilities)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Probability of nurses being greater than 2 and number of doctors being&quot;</span>, num_doctors, <span class="st">&quot;is:&quot;</span>, prob_large)</span></code></pre></div>
 <h2 id="the-product-rule">The Product Rule</h2>
 <p>This number is the joint probability, <span class="math inline">\(P(Y, X)\)</span> which is much <em>smaller</em> than the conditional probability. The number can never be bigger than the conditional probabililty because it is computed using the <em>product rule</em>. <span class="math display">\[
 p(Y=y, X=x) = p(Y=y|X=x)p(X=x)
@@ -500,15 +922,15 @@ p(Y=y, X=x) = p(Y=y|X=x)p(X=x)
 <p>In our shorter notation we can write the product rule as <span class="math display">\[
 p(y, x) = p(y|x)p(x)
 \]</span> We can see the relation working in practice for our data above by computing the different values for <span class="math inline">\(x=1\)</span>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>num_doctors<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>num_nurses<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>p_x <span class="op">=</span> <span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_doctors_fulltime.count())</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>p_y_given_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>p_y_and_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_nurses_fulltime.count())</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(x) is&quot;</span>, p_x)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y|x) is&quot;</span>, p_y_given_x)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y,x) is&quot;</span>, p_y_and_x)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>num_doctors<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>num_nurses<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>p_x <span class="op">=</span> <span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_doctors_fulltime.count())</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>p_y_given_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>((data.num_doctors_fulltime<span class="op">==</span>num_doctors).<span class="bu">sum</span>())</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>p_y_and_x <span class="op">=</span> <span class="bu">float</span>((data.num_nurses_fulltime[data.num_doctors_fulltime<span class="op">==</span>num_doctors]<span class="op">&gt;</span>num_nurses).<span class="bu">sum</span>())<span class="op">/</span><span class="bu">float</span>(data.num_nurses_fulltime.count())</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(x) is&quot;</span>, p_x)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y|x) is&quot;</span>, p_y_given_x)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(y,x) is&quot;</span>, p_y_and_x)</span></code></pre></div>
 <h2 id="the-sum-rule">The Sum Rule</h2>
 <p>The other <em>fundamental rule</em> of probability is the <em>sum rule</em> this tells us how to get a <em>marginal</em> distribution from the joint distribution. Simply put it says that we need to sum across the value we’d like to remove. <span class="math display">\[
 P(Y=y) = \sum_{x} P(Y=y, X=x)
@@ -535,7 +957,7 @@ P(x|y) =
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/probability-review.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/probability-review.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>What use is all this probability in data science? Let’s think about how we might use the probabilities to do some decision making. Let’s look at the information data.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>Now we see we have several additional features. Let’s assume we want to predict <code>maternal_health_delivery_services</code>. How would we go about doing it?</p>
 <p>Using what you’ve learnt about joint, conditional and marginal probabilities, as well as the sum and product rule, how would you formulate the question you want to answer in terms of probabilities? Should you be using a joint or a conditional distribution? If it’s conditional, what should the distribution be over, and what should it be conditioned on?</p>
@@ -587,14 +1009,29 @@ P(x|y) =
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
+<div id="ref-Coales-yellow14" class="csl-entry" role="doc-biblioentry">
+Coales, J.F., Kane, S.J., 2014. The <span>“yellow peril”</span> and after. IEEE Control Systems Magazine 34, 65–69. <a href="https://doi.org/10.1109/MCS.2013.2287387">https://doi.org/10.1109/MCS.2013.2287387</a>
+</div>
+<div id="ref-Gauss-monatliche1801" class="csl-entry" role="doc-biblioentry">
+Gauss, C.F., n.d. Fortgesetzte <span>N</span>achrichten über den <span>L</span>ängst vermutheten neuen <span>H</span>aupt-<span>P</span>laneten unseres <span>S</span>onnen-<span>S</span>ystems. pp. 638–649.
+</div>
+<div id="ref-Gauss-astronomische02" class="csl-entry" role="doc-biblioentry">
+Gauss, C.F., 1802. Astronomische <span>U</span>ntersuchungen und <span>R</span>echnungen vornehmlich über die <span>C</span>eres <span>F</span>erdinandea.
+</div>
 <div id="ref-Laplace-essai14" class="csl-entry" role="doc-biblioentry">
 Laplace, P.S., 1814. Essai philosophique sur les probabilités, 2nd ed. Courcier, Paris.
+</div>
+<div id="ref-Piazzi-monatliche1801" class="csl-entry" role="doc-biblioentry">
+Piazzi, G., n.d. Fortgesetzte <span>N</span>achrichten über den <span>L</span>ängst vermutheten neuen <span>H</span>aupt-<span>P</span>laneten unseres <span>S</span>onnen-<span>S</span>ystems. pp. 279–283.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
 Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 </div>
 <div id="ref-Nigeria-nmis14" class="csl-entry" role="doc-biblioentry">
 The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014. Nigeria <span>NMIS</span> facility database.
+</div>
+<div id="ref-Wiener-exprodigy53" class="csl-entry" role="doc-biblioentry">
+Wiener, N., 1953. Ex-prodigy: My childhood and youth. mitp, Cambridge, MA.
 </div>
 </div>
 <section class="footnotes" role="doc-endnotes">

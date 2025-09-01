@@ -15,10 +15,15 @@ ipynb: true
 
 \include{_mlfc/includes/welcome.md}
 \include{_mlfc/includes/assumed-knowledge.md}
-\include{_mlfc/includes/mlfc-notebook-setup.md}
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 \include{_ml/includes/what-is-ml.md}
 \include{_ml/includes/what-does-machine-learning-do.md}
+\include{_physics/includes/ceres-discovery.md}
 \include{_ml/includes/overdetermined-inaugural.md}
+<!--include{_physics/includes/emergent-behaviour.md}-->
+<!--include{_physics/includes/lap-engine.md}-->
+\include{_physics/includes/theory-of-ignorance.md}
+\include{_physics/includes/entropy-billiards.md}
 \include{_ml/includes/underdetermined-system.md}
 \include{_ml/includes/probability-intro.md}
 
