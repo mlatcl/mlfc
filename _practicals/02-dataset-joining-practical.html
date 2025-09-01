@@ -41,28 +41,21 @@ categories:
 -->
 <h2 id="code-reuse-with-fynesse">Code Reuse with Fynesse</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/code-reuse-fynesse.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/code-reuse-fynesse.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/osm-code-reuse-fynesse.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/osm-code-reuse-fynesse.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>We will be reusing some of the functions we created in the first practical. This demonstrates one of the key principles of data science: building reusable code libraries that can be applied across multiple projects.</p>
-<p>The Fynesse library you created in Practical 1 implemented the Access-Assess-Address framework with geospatial functionality. Now we’ll use it as a foundation for more advanced analysis.</p>
+<p>{We will be reusing some of the functions we created in the first practical. This demonstrates one of the key principles of data science: building reusable code libraries that can be applied across multiple projects.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install osmnx</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone https:<span class="op">//</span>github.com<span class="op">/</span>YOUR_USERNAME<span class="op">/</span>fynesse_YOUR_PROJECT.git</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, subprocess, importlib, sys</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">&quot;/content/fynesse_YOUR_PROJECT&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fynesse</span></code></pre></div>
-<p>Test that your library works by using one of the functions you created:</p>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install osmnx</span></code></pre></div>
+<h3 id="exercise-1">Exercise 1</h3>
+<p>Install your Fyness library, and run code to show its available.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Plot a city map using your reusable function</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># fynesse.access.plot_city_map(&#39;Nyeri, Kenya&#39;, -0.4371, 36.9580, 2)</span></span></code></pre></div>
-<p>This approach to code reuse is fundamental to efficient data science workflows. By packaging commonly used functionality into libraries, we can focus on the novel aspects of each analysis rather than reimplementing basic operations.</p>
-<h3 id="exercise-1">Exercise 1</h3>
-<p>Install your Fynesse library from Practical 1, and demonstrate that it works by plotting a city map.</p>
-<h2 id="dsail-porini-camera-trap-dataset">DSAIL-Porini Camera Trap Dataset</h2>
+<h2 id="dsail-porini-dataset">DSAIL-Porini Dataset</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/dsail-porini-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/dsail-porini-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Head over to https://data.mendeley.com/datasets/6mhrhn7rxc/6 to explore the DSAIL-Porini dataset. This dataset contains camera trap images and annotations from Kenya, providing rich information about wildlife patterns and behavior.</p>
-<p>We’ll work with the <a href="https://data.mendeley.com/public-files/datasets/6mhrhn7rxc/files/641e83c9-16a3-485c-b247-b5701f8a5540/file_downloaded"><code>camera_trap_dataset_annotation.xlsx</code></a> file which contains metadata about animal sightings.</p>
+<p>Locate the <code>camera_trap_dataset_annotation.xlsx</code> file and make it available in this notebook.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
@@ -83,763 +76,342 @@ categories:
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>porini_file <span class="op">=</span> download_if_not_exists(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;https://data.mendeley.com/public-files/datasets/6mhrhn7rxc/files/641e83c9-16a3-485c-b247-b5701f8a5540/file_downloaded&#39;</span>, </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;camera_trap_dataset_annotation.xlsx&#39;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>porini_df <span class="op">=</span> pd.read_excel(porini_file)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>porini_df.head()</span></code></pre></div>
-<p>This dataset represents a typical real-world scenario where we have rich, messy data that requires careful preprocessing. The camera trap setup provides both temporal and spatial dimensions that we can exploit for analysis.</p>
-<h2 id="joining-datasets-with-geospatial-data">Joining Datasets with Geospatial Data</h2>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>porini_df <span class="op">=</span> pd.read_excel(porini_file)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>porini_df.head()</span></code></pre></div>
+<h2 id="joining-datasets">Joining Datasets</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/osm-cities-data-joining.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/osm-cities-data-joining.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/dsail-porini-data-joining.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/dsail-porini-data-joining.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Geospatial data is particularly useful because it is the most common index in the world, over which so many datasets can be joined. Location provides a natural way to integrate disparate data sources and add contextual information to our analyses.</p>
-<p>In this exercise, we’ll extract coordinate information from the camera trap dataset and visualize it on an OpenStreetMap base layer. This demonstrates how wildlife monitoring data can be integrated with geographic information systems.</p>
 <h3 id="exercise-2">Exercise 2</h3>
-<p>Find the coordinate information in the camera trap dataset, and plot it on top of an OSM map. You may want to deduplicate the coordinates before you plot!</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract unique camera locations</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>unique_locations <span class="op">=</span> porini_df[[<span class="st">&#39;Latitude&#39;</span>, <span class="st">&#39;Longitude&#39;</span>]].drop_duplicates()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Found </span><span class="sc">{</span><span class="bu">len</span>(unique_locations)<span class="sc">}</span><span class="ss"> unique camera locations&quot;</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the coordinates</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>unique_locations.head()</span></code></pre></div>
-<p>Once we have the coordinates, we can use the mapping functions from our Fynesse library to visualize them in geographic context:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of plotting camera locations</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use your plot_city_map function to show the area</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Then overlay the camera positions as additional points</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot of camera locations</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(unique_locations[<span class="st">&#39;Longitude&#39;</span>], unique_locations[<span class="st">&#39;Latitude&#39;</span>], </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>           c<span class="op">=</span><span class="st">&#39;red&#39;</span>, s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">&#39;Camera Locations&#39;</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Longitude&#39;</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Latitude&#39;</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;DSAIL-Porini Camera Trap Locations&#39;</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p>This geographic visualization immediately reveals the spatial distribution of the monitoring network and can help us understand the ecological context of our observations. The clustering or spread of cameras can influence the patterns we observe in the data.</p>
+<p>Geospatial data is particularly useful because it is the most common index in the world, over which so many datasets can be joined. Find the coordiante information in the dataset, and plot it on top of an OSM map.</p>
+<p>You may want to deduplicate the coordinates before you plot!</p>
+<!-- Dsail Porini Address -->
+<h2 id="sighting-predictions">Sighting Predictions</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/dsail-porini-data-preprocessing.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/dsail-porini-data-preprocessing.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>We will use the dataset to create a simple prediction model for the likelihood of animal sightings.</p>
+<p>Let’s follow a minimal example of the Access-Assess-Address framework!</p>
+<p>Reminder about Neil’s article on the framework <a href="https://inverseprobability.com/talks/notes/access-assess-address-a-pipeline-for-automated-data-science.html">here</a>.</p>
+<h3 id="access">Access</h3>
+<p>Access is already done, partly years ago by the DSAIL team, and two cells above by us. Example tasks within access would be: - Setting up the cameras in the woods (done) - Collecting the pictures (done) - Labeling the dataset (done) - Making the excel file online accessible (done) - Downloading the file (done just now)}</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>porini_df.head()</span></code></pre></div>
+<h3 id="assess">Assess</h3>
+<p>Have a look at the dataset for any issues that could stop us from being able to cleanly analyse it.</p>
+<p>Some issues: - Timestamps not readilly available. Hidden in image filenames. - No timestamps available for one of the cameras. - No Camera ID, but can be deduced from coordinates.</p>
+<p>Decide how it would be best to address these and potentially other issues with the data.</p>
+<p>We would like an output dataframe that has a column for counts each animal was spotted by each camera, and rows for each day in the available range. You might want to use this opportunity to practice <a href="https://pandas.pydata.org/docs/user_guide/advanced.html">Pandas MultiIndex</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy original</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> porini_df.copy()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize species and parse counts</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Species&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Species&quot;</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.strip()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract timestamp from filename</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>pat <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r&quot;(\d</span><span class="sc">{4}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)&quot;</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_ts(name):</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> pat.search(<span class="bu">str</span>(name))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> m:</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.NaT</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    y, M, d, h, m_, s <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, m.groups())</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Timestamp(y, M, d, h, m_, s)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;timestamp&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Filename&quot;</span>].<span class="bu">map</span>(parse_ts)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;date&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;timestamp&quot;</span>].dt.date</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Camera ID from rounded lat/lon</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Latitude&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Latitude&quot;</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Longitude&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Longitude&quot;</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>coord_key <span class="op">=</span> df[<span class="st">&quot;Latitude&quot;</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">&quot;,&quot;</span> <span class="op">+</span> df[<span class="st">&quot;Longitude&quot;</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>codes, _ <span class="op">=</span> pd.factorize(coord_key)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;camera_id&quot;</span>] <span class="op">=</span> pd.Series(codes).<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="ss">f&quot;C</span><span class="sc">{</span><span class="bu">int</span>(i)<span class="op">+</span><span class="dv">1</span><span class="sc">:03d}</span><span class="ss">&quot;</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract camera coordinates dictionary (rounded)</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>camera_coords <span class="op">=</span> (</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    df.drop_duplicates(subset<span class="op">=</span><span class="st">&quot;camera_id&quot;</span>)[[<span class="st">&quot;camera_id&quot;</span>, <span class="st">&quot;Latitude&quot;</span>, <span class="st">&quot;Longitude&quot;</span>]]</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>      .set_index(<span class="st">&quot;camera_id&quot;</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>      .sort_index()</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">apply</span>(<span class="bu">tuple</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>      .to_dict()</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Group and count: number of pictures per species per camera per day</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> (</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    df.dropna(subset<span class="op">=</span>[<span class="st">&quot;date&quot;</span>])</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>      .groupby([<span class="st">&quot;date&quot;</span>, <span class="st">&quot;camera_id&quot;</span>, <span class="st">&quot;Species&quot;</span>])</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>      .size()</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>      .reset_index(name<span class="op">=</span><span class="st">&quot;photo_count&quot;</span>)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>      .pivot_table(index<span class="op">=</span><span class="st">&quot;date&quot;</span>, columns<span class="op">=</span>[<span class="st">&quot;camera_id&quot;</span>, <span class="st">&quot;Species&quot;</span>], values<span class="op">=</span><span class="st">&quot;photo_count&quot;</span>, aggfunc<span class="op">=</span><span class="st">&quot;sum&quot;</span>)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>      .fillna(<span class="dv">0</span>)</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>      .astype(<span class="bu">int</span>)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>      .sort_index()</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill missing dates</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> daily.empty:</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    full_idx <span class="op">=</span> pd.date_range(start<span class="op">=</span>daily.index.<span class="bu">min</span>(), end<span class="op">=</span>daily.index.<span class="bu">max</span>(), freq<span class="op">=</span><span class="st">&quot;D&quot;</span>).date</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    daily <span class="op">=</span> daily.reindex(full_idx).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    daily.index.name <span class="op">=</span> <span class="st">&quot;date&quot;</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(camera_coords)</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>daily.tail()</span></code></pre></div>
+<p>Huh, looks like we have some more issues. - “Impala, Monkey” is not a species - should be counted towards two! - “Can’t Tell” shouldn’t be a species at all. - Some columns don’t exist (eg. <code>C011</code> has no <code>ZEBRA</code>). Let’s just fill them with zeros.</p>
+<p>Additionally, there probably weren’t <code>1577</code> impalas spotted on Christmas Eve 2021. This is a result of burst shots repetitively capturing the same animal. For now, let’s just treat the data as binary, whether at least one photo was taken on that day.</p>
 <h3 id="exercise-3">Exercise 3</h3>
-<p>Find the coordinate information in the dataset, deduplicate the coordinates, and plot them on top of an OSM map.</p>
-<h2 id="access-assess-address-framework">Access, Assess, Address Framework</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/osm-access-assess-address.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/osm-access-assess-address.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>The Access-Assess-Address framework provides a systematic approach to data science projects:</p>
-<ul>
-<li><strong>Access</strong>: How do we get the data? This includes APIs, web scraping, database queries, file formats, etc.</li>
-<li><strong>Assess</strong>: How do we evaluate data quality, understand its structure, and validate our assumptions?</li>
-<li><strong>Address</strong>: How do we answer the specific question or solve the problem at hand?</li>
-</ul>
-<h2 id="applying-the-framework">Applying the Framework</h2>
-<p>Using the lessons from the article, have a look at the functionality you created, and identify generalisable Access, Assess and Address functionality that could come in useful in the future.</p>
-<p><strong>Access functionality</strong></p>
-<p>What we’ve created: - Connection to OpenStreetMap API via OSMnx</p>
-<p>What we might need to have done: - Legal, ethical considerations.</p>
-<p><strong>Assess functionality</strong></p>
-<p>What we’ve created: - <code>plot_city_map()</code>: visualizes OSM data for any location - <code>get_feature_vector()</code>: Extracts quantitative features from geographic coordinates - Visualization of geographic data to understand structure - Feature counting and summarization - Dimensionality reduction for pattern visualization</p>
-<p>What we could create - Data quality checks (handling missing data, failed queries)</p>
-<p><strong>Address functionality</strong></p>
-<p>What we’ve created: - Machine learning pipeline for location classification - Evaluation on test sets - Analysis of model performance and potential biases}</p>
-<h2 id="library">Library</h2>
-<p>Consider for example, this reusable library structure:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access.py</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># assess.py  </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_city_map(place_name, latitude, longitude, box_size_km<span class="op">=</span><span class="dv">2</span>, poi_tags<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Access and visualize geographic data</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_osm_features(latitude, longitude, box_size_km<span class="op">=</span><span class="dv">2</span>, tags<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Access raw OSM data</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_feature_vector(latitude, longitude, box_size_km<span class="op">=</span><span class="dv">2</span>, features<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assess and quantify geographic features</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_feature_space(X, y, method<span class="op">=</span><span class="st">&#39;PCA&#39;</span>):</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assess data distribution and separability</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># address.py</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_location_classifier(X_train, y_train, model_type<span class="op">=</span><span class="st">&#39;logistic&#39;</span>):</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Address classification problem</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_classifier(model, X_test, y_test):</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Address evaluation of performance</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div>
-<h3 id="exercise-4">Exercise 4</h3>
-<p>Over the course of this module we will end up reusing a lot of the code we create. This is on purpose, and a very important aspect of creating data science pipelines. The goal of this section is to put this idea in practice.</p>
-<p>Have a <em>skim</em> through Neil Lawrence’s article on the Access Assess Address data science framework <a href="https://inverseprobability.com/talks/notes/access-assess-address-a-pipeline-for-automated-data-science.html">here</a>.</p>
-<p>Using the lessons from the article, have a look at the functionality you created, and identify generalisable Access, Assess and Address functionality that could come in useful in the future.</p>
-<p>Use git to fork this repository: https://github.com/lawrennd/fynesse_template and include your code in the <code>access.py</code>, <code>assess.py</code>, and <code>address.py</code> files.</p>
-<p>Demonstrate this by importing your repository below and calling a couple example functions.</p>
-<p>This modular approach makes code reusable across different projects and enables systematic data science workflows. Each module has a clear responsibility within the overall pipeline.</p>
-<p>Once you have implemented your functions you should be able to call them to plot the city map.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fynesse</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fynesse.assess.plot_city_map(<span class="st">&#39;Cambridge, England&#39;</span>,  <span class="fl">52.2053</span>, <span class="fl">0.1218</span>, <span class="dv">2</span>)</span></code></pre></div>
-<h2 id="bonus">Bonus</h2>
-<p>If you made changes to the repository after pulling it, you might have issues getting the changes to take effect in the workbook without restarting runtime. Use the workaround below:</p>
-<pre><code>import os, subprocess, importlib, sys
-
-def load_repo(repo):
-    local = repo.split(&quot;/&quot;)[-1]
-    if not os.path.exists(local):
-        subprocess.run([&quot;git&quot;, &quot;clone&quot;, f&quot;https://github.com/{repo}.git&quot;], check=True)
-    else:
-        subprocess.run([&quot;git&quot;, &quot;-C&quot;, local, &quot;pull&quot;], check=True)
-    if local not in sys.path:
-        sys.path.insert(0, local)
-    mod = importlib.import_module(local)
-    importlib.reload(mod)
-    return mod
-
-# Use after making changes
-fynesse = load_repo(&quot;TODO/fynesse_TODO&quot;)
-</code></pre>
-<h2 id="data-assessment-and-preprocessing">Data Assessment and Preprocessing</h2>
-<h2 id="assess-data-quality-and-preprocessing">Assess: Data Quality and Preprocessing</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/camera-trap-data-preprocessing.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/camera-trap-data-preprocessing.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Have a look at the dataset for any issues that could stop us from being able to cleanly analyse it. This is the “Assess” phase of our framework.</p>
-<p>Some issues we can identify: - Timestamps not readily available - hidden in image filenames - No timestamps available for one of the cameras - No explicit Camera ID, but can be deduced from coordinates - Multi-species entries (e.g., “Impala, Monkey”) need to be handled - Invalid entries like “Can’t Tell” should be removed - Burst photography creates inflated counts</p>
-<p>We want an output dataframe that has counts of each animal spotted by each camera, with rows for each day in the available range. This is a classic data reshaping problem.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy original data to preserve it</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> porini_df.copy()</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize species names</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Species&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Species&quot;</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.strip()</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract timestamp from filename using regex</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>pat <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r&quot;(\d</span><span class="sc">{4}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)-(\d</span><span class="sc">{2}</span><span class="vs">)&quot;</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_timestamp(filename):</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Extract datetime from camera trap filename&quot;&quot;&quot;</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> pat.search(<span class="bu">str</span>(filename))</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> m:</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.NaT</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    y, M, d, h, m_, s <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, m.groups())</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Timestamp(y, M, d, h, m_, s)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;timestamp&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Filename&quot;</span>].<span class="bu">map</span>(parse_timestamp)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;date&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;timestamp&quot;</span>].dt.date</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Camera ID from rounded coordinates</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Latitude&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Latitude&quot;</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;Longitude&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;Longitude&quot;</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>coord_key <span class="op">=</span> df[<span class="st">&quot;Latitude&quot;</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">&quot;,&quot;</span> <span class="op">+</span> df[<span class="st">&quot;Longitude&quot;</span>].astype(<span class="bu">str</span>)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>codes, _ <span class="op">=</span> pd.factorize(coord_key)</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;camera_id&quot;</span>] <span class="op">=</span> pd.Series(codes).<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="ss">f&quot;C</span><span class="sc">{</span><span class="bu">int</span>(i)<span class="op">+</span><span class="dv">1</span><span class="sc">:03d}</span><span class="ss">&quot;</span>)</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract camera coordinates dictionary</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>camera_coords <span class="op">=</span> (</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    df.drop_duplicates(subset<span class="op">=</span><span class="st">&quot;camera_id&quot;</span>)[[<span class="st">&quot;camera_id&quot;</span>, <span class="st">&quot;Latitude&quot;</span>, <span class="st">&quot;Longitude&quot;</span>]]</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>      .set_index(<span class="st">&quot;camera_id&quot;</span>)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>      .sort_index()</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">apply</span>(<span class="bu">tuple</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>      .to_dict()</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Camera coordinates:&quot;</span>)</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cam_id, coords <span class="kw">in</span> camera_coords.items():</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  </span><span class="sc">{</span>cam_id<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>coords<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Group and count: photos per species per camera per day</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>daily_counts <span class="op">=</span> (</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    df.dropna(subset<span class="op">=</span>[<span class="st">&quot;date&quot;</span>])</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>      .groupby([<span class="st">&quot;date&quot;</span>, <span class="st">&quot;camera_id&quot;</span>, <span class="st">&quot;Species&quot;</span>])</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>      .size()</span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>      .reset_index(name<span class="op">=</span><span class="st">&quot;photo_count&quot;</span>)</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>      .pivot_table(index<span class="op">=</span><span class="st">&quot;date&quot;</span>, columns<span class="op">=</span>[<span class="st">&quot;camera_id&quot;</span>, <span class="st">&quot;Species&quot;</span>], </span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>                   values<span class="op">=</span><span class="st">&quot;photo_count&quot;</span>, aggfunc<span class="op">=</span><span class="st">&quot;sum&quot;</span>)</span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>      .fillna(<span class="dv">0</span>)</span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>      .astype(<span class="bu">int</span>)</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>      .sort_index()</span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill missing dates to create complete time series</span></span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> daily_counts.empty:</span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    full_idx <span class="op">=</span> pd.date_range(start<span class="op">=</span>daily_counts.index.<span class="bu">min</span>(), </span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>                            end<span class="op">=</span>daily_counts.index.<span class="bu">max</span>(), freq<span class="op">=</span><span class="st">&quot;D&quot;</span>).date</span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    daily_counts <span class="op">=</span> daily_counts.reindex(full_idx).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>    daily_counts.index.name <span class="op">=</span> <span class="st">&quot;date&quot;</span></span>
-<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Daily counts shape: </span><span class="sc">{</span>daily_counts<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>daily_counts.tail()</span></code></pre></div>
-<p>This preprocessing step transforms our raw observational data into a structured format suitable for time series analysis and machine learning. The systematic approach ensures we don’t lose important information while making the data analytically tractable.</p>
-<h3 id="exercise-5">Exercise 5</h3>
-<p>Clean the dataset by handling multi-species sightings, removing invalid entries, and converting to binary sighting data.</p>
+<p>Use the cell below to implement the changes discussed above, and potentially additional issues.</p>
 <h2 id="statistical-analysis-of-sighting-patterns">Statistical Analysis of Sighting Patterns</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/camera-trap-sighting-probability-analysis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/camera-trap-sighting-probability-analysis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/dsail-porini-probability-analysis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/dsail-porini-probability-analysis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Now let’s create a simple prediction system for whether a specific <code>camera</code> captured a <code>species</code> on a given <code>date</code>. Before we jump into addressing the question, let’s further assess the data.</p>
-<p>We’ll calculate and plot average probabilities for dates, species, and cameras. This exploratory analysis helps us understand the underlying patterns in the data.</p>
-<p>First, let’s address some remaining data quality issues: - “Impala, Monkey” should be split into two species - “Can’t Tell” should be removed - Large counts likely represent burst photography - convert to binary presence/absence</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the data further</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_species_data(daily_counts):</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Clean species data and convert to binary sighting indicators&quot;&quot;&quot;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    binary_df <span class="op">=</span> daily_counts.copy()</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to binary (presence/absence) to handle burst photography</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    binary_df <span class="op">=</span> (binary_df <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Handle multi-species entries (this is dataset-specific logic)</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove &quot;Can&#39;t Tell&quot; columns if they exist</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    cols_to_drop <span class="op">=</span> []</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> binary_df.columns:</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(col) <span class="op">==</span> <span class="dv">2</span>:  <span class="co"># (camera, species) tuple</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>            camera, species <span class="op">=</span> col</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">&quot;Can&#39;t Tell&quot;</span> <span class="kw">in</span> <span class="bu">str</span>(species) <span class="kw">or</span> <span class="st">&quot;can&#39;t tell&quot;</span> <span class="kw">in</span> <span class="bu">str</span>(species).lower():</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                cols_to_drop.append(col)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    binary_df <span class="op">=</span> binary_df.drop(columns<span class="op">=</span>cols_to_drop, errors<span class="op">=</span><span class="st">&#39;ignore&#39;</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> binary_df</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>binary_sightings <span class="op">=</span> clean_species_data(daily_counts)</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Binary sightings shape: </span><span class="sc">{</span>binary_sightings<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>binary_sightings.head()</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate overall sighting probabilities by species</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(binary_sightings.columns) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract species names from MultiIndex columns</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    species_probs <span class="op">=</span> {}</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> camera, species <span class="kw">in</span> binary_sightings.columns:</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> species <span class="kw">not</span> <span class="kw">in</span> species_probs:</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            species_probs[species] <span class="op">=</span> []</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        species_probs[species].extend(binary_sightings[(camera, species)].values)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate mean probability for each species</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    species_means <span class="op">=</span> {species: np.mean(sightings) </span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">for</span> species, sightings <span class="kw">in</span> species_probs.items()}</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot species probabilities</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    species_names <span class="op">=</span> <span class="bu">list</span>(species_means.keys())</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    probabilities <span class="op">=</span> <span class="bu">list</span>(species_means.values())</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    plt.bar(<span class="bu">range</span>(<span class="bu">len</span>(species_names)), probabilities)</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">&#39;Species&#39;</span>)</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">&#39;Sighting Probability&#39;</span>)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Average Sighting Probability by Species&#39;</span>)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">range</span>(<span class="bu">len</span>(species_names)), species_names, rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">&#39;right&#39;</span>)</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate temporal patterns</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    daily_totals <span class="op">=</span> binary_sightings.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    plt.plot(daily_totals.index, daily_totals.values)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">&#39;Date&#39;</span>)</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">&#39;Total Daily Sightings&#39;</span>)</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Total Daily Sightings Over Time&#39;</span>)</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Species sighting probabilities:&quot;</span>)</span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> species, prob <span class="kw">in</span> <span class="bu">sorted</span>(species_means.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>):</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  </span><span class="sc">{</span>species<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>prob<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span></code></pre></div>
-<p>This analysis reveals important ecological patterns - which species are more commonly observed, seasonal trends, and site-specific preferences. Understanding these patterns is crucial for building accurate predictive models.</p>
-<h3 id="exercise-6">Exercise 6</h3>
-<p>Calculate and plot average probabilities for dates, species, and cameras. Determine which relationships are statistically significant.</p>
+<h3 id="exercise-4">Exercise 4</h3>
+<p>Now let’s create a simple prediction system for whether a specific <code>camera</code> captured a <code>species</code> on a given <code>date</code>. Let’s use the whole dataset, except the prediction target date.</p>
+<p>Before we jump into addressing the question, let’s further assess the data. Calculate and plot average probabilities for dates, species, and cameras. You may want to implement some smoothing over dates, or group them into longer ranges.</p>
+<p>Exercise 3 extension: which of these relationships that you found are statistically significant?</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Exercise 3 Extended</span></span></code></pre></div>
 <h2 id="address-naive-bayesian-prediction-model">Address: Naive Bayesian Prediction Model</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/camera-trap-naive-bayes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/camera-trap-naive-bayes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/dsail-porini-naive-bayes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/dsail-porini-naive-bayes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Using the data we collected in the Access stage and understood in Assess, we can now Address our question: create a naive Bayesian classification model for predicting the probability of a camera sighting a species on a given day.</p>
-<p>The naive Bayes approach assumes independence between different factors, which simplifies our model:</p>
-<p><span class="math display">\[P(\text{sighting} | \text{camera, species, date}) \propto P(\text{sighting} | \text{camera}) \times P(\text{sighting} | \text{species}) \times P(\text{sighting} | \text{date})\]</span></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Union</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date <span class="im">as</span> DateType</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> naive_sighting_probability(df, camera, species, date) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Estimates the probability of sighting a given species at a given camera </span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">    on a specific date using naive Bayes approach.</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">        df (pd.DataFrame): DataFrame with MultiIndex columns (camera, species) </span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">                          and datetime.date index</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">        camera (str): Camera ID (e.g. &#39;C001&#39;)</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">        species (str): Species name (e.g. &#39;IMPALA&#39;)  </span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">        date (str/date/Timestamp): Date of the observation</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">        float: Estimated sighting probability</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(date, <span class="bu">str</span>) <span class="kw">or</span> <span class="bu">isinstance</span>(date, pd.Timestamp):</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        date <span class="op">=</span> pd.to_datetime(date).date()</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the specific (camera, species) combination exists</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (camera, species) <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove the target observation to avoid data leakage</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    df_blind <span class="op">=</span> df.copy()</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    df_blind.loc[date, (camera, species)] <span class="op">=</span> np.nan</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate component probabilities</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># P(sighting | camera, species) - base rate for this camera-species combo</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    camera_species_prob <span class="op">=</span> df_blind[(camera, species)].mean()</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># P(sighting | camera) - how active is this camera</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    camera_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df_blind.columns <span class="cf">if</span> col[<span class="dv">0</span>] <span class="op">==</span> camera]</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    camera_prob <span class="op">=</span> df_blind[camera_cols].mean().mean() <span class="cf">if</span> camera_cols <span class="cf">else</span> <span class="dv">0</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># P(sighting | species) - how common is this species</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    species_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df_blind.columns <span class="cf">if</span> col[<span class="dv">1</span>] <span class="op">==</span> species]</span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    species_prob <span class="op">=</span> df_blind[species_cols].mean().mean() <span class="cf">if</span> species_cols <span class="cf">else</span> <span class="dv">0</span></span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simple combination (could be improved with proper Bayesian inference)</span></span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(camera_species_prob):</span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fallback to marginal probabilities</span></span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>        combined_prob <span class="op">=</span> camera_prob <span class="op">*</span> species_prob</span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Weight the specific combination more heavily</span></span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>        combined_prob <span class="op">=</span> <span class="fl">0.7</span> <span class="op">*</span> camera_species_prob <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> (camera_prob <span class="op">*</span> species_prob)</span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(<span class="fl">0.0</span>, <span class="bu">min</span>(<span class="fl">1.0</span>, combined_prob))  <span class="co"># Ensure valid probability</span></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function</span></span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(binary_sightings.columns) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get first available camera and species</span></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>    test_camera, test_species <span class="op">=</span> binary_sightings.columns[<span class="dv">0</span>]</span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>    test_date <span class="op">=</span> binary_sightings.index[<span class="dv">10</span>]  <span class="co"># Use 10th date</span></span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> naive_sighting_probability(binary_sightings, test_camera, test_species, test_date)</span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> binary_sightings.loc[test_date, (test_camera, test_species)]</span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Test prediction:&quot;</span>)</span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Camera: </span><span class="sc">{</span>test_camera<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Species: </span><span class="sc">{</span>test_species<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Date: </span><span class="sc">{</span>test_date<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Predicted probability: </span><span class="sc">{</span>prob<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Actual sighting: </span><span class="sc">{</span>actual<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
-<p>This simple model provides a baseline for prediction. The naive Bayes assumption of independence is often violated in ecological data (e.g., some species move together), but it provides a interpretable starting point that can be improved with more sophisticated techniques.</p>
-<h2 id="advanced-analysis-and-model-improvement">Advanced Analysis and Model Improvement</h2>
+<p>Using the data we collected in the Access stage and understood in Assess, we can now Address our question, and create a naive Bayesian classification model for predicting the probability of a camera sighting a species on a given day.</p>
+<p><span class="math display">\[
+\text{P}(1 \mid c, s, d) = P(1) \cdot P(c \mid 1) \cdot P(s \mid 1) \cdot P(d \mid 1)
+\]</span></p>
+<p><span class="math display">\[
+\text{Using Bayes&#39; rule:} \quad P(c \mid 1) = \frac{P(1 \mid c) \cdot P(c)}{P(1)} \quad \text{(and similarly for } s, d\text{)}
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow \text{P}(1 \mid c, s, d) = P(1) \cdot \frac{P(1 \mid c) \cdot P(c)}{P(1)} \cdot \frac{P(1 \mid s) \cdot P(s)}{P(1)} \cdot \frac{P(1 \mid d) \cdot P(d)}{P(1)}
+\]</span></p>
+<p><span class="math display">\[
+= \frac{P(1 \mid c) \cdot P(1 \mid s) \cdot P(1 \mid d) \cdot P(c) \cdot P(s) \cdot P(d)}{P(1)^2}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+&amp;c = \text{camera ID (e.g., C001)} \\
+&amp;s = \text{species (e.g., IMPALA)} \\
+&amp;d = \text{smoothed date (e.g., month, or Gaussian-filtered day)}
+\end{align*}
+\]</span></p>
+<h3 id="exercise-5">Exercise 5</h3>
+<p>Implement the model below.</p>
+<p>Well done! We should now have a working Access-Assess-Address data science pipeline! Let’s see how it does.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code></pre></div>
+<h3 id="evaluation">Evaluation</h3>
+<p>The data is extremely sparse, with less than 1% of values being <code>1</code>. This is a challenge, as checking naive accuracy would make always-zero a very very good predictor.</p>
+<p>Let’s evaluate our prediction system using <code>log-loss</code> i.e. <code>cross-entropy</code>:</p>
+<p><span class="math display">\[
+\mathcal{L} = - \frac{1}{N} \sum_{i=1}^{N}
+\Big[
+    y_i \, \log(\hat{p}_i) + (1 - y_i) \, \log(1 - \hat{p}_i)
+\Big]
+\]</span></p>
+<h3 id="exercise-6">Exercise 6</h3>
+<p>Implement the loss function below.</p>
+<p>For reference, predicting a constant probability (eg. 0.5%) gives a loss of around 0.026. This should be the benchmark number we want to improve on. If your model does better than that, well done!</p>
+<p><em>Note: our approach included look-ahead bias - making predictions based on data that we would not have access to at the time. For real-life deployment, we would need to limit our training data to before individual test cases.</em></p>
+<h2 id="improving-the-method-correlated-variables">Improving the Method: Correlated Variables</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/camera-trap-correlation-analysis-improvements.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/camera-trap-correlation-analysis-improvements.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/dsail-porini-correlation-analysis-improvements.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/dsail-porini-correlation-analysis-improvements.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Let’s analyze the data again to find the strongest relationships which can be used to improve predictions. We’ll create correlation matrices and other helpful visualizations to understand the patterns better.</p>
-<p>Reading through the <a href="https://www.sciencedirect.com/science/article/pii/S2352340922010666">DSAIL-Porini paper</a> can provide inspiration about other probability analyses that can be done with this type of ecological data.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate correlation matrices for different aspects of the data</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_correlations(df):</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Analyze correlations in sighting data&quot;&quot;&quot;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Species co-occurrence correlation</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a matrix of species sightings across all cameras and dates</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    species_data <span class="op">=</span> {}</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> camera, species <span class="kw">in</span> df.columns:</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> species <span class="kw">not</span> <span class="kw">in</span> species_data:</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            species_data[species] <span class="op">=</span> []</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        species_data[species].extend(df[(camera, species)].values)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    species_df <span class="op">=</span> pd.DataFrame(species_data)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate species correlation matrix</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    species_corr <span class="op">=</span> species_df.corr()</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot correlation matrix</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    sns.heatmap(species_corr, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">&#39;RdBu_r&#39;</span>, center<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>                square<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">&#39;.2f&#39;</span>)</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Species Co-occurrence Correlations&#39;</span>)</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Temporal correlations</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    daily_totals <span class="op">=</span> df.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    daily_totals_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;total_sightings&#39;</span>: daily_totals,</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;day_of_week&#39;</span>: [d.weekday() <span class="cf">for</span> d <span class="kw">in</span> daily_totals.index],</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;day_of_year&#39;</span>: [d.timetuple().tm_yday <span class="cf">for</span> d <span class="kw">in</span> daily_totals.index]</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Group by day of week</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    weekly_pattern <span class="op">=</span> daily_totals_df.groupby(<span class="st">&#39;day_of_week&#39;</span>)[<span class="st">&#39;total_sightings&#39;</span>].mean()</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> [<span class="st">&#39;Mon&#39;</span>, <span class="st">&#39;Tue&#39;</span>, <span class="st">&#39;Wed&#39;</span>, <span class="st">&#39;Thu&#39;</span>, <span class="st">&#39;Fri&#39;</span>, <span class="st">&#39;Sat&#39;</span>, <span class="st">&#39;Sun&#39;</span>]</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    plt.bar(<span class="bu">range</span>(<span class="dv">7</span>), weekly_pattern.values)</span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">&#39;Day of Week&#39;</span>)</span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">&#39;Average Sightings&#39;</span>)</span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Weekly Pattern in Sightings&#39;</span>)</span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">range</span>(<span class="dv">7</span>), days)</span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> species_corr, weekly_pattern</span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(binary_sightings.columns) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>    species_correlations, weekly_patterns <span class="op">=</span> analyze_correlations(binary_sightings)</span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Strongest positive species correlations:&quot;</span>)</span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find strongest correlations (excluding diagonal)</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> np.triu(np.ones_like(species_correlations, dtype<span class="op">=</span><span class="bu">bool</span>))</span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    species_correlations_masked <span class="op">=</span> species_correlations.mask(mask)</span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(<span class="dv">5</span>, <span class="bu">len</span>(species_correlations))):</span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>        max_idx <span class="op">=</span> np.unravel_index(np.nanargmax(species_correlations_masked.values), </span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>                                  species_correlations_masked.shape)</span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> np.isnan(species_correlations_masked.iloc[max_idx]):</span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>            species1 <span class="op">=</span> species_correlations_masked.index[max_idx[<span class="dv">0</span>]]</span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>            species2 <span class="op">=</span> species_correlations_masked.columns[max_idx[<span class="dv">1</span>]]</span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>            corr_val <span class="op">=</span> species_correlations_masked.iloc[max_idx]</span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f&quot;  </span><span class="sc">{</span>species1<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>species2<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>corr_val<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>            species_correlations_masked.iloc[max_idx] <span class="op">=</span> np.nan</span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span></code></pre></div>
-<p>These correlation analyses reveal important ecological relationships that can improve our predictions. Species that frequently occur together, temporal patterns, and location preferences all provide valuable signal for more sophisticated models.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> improved_sighting_probability(df, camera, species, date) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Improved prediction that incorporates correlation patterns</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(date, <span class="bu">str</span>) <span class="kw">or</span> <span class="bu">isinstance</span>(date, pd.Timestamp):</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        date <span class="op">=</span> pd.to_datetime(date).date()</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (camera, species) <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove target observation</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    df_blind <span class="op">=</span> df.copy()</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    df_blind.loc[date, (camera, species)] <span class="op">=</span> np.nan</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Base probability from historical data</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    base_prob <span class="op">=</span> df_blind[(camera, species)].mean()</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(base_prob):</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        base_prob <span class="op">=</span> <span class="fl">0.1</span>  <span class="co"># Default low probability</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Temporal adjustment (day of week effect)</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    day_of_week <span class="op">=</span> date.weekday()</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get day-of-week effect for this species at this camera</span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    camera_species_data <span class="op">=</span> df_blind[(camera, species)]</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    weekly_data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;sighting&#39;</span>: camera_species_data,</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;dow&#39;</span>: [d.weekday() <span class="cf">for</span> d <span class="kw">in</span> camera_species_data.index]</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    }).dropna()</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(weekly_data) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>        dow_effect <span class="op">=</span> weekly_data.groupby(<span class="st">&#39;dow&#39;</span>)[<span class="st">&#39;sighting&#39;</span>].mean()</span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> day_of_week <span class="kw">in</span> dow_effect.index:</span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>            temporal_multiplier <span class="op">=</span> dow_effect[day_of_week] <span class="op">/</span> dow_effect.mean()</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>            temporal_multiplier <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>        temporal_multiplier <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Spatial context (other cameras nearby)</span></span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is simplified - in practice you&#39;d use actual distances</span></span>
-<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    other_camera_sightings <span class="op">=</span> []</span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> other_camera <span class="kw">in</span> <span class="bu">set</span>(col[<span class="dv">0</span>] <span class="cf">for</span> col <span class="kw">in</span> df.columns):</span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> other_camera <span class="op">!=</span> camera <span class="kw">and</span> (other_camera, species) <span class="kw">in</span> df.columns:</span>
-<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>            other_sighting <span class="op">=</span> df_blind.loc[date, (other_camera, species)]</span>
-<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> pd.isna(other_sighting):</span>
-<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>                other_camera_sightings.append(other_sighting)</span>
-<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> other_camera_sightings:</span>
-<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>        spatial_effect <span class="op">=</span> np.mean(other_camera_sightings) <span class="op">*</span> <span class="fl">0.3</span>  <span class="co"># Moderate influence</span></span>
-<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>        spatial_effect <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine factors</span></span>
-<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>    improved_prob <span class="op">=</span> base_prob <span class="op">*</span> temporal_multiplier <span class="op">+</span> spatial_effect</span>
-<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(<span class="fl">0.0</span>, <span class="bu">min</span>(<span class="fl">1.0</span>, improved_prob))</span>
-<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Test improved model</span></span>
-<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(binary_sightings.columns) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>    test_camera, test_species <span class="op">=</span> binary_sightings.columns[<span class="dv">0</span>]</span>
-<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>    test_date <span class="op">=</span> binary_sightings.index[<span class="dv">15</span>]</span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>    basic_prob <span class="op">=</span> naive_sighting_probability(binary_sightings, test_camera, test_species, test_date)</span>
-<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>    improved_prob <span class="op">=</span> improved_sighting_probability(binary_sightings, test_camera, test_species, test_date)</span>
-<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> binary_sightings.loc[test_date, (test_camera, test_species)]</span>
-<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Model comparison:&quot;</span>)</span>
-<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Basic model: </span><span class="sc">{</span>basic_prob<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Improved model: </span><span class="sc">{</span>improved_prob<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;  Actual: </span><span class="sc">{</span>actual<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
-<p>The improved model incorporates temporal patterns and spatial context, which often provide significant predictive power in ecological systems. Real-world improvements would also consider weather data, moon phases, seasonal migration patterns, and other environmental factors.</p>
+<p>The model above was quite simplified, and it disregarded any correlations between the three variables. Since cameras are close to each other, maybe they are more likely to capture the same animals on the same day? Maybe some animals like or avoid some areas, or some other animals? If any of the above is true, we can’t really be using simple Bayes’ rule classification.</p>
 <h3 id="exercise-7">Exercise 7</h3>
+<p>Analyse the data again to find the strongest relationships which can be used to improve predictions. Plot correlation matrices and other helpful charts.</p>
+<p>Have a short read through the <a href="https://www.sciencedirect.com/science/article/pii/S2352340922010666">DSAIL-Porini paper</a> for inspiration about other probability analyses that can be done here.</p>
+<p>Exercise Extension: Use what you found to improve your prediction model, and compare it against the previous one.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Union</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date <span class="im">as</span> DateType</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> improved_sighting_probability(df, camera, species, date) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Removes a specific observation and estimates the probability of sighting</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">    a given species at a given camera on a specific date.</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">        df (pd.DataFrame): DataFrame with MultiIndex columns (camera, species) and datetime.date index.</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">        camera (str): Camera ID (e.g. &#39;C001&#39;).</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">        species (str): Species name (e.g. &#39;IMPALA&#39;).</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">        date (str or datetime.date or pd.Timestamp): Date of the observation.</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">        float: Estimated sighting probability - </span><span class="al">TODO</span><span class="co">.</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(date, <span class="bu">str</span>) <span class="kw">or</span> <span class="bu">isinstance</span>(date, pd.Timestamp):</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        date <span class="op">=</span> pd.to_datetime(date).date()</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    df_blind <span class="op">=</span> df.copy()</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    df_blind.loc[date, (camera, species)] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">#TODO Exercise 6 Extended</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">&quot;Prediction logic not implemented yet.&quot;</span>)</span></code></pre></div>
+<h2 id="extended-exercises">Extended Exercises</h2>
+<p>We didn’t use all of the available data when we just classified days as “sighting” or “no sighting.” Extend your analysis to include all the information in the file, like numbers of sightings, and numbers of animals in the photos.</p>
+<p>This will be quite challenging due to burst shots - assess the dataset and come up with a good definition of what a burst is, and a data structure that has the information you chose as important.</p>
+<p>Example burst data: - Camera, Date, Species - Time Start, Time End - Number of photos - Average/most animals in a photo</p>
+<p><em>Particular challenge around deduplicating multi-species sightings.</em></p>
+<h3 id="exercise-8">Exercise 8</h3>
+<p>Use this additional data and repeat the analysis you did above. Aim to further improve predictions and write a new function like <code>burst_sighting_probability('C001', 'IMPALA', '2021-12-24')</code>.</p>
+<h3 id="exercise-9">Exercise 9</h3>
+<p>Compare the results and note the improvement (or lack thereof) against the two previous prediction functions you created.</p>
+<h3 id="exercise-10">Exercise 10</h3>
+<p>What other benefits does your new system provide? Can you modify it to provide more predictions, like expected number of sightings, number of animals?</p>
+<h3 id="exercise-11">Exercise 11</h3>
 <p>Analyze the data to find the strongest relationships for improving predictions. Compare improved model against the baseline.</p>
 <h2 id="database-integration-with-sqlite">Database Integration with SQLite</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/sqlite-database-creation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/sqlite-database-creation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/dsail-porini-sqlite-database-creation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/dsail-porini-sqlite-database-creation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Throughout data science projects you will work with various datasets and data formats. An SQL database is one of the most common ways to store large amounts of data. We’ll use this example to build a small database of animal sightings based on our processed camera trap data.</p>
-<p>Databases provide several advantages: - Efficient storage and retrieval for large datasets - Built-in indexing for fast queries - Concurrent access by multiple users - Data integrity constraints - Standardized query language (SQL)</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a local SQLite database</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_sightings_database(sightings_df, camera_coords, db_name<span class="op">=</span><span class="st">&quot;wildlife_sightings.db&quot;</span>):</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Create SQLite database with animal sighting and camera data</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(db_name)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    cursor <span class="op">=</span> conn.cursor()</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create camera coordinates table</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&#39;&#39;&#39;</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="st">        CREATE TABLE IF NOT EXISTS cameras (</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="st">            camera_id TEXT PRIMARY KEY,</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="st">            latitude REAL NOT NULL,</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="st">            longitude REAL NOT NULL</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="st">        )</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="st">    &#39;&#39;&#39;</span>)</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Insert camera data</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> camera_id, (lat, lon) <span class="kw">in</span> camera_coords.items():</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>        cursor.execute(</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;INSERT OR REPLACE INTO cameras VALUES (?, ?, ?)&quot;</span>,</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>            (camera_id, lat, lon)</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create sightings table</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&#39;&#39;&#39;</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="st">        CREATE TABLE IF NOT EXISTS sightings (</span></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="st">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="st">            date DATE NOT NULL,</span></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="st">            camera_id TEXT NOT NULL,</span></span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="st">            species TEXT NOT NULL,</span></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="st">            sighted INTEGER NOT NULL,</span></span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="st">            FOREIGN KEY (camera_id) REFERENCES cameras (camera_id)</span></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="st">        )</span></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="st">    &#39;&#39;&#39;</span>)</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert wide format to long format for database storage</span></span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    sightings_long <span class="op">=</span> []</span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> date_idx <span class="kw">in</span> sightings_df.index:</span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (camera, species) <span class="kw">in</span> sightings_df.columns:</span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>            sighting <span class="op">=</span> sightings_df.loc[date_idx, (camera, species)]</span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>            sightings_long.append((<span class="bu">str</span>(date_idx), camera, species, <span class="bu">int</span>(sighting)))</span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Insert sighting data</span></span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>    cursor.executemany(</span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;INSERT INTO sightings (date, camera_id, species, sighted) VALUES (?, ?, ?, ?)&quot;</span>,</span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>        sightings_long</span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create indices for efficient queries</span></span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&quot;CREATE INDEX IF NOT EXISTS idx_date ON sightings(date)&quot;</span>)</span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&quot;CREATE INDEX IF NOT EXISTS idx_camera_species ON sightings(camera_id, species)&quot;</span>)</span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&quot;CREATE INDEX IF NOT EXISTS idx_location ON cameras(latitude, longitude)&quot;</span>)</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a>    conn.commit()</span>
-<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Created database &#39;</span><span class="sc">{</span>db_name<span class="sc">}</span><span class="ss">&#39; with </span><span class="sc">{</span><span class="bu">len</span>(camera_coords)<span class="sc">}</span><span class="ss"> cameras and </span><span class="sc">{</span><span class="bu">len</span>(sightings_long)<span class="sc">}</span><span class="ss"> sighting records&quot;</span>)</span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> conn</span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the database</span></span>
-<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(binary_sightings.columns) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> create_sightings_database(binary_sightings, camera_coords)</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate database queries</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> demonstrate_sql_queries(conn):</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Show various SQL query examples&quot;&quot;&quot;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;=== SQL Query Demonstrations ===</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Query 1: Count total sightings by species</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;1. Total sightings by species:&quot;</span>)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    query1 <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT species, SUM(sighted) as total_sightings </span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM sightings </span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="st">        GROUP BY species </span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="st">        ORDER BY total_sightings DESC</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    result1 <span class="op">=</span> pd.read_sql_query(query1, conn)</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result1.head())</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Query 2: Camera activity levels</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;2. Camera activity (total sighting days):&quot;</span>)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    query2 <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT s.camera_id, c.latitude, c.longitude, </span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="st">               COUNT(*) as active_days,</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="st">               SUM(s.sighted) as total_sightings</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM sightings s</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="st">        JOIN cameras c ON s.camera_id = c.camera_id</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="st">        WHERE s.sighted = 1</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="st">        GROUP BY s.camera_id</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="st">        ORDER BY total_sightings DESC</span></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    result2 <span class="op">=</span> pd.read_sql_query(query2, conn)</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result2)</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Query 3: Species sightings within geographic area (example)</span></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;3. Example geographic query (sightings near center of study area):&quot;</span>)</span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find center coordinates</span></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    center_query <span class="op">=</span> <span class="st">&quot;SELECT AVG(latitude) as center_lat, AVG(longitude) as center_lon FROM cameras&quot;</span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    center <span class="op">=</span> pd.read_sql_query(center_query, conn)</span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    center_lat, center_lon <span class="op">=</span> center.iloc[<span class="dv">0</span>][<span class="st">&#39;center_lat&#39;</span>], center.iloc[<span class="dv">0</span>][<span class="st">&#39;center_lon&#39;</span>]</span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simple rectangular bounding box (in practice, you&#39;d use proper geographic distance)</span></span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    bbox_size <span class="op">=</span> <span class="fl">0.001</span>  <span class="co"># Very small area for demonstration</span></span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>    query3 <span class="op">=</span> <span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a><span class="ss">        SELECT s.species, COUNT(*) as sightings_in_area</span></span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a><span class="ss">        FROM sightings s</span></span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a><span class="ss">        JOIN cameras c ON s.camera_id = c.camera_id</span></span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="ss">        WHERE s.sighted = 1</span></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="ss">        AND c.latitude BETWEEN </span><span class="sc">{</span>center_lat <span class="op">-</span> bbox_size<span class="sc">}</span><span class="ss"> AND </span><span class="sc">{</span>center_lat <span class="op">+</span> bbox_size<span class="sc">}</span></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="ss">        AND c.longitude BETWEEN </span><span class="sc">{</span>center_lon <span class="op">-</span> bbox_size<span class="sc">}</span><span class="ss"> AND </span><span class="sc">{</span>center_lon <span class="op">+</span> bbox_size<span class="sc">}</span></span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="ss">        GROUP BY s.species</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a><span class="ss">        ORDER BY sightings_in_area DESC</span></span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="ss">    &quot;&quot;&quot;</span></span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>    result3 <span class="op">=</span> pd.read_sql_query(query3, conn)</span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Area around (</span><span class="sc">{</span>center_lat<span class="sc">:.4f}</span><span class="ss">, </span><span class="sc">{</span>center_lon<span class="sc">:.4f}</span><span class="ss">):&quot;</span>)</span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result3)</span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Run demonstrations</span></span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;conn&#39;</span> <span class="kw">in</span> <span class="bu">locals</span>():</span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>    demonstrate_sql_queries(conn)</span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>    conn.close()</span></code></pre></div>
-<p>SQL databases provide powerful tools for data analysis, especially when dealing with large datasets that don’t fit in memory. The indexing system allows for fast queries even on millions of records, and the relational structure helps maintain data integrity and enables complex joins between different data sources.</p>
-<h3 id="exercise-8">Exercise 8</h3>
-<p>Create a SQLite database with animal sighting and camera coordinate tables. Set appropriate indices and demonstrate with SQL queries.</p>
+<p>Throughout the course you will work with various datasets and data formats. An SQL database is one of the most common ways to store large amounts of data. We recognise that many of you may be familiar with this already, but let’s use this example to build a small toy database of animal sightings based on the excel file and the dataframes we created.</p>
+<h3 id="exercise-12">Exercise 12</h3>
+<ul>
+<li>Create a local database (eg. <code>sqlite3</code>).</li>
+<li>Add a table with animal sighting data.</li>
+<li>Add a table with camera coordinates data.</li>
+<li>Set indices on columns you might search by (eg. <code>CameraID</code>, <code>Date</code>). Make sure the index types make sense!</li>
+<li>Look into multi column indices, and set one on <code>Latitude</code> and <code>Longitude</code>.</li>
+<li>Demonstrate success with a couple SQL queries, eg. counting <code>IMPALA</code> sightings within a <code>200m</code> square around <code>-0.3866, 36.9649</code>.</li>
+</ul>
+<p>Helpful links:</p>
+<p><a href="https://www.w3schools.com/sql/sql_intro.asp">SQL Intro, Creating Tables, Indices, Joins</a></p>
+<p><a href="https://stackoverflow.com/questions/179085/multiple-indexes-vs-multi-column-indexes">Multi-Column Indices</a></p>
+<p>Remember to include reusable code from this and previous exercises in your Fynesse library!</p>
 <h2 id="extended-analysis-burst-detection">Extended Analysis: Burst Detection</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/camera-trap-burst-detection-analysis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/camera-trap-burst-detection-analysis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/dsail-porini-burst-detection-analysis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/dsail-porini-burst-detection-analysis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We didn’t use all of the available data when we just classified days as “sighting” or “no sighting.” Camera traps often capture “burst” sequences - multiple photos taken in rapid succession when motion is detected. Understanding and properly handling these bursts can provide richer information about animal behavior.</p>
 <p>This extended analysis is quite challenging due to the complexity of burst detection and multi-species deduplication.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define what constitutes a &quot;burst&quot;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> detect_bursts(df, time_threshold_minutes<span class="op">=</span><span class="dv">5</span>, min_photos<span class="op">=</span><span class="dv">2</span>):</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Detect photo bursts in camera trap data</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">        df: DataFrame with timestamp and camera_id columns</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">        time_threshold_minutes: Photos within this time are considered same burst</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">        min_photos: Minimum photos to constitute a burst</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">        DataFrame with burst information</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    bursts <span class="op">=</span> []</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Group by camera and species</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (camera, species), group <span class="kw">in</span> df.groupby([<span class="st">&#39;camera_id&#39;</span>, <span class="st">&#39;Species&#39;</span>]):</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sort by timestamp</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>        group_sorted <span class="op">=</span> group.dropna(subset<span class="op">=</span>[<span class="st">&#39;timestamp&#39;</span>]).sort_values(<span class="st">&#39;timestamp&#39;</span>)</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(group_sorted) <span class="op">&lt;</span> min_photos:</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Identify bursts using time gaps</span></span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>        time_diffs <span class="op">=</span> group_sorted[<span class="st">&#39;timestamp&#39;</span>].diff()</span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>        burst_breaks <span class="op">=</span> time_diffs <span class="op">&gt;</span> pd.Timedelta(minutes<span class="op">=</span>time_threshold_minutes)</span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>        burst_ids <span class="op">=</span> burst_breaks.cumsum()</span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Process each burst</span></span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> burst_id, burst_group <span class="kw">in</span> group_sorted.groupby(burst_ids):</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(burst_group) <span class="op">&gt;=</span> min_photos:</span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>                burst_info <span class="op">=</span> {</span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;camera_id&#39;</span>: camera,</span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;species&#39;</span>: species,</span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;burst_start&#39;</span>: burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">min</span>(),</span>
-<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;burst_end&#39;</span>: burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">max</span>(),</span>
-<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;duration_seconds&#39;</span>: (burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">max</span>() <span class="op">-</span> </span>
-<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>                                       burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">min</span>()).total_seconds(),</span>
-<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;num_photos&#39;</span>: <span class="bu">len</span>(burst_group),</span>
-<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;date&#39;</span>: burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">min</span>().date()</span>
-<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>                }</span>
-<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>                bursts.append(burst_info)</span>
-<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(bursts)</span>
-<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply burst detection to our data (if we have timestamp data)</span></span>
-<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;df&#39;</span> <span class="kw">in</span> <span class="bu">locals</span>() <span class="kw">and</span> <span class="st">&#39;timestamp&#39;</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>    burst_data <span class="op">=</span> detect_bursts(df)</span>
-<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Detected </span><span class="sc">{</span><span class="bu">len</span>(burst_data)<span class="sc">}</span><span class="ss"> bursts&quot;</span>)</span>
-<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(burst_data) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Burst statistics:&quot;</span>)</span>
-<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  Average photos per burst: </span><span class="sc">{</span>burst_data[<span class="st">&#39;num_photos&#39;</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  Average burst duration: </span><span class="sc">{</span>burst_data[<span class="st">&#39;duration_seconds&#39;</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> seconds&quot;</span>)</span>
-<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  Longest burst: </span><span class="sc">{</span>burst_data[<span class="st">&#39;num_photos&#39;</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss"> photos&quot;</span>)</span>
-<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Show burst distribution by species</span></span>
-<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>        burst_by_species <span class="op">=</span> burst_data.groupby(<span class="st">&#39;species&#39;</span>).agg({</span>
-<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;num_photos&#39;</span>: [<span class="st">&#39;count&#39;</span>, <span class="st">&#39;mean&#39;</span>],</span>
-<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;duration_seconds&#39;</span>: <span class="st">&#39;mean&#39;</span></span>
-<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>        }).<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>        burst_by_species.columns <span class="op">=</span> [<span class="st">&#39;Total_Bursts&#39;</span>, <span class="st">&#39;Avg_Photos_per_Burst&#39;</span>, <span class="st">&#39;Avg_Duration_Seconds&#39;</span>]</span>
-<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Burst patterns by species:&quot;</span>)</span>
-<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(burst_by_species)</span>
-<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Timestamp data not available for burst analysis&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced analysis: Multi-species burst handling</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_multispecies_interactions(burst_data, time_window_minutes<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Analyze cases where multiple species appear in close temporal/spatial proximity</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(burst_data) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame()</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    interactions <span class="op">=</span> []</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Group bursts by camera and date</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (camera, date), day_bursts <span class="kw">in</span> burst_data.groupby([<span class="st">&#39;camera_id&#39;</span>, <span class="st">&#39;date&#39;</span>]):</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        day_bursts_sorted <span class="op">=</span> day_bursts.sort_values(<span class="st">&#39;burst_start&#39;</span>)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Look for overlapping or closely timed bursts of different species</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(day_bursts_sorted)):</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>            burst1 <span class="op">=</span> day_bursts_sorted.iloc[i]</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="bu">len</span>(day_bursts_sorted)):</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>                burst2 <span class="op">=</span> day_bursts_sorted.iloc[j]</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Check if bursts are close in time</span></span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>                time_gap <span class="op">=</span> (burst2[<span class="st">&#39;burst_start&#39;</span>] <span class="op">-</span> burst1[<span class="st">&#39;burst_end&#39;</span>]).total_seconds()</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> time_gap <span class="op">&lt;=</span> time_window_minutes <span class="op">*</span> <span class="dv">60</span> <span class="kw">and</span> burst1[<span class="st">&#39;species&#39;</span>] <span class="op">!=</span> burst2[<span class="st">&#39;species&#39;</span>]:</span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>                    interaction <span class="op">=</span> {</span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;camera_id&#39;</span>: camera,</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;date&#39;</span>: date,</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;species_1&#39;</span>: burst1[<span class="st">&#39;species&#39;</span>],</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;species_2&#39;</span>: burst2[<span class="st">&#39;species&#39;</span>],</span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;time_gap_seconds&#39;</span>: time_gap,</span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;interaction_type&#39;</span>: <span class="st">&#39;sequential&#39;</span> <span class="cf">if</span> time_gap <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">&#39;overlapping&#39;</span></span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>                    }</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>                    interactions.append(interaction)</span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(interactions)</span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze species interactions</span></span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;burst_data&#39;</span> <span class="kw">in</span> <span class="bu">locals</span>() <span class="kw">and</span> <span class="bu">len</span>(burst_data) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>    interactions <span class="op">=</span> analyze_multispecies_interactions(burst_data)</span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(interactions) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Found </span><span class="sc">{</span><span class="bu">len</span>(interactions)<span class="sc">}</span><span class="ss"> potential species interactions&quot;</span>)</span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Most common species pairs</span></span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>        species_pairs <span class="op">=</span> interactions.groupby([<span class="st">&#39;species_1&#39;</span>, <span class="st">&#39;species_2&#39;</span>]).size().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Most frequent species interactions:&quot;</span>)</span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(species_pairs.head())</span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Temporal patterns</span></span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>        avg_gap <span class="op">=</span> interactions[<span class="st">&#39;time_gap_seconds&#39;</span>].mean()</span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Average time gap between species: </span><span class="sc">{</span>avg_gap<span class="sc">:.1f}</span><span class="ss"> seconds&quot;</span>)</span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">No close species interactions detected&quot;</span>)</span>
-<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Burst data not available for interaction analysis&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define what constitutes a &quot;burst&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> detect_bursts(df, time_threshold_minutes<span class="op">=</span><span class="dv">5</span>, min_photos<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Detect photo bursts in camera trap data</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">        df: DataFrame with timestamp and camera_id columns</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">        time_threshold_minutes: Photos within this time are considered same burst</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">        min_photos: Minimum photos to constitute a burst</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">        DataFrame with burst information</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    bursts <span class="op">=</span> []</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Group by camera and species</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (camera, species), group <span class="kw">in</span> df.groupby([<span class="st">&#39;camera_id&#39;</span>, <span class="st">&#39;Species&#39;</span>]):</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sort by timestamp</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        group_sorted <span class="op">=</span> group.dropna(subset<span class="op">=</span>[<span class="st">&#39;timestamp&#39;</span>]).sort_values(<span class="st">&#39;timestamp&#39;</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(group_sorted) <span class="op">&lt;</span> min_photos:</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Identify bursts using time gaps</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>        time_diffs <span class="op">=</span> group_sorted[<span class="st">&#39;timestamp&#39;</span>].diff()</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>        burst_breaks <span class="op">=</span> time_diffs <span class="op">&gt;</span> pd.Timedelta(minutes<span class="op">=</span>time_threshold_minutes)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>        burst_ids <span class="op">=</span> burst_breaks.cumsum()</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Process each burst</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> burst_id, burst_group <span class="kw">in</span> group_sorted.groupby(burst_ids):</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(burst_group) <span class="op">&gt;=</span> min_photos:</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                burst_info <span class="op">=</span> {</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;camera_id&#39;</span>: camera,</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;species&#39;</span>: species,</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;burst_start&#39;</span>: burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">min</span>(),</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;burst_end&#39;</span>: burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">max</span>(),</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;duration_seconds&#39;</span>: (burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">max</span>() <span class="op">-</span> </span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>                                       burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">min</span>()).total_seconds(),</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;num_photos&#39;</span>: <span class="bu">len</span>(burst_group),</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;date&#39;</span>: burst_group[<span class="st">&#39;timestamp&#39;</span>].<span class="bu">min</span>().date()</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>                bursts.append(burst_info)</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(bursts)</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply burst detection to our data (if we have timestamp data)</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;df&#39;</span> <span class="kw">in</span> <span class="bu">locals</span>() <span class="kw">and</span> <span class="st">&#39;timestamp&#39;</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    burst_data <span class="op">=</span> detect_bursts(df)</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Detected </span><span class="sc">{</span><span class="bu">len</span>(burst_data)<span class="sc">}</span><span class="ss"> bursts&quot;</span>)</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(burst_data) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Burst statistics:&quot;</span>)</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  Average photos per burst: </span><span class="sc">{</span>burst_data[<span class="st">&#39;num_photos&#39;</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  Average burst duration: </span><span class="sc">{</span>burst_data[<span class="st">&#39;duration_seconds&#39;</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> seconds&quot;</span>)</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;  Longest burst: </span><span class="sc">{</span>burst_data[<span class="st">&#39;num_photos&#39;</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss"> photos&quot;</span>)</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Show burst distribution by species</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>        burst_by_species <span class="op">=</span> burst_data.groupby(<span class="st">&#39;species&#39;</span>).agg({</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;num_photos&#39;</span>: [<span class="st">&#39;count&#39;</span>, <span class="st">&#39;mean&#39;</span>],</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;duration_seconds&#39;</span>: <span class="st">&#39;mean&#39;</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>        }).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>        burst_by_species.columns <span class="op">=</span> [<span class="st">&#39;Total_Bursts&#39;</span>, <span class="st">&#39;Avg_Photos_per_Burst&#39;</span>, <span class="st">&#39;Avg_Duration_Seconds&#39;</span>]</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Burst patterns by species:&quot;</span>)</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(burst_by_species)</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Timestamp data not available for burst analysis&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced analysis: Multi-species burst handling</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_multispecies_interactions(burst_data, time_window_minutes<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Analyze cases where multiple species appear in close temporal/spatial proximity</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(burst_data) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.DataFrame()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    interactions <span class="op">=</span> []</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Group bursts by camera and date</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (camera, date), day_bursts <span class="kw">in</span> burst_data.groupby([<span class="st">&#39;camera_id&#39;</span>, <span class="st">&#39;date&#39;</span>]):</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        day_bursts_sorted <span class="op">=</span> day_bursts.sort_values(<span class="st">&#39;burst_start&#39;</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Look for overlapping or closely timed bursts of different species</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(day_bursts_sorted)):</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>            burst1 <span class="op">=</span> day_bursts_sorted.iloc[i]</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="bu">len</span>(day_bursts_sorted)):</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                burst2 <span class="op">=</span> day_bursts_sorted.iloc[j]</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Check if bursts are close in time</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                time_gap <span class="op">=</span> (burst2[<span class="st">&#39;burst_start&#39;</span>] <span class="op">-</span> burst1[<span class="st">&#39;burst_end&#39;</span>]).total_seconds()</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> time_gap <span class="op">&lt;=</span> time_window_minutes <span class="op">*</span> <span class="dv">60</span> <span class="kw">and</span> burst1[<span class="st">&#39;species&#39;</span>] <span class="op">!=</span> burst2[<span class="st">&#39;species&#39;</span>]:</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                    interaction <span class="op">=</span> {</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;camera_id&#39;</span>: camera,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;date&#39;</span>: date,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;species_1&#39;</span>: burst1[<span class="st">&#39;species&#39;</span>],</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;species_2&#39;</span>: burst2[<span class="st">&#39;species&#39;</span>],</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;time_gap_seconds&#39;</span>: time_gap,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;interaction_type&#39;</span>: <span class="st">&#39;sequential&#39;</span> <span class="cf">if</span> time_gap <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">&#39;overlapping&#39;</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>                    }</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>                    interactions.append(interaction)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(interactions)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze species interactions</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;burst_data&#39;</span> <span class="kw">in</span> <span class="bu">locals</span>() <span class="kw">and</span> <span class="bu">len</span>(burst_data) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>    interactions <span class="op">=</span> analyze_multispecies_interactions(burst_data)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(interactions) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Found </span><span class="sc">{</span><span class="bu">len</span>(interactions)<span class="sc">}</span><span class="ss"> potential species interactions&quot;</span>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Most common species pairs</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>        species_pairs <span class="op">=</span> interactions.groupby([<span class="st">&#39;species_1&#39;</span>, <span class="st">&#39;species_2&#39;</span>]).size().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Most frequent species interactions:&quot;</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(species_pairs.head())</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Temporal patterns</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>        avg_gap <span class="op">=</span> interactions[<span class="st">&#39;time_gap_seconds&#39;</span>].mean()</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Average time gap between species: </span><span class="sc">{</span>avg_gap<span class="sc">:.1f}</span><span class="ss"> seconds&quot;</span>)</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">No close species interactions detected&quot;</span>)</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Burst data not available for interaction analysis&quot;</span>)</span></code></pre></div>
 <p>This extended analysis demonstrates how camera trap data can be mined for complex ecological insights. Burst patterns can reveal:</p>
 <ul>
 <li><strong>Feeding behavior</strong>: Long bursts might indicate feeding sites</li>
@@ -848,14 +420,13 @@ fynesse = load_repo(&quot;TODO/fynesse_TODO&quot;)
 <li><strong>Individual identification</strong>: Consistent burst patterns might help identify individuals</li>
 </ul>
 <p>The challenge lies in balancing detail with computational complexity, and in handling the inherent uncertainty in automated image analysis.</p>
-<h2 id="thanks">Thanks!</h2>
-<p>For more information on these subjects and more you might want to check the following resources.</p>
-<ul>
-<li>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></li>
-<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
-<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
-<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
-<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
-</ul>
+<p>End of Practical 2</p>
+<pre><code> _______  __   __  _______  __    _  ___   _  _______  __
+|       ||  | |  ||   _   ||  |  | ||   | | ||       ||  |
+|_     _||  |_|  ||  |_|  ||   |_| ||   |_| ||  _____||  |
+  |   |  |       ||       ||       ||      _|| |_____ |  |
+  |   |  |       ||       ||  _    ||     |_ |_____  ||__|
+  |   |  |   _   ||   _   || | |   ||    _  | _____| | __
+  |___|  |__| |__||__| |__||_|  |__||___| |_||_______||__|</code></pre>
 <h1 id="references">References</h1>
 

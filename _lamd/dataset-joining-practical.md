@@ -1,10 +1,10 @@
 ---
 title: "Practical 2: Dataset Joining and Access-Assess-Address Framework"
 practical: 2
-featured_image: assets/images/practical-two.png
+featured_image: slides/diagrams/datasts/dsail-porini.png
 abstract: >
   In this lab session we will explore dataset joining techniques, implement 
-  the Access-Assess-Address framework in practice, work with camera trap data,
+  the Access-Assess-Address framework in practice, work with the DSAIL Porini camera trap data,
   and build predictive models for animal sightings.
 layout: practical
 venue: 
@@ -46,15 +46,20 @@ postsdir: ../_practicals/ # Where compiled lecture HTML files go
 
 \include{_datasets/includes/dsail-porini-sqlite-database-creation.md}
 
-\writeassignment{Create a SQLite database with animal sighting and camera coordinate tables. Set appropriate indices and demonstrate with SQL queries.}{20}
-
-
 \include{_ml/includes/dsail-porini-burst-detection-analysis.md}
 
 
-\reading
+\notes{End of Practical 2
+```
+ _______  __   __  _______  __    _  ___   _  _______  __
+|       ||  | |  ||   _   ||  |  | ||   | | ||       ||  |
+|_     _||  |_|  ||  |_|  ||   |_| ||   |_| ||  _____||  |
+  |   |  |       ||       ||       ||      _|| |_____ |  |
+  |   |  |       ||       ||  _    ||     |_ |_____  ||__|
+  |   |  |   _   ||   _   || | |   ||    _  | _____| | __
+  |___|  |__| |__||__| |__||_|  |__||___| |_||_______||__|
+```}
 
-\exercises
 
 \references
 
