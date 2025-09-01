@@ -42,8 +42,6 @@ postsdir: ../_practicals/ # Where compiled lecture HTML files go
 
 \include{_ml/includes/dsail-porini-correlation-analysis-improvements.md}
 
-\writeassignment{Analyze the data to find the strongest relationships for improving predictions. Compare improved model against the baseline.}{15}
-
 \include{_datasets/includes/dsail-porini-sqlite-database-creation.md}
 
 \include{_ml/includes/dsail-porini-burst-detection-analysis.md}
