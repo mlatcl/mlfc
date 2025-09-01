@@ -1,6 +1,6 @@
 ---
-title: "Practical 2: Dataset Joining and Access-Assess-Address Framework"
-practical: 2
+title: "Practical 3: Dataset Joining and Access-Assess-Address Framework"
+practical: 3
 featured_image: slides/diagrams/datasets/dsail-porini.png
 abstract: >
   In this lab session we will explore dataset joining techniques, implement 
@@ -17,8 +17,8 @@ author:
   institute: University of Cambridge
   twitter: lawrennd
   url: http://inverseprobability.com
-time: "15:00"
-date: 2025-09-02
+time: "14:00"
+date: 2025-09-03
 transition: None
 reveal: false
 ipynb: true
