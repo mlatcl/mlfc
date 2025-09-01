@@ -23,7 +23,7 @@ postsdir: ../_practicals/ # Where compiled lecture HTML files go
 
 \notes{We'll be using a partial EA FC 25 database for this workshop.}
 
-\includejpg{}
+\includefigure{\includepng{\diagramsDir/datasets/football-database}}{60%}{}
 
 \notes{Find it in this GitHub repo: `radzim/football_data`}
 
