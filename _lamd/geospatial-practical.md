@@ -1,7 +1,7 @@
 ---
 title: "Practical 1: Nyeri to Cambridge - Geospatial Data and Reusability"
 practical: 1
-featured_image: assets/images/practical-one.png
+featured_image: slides/diagrams/datasets/nyeri-osm.png
 abstract: >
   In this lab session we will explore geospatial data using OpenStreetMap, 
   create reusable code for data science pipelines, and apply machine learning 

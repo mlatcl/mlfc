@@ -1,7 +1,7 @@
 ---
 title: "Practical 2: Dataset Joining and Access-Assess-Address Framework"
 practical: 2
-featured_image: slides/diagrams/datasts/dsail-porini.png
+featured_image: slides/diagrams/datasets/dsail-porini.png
 abstract: >
   In this lab session we will explore dataset joining techniques, implement 
   the Access-Assess-Address framework in practice, work with the DSAIL Porini camera trap data,
@@ -19,7 +19,6 @@ author:
   url: http://inverseprobability.com
 time: "15:00"
 date: 2025-09-02
-published: 2025-08-29
 transition: None
 reveal: false
 ipynb: true
