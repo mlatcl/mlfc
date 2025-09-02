@@ -1,7 +1,7 @@
 ---
 week: 1
 session: 3
-date: 2025-09-02
+date: 2025-09-03
 featured_image: slides/diagrams/mlai/carthaginian-empire.png
 title: "Objective Functions"
 abstract: |

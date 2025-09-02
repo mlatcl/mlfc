@@ -33,12 +33,23 @@ categories:
 -->
 <h2 id="data-and-python">Data and Python</h2>
 <h3 id="the-data">The Data</h3>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/football-data-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/football-data-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>We’ll be using a partial EA FC 25 database for this workshop.</p>
-\includefigure{
+<div class="figure">
+<div id="-figure" class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/football-database.png" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<p>}{60%}{}</p>
+</div>
+<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="-caption" class="caption-frame">
+<p>Figure: 60%</p>
+</div>
+</div>
 <p>Find it in this GitHub repo: <code>radzim/football_data</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, subprocess</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>repo_url <span class="op">=</span> <span class="st">&quot;https://github.com/radzim/football_data.git&quot;</span></span>
@@ -130,9 +141,20 @@ dict</code></pre>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/football-spatial-temporal-locality.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/football-spatial-temporal-locality.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-\includefigure{
+<div class="figure">
+<div id="-figure" class="figure-frame">
+
+</div>
+<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="-caption" class="caption-frame">
+<p>Figure:</p>
+</div>
+</div>
+{
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/storage-pyramid.png.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/storage-pyramid.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 <p>Spatial locality means a program is likely to access nearby memory addresses soon after accessing one (e.g., iterating through an array). CPUs exploit both by loading data from RAM based on expected patterns of use.</p>
 <p>Temporal locality benefits from keeping recently used data in cache, while spatial locality benefits from prefetching adjacent data to speed up sequential access.</p>
@@ -183,7 +205,7 @@ dict</code></pre>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np_arr.<span class="bu">sum</span>()</span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s, time.time()<span class="op">-</span>start_time)</span></code></pre></div>
 <p>NumPy is insanely fast. Use it everywhere you can!</p>
-<h3 id="cheat-sheet"># Cheat Sheet</h3>
+<h3 id="cheat-sheet">Cheat Sheet</h3>
 <p>Create Arrays</p>
 <pre><code>a = np.array([1, 2, 3, 4, 5])
 print(a)        # [1 2 3 4 5]
@@ -300,7 +322,7 @@ df.to_pickle(&quot;players_clean.pkl&quot;)</code></pre>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;bmi&quot;</span>] <span class="op">=</span> df[<span class="st">&quot;weight&quot;</span>]<span class="op">/</span>df[<span class="st">&quot;height_m&quot;</span>]<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time()<span class="op">-</span>start)</span>
 <span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&quot;bmi&quot;</span>]</span></code></pre></div>
-<h3 id="pickles">Pickles</h3>
+<h2 id="pickles">Pickles</h2>
 <p>Pickles are a Python way of storing objects as files. Very useful, and usually faster than the naive way of doing things.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> time.time()</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">&quot;data.csv&quot;</span>)</span>
@@ -444,11 +466,19 @@ display(api_key, db_password)
 <h3 id="background">Background</h3>
 <p>A database is not a special piece of hardware, it can live on any medium. It’s just an organized collection of data stored in a structured way, allowing efficient storage, retrieval, and management of information.</p>
 <p>What we usually mean by a database is just a standard digital implementation of such a system.</p>
-\includefigure{
+<div class="figure">
+<div id="Photo by British Geological Survey-figure" class="figure-frame">
 <div class="centered centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//slides/datasets/british-geological-survey.jpg" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/british-geological-survey.jpg" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-<p>}{50%}{Photo by British Geological Survey}</p>
+</div>
+<div id="Photo by British Geological Survey-magnify" class="magnify" onclick="magnifyFigure(&#39;Photo by British Geological Survey&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="Photo by British Geological Survey-caption" class="caption-frame">
+<p>Figure: 50%</p>
+</div>
+</div>
 <p>What makes databases special is the structure - the information is conveyed in a way that allows for complicated lookup operations to be completed quickly.</p>
 <h3 id="physical-index">Physical Index</h3>
 <p>This is what you would usually mean when talking about simple indexes. This is how dictionaries, encyclopedias work. Many datasets have built-in physical indices, even if not explicitly defined.</p>
@@ -552,10 +582,25 @@ ON table_name (column1, column2, ...);</code></pre>
 <span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> start)</span>
 <span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code></pre></div>
-<h3 id="multi-column-index">Multi-column Index</h3>
+<h2 id="multi-column-index">Multi-column Index</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/football-multi-column-index.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/football-multi-column-index.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>Sometimes you will be repetitively looking for data that fits multiple criteria at once. The most common example would be coordinates - latitude and longitude.</p>
 <p>Imagine if, when looking for houses within 10km of Mt Kenya, you had to search through all the houses on earth one by one. That would be very inefficient. But single indices on latitude and longitude would still not help you that much - there are millions of houses within 10km of the equator, in Kongo, Ecuador, Indonesia - you would first narrow it down to all of those, and then have to search through them again, with respect to longitude.</p>
-<p>\includefigure{}{80%}{}</p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/world-map-continents-oceans.png" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="-caption" class="caption-frame">
+<p>Figure: 80%</p>
+</div>
+</div>
 <p>That’s why we have multi-column indices. The simplest example would be a map - given a detailed map, I can easily find the area I’m looking for data in.</p>
 <p>Using our <code>players</code> example, let’s look for players who are both tall and strong.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
