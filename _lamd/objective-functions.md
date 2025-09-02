@@ -9,6 +9,9 @@ abstract: |
 youtube: Gq6bjcm8AqQ
 ---
 
+\define{ipynbpath}{_notebooks}
+
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 \newslide{Objective Function}
 \slides{
