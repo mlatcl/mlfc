@@ -38,16 +38,16 @@ categories:
 </div>
 <p>We’ll be using a partial EA FC 25 database for this workshop.</p>
 <div class="figure">
-<div id="-figure" class="figure-frame">
+<div id="football-database-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/football-database.png" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/football-database.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="football-database-magnify" class="magnify" onclick="magnifyFigure(&#39;football-database&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
-<p>Figure: 60%</p>
+<div id="football-database-caption" class="caption-frame">
+<p>Figure:</p>
 </div>
 </div>
 <p>Find it in this GitHub repo: <code>radzim/football_data</code></p>
@@ -142,16 +142,16 @@ dict</code></pre>
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/football-spatial-temporal-locality.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/football-spatial-temporal-locality.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <div class="figure">
-<div id="-figure" class="figure-frame">
+<div id="storage-pyramid-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/storage-pyramid.png" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/storage-pyramid.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="storage-pyramid-magnify" class="magnify" onclick="magnifyFigure(&#39;storage-pyramid&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
-<p>Figure: 60%</p>
+<div id="storage-pyramid-caption" class="caption-frame">
+<p>Figure:</p>
 </div>
 </div>
 <p>Spatial locality means a program is likely to access nearby memory addresses soon after accessing one (e.g., iterating through an array). CPUs exploit both by loading data from RAM based on expected patterns of use.</p>
@@ -590,16 +590,16 @@ ON table_name (column1, column2, ...);</code></pre>
 <p>Sometimes you will be repetitively looking for data that fits multiple criteria at once. The most common example would be coordinates - latitude and longitude.</p>
 <p>Imagine if, when looking for houses within 10km of Mt Kenya, you had to search through all the houses on earth one by one. That would be very inefficient. But single indices on latitude and longitude would still not help you that much - there are millions of houses within 10km of the equator, in Congo, Ecuador, Indonesia - you would first narrow it down to all of those, and then have to search through them again, with respect to longitude.</p>
 <div class="figure">
-<div id="-figure" class="figure-frame">
+<div id="world-map-continets-oceans-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/world-map-continents-oceans.png" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/world-map-continents-oceans.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="world-map-continets-oceans-magnify" class="magnify" onclick="magnifyFigure(&#39;world-map-continets-oceans&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
-<p>Figure: 80%</p>
+<div id="world-map-continets-oceans-caption" class="caption-frame">
+<p>Figure:</p>
 </div>
 </div>
 <p>That’s why we have multi-column indices. The simplest example would be a map - given a detailed map, I can easily find the area I’m looking for data in.</p>
