@@ -143,18 +143,16 @@ dict</code></pre>
 </div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/storage-pyramid.png" width="" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
 </div>
 <div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="-caption" class="caption-frame">
-<p>Figure:</p>
+<p>Figure: 60%</p>
 </div>
-</div>
-{
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/storage-pyramid.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 <p>Spatial locality means a program is likely to access nearby memory addresses soon after accessing one (e.g., iterating through an array). CPUs exploit both by loading data from RAM based on expected patterns of use.</p>
 <p>Temporal locality benefits from keeping recently used data in cache, while spatial locality benefits from prefetching adjacent data to speed up sequential access.</p>
@@ -403,7 +401,10 @@ WHERE playerid IN (
 <pre><code>CREATE INDEX idx_players_height ON players(height);
 CREATE INDEX idx_tpl_player ON teamplayerlinks(playerid);
 CREATE INDEX idx_tpl_team_player ON teamplayerlinks(teamid, playerid);</code></pre>
-<h3 id="sql-in-python">SQL in Python</h3>
+<h2 id="sql-in-python">SQL in Python</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/football-sql-in-python.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/football-sql-in-python.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>Just a reminder, you can use SQL inside Python very neatly. It’s the recommended practice, and leaves you compatible with other systems using your database.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
@@ -587,7 +588,7 @@ ON table_name (column1, column2, ...);</code></pre>
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/football-multi-column-index.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/football-multi-column-index.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Sometimes you will be repetitively looking for data that fits multiple criteria at once. The most common example would be coordinates - latitude and longitude.</p>
-<p>Imagine if, when looking for houses within 10km of Mt Kenya, you had to search through all the houses on earth one by one. That would be very inefficient. But single indices on latitude and longitude would still not help you that much - there are millions of houses within 10km of the equator, in Kongo, Ecuador, Indonesia - you would first narrow it down to all of those, and then have to search through them again, with respect to longitude.</p>
+<p>Imagine if, when looking for houses within 10km of Mt Kenya, you had to search through all the houses on earth one by one. That would be very inefficient. But single indices on latitude and longitude would still not help you that much - there are millions of houses within 10km of the equator, in Congo, Ecuador, Indonesia - you would first narrow it down to all of those, and then have to search through them again, with respect to longitude.</p>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <div class="centered" style="">
