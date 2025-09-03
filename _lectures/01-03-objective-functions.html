@@ -122,7 +122,7 @@ f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right),
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x_minus <span class="op">=</span> np.random.normal(loc<span class="op">=-</span><span class="fl">1.3</span>, size<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">2</span>))</span></code></pre></div>
 <div class="figure">
 <div id="artificial-classification-examples-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/artificial-classification-examples.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/artificial-classification-example.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="artificial-classification-examples-magnify" class="magnify" onclick="magnifyFigure(&#39;artificial-classification-examples&#39;)">
@@ -164,6 +164,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> init_perceptron</span></code></pre></div>
+<h2 id="drawing-decision-boundary">Drawing Decision Boundary</h2>
 <div class="figure">
 <div id="perceptron-init-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron-init.svg" width="80%" style=" ">
@@ -176,7 +177,6 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <p>Figure: Initial perceptron setup showing data points and initial decision boundary.</p>
 </div>
 </div>
-<h2 id="drawing-decision-boundary">Drawing Decision Boundary</h2>
 <p>The decision boundary is where the output of the function changes from -1 to +1 (or vice versa) so it’s the point at which the argument of the <span class="math inline">\(\text{sign}\)</span> function is zero. So in other words, the decision boundary is given by the <em>line</em> defined by <span class="math inline">\(x_1 w_1 + x_2 w_2 = -b\)</span> (where we have dropped the index <span class="math inline">\(i\)</span> for convenience). In this two dimensional space the decision boundary is defined by a line. In a three dimensional space it would be defined by a <em>plane</em> and in higher dimensional spaces it is defined by something called a <a href="http://en.wikipedia.org/wiki/Hyperplane"><em>hyperplane</em></a>. This equation is therefore often known as the <em>separating hyperplane</em> because it defines the hyperplane that separates the data. To draw it in 2-D we can choose some values to plot from <span class="math inline">\(x_1\)</span> and then find the corresponding values for <span class="math inline">\(x_2\)</span> to plot using the rearrangement of the hyperplane formula as follows <span class="math display">\[
 x_2 = -\frac{(b+x_1w_1)}{w_2}
 \]</span> Of course, we can also choose to specify the values for <span class="math inline">\(x_2\)</span> and compute the values for <span class="math inline">\(x_1\)</span> given the values for <span class="math inline">\(x_2\)</span>, <span class="math display">\[

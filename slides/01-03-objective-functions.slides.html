@@ -151,14 +151,11 @@ f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right)
 <section id="toy-data" class="slide level2">
 <h2>Toy Data</h2>
 <ul>
-<li>Red crosses and green circles.</li>
+<li>Red crosses (+ve) and green circles (-ve).</li>
 </ul>
-</section>
-<section id="toy-data-1" class="slide level2">
-<h2>Toy Data</h2>
 <div class="figure">
 <div id="artificial-classification-examples-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/artificial-classification-examples.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/artificial-classification-example.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
@@ -168,6 +165,12 @@ Red crosses and green circles are sampled from two separate Gaussian distributio
 </section>
 <section id="the-perceptron" class="slide level2">
 <h2>The Perceptron</h2>
+<ul>
+<li>Developed in 1957 by Rosenblatt.</li>
+<li>Take a data point at, <span class="math inline">\(\mathbf{ x}_i\)</span>.</li>
+<li>Predict class, <span class="math inline">\(y_i=1\)</span> if <span class="math inline">\(\sum_jw_{j} \mathbf{ x}_{i, j} + b &gt; 0\)</span></li>
+<li>Otherwise predict <span class="math inline">\(y_i=-1\)</span>.</li>
+</ul>
 </section>
 <section id="mathematical-drawing-of-decision-boundary" class="slide level2">
 <h2>Mathematical Drawing of Decision Boundary</h2>
@@ -211,8 +214,8 @@ Red crosses and green circles are sampled from two separate Gaussian distributio
 \]</span></li>
 </ul>
 </section>
-<section id="computing-decision-boundary" class="slide level2">
-<h2>Computing Decision Boundary</h2>
+<section id="drawing-decision-boundary" class="slide level2">
+<h2>Drawing Decision Boundary</h2>
 <div class="figure">
 <div id="perceptron-init-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron-init.svg" width="80%" style=" ">
@@ -222,17 +225,14 @@ Red crosses and green circles are sampled from two separate Gaussian distributio
 <aside class="notes">
 Initial perceptron setup showing data points and initial decision boundary.
 </aside>
-</section>
-<section id="drawing-decision-boundary" class="slide level2">
-<h2>Drawing Decision Boundary</h2>
 <ul>
-<li><p>Plot <span class="math display">\[
+<li>Plot <span class="math display">\[
 x_2 = -\frac{(b+x_1 w_1)}{w_2}
-\]</span></p></li>
-<li><p>Can choose to specify <span class="math inline">\(x_2\)</span> and compute <span class="math inline">\(x_1\)</span> given the values for <span class="math inline">\(x_2\)</span>, <span class="math display">\[
-x_1 = -\frac{b + x_2w_2}{w_1}
-\]</span></p></li>
+\]</span></li>
 </ul>
+<p><em>or</em> specify <span class="math inline">\(x_2\)</span> and compute <span class="math inline">\(x_1\)</span> given the values for <span class="math inline">\(x_2\)</span>, <span class="math display">\[
+x_1 = -\frac{b + x_2w_2}{w_1}
+\]</span></p>
 </section>
 <section id="switching-formulae" class="slide level2">
 <h2>Switching Formulae</h2>
@@ -426,7 +426,8 @@ Contours of the objective function for linear regression by minimizing least squ
 <ul>
 <li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
 </ul>
-<p><code>m_star = 0.0 c_star = -5.0</code></p>
+<pre><code>m_star = 0.0
+c_star = -5.0</code></pre>
 </section>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
@@ -438,79 +439,131 @@ Contours of the objective function for linear regression by minimizing least squ
 </section>
 <section id="compute-as" class="slide level2">
 <h2>Compute as</h2>
-<p><code>c_grad = -2*(y-m_star*x - c_star).sum()</code></p>
-</section>
-<section id="slope-gradient" class="slide level2">
-<h2>Slope Gradient</h2>
-<p>Gradient wrt <span class="math inline">\(m\)</span> is similar <span class="math display">\[
-\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
+<p>{</p>
+<pre><code>c_grad = -2*(y-m_star*x - c_star).sum()
+```}
+
+
+
+
+
+
+
+
+
+## Slope Gradient 
+
+
+
+
+
+
+
+Gradient wrt $m$ is similar
+$$
+\frac{\text{d}\errorFunction(m, c)}{\text{d} m} = -2\sum_{i=1}^\numData \inputScalar_i(\dataScalar_i - m\inputScalar_i -
 c)
-\]</span></p>
-</section>
-<section id="compute-as-1" class="slide level2">
-<h2>Compute as</h2>
-<p>which can be implemented in python (numpy) as</p>
-<p><code>m_grad = -2*(x*(y-m_star*x - c_star)).sum()</code></p>
-</section>
-<section id="update-equations" class="slide level2">
-<h2>Update Equations</h2>
-<ul>
-<li>Gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
-<li>Can update our inital guesses for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> using the gradient.</li>
-</ul>
-</section>
-<section id="update-equations-1" class="slide level2">
-<h2>Update Equations</h2>
-<ul>
-<li>We don’t want to just subtract the gradient from <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>,</li>
-<li>We need to take a <em>small</em> step in the gradient direction.</li>
-<li>Otherwise we might overshoot the minimum.</li>
-</ul>
-</section>
-<section id="update-equations-2" class="slide level2">
-<h2>Update Equations</h2>
-<ul>
-<li>We want to follow the gradient to get to the minimum, the gradient changes all the time.</li>
-</ul>
-</section>
-<section id="move-in-direction-of-gradient" class="slide level2">
-<h2>Move in Direction of Gradient</h2>
-<div class="figure">
-<div id="regression-contour-step-1-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour_step001.svg" width="60%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Single update descending the contours of the error surface for regression.
-</aside>
-</section>
-<section id="update-equations-3" class="slide level2">
-<h2>Update Equations</h2>
-<ul>
-<li>The step size has already been introduced</li>
-<li>it’s known as the learning rate and is denoted by <span class="math inline">\(\eta\)</span>. <span class="math display">\[
-c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}c}
-\]</span></li>
-</ul>
-</section>
-<section id="step-size" class="slide level2">
-<h2>Step Size</h2>
-<ul>
-<li>gives us an update for our estimate of <span class="math inline">\(c\)</span> and <span class="math display">\[
-m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
-\]</span></li>
-<li>Giving us an update for <span class="math inline">\(m\)</span>.</li>
-</ul>
-</section>
-<section id="update-code" class="slide level2">
-<h2>Update Code</h2>
-<ul>
-<li>These updates can be coded as</li>
-</ul>
-<pre><code>learn_rate = 0.01
-c_star = c_star - learn_rate*c_grad
-m_star = m_star - learn_rate*m_grad</code></pre>
+$$
+
+
+## Compute as  {}
+
+which can be implemented in python (numpy) as
+\small{</code></pre>
+<p>m_grad = -2<em>(x</em>(y-m_star*x - c_star)).sum()</p>
+<pre><code>}
+
+
+
+
+## Update Equations 
+
+
+
+
+
+
+
+* Gradients with respect to $m$ and $c$.
+* Can update our inital guesses for $m$ and $c$ using the gradient. 
+
+
+
+## Update Equations  {}
+
+
+
+
+* We don&#39;t want to just subtract the gradient from $m$ and $c$, 
+* We need to take a *small* step in the gradient direction. 
+* Otherwise we might overshoot the minimum. 
+
+
+
+## Update Equations  {}
+
+
+
+* We want to follow the gradient to get to the minimum, the gradient
+changes all the time.
+
+
+
+## Move in Direction of Gradient 
+
+
+
+
+
+
+
+
+
+&lt;div class=&quot;figure&quot;&gt;
+&lt;div class=&quot;figure-frame&quot; id=&quot;regression-contour-step-1-figure&quot;&gt;
+&lt;object class=&quot;svgplot &quot; data=&quot;https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour_step001.svg&quot; width=&quot;60%&quot; style=&quot; &quot;&gt;&lt;/object&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;aside class=&quot;notes&quot;&gt;Single update descending the contours of the error surface for regression.&lt;/aside&gt;
+
+
+
+## Update Equations 
+
+
+
+
+
+
+* The step size has already been introduced
+* it&#39;s known as the learning rate and is denoted by $\learnRate$. 
+  $$
+  c_\text{new}\leftarrow c_{\text{old}} - \learnRate \frac{\text{d}\errorFunction(m, c)}{\text{d}c}
+$$ 
+
+
+## Step Size  {}
+
+
+
+
+* gives us an update for our estimate of $c$ and
+$$
+m_\text{new} \leftarrow m_{\text{old}} - \learnRate \frac{\text{d}\errorFunction(m, c)}{\text{d}m}
+$$
+* Giving us an update for $m$.
+
+
+
+## Update Code 
+
+
+
+
+
+
+* These updates can be coded as</code></pre>
+<p>learn_rate = 0.01 c_star = c_star - learn_rate<em>c_grad m_star = m_star - learn_rate</em>m_grad ```</p>
 <!-- SECTION Iterating Updates -->
 </section>
 <section id="iterating-updates" class="slide level2">
