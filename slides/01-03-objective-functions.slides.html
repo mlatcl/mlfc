@@ -641,13 +641,14 @@ mx_i - c)
 </section>
 <section id="decompose-the-sum" class="slide level2">
 <h2>Decompose the Sum</h2>
-<p>but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form <span class="math display">\[\begin{align*}
+but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form
+<span class="math display">\[\begin{aligned}
   m_\text{new} \leftarrow
 m_\text{old} \\ 
 &amp; + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) \right. \\ 
 &amp; + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) \\ 
 &amp; + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]
-\end{align*}\]</span></p>
+\end{aligned}\]</span>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
