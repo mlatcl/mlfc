@@ -2,7 +2,7 @@
 week: 1
 session: 3
 date: 2025-09-03
-featured_image: slides/diagrams/ml/artificial-classification-example.png
+featured_image: slides/diagrams/ml/regression_contour_fit028.svg
 title: "Objective Functions and Gradient Descent"
 abstract: |
   In this session we introduce the notion of objective functions and show how they can be used in a simple optimisation systems based on gradients.
@@ -33,7 +33,6 @@ ipynb: true
 
 
 \addreading{@Rogers:book11}{Section 1.1.3} for loss functions.
-
 
 \thanks
 
