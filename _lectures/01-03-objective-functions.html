@@ -69,6 +69,8 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/mnist-digits-subsample-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/mnist-digits-subsample-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We will look at a sub-sample of the MNIST digit data set.</p>
+<p>THE MNIST DATABASE of handwritten digits was created by Yann LeCun, Corinna Cortes and Christopher J. C. Burges. More details can be found at Yann’s site <a href="http://yann.lecun.com/exdb/mnist/" class="uri">http://yann.lecun.com/exdb/mnist/</a></p>
+<p>The data is a modified version of a data set from the US National Institute of Standards and Technology (<a href="https://www.nist.gov/">NIST</a>.</p>
 <p>First load in the MNIST data set from scikit learn. This can take a little while because it’s large to download.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mnist <span class="op">=</span> fetch_openml(<span class="st">&#39;mnist_784&#39;</span>)</span></code></pre></div>
@@ -93,14 +95,14 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 </div>
 <div class="figure">
 <div id="mnist-digits-subsample-examples-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/mnist-digits-subsample-examples.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/mnist-digits-subsample-examples.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="mnist-digits-subsample-examples-magnify" class="magnify" onclick="magnifyFigure(&#39;mnist-digits-subsample-examples&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="mnist-digits-subsample-examples-caption" class="caption-frame">
-<p>Figure: Examples of MNIST digits 0-4 from our subsampled dataset, showing 10 examples of each digit.</p>
+<p>Figure: Examples of MNIST digits 0-4 from our subsampled dataset, showing 5 examples of each digit.</p>
 </div>
 </div>
 <p>The visualization shows the variety in handwritten digits even within the same class. Each row represents a different digit (0 through 4), and each column shows a different example of that digit.</p>
