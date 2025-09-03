@@ -414,7 +414,7 @@ Contours of the objective function for linear regression by minimizing least squ
 </section>
 <section id="compute-as" class="slide level2">
 <h2>Compute as</h2>
-<p><code>c_grad = -2*(y-m_star*x - c_star).sum()</code>}</p>
+<p><code>c_grad = -2*(y-m_star*x - c_star).sum()</code></p>
 </section>
 <section id="deriving-the-gradient" class="slide level2">
 <h2>Deriving the Gradient</h2>
@@ -628,7 +628,7 @@ showDivs(1, 'regression_contour_fit');
 <h2>Stochastic Gradient Descent</h2>
 <ul>
 <li>If <span class="math inline">\(n\)</span> is small, gradient descent is fine.</li>
-<li>But sometimes (e.g. on the internet <span class="math inline">\(n\)</span> could be a billion.</li>
+<li>But sometimes (e.g. on the internet) <span class="math inline">\(n\)</span> could be a billion.</li>
 <li>Stochastic gradient descent is more similar to perceptron.</li>
 <li>Look at gradient of one data point at a time rather than summing across <em>all</em> data points)</li>
 <li>This gives a stochastic estimate of gradient.</li>
@@ -639,16 +639,25 @@ showDivs(1, 'regression_contour_fit');
 <ul>
 <li><p>The real gradient with respect to <span class="math inline">\(m\)</span> is given by</p>
 <p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i -
-mx_i - c)\]</span></p>
+mx_i - c)\]</span></p></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <p>but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form</p>
 <p><span class="math display">\[m_\text{new} \leftarrow
 m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]\]</span></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <p>This could be split up into lots of individual updates <span class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 -
 c_\text{old})\right]\]</span> <span class="math display">\[m_2 \leftarrow m_1 + 2\eta\left[x_2 (y_2 -
 m_\text{old}x_2 - c_\text{old})\right]\]</span> <span class="math display">\[m_3 \leftarrow m_2 + 2\eta
 \left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow m_{n-1} + 2\eta\left[x_n (y_n -
-m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
-</ul>
+m_\text{old}x_n - c_\text{old})\right]\]</span></p>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 <p>which would lead to the same final update.</p>
 </section>
 <section id="updating-c-and-m" class="slide level2">
@@ -657,6 +666,11 @@ m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
 <li>In the sum we don’t change <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
 <li>In stochastic gradient descent we <em>do</em> change them.</li>
 <li>This means it’s not quite the same as steepest descent.</li>
+</ul>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<ul>
 <li>But we can present each data point in a random order, like we did for the perceptron.</li>
 <li>This makes the algorithm suitable for large scale web use (recently this domain is known as ‘Big Data’) and algorithms like this are widely used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
 </ul>
@@ -672,6 +686,9 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <section id="sgd-for-linear-regression" class="slide level2">
 <h2>SGD for Linear Regression</h2>
 <p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
 <script>
 showDivs(0, 'regression_sgd_contour_fit');
 </script>

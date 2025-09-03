@@ -318,10 +318,9 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div>
 <h2 id="offset-gradient">Offset Gradient</h2>
 <p>To implement gradient descent, we need to compute the partial derivatives of our error function with respect to each parameter. We’ll start with the gradient with respect to the intercept parameter <span class="math inline">\(c\)</span>.</p>
-<p>Our error function is: <span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - mx_i - c)^2\]</span></p>
+<p>Our error function is <span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - mx_i - c)^2\]</span></p>
 <p>To find how the error changes with respect to <span class="math inline">\(c\)</span>, we use the chain rule. Each squared term contributes to the gradient, and since <span class="math inline">\(c\)</span> appears in every term with a coefficient of <span class="math inline">\(-1\)</span>, the partial derivative becomes: <span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c)\]</span></p>
 <p>The negative sign comes from differentiating the <span class="math inline">\(-c\)</span> term inside the squared expression, and the factor of 2 comes from differentiating the square.</p>
-<p><code>c_grad = -2*(y-m_star*x - c_star).sum()</code>}</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>c_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star).<span class="bu">sum</span>()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to c is &quot;</span>, c_grad)</span></code></pre></div>
 <h2 id="deriving-the-gradient">Deriving the Gradient</h2>
@@ -389,7 +388,12 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <p>The beauty of this algorithm is its simplicity and general applicability - the same basic approach works for many different types of models and error functions.</p>
 <h2 id="gradient-descent-algorithm">Gradient Descent Algorithm</h2>
 <p>Let’s run the complete gradient descent algorithm and visualize how the parameters evolve over multiple iterations. The animation will show the path taken through parameter space as the algorithm navigates toward the minimum of the error surface.</p>
-<p>Each frame shows: - <em>Current position</em>: The green star indicating our current parameter estimates - <em>Error contours</em>: The background showing the error landscape - <em>Path</em>: The trajectory we’ve taken from the starting point to the current position</p>
+<p>Each frame shows:</p>
+<ul>
+<li><em>Current position</em>: The green star indicating our current parameter estimates</li>
+<li><em>Error contours</em>: The background showing the error landscape</li>
+<li><em>Path</em>: The trajectory we’ve taken from the starting point to the current position</li>
+</ul>
 <p>Watch how the algorithm follows a curved path that eventually spiral into the minimum, demonstrating the iterative nature of gradient-based optimization.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>num_plots <span class="op">=</span> plot.regression_contour_fit(x, y, diagrams<span class="op">=</span><span class="st">&#39;./ml&#39;</span>)</span></code></pre></div>
 <div class="figure">
@@ -415,7 +419,7 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-stochastic-gradient-descent.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-stochastic-gradient-descent.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>While batch gradient descent works well for small datasets, it becomes computationally prohibitive when dealing with large-scale data. Consider modern internet applications where you might have millions or billions of data points - computing the full gradient by summing over all data points in each iteration would be extremely slow.</p>
+<p>While batch gradient descent is possible for small datasets, it becomes computationally prohibitive when dealing with large-scale data. Consider modern internet applications where you might have millions or billions of data points - computing the full gradient by summing over all data points in each iteration would be extremely slow.</p>
 <p>Stochastic Gradient Descent (SGD) offers an elegant solution by approximating the full gradient using just one (or a few) randomly selected data points at each iteration. This approach:</p>
 <ol type="1">
 <li><em>Scales to large datasets</em>: Each update requires only O(1) computation regardless of dataset size</li>
@@ -424,32 +428,11 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <li><em>Mirrors biological learning</em>: Similar to how the perceptron processes one example at a time</li>
 </ol>
 <p>The key insight is that while each individual gradient estimate is noisy, on average it points in the correct direction toward the minimum.</p>
-<ul>
-<li>If <span class="math inline">\(n\)</span> is small, gradient descent is fine.</li>
-<li>But sometimes (e.g. on the internet <span class="math inline">\(n\)</span> could be a billion.</li>
-<li>Stochastic gradient descent is more similar to perceptron.</li>
-<li>Look at gradient of one data point at a time rather than summing across <em>all</em> data points)</li>
-<li>This gives a stochastic estimate of gradient.</li>
-</ul>
 <h2 id="stochastic-gradient-descent-1">Stochastic Gradient Descent</h2>
 <p>To understand how stochastic gradient descent works mathematically, let’s examine how the full batch gradient can be decomposed into individual per-example contributions. This decomposition reveals why we can update parameters using just one data point at a time.</p>
 <p>The batch gradient is a sum over all data points: <span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i - c)\]</span></p>
 <p>When we substitute this into our parameter update equation, we get: <span class="math display">\[m_\text{new} \leftarrow m_\text{old} + 2\eta\left[\sum_{i=1}^nx_i (y_i - m_\text{old}x_i - c_\text{old})\right]\]</span></p>
 <p>The key insight is that this single large update is mathematically equivalent to a sequence of smaller updates, each using just one data point. However, there’s an important difference in practice - in SGD, we update the parameters after each individual contribution rather than keeping them fixed throughout the sum.</p>
-<ul>
-<li><p>The real gradient with respect to <span class="math inline">\(m\)</span> is given by</p>
-<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i -
-mx_i - c)\]</span></p>
-<p>but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form</p>
-<p><span class="math display">\[m_\text{new} \leftarrow
-m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]\]</span></p>
-<p>This could be split up into lots of individual updates <span class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 -
-c_\text{old})\right]\]</span> <span class="math display">\[m_2 \leftarrow m_1 + 2\eta\left[x_2 (y_2 -
-m_\text{old}x_2 - c_\text{old})\right]\]</span> <span class="math display">\[m_3 \leftarrow m_2 + 2\eta
-\left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow m_{n-1} + 2\eta\left[x_n (y_n -
-m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
-</ul>
-<p>which would lead to the same final update.</p>
 <h2 id="updating-c-and-m">Updating <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span></h2>
 <p>Here’s where stochastic gradient descent fundamentally differs from batch gradient descent. In batch gradient descent, we compute the full gradient using fixed parameter values <span class="math inline">\(m_{\text{old}}\)</span> and <span class="math inline">\(c_{\text{old}}\)</span> for all data points, then make one large update.</p>
 <p>In stochastic gradient descent, we update the parameters after processing each individual data point. This means:</p>
@@ -459,23 +442,11 @@ m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
 <li><em>Online processing</em>: We can process data points as they arrive, making the algorithm suitable for streaming data</li>
 </ol>
 <p>This dynamic updating is what makes SGD both powerful and noisy. The noise can actually be beneficial - it provides a form of regularization and can help escape poor local minima in more complex problems.</p>
-<ul>
-<li>In the sum we don’t change <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
-<li>In stochastic gradient descent we <em>do</em> change them.</li>
-<li>This means it’s not quite the same as steepest descent.</li>
-<li>But we can present each data point in a random order, like we did for the perceptron.</li>
-<li>This makes the algorithm suitable for large scale web use (recently this domain is known as ‘Big Data’) and algorithms like this are widely used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
-</ul>
 <h2 id="stochastic-gradient-descent-2">Stochastic Gradient Descent</h2>
 <p>In practice, stochastic gradient descent simplifies to a very clean algorithm. Since we process data points in random order, each SGD update uses the gradient contribution from just one randomly selected example. The update equations become:</p>
 <p>For the slope parameter: <span class="math display">\[m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right]\]</span></p>
 <p>For the intercept parameter: <span class="math display">\[c_\text{new} = c_\text{old} + 2\eta\left[(y_i - m_\text{old}x_i - c_\text{old})\right]\]</span></p>
 <p>Notice how these look exactly like the per-example terms from our batch gradient, but now we apply them immediately rather than accumulating them in a sum.</p>
-<ul>
-<li>Or more accurate, since the data is normally presented in a random order we just can write <span class="math display">\[
-m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right]
-\]</span></li>
-</ul>
 <p>The implementation is straightforward: randomly select a data point, compute its contribution to the gradient, and immediately update the parameters. This process repeats for many iterations, with each iteration using a different random example.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose a random point for the update </span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
@@ -492,7 +463,6 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <li><em>Practical efficiency</em>: Despite the noise, SGD often reaches good solutions faster in wall-clock time for large datasets</li>
 </ol>
 <p>The animation shows how the stochastic approximation creates a much more chaotic but ultimately effective optimization trajectory.</p>
-<p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
 <div class="figure">
 <div id="regression-sgd-contour-fit-58-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_sgd_contour_fit058.svg" width="60%" style=" ">
@@ -505,10 +475,24 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <p>Figure: Stochastic gradient descent for linear regression showing the noisy but effective optimization path.</p>
 </div>
 </div>
-<p>The final visualization clearly demonstrates the contrasting behavior of SGD compared to batch gradient descent:</p>
-<p><strong>Optimization Path Characteristics:</strong> - <em>Erratic trajectory</em>: The path zigzags chaotically through parameter space rather than following smooth contours - <em>Local exploration</em>: The algorithm continues to explore around the minimum even after finding a good solution - <em>Effective convergence</em>: Despite the noise, SGD successfully navigates to the optimal region</p>
-<p><strong>Practical Implications:</strong> - <em>Computational efficiency</em>: Each SGD iteration processes just one example, making it ideal for large datasets where computing the full gradient is prohibitive - <em>Online learning capability</em>: The algorithm can adapt to new data points as they arrive, enabling real-time model updates - <em>Regularization effect</em>: The noise in SGD can prevent overfitting and help escape poor local minima in more complex optimization landscapes</p>
-<p><strong>Trade-offs:</strong> - <em>Convergence vs. efficiency</em>: SGD trades smooth convergence for computational speed - it may never fully settle but reaches good solutions quickly - <em>Hyperparameter sensitivity</em>: Learning rate tuning becomes more critical as too large values can cause divergence, while too small values slow convergence excessively</p>
+<p>The final visualisation demonstrates the behaviour of SGD compared to batch gradient descent:</p>
+<p><strong>Optimization Path Characteristics:</strong></p>
+<ul>
+<li><em>Erratic trajectory</em>: The path zigzags chaotically through parameter space rather than following smooth contours</li>
+<li><em>Local exploration</em>: The algorithm continues to explore around the minimum even after finding a good solution</li>
+<li><em>Effective convergence</em>: Despite the noise, SGD successfully navigates to the optimal region</li>
+</ul>
+<p><strong>Practical Implications:</strong></p>
+<ul>
+<li><em>Computational efficiency</em>: Each SGD iteration processes just one example, making it ideal for large datasets where computing the full gradient is prohibitive</li>
+<li><em>Online learning capability</em>: The algorithm can adapt to new data points as they arrive, enabling real-time model updates</li>
+<li><em>Regularization effect</em>: The noise in SGD can prevent overfitting and help escape poor local minima in more complex optimization landscapes</li>
+</ul>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li><em>Convergence vs. efficiency</em>: SGD trades smooth convergence for computational speed - it may never fully settle but reaches good solutions quickly</li>
+<li><em>Hyperparameter sensitivity</em>: Learning rate tuning becomes more critical as too large values can cause divergence, while too small values slow convergence excessively</li>
+</ul>
 <p>This stochastic approach forms the foundation for training modern machine learning models, particularly deep neural networks where batch gradient computation is computationally intractable.</p>
 <h2 id="reflection-on-linear-regression-and-supervised-learning">Reflection on Linear Regression and Supervised Learning</h2>
 <div style="text-align:right">
