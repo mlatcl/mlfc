@@ -168,7 +168,6 @@ Red crosses and green circles are sampled from two separate Gaussian distributio
 </section>
 <section id="the-perceptron" class="slide level2">
 <h2>The Perceptron</h2>
-<p>{</p>
 </section>
 <section id="mathematical-drawing-of-decision-boundary" class="slide level2">
 <h2>Mathematical Drawing of Decision Boundary</h2>
@@ -184,19 +183,33 @@ Red crosses and green circles are sampled from two separate Gaussian distributio
 <ul>
 <li>Plane equation: <span class="math inline">\(w_1 x_{i, 1} + w_2 x_{i, 2} + b = 0\)</span></li>
 <li>Decision boundary where <span class="math inline">\(\text{sign}(\cdot)\)</span> argument equals zero</li>
+</ul>
+</section>
+<section id="reminder-equation-of-plane-1" class="slide level2">
+<h2>Reminder: Equation of Plane</h2>
+<ul>
 <li>Rearrange to plot: <span class="math inline">\(x_2 = -\frac{(b+x_1w_1)}{w_2}\)</span></li>
 <li>Separating hyperplane divides feature space</li>
 </ul>
 </section>
 <section id="perceptron-algorithm-initialisation-maths" class="slide level2">
 <h2>Perceptron Algorithm: Initialisation Maths</h2>
-<p><span class="math display">\[
+<ul>
+<li>Set <span class="math inline">\(\mathbf{ w}\)</span> with random selected point <span class="math inline">\(i\)</span> <span class="math display">\[
 \mathbf{ w}= y_i \mathbf{ x}_i.
-\]</span> Why is this sensible? Well if the predicted label of the <span class="math inline">\(i\)</span>th point is <span class="math display">\[
+\]</span></li>
+<li>Why? Consider <span class="math display">\[
 \text{sign}(\mathbf{ w}^\top\mathbf{ x}_i)
-\]</span> then setting <span class="math inline">\(\mathbf{ w}\)</span> to <span class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span class="math display">\[
+\]</span></li>
+</ul>
+</section>
+<section id="perceptron-algorithm-initialisation-maths-1" class="slide level2">
+<h2>Perceptron Algorithm: Initialisation Maths</h2>
+<ul>
+<li>Setting <span class="math inline">\(\mathbf{ w}\)</span> to <span class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span class="math display">\[
 \text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) = \text{sign}(y_i\mathbf{ x}_i^\top \mathbf{ x}_i) = y_i
-\]</span></p>
+\]</span></li>
+</ul>
 </section>
 <section id="computing-decision-boundary" class="slide level2">
 <h2>Computing Decision Boundary</h2>
@@ -212,12 +225,21 @@ Initial perceptron setup showing data points and initial decision boundary.
 </section>
 <section id="drawing-decision-boundary" class="slide level2">
 <h2>Drawing Decision Boundary</h2>
-<p><span class="math display">\[x_2 = -\frac{(b+x_1w_1)}{w_2}\]</span></p>
-<p>Of course, we can also choose to specify the values for <span class="math inline">\(x_2\)</span> and compute the values for <span class="math inline">\(x_1\)</span> given the values for <span class="math inline">\(x_2\)</span>,</p>
-<p><span class="math display">\[x_1 = -\frac{b + x_2w_2}{w_1}\]</span></p>
+<ul>
+<li><p>Plot <span class="math display">\[
+x_2 = -\frac{(b+x_1 w_1)}{w_2}
+\]</span></p></li>
+<li><p>Can choose to specify <span class="math inline">\(x_2\)</span> and compute <span class="math inline">\(x_1\)</span> given the values for <span class="math inline">\(x_2\)</span>, <span class="math display">\[
+x_1 = -\frac{b + x_2w_2}{w_1}
+\]</span></p></li>
+</ul>
 </section>
 <section id="switching-formulae" class="slide level2">
 <h2>Switching Formulae</h2>
+<ul>
+<li>Use of first or second formula</li>
+<li>Depends on how hyperplane leaves plot</li>
+</ul>
 </section>
 <section id="code-for-perceptron" class="slide level2">
 <h2>Code for Perceptron</h2>
