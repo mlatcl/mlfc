@@ -82,8 +82,8 @@
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>Yesterday we motivated the importance of probability.</li>
-<li>Today we motivate the idea of the ‘objective function.’</li>
+<li>On Monday we introduced ML and motivated the importance of probability.</li>
+<li>Today we explore the idea of the ‘objective function.’</li>
 </ul>
 </section>
 <section id="introduction-to-classification" class="slide level2">
@@ -123,6 +123,8 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <li>Classifiying hand written digits from binary images (automatic zip code reading)</li>
 <li>Detecting faces in images (e.g. digital cameras).</li>
 <li>Who a detected face belongs to (e.g. Facebook, DeepFace)</li>
+</ul>
+<ul>
 <li>Classifying type of cancer given gene expression data.</li>
 <li>Categorization of document types (different types of news article on the internet)</li>
 </ul>
@@ -130,50 +132,76 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <section id="hyperplane" class="slide level2">
 <h2>Hyperplane</h2>
 <ul>
-<li><p>predict the class label, <span class="math inline">\(y_i\)</span>, given the features associated with that data point, <span class="math inline">\(\mathbf{ x}_i\)</span>, using the <em>prediction function</em>:</p>
-<p><span class="math display">\[f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right)\]</span></p></li>
-<li><p>Decision boundary for the classification is given by a <em>hyperplane</em>.</p></li>
-<li><p>Vector <span class="math inline">\(\mathbf{ w}\)</span> is the [normal vector](http://en.wikipedia.org/wiki/Normal_(geometry) to the hyperplane.</p></li>
-<li><p>Hyperplane is described by the formula <span class="math inline">\(\mathbf{ w}^\top \mathbf{ x}= -b\)</span></p></li>
+<li>Predict class label <span class="math inline">\(y_i\)</span></li>
+<li>Using data features <span class="math inline">\(\mathbf{ x}_i\)</span></li>
+<li>Through the prediction function} <span class="math display">\[
+f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right)
+\]</span></li>
+</ul>
+</section>
+<section id="hyperplane-1" class="slide level2">
+<h2>Hyperplane</h2>
+<ul>
+<li>Boundary for classification given by hyperplane</li>
+<li>Hyperplane defined by the <em>normal vector</em> <span class="math inline">\(\mathbf{ w}\)</span>. <span class="math display">\[
+\mathbf{ w}^\top \mathbf{ x}= -b
+\]</span></li>
 </ul>
 </section>
 <section id="toy-data" class="slide level2">
 <h2>Toy Data</h2>
 <ul>
-<li>Need to draw a decision boundary that separates red crosses from green circles.</li>
+<li>Red crosses and green circles.</li>
 </ul>
+</section>
+<section id="toy-data-1" class="slide level2">
+<h2>Toy Data</h2>
+<div class="figure">
+<div id="artificial-classification-examples-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/artificial-classification-examples.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Red crosses and green circles are sampled from two separate Gaussian distributions with 30 examples of each.
+</aside>
+</section>
+<section id="the-perceptron" class="slide level2">
+<h2>The Perceptron</h2>
+<p>{</p>
 </section>
 <section id="mathematical-drawing-of-decision-boundary" class="slide level2">
 <h2>Mathematical Drawing of Decision Boundary</h2>
-<p><strong>Refresher</strong>: draw a hyper plane at decision boundary. - <em>Decision boundary</em>: plane where a point moves from being classified as -1 to +1. - We have</p>
-<p><span class="math display">\[\text{sign}(\mathbf{ x}^\top \mathbf{ w}) = \text{sign}(w_0 + w_1x_{i,1} + w_2 x_{i, 2})\]</span></p>
-<p><span class="math inline">\(x_{i, 1}\)</span> is first feature <span class="math inline">\(x_{i, 2}\)</span> is second feature assume <span class="math inline">\(x_{0,i}=1\)</span>.</p>
 <ul>
-<li><p>Set <span class="math inline">\(w_0 = b\)</span> we have</p>
-<p><span class="math display">\[\text{sign}\left(w_1 x_{i, 1} + w_2 x_{i, 2} + b\right)\]</span></p></li>
+<li>Decision boundary defined by hyperplane</li>
+<li>Classification: <span class="math inline">\(\text{sign}(\mathbf{ x}^\top \mathbf{ w})\)</span></li>
+<li>Two features: <span class="math inline">\(w_1x_{i,1} + w_2x_{i,2} + b\)</span></li>
+<li>Boundary where prediction switches from -1 to +1</li>
 </ul>
 </section>
-<section id="equation-of-plane" class="slide level2">
-<h2>Equation of Plane</h2>
-<p><span class="math display">\[\text{sign}\left(w_1 x_{i, 1} + w_2 x_{i, 2} + b\right)\]</span></p>
+<section id="reminder-equation-of-plane" class="slide level2">
+<h2>Reminder: Equation of Plane</h2>
 <ul>
-<li><p>Equation of plane is</p>
-<p><span class="math display">\[w_1 x_{i, 1} + w_2 x_{i, 2} + b = 0\]</span></p>
-<p>or</p>
-<p><span class="math display">\[w_1 x_{i, 1} + w_2 x_{i, 2} = -b\]</span></p></li>
-<li><p>Next we will initialise the model and draw a decision boundary.</p></li>
+<li>Plane equation: <span class="math inline">\(w_1 x_{i, 1} + w_2 x_{i, 2} + b = 0\)</span></li>
+<li>Decision boundary where <span class="math inline">\(\text{sign}(\cdot)\)</span> argument equals zero</li>
+<li>Rearrange to plot: <span class="math inline">\(x_2 = -\frac{(b+x_1w_1)}{w_2}\)</span></li>
+<li>Separating hyperplane divides feature space</li>
 </ul>
 </section>
 <section id="perceptron-algorithm-initialisation-maths" class="slide level2">
 <h2>Perceptron Algorithm: Initialisation Maths</h2>
-<ul>
-<li><p>For a randomly chosen data point, <span class="math inline">\(i\)</span>, set <span class="math display">\[\mathbf{ w}= y_i \mathbf{ x}_i\]</span></p></li>
-<li><p>If predicted label of the <span class="math inline">\(i\)</span>th point is <span class="math display">\[\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i)\]</span></p></li>
-<li><p>Setting <span class="math inline">\(\mathbf{ w}\)</span> to <span class="math inline">\(y_i\mathbf{ x}_i\)</span> implies <span class="math display">\[\text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) = \text{sign}(y_i\mathbf{ x}_i^\top \mathbf{ x}_i) = y_i\]</span></p></li>
-</ul>
 </section>
 <section id="computing-decision-boundary" class="slide level2">
 <h2>Computing Decision Boundary</h2>
+<div class="figure">
+<div id="perceptron-init-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron-init.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Initial perceptron setup showing data points and initial decision boundary.
+</aside>
 </section>
 <section id="drawing-decision-boundary" class="slide level2">
 <h2>Drawing Decision Boundary</h2>
@@ -247,25 +275,72 @@ showDivs(0, 'perceptron');
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron014.svg" width="60%" style=" ">
 </object>
 </div>
+{
+<div class="figure">
+<div id="perceptron-decision-boundary-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron014.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The perceptron decision boundary.
+</aside>
+</section>
+<section id="perceptron-reflection" class="slide level2">
+<h2>Perceptron Reflection</h2>
+<ul>
+<li>Algorithm updates are intuitive and interpretable</li>
+<li>What happens when classes aren’t linearly separable?</li>
+</ul>
+</section>
+<section id="perceptron-reflections" class="slide level2">
+<h2>Perceptron Reflections</h2>
+<ul>
+<li>Non-convergence indicates inseparable data</li>
+<li>Possible fix: anneal learning rate</li>
+<li>Non-linear extensions: basis functions, kernel methods, multi-layer networks</li>
+</ul>
+</section>
+<section id="the-objective-function" class="slide level2">
+<h2>The Objective Function</h2>
+<p>{Another question is where is the objective function? I like the Percptron because if you study the algorithm you get an insight into what its doing and that gives an intuition about how its updating the parameters. But it’s not easy to see how that connects to an objective function. Very often to define an algorithm its much easier to start with an <em>objective function</em> (otherwise known as a loss function, an error function or a cost function).</p>
+<ul>
+<li>Perceptron algorithm lacks explicit objective function</li>
+<li>Updates provide intuition but not clear optimization target</li>
+<li>Objective functions (loss/error/cost) often easier starting point</li>
+<li>Connection between algorithm and objective not immediately obvious</li>
+</ul>
 </section>
 <section id="objective-functions-and-regression" class="slide level2">
 <h2>Objective Functions and Regression</h2>
 <ul>
-<li><p>Classification: map feature to class label.</p></li>
-<li><p>Regression: map feature to real value our <em>prediction function</em> is</p>
-<p><span class="math display">\[f(x_i) = mx_i + c\]</span></p></li>
-<li><p>Need an <em>algorithm</em> to fit it.</p></li>
-<li><p>Least squares: minimize an error.</p></li>
+<li>Classification: map feature to class label.</li>
+<li>Regression: map feature to real value</li>
 </ul>
-<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i * f(x_i))^2\]</span></p>
 </section>
 <section id="regression" class="slide level2">
 <h2>Regression</h2>
 <ul>
-<li>Create an artifical data set.</li>
+<li><p>Our <em>prediction function</em> is <span class="math display">\[f(x_i) = mx_i + c\]</span></p></li>
+<li><p>Need an <em>algorithm</em> to fit it.</p></li>
 </ul>
-<p>We now need to decide on a <em>true</em> value for <span class="math inline">\(m\)</span> and a <em>true</em> value for <span class="math inline">\(c\)</span> to use for generating the data.</p>
+</section>
+<section id="least-squares" class="slide level2">
+<h2>Least Squares</h2>
+<ul>
+<li>Least squares: minimise an error.</li>
+</ul>
+<p><span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2\]</span></p>
+</section>
+<section id="regression-1" class="slide level2">
+<h2>Regression</h2>
+<ul>
+<li><p>Create an artifical data set.</p></li>
+<li><p><em>true</em> value for <span class="math inline">\(m\)</span> <code>m_true = 1.4</code></p></li>
+<li><p><em>true</em> value for <span class="math inline">\(c\)</span> <code>c_true = -3.1</code></p></li>
+</ul>
 <p>We can use these values to create our artificial data. The formula <span class="math display">\[y_i = mx_i + c\]</span> is translated to code as follows:</p>
+<p><code>y = m_true*x+c_true</code></p>
 </section>
 <section id="plot-of-data" class="slide level2">
 <h2>Plot of Data</h2>
@@ -279,7 +354,11 @@ showDivs(0, 'perceptron');
 <aside class="notes">
 A simple linear regression.
 </aside>
-<p>These points lie exactly on a straight line, that’s not very realistic, let’s corrupt them with a bit of Gaussian ‘noise.’</p>
+<ul>
+<li>Points lie exactly on a straight line</li>
+<li>Not very realistic</li>
+<li>Corrupt them with Gaussian ‘noise.’</li>
+</ul>
 </section>
 <section id="noise-corrupted-plot" class="slide level2">
 <h2>Noise Corrupted Plot</h2>
@@ -295,17 +374,9 @@ A simple linear regression with noise.
 </section>
 <section id="contour-plot-of-error-function" class="slide level2">
 <h2>Contour Plot of Error Function</h2>
-<ul>
-<li><p>Visualise the error function surface, create vectors of values.</p></li>
-<li><p>create a grid of values to evaluate the error function in 2D.</p></li>
-<li><p>compute the error function at each combination of <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</p></li>
-</ul>
 </section>
 <section id="contour-plot-of-error" class="slide level2">
 <h2>Contour Plot of Error</h2>
-<ul>
-<li>We can now make a contour plot.</li>
-</ul>
 <div class="figure">
 <div id="regression-contour-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour.svg" width="60%" style=" ">
@@ -319,9 +390,9 @@ Contours of the objective function for linear regression by minimizing least squ
 <section id="steepest-descent" class="slide level2">
 <h2>Steepest Descent</h2>
 <ul>
-<li>Minimize the sum of squares error function.</li>
-<li>One way of doing that is gradient descent.</li>
-<li>Initialize with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span></li>
+<li>Minimise the sum of squares error function.</li>
+<li>E.g. gradient descent.</li>
+<li>Initialise with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span></li>
 <li>update that guess by subtracting a portion of the gradient from the guess.</li>
 <li>Like walking down a hill in the steepest direction of the hill to get to the bottom.</li>
 </ul>
@@ -331,35 +402,56 @@ Contours of the objective function for linear regression by minimizing least squ
 <ul>
 <li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
 </ul>
+<p><code>m_star = 0.0</code> <code>c_star = -5.0</code></p>
 </section>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
 <ul>
-<li><p>Now we need to compute the gradient of the error function, firstly with respect to <span class="math inline">\(c\)</span>, <span class="math display">\[
+<li>Gradient of the error wrt <span class="math inline">\(c\)</span>, <span class="math display">\[
   \frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c)
-  \]</span></p></li>
-<li><p>This is computed in python as follows</p></li>
+  \]</span></li>
 </ul>
+</section>
+<section id="compute-as" class="slide level2">
+<h2>Compute as</h2>
+<p><code>c_grad = -2*(y-m_star*x - c_star).sum()</code>}</p>
 </section>
 <section id="deriving-the-gradient" class="slide level2">
 <h2>Deriving the Gradient</h2>
-<p>To see how the gradient was derived, first note that the <span class="math inline">\(c\)</span> appears in every term in the sum. So we are just differentiating <span class="math inline">\((y_i - mx_i - c)^2\)</span> for each term in the sum. The gradient of this term with respect to <span class="math inline">\(c\)</span> is simply the gradient of the outer quadratic, multiplied by the gradient with respect to <span class="math inline">\(c\)</span> of the part inside the quadratic. The gradient of a quadratic is two times the argument of the quadratic, and the gradient of the inside linear term is just minus one. This is true for all terms in the sum, so we are left with the sum in the gradient.</p>
 </section>
 <section id="slope-gradient" class="slide level2">
 <h2>Slope Gradient</h2>
-<p>The gradient with respect tom <span class="math inline">\(m\)</span> is similar, but now the gradient of the quadratic’s argument is <span class="math inline">\(-x_i\)</span> so the gradient with respect to <span class="math inline">\(m\)</span> is</p>
-<p><span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
-c)\]</span></p>
+</section>
+<section id="slope-gradient-1" class="slide level2">
+<h2>Slope gradient</h2>
+<p>Gradient wrt <span class="math inline">\(m\)</span> is similar <span class="math display">\[
+\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
+c)
+\]</span></p>
+</section>
+<section id="compute-as-1" class="slide level2">
+<h2>Compute as</h2>
 <p>which can be implemented in python (numpy) as</p>
+<p><code>m_grad = -2*(x*(y-m_star*x - c_star)).sum()</code></p>
 </section>
 <section id="update-equations" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li>Now we have gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
+<li>Gradients with respect to <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
 <li>Can update our inital guesses for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> using the gradient.</li>
+</ul>
+</section>
+<section id="update-equations-1" class="slide level2">
+<h2>Update Equations</h2>
+<ul>
 <li>We don’t want to just subtract the gradient from <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>,</li>
 <li>We need to take a <em>small</em> step in the gradient direction.</li>
 <li>Otherwise we might overshoot the minimum.</li>
+</ul>
+</section>
+<section id="update-equations-2" class="slide level2">
+<h2>Update Equations</h2>
+<ul>
 <li>We want to follow the gradient to get to the minimum, the gradient changes all the time.</li>
 </ul>
 </section>
@@ -375,16 +467,22 @@ c)\]</span></p>
 Single update descending the contours of the error surface for regression.
 </aside>
 </section>
-<section id="update-equations-1" class="slide level2">
+<section id="update-equations-3" class="slide level2">
 <h2>Update Equations</h2>
 <ul>
-<li><p>The step size has already been introduced, it’s again known as the learning rate and is denoted by <span class="math inline">\(\eta\)</span>. <span class="math display">\[
+<li>The step size has already been introduced</li>
+<li>it’s known as the learning rate and is denoted by <span class="math inline">\(\eta\)</span>. <span class="math display">\[
 c_\text{new}\leftarrow c_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}c}
-\]</span></p></li>
-<li><p>gives us an update for our estimate of <span class="math inline">\(c\)</span> (which in the code we’ve been calling <code>c_star</code> to represent a common way of writing a parameter estimate, <span class="math inline">\(c^*\)</span>) and <span class="math display">\[
+\]</span></li>
+</ul>
+</section>
+<section id="step-size" class="slide level2">
+<h2>Step Size</h2>
+<ul>
+<li>gives us an update for our estimate of <span class="math inline">\(c\)</span> and <span class="math display">\[
 m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
-\]</span></p></li>
-<li><p>Giving us an update for <span class="math inline">\(m\)</span>.</p></li>
+\]</span></li>
+<li>Giving us an update for <span class="math inline">\(m\)</span>.</li>
 </ul>
 </section>
 <section id="update-code" class="slide level2">
@@ -392,6 +490,9 @@ m_\text{new} \leftarrow m_{\text{old}} - \eta\frac{\text{d}E(m, c)}{\text{d}m}
 <ul>
 <li>These updates can be coded as</li>
 </ul>
+<pre><code>learn_rate = 0.01
+c_star = c_star - learn_rate*c_grad
+m_star = m_star - learn_rate*m_grad</code></pre>
 <!-- SECTION Iterating Updates -->
 </section>
 <section id="iterating-updates" class="slide level2">
@@ -553,11 +654,11 @@ m_\text{old}x_n - c_\text{old})\right]\]</span></p></li>
 <section id="updating-c-and-m" class="slide level2">
 <h2>Updating <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span></h2>
 <ul>
-<li>In the sum we don’t <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
+<li>In the sum we don’t change <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> we use for computing the gradient term at each update.</li>
 <li>In stochastic gradient descent we <em>do</em> change them.</li>
-<li>This means it’s not quite the same as steepest desceint.</li>
+<li>This means it’s not quite the same as steepest descent.</li>
 <li>But we can present each data point in a random order, like we did for the perceptron.</li>
-<li>This makes the algorithm suitable for large scale web use (recently this domain is know as ‘Big Data’) and algorithms like this are widely used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
+<li>This makes the algorithm suitable for large scale web use (recently this domain is known as ‘Big Data’) and algorithms like this are widely used by Google, Microsoft, Amazon, Twitter and Facebook.</li>
 </ul>
 </section>
 <section id="stochastic-gradient-descent-2" class="slide level2">
