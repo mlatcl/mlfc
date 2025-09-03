@@ -3,10 +3,9 @@ week: 1
 session: 3
 date: 2025-09-03
 featured_image: slides/diagrams/ml/artificial-classification-example.png
-title: "Objective Functions"
+title: "Objective Functions and Gradient Descent"
 abstract: |
-  In this session we introduce the notion of objective functions and show how they can be used in a simple recommender system based on *matrix factorisation*.
-youtube: Gq6bjcm8AqQ
+  In this session we introduce the notion of objective functions and show how they can be used in a simple optimisation systems based on gradients.
 transition: None
 time: 9:30
 ipynb: true
@@ -34,8 +33,6 @@ ipynb: true
 
 
 \addreading{@Rogers:book11}{Section 1.1.3} for loss functions.
-
-\reading
 
 
 \thanks

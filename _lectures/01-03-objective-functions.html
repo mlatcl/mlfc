@@ -1,6 +1,6 @@
 ---
-title: "Objective Functions"
-abstract: "<p>In this session we introduce the notion of objective functions and show how they can be used in a simple recommender system based on <em>matrix factorisation</em>.</p>"
+title: "Objective Functions and Gradient Descent"
+abstract: "<p>In this session we introduce the notion of objective functions and show how they can be used in a simple optimisation systems based on gradients.</p>"
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/objective-functions.md
 date: 2025-09-03
 time: "570"
@@ -10,7 +10,6 @@ featured_image: slides/diagrams/ml/artificial-classification-example.png
 reveal: 01-03-objective-functions.slides.html
 transition: None
 ipynb: 01-03-objective-functions.ipynb
-youtube: "Gq6bjcm8AqQ"
 layout: lecture
 categories:
 - notes
@@ -445,9 +444,10 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <p>This dynamic updating is what makes SGD both powerful and noisy. The noise can actually be beneficial - it provides a form of regularization and can help escape poor local minima in more complex problems.</p>
 <h2 id="stochastic-gradient-descent-2">Stochastic Gradient Descent</h2>
 <p>In practice, stochastic gradient descent simplifies to a very clean algorithm. Since we process data points in random order, each SGD update uses the gradient contribution from just one randomly selected example. The update equations become:</p>
-<p>For the slope parameter: <span class="math display">\[m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right]\]</span></p>
-<p>For the intercept parameter: <span class="math display">\[c_\text{new} = c_\text{old} + 2\eta\left[(y_i - m_\text{old}x_i - c_\text{old})\right]\]</span></p>
-<p>Notice how these look exactly like the per-example terms from our batch gradient, but now we apply them immediately rather than accumulating them in a sum.</p>
+<p>For the slope parameter <span class="math display">\[
+m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{old})\right].
+\]</span> For the intercept parameter <span class="math display">\[c_\text{new} = c_\text{old} + 2\eta\left[(y_i - m_\text{old}x_i - c_\text{old})\right].
+\]</span> Notice how these look exactly like the per-example terms from our batch gradient, but now we apply them immediately rather than accumulating them in a sum.</p>
 <p>The implementation is straightforward: randomly select a data point, compute its contribution to the gradient, and immediately update the parameters. This process repeats for many iterations, with each iteration using a different random example.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose a random point for the update </span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
@@ -459,7 +459,7 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <p>Let’s now run the complete stochastic gradient descent algorithm and visualize how it differs from batch gradient descent. The key differences you’ll observe:</p>
 <ol type="1">
 <li><em>Noisier path</em>: SGD takes a much more erratic path through parameter space because each update is based on just one noisy example</li>
-<li><em>More iterations needed</em>: While each iteration is faster (O(1) vs O(n)), SGD typically needs more iterations to converge</li>
+<li><em>More iterations needed</em>: While each iteration is faster (<span class="math inline">\(O(1)\)</span> vs <span class="math inline">\(O(n)\)</span>), SGD typically needs more iterations to converge</li>
 <li><em>Never fully converges</em>: SGD will continue to “bounce around” near the minimum due to the noise in gradient estimates</li>
 <li><em>Practical efficiency</em>: Despite the noise, SGD often reaches good solutions faster in wall-clock time for large datasets</li>
 </ol>
