@@ -3,10 +3,12 @@ title: "Objective Functions"
 abstract: "<p>In this session we introduce the notion of objective functions and show how they can be used in a simple recommender system based on <em>matrix factorisation</em>.</p>"
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/objective-functions.md
 date: 2025-09-03
+time: "570"
 week: 1
 session: 3
 featured_image: slides/diagrams/ml/artificial-classification-example.png
 reveal: 01-03-objective-functions.slides.html
+transition: None
 ipynb: 01-03-objective-functions.ipynb
 youtube: "Gq6bjcm8AqQ"
 layout: lecture
@@ -193,7 +195,6 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> update_perceptron</span></code></pre></div>
 <p>The code for plotting the perceptron boundary is also provided. Here note how many more lines are required for plotting than are required for updating! The plotting code runs an entire optimisation of the Perceptron algorithm showing the histrogram of points projected onto the <em>normal vector</em>, <span class="math inline">\(\mathbf{ w}\)</span>.</p>
-{
 <div class="figure">
 <div id="perceptron-decision-boundary-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron014.svg" width="60%" style=" ">
@@ -209,7 +210,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <h2 id="perceptron-reflection">Perceptron Reflection</h2>
 <p>It’s worth having some reflections on the Perceptron and what it does. The algorithm is simple enough that you can go through the exact updates. What is it doing? When will it fail? What happens when you can’t separate the classes with a linear hyperplane? Why does this stop the algorithm converging? How might you fix the algorithm to make it converge?</p>
 <h2 id="the-objective-function">The Objective Function</h2>
-<p>{Another question is where is the objective function? I like the Percptron because if you study the algorithm you get an insight into what its doing and that gives an intuition about how its updating the parameters. But it’s not easy to see how that connects to an objective function. Very often to define an algorithm its much easier to start with an <em>objective function</em> (otherwise known as a loss function, an error function or a cost function).</p>
+<p>Another question is where is the objective function? I like the Percptron because if you study the algorithm you get an insight into what its doing and that gives an intuition about how its updating the parameters. But it’s not easy to see how that connects to an objective function. Very often to define an algorithm its much easier to start with an <em>objective function</em> (otherwise known as a loss function, an error function or a cost function).</p>
 <h2 id="objective-functions-and-regression">Objective Functions and Regression</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

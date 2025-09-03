@@ -275,16 +275,6 @@ showDivs(0, 'perceptron');
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron014.svg" width="60%" style=" ">
 </object>
 </div>
-{
-<div class="figure">
-<div id="perceptron-decision-boundary-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron014.svg" width="60%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-The perceptron decision boundary.
-</aside>
 </section>
 <section id="perceptron-reflection" class="slide level2">
 <h2>Perceptron Reflection</h2>
@@ -303,7 +293,6 @@ The perceptron decision boundary.
 </section>
 <section id="the-objective-function" class="slide level2">
 <h2>The Objective Function</h2>
-<p>{Another question is where is the objective function? I like the Percptron because if you study the algorithm you get an insight into what its doing and that gives an intuition about how its updating the parameters. But it’s not easy to see how that connects to an objective function. Very often to define an algorithm its much easier to start with an <em>objective function</em> (otherwise known as a loss function, an error function or a cost function).</p>
 <ul>
 <li>Perceptron algorithm lacks explicit objective function</li>
 <li>Updates provide intuition but not clear optimization target</li>
@@ -339,6 +328,9 @@ The perceptron decision boundary.
 <li><p><em>true</em> value for <span class="math inline">\(m\)</span> <code>m_true = 1.4</code></p></li>
 <li><p><em>true</em> value for <span class="math inline">\(c\)</span> <code>c_true = -3.1</code></p></li>
 </ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <p>We can use these values to create our artificial data. The formula <span class="math display">\[y_i = mx_i + c\]</span> is translated to code as follows:</p>
 <p><code>y = m_true*x+c_true</code></p>
 </section>
@@ -354,6 +346,9 @@ The perceptron decision boundary.
 <aside class="notes">
 A simple linear regression.
 </aside>
+</section>
+<section id="plot-of-data-1" class="slide level2">
+<h2>Plot of data</h2>
 <ul>
 <li>Points lie exactly on a straight line</li>
 <li>Not very realistic</li>
@@ -374,9 +369,6 @@ A simple linear regression with noise.
 </section>
 <section id="contour-plot-of-error-function" class="slide level2">
 <h2>Contour Plot of Error Function</h2>
-</section>
-<section id="contour-plot-of-error" class="slide level2">
-<h2>Contour Plot of Error</h2>
 <div class="figure">
 <div id="regression-contour-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour.svg" width="60%" style=" ">
@@ -402,7 +394,7 @@ Contours of the objective function for linear regression by minimizing least squ
 <ul>
 <li>We start with a guess for <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>.</li>
 </ul>
-<p><code>m_star = 0.0</code> <code>c_star = -5.0</code></p>
+<p><code>m_star = 0.0 c_star = -5.0</code></p>
 </section>
 <section id="offset-gradient" class="slide level2">
 <h2>Offset Gradient</h2>
@@ -416,14 +408,8 @@ Contours of the objective function for linear regression by minimizing least squ
 <h2>Compute as</h2>
 <p><code>c_grad = -2*(y-m_star*x - c_star).sum()</code></p>
 </section>
-<section id="deriving-the-gradient" class="slide level2">
-<h2>Deriving the Gradient</h2>
-</section>
 <section id="slope-gradient" class="slide level2">
 <h2>Slope Gradient</h2>
-</section>
-<section id="slope-gradient-1" class="slide level2">
-<h2>Slope gradient</h2>
 <p>Gradient wrt <span class="math inline">\(m\)</span> is similar <span class="math display">\[
 \frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i -
 c)
@@ -642,13 +628,13 @@ showDivs(1, 'regression_contour_fit');
 mx_i - c)\]</span></p></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <p>but it has <span class="math inline">\(n\)</span> terms in the sum. Substituting in the gradient we can see that the full update is of the form</p>
 <p><span class="math display">\[m_\text{new} \leftarrow
 m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 - c_\text{old}) + (x_2 (y_2 -   m_\text{old}x_2 - c_\text{old}) + \dots + (x_n (y_n - m_\text{old}x_n - c_\text{old})\right]\]</span></p>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <p>This could be split up into lots of individual updates <span class="math display">\[m_1 \leftarrow m_\text{old} + 2\eta\left[x_1 (y_1 - m_\text{old}x_1 -
 c_\text{old})\right]\]</span> <span class="math display">\[m_2 \leftarrow m_1 + 2\eta\left[x_2 (y_2 -
@@ -656,7 +642,7 @@ m_\text{old}x_2 - c_\text{old})\right]\]</span> <span class="math display">\[m_3
 \left[\dots\right]\]</span> <span class="math display">\[m_n \leftarrow m_{n-1} + 2\eta\left[x_n (y_n -
 m_\text{old}x_n - c_\text{old})\right]\]</span></p>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <p>which would lead to the same final update.</p>
 </section>
@@ -668,7 +654,7 @@ m_\text{old}x_n - c_\text{old})\right]\]</span></p>
 <li>This means it’s not quite the same as steepest descent.</li>
 </ul>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <ul>
 <li>But we can present each data point in a random order, like we did for the perceptron.</li>
@@ -687,7 +673,7 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <h2>SGD for Linear Regression</h2>
 <p>Putting it all together in an algorithm, we can do stochastic gradient descent for our regression data.</p>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <script>
 showDivs(0, 'regression_sgd_contour_fit');
@@ -976,6 +962,8 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Transition style
+        transition: 'None', // none/fade/slide/convex/concave/zoom
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
