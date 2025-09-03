@@ -7,6 +7,9 @@ title: "Objective Functions"
 abstract: |
   In this session we introduce the notion of objective functions and show how they can be used in a simple recommender system based on *matrix factorisation*.
 youtube: Gq6bjcm8AqQ
+transition: None
+time: 9:30
+ipynb: true
 ---
 
 \define{ipynbpath}{_notebooks}
