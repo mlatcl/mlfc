@@ -169,7 +169,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <h2 id="drawing-decision-boundary">Drawing Decision Boundary</h2>
 <div class="figure">
 <div id="perceptron-init-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron-init.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/perceptron_init.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="perceptron-init-magnify" class="magnify" onclick="magnifyFigure(&#39;perceptron-init&#39;)">
@@ -502,8 +502,15 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 </div>
 <p>Think about:</p>
 <ol type="1">
-<li><p>What effect does the learning rate have in the optimization? What’s the effect of making it too small, what’s the effect of making it too big? Do you get the same result for both stochastic and steepest gradient descent?</p></li>
-<li><p>The stochastic gradient descent doesn’t help very much for such a small data set. It’s real advantage comes when there are many.</p></li>
+<li>What effect does the learning rate have in the optimization?</li>
+</ol>
+<ul>
+<li>What’s the effect of making it too small?</li>
+<li>What’s the effect of making it too big?</li>
+</ul>
+<ol start="2" type="1">
+<li><p>Do you get the same result for both stochastic and steepest gradient descent?</p></li>
+<li><p>Are there any advantages for stochastic gradient descent for small data?</p></li>
 </ol>
 <p>for loss functions.</p>
 <h2 id="thanks">Thanks!</h2>
