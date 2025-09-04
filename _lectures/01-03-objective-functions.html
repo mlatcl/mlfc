@@ -378,7 +378,7 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">-</span> learn_rate<span class="op">*</span>c_grad</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">-</span> learn_rate<span class="op">*</span>m_grad</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;New m is&quot;</span>, m_star, <span class="st">&quot;and new c is&quot;</span>, c_star)</span></code></pre></div>
-<h1 id="iterating-updates">Iterating Updates</h1>
+<h2 id="iterating-updates">Iterating Updates</h2>
 <p>One gradient step only takes us partway to the minimum. The full gradient descent algorithm requires iterating these updates until convergence. The process is:</p>
 <ol type="1">
 <li><em>Initialise</em> parameters with random or reasonable starting values</li>
