@@ -1,15 +1,15 @@
 ---
 title: "Objective Functions and Gradient Descent"
 abstract: "<p>In this session we introduce the notion of objective functions and show how they can be used in a simple optimisation systems based on gradients.</p>"
-edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/objective-functions.md
+edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/objective-functions-and-gradient-descent.md
 date: 2025-09-03
 time: "570"
 week: 1
 session: 3
 featured_image: slides/diagrams/ml/regression_contour_fit028.svg
-reveal: 01-03-objective-functions.slides.html
+reveal: 01-03-objective-functions-and-gradient-descent.slides.html
 transition: None
-ipynb: 01-03-objective-functions.ipynb
+ipynb: 01-03-objective-functions-and-gradient-descent.ipynb
 layout: lecture
 categories:
 - notes
@@ -496,6 +496,10 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <li><em>Hyperparameter sensitivity</em>: Learning rate tuning becomes more critical as too large values can cause divergence, while too small values slow convergence excessively</li>
 </ul>
 <p>This stochastic approach forms the foundation for training modern machine learning models, particularly deep neural networks where batch gradient computation is computationally intractable.</p>
+<h2 id="mini-batch">Mini-Batch</h2>
+<p>In practice we normally use mini-batches for gradient descent. Rather than computing the gradient with respect to one point, you compute gradient with respect to a small batch of points.</p>
+<h3 id="exercise-1">Exercise 1</h3>
+<p>Can you write your own implementation of mini-batch gradient ascent for the regression problem? Allow the user to choose the mini-batch size.</p>
 <h2 id="reflection-on-linear-regression-and-supervised-learning">Reflection on Linear Regression and Supervised Learning</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-iterative.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-iterative.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
