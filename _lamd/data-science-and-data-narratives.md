@@ -6,9 +6,9 @@ featured_image: slides/diagrams/data-science/a-data-science-process.png
 abstract:  >
   In this lecture we will highlight that one of the main roles of the data scientist is communicating results to other humans. That often involves telling the story of the data. It's important that the story doesn't misrepresent, but it's also important that the story captures attention for the *salient* features of the data. 
   
-  We introduce a data science process: access, assess and address, and show how this framework can structure compelling data narratives. We explore techniques for building effective data stories, drawing inspiration from award-winning data journalism examples including The Guardian's "The Counted," ProPublica's "Machine Bias," and The New York Times' COVID-19 visualizations.
+  In this session we introduce a data science process: access, assess and address. The process Given the landscape we've outlined, in this lecture we will look at the challenges of deploying data science solutions in practice. We categorise them into three groups.
   
-  Your mini-projects can make use of these narrative techniques and the access-assess-address framework to create compelling data stories that inform and engage your audience.
+  Your mini-projects can make use of this process to help you in structuring your narrative. We'll end by providing some examples of data story telling from data journalism.
 author:
 - family: Lawrence
   given: Neil D.
