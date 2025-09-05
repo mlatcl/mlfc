@@ -40,6 +40,7 @@ macrosdir: $HOME/lawrennd/lamd/lamd/macros
 transition: None # Options: None, fade, slide, convex, concave, zoom
 potx: custom-reference.potx 
 dotx: custom-reference.dotx
+venue: Dedan Kimathi University of Technology, Nyeri, Kenya
 # GitHub Pages configuration
 ghub:
   - organization: mlatcl # Your GitHub username or organization

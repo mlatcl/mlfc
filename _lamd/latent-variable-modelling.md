@@ -1,7 +1,7 @@
 ---
-week: 5
-session: 1
-date: 2025-09-29
+week: 3
+session: 3
+date: 2025-09-17
 featured_image: slides/diagrams/dimred/dem_manifold_print002.png
 title: "Dimensionality Reduction: Latent Variable Modelling"
 abstract: "In this lecture we turn to *unsupervised learning*. Specifically, we introduce the idea of a latent variable model. Latent variable models are a probabilistic perspective on unsupervised learning which lead to dimensionality reduction algorithms. "

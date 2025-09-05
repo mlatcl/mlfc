@@ -1,7 +1,7 @@
 ---
-week: 4
+week: 3
 session: 1
-date: 2025-09-22
+date: 2025-09-15
 featured_image: slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg
 title: "Bayesian Regression"
 abstract: "Bayesian formalisms deal with uncertainty in parameters, "
@@ -148,6 +148,9 @@ sigma2 = 0.01}
 * Maximum likelihood model over fits through increasing number of parameters.
 * Revisit maximum likelihood solution with validation set.
 }
+
+\include{_ml/includes/bayesian-interpretation-of-regularisation.md}
+
 
 \newslide{Regularized Mean}
 

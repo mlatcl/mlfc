@@ -1,7 +1,7 @@
 ---
-week: 4
+week: 3
 session: 2
-date: 2025-09-23
+date: 2025-09-16
 featured_image: slides/diagrams/gp/two_point_sample001.svg
 title: "Gaussian Processes"
 abstract: 
