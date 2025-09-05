@@ -14,17 +14,33 @@ ipynb: true
 
 \subsection{Review}
 
-* Last time: Reviewed Objective Functions and gradient descent.
+* Last time: Reviewed Objective Functions and gradient descent. 
 
 \define{ipynbpath}{_notebooks}
 
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 \include{_ml/includes/regression-examples.md}
+\notes{In the [lecture on probability](https://mlatcl.github.io/mlfc/lectures/01-01-probability.html) we explored how Laplace proposed that we should introduce a latent slack variable for dealing with model mismatch.}
 \include{_ml/includes/laplace-latent-variable-solution.md}
+\notes{As we saw, Gauss used his understanding to predict where the dwarf planet Ceres could be recovered. We've already used the least squares algorithm to fit linear regressions. Today we're going to motivate least squares through the probabilistic framework we introduced in Lecture 1.}
+
+\notes{First though, we'll introduce a data set. Since our presentation mirrors that of Rogers and Girolami, we'll follow them in looking at Olympic sprinting data.}
 
 \include{_datasets/includes/olympic-100m-data.md}
-\include{_ml/includes/sum-of-squares-error.md}
+
+\subsection{Sum of Squares Error}
+
+\section{Sum of Squares Error}
+
+\notes{Last week we considered a cost function for minimization of the error. We minimised an objective that assumed used the quadratic error function,
+$$
+\errorFunction(\mappingVector) = \sum_{i=1}^n \left(\dataScalar_i - \inputVector_i^\top \mappingVector\right)^2.
+$$
+}
+
+\notes{This week we will reinterpret the error as a *probabilistic model*. As Laplace suggests, we will consider the difference between our data and our model to have come from unconsidered factors which exhibit as a probability density. This leads to a more principled definition of least squares error due to [Carl Friederich Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), but inspired by [Pierre-Simon Laplace](https://en.wikipedia.org/wiki/Pierre-Simon_Laplace).}
+
 \include{_ml/includes/univariate-gaussian.md}
 \include{_ml/includes/univariate-gaussian-properties.md}
 \include{_ml/includes/linear-regression-log-likelihood.md}
