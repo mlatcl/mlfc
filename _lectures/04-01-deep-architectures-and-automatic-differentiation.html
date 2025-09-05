@@ -57,7 +57,7 @@ categories:
 sns.set_style('darkgrid')
 sns.set_context('paper')
 sns.set_palette('colorblind')}-->
-<p>This lecture is based on a presentation by Ferenc Huszar on the Deep Neural Network course at the University of Cambridge. Ferenc’s original slides <a href="https://hackmd.io/@fhuszar/H1WZ70kl_#">are here</a> and his notes on approximating with ReLU are <a href="https://hackmd.io/@fhuszar/S1UdOvZe_">here</a>. His notes on automatic differentiaton <a href="https://hackmd.io/@fhuszar/SyHTInWeu">are here</a>. His Google colab notebook is <a href="https://colab.research.google.com/drive/1qioPLq-dxOwudPKXU3MxpHr2s4Su3dxI?usp=sharing">here</a>. He also recommended a review paper from <a href="https://jmlr.org/papers/v18/17-468.html">JMLR</a> <span class="citation" data-cites="Baydin-autodiff18">Baydin et al. (2018)</span> (See Figure 2).</p>
+<p>This lecture is based on a presentation by Ferenc Huszar on the Deep Neural Network course at the University of Cambridge. Ferenc’s original slides <a href="https://hackmd.io/@fhuszar/H1WZ70kl_#">are here</a> and his notes on approximating with ReLU are <a href="https://hackmd.io/@fhuszar/S1UdOvZe_">here</a>. His notes on automatic differentiation <a href="https://hackmd.io/@fhuszar/SyHTInWeu">are here</a>. His Google colab notebook is <a href="https://colab.research.google.com/drive/1qioPLq-dxOwudPKXU3MxpHr2s4Su3dxI?usp=sharing">here</a>. He also recommended a review paper from <a href="https://jmlr.org/papers/v18/17-468.html">JMLR</a> <span class="citation" data-cites="Baydin-autodiff18">Baydin et al. (2018)</span> (See Figure 2).</p>
 <h2 id="learning-objectives">Learning Objectives</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/deep-architectures-and-automatic-differentiation.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/deep-architectures-and-automatic-differentiation.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -219,6 +219,121 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 \]</span> In these models, a gradient flow analysis shows that the model finds solutions where the linear mapping, <span class="math display">\[
 \mathbf{W}= \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1 
 \]</span> is very low rank. This is highly suggestive of another type of regularization that could be occurring in deep neural networks. Low rank parameter matrices mean that the effective capacity of the neural network is reduced. Indeed, empirical observations of the rank of deep nets trained on data suggest that they may be finding such solutions.</p>
+<h2 id="general-deep-function-composition">General Deep Function Composition</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p><span class="math display">\[
+f_L(f_{L-1}(\cdots f_1(\mathbb{w})))
+\]</span></p>
+<p>How do I calculate the derivative of <span class="math inline">\(f_L(\mathbb{w})\)</span> with respect to <span class="math inline">\(\mathbb{w}\)</span>?</p>
+<h2 id="chain-rule">Chain rule</h2>
+<p><span class="math display">\[
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}} \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} 
+\]</span></p>
+<h2 id="how-to-evaluate-this">How to evaluate this?</h2>
+<p><span class="math display">\[
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}} \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} 
+\]</span></p>
+<p><span class="math display">\[
+\small
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \left( \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}} \left( \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \cdots \left( \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \left( \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} \right) \right) \cdots \right) \right)
+\]</span></p>
+<h2 id="or-like-this">Or like this?</h2>
+<p><span class="math display">\[
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}} \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} 
+\]</span></p>
+<p><span class="math display">\[
+\small
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \left( \left( \cdots \left( \left( \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}}  \right) \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \right) \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \right) \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \right) \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} 
+\]</span></p>
+<h2 id="or-in-a-funky-way">Or in a funky way?</h2>
+<p><span class="math display">\[
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}} \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} 
+\]</span></p>
+<p><span class="math display">\[
+\small
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \left( \left( \left( \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}}  \right) \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \right) \left( \left( \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \right) \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \right) \right)\frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} 
+\]</span></p>
+<h2 id="automatic-differentiation">Automatic differentiation</h2>
+<p><em>Forward-mode</em></p>
+<p><span class="math display">\[
+\small
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \left( \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}} \left( \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \cdots \left( \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \left( \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \frac{\partial \mathbf{f}_1}{\partial \mathbf{ w}} \right) \right) \cdots \right) \right)
+\]</span></p>
+<p>Cost: <span class="math display">\[
+\small
+d_0d_1d_2 + d_0d_2d_3 + \ldots + d_0d_{L-1}d_L = d_0 \sum_{l=2}^{L}d_ld_{l-1}
+\]</span></p>
+<h2 id="automatic-differentiation-1">Automatic differentiation</h2>
+<p><em>Reverse-mode</em></p>
+<p><span class="math display">\[
+\small
+\frac{\partial \mathbf{f}_L}{\partial \mathbb{w}} = \left( \left( \cdots \left( \left( \frac{\partial \mathbf{f}_L}{\partial \mathbf{f}_{L-1}} \frac{\partial \mathbf{f}_{L-1}}{\partial \mathbf{f}_{L-2}}  \right) \frac{\partial \mathbf{f}_{L-2}}{\partial \mathbf{f}_{L-3}} \right) \cdots \frac{\partial \mathbf{f}_3}{\partial \mathbf{f}_{2}} \right) \frac{\partial \mathbf{f}_2}{\partial \mathbf{f}_{1}} \right) \frac{\partial \mathbf{f}_1}{\partial \mathbb{w}} 
+\]</span></p>
+<p>Cost: <span class="math display">\[
+\small
+ d_Ld_{L-1}d_{L-2} + d_{L}d_{L-2}d_{L-3} + \ldots + d_Ld_{1}d_0 = d_L \sum_{l=0}^{L-2}d_ld_{l+1}
+\]</span></p>
+<h2 id="memory-cost-of-autodiff">Memory cost of autodiff</h2>
+<p>Let <span class="math inline">\(d_l\)</span> denote the output dimensionality at layer <span class="math inline">\(l\)</span>. Jacobians are evaluated at intermediate activations <span class="math inline">\(\mathbf{f}_l\)</span>.</p>
+<h3 id="forward-mode">Forward-mode</h3>
+<p>Placeholder figure: forward-mode memory footprint (streaming through layers).</p>
+<h3 id="reverse-mode">Reverse-mode</h3>
+<p>Placeholder figure: reverse-mode memory footprint (cached activations reused in backward).</p>
+<h2 id="automatic-differentiation-2">Automatic differentiation</h2>
+<ul>
+<li>in deep learning we’re most interested in scalar objectives</li>
+<li><span class="math inline">\(d_L=1\)</span>, consequently, backward mode is always optimal</li>
+<li>in the context of neural networks: <em>backpropagation</em></li>
+<li>backprop has higher memory cost than forwardprop</li>
+</ul>
+<h3 id="backprop-in-deep-networks">Backprop in deep networks</h3>
+<p>For gradients of scalar objectives (<span class="math inline">\(d_L=1\)</span>), reverse-mode is computationally optimal and standard. Memory can be reduced via checkpointing/rematerialisation at extra compute cost.</p>
+<h2 id="computational-graphs-and-pytorch-autodiff">Computational Graphs and PyTorch Autodiff</h2>
+<p>Modern frameworks build a dynamic computational graph as you compute, then traverse it in reverse to accumulate gradients.</p>
+<p>Minimal PyTorch example (CPU/GPU agnostic):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
+<p>PyTorch attaches <code>grad_fn</code> to results, constructs the graph dynamically during forward, and supports GPU execution via <code>.cuda()</code>. These conveniences, together with autodiff, enable fast deep learning experimentation.</p>
+<h2 id="practical-optimisation-notes">Practical Optimisation Notes</h2>
+<h2 id="timing-guidance-for-2-hours">Timing Guidance (for 2 hours)</h2>
+<p>15 min recap; 30 min depth/width and representation; 25 min generalisation phenomena; 30 min autodiff/backprop with small live demos; 15 min practical optimisation; 5 min Q&amp;A.</p>
+<h2 id="further-reading">Further Reading</h2>
+<h2 id="example-calculating-a-hessian">Example: calculating a Hessian</h2>
+<p><span class="math display">\[
+H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\mathbf{w})
+:= \frac{\partial}{\partial\mathbf{w}} \mathbf{g}(\mathbf{w})
+\]</span></p>
+<p>Efficient strategy: compute <span class="math inline">\(\mathbf{g}(\mathbf{w})\)</span> with reverse-mode, then apply forward-mode to obtain Hessian columns or HVPs (reverse-over-forward). Framework helpers: JAX <code>jax.jacfwd(jax.jacrev(f))</code>, PyTorch <code>autograd.functional.hessian</code> (memory heavy for large models).</p>
+<h2 id="example-hessian-vector-product">Example: Hessian-vector product</h2>
+<p><span class="math display">\[
+\mathbf{v}^\top H(\mathbf{w}) = \frac{\partial}{\partial\mathbf{w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{w}) \right)
+\]</span></p>
+<p>Live-coding HVP in PyTorch (mixed-mode via backward-over-backward or autograd.functional). Using a quadratic ensures a non-zero Hessian (2I):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
+<h2 id="thanks">Thanks!</h2>
+<p>For more information on these subjects and more you might want to check the following resources.</p>
+<ul>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
+<li>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></li>
+<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
+<li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
+<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
+<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+</ul>
+<h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Arora-convergence19" class="csl-entry" role="doc-biblioentry">
 Arora, S., Cohen, N., Golowich, N., Hu, W., 2019. A convergence analysis of gradient descent for deep linear neural networks, in: International Conference on Learning Representations.
