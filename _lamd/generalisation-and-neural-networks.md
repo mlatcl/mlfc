@@ -118,6 +118,8 @@ $$
 
 \notes{Simply put, there is not enough regularisation encoded in the objective function of the neural network models we are using to explain the generalisation performance. There must be something in the algorithms we are using that causes these highly overparameterised models to generalise well.}
 
+\include{_ml/includes/generalization-and-overfitting.md}
+
 \include{_deepnn/includes/double-descent.md}
 \include{_deepnn/includes/neural-tangent-kernel.md}
 
