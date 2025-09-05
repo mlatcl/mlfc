@@ -133,22 +133,16 @@ p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(y_i-f
 <h2>Olympic 100m Data</h2>
 <table>
 <tr>
-<td width="50%">
+<td width="70%">
 <ul>
 <li>Gold medal times for Olympic 100 m runners since 1896.</li>
 <li>One of a number of Olypmic data sets collected by <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span>.
 </td>
-<td width="50%">
-<div class="figure">
-<div id="100m-final-start-figure" class="figure-frame">
+<td width="30%">
 <div class="centered centered" style="">
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/100m_final_start.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
-</div>
-</div>
-<aside class="notes">
-Start of the 2012 London 100m race. <em>Image from Wikimedia Commons</em> <a href="http://bit.ly/191adDC" class="uri">http://bit.ly/191adDC</a>
-</aside>
+<small>Start of the 2012 London 100m race. <em>Image from Wikimedia Commons</em> <a href="http://bit.ly/191adDC" class="uri">http://bit.ly/191adDC</a></small>
 </td>
 </tr>
 </table></li>
@@ -165,9 +159,12 @@ Start of the 2012 London 100m race. <em>Image from Wikimedia Commons</em> <a hre
 <aside class="notes">
 Olympic 100m wining times since 1896.
 </aside>
-<!-- SECTION Sum of Squares Error -->
 </section>
 <section id="sum-of-squares-error" class="slide level2">
+<h2>Sum of Squares Error</h2>
+<!-- SECTION Sum of Squares Error -->
+</section>
+<section id="sum-of-squares-error-1" class="slide level2">
 <h2>Sum of Squares Error</h2>
 </section>
 <section id="the-gaussian-density" class="slide level2">
@@ -177,7 +174,7 @@ Olympic 100m wining times since 1896.
 </ul>
 <div class="fragment">
 <p><span class="math display">\[\begin{align}
-  p(y| \mu, \sigma^2) &amp; = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y- \mu)^2}{2\sigma^2}\right)\\&amp; \buildrel\triangle\over = \mathcal{N}\left(y|\mu,\sigma^2\right)
+  p(y| \mu, \sigma^2) &amp; = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(y- \mu)^2}{2\sigma^2}\right)\\&amp; \buildrel\triangle\over = \mathscr{N}\left(y|\mu,\sigma^2\right)
   \end{align}\]</span></p>
 </div>
 </section>
@@ -196,7 +193,7 @@ The Gaussian PDF with <span class="math inline">\({\mu}=1.7\)</span> and varianc
 <section id="gaussian-density-1" class="slide level2">
 <h2>Gaussian Density</h2>
 <p><large><span class="math display">\[
-\mathcal{N}\left(y|\mu,\sigma^2\right) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(y-\mu)^2}{2\sigma^2}\right)
+\mathscr{N}\left(y|\mu,\sigma^2\right) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(y-\mu)^2}{2\sigma^2}\right)
 \]</span></large></p>
 <div class="fragment">
 <center>
@@ -213,14 +210,14 @@ The Gaussian PDF with <span class="math inline">\({\mu}=1.7\)</span> and varianc
 <div style="text-align:left">
 Sum of Gaussian variables is also Gaussian.
 </div>
-<p><span class="math display">\[y_i \sim \mathcal{N}\left(\mu_i,\sigma_i^2\right)\]</span></p>
+<p><span class="math display">\[y_i \sim \mathscr{N}\left(\mu_i,\sigma_i^2\right)\]</span></p>
 </div>
 <div class="fragment">
 <div style="text-align:left">
 And the sum is distributed as
 </div>
 <p><span class="math display">\[
-\sum_{i=1}^{n} y_i \sim \mathcal{N}\left(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2\right)
+\sum_{i=1}^{n} y_i \sim \mathscr{N}\left(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2\right)
 \]</span></p>
 </div>
 <div class="fragment">
@@ -235,13 +232,13 @@ Scaling a Gaussian leads to a Gaussian.
 </div>
 </div>
 <div class="fragment">
-<p><span class="math display">\[y\sim \mathcal{N}\left(\mu,\sigma^2\right)\]</span></p>
+<p><span class="math display">\[y\sim \mathscr{N}\left(\mu,\sigma^2\right)\]</span></p>
 </div>
 <div class="fragment">
 <div style="text-align:left">
 And the scaled variable is distributed as
 </div>
-<p><span class="math display">\[wy\sim \mathcal{N}\left(w\mu,w^2 \sigma^2\right).\]</span></p>
+<p><span class="math display">\[wy\sim \mathscr{N}\left(w\mu,w^2 \sigma^2\right).\]</span></p>
 </div>
 </section>
 <section id="laplaces-idea" class="slide level2">
@@ -266,7 +263,7 @@ And the scaled variable is distributed as
 <p>This leads to a regression model. <span class="math display">\[
 \begin{align*}
   y_i=&amp;f\left(x_i\right)+\epsilon_i,\\
-         \epsilon_i \sim &amp; \mathcal{N}\left(0,\sigma^2\right).
+         \epsilon_i \sim &amp; \mathscr{N}\left(0,\sigma^2\right).
   \end{align*}
 \]</span></p>
 <p>Assume <span class="math inline">\(y_i\)</span> is height and <span class="math inline">\(x_i\)</span> is weight.</p>
@@ -327,7 +324,7 @@ L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n
 </ul>
 <!-- SECTION Sum of Squares Error -->
 </section>
-<section id="sum-of-squares-error-1" class="slide level2">
+<section id="sum-of-squares-error-2" class="slide level2">
 <h2>Sum of Squares Error</h2>
 <ul>
 <li>Ignoring terms which don’t depend on <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> gives <span class="math display">\[E(m, c) \propto \sum_{i=1}^n(y_i - f(x_i))^2\]</span> where <span class="math inline">\(f(x_i) = mx_i + c\)</span>.</li>
@@ -711,6 +708,7 @@ Residual values for the ratings from the prediction of the movie rating given th
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
 <li>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></li>
 <li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
 <li><a href="https://the-atomic-human.ai">The Atomic Human</a></li>
