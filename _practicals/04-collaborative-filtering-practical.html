@@ -233,7 +233,7 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">2</span> <span class="co"># the dimension of our map of the &#39;library&#39;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>learn_rate <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="bu">len</span>(user_names), q))<span class="op">*</span><span class="fl">0.001</span>, index<span class="op">=</span>user_names)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="bu">len</span>(movies.columns), q))<span class="op">*</span><span class="fl">0.001</span>, index<span class="op">=</span>movies.columns)</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> pd.DataFrame(np.random.normal(size<span class="op">=</span>(<span class="bu">len</span>(movies.index), q))<span class="op">*</span><span class="fl">0.001</span>, index<span class="op">=</span>movies.index)</span></code></pre></div>
 <p>We also will subtract the mean from the rating before we try and predict them predictions. Have a think about why this might be a good idea (<em>Hint</em>: what will the gradients be if we don’t subtract the mean?).</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Y[<span class="st">&#39;rating&#39;</span>] <span class="op">-=</span> Y[<span class="st">&#39;rating&#39;</span>].mean()</span></code></pre></div>
@@ -243,7 +243,7 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    gV <span class="op">=</span> pd.DataFrame(np.zeros((V.shape)), index<span class="op">=</span>V.index)</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    obj <span class="op">=</span> <span class="fl">0.</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ind, series <span class="kw">in</span> Y.iterrows():</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        film <span class="op">=</span> series[<span class="st">&#39;index&#39;</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        film <span class="op">=</span> series[<span class="st">&#39;film&#39;</span>]</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        user <span class="op">=</span> series[<span class="st">&#39;user&#39;</span>]</span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        rating <span class="op">=</span> series[<span class="st">&#39;rating&#39;</span>]</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        prediction <span class="op">=</span> np.dot(U.loc[user], V.loc[film]) <span class="co"># vTu</span></span>
@@ -260,6 +260,9 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Iteration&quot;</span>, i, <span class="st">&quot;Objective function: &quot;</span>, obj)</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    U <span class="op">-=</span> learn_rate<span class="op">*</span>gU</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    V <span class="op">-=</span> learn_rate<span class="op">*</span>gV</span></code></pre></div>
+<p>Next we’ll use <code>plotly</code> to create a simple interactive visualisation of the users and the films. In our map, we expect similar films to be close to each other and similar users to be close to each other. Let’s look at the user map first, which is stored in the dataframe <code>U</code>.</p>
+<p>Now let’s look at our map of the films which is stored in a dataframe <code>V</code>.</p>
+<p>That gives us a first attempt at visualising this rating data.</p>
 <h3 id="exercise-5">Exercise 5</h3>
 <p>What happens as you increase the number of iterations? What happens if you increase the learning rate?</p>
 <h2 id="stochastic-gradient-descent-or-robbins-monroe-algorithm">Stochastic Gradient Descent or Robbins Monroe Algorithm</h2>
