@@ -6,6 +6,7 @@ featured_image: slides/diagrams/mlai/carthaginian-empire.png
 abstract: |
   In this session we use our understanding of objective functions to build a  simple recommender system based on *matrix factorisation*.
 youtube: Gq6bjcm8AqQ
+reveal: false
 ---
 
 \include{_mlfc/includes/mlfc-notebook-setup.md}
