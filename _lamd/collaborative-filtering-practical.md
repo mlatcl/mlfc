@@ -3,6 +3,11 @@ title: "Practical 4: Collaborative Filtering with Matrix Factorisation"
 practical: 4
 layout: practical
 featured_image: slides/diagrams/mlai/carthaginian-empire.png
+author:
+- family: Lawrence
+  given: Neil D.
+- family: Sendyka
+  given: Radzim
 abstract: |
   In this session we use our understanding of objective functions to build a  simple recommender system based on *matrix factorisation*.
 youtube: Gq6bjcm8AqQ
