@@ -91,14 +91,15 @@ sns.set_palette('colorblind')}-->
 </table></li>
 </ul>
 <p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal 100m winners for the Olympics from 1896 to present. First we load in the data and plot.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_100m_men()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_100m_men()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span></code></pre></div>
 <div class="figure">
 <div id="olympic-100m-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-100m.svg" width="80%" style=" ">
@@ -112,6 +113,9 @@ sns.set_palette('colorblind')}-->
 </div>
 </div>
 <h2 id="sum-of-squares-error">Sum of Squares Error</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/linear-algebra.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/linear-algebra.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <h1 id="sum-of-squares-error-1">Sum of Squares Error</h1>
 <p>Last week we considered a cost function for minimization of the error. We minimised an objective that assumed used the quadratic error function, <span class="math display">\[
 E(\mathbf{ w}) = \sum_{i=1}^n \left(y_i - \mathbf{ x}_i^\top \mathbf{ w}\right)^2.
@@ -249,15 +253,15 @@ b^{\prime\prime} &amp; \leftarrow x_3\\
 </tr>
 </table>
 <p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
@@ -313,8 +317,8 @@ b^{\prime\prime} &amp; \leftarrow x_3\\
 <p>Now we will take the maximum likelihood approach we derived in the lecture to fit a line, <span class="math inline">\(y_i=mx_i + c\)</span>, to the data you’ve plotted. We are trying to minimize the error function: <span class="math display">\[
 E(m, c) =  \sum_{i=1}^n(y_i-mx_i-c)^2
 \]</span> with respect to <span class="math inline">\(m\)</span>, <span class="math inline">\(c\)</span> and <span class="math inline">\(\sigma^2\)</span>. We can start with an initial guess for <span class="math inline">\(m\)</span>,</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="op">-</span><span class="fl">0.4</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">80</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="op">-</span><span class="fl">0.4</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">80</span></span></code></pre></div>
 <p>Then we use the maximum likelihood update to find an estimate for the offset, <span class="math inline">\(c\)</span>.</p>
 <h2 id="coordinate-descent">Coordinate Descent</h2>
 <div style="text-align:right">
@@ -332,9 +336,9 @@ c^* = \frac{\sum_{i=1}^n(y_i-m^*x_i)}{n}.
 \]</span> The fact that the stationary point is easily extracted in this manner implies that the solution is <em>unique</em>. There is only one stationary point for this system. Traditionally when trying to determine the type of stationary point we have encountered we now compute the <em>second derivative</em>, <span class="math display">\[
 \frac{\text{d}^2E(m,c)}{\text{d}c^2} = 2n.
 \]</span> The second derivative is positive, which in turn implies that we have found a minimum of the function. This means that setting <span class="math inline">\(c\)</span> in this way will take us to the lowest point along that axes.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set c to the minimum</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> (y <span class="op">-</span> m<span class="op">*</span>x).mean()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set c to the minimum</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> (y <span class="op">-</span> m<span class="op">*</span>x).mean()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div>
 <h2 id="update-for-slope">Update for Slope</h2>
 <p>Now we have the offset set to the minimum value, in coordinate descent, the next step is to optimise another parameter. Only one further parameter remains. That is the slope of the system.</p>
 <p>Now we can turn our attention to the slope. We once again peform the same set of computations to find the minima. We end up with an update equation of the following form.</p>
@@ -367,27 +371,27 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 <p>Now that you’ve had a little training in writing maths with <span class="math inline">\(\LaTeX\)</span>, we will be able to use it to answer questions. The next thing we are going to do is a little differentiation practice.</p>
 <h3 id="exercise-2">Exercise 2</h3>
 <p>Derive the the gradient of the objective function with respect to the slope, <span class="math inline">\(m\)</span>. Rearrange it to show that the update equation written above does find the stationary points of the objective function. By computing its derivative show that it’s a minimum.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> ((y <span class="op">-</span> c)<span class="op">*</span>x).<span class="bu">sum</span>()<span class="op">/</span>(x<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> ((y <span class="op">-</span> c)<span class="op">*</span>x).<span class="bu">sum</span>()<span class="op">/</span>(x<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span></code></pre></div>
 <p>We can have a look at how good our fit is by computing the prediction across the input space. First create a vector of ‘test points,’</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> np.linspace(<span class="dv">1890</span>, <span class="dv">2020</span>, <span class="dv">130</span>)[:, <span class="va">None</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> np.linspace(<span class="dv">1890</span>, <span class="dv">2020</span>, <span class="dv">130</span>)[:, <span class="va">None</span>]</span></code></pre></div>
 <p>Now use this vector to compute some test predictions,</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="op">=</span> m<span class="op">*</span>x_test <span class="op">+</span> c</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="op">=</span> m<span class="op">*</span>x_test <span class="op">+</span> c</span></code></pre></div>
 <p>Now plot those test predictions with a blue line on the same plot as the data,</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x_test, f_test, <span class="st">&#39;b-&#39;</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x_test, f_test, <span class="st">&#39;b-&#39;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <p>The fit isn’t very good, we need to iterate between these parameter updates in a loop to improve the fit, we have to do this several times,</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> np.arange(<span class="dv">10</span>):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> ((y <span class="op">-</span> c)<span class="op">*</span>x).<span class="bu">sum</span>()<span class="op">/</span>(x<span class="op">*</span>x).<span class="bu">sum</span>()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> (y<span class="op">-</span>m<span class="op">*</span>x).<span class="bu">sum</span>()<span class="op">/</span>y.shape[<span class="dv">0</span>]</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> np.arange(<span class="dv">10</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> ((y <span class="op">-</span> c)<span class="op">*</span>x).<span class="bu">sum</span>()<span class="op">/</span>(x<span class="op">*</span>x).<span class="bu">sum</span>()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> (y<span class="op">-</span>m<span class="op">*</span>x).<span class="bu">sum</span>()<span class="op">/</span>y.shape[<span class="dv">0</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div>
 <p>And let’s try plotting the result again</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="op">=</span> m<span class="op">*</span>x_test <span class="op">+</span> c</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x_test, f_test, <span class="st">&#39;b-&#39;</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="op">=</span> m<span class="op">*</span>x_test <span class="op">+</span> c</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x_test, f_test, <span class="st">&#39;b-&#39;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <p>Clearly we need more iterations than 10! In the next question you will add more iterations and report on the error as optimisation proceeds.</p>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>There is a problem here, we seem to need many interations to get to a good solution. Let’s explore what’s going on. Write code which alternates between updates of <code>c</code> and <code>m</code>. Include the following features in your code.</p>
@@ -453,11 +457,11 @@ c \times 1,
 \]</span> because if we now take the inner product between these two vectors we recover <span class="math display">\[
 \mathbf{ x}\cdot\mathbf{ w}= 1 \times c + x \times m = mx + c
 \]</span> In <code>numpy</code> we can define this vector as follows</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the vector w</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>w[<span class="dv">0</span>] <span class="op">=</span> m</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>w[<span class="dv">1</span>] <span class="op">=</span> c</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the vector w</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>w[<span class="dv">0</span>] <span class="op">=</span> m</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>w[<span class="dv">1</span>] <span class="op">=</span> c</span></code></pre></div>
 <p>This gives us the equivalence between original operation and an operation in vector space. Whilst the notation here isn’t a lot shorter, the beauty is that we will be able to add as many features as we like and keep the same representation. In general, we are now moving to a system where each of our predictions is given by an inner product. When we want to represent a linear product in linear algebra, we tend to do it with the transpose operation, so since we have <span class="math inline">\(\mathbf{a}\cdot\mathbf{b} = \mathbf{a}^\top\mathbf{b}\)</span> we can write <span class="math display">\[
 f(\mathbf{ x}_i) = \mathbf{ x}_i^\top\mathbf{ w}.
 \]</span> Where we’ve assumed that each data point, <span class="math inline">\(\mathbf{ x}_i\)</span>, is now written by appending a 1 onto the original vector <span class="math display">\[
@@ -482,9 +486,9 @@ x_i
 1 &amp; x_n
 \end{bmatrix},
 \]</span> which in <code>numpy</code> can be done with the following commands:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.hstack((np.ones_like(x), x))</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.hstack((np.ones_like(x), x))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X)</span></code></pre></div>
 <h2 id="writing-the-objective-with-linear-algebra">Writing the Objective with Linear Algebra</h2>
 <p>When we think of the objective function, we can think of it as the errors where the error is defined in a similar way to what it was in Legendre’s day <span class="math inline">\(y_i - f(\mathbf{ x}_i)\)</span>, in statistics these errors are also sometimes called <a href="http://en.wikipedia.org/wiki/Errors_and_residuals_in_statistics"><em>residuals</em></a>. So, we can think as the objective and the prediction function as two separate parts, first we have, <span class="math display">\[
 E(\mathbf{ w}) = \sum_{i=1}^n(y_i - f(\mathbf{ x}_i; \mathbf{ w}))^2,
@@ -522,14 +526,14 @@ b_{k, 1}a_1 + b_{k, 2}a_2 + \dots + b_{k, k}a_k\end{bmatrix}.
 <p><span class="math display">\[
 \mathbf{ f}= \mathbf{X}\mathbf{ w}.
 \]</span></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> X<span class="op">@</span>w <span class="co"># The @ sign performs matrix multiplication</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> X<span class="op">@</span>w <span class="co"># The @ sign performs matrix multiplication</span></span></code></pre></div>
 <p>Combining this result with our objective function, <span class="math display">\[
 E(\mathbf{ w}) = (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 \]</span> we find we have defined the <em>model</em> with two equations. One equation tells us the form of our predictive function and how it depends on its parameters, the other tells us the form of our objective function.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>resid <span class="op">=</span> (y<span class="op">-</span>f)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> np.dot(resid.T, resid) <span class="co"># matrix multiplication on a single vector is equivalent to a dot product.</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Error function is:&quot;</span>, E)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>resid <span class="op">=</span> (y<span class="op">-</span>f)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> np.dot(resid.T, resid) <span class="co"># matrix multiplication on a single vector is equivalent to a dot product.</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Error function is:&quot;</span>, E)</span></code></pre></div>
 <h1 id="objective-optimization">Objective Optimization</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-objective-optimisation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-objective-optimisation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -612,29 +616,30 @@ E(\mathbf{ w})=
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/movie-body-count-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/movie-body-count-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>This is a data set created by Simon Garnier and Rany Olson for exploring the differences between R and Python for data science. The data contains information about different movies augmented by estimates about how many on-screen deaths are contained in the movie. The data is craped from <a href="http://www.moviebodycounts.com" class="uri">http://www.moviebodycounts.com</a>. The data contains the following featuers for each movie: <code>Year</code>, <code>Body_Count</code>, <code>MPAA_Rating</code>, <code>Genre</code>, <code>Director</code>, <code>Actors</code>, <code>Length_Minutes</code>, <code>IMDB_Rating</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.movie_body_count()</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.movie_body_count()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <p>The data is provided to us in the form of a pandas data frame, we can see the features we’re provided with by inspecting the columns of the data frame.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;, &#39;</span>.join(movies.columns))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;, &#39;</span>.join(movies.columns))</span></code></pre></div>
+<p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
 <h2 id="multivariate-regression-on-movie-body-count-data">Multivariate Regression on Movie Body Count Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/movie-body-count-linear-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/movie-body-count-linear-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Now we will build a design matrix based on the numeric features: year, Body_Count, Length_Minutes in an effort to predict the rating. We build the design matrix as follows:</p>
 <p>Bias as an additional feature.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>select_features <span class="op">=</span> [<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Body_Count&#39;</span>, <span class="st">&#39;Length_Minutes&#39;</span>]</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> movies[select_features]</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>X[<span class="st">&#39;Eins&#39;</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># add a column for the offset</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>select_features <span class="op">=</span> [<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Body_Count&#39;</span>, <span class="st">&#39;Length_Minutes&#39;</span>]</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> movies[select_features]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>X[<span class="st">&#39;Eins&#39;</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># add a column for the offset</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
 <p>Now let’s perform a linear regression. But this time, we will create a pandas data frame for the result so we can store it in a form that we can visualise easily.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y),  <span class="co"># solve linear regression here</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y),  <span class="co"># solve linear regression here</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                 columns<span class="op">=</span>[<span class="st">&#39;regression_coefficient&#39;</span>]) <span class="co"># the column of X is the value of regression coefficient</span></span></code></pre></div>
 <p>We can check the residuals to see how good our estimates are. First we create a pandas data frame containing the predictions and use it to compute the residuals.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>(X<span class="op">@</span>w).values, columns<span class="op">=</span>[<span class="st">&#39;IMDB_Rating&#39;</span>])</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resid <span class="op">=</span> y<span class="op">-</span>ypred</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>(X<span class="op">@</span>w).values, columns<span class="op">=</span>[<span class="st">&#39;IMDB_Rating&#39;</span>])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>resid <span class="op">=</span> y<span class="op">-</span>ypred</span></code></pre></div>
 <div class="figure">
 <div id="movie-body-count-residuals-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/movie-body-count-rating-residuals.svg" width="80%" style=" ">
@@ -648,7 +653,7 @@ E(\mathbf{ w})=
 </div>
 </div>
 <p>Which shows our model <em>hasn’t</em> yet done a great job of representation, because the spread of values is large. We can check what the rating is dominated by in terms of regression coefficients.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
 <p>Although we have to be a little careful about interpretation because our input values live on different scales, however it looks like we are dominated by the bias, with a small negative effect for later films (but bear in mind the years are large, so this effect is probably larger than it looks) and a positive effect for length. So it looks like long earlier films generally do better, but the residuals are so high that we probably haven’t modelled the system very well.</p>
 <div class="figure">
 <div id="mlai-15-multivariate-regression-figure" class="figure-frame">
@@ -699,13 +704,277 @@ E(\mathbf{ w})=
 \]</span> which leaves us with a lower triangular system to solve.</p>
 <p>This is a more numerically stable solution because it removes the need to compute <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> as an intermediate. Computing <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> is a bad idea because it involves squaring all the elements of <span class="math inline">\(\mathbf{X}\)</span> and thereby potentially reducing the numerical precision with which we can represent the solution. Operating on <span class="math inline">\(\mathbf{X}\)</span> directly preserves the numerical precision of the model.</p>
 <p>This can be more particularly seen when we begin to work with <em>basis functions</em> in the next session. Some systems that can be resolved with the QR decomposition cannot be resolved by using solve directly.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>X.columns)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(X)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>X.columns)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
 <h3 id="exercise-5">Exercise 5</h3>
 <p>Can you see any difference between the values for the coefficients you got using QR decomposition than for the system where you computed <span class="math inline">\(\mathbf{X}^\top \mathbf{X}\)</span>? Why is this?</p>
+<h1 id="logistic-regression">Logistic Regression</h1>
+<h2 id="logistic-regression-1">Logistic Regression</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>A logistic regression is an approach to classification which extends the linear regression models we’ve already explored. Rather than modeling the output of the function directly the assumption is that we model the <em>log-odds</em> with the basis functions.</p>
+<p>The <a href="http://en.wikipedia.org/wiki/Odds">odds</a> are defined as the ratio of the probability of a positive outcome, to the probability of a negative outcome. Just as we saw in our jumper (sweater) example where <span class="math display">\[ 
+\log \frac{p(\text{bought})}{p(\text{not bought})} = w_0 + w_1 \text{age} + w_2 \text{latitude} 
+\]</span> If the probability of a positive outcome is denoted by <span class="math inline">\(\pi\)</span>, then the odds are computed as <span class="math inline">\(\frac{\pi}{1-\pi}\)</span>.</p>
+<p>Odds are widely used by <a href="http://en.wikipedia.org/wiki/Bookmaker">bookmakers</a> in gambling, although a bookmakers odds won’t normalise: i.e. if you look at the equivalent probabilities, and sum over the probability of all outcomes the bookmakers are considering, then you won’t get one. This is how the bookmaker makes a profit. Because a probability is always between zero and one, the odds are always between <span class="math inline">\(0\)</span> and <span class="math inline">\(\infty\)</span>. If the positive outcome is unlikely the odds are close to zero, if it is very likely then the odds become close to infinite. Taking the logarithm of the odds maps the odds from the positive half space to being across the entire real line. Odds that were between 0 and 1 (where the negative outcome was more likely) are mapped to the range between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(0\)</span>. Odds that are greater than 1 are mapped to the range between <span class="math inline">\(0\)</span> and <span class="math inline">\(\infty\)</span>. Considering the log odds therefore takes a number between 0 and 1 (the probability of positive outcome) and maps it to the entire real line. The function that does this is known as the <a href="http://en.wikipedia.org/wiki/Logit">logit function</a>, <span class="math inline">\(g(p_i) = \log\frac{p_i}{1-p_i}\)</span>. This function is known as a <em>link function</em>.</p>
+<p>For a standard regression we take, <span class="math display">\[
+f(\mathbf{ x}) = \mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x}),
+\]</span> if we want to perform classification we perform a logistic regression. <span class="math display">\[
+\log \frac{\pi}{(1-\pi)} = \mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x})
+\]</span> where the odds ratio between the positive class and the negative class is given by <span class="math display">\[
+\frac{\pi}{(1-\pi)}
+\]</span> The odds can never be negative, but can take any value from 0 to <span class="math inline">\(\infty\)</span>. We have defined the link function as taking the form <span class="math inline">\(g^{-1}(\cdot)\)</span> implying that the inverse link function is given by <span class="math inline">\(g(\cdot)\)</span>. Since we have defined, <span class="math display">\[
+g(\pi) =
+\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})
+\]</span> we can write <span class="math inline">\(\pi\)</span> in terms of the <em>inverse link</em> function, <span class="math inline">\(h(\cdot)\)</span> as <span class="math display">\[
+\pi = h(\mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x})).
+\]</span></p>
+<p>We’ll define our prediction, objective and gradient functions below. But before we start, we need to define a basis function for our model. Let’s start with the linear basis.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> linear</span></code></pre></div>
+<h2 id="prediction-function">Prediction Function</h2>
+<p>Now we have the basis function let’s define the prediction function.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(w, x, basis<span class="op">=</span>linear, <span class="op">**</span>kwargs):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Generates the prediction function and the basis matrix.&quot;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> basis(x, <span class="op">**</span>kwargs)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> np.dot(Phi, w)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">1.</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>f)), Phi</span></code></pre></div>
+<p>This inverse of the link function is known as the <a href="http://en.wikipedia.org/wiki/Logistic_function">logistic</a> (thus the name logistic regression) or sometimes it is called the sigmoid function. For a particular value of the input to the link function, <span class="math inline">\(f_i = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\)</span> we can plot the value of the inverse link function as below.</p>
+<h3 id="sigmoid-function">Sigmoid Function</h3>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/sigmoid-function.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/sigmoid-function.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="figure">
+<div id="the-logistic-function-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="the-logistic-function-magnify" class="magnify" onclick="magnifyFigure(&#39;the-logistic-function&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="the-logistic-function-caption" class="caption-frame">
+<p>Figure: The logistic function.</p>
+</div>
+</div>
+<p>The function has this characeristic ‘s’-shape (from where the term sigmoid, as in sigma, comes from). It also takes the input from the entire real line and ‘squashes’ it into an output that is between zero and one. For this reason it is sometimes also called a ‘squashing function.’</p>
+<p>By replacing the inverse link with the sigmoid we can write <span class="math inline">\(\pi\)</span> as a function of the input and the parameter vector as, <span class="math display">\[
+\pi(\mathbf{ x},\mathbf{ w}) = \frac{1}{1+\exp\left(-\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)}.
+\]</span> The process for logistic regression is as follows. Compute the output of a standard linear basis function composition (<span class="math inline">\(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\)</span>, as we did for linear regression) and then apply the inverse link function, <span class="math inline">\(g(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}))\)</span>. In logistic regression this involves <em>squashing</em> it with the logistic (or sigmoid) function. Use this value, which now has an interpretation as a <em>probability</em> in a Bernoulli distribution to form the likelihood. Then we can assume conditional independence of each data point given the parameters and develop a likelihod for the entire data set.</p>
+<p>The Bernoulli likelihood is of the form, <span class="math display">\[
+P(y_i|\mathbf{ w}, \mathbf{ x}) =
+\pi_i^{y_i} (1-\pi_i)^{1-y_i}
+\]</span> which we can think of as clever trick for mathematically switching between two probabilities if we were to write it as code it would be better described as</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bernoulli(x, y, pi):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> y <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pi(x)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">-</span>pi(x)</span></code></pre></div>
+<p>but writing it mathematically makes it easier to write our objective function within a single mathematical equation.</p>
+<h2 id="maximum-likelihood">Maximum Likelihood</h2>
+<p>To obtain the parameters of the model, we need to maximise the likelihood, or minimise the objective function, normally taken to be the negative log likelihood. With a data conditional independence assumption the likelihood has the form, <span class="math display">\[
+P(\mathbf{ y}|\mathbf{ w},
+\mathbf{X}) = \prod_{i=1}^nP(y_i|\mathbf{ w}, \mathbf{ x}_i). 
+\]</span> which can be written as a log likelihood in the form <span class="math display">\[
+\log P(\mathbf{ y}|\mathbf{ w},
+\mathbf{X}) = \sum_{i=1}^n\log P(y_i|\mathbf{ w}, \mathbf{ x}_i) = \sum_{i=1}^n
+y_i \log \pi_i + \sum_{i=1}^n(1-y_i)\log (1-\pi_i)
+\]</span> and if we take the probability of positive outcome for the <span class="math inline">\(i\)</span>th data point to be given by <span class="math display">\[
+\pi_i = h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right),
+\]</span> where <span class="math inline">\(g(\cdot)\)</span> is the <em>inverse</em> link function, then this leads to an objective function of the form, <span class="math display">\[
+E(\mathbf{ w}) = -  \sum_{i=1}^ny_i \log
+h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right) -
+\sum_{i=1}^n(1-y_i)\log \left(1-g\left(\mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x}_i)\right)\right).
+\]</span></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(h, y):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Computes the objective function.&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    labs <span class="op">=</span> np.asarray(y, dtype<span class="op">=</span><span class="bu">float</span>).flatten()</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    posind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    negind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">0</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.log(h[posind, :]).<span class="bu">sum</span>() <span class="op">-</span> np.log(<span class="dv">1</span><span class="op">-</span>h[negind, :]).<span class="bu">sum</span>()</span></code></pre></div>
+<p>As normal, we would like to minimise this objective. This can be done by differentiating with respect to the parameters of our prediction function, <span class="math inline">\(\pi(\mathbf{ x};\mathbf{ w})\)</span>, for optimisation. The gradient of the likelihood with respect to <span class="math inline">\(\pi(\mathbf{ x};\mathbf{ w})\)</span> is of the form, <span class="math display">\[
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
+\frac{y_i}{g\left(\mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x})\right)}\frac{\text{d}g(f_i)}{\text{d}f_i}
+\boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
+\frac{1-y_i}{1-g\left(\mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x})\right)}\frac{\text{d}g(f_i)}{\text{d}f_i}
+\boldsymbol{ \phi}(\mathbf{ x}_i)
+\]</span> where we used the chain rule to develop the derivative in terms of <span class="math inline">\(\frac{\text{d}h(f_i)}{\text{d}f_i}\)</span>, which is the gradient of the inverse link function (in our case the gradient of the sigmoid function).</p>
+<p>So the objective function now depends on the gradient of the inverse link function, as well as the likelihood depends on the gradient of the inverse link function, as well as the gradient of the log likelihood, and naturally the gradient of the argument of the inverse link function with respect to the parameters, which is simply <span class="math inline">\(\boldsymbol{ \phi}(\mathbf{ x}_i)\)</span>.</p>
+<p>The only missing term is the gradient of the inverse link function. For the sigmoid squashing function we have, <span class="math display">\[\begin{align*}
+h(f_i) &amp;= \frac{1}{1+\exp(-f_i)}\\
+&amp;=(1+\exp(-f_i))^{-1}
+\end{align*}\]</span> and the gradient can be computed as <span class="math display">\[\begin{align*}
+\frac{\text{d}h(f_i)}{\text{d} f_i} &amp; =
+\exp(-f_i)(1+\exp(-f_i))^{-2}\\
+&amp; = \frac{1}{1+\exp(-f_i)}
+\frac{\exp(-f_i)}{1+\exp(-f_i)} \\
+&amp; = h(f_i) (1-g(f_i))
+\end{align*}\]</span> so the full gradient can be written down as <span class="math display">\[
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
+y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
+(1-y_i)\left(g\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i).
+\]</span></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradient(h, Phi, y):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Generates the gradient of the parameter vector.&quot;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    labs <span class="op">=</span> np.asarray(y, dtype<span class="op">=</span><span class="bu">float</span>).flatten()</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    posind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    dw <span class="op">=</span> <span class="op">-</span>(Phi[posind]<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>g[posind])).<span class="bu">sum</span>(<span class="dv">0</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    negind <span class="op">=</span> np.where(labs<span class="op">==</span><span class="dv">0</span> )</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    dw <span class="op">+=</span> (Phi[negind]<span class="op">*</span>h[negind]).<span class="bu">sum</span>(<span class="dv">0</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dw[:, <span class="va">None</span>]</span></code></pre></div>
+<h2 id="optimisation-of-the-function">Optimisation of the Function</h2>
+<p>Reorganising the gradient to find a stationary point of the function with respect to the parameters <span class="math inline">\(\mathbf{ w}\)</span> turns out to be impossible. Optimisation has to proceed by <em>numerical methods</em>. Options include the multidimensional variant of <a href="http://en.wikipedia.org/wiki/Newton%27s_method">Newton’s method</a> or <a href="http://en.wikipedia.org/wiki/Gradient_method">gradient based optimisation methods</a> like we used for optimising matrix factorisation for the movie recommender system. We recall from matrix factorisation that, for large data, <em>stochastic gradient descent</em> or the Robbins Munro <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> optimisation procedure worked best for function minimisation.</p>
+<h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>As an example data set we will use Nigerian Millennium Development Goals Information System Health Facility <span class="citation" data-cites="Nigeria-nmis14">(The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) and Columbia University, 2014)</span>. It can be found here <a href="https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014" class="uri">https://energydata.info/dataset/nigeria-nmis-education-facility-data-2014</a>.</p>
+<p>Taking from the information on the site,</p>
+<blockquote>
+<p>The Nigeria MDG (Millennium Development Goals) Information System – NMIS health facility data is collected by the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) in partner with the Sustainable Engineering Lab at Columbia University. A rigorous, geo-referenced baseline facility inventory across Nigeria is created spanning from 2009 to 2011 with an additional survey effort to increase coverage in 2014, to build Nigeria’s first nation-wide inventory of health facility. The database includes 34,139 health facilities info in Nigeria.</p>
+<p>The goal of this database is to make the data collected available to planners, government officials, and the public, to be used to make strategic decisions for planning relevant interventions.</p>
+<p>For data inquiry, please contact Ms. Funlola Osinupebi, Performance Monitoring &amp; Communications, Advisory Power Team, Office of the Vice President at funlola.osinupebi@aptovp.org</p>
+<p>To learn more, please visit <a href="http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/" class="uri">http://csd.columbia.edu/2014/03/10/the-nigeria-mdg-information-system-nmis-takes-open-data-further/</a></p>
+<p>Suggested citation: Nigeria NMIS facility database (2014), the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
+</blockquote>
+<p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<p>Alternatively, you can access the data directly with the following commands.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
+<p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<p>We can also find out the dimensions of the dataset using the <code>shape</code> property.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div>
+<p>Dataframes have different functions that you can use to explore and understand your data. In python and the Jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
+<p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
+<div class="figure">
+<div id="nigerian-health-facilities-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="nigerian-health-facilities-magnify" class="magnify" onclick="magnifyFigure(&#39;nigerian-health-facilities&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="nigerian-health-facilities-caption" class="caption-frame">
+<p>Figure: Location of the over thirty-four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.</p>
+</div>
+</div>
+<h2 id="nigeria-nmis-data-classification">Nigeria NMIS Data Classification</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data-classification.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data-classification.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Our aim will be to predict whether a center has maternal health delivery services given the attributes in the data. We will predict of the number of nurses, the number of doctors, location etc.</p>
+<p>Now we will convert this data into a form which we can use as inputs <code>X</code>, and labels <code>y</code>.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[<span class="op">~</span>pd.isnull(data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>])]</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.dropna() <span class="co"># Remove entries with missing values</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">&#39;emergency_transport&#39;</span>,</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_chews_fulltime&#39;</span>, </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;phcn_electricity&#39;</span>,</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;child_health_measles_immun_calc&#39;</span>,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_nurses_fulltime&#39;</span>,</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_doctors_fulltime&#39;</span>, </span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;improved_water_supply&#39;</span>, </span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;improved_sanitation&#39;</span>,</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;antenatal_care_yn&#39;</span>, </span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;family_planning_yn&#39;</span>,</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;malaria_treatment_artemisinin&#39;</span>, </span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;latitude&#39;</span>, </span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;longitude&#39;</span>]].copy()</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>]<span class="op">==</span><span class="va">True</span>  <span class="co"># set label to be whether there&#39;s a maternal health delivery service</span></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create series of health center types with the relevant index</span></span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> data[<span class="st">&#39;facility_type_display&#39;</span>].<span class="bu">apply</span>(pd.Series, <span class="dv">1</span>).stack() </span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>s.index <span class="op">=</span> s.index.droplevel(<span class="op">-</span><span class="dv">1</span>) <span class="co"># to line up with df&#39;s index</span></span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract from the series the unique list of types.</span></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> s.unique()</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a><span class="co"># For each type extract the indices where it is present and add a column to X</span></span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>type_names <span class="op">=</span> []</span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> htype <span class="kw">in</span> types:</span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> s[s<span class="op">==</span>htype].index.tolist()</span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>    type_col<span class="op">=</span>htype.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>).replace(<span class="st">&#39;/&#39;</span>,<span class="st">&#39;-&#39;</span>).lower()</span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>    type_names.append(type_col)</span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>    X.loc[:, type_col] <span class="op">=</span> <span class="fl">0.0</span> </span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>    X.loc[index, type_col] <span class="op">=</span> <span class="fl">1.0</span></span></code></pre></div>
+<p>This has given us a new data frame <code>X</code> which contains the different facility types in different columns.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>X.describe()</span></code></pre></div>
+<h2 id="batch-gradient-descent">Batch Gradient Descent</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression-gradient-descent.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression-gradient-descent.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>We will need to define some initial random values for our vector and then minimize the objective by descending the gradient.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate train and test</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.random.permutation(X.shape[<span class="dv">0</span>])</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> np.ceil(X.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>)r</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X.iloc[train_indices]</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y.iloc[train_indices]<span class="op">==</span><span class="va">True</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X.iloc[test_indices]</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y.iloc[test_indices]<span class="op">==</span><span class="va">True</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gradient descent algorithm</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.normal(size<span class="op">=</span>(X.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, <span class="dv">1</span>), scale <span class="op">=</span> <span class="fl">0.001</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">1e-9</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>iters <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    g, Phi <span class="op">=</span> predict(w, X_train, linear)</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    w <span class="op">-=</span> eta<span class="op">*</span>gradient(g, Phi, y_train) <span class="op">+</span> <span class="fl">0.001</span><span class="op">*</span>w</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> i <span class="op">%</span> <span class="dv">100</span>:</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Iter&quot;</span>, i, <span class="st">&quot;Objective&quot;</span>, objective(g, y_train))</span></code></pre></div>
+<p>Let’s look at the weights and how they relate to the inputs.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w)</span></code></pre></div>
+<p>What does the magnitude of the weight vectors tell you about the different parameters and their influence on outcome? Are the weights of roughly the same size, if not, how might you fix this?</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, linear)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(g_test[y_test]<span class="op">&gt;</span><span class="fl">0.5</span>)</span></code></pre></div>
+<h2 id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
+<h3 id="exercise-6">Exercise 6</h3>
+<p>Now construct a stochastic gradient descent algorithm and run it on the data. Is it faster or slower than batch gradient descent? What can you do to improve convergence speed?</p>
+<h2 id="using-statsmodels">Using Statsmodels</h2>
+<p>The statsmodels package provides a more convenient way to fit logistic regression models with additional statistical analysis capabilities.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to X_train and X_test for intercept</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>X_test_sm <span class="op">=</span> sm.add_constant(X_test)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.Logit(y_train, X_train_sm)</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary of model results</span></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on test set</span></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> results.predict(X_test_sm)</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Test set accuracy:&quot;</span>, np.mean((y_pred <span class="op">&gt;</span> <span class="fl">0.5</span>) <span class="op">==</span> y_test))</span></code></pre></div>
+<p>The statsmodels implementation provides additional statistical metrics like p-values, confidence intervals, and various diagnostic tests that can help evaluate the model’s fit and assumptions.</p>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -721,6 +990,7 @@ E(\mathbf{ w})=
 <li><p>For fitting linear models: Section 1.1-1.2 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
 <li><p>Section 1.2.5 up to equation 1.65 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
 <li><p>Section 1.3 for Matrix &amp; Vector Review of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 5.2.2 up to pg 182 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
@@ -730,8 +1000,14 @@ Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 <div id="ref-Legendre:nouvelles05" class="csl-entry" role="doc-biblioentry">
 Legendre, A.-M., 1805. Nouvelles méthodes pour la détermination des orbites des comètes. F. Didot.
 </div>
+<div id="ref-Robbins:stoch51" class="csl-entry" role="doc-biblioentry">
+Robbins, H., Monro, S., 1951. A stochastic approximation method. Annals of Mathematical Statistics 22, 400–407.
+</div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
 Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+</div>
+<div id="ref-Nigeria-nmis14" class="csl-entry" role="doc-biblioentry">
+The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014. Nigeria <span>NMIS</span> facility database.
 </div>
 </div>
 

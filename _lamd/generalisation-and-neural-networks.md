@@ -18,9 +18,12 @@ oldyoutube:
 
 \define{\errorFunction}{L}
 \define{\designVector}{\boldsymbol{\phi}}
+\define{designMatrix}{\basisMatrix}
 
 \include{_mlfc/includes/mlfc-notebook-setup.md}
 
+
+\include{_ml/includes/non-linear-regression-intro.md}
 \include{_ml/includes/basis-functions.md}
 \include{_ml/includes/basis-function-models.md}
 
@@ -30,13 +33,10 @@ oldyoutube:
 
 \include{_ml/includes/nigeria-nmis-linear-regression.md}
 
-\notes{\section{Aside}}
-\define{designMatrix}{\basisMatrix}
+\notes{\subsection{Aside}}
 
-\notes{Just for informational purposes, the actual approach used in software for fitting a linear model *should* be a QR decomposition.}
+\notes{Just as a quick reminder, the approach used in software for fitting a linear model *should* be a QR decomposition. See \refnotes{the lecture on linear algebra and linear regression}{linear-algebra}.
 
-\notes{\include{_ml/includes/qr-decomposition-regression.md}}
-}
 
 \subsection{Basis Function Models}
 
