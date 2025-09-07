@@ -58,27 +58,27 @@ sns.set_palette('colorblind')}-->
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_data-science/includes/movie-body-count-visualise.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_data-science/includes/movie-body-count-visualise.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Year&#39;</span>])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(data[&#39;Body_Count&#39;])</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(movies[<span class="st">&#39;Year&#39;</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(movies[&#39;Body_Count&#39;])</span></span></code></pre></div>
 <p>This shows the number of deaths per film across the years. We can plot the data as follows.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this ensures the plot appears in the web browser</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># this imports the plotting library in python</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">&#39;Year&#39;</span>], data[<span class="st">&#39;Body_Count&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.plot(movies[<span class="st">&#39;Year&#39;</span>], movies[<span class="st">&#39;Body_Count&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <p>You may be curious what the arguments we give to <code>plt.plot</code> are for, now is the perfect time to look at the documentation</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.plot?</span></code></pre></div>
 <p>We immediately note that some films have a lot of deaths, which prevent us seeing the detail of the main body of films. First lets identify the films with the most deaths.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;Body_Count&#39;</span>]<span class="op">&gt;</span><span class="dv">200</span>]</span></code></pre></div>
-<p>Here we are using the command <code>data['Kill_Count']&gt;200</code> to index the films in the pandas data frame which have over 200 deaths. To sort them in order we can also use the <code>sort</code> command. The result of this command on its own is a data series of <code>True</code> and <code>False</code> values. However, when it is passed to the <code>data</code> data frame it returns a new data frame which contains only those values for which the data series is <code>True</code>. We can also sort the result. To sort the result by the values in the <code>Kill_Count</code> column in <em>descending</em> order we use the following command.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data[data[<span class="st">&#39;Body_Count&#39;</span>]<span class="op">&gt;</span><span class="dv">200</span>].sort_values(by<span class="op">=</span><span class="st">&#39;Body_Count&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>movies[movies[<span class="st">&#39;Body_Count&#39;</span>]<span class="op">&gt;</span><span class="dv">200</span>]</span></code></pre></div>
+<p>Here we are using the command <code>movies['Kill_Count']&gt;200</code> to index the films in the pandas data frame which have over 200 deaths. To sort them in order we can also use the <code>sort</code> command. The result of this command on its own is a data series of <code>True</code> and <code>False</code> values. However, when it is passed to the <code>data</code> data frame it returns a new data frame which contains only those values for which the data series is <code>True</code>. We can also sort the result. To sort the result by the values in the <code>Kill_Count</code> column in <em>descending</em> order we use the following command.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>movies[movies[<span class="st">&#39;Body_Count&#39;</span>]<span class="op">&gt;</span><span class="dv">200</span>].sort_values(by<span class="op">=</span><span class="st">&#39;Body_Count&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>We now see that the ‘Lord of the Rings’ is a large outlier with a very large number of kills. We can try and determine how much of an outlier by histograming the data.</p>
 <h2 id="plotting-the-data-1">Plotting the Data</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Body_Count&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>movies[<span class="st">&#39;Body_Count&#39;</span>].hist(bins<span class="op">=</span><span class="dv">20</span>) <span class="co"># histogram the data with 20 bins.</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Film Kill Count&#39;</span>)</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>Read on the internet about the following python libraries: <code>numpy</code>, <code>matplotlib</code>, <code>scipy</code> and <code>pandas</code>. What functionality does each provide python. What is the <code>pylab</code> library and how does it relate to the other libraries?</p>
 <p>We could try and remove these outliers, but another approach would be plot the logarithm of the counts against the year.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">&#39;Year&#39;</span>], data[<span class="st">&#39;Body_Count&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.plot(movies[<span class="st">&#39;Year&#39;</span>], movies[<span class="st">&#39;Body_Count&#39;</span>], <span class="st">&#39;rx&#39;</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca() <span class="co"># obtain a handle to the current axis</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">&#39;log&#39;</span>) <span class="co"># use a logarithmic death scale</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># give the plot some titles and labels</span></span>
@@ -194,8 +194,8 @@ sns.set_palette('colorblind')}-->
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> Y.dropna(axis<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>Y.index.name<span class="op">=</span><span class="st">&quot;index&quot;</span></span></code></pre></div>
-<h2 id="what-is-a-pivot-table-what-does-the-pandas-command">What is a pivot table? What does the <code>pandas</code> command</h2>
-<p><code>pd.melt</code> do?</p>
+<h3 id="exercise-4">Exercise 4</h3>
+<p>What is a pivot table? What does the <code>pandas</code> command <code>pd.melt</code> do?</p>
 <h2 id="measuring-similarity">Measuring Similarity</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/matrix-factorization.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/matrix-factorization.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -225,7 +225,7 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 \frac{\text{d}E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}} = -2
 \sum_j s_{k,j}v_{j,\ell}(y_{k, j} - \mathbf{u}_k^\top\mathbf{v}_{j}).
 \]</span> Similarly each parameter <span class="math inline">\(v_{i,j}\)</span> needs to be updated according to its gradient.</p>
-<h3 id="exercise-4">Exercise 4</h3>
+<h3 id="exercise-5">Exercise 5</h3>
 <p>What is the gradient of the objective function with respect to <span class="math inline">\(v_{k, \ell}\)</span>? Write your answer in the box below, and explain which differentiation techniques you used to get there. You will be expected to justify your answer in class by oral questioning. Create a function for computing this gradient that is used in the algorithm below.</p>
 <h2 id="steepest-descent-algorithm">Steepest Descent Algorithm</h2>
 <p>In the steepest descent algorithm we aim to minimize the objective function by subtacting the gradient of the objective function from the parameters.</p>
@@ -264,11 +264,11 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <p>Next we’ll use <code>plotly</code> to create a simple interactive visualisation of the users and the films. In our map, we expect similar films to be close to each other and similar users to be close to each other. Let’s look at the user map first, which is stored in the dataframe <code>U</code>.</p>
 <p>Now let’s look at our map of the films which is stored in a dataframe <code>V</code>.</p>
 <p>That gives us a first attempt at visualising this rating data.</p>
-<h3 id="exercise-5">Exercise 5</h3>
+<h3 id="exercise-6">Exercise 6</h3>
 <p>What happens as you increase the number of iterations? What happens if you increase the learning rate?</p>
 <h2 id="stochastic-gradient-descent-or-robbins-monroe-algorithm">Stochastic Gradient Descent or Robbins Monroe Algorithm</h2>
 <p>{In  we saw how stochastic gradient descent <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> involves updating separating each gradient update according to each separate observation, rather than summing over them all. It is an approximate optimization method, but it has proven convergence under certain conditions and can be much faster in practice. It is used widely by internet companies for doing machine learning in practice. For example, Facebook’s ad ranking algorithm uses stochastic gradient descent.</p>
-<h3 id="exercise-6">Exercise 6</h3>
+<h3 id="exercise-7">Exercise 7</h3>
 <p>Create a stochastic gradient descent version of the algorithm. Monitor the objective function after every 1000 updates to ensure that it is decreasing. When you have finished, plot the movie map and the user map in two dimensions. Label the plots with the name of the movie or user.</p>
 <h2 id="making-predictions">Making Predictions</h2>
 <p>Predictions can be made from the model of the appropriate rating for a given user, <span class="math inline">\(i\)</span>, for a given film, <span class="math inline">\(j\)</span>, by simply taking the inner product between their vectors <span class="math inline">\(\mathbf{u}_i\)</span> and <span class="math inline">\(\mathbf{v}_j\)</span>.</p>
@@ -280,8 +280,16 @@ E(\mathbf{U}, \mathbf{V})}{\text{d}u_{k,\ell}}
 <div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> pods.datasets.movielens100k()</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Y<span class="op">=</span>d[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
-<h3 id="exercise-7">Exercise 7</h3>
+<h3 id="exercise-8">Exercise 8</h3>
 <p>Use stochastic gradient descent to make a movie map for the movielens data. Plot the map of the movies when you are finished.</p>
+<p>End of Practical 4</p>
+<pre><code> _______  __   __  _______  __    _  ___   _  _______  __
+|       ||  | |  ||   _   ||  |  | ||   | | ||       ||  |
+|_     _||  |_|  ||  |_|  ||   |_| ||   |_| ||  _____||  |
+  |   |  |       ||       ||       ||      _|| |_____ |  |
+  |   |  |       ||       ||  _    ||     |_ |_____  ||__|
+  |   |  |   _   ||   _   || | |   ||    _  | _____| | __
+  |___|  |__| |__||__| |__||_|  |__||___| |_||_______||__|</code></pre>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
