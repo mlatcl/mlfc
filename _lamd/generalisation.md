@@ -6,7 +6,7 @@ week: 2
 session: 2
 date: 2025-09-09
 abstract: >
-  This lecture will cover generalization in machine learning with a particular focus on
+  This lecture will cover generalisation in machine learning with a particular focus on
   neural architectures. We will review classical generalisation and explore what's different
   about neural network models.
 hackmdslides: fhuszar/r1HxvooMd#/
@@ -118,7 +118,7 @@ $$
 
 \notes{Simply put, there is not enough regularisation encoded in the objective function of the neural network models we are using to explain the generalisation performance. There must be something in the algorithms we are using that causes these highly overparameterised models to generalise well.}
 
-\include{_ml/includes/generalization-and-overfitting.md}
+\include{_ml/includes/generalisation-and-overfitting.md}
 
 \include{_deepnn/includes/double-descent.md}
 \include{_deepnn/includes/neural-tangent-kernel.md}
