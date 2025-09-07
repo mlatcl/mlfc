@@ -790,10 +790,10 @@ P(\mathbf{ y}|\mathbf{ w},
 y_i \log \pi_i + \sum_{i=1}^n(1-y_i)\log (1-\pi_i)
 \]</span> and if we take the probability of positive outcome for the <span class="math inline">\(i\)</span>th data point to be given by <span class="math display">\[
 \pi_i = h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right),
-\]</span> where <span class="math inline">\(g(\cdot)\)</span> is the <em>inverse</em> link function, then this leads to an objective function of the form, <span class="math display">\[
+\]</span> where <span class="math inline">\(h(\cdot)\)</span> is the <em>inverse</em> link function, then this leads to an objective function of the form, <span class="math display">\[
 E(\mathbf{ w}) = -  \sum_{i=1}^ny_i \log
 h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right) -
-\sum_{i=1}^n(1-y_i)\log \left(1-g\left(\mathbf{ w}^\top
+\sum_{i=1}^n(1-y_i)\log \left(1-h\left(\mathbf{ w}^\top
 \boldsymbol{ \phi}(\mathbf{ x}_i)\right)\right).
 \]</span></p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
@@ -805,8 +805,8 @@ h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right) -
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.log(h[posind, :]).<span class="bu">sum</span>() <span class="op">-</span> np.log(<span class="dv">1</span><span class="op">-</span>h[negind, :]).<span class="bu">sum</span>()</span></code></pre></div>
 <p>As normal, we would like to minimise this objective. This can be done by differentiating with respect to the parameters of our prediction function, <span class="math inline">\(\pi(\mathbf{ x};\mathbf{ w})\)</span>, for optimisation. The gradient of the likelihood with respect to <span class="math inline">\(\pi(\mathbf{ x};\mathbf{ w})\)</span> is of the form, <span class="math display">\[
 \frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
-\frac{y_i}{g\left(\mathbf{ w}^\top
-\boldsymbol{ \phi}(\mathbf{ x})\right)}\frac{\text{d}g(f_i)}{\text{d}f_i}
+\frac{y_i}{h\left(\mathbf{ w}^\top
+\boldsymbol{ \phi}(\mathbf{ x})\right)}\frac{\text{d}h(f_i)}{\text{d}f_i}
 \boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
 \frac{1-y_i}{1-g\left(\mathbf{ w}^\top
 \boldsymbol{ \phi}(\mathbf{ x})\right)}\frac{\text{d}g(f_i)}{\text{d}f_i}
@@ -826,7 +826,7 @@ h(f_i) &amp;= \frac{1}{1+\exp(-f_i)}\\
 \frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
 y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
-(1-y_i)\left(g\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+(1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span></p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
@@ -957,24 +957,6 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 <h2 id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
 <h3 id="exercise-6">Exercise 6</h3>
 <p>Now construct a stochastic gradient descent algorithm and run it on the data. Is it faster or slower than batch gradient descent? What can you do to improve convergence speed?</p>
-<h2 id="using-statsmodels">Using Statsmodels</h2>
-<p>The statsmodels package provides a more convenient way to fit logistic regression models with additional statistical analysis capabilities.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span></code></pre></div>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to X_train and X_test for intercept</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>X_test_sm <span class="op">=</span> sm.add_constant(X_test)</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression</span></span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.Logit(y_train, X_train_sm)</span>
-<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
-<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary of model results</span></span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span>
-<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on test set</span></span>
-<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> results.predict(X_test_sm)</span>
-<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Test set accuracy:&quot;</span>, np.mean((y_pred <span class="op">&gt;</span> <span class="fl">0.5</span>) <span class="op">==</span> y_test))</span></code></pre></div>
-<p>The statsmodels implementation provides additional statistical metrics like p-values, confidence intervals, and various diagnostic tests that can help evaluate the model’s fit and assumptions.</p>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>

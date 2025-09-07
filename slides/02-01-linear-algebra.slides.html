@@ -877,7 +877,7 @@ Residual values for the ratings from the prediction of the movie rating given th
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>Probability of positive outcome for the <span class="math inline">\(i\)</span>th data point <span class="math display">\[\pi_i = g\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right),\]</span> where <span class="math inline">\(g(\cdot)\)</span> is the <em>inverse</em> link function</li>
+<li>Probability of positive outcome for the <span class="math inline">\(i\)</span>th data point <span class="math display">\[\pi_i = h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right),\]</span> where <span class="math inline">\(h(\cdot)\)</span> is the <em>inverse</em> link function</li>
 <li>Objective function of the form <span class="math display">\[\begin{align*}
   E(\mathbf{ w}) = &amp; -  \sum_{i=1}^ny_i \log
   g\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right) \\&amp; -
@@ -966,9 +966,6 @@ Location of the over thirty-four thousand health facilities registered in the NM
 </section>
 <section id="stochastic-gradient-descent" class="slide level2">
 <h2>Stochastic Gradient Descent</h2>
-</section>
-<section id="using-statsmodels" class="slide level2">
-<h2>Using Statsmodels</h2>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
