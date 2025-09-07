@@ -97,11 +97,8 @@ $$
 
 \addreading{@Rogers:book11}{Section 1.3 for Matrix & Vector Review}
 
-
-\section{Logistic Regression}
-
-\include{_ml/includes/logistic-regression.md}
-\include{_ml/includes/nigeria-nmis-data-logistic.md}
+\include{_ml/includes/non-linear-regression-intro.md}
+\include{_ml/includes/basis-functions.md}
 
 
 \thanks
