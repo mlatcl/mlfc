@@ -30,7 +30,6 @@ ipynb: true
 
 \include{_mlfc/includes/mlfc-notebook-setup.md}
 
-\installcode{statsmodels}
 
 \subsection{Review}
 
@@ -45,6 +44,8 @@ As we move to generalised linear models like logistic regression, we'll see how 
 \include{_ml/includes/logistic-regression.md}
 \include{_ml/includes/nigeria-nmis-data-logistic.md}
 
+
+\installcode{statsmodels}
 
 \include{_ml/includes/linear-regression-statsmodels.md}
 \include{_ml/includes/logistic-regression-statsmodels.md}
