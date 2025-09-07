@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="dcterms.date" content="2025-09-09">
-  <title>Basis Functions, Generalisation and Neural Networks</title>
+  <title>Generalisation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Basis Functions, Generalisation and Neural Networks</h1>
+  <h1 class="title">Generalisation</h1>
   <p class="date" style="text-align:center"><time>2025-09-09</time></p>
 </section>
 
@@ -1370,6 +1370,14 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 \mathbf{W}= \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1 
 \]</span></p>
 </section>
+<section id="further-reading" class="slide level2 scrollable">
+<h2 class="scrollable">Further Reading</h2>
+<ul>
+<li><p>Section 1.4 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Chapter 1, pg 1-6 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+</ul>
+</section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
@@ -1381,168 +1389,23 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
 </section>
-<section id="references" class="slide level2 scrollable">
-<h2 class="scrollable">References</h2>
-<p>bootstrap</p>
-<p>David Hogg’s lecture <a href="https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters" class="uri">https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters</a></p>
-<p>The Deep Bootstrap <a href="https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20" class="uri">https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20</a></p>
-<p>Aki Vehtari on Leave One Out Uncertainty: <a href="https://arxiv.org/abs/2008.10296" class="uri">https://arxiv.org/abs/2008.10296</a> (check for his references).</p>
-<!-- Material from Ferenc's DeepNN lecture on generalisation -->
-<p>{</p>
-</section>
-<section id="approximation" class="slide level2">
-<h2>Approximation</h2>
-</section>
-<section id="basic-multilayer-perceptron" class="slide level2">
-<h2>Basic Multilayer Perceptron</h2>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= \phi(W_l f_{l-1}(x) + b_l)\\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-</section>
-<section id="basic-multilayer-perceptron-1" class="slide level2">
-<h2>Basic Multilayer Perceptron</h2>
-<p><span class="math display">\[
-\small
-f_L(x) = \phi\left(b_L + W_L \phi\left(b_{L-1} + W_{L-1} \phi\left( \cdots \phi\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
-\]</span></p>
-</section>
-<section id="rectified-linear-unit" class="slide level2">
-<h2>Rectified Linear Unit</h2>
-<p><span class="math display">\[
-\phi(x) = \left\{\matrix{0&amp;\text{when }x\leq 0\\x&amp;\text{when }x&gt;0}\right.
-\]</span></p>
-<p><img data-src="https://i.imgur.com/SxKdrzb.png" /></p>
-</section>
-<section id="what-can-these-networks-represent" class="slide level2">
-<h2>What can these networks represent?</h2>
-<p><span class="math display">\[
-\operatorname{ReLU}(\mathbf{w}_1x - \mathbf{b}_1)
-\]</span></p>
-<p><img data-src="https://i.imgur.com/rN5wRVJ.png" /></p>
-</section>
-<section id="what-can-these-networks-represent-1" class="slide level2">
-<h2>What can these networks represent?</h2>
-<p><span class="math display">\[
-f(x) = \mathbf{w}^T_2 \operatorname{ReLU}(\mathbf{w}_1x - \mathbf{b}_1)
-\]</span></p>
-<p><img data-src="https://i.imgur.com/kX3nuYg.png" /></p>
-</section>
-<section id="single-hidden-layer" class="slide level2">
-<h2>Single hidden layer</h2>
-<p>number of kinks <span class="math inline">\(\approx O(\)</span> width of network <span class="math inline">\()\)</span></p>
-</section>
-<section id="example-sawtooth-network" class="slide level2">
-<h2>Example: “sawtooth” network</h2>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= 2\vert f_{l-1}(x)\vert - 2 \\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-</section>
-<section id="sawtooth-network" class="slide level2">
-<h2>Sawtooth network</h2>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= 2 \operatorname{ReLU}(f_{l-1}(x)) + 2 \operatorname{ReLU}(-f_{l-1}(x)) - 2\\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-</section>
-<section id="layer-network" class="slide level2">
-<h2><span class="math inline">\(0\)</span>-layer network</h2>
-<p><img data-src="https://i.imgur.com/pucqIVN.png" /></p>
-</section>
-<section id="layer-network-1" class="slide level2">
-<h2><span class="math inline">\(1\)</span>-layer network</h2>
-<p><img data-src="https://i.imgur.com/YOTtTY7.png" /></p>
-</section>
-<section id="layer-network-2" class="slide level2">
-<h2><span class="math inline">\(2\)</span>-layer network</h2>
-<p><img data-src="https://i.imgur.com/reii7O5.png" /></p>
-</section>
-<section id="layer-network-3" class="slide level2">
-<h2><span class="math inline">\(3\)</span>-layer network</h2>
-<p><img data-src="https://i.imgur.com/J6KiUHI.png" /></p>
-</section>
-<section id="layer-network-4" class="slide level2">
-<h2><span class="math inline">\(4\)</span>-layer network</h2>
-<p><img data-src="https://i.imgur.com/fHTZhU0.png" /></p>
-</section>
-<section id="layer-network-5" class="slide level2">
-<h2><span class="math inline">\(5\)</span>-layer network</h2>
-<p><img data-src="https://i.imgur.com/ni4QV2b.png" /></p>
-</section>
-<section id="deep-relu-networks" class="slide level2">
-<h2>Deep ReLU networks</h2>
-<p>number of kinks <span class="math inline">\(\approx O(2^\text{depth of network})\)</span></p>
-</section>
-<section id="in-higher-dimensions" class="slide level2">
-<h2>In higher dimensions</h2>
-<p><img data-src="https://i.imgur.com/0NVHFEN.png" /></p>
-</section>
-<section id="in-higher-dimensions-1" class="slide level2">
-<h2>In higher dimensions</h2>
-<p><img data-src="https://i.imgur.com/DJtv5Yj.jpg" /></p>
-</section>
-<section id="approximation-summary" class="slide level2">
-<h2>Approximation: summary</h2>
-<ul>
-<li>depth increases model complexity more than width</li>
-<li>model clas defined by deep networks is VERY LARGE</li>
-<li>both an advantage, but and cause for concern</li>
-<li>“complex models don’t generalize”</li>
-</ul>
-</section>
-<section id="generalization" class="slide level2">
-<h2>Generalization</h2>
-</section>
-<section id="generalization-1" class="slide level2">
-<h2>Generalization</h2>
-<p><img data-src="https://i.imgur.com/Tu5SHpr.png" /></p>
-</section>
-<section id="generalization-2" class="slide level2">
-<h2>Generalization</h2>
-<p><img data-src="https://i.imgur.com/8bkhxAv.png" /></p>
-</section>
-<section id="generalization-3" class="slide level2">
-<h2>Generalization</h2>
-<p><img data-src="https://i.imgur.com/YHedAr6.png" /></p>
-</section>
-<section id="generalization-deep-nets" class="slide level2">
-<h2>Generalization: deep nets</h2>
-<p><img data-src="https://i.imgur.com/bfyRBsx.png" /></p>
-</section>
-<section id="generalization-deep-nets-1" class="slide level2">
-<h2>Generalization: deep nets</h2>
-<p><img data-src="https://i.imgur.com/fzLYvHe.png" /></p>
-</section>
-<section id="generalization-summary" class="slide level2">
-<h2>Generalization: summary</h2>
-<ul>
-<li><strong>classical view:</strong> generalization is property of model class and loss function</li>
-<li><strong>new view:</strong> it is also a property of the optimization algorithm</li>
-</ul>
-</section>
-<section id="generalization-4" class="slide level2">
-<h2>Generalization</h2>
-<ul>
-<li>optimization is core to deep learning</li>
-<li>new tools and insights:
-<ul>
-<li>infinite width neural networks</li>
-<li>neural tangent kernel <a href="https://arxiv.org/abs/1806.07572">(Jacot et al, 2018)</a></li>
-<li>deep linear models (<a href="https://arxiv.org/abs/1905.13655">e.g. Arora et al, 2019</a>)</li>
-<li>importance of initialization</li>
-<li>effect of gradient noise</li>
-</ul></li>
-</ul>
+<section id="references" class="slide level2 unnumbered scrollable">
+<h2 class="unnumbered scrollable">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Belkin:reconciling19" class="csl-entry" role="doc-biblioentry">
 Belkin, M., Hsu, D., Ma, S., Soumik Mandal, and, 2019. Reconciling modern machine-learning practice and the classical bias-variance trade-off. Proc. Natl. Acad. Sci. USA 116, 15849–15854.
+</div>
+<div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
+Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 <div id="ref-Bishop:noise95" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 1995. Training with noise is equivalent to <span>T</span>ikhonov regularization. Neural Computation 7, 108–116. <a href="https://doi.org/10.1162/neco.1995.7.1.108">https://doi.org/10.1162/neco.1995.7.1.108</a>
 </div>
 <div id="ref-Jacot-ntk18" class="csl-entry" role="doc-biblioentry">
 Jacot, A., Gabriel, F., Hongler, C., 2018. Neural tangent kernel: Convergence and generalization in neural networks, in: Bengio, S., Wallach, H., Larochelle, H., Grauman, K., Cesa-Bianchi, N., Garnett, R. (Eds.), Advances in Neural Information Processing Systems. Curran Associates, Inc., pp. 8571–8580.
+</div>
+<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 </div>
 <div id="ref-Scholkopf:learning01" class="csl-entry" role="doc-biblioentry">
 Schölkopf, B., Smola, A.J., 2001. Learning with kernels. mit, Cambridge, MA.

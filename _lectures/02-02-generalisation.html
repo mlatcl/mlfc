@@ -1,6 +1,6 @@
 ---
-title: "Basis Functions, Generalisation and Neural Networks"
-abstract: "<p>This lecture will cover generalisation in machine learning with a particular focus on neural architectures. We will review classical generalisation and explore what’s different about neural network models.</p>"
+title: "Generalisation"
+abstract: "<p>This lecture will cover generalisation in machine learning.</p>"
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/generalisation.md
 date: 2025-09-09
 week: 2
@@ -8,7 +8,6 @@ session: 2
 featured_image: slides/diagrams/ml/olympic_LM_polynomial_number026.svg
 reveal: 02-02-generalisation.slides.html
 ipynb: 02-02-generalisation.ipynb
-hackmdslides: fhuszar/r1HxvooMd#/
 youtube: "WaauyjcSNhc"
 layout: lecture
 categories:
@@ -1148,6 +1147,12 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 \]</span> In these models, a gradient flow analysis shows that the model finds solutions where the linear mapping, <span class="math display">\[
 \mathbf{W}= \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1 
 \]</span> is very low rank. This is highly suggestive of another type of regularization that could be occurring in deep neural networks. Low rank parameter matrices mean that the effective capacity of the neural network is reduced. Indeed, empirical observations of the rank of deep nets trained on data suggest that they may be finding such solutions.</p>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><p>Section 1.4 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Chapter 1, pg 1-6 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Chapter 3, Section 3.1 up to pg 143 of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+</ul>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -1158,109 +1163,16 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h1 id="references">References</h1>
-<p>bootstrap</p>
-<p>David Hogg’s lecture <a href="https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters" class="uri">https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters</a></p>
-<p>The Deep Bootstrap <a href="https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20" class="uri">https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20</a></p>
-<p>Aki Vehtari on Leave One Out Uncertainty: <a href="https://arxiv.org/abs/2008.10296" class="uri">https://arxiv.org/abs/2008.10296</a> (check for his references).</p>
-<!-- Material from Ferenc's DeepNN lecture on generalisation -->
-<p>{ ## Approximation</p>
-<h3 id="basic-multilayer-perceptron">Basic Multilayer Perceptron</h3>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= \phi(W_l f_{l-1}(x) + b_l)\\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-<h3 id="basic-multilayer-perceptron-1">Basic Multilayer Perceptron</h3>
-<p><span class="math display">\[
-\small
-f_L(x) = \phi\left(b_L + W_L \phi\left(b_{L-1} + W_{L-1} \phi\left( \cdots \phi\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
-\]</span></p>
-<h3 id="rectified-linear-unit">Rectified Linear Unit</h3>
-<p><span class="math display">\[
-\phi(x) = \left\{\matrix{0&amp;\text{when }x\leq 0\\x&amp;\text{when }x&gt;0}\right.
-\]</span></p>
-<p><img src="https://i.imgur.com/SxKdrzb.png" /></p>
-<h3 id="what-can-these-networks-represent">What can these networks represent?</h3>
-<p><span class="math display">\[
-\operatorname{ReLU}(\mathbf{w}_1x - \mathbf{b}_1)
-\]</span></p>
-<p><img src="https://i.imgur.com/rN5wRVJ.png" /></p>
-<h3 id="what-can-these-networks-represent-1">What can these networks represent?</h3>
-<p><span class="math display">\[
-f(x) = \mathbf{w}^T_2 \operatorname{ReLU}(\mathbf{w}_1x - \mathbf{b}_1)
-\]</span></p>
-<p><img src="https://i.imgur.com/kX3nuYg.png" /></p>
-<h3 id="single-hidden-layer">Single hidden layer</h3>
-<p>number of kinks <span class="math inline">\(\approx O(\)</span> width of network <span class="math inline">\()\)</span></p>
-<h3 id="example-sawtooth-network">Example: “sawtooth” network</h3>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= 2\vert f_{l-1}(x)\vert - 2 \\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-<h3 id="sawtooth-network">Sawtooth network</h3>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= 2 \operatorname{ReLU}(f_{l-1}(x)) + 2 \operatorname{ReLU}(-f_{l-1}(x)) - 2\\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-<h3 id="layer-network"><span class="math inline">\(0\)</span>-layer network</h3>
-<p><img src="https://i.imgur.com/pucqIVN.png" /></p>
-<h3 id="layer-network-1"><span class="math inline">\(1\)</span>-layer network</h3>
-<p><img src="https://i.imgur.com/YOTtTY7.png" /></p>
-<h3 id="layer-network-2"><span class="math inline">\(2\)</span>-layer network</h3>
-<p><img src="https://i.imgur.com/reii7O5.png" /></p>
-<h3 id="layer-network-3"><span class="math inline">\(3\)</span>-layer network</h3>
-<p><img src="https://i.imgur.com/J6KiUHI.png" /></p>
-<h3 id="layer-network-4"><span class="math inline">\(4\)</span>-layer network</h3>
-<p><img src="https://i.imgur.com/fHTZhU0.png" /></p>
-<h3 id="layer-network-5"><span class="math inline">\(5\)</span>-layer network</h3>
-<p><img src="https://i.imgur.com/ni4QV2b.png" /></p>
-<h3 id="deep-relu-networks">Deep ReLU networks</h3>
-<p>number of kinks <span class="math inline">\(\approx O(2^\text{depth of network})\)</span></p>
-<h3 id="in-higher-dimensions">In higher dimensions</h3>
-<p><img src="https://i.imgur.com/0NVHFEN.png" /></p>
-<h3 id="in-higher-dimensions-1">In higher dimensions</h3>
-<p><img src="https://i.imgur.com/DJtv5Yj.jpg" /></p>
-<h3 id="approximation-summary">Approximation: summary</h3>
-<ul>
-<li>depth increases model complexity more than width</li>
-<li>model clas defined by deep networks is VERY LARGE</li>
-<li>both an advantage, but and cause for concern</li>
-<li>“complex models don’t generalize”</li>
-</ul>
-<h2 id="generalization">Generalization</h2>
-<h2 id="generalization-1">Generalization</h2>
-<p><img src="https://i.imgur.com/Tu5SHpr.png" /></p>
-<h2 id="generalization-2">Generalization</h2>
-<p><img src="https://i.imgur.com/8bkhxAv.png" /></p>
-<h2 id="generalization-3">Generalization</h2>
-<p><img src="https://i.imgur.com/YHedAr6.png" /></p>
-<h2 id="generalization-deep-nets">Generalization: deep nets</h2>
-<p><img src="https://i.imgur.com/bfyRBsx.png" /></p>
-<h2 id="generalization-deep-nets-1">Generalization: deep nets</h2>
-<p><img src="https://i.imgur.com/fzLYvHe.png" /></p>
-<h2 id="generalization-summary">Generalization: summary</h2>
-<ul>
-<li><strong>classical view:</strong> generalization is property of model class and loss function</li>
-<li><strong>new view:</strong> it is also a property of the optimization algorithm</li>
-</ul>
-<h2 id="generalization-4">Generalization</h2>
-<ul>
-<li>optimization is core to deep learning</li>
-<li>new tools and insights:
-<ul>
-<li>infinite width neural networks</li>
-<li>neural tangent kernel <a href="https://arxiv.org/abs/1806.07572">(Jacot et al, 2018)</a></li>
-<li>deep linear models (<a href="https://arxiv.org/abs/1905.13655">e.g. Arora et al, 2019</a>)</li>
-<li>importance of initialization</li>
-<li>effect of gradient noise</li>
-</ul></li>
-</ul>
+<h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Arora-convergence19" class="csl-entry" role="doc-biblioentry">
 Arora, S., Cohen, N., Golowich, N., Hu, W., 2019. A convergence analysis of gradient descent for deep linear neural networks, in: International Conference on Learning Representations.
 </div>
 <div id="ref-Belkin:reconciling19" class="csl-entry" role="doc-biblioentry">
 Belkin, M., Hsu, D., Ma, S., Soumik Mandal, and, 2019. Reconciling modern machine-learning practice and the classical bias-variance trade-off. Proc. Natl. Acad. Sci. USA 116, 15849–15854.
+</div>
+<div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
+Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 <div id="ref-Bishop:noise95" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 1995. Training with noise is equivalent to <span>T</span>ikhonov regularization. Neural Computation 7, 108–116. <a href="https://doi.org/10.1162/neco.1995.7.1.108">https://doi.org/10.1162/neco.1995.7.1.108</a>
@@ -1300,6 +1212,9 @@ Lawson, C.L., Hanson, R.J., 1995. Solving least squares problems. SIAM. <a href=
 </div>
 <div id="ref-McCullagh-gen_linear89" class="csl-entry" role="doc-biblioentry">
 McCullagh, P., Nelder, J.A., 1989. Generalized linear models, 2nd ed. Chapman; Hall.
+</div>
+<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
+Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 </div>
 <div id="ref-Scholkopf:learning01" class="csl-entry" role="doc-biblioentry">
 Schölkopf, B., Smola, A.J., 2001. Learning with kernels. mit, Cambridge, MA.
