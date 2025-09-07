@@ -93,9 +93,10 @@ $$
 
 \include{_ml/includes/qr-decomposition-regression.md}
 
-\writeassignment{Can you see any difference between the values for the coefficients you got using QR decomposition than for the system where you computed $\designMatrix^\top \designMatrix$? Why is this?}{20}
+\writeassignment{Ca you see any difference between the values for the coefficients you got using QR decomposition than for the system where you computed $\designMatrix^\top \designMatrix$? Why is this?}{20}
 
 \addreading{@Rogers:book11}{Section 1.3 for Matrix & Vector Review}
+
 
 \include{_ml/includes/non-linear-regression-intro.md}
 \include{_ml/includes/basis-functions.md}
