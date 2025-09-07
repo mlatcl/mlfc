@@ -15,7 +15,7 @@ reveal: false
 
 \notes{Across the first week we motivated the importance of probability, but also stressed that machine learning builds on 'objective functions'. In this practical you will take the ideas you've learnt and apply them to the domain of *collaborative filtering*. Specifically you will create a *matrix factorisation* algorithm.} 
 
-\notes{In \refnotes{the introduction}{probability} we saw how
+\notes{In the last few practicals we saw how
 we could load in a data set to pandas and use it for some simple data
 processing. We computed variaous probabilities on the data and I encouraged you
 to think about what sort of probabilities you need for prediction. This week we
@@ -29,7 +29,8 @@ are going to take a slightly different tack.}
 
 \notes{This week we are going to try and build a simple movie recommender system using an objective function. To do this, the first thing I'd like you to do is to install some software we've written for sharing information across google documents.}
 
-\include{_ml/includes/movie-body-count-data.md}
+\include{_datasets/includes/movie-body-count-data.md}
+\include{_data-science/includes/movie-body-count-visualise.md}
 
 \writeassignment{Data ethics. If you find data available on the
 internet, can you simply use it without consequence? If you are given data by a
