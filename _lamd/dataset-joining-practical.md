@@ -46,7 +46,7 @@ postsdir: ../_practicals/ # Where compiled lecture HTML files go
 \include{_ml/includes/dsail-porini-burst-detection-analysis.md}
 
 
-\notes{End of Practical 2
+\notes{End of Practical 3
 ```
  _______  __   __  _______  __    _  ___   _  _______  __
 |       ||  | |  ||   _   ||  |  | ||   | | ||       ||  |

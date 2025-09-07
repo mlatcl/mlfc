@@ -40,6 +40,17 @@ fellow researcher can you publish that data on line?}{1}{10}
 \include{_ml/includes/recommender-data.md}
 \include{_ml/includes/matrix-factorization.md}
 
+\notes{End of Practical 4
+```
+ _______  __   __  _______  __    _  ___   _  _______  __
+|       ||  | |  ||   _   ||  |  | ||   | | ||       ||  |
+|_     _||  |_|  ||  |_|  ||   |_| ||   |_| ||  _____||  |
+  |   |  |       ||       ||       ||      _|| |_____ |  |
+  |   |  |       ||       ||  _    ||     |_ |_____  ||__|
+  |   |  |   _   ||   _   || | |   ||    _  | _____| | __
+  |___|  |__| |__||__| |__||_|  |__||___| |_||_______||__|
+```}
+
 
 \thanks
 
