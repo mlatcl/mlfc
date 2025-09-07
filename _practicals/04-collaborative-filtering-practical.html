@@ -123,70 +123,163 @@ sns.set_palette('colorblind')}-->
 \mathbf{u}_i = \begin{bmatrix} u_{i,1} \\ u_{i,2}\end{bmatrix}.
 \]</span> Finally, we need some way of recording a given user’s affinity for a given item. This affinity might be the rating that the user gives the film. We can use <span class="math inline">\(y_{i,j}\)</span> to represent user <span class="math inline">\(i\)</span>’s affinity for item <span class="math inline">\(j\)</span>.</p>
 <p>For our film example we might imagine wanting to order films in a few ways. We could imagine organising films in the North-South direction as to how romantic they are. We could place the more romantic films further North and the less romantic films further South. For the East-West direction we could imagine ordering them according to how historic they are: we can imagine placing science fiction films to the East and historical drama to the West. In this case, fans of historical romances would be based in the North-West location, whilst fans of Science Fiction Action films might be located in the South-East (if we assume that ‘Action’ is the opposite of ‘Romance,’ which is not necessarily the case). How do we lay out all these films? Have we got the right axes? In machine learning the answer is to ‘let the data speak.’ Use the data to try and obtain such a lay out. To do this we first need to obtain the data.</p>
-<h2 id="obtaining-the-data">Obtaining the Data</h2>
+<h2 id="collecting-the-data">Collecting the Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/recommender-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/recommender-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>THIS IS THE OLD APPROACH FROM THE PRACTICAL I RAN IN SHEFFIELD. AIM WAS TO GET THE STUDENTS TO RATE MOVIES THEMSELVES. THE CODE STOPPED WORKING DUE TO CHANGES IN THE GOOGLE API.</p>
-<p>We are using a functionality of the Open Data Science software library to obtain the data. This functionality involves some prewritten code which distributes to each of you a google spreadsheet where you can rate movies that you’ve seen. For completeness the code follows. Try and read and understand the code, but don’t run it! It has already been run centrally by me.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>user_data <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>movies.index, columns<span class="op">=</span>[<span class="st">&#39;title&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;rating&#39;</span>, <span class="st">&#39;prediction&#39;</span>])</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>user_data[<span class="st">&#39;title&#39;</span>]<span class="op">=</span>movies.Film</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>user_data[<span class="st">&#39;year&#39;</span>]<span class="op">=</span>movies.Year</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>accumulator<span class="op">=</span>pods.lab.distributor(spreadsheet_title<span class="op">=</span><span class="st">&#39;COM4509/6509 Movie Ratings:&#39;</span>, user_sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># function to apply to data before giving it to user </span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select 50 movies at random and order them according to year.</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>max_movies <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>function <span class="op">=</span> <span class="kw">lambda</span> x: x.loc[np.random.permutation(x.index)[:max_movies]].sort(columns<span class="op">=</span><span class="st">&#39;year&#39;</span>)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>accumulator.write(data_frame<span class="op">=</span>user_data, comment<span class="op">=</span><span class="st">&#39;Film Ratings&#39;</span>, </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                  function<span class="op">=</span>function)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>accumulator.write_comment(<span class="st">&#39;Rate Movie Here (score 1-5)&#39;</span>, row<span class="op">=</span><span class="dv">1</span>, column<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>accumulator.share(share_type<span class="op">=</span><span class="st">&#39;writer&#39;</span>, send_notifications<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
-<p>In your Google drive account you should be able to find a spreadsheet called ‘COM4509/6509 Movie Ratings: Your Name.’ In the spreadsheet You should find a number of movies listed according to year. In the column titled ‘rating’ please place your rating using a score of 1-5 for <em>any</em> of the movies you’ve seen from the list.</p>
-<p>Once you have placed your ratings we can download the data from your spreadsheets to a central file where the ratings of the whole class can be stored. We will build an algorithm on these ratings and use them to make predictions for the rest of the class. Firstly, here’s the code for reading the ratings from each of the spreadsheets.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>accumulator <span class="op">=</span> pods.lab.distributor(user_sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> accumulator.read(usecols<span class="op">=</span>[<span class="st">&#39;rating&#39;</span>], dtype<span class="op">=</span>{<span class="st">&#39;index&#39;</span>:<span class="bu">int</span>, <span class="st">&#39;rating&#39;</span>:np.float64}, header<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> user <span class="kw">in</span> data:</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data[user].rating.count()<span class="op">&gt;</span><span class="dv">0</span>: <span class="co"># only add user if they rated something</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># add a new field to movies with that user&#39;s ratings.</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        movies[user] <span class="op">=</span> data[user][<span class="st">&#39;rating&#39;</span>]</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store the csv on disk where it will be shared through dropbox.</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>movies.to_csv(os.path.join(pods.lab.class_dir,<span class="st">&#39;movies.csv&#39;</span>), skiprows<span class="op">=</span><span class="dv">1</span>, index_label<span class="op">=</span><span class="st">&#39;ResponseID&#39;</span>)</span></code></pre></div>
-<p>Now we will convert our data structure into a form that is appropriate for processing. We will convert the <code>movies</code> object into a data base which contains the movie, the user and the score using the following command.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code></pre></div>
-<p>I’VE FIXED IT UP TO LOAD IN THIS DATA FROM A GOOGLE FORM THAT I USED tO GET MOVIE RATINGS FROM THE PUBLIC FOR A SCIENCE TALK I DID</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment the line below if you are doing this task by self study.</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pods.access.download_url(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/datasets_mirror/main/movie_recommender/movies.csv&#39;</span>, store_directory <span class="op">=</span> <span class="st">&#39;class_movie&#39;</span>, save_name<span class="op">=</span><span class="st">&#39;movies.csv&#39;</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#pods.access.download_url(&#39;https://www.dropbox.com/s/s6gqvp9b383b59y/movies.csv?dl=0&amp;raw=1&#39;, store_directory = &#39;class_movie&#39;, save_name=&#39;movies.csv&#39;)</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>raw_movies <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">&#39;class_movie&#39;</span>, <span class="st">&#39;movies.csv&#39;</span>),encoding<span class="op">=</span><span class="st">&#39;latin-1&#39;</span>, header<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract user names from 15th column (0-indexed as 14)</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>usernames <span class="op">=</span> raw_movies.iloc[:, <span class="dv">14</span>]  </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract movie ratings from 16th to fourth last column (indexed 15:-4)</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> raw_movies.iloc[:, <span class="dv">15</span>:<span class="op">-</span><span class="dv">4</span>]  <span class="co"># columns 16:-4 in 1-based = 15:-4 in 0-based</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Get movie names from the column headers</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>movie_names <span class="op">=</span> movie_data.columns</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the tidied up dataframe structure</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to transpose and set up proper index/columns</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> movie_data.T  <span class="co"># Transpose so movies become rows</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>movies.columns <span class="op">=</span> usernames  <span class="co"># Set usernames as column headers</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>movies.index.name <span class="op">=</span> <span class="st">&#39;film&#39;</span>  <span class="co"># Name the index</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>movies.columns.name <span class="op">=</span> <span class="st">&#39;user&#39;</span>  <span class="co"># Name the columns</span></span></code></pre></div>
+<p>This functionality involves some prewritten code which connects to a central write server, where you can rate movies that you’ve seen.</p>
+<p>Once you have placed your ratings, we can download the data to a file. We will build an algorithm on these ratings and use them to make predictions for the rest of the class. Firstly, here’s the code for which movies we will be rating. Remember to change your name.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>movies_list <span class="op">=</span> [</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Kenyan films</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Nairobi Half Life&quot;</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Rafiki&quot;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Sincerely Daisy&quot;</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Supa Modo&quot;</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Kati Kati&quot;</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mvera&quot;</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;NAWI: Dear Future Me&quot;</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;BOBO&quot;</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;The First Grader&quot;</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mother Mother&quot;</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;The Wall Street Boy&quot;</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;40 Sticks&quot;</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;TeraStorm&quot;</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Global all-time blockbuster hits</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Avatar&quot;</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Avengers: Endgame&quot;</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Titanic&quot;</span>,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;The Lion King&quot;</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Frozen&quot;</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Spider-Man: No Way Home&quot;</span>,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Black Panther&quot;</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Top Gun: Maverick&quot;</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;The Dark Knight&quot;</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Inception&quot;</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Jurassic World&quot;</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Minions: The Rise of Gru&quot;</span>,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;The Fate of the Furious&quot;</span>,</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Doctor Strange in the Multiverse of Madness&quot;</span>,</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Furious 7&quot;</span>,</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Star Wars: The Force Awakens&quot;</span>,</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;The Avengers&quot;</span>,</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Beauty and the Beast&quot;</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Harry Potter and the Deathly Hallows – Part 2&quot;</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Joker&quot;</span>,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Aladdin&quot;</span>,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Aquaman&quot;</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">&#39;todo&#39;</span> <span class="co"># </span><span class="al">TODO</span><span class="co">: your name here - this will be somewhat public so you might not want to use full real names, nickname is fine</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> name<span class="op">!=</span><span class="st">&#39;todo&#39;</span></span></code></pre></div>
+<p>The below code starts an interactive Python Widget, which will submit your responses. There’s also code for reading the ratings after they’ve been submitted.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random, requests, ipywidgets <span class="im">as</span> W</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> Widget</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, clear_output</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Config</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>topic, target <span class="op">=</span> <span class="st">&quot;mlfc_movie_ratings&quot;</span>, <span class="dv">25</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f&quot;https://ntfy.sh/</span><span class="sc">{</span>topic<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>cache <span class="op">=</span> <span class="st">&quot;rated_movies_cache.txt&quot;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> responses(topic<span class="op">=</span>topic, sep<span class="op">=</span><span class="st">&quot;|||&quot;</span>, since<span class="op">=</span><span class="st">&quot;all&quot;</span>, n<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f&quot;https://ntfy.sh/</span><span class="sc">{</span>topic<span class="sc">}</span><span class="ss">/json?poll=1&amp;since=</span><span class="sc">{</span>since<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> requests.get(url, stream<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> r:</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> r.iter_lines():</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> line: <span class="cf">continue</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>            e <span class="op">=</span> json.loads(line)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> e.get(<span class="st">&quot;event&quot;</span>) <span class="op">!=</span> <span class="st">&quot;message&quot;</span>: <span class="cf">continue</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>            p <span class="op">=</span> (e.get(<span class="st">&quot;message&quot;</span>) <span class="kw">or</span> <span class="st">&quot;&quot;</span>).split(sep)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>            rows.append({<span class="st">&quot;name&quot;</span>: p[<span class="dv">0</span>], <span class="st">&quot;movie&quot;</span>: p[<span class="dv">1</span>], <span class="st">&quot;rating&quot;</span>: pd.to_numeric(p[<span class="dv">2</span>], errors<span class="op">=</span><span class="st">&quot;coerce&quot;</span>)} <span class="cf">if</span> <span class="bu">len</span>(p)<span class="op">==</span><span class="dv">3</span> <span class="cf">else</span> {<span class="st">&quot;raw&quot;</span>: e.get(<span class="st">&quot;message&quot;</span>)})</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> n <span class="kw">and</span> <span class="bu">len</span>(rows) <span class="op">&gt;=</span> n: <span class="cf">break</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(rows)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> start_movie_rater(movies_list<span class="op">=</span>movies_list, topic<span class="op">=</span>topic, name<span class="op">=</span>name, target<span class="op">=</span><span class="dv">25</span>):</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> random, requests</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> ipywidgets <span class="im">as</span> W</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f&quot;https://ntfy.sh/</span><span class="sc">{</span>topic<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    movies <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>.fromkeys(<span class="bu">map</span>(<span class="bu">str</span>, movies_list)))</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    seen <span class="op">=</span> <span class="bu">set</span>()  <span class="co"># in-memory only</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    rated, cur, running <span class="op">=</span> <span class="dv">0</span>, <span class="va">None</span>, <span class="va">True</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> rem(): <span class="cf">return</span> [m <span class="cf">for</span> m <span class="kw">in</span> movies <span class="cf">if</span> m <span class="kw">not</span> <span class="kw">in</span> seen]</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> mark_seen(m):</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="kw">not</span> <span class="kw">in</span> seen:</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>            seen.add(m)</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> send(m, r):</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>            requests.post(url, data<span class="op">=</span><span class="ss">f&quot;</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">|||</span><span class="sc">{m}</span><span class="ss">|||</span><span class="sc">{r}</span><span class="ss">&quot;</span>.encode(<span class="st">&quot;utf-8&quot;</span>), timeout<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> W.HTML()</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    btns <span class="op">=</span> [W.Button(description<span class="op">=</span><span class="bu">str</span>(i)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)]</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    skip <span class="op">=</span> W.Button(description<span class="op">=</span><span class="st">&quot;Skip&quot;</span>, button_style<span class="op">=</span><span class="st">&quot;warning&quot;</span>)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    finish <span class="op">=</span> W.Button(description<span class="op">=</span><span class="st">&quot;Finish&quot;</span>, button_style<span class="op">=</span><span class="st">&quot;success&quot;</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    box <span class="op">=</span> W.VBox([status, W.HBox(btns <span class="op">+</span> [skip, finish])])</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> end(msg):</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>        <span class="kw">nonlocal</span> running</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>        running <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> w <span class="kw">in</span> btns <span class="op">+</span> [skip, finish]:</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>            w.disabled <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>        status.value <span class="op">=</span> msg</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pick_next():</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>        <span class="kw">nonlocal</span> cur</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> rem()</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>        cur <span class="op">=</span> random.choice(r) <span class="cf">if</span> r <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>        status.value <span class="op">=</span> <span class="ss">f&quot;&lt;b&gt;Rate (</span><span class="sc">{</span>rated<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">):&lt;/b&gt; </span><span class="sc">{</span>cur<span class="sc">}</span><span class="ss">&quot;</span> <span class="cf">if</span> cur <span class="cf">else</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> on_rate(b):</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>        <span class="kw">nonlocal</span> rated</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> running <span class="kw">or</span> cur <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>        send(cur, <span class="bu">int</span>(b.description))</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>        mark_seen(cur)</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>        rated <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> rated <span class="op">&gt;=</span> target:</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>            end(<span class="ss">f&quot;Done. Rated </span><span class="sc">{</span>rated<span class="sc">}</span><span class="ss">.&quot;</span>)</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>        pick_next()</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cur <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>            end(<span class="ss">f&quot;No unseen movies left. Rated </span><span class="sc">{</span>rated<span class="sc">}</span><span class="ss">.&quot;</span>)</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> on_skip(_):</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> running <span class="kw">or</span> cur <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>        mark_seen(cur)</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>        pick_next()</span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cur <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>            end(<span class="ss">f&quot;No unseen movies left. Rated </span><span class="sc">{</span>rated<span class="sc">}</span><span class="ss">.&quot;</span>)</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> on_finish(_):</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a>        end(<span class="ss">f&quot;Finished. Rated </span><span class="sc">{</span>rated<span class="sc">}</span><span class="ss">.&quot;</span>)</span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> b <span class="kw">in</span> btns:</span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a>        b.on_click(on_rate)</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a>    skip.on_click(on_skip)</span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>    finish.on_click(on_finish)</span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>    display(box)</span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a>    pick_next()</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cur <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>        end(<span class="st">&quot;No unseen movies to rate.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this cell to provide your ratings</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Widget.close_all()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>start_movie_rater(target<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this cell to collect everyone&#39;s responses</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>responses()</span></code></pre></div>
 <h3 id="exercise-3">Exercise 3</h3>
-<p>The movies data is now in a data frame which contains one column for each user rating the movie. There are some entries that contain <code>NaN</code>. What does the <code>NaN</code> mean in this context?</p>
+<p>The movies data is now in a data frame, which contains one column for each user rating the movie. There are some entries that contain <code>NaN</code>. What does the <code>NaN</code> mean in this context?</p>
 <h2 id="processing-the-data">Processing the Data</h2>
-<p>We will now prepare the data set for processing. To do this we are going to conver the data into a new format using the <code>melt</code> command.</p>
+<p>We will now prepare the data set for processing. To do this, we are going to convert the data into a new format using the <code>melt</code> command.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> movies.reset_index().melt(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        id_vars<span class="op">=</span>[<span class="st">&#39;film&#39;</span>],           <span class="co"># Keep the movie names as identifier</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        var_name<span class="op">=</span><span class="st">&#39;user&#39;</span>,            <span class="co"># Column name for users</span></span>
