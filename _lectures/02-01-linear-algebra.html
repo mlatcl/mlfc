@@ -634,7 +634,7 @@ E(\mathbf{ w})=
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> movies[[<span class="st">&#39;IMDB_Rating&#39;</span>]]</span></code></pre></div>
 <p>Now let’s perform a linear regression. But this time, we will create a pandas data frame for the result so we can store it in a form that we can visualise easily.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y <span class="co"># solve linear regression here</span></span>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> np.linalg.solve(X.T<span class="op">@</span>X, X.T<span class="op">@</span>y) <span class="co"># solve linear regression here</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Place the solution in the data frame</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>solution, </span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                 index <span class="op">=</span> X.columns,  <span class="co"># columns of X become rows of w</span></span>
@@ -789,7 +789,7 @@ f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2 x^2}}
 </div>
 <h2 id="different-bases">Different Bases</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-different-bases.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-different-bases.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Our choice of basis can be made based on what our beliefs about what is appropriate for the data. For example, the polynomial basis extends the quadratic basis to aribrary degree, so we might define the <span class="math inline">\(j\)</span>th basis function associated with the model as <span class="math display">\[
 \phi_j(x_i) = x_i^j
@@ -998,6 +998,160 @@ f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 
 <p>Figure: A random combination of functions from the Fourier basis. Fourier basis is made up of sine and cosine functions with different frequencies.</p>
 </div>
 </div>
+<h1 id="fitting-basis-function-models">Fitting Basis Function Models</h1>
+<h2 id="fitting-to-data">Fitting to Data</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-fitting-to-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-fitting-to-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
+<h3 id="exercise-7">Exercise 7</h3>
+<p>Use the tool provided above to try and find the best fit you can to the data. Explore the parameter space and give the weight values you used for the</p>
+<ol type="a">
+<li>polynomial basis</li>
+<li>Radial basis</li>
+<li>Fourier basis</li>
+</ol>
+<p>Write your answers in the code box below creating a new vector of parameters (in the correct order!) for each basis.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
+<h2 id="basis-function-models">Basis Function Models</h2>
+<p><span class="math display">\[
+  f(\mathbf{ x}_i) = \sum_{j=1}^mw_j \phi_{i, j}
+  \]</span></p>
+<p><span class="math display">\[
+  f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}_i
+  \]</span></p>
+<h2 id="log-likelihood-for-basis-function-model">Log Likelihood for Basis Function Model</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-log-likelihood.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-log-likelihood.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>The likelihood of a single data point given the model parameters is given by <span class="math display">\[
+  p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}\right).
+  \]</span> and making an assumption of <em>conditional independence</em> given the parameters we can write</p>
+<p><span class="math display">\[
+  L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+  \]</span> to give us the likelihood for the whole data set.</p>
+<h2 id="objective-function">Objective Function</h2>
+<p>Traditionally in optimization, we choose to minmize an object function (or loss function, or cost function) rather than maximizing a likelihood. For these models we <em>minimize the negative log likelihood</em>. This function takes the form,</p>
+<p><span class="math display">\[
+E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+\]</span></p>
+<p>To minimize this objective, we first expand the brackets as follows, <span class="math display">\[
+\begin{align}
+  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\\ &amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
+\end{align}
+\]</span></p>
+<p>Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, to highlight that what we have is a multivariate quadratic form in <span class="math inline">\(\mathbf{ w}\)</span>. <span class="math display">\[\begin{align} E(\mathbf{ w}, \sigma^2) = &amp; \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2} \mathbf{ w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp; +\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}+\text{const}.\end{align}\]</span></p>
+<h2 id="design-matrices">Design Matrices</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-optimisation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-optimisation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>We like to make use of <em>design</em> matrices for our data. Design matrices involve placing the data points into rows of the matrix and data features into the columns of the matrix. By convention, we are referincing a vector with a bold lower case letter, and a matrix with a bold upper case letter. The design matrix is therefore given by <span class="math display">\[
+  \boldsymbol{ \Phi}= \begin{bmatrix} \mathbf{1} &amp; \mathbf{ x}&amp; \mathbf{ x}^2\end{bmatrix}
+  \]</span> so that <span class="math display">\[
+  \boldsymbol{ \Phi}\in \Re^{n\times p}.
+  \]</span></p>
+<h3 id="multivariate-derivatives-reminder">Multivariate Derivatives Reminder</h3>
+<p>To find the minimum of the objective function, we need to make use of multivariate calculus. The two results we need from multivariate calculus have the following form.</p>
+<p><span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></p>
+<h2 id="differentiate">Differentiate</h2>
+<p>Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i,\]</span></p>
+<p>Rewriting this result in matrix notation we obtain: <span class="math display">\[
+\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top = \boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i = \boldsymbol{ \Phi}^\top \mathbf{ y}
+\]</span></p>
+<p>Setting the derivative to zero we obtain update equations for the parameter vector and the noise variance.</p>
+<p><span class="math display">\[
+  \mathbf{ w}^{*} = \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
+  \]</span></p>
+<p><span class="math display">\[
+  \left.\sigma^2\right.^{*}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}.
+  \]</span></p>
+<p>In practice we should avoid solving these equations through direct use of the inverse. Instead we solve for <span class="math inline">\(\mathbf{ w}\)</span> in the following linear system.</p>
+<p><span class="math display">\[
+  \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}= \boldsymbol{ \Phi}^\top \mathbf{ y}
+\]</span> Compare this system with <em>solve for</em> <span class="math inline">\(\mathbf{x}\)</span> in <span class="math display">\[
+\mathbf{A}\mathbf{x} = \mathbf{b}.
+\]</span> For example see the <code>numpy.linalg.solve</code> or <code>torch.linalg.solve</code>.</p>
+<p>But the correct and more stable approach is to make use of the QR decomposition.</p>
+<p>Don’t forget, the multivariate solution should be computed using QR decomposition.</p>
+<h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic Data</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.polynomial</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1892</span>, <span class="dv">2020</span>]</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>max_basis <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>sum_squares <span class="op">=</span> np.array([np.nan]<span class="op">*</span>(max_basis))</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="figure">
+<div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-lm-polynomial-num-basis-02-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-02&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-lm-polynomial-num-basis-02-caption" class="caption-frame">
+<p>Figure: Fit of a 1 degree polynomial to the olympic marathon data.</p>
+</div>
+</div>
+<div class="figure">
+<div id="olympic-lm-polynomial-num-basis-03-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number003.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-lm-polynomial-num-basis-03-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-03&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-lm-polynomial-num-basis-03-caption" class="caption-frame">
+<p>Figure: Fit of a 2 degree polynomial to the olympic marathon data.</p>
+</div>
+</div>
+<h2 id="non-linear-but-linear-in-the-parameters">Non-linear but Linear in the Parameters</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-but-linear-in-parameters.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-but-linear-in-parameters.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>One rather nice aspect of our model is that whilst it is non-linear in the inputs, it is still linear in the parameters <span class="math inline">\(\mathbf{ w}\)</span>. This means that our derivations from before continue to operate to allow us to work with this model. In fact, although this is a non-linear regression it is still known as a <em>linear model</em> because it is linear in the parameters,</p>
+<p><span class="math display">\[
+f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})
+\]</span> where the vector <span class="math inline">\(\mathbf{ x}\)</span> appears inside the basis functions, making our result, <span class="math inline">\(f(\mathbf{ x})\)</span> non-linear in the inputs, but <span class="math inline">\(\mathbf{ w}\)</span> appears outside our basis function, making our result <em>linear</em> in the parameters. In practice, our basis function itself may contain its own set of parameters, <span class="math display">\[
+f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
+\boldsymbol{\theta}),
+\]</span> that we’ve denoted here as <span class="math inline">\(\boldsymbol{\theta}\)</span>. If these parameters appear inside the basis function then our model is <em>non-linear</em> in these parameters.</p>
+<h3 id="exercise-8">Exercise 8</h3>
+<p>For the following prediction functions state whether the model is linear in the inputs, the parameters or both.</p>
+<ol type="a">
+<li><p><span class="math inline">\(f(x) = w_1x_1 + w_2\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = w_1\exp(x_1) + w_2x_2 + w_3\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = \log(x_1^{w_1}) + w_2x_2^2 + w_3\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = \exp(-\sum_i(x_i - w_i)^2)\)</span></p></li>
+<li><p><span class="math inline">\(f(x) = \exp(-\mathbf{ w}^\top \mathbf{ x})\)</span></p></li>
+</ol>
+<h2 id="fitting-the-model-yourself">Fitting the Model Yourself</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-student-fitting-exercise.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-student-fitting-exercise.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>You now have everything you need to fit a non- linear (in the inputs) basis function model to the marathon data.</p>
+<h3 id="exercise-9">Exercise 9</h3>
+<p>Choose one of the basis functions you have explored above. Compute the design matrix on the covariates (or input data), <code>x</code>. Use the design matrix and the response variable <code>y</code> to solve the following linear system for the model parameters <code>w</code>. <span class="math display">\[
+\boldsymbol{ \phi}^\top\boldsymbol{ \phi}\mathbf{ w}= \boldsymbol{ \phi}^\top \mathbf{ y}
+\]</span> Compute the corresponding error on the training data. How does it compare to the error you were able to achieve fitting the basis above? Plot the form of your prediction function from the least squares estimate alongside the form of you prediction function you fitted by hand.</p>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
