@@ -53,6 +53,8 @@ $$
 \include{_ml/includes/alan-turing-marathon.md}
 \include{_ml/includes/olympic-marathon-linear-regression.md}
 \include{_ml/includes/linear-regression-coordinate-ascent.md}
+\include{_ml/includes/regression-contour-plot.md}
+\include{_ml/includes/regression-coordinate-fit.md}
 
 \subsection{Important Concepts Not Covered}
 
