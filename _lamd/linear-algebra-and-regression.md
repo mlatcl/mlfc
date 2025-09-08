@@ -53,8 +53,19 @@ $$
 \include{_ml/includes/alan-turing-marathon.md}
 \include{_ml/includes/olympic-marathon-linear-regression.md}
 \include{_ml/includes/linear-regression-coordinate-ascent.md}
+
+\notes{Let's recreate our data set we used for the iterative fitting so we can visualise the optimisation process.}
+
+\code{m_true  = 1.4
+c_true = -3.1
+x = np.random.normal(size=(4, 1))
+noise = np.random.normal(scale=0.5, size=(4, 1)) # standard deviation of the noise is 0.5
+y = m_true*x + c_true + noise}
+
 \include{_ml/includes/regression-contour-plot.md}
 \include{_ml/includes/regression-coordinate-fit.md}
+
+\writeassignment{Why does the coordiate descent converge so quickly for the toy data example, but take so long for the Marathon data?}{10}
 
 \subsection{Important Concepts Not Covered}
 
