@@ -69,7 +69,9 @@
 
 <section id="title-slide">
   <h1 class="title">Linear Algebra and Regression</h1>
+  <p class="author" style="text-align:center">Neil Lawrence</p>
   <p class="date" style="text-align:center"><time>2025-09-08</time></p>
+  <p class="venue" style="text-align:center">Dedan Kimathi University, Nyeri, Kenya</p>
 </section>
 
 <section class="slide level2">
@@ -294,7 +296,7 @@ p(\mathbf{ y}|\mathbf{ x}, m, c) = \frac{1}{\left(2\pi \sigma^2\right)^{\frac{n}
 <ul>
 <li>Normally work with the log likelihood:
 <span class="math display">\[\begin{aligned}
-L(m,c,\sigma^{2})= &amp; -\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 &amp; -\sum_{i=1}^{n}\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}.
+L(m,c,\sigma^{2})= &amp; -\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 \\&amp; -\sum_{i=1}^{n}\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}.
 \end{aligned}\]</span></li>
 </ul>
 </section>
@@ -324,7 +326,9 @@ L(m,c,\sigma^{2})= &amp; -\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 &amp; -
 <section id="error-function" class="slide level2">
 <h2>Error Function</h2>
 <ul>
-<li>Negative log likelihood leads to an error function \begin{aligned} (m,c,^{2})= &amp; ^2 &amp; +_{i=1}^{}(_i-m_i-c)^{2}.$$</li>
+<li>Negative log likelihood leads to an error function
+<span class="math display">\[\begin{aligned}
+E(m,c,\sigma^{2})= &amp; \frac{n}{2}\log \sigma^2 \\&amp; +\frac{1}{2\sigma^2}\sum _{i=1}^{n}\left(y_i-mx_i-c\right)^{2}.\end{aligned}\]</span></li>
 <li>Learning by minimising error function.</li>
 </ul>
 <!-- SECTION Sum of Squares Error -->
@@ -674,7 +678,7 @@ showDivs(1, 'regression_contour_coordinate_descent');
 <h2>Log Likelihood for Multivariate Regression</h2>
 <p>Leading to a log likelihood for the data set of</p>
 <div class="fragment">
-<span class="math display">\[\begin{aligned}L(\mathbf{ w},\sigma^2)= &amp; -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi &amp; -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}.\end{aligned}\]</span>
+<span class="math display">\[\begin{aligned}L(\mathbf{ w},\sigma^2)= &amp; -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi \\ &amp; -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}.\end{aligned}\]</span>
 </div>
 </section>
 <section id="error-function-1" class="slide level2">
@@ -1237,7 +1241,7 @@ showDivs(0, 'fourier_function');
 </section>
 <section id="fitting-to-data" class="slide level2">
 <h2>Fitting to Data</h2>
-<p>Now we are going to consider how these basis functions can be adjusted to fit to a particular data set. We will return to the olympic marathon data from last time. First we will scale the output of the data to be zero mean and variance 1.</p>
+<p>Notebook example</p>
 </section>
 <section id="basis-function-models" class="slide level2">
 <h2>Basis Function Models</h2>

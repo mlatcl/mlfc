@@ -4,8 +4,12 @@ session: 3
 date: 2025-09-03
 featured_image: slides/diagrams/ml/regression_contour_fit028.svg
 title: "Objective Functions and Gradient Descent"
+author:
+  - given: Neil
+    family: Lawrence
 abstract: |
   In this session we introduce the notion of objective functions and show how they can be used in a simple optimisation systems based on gradients.
+venue: Dedan Kimathi University, Nyeri, Kenya
 transition: None
 time: 9:30
 ipynb: true

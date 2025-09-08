@@ -4,9 +4,13 @@ session: 1
 date: 2025-09-01
 featured_image: slides/diagrams/ml/over_determined_system007.svg
 title: Probability
+author:
+  - given: Neil
+    family: Lawrence
 abstract: |
   In this first session we will introduce *machine learning*, review *probability* and begin familiarization with the Jupyter notebook, python and pandas.
 youtube: M67rG3cZoVg
+venue: Dedan Kimathi University, Nyeri, Kenya
 transition: None
 time: 9:30
 ipynb: true
