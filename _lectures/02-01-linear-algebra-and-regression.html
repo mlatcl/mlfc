@@ -403,13 +403,13 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;rx&#39;</span>)</span></code></pre></div>
 <p>Clearly we need more iterations than 10! In the next question you will add more iterations and report on the error as optimisation proceeds.</p>
 <h2 id="coordiate-descent-algorithm">Coordiate Descent Algorithm</h2>
-<p>Let’s run the complete coordiante ascent algorithm and visualise how the parameters evolve over multiple iterations. The animation will show the path taken through parameter space as the algorithm navigates toward the minimum of the error surface.</p>
+<p>Let’s run the complete coordiante descent algorithm and visualise how the parameters evolve over multiple iterations. The animation will show the path taken through parameter space as the algorithm navigates toward the minimum of the error surface.</p>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>There is a problem here, we seem to need many interations to get to a good solution. Let’s explore what’s going on. Write code which alternates between updates of <code>c</code> and <code>m</code>. Include the following features in your code.</p>
 <ol type="1">
 <li>Initialise with <code>m=-0.4</code> and <code>c=80</code>.</li>
-<li>Every 10 iterations compute the value of the objective function for the training data and print it to the screen (you’ll find hints on this in <a href="./week2.ipynb">the lab from last week</a>).</li>
-<li>Cause the code to stop running when the error change over less than 10 iterations is smaller than <span class="math inline">\(1\times10^{-4}\)</span>. This is known as a stopping criterion.</li>
+<li>Every 10 iterations compute the value of the objective function for the training data and print it to the screen.</li>
+<li>Cause the code to stop running when the error changes over less than 10 iterations is smaller than <span class="math inline">\(1\times 10^{-4}\)</span>. This is known as a stopping criterion.</li>
 </ol>
 <p>Why do we need so many iterations to get to the solution?</p>
 <p>Let’s recreate our data set we used for the iterative fitting so we can visualise the optimisation process.</p>
@@ -482,14 +482,14 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 </ul>
 <p>Watch how the algorithm follows a “staircase” path that converges towards the minimum. Note that the more correlated <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> are (principle axes of the ellipse contours is diagonal) the slower the convergence towards the minimum demonstrating the potential limitation of coordinate descent.</p>
 <div class="figure">
-<div id="regression-contour-coordinate-descent-10-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour_coordinate_descent010.svg" width="60%" style=" ">
+<div id="regression-coordinate-descent-contour-fit10-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_coordinate_descent_contour_fit010.svg" width="60%" style=" ">
 </object>
 </div>
-<div id="regression-contour-coordinate-descent-10-magnify" class="magnify" onclick="magnifyFigure(&#39;regression-contour-coordinate-descent-10&#39;)">
+<div id="regression-coordinate-descent-contour-fit10-magnify" class="magnify" onclick="magnifyFigure(&#39;regression-coordinate-descent-contour-fit10&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="regression-contour-coordinate-descent-10-caption" class="caption-frame">
+<div id="regression-coordinate-descent-contour-fit10-caption" class="caption-frame">
 <p>Figure: Coordinate descent for linear regression showing the path after 10 updates between <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>.</p>
 </div>
 </div>
