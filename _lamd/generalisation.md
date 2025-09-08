@@ -57,6 +57,10 @@ oldyoutube:
 \include{_ml/includes/olympic-marathon-loo-validation.md}
 \include{_ml/includes/olympic-marathon-k-fold-validation.md}
 
+\notes{Notice how as we vary the "part" of the cross validation, the fit varies. This variation is greater for high degree polynomials than for small degree polynomials like linear and quadratic models. This variation is coming from different variations of the data set.}
+
+\notes{An explicit approach to assessing this variations is to use "bootstrap sampling".}
+
 \include{_ml/includes/the-bootstrap.md}
 
 \include{_ml/includes/olympic-marathon-bootstrap-polynomial.md}
@@ -64,6 +68,8 @@ oldyoutube:
 \define{biasVariancePlots}
 
 \include{_ml/includes/bias-variance-dilemma.md}
+\notes{We can also use the bootstrap to characterise the bias and variance area for different polynomials on the olympic data.}
+\include{_ml/includes/olympic-marathon-bias-variance-plots.md}
 \include{_ml/includes/no-free-lunch-theorem.md}
 
 \include{_ml/includes/linear-regression-regularisation.md}
