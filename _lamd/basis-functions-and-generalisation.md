@@ -1,7 +1,7 @@
 ---
 layout: lecture
 featured_image: slides/diagrams/ml/olympic_LM_polynomial_number026.svg
-title: Generalisation
+title: Basis Functions and Generalisation
 author:
   - given: Neil
     family: Lawrence
