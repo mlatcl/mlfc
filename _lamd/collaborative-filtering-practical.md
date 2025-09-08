@@ -8,6 +8,7 @@ author:
   given: Neil D.
 - family: Sendyka
   given: Radzim
+date: 2025-09-09
 abstract: |
   In this session we use our understanding of objective functions to build a  simple recommender system based on *matrix factorisation*.
 youtube: Gq6bjcm8AqQ
