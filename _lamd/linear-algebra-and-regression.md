@@ -58,6 +58,7 @@ $$
 
 \code{m_true  = 1.4
 c_true = -3.1
+np.random.seed(42)
 x = np.random.normal(size=(4, 1))
 noise = np.random.normal(scale=0.5, size=(4, 1)) # standard deviation of the noise is 0.5
 y = m_true*x + c_true + noise}
