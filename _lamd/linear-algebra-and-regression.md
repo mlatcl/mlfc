@@ -39,6 +39,7 @@ ipynb: true
 $$
 \errorFunction(\mappingVector) = \sum_{i=1}^n \left(\dataScalar_i - \inputVector_i^\top \mappingVector\right)^2\notes{.}
 $$
+
 \slides{* Will recast with probabilistic motivation.
 * First, reminder of Gaussian distribution.}
 
@@ -62,6 +63,11 @@ $$
 
 \addreading{@Rogers:book11}{For fitting linear models: Section 1.1-1.2}
 \addreading{@Bishop:book06}{Section 1.2.5 up to equation 1.65}
+
+
+\section{Multivariate Regression}
+
+\notes{What if we're faced with a multivariate regression. For example, we might try and predict height given weight and gender.}
 
 \newslide{Multi-dimensional Inputs}
 \slides{

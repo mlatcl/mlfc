@@ -166,7 +166,11 @@ Olympic 100m wining times since 1896.
 <h2>Sum of Squares Error</h2>
 <p><span class="math display">\[
 E(\mathbf{ w}) = \sum_{i=1}^n \left(y_i - \mathbf{ x}_i^\top \mathbf{ w}\right)^2
-\]</span> * Will recast with probabilistic motivation. * First, reminder of Gaussian distribution.</p>
+\]</span></p>
+<ul>
+<li>Will recast with probabilistic motivation.</li>
+<li>First, reminder of Gaussian distribution.</li>
+</ul>
 </section>
 <section id="the-gaussian-density" class="slide level2">
 <h2>The Gaussian Density</h2>
@@ -287,9 +291,12 @@ p(\mathbf{ y}|\mathbf{ x}, m, c) = \prod_{i=1}^np(y_i|x_i, m, c)
 <h2>For Gaussian</h2>
 <p>i.i.d. assumption <span class="math display">\[
 p(\mathbf{ y}|\mathbf{ x}, m, c) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left(-\frac{\left(y_i- mx_i-c\right)^{2}}{2\sigma^2}\right).
-\]</span> <span class="math display">\[
+\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[
 p(\mathbf{ y}|\mathbf{ x}, m, c) = \frac{1}{\left(2\pi \sigma^2\right)^{\frac{n}{2}}}\exp\left(-\frac{\sum_{i=1}^n\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}\right).
 \]</span></p>
+</div>
 </section>
 <section id="log-likelihood-function" class="slide level2">
 <h2>Log Likelihood Function</h2>
@@ -305,6 +312,11 @@ L(m,c,\sigma^{2})= &amp; -\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 \\&amp;
 <ul>
 <li>If data was really generated according to probability we specified.</li>
 <li>Correct parameters will be recovered in limit as <span class="math inline">\(n\rightarrow \infty\)</span>.</li>
+</ul>
+</section>
+<section id="consistency-of-maximum-likelihood-1" class="slide level2">
+<h2>Consistency of Maximum Likelihood</h2>
+<ul>
 <li>This can be proven through sample based approximations (law of large numbers) of “KL divergences.”</li>
 <li>Mainstay of classical statistics <span class="citation" data-cites="Wasserman:all03">(Wasserman, 2003)</span>.</li>
 </ul>
@@ -649,6 +661,10 @@ showDivs(1, 'regression_contour_coordinate_descent');
 <li>Effective heuristics such as momentum.</li>
 <li>Local vs global solutions.</li>
 </ul>
+<!-- SECTION Multivariate Regression -->
+</section>
+<section id="multivariate-regression" class="slide level2">
+<h2>Multivariate Regression</h2>
 </section>
 <section id="multi-dimensional-inputs" class="slide level2">
 <h2>Multi-dimensional Inputs</h2>
@@ -807,16 +823,17 @@ _{i=1}^{n}\mathbf{ x}_iy_i,
 <li><p>The equation for <span class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be found <span class="math display">\[\left.\sigma^2\right.^{{*}}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\mathbf{ x}_i\right)^{2}}{n}.\]</span></p></li>
 </ul>
 </section>
-<section id="movie-body-count-data" class="slide level2">
-<h2>Movie Body Count Data</h2>
+<section id="movie-violence-data" class="slide level2">
+<h2>Movie Violence Data</h2>
 <ul>
 <li>Data containing movie information (year, length, rating, genre, IMDB Rating).</li>
+<li>Try and predict what factors influence a movie’s violence</li>
 </ul>
 </section>
-<section id="multivariate-regression-on-movie-body-count-data" class="slide level2">
-<h2>Multivariate Regression on Movie Body Count Data</h2>
+<section id="multivariate-regression-on-movie-violence-data" class="slide level2">
+<h2>Multivariate Regression on Movie Violence Data</h2>
 <ul>
-<li>Regress from features <code>Year</code>, <code>Body_Count</code>, <code>Length_Minutes</code> to IMDB_Rating.</li>
+<li>Regress from features <code>Year</code>, <code>Body_Count</code>, <code>Length_Minutes</code> to <code>IMDB_Rating</code>.</li>
 </ul>
 </section>
 <section id="residuals" class="slide level2">
