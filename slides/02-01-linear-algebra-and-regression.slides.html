@@ -162,10 +162,9 @@ Olympic 100m wining times since 1896.
 </section>
 <section id="sum-of-squares-error" class="slide level2">
 <h2>Sum of Squares Error</h2>
-<!-- SECTION Sum of Squares Error -->
-</section>
-<section id="sum-of-squares-error-1" class="slide level2">
-<h2>Sum of Squares Error</h2>
+<p><span class="math display">\[
+E(\mathbf{ w}) = \sum_{i=1}^n \left(y_i - \mathbf{ x}_i^\top \mathbf{ w}\right)^2
+\]</span> * Will recast with probabilistic motivation. * First, reminder of Gaussian distribution.</p>
 </section>
 <section id="the-gaussian-density" class="slide level2">
 <h2>The Gaussian Density</h2>
@@ -293,9 +292,10 @@ p(\mathbf{ y}|\mathbf{ x}, m, c) = \frac{1}{\left(2\pi \sigma^2\right)^{\frac{n}
 <section id="log-likelihood-function" class="slide level2">
 <h2>Log Likelihood Function</h2>
 <ul>
-<li>Normally work with the log likelihood: <span class="math display">\[
-L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n}\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}.
-\]</span></li>
+<li>Normally work with the log likelihood:
+<span class="math display">\[\begin{aligned}
+L(m,c,\sigma^{2})= &amp; -\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 &amp; -\sum_{i=1}^{n}\frac{\left(y_i-mx_i-c\right)^{2}}{2\sigma^2}.
+\end{aligned}\]</span></li>
 </ul>
 </section>
 <section id="consistency-of-maximum-likelihood" class="slide level2">
@@ -307,11 +307,16 @@ L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n
 <li>Mainstay of classical statistics <span class="citation" data-cites="Wasserman:all03">(Wasserman, 2003)</span>.</li>
 </ul>
 </section>
-<section id="probabilistic-interpretation-of-the-error-function" class="slide level2">
-<h2>Probabilistic Interpretation of the Error Function</h2>
+<section id="probabilistic-interpretation-of-error-function" class="slide level2">
+<h2>Probabilistic Interpretation of Error Function</h2>
 <ul>
 <li>Probabilistic Interpretation for Error Function is Negative Log Likelihood.</li>
 <li><em>Minimizing</em> error function is equivalent to <em>maximizing</em> log likelihood.</li>
+</ul>
+</section>
+<section id="probabilistic-interpretation-of-error-function-1" class="slide level2">
+<h2>Probabilistic Interpretation of Error Function</h2>
+<ul>
 <li>Maximizing <em>log likelihood</em> is equivalent to maximizing the <em>likelihood</em> because <span class="math inline">\(\log\)</span> is monotonic.</li>
 <li>Probabilistic interpretation: Minimizing error function is equivalent to maximum likelihood with respect to parameters.</li>
 </ul>
@@ -319,16 +324,21 @@ L(m,c,\sigma^{2})=-\frac{n}{2}\log 2\pi -\frac{n}{2}\log \sigma^2 -\sum_{i=1}^{n
 <section id="error-function" class="slide level2">
 <h2>Error Function</h2>
 <ul>
-<li>Negative log likelihood is the error function leading to an error function <span class="math display">\[E(m,c,\sigma^{2})=\frac{n}{2}\log \sigma^2+\frac{1}{2\sigma^2}\sum _{i=1}^{n}\left(y_i-mx_i-c\right)^{2}.\]</span></li>
-<li>Learning proceeds by minimizing this error function for the data set provided.</li>
+<li>Negative log likelihood leads to an error function \begin{aligned} (m,c,^{2})= &amp; ^2 &amp; +_{i=1}^{}(_i-m_i-c)^{2}.$$</li>
+<li>Learning by minimising error function.</li>
 </ul>
 <!-- SECTION Sum of Squares Error -->
+</section>
+<section id="sum-of-squares-error-1" class="slide level2">
+<h2>Sum of Squares Error</h2>
+<ul>
+<li>Ignoring terms which don’t depend on <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> gives <span class="math display">\[E(m, c) \propto \sum_{i=1}^n(y_i - f(x_i))^2\]</span> where <span class="math inline">\(f(x_i) = mx_i + c\)</span>.</li>
+</ul>
 </section>
 <section id="sum-of-squares-error-2" class="slide level2">
 <h2>Sum of Squares Error</h2>
 <ul>
-<li>Ignoring terms which don’t depend on <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> gives <span class="math display">\[E(m, c) \propto \sum_{i=1}^n(y_i - f(x_i))^2\]</span> where <span class="math inline">\(f(x_i) = mx_i + c\)</span>.</li>
-<li>This is known as the <em>sum of squares</em> error function.</li>
+<li>This is recognised as the <em>sum of squares</em> error function.</li>
 <li>Commonly used and is closely associated with the Gaussian likelihood.</li>
 </ul>
 </section>
@@ -358,6 +368,24 @@ E(m, c)=\sum_{i=1}^n\left(y_i - mx_i-c\right)^2
 </section>
 <section id="legendre" class="slide level2">
 <h2>Legendre</h2>
+<ul>
+<li>Sum of squares error was first <strong>published</strong> by Legendre in 1805</li>
+<li>But Laplace had priority - he used it to recover the lost planet Ceres</li>
+<li>This led to a priority dispute between Legendre and Gauss</li>
+</ul>
+</section>
+<section id="legendre-1" class="slide level2">
+<h2>Legendre</h2>
+<div class="figure">
+<div id="legendre-least-squares-figure" class="figure-frame">
+<div class="centered" style="">
+<a href="https://play.google.com/books/reader?id=spcAAAAAMAAJ&amp;pg=PA72"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/spcAAAAAMAAJ-PA72.png" /></a>
+</div>
+</div>
+</div>
+<aside class="notes">
+Legendre’s book was on the determination of orbits of comets. This page describes the formulation of least squares
+</aside>
 </section>
 <section id="olympic-marathon-data" class="slide level2">
 <h2>Olympic Marathon Data</h2>
@@ -484,8 +512,8 @@ _{i=1}^{n}\left(y_i-m^{*}x_i-c^{*}\right)^{2}}{n}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="gradient-descent-algorithm" class="slide level2">
-<h2>Gradient Descent Algorithm</h2>
+<section id="coordiate-descent-algorithm" class="slide level2">
+<h2>Coordiate Descent Algorithm</h2>
 <script>
 showDivs(1, 'regression_contour_coordinate_descent');
 </script>
@@ -641,11 +669,12 @@ showDivs(1, 'regression_contour_coordinate_descent');
 <div class="fragment">
 <p><span class="math display">\[p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}\right).\]</span></p>
 </div>
-<div class="fragment">
+</section>
+<section id="log-likelihood-for-multivariate-regression-1" class="slide level2">
+<h2>Log Likelihood for Multivariate Regression</h2>
 <p>Leading to a log likelihood for the data set of</p>
-</div>
 <div class="fragment">
-<p><span class="math display">\[L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}.\]</span></p>
+<span class="math display">\[\begin{aligned}L(\mathbf{ w},\sigma^2)= &amp; -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi &amp; -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\mathbf{ x}_i\right)^{2}}{2\sigma^2}.\end{aligned}\]</span>
 </div>
 </section>
 <section id="error-function-1" class="slide level2">
@@ -827,6 +856,10 @@ Residual values for the ratings from the prediction of the movie rating given th
 <li>More nummerically stable.</li>
 <li>Avoids the intermediate computation of <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span>.</li>
 </ul>
+<!-- SECTION Nonlinear Regression with Linear Models -->
+</section>
+<section id="nonlinear-regression-with-linear-models" class="slide level2">
+<h2>Nonlinear Regression with Linear Models</h2>
 </section>
 <section id="nonlinear-regression" class="slide level2">
 <h2>Nonlinear Regression</h2>
@@ -991,6 +1024,9 @@ showDivs(0, 'polynomial_function');
 \phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)
 \]</span></li>
 </ul>
+</section>
+<section id="radial-basis-functions-1" class="slide level2">
+<h2>Radial Basis Functions</h2>
 <script>
 showDivs(0, 'radial_basis');
 </script>
@@ -1033,7 +1069,7 @@ showDivs(0, 'radial_function');
 <section id="rectified-linear-units" class="slide level2">
 <h2>Rectified Linear Units</h2>
 <ul>
-<li></li>
+<li>The ReLU is a basis function used in neural nets</li>
 </ul>
 <p><span class="math display">\[
 \phi_j(x) = xH(v_j x+ v_0)
@@ -1088,7 +1124,7 @@ showDivs(0, 'relu_function');
 <section id="hyperbolic-tangent-basis" class="slide level2">
 <h2>Hyperbolic Tangent Basis</h2>
 <ul>
-<li></li>
+<li>The hyperbolc tangent was formerly popular for neural nets.</li>
 </ul>
 <p><span class="math display">\[
 \phi_j(x) = \tanh(v_j x+ v_0)
@@ -1143,7 +1179,7 @@ showDivs(0, 'hyperbolic_tangent_function');
 <section id="fourier-basis" class="slide level2">
 <h2>Fourier Basis</h2>
 <ul>
-<li></li>
+<li>In signal processing we often use the Fourier basis</li>
 </ul>
 <p><span class="math display">\[
 f(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)
@@ -1230,9 +1266,10 @@ p\left(y_i|x_i\right)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{\left(y_i-\m
 <section id="log-likelihood-for-basis-function-model-1" class="slide level2">
 <h2>Log Likelihood for Basis Function Model</h2>
 <ul>
-<li>Leading to a log likelihood for the data set of <span class="math display">\[
-L(\mathbf{ w},\sigma^2)= -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
-\]</span></li>
+<li>Leading to a log likelihood for the data set of
+<span class="math display">\[\begin{aligned}
+L(\mathbf{ w},\sigma^2)= &amp; -\frac{n}{2}\log \sigma^2-\frac{n}{2}\log 2\pi \\ &amp; -\frac{\sum_{i=1}^{n}\left(y_i-\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\right)^{2}}{2\sigma^2}.
+\end{aligned}\]</span></li>
 </ul>
 </section>
 <section id="objective-function" class="slide level2">
@@ -1245,15 +1282,13 @@ E(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 </section>
 <section id="expand-the-brackets" class="slide level2">
 <h2>Expand the Brackets</h2>
-<p><span class="math display">\[
-\begin{align}
-  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\\ &amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
-\end{align}
-\]</span></p>
+<span class="math display">\[\begin{aligned}
+  E(\mathbf{ w},\sigma^2) = &amp;\frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2} \\ &amp; -\frac{1}{\sigma^2}\sum_{i=1}^{n}y_i\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\\ &amp;+\frac{1}{2\sigma^2}\sum_{i=1}^{n}\mathbf{ w}^{\top}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\mathbf{ w}+\text{const}.
+\end{aligned}\]</span>
 </section>
 <section id="expand-the-brackets-1" class="slide level2">
 <h2>Expand the Brackets</h2>
-<p><span class="math display">\[\begin{align} E(\mathbf{ w}, \sigma^2) = &amp; \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2}-\frac{1}{\sigma^2} \mathbf{ w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp; +\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}+\text{const}.\end{align}\]</span></p>
+<span class="math display">\[\begin{aligned} E(\mathbf{ w}, \sigma^2) = &amp; \frac{n}{2}\log \sigma^2 + \frac{1}{2\sigma^2}\sum_{i=1}^{n}y_i^{2} \\ &amp; -\frac{1}{\sigma^2} \mathbf{ w}^\top\sum_{i=1}^{n}\boldsymbol{ \phi}_i y_i\\ &amp; +\frac{1}{2\sigma^2}\mathbf{ w}^{\top}\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}+\text{const}.\end{aligned}\]</span>
 </section>
 <section id="design-matrices" class="slide level2">
 <h2>Design Matrices</h2>
@@ -1441,9 +1476,6 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 \boldsymbol{\theta}),
 \]</span></li>
 </ul>
-</section>
-<section id="fitting-the-model-yourself" class="slide level2">
-<h2>Fitting the Model Yourself</h2>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>

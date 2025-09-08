@@ -31,13 +31,12 @@ ipynb: true
 
 \subsection{Sum of Squares Error}
 
-\section{Sum of Squares Error}
-
-\notes{Last week we considered a cost function for minimization of the error. We minimised an objective that assumed used the quadratic error function,
+\notes{Last week we considered a cost function for minimization of the error. We minimised an objective that assumed used the quadratic error function,}
 $$
-\errorFunction(\mappingVector) = \sum_{i=1}^n \left(\dataScalar_i - \inputVector_i^\top \mappingVector\right)^2.
+\errorFunction(\mappingVector) = \sum_{i=1}^n \left(\dataScalar_i - \inputVector_i^\top \mappingVector\right)^2\notes{.}
 $$
-}
+\slides{* Will recast with probabilistic motivation.
+* First, reminder of Gaussian distribution.}
 
 \notes{This week we will reinterpret the error as a *probabilistic model*. As Laplace suggests, we will consider the difference between our data and our model to have come from unconsidered factors which exhibit as a probability density. This leads to a more principled definition of least squares error due to [Carl Friederich Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), but inspired by [Pierre-Simon Laplace](https://en.wikipedia.org/wiki/Pierre-Simon_Laplace).}
 
@@ -97,6 +96,7 @@ $$
 
 \addreading{@Rogers:book11}{Section 1.3 for Matrix & Vector Review}
 
+\section{Nonlinear Regression with Linear Models}
 
 \include{_ml/includes/non-linear-regression-intro.md}
 
@@ -117,7 +117,7 @@ $$
 \include{_ml/includes/basis-functions-optimisation.md}
 \include{_ml/includes/olympic-marathon-all-polynomial.md}
 \include{_ml/includes/non-linear-but-linear-in-parameters.md}
-\include{_ml/includes/basis-functions-student-fitting-exercise.md}
+\notes{\include{_ml/includes/basis-functions-student-fitting-exercise.md}}
 
 \thanks
 
