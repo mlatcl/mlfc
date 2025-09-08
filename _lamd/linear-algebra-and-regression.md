@@ -120,29 +120,6 @@ y = m_true*x + c_true + noise}
 
 \addreading{@Rogers:book11}{Section 1.3 for Matrix & Vector Review}
 
-\section{Nonlinear Regression with Linear Models}
-
-\include{_ml/includes/non-linear-regression-intro.md}
-
-\section{Basis Functions}
-
-\include{_ml/includes/basis-functions-intro.md}
-\include{_ml/includes/quadratic-basis.md}
-\include{_ml/includes/basis-functions-different-bases.md}
-\include{_ml/includes/radial-basis.md}
-\include{_ml/includes/relu-basis.md}
-\include{_ml/includes/hyperbolic-tangent-basis.md}
-\include{_ml/includes/fourier-basis.md}
-
-\section{Fitting Basis Function Models}
-
-\include{_ml/includes/basis-functions-fitting-to-data.md}
-\include{_ml/includes/basis-functions-log-likelihood.md}
-\include{_ml/includes/basis-functions-optimisation.md}
-\include{_ml/includes/olympic-marathon-all-polynomial.md}
-\include{_ml/includes/non-linear-but-linear-in-parameters.md}
-\notes{\include{_ml/includes/basis-functions-student-fitting-exercise.md}}
-
 \thanks
 
 \exercises
