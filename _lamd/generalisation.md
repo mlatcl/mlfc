@@ -2,8 +2,13 @@
 layout: lecture
 featured_image: slides/diagrams/ml/olympic_LM_polynomial_number026.svg
 title: Generalisation
+author:
+  - given: Neil
+    family: Lawrence
 week: 2
 session: 2
+venue: Dedan Kimathi University, Nyeri, Kenya
+transition: None
 date: 2025-09-09
 abstract: >
   This lecture will cover generalisation in machine learning.
