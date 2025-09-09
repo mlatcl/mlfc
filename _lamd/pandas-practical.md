@@ -335,6 +335,13 @@ df["height"].fillna(df["height"].mean())
 df.dropna(subset=["height"])
 ```
 
+Explode
+
+```
+df["playername"] = df["playername"].astype(str).str.split(" ")
+df = df.explode("playername").reset_index(drop=True)
+```
+
 Exporting Data
 
 ```
