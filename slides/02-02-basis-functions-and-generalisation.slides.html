@@ -2024,6 +2024,34 @@ Bias-variance tradeoff for polynomial models on Olympic marathon data. The bias 
 </section>
 <section id="no-free-lunch-theorem" class="slide level2">
 <h2>No Free Lunch Theorem</h2>
+<ul>
+<li>No universally best learner across all data-generating processes</li>
+<li>Performance gains arise from assumptions (inductive bias) matching the task</li>
+<li>Implication: model choice and regularisation must reflect prior beliefs about the problem</li>
+</ul>
+</section>
+<section id="statement-informal" class="slide level2">
+<h2>Statement (Informal)</h2>
+<ul>
+<li>Averaged over all possible labelings/functions, all algorithms have the same expected error</li>
+<li>Differences in performance come only from restricting the problem family (assumptions)</li>
+</ul>
+</section>
+<section id="position-in-this-lecture" class="slide level2">
+<h2>Position in this Lecture</h2>
+<ul>
+<li>After bias–variance and bootstrap: why we cannot expect one degree/basis to win universally</li>
+<li>Connects to cross-validation and model selection: choose bias consistent with data</li>
+<li>Motivates regularisation: encode assumptions to trade bias for variance appropriately</li>
+</ul>
+</section>
+<section id="practical-takeaways" class="slide level2">
+<h2>Practical Takeaways</h2>
+<ul>
+<li>Use validation to select assumptions that fit the domain</li>
+<li>Prefer simple models unless evidence supports added complexity</li>
+<li>Make assumptions explicit (document basis, priors, regularisers)</li>
+</ul>
 </section>
 <section id="regularisation" class="slide level2">
 <h2>Regularisation</h2>
