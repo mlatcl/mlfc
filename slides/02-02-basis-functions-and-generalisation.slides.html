@@ -379,7 +379,7 @@ showDivs(0, 'radial_function');
 <li>The ReLU is a basis function used in neural nets</li>
 </ul>
 <p><span class="math display">\[
-\phi_j(x) = xH(v_j x+ v_0)
+\phi_j(x) = xH(x+ v_j)
 \]</span></p>
 <script>
 showDivs(0, 'relu_basis');
@@ -741,7 +741,7 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})
 \]</span></li>
 <li><span class="math inline">\(\mathbf{ x}\)</span> is inside the non-linearity, but <span class="math inline">\(\mathbf{ w}\)</span> is outside. <span class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
-\boldsymbol{\theta}),
+\mathbf{ v}),
 \]</span></li>
 </ul>
 </section>

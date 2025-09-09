@@ -226,7 +226,7 @@ f(x) = \color{red}{w_1 e^{-2(x+1)^2}}  + \color{magenta}{w_2e^{-2x^2}} + \color{
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/relu-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/relu-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The rectified linear unit is a basis function that emerged out of the deep learning community. Rectified linear units are popular in the current generation of multilayer perceptron models, or deep networks. These basis functions start flat, and then become linear functions at a certain threshold. <span class="math display">\[
-\phi_j(x) = xH(v_j x+ v_0)
+\phi_j(x) = xH(x+ v_j)
 \]</span></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
@@ -507,8 +507,8 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})
 \]</span> where the vector <span class="math inline">\(\mathbf{ x}\)</span> appears inside the basis functions, making our result, <span class="math inline">\(f(\mathbf{ x})\)</span> non-linear in the inputs, but <span class="math inline">\(\mathbf{ w}\)</span> appears outside our basis function, making our result <em>linear</em> in the parameters. In practice, our basis function itself may contain its own set of parameters, <span class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
-\boldsymbol{\theta}),
-\]</span> that we’ve denoted here as <span class="math inline">\(\boldsymbol{\theta}\)</span>. If these parameters appear inside the basis function then our model is <em>non-linear</em> in these parameters.</p>
+\mathbf{ v}),
+\]</span> that we’ve denoted here as <span class="math inline">\(\mathbf{ v}\)</span>. If these parameters appear inside the basis function then our model is <em>non-linear</em> in these parameters.</p>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>For the following prediction functions state whether the model is linear in the inputs, the parameters or both.</p>
 <ol type="a">
