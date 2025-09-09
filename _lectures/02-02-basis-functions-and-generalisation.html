@@ -80,7 +80,7 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \mathbf{ x}
 \]</span> Now we can consider them together by placing them in a vector, <span class="math display">\[
 \boldsymbol{ \phi}(x) = \begin{bmatrix} 1\\ x\\ x^2\end{bmatrix}.
 \]</span> For the vector-valued function, we have simply collected the different functions together in the same vector making them notationally easier to deal with in our mathematics.</p>
-<p>When we consider the vector-valued function for each data point, then we place all the data into a matrix. The result is a matrix valued function, <span class="math display">\[
+<p>When we consider the vector-valued function for each data point, then we place all the data into a design matrix. The result is a matrix valued function, <span class="math display">\[
 \boldsymbol{ \Phi}(\mathbf{ x}) = 
 \begin{bmatrix} 1 &amp; x_1 &amp;
 x_1^2 \\
@@ -88,7 +88,7 @@ x_1^2 \\
 \vdots &amp; \vdots &amp; \vdots \\
 1 &amp; x_n&amp; x_n^2
 \end{bmatrix}
-\]</span> where we are still in the one dimensional input setting so <span class="math inline">\(\mathbf{ x}\)</span> here represents a vector of our inputs with <span class="math inline">\(n\)</span> elements.</p>
+\]</span> where here we are still considering the one dimensional input setting so <span class="math inline">\(\mathbf{ x}\)</span> here represents a vector of our inputs with <span class="math inline">\(n\)</span> elements.</p>
 <p>Let’s try constructing such a matrix for a set of inputs. First of all, we create a function that returns the matrix valued function.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic(x, <span class="op">**</span>kwargs):</span>
@@ -129,7 +129,7 @@ f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2 x^2}}
 <p>Figure: Functions constructed by weighted sum of the components of a quadratic basis.</p>
 </div>
 </div>
-<h2 id="different-bases">Different Bases</h2>
+<h2 id="choice-of-basis">Choice of Basis</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-different-bases.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-different-bases.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
@@ -443,21 +443,19 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
   \boldsymbol{ \Phi}\in \Re^{n\times p}.
   \]</span></p>
 <h3 id="multivariate-derivatives-reminder">Multivariate Derivatives Reminder</h3>
-<p>To find the minimum of the objective function, we need to make use of multivariate calculus. The two results we need from multivariate calculus have the following form.</p>
-<p><span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></p>
+<p>To find the minimum of the objective function, we need to make use of multivariate calculus. The two results we need from multivariate calculus have the following form. <span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></p>
+<p>{ <span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span>  <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}\]</span> </p>
 <h2 id="differentiate">Differentiate</h2>
-<p>Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\mathbf{ w}^{*}=\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]^{-1}\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i,\]</span></p>
+<p>Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}^{*}=\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i.\]</span></p>
 <p>Rewriting this result in matrix notation we obtain: <span class="math display">\[
 \sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^\top = \boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\]</span> <span class="math display">\[\sum _{i=1}^{n}\boldsymbol{ \phi}_iy_i = \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></p>
-<p>Setting the derivative to zero we obtain update equations for the parameter vector and the noise variance.</p>
-<p><span class="math display">\[
-  \mathbf{ w}^{*} = \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)^{-1} \boldsymbol{ \Phi}^\top \mathbf{ y}
-  \]</span></p>
-<p><span class="math display">\[
+<p>Setting the derivative to zero we obtain update equations for the parameter vector and the noise variance. First to find <span class="math inline">\(\mathbf{ w}^{*}\)</span> we solve <span class="math display">\[
+  \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)  \mathbf{ w}^{*} = \boldsymbol{ \Phi}^\top \mathbf{ y}
+  \]</span> and the update for <span class="math inline">\(\left.\sigma^2\right.^*\)</span> is <span class="math display">\[
   \left.\sigma^2\right.^{*}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}.
   \]</span></p>
-<p>In practice we should avoid solving these equations through direct use of the inverse. Instead we solve for <span class="math inline">\(\mathbf{ w}\)</span> in the following linear system.</p>
+<p>Wee should avoid solving these equations through direct use of the inverse. Instead we solve for <span class="math inline">\(\mathbf{ w}\)</span> in the following linear system.</p>
 <p><span class="math display">\[
   \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)\mathbf{ w}= \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span> Compare this system with <em>solve for</em> <span class="math inline">\(\mathbf{x}\)</span> in <span class="math display">\[
@@ -501,37 +499,6 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>Phi.columns)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
-<h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic Data</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
-<div class="figure">
-<div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-lm-polynomial-num-basis-02-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-02&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-lm-polynomial-num-basis-02-caption" class="caption-frame">
-<p>Figure: Fit of a 1 degree polynomial to the olympic marathon data.</p>
-</div>
-</div>
-<div class="figure">
-<div id="olympic-lm-polynomial-num-basis-03-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number003.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-lm-polynomial-num-basis-03-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-03&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-lm-polynomial-num-basis-03-caption" class="caption-frame">
-<p>Figure: Fit of a 2 degree polynomial to the olympic marathon data.</p>
-</div>
-</div>
 <h2 id="non-linear-but-linear-in-the-parameters">Non-linear but Linear in the Parameters</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-but-linear-in-parameters.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-but-linear-in-parameters.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -565,26 +532,26 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
 <p>Define the polynomial basis function.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <p>Now we include the solution for the linear regression through QR-decomposition.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> basis_fit(Phi, y):</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Use QR decomposition to fit the basis.&quot;</span><span class="st">&quot;&quot;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    Q, R <span class="op">=</span> np.linalg.qr(Phi)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> basis_fit(Phi, y):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Use QR decomposition to fit the basis.&quot;</span><span class="st">&quot;&quot;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    Q, R <span class="op">=</span> np.linalg.qr(Phi)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span></code></pre></div>
 <h2 id="linear-fit">Linear Fit</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">2</span>, <span class="co"># two basis functions (1 and x)</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">2</span>, <span class="co"># two basis functions (1 and x)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
 <p>Now we make some predictions for the fit.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">400</span>)[:, np.newaxis]</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">400</span>)[:, np.newaxis]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-2.svg" width="80%" style=" ">
@@ -598,12 +565,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 </div>
 <h2 id="cubic-fit">Cubic Fit</h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-4-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-4.svg" width="80%" style=" ">
@@ -618,12 +585,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 <h2 id="th-degree-polynomial-fit">9th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 9th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">10</span>, <span class="co"># basis up to x^9</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">10</span>, <span class="co"># basis up to x^9</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-10-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-10.svg" width="80%" style=" ">
@@ -638,12 +605,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 <h2 id="th-degree-polynomial-fit-1">16th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 16th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">17</span>, <span class="co"># basis up to x^16</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">17</span>, <span class="co"># basis up to x^16</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-17-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-17.svg" width="80%" style=" ">
@@ -658,12 +625,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 <h2 id="th-degree-polynomial-fit-2">28th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 28th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">29</span>, <span class="co"># basis up to x^28</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">29</span>, <span class="co"># basis up to x^28</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-29-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-29.svg" width="80%" style=" ">
@@ -676,6 +643,38 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 <p>Figure: Fit of a 28-degree polynomial to the Olympic marathon data.</p>
 </div>
 </div>
+<h2 id="polynomial-fits-to-olympic-data">Polynomial Fits to Olympic Data</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="figure">
+<div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-lm-polynomial-num-basis-02-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-02&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-lm-polynomial-num-basis-02-caption" class="caption-frame">
+<p>Figure: Fit of a 1 degree polynomial to the olympic marathon data.</p>
+</div>
+</div>
+<div class="figure">
+<div id="olympic-lm-polynomial-num-basis-03-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number003.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-lm-polynomial-num-basis-03-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-lm-polynomial-num-basis-03&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-lm-polynomial-num-basis-03-caption" class="caption-frame">
+<p>Figure: Fit of a 2 degree polynomial to the olympic marathon data.</p>
+</div>
+</div>
+<h1 id="empirical-risk-minimisation">Empirical Risk Minimisation</h1>
 <h2 id="expected-loss">Expected Loss</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/expected-loss.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/expected-loss.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -683,7 +682,8 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 <p>Our objective function so far has been the negative log likelihood, which we have minimized (via the sum of squares error) to obtain our model. However, there is an alternative perspective on an objective function, that of a <em>loss function</em>. A loss function is a cost function associated with the penalty you might need to pay for a particular incorrect decision. One approach to machine learning involves specifying a loss function and considering how much a particular model is likely to cost us across its lifetime. We can represent this with an expectation. If our loss function is given as <span class="math inline">\(L(y, x, \mathbf{ w})\)</span> for a particular model that predicts <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span> and <span class="math inline">\(\mathbf{ w}\)</span> then we are interested in minimizing the expected loss under the likely distribution of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. To understand this formally we define the <em>true</em> distribution of the data samples, <span class="math inline">\(y\)</span>, <span class="math inline">\(x\)</span>. This is a particular distribution that we don’t typically have access to. To represent it we define a variant of the letter ‘P,’ <span class="math inline">\(\mathbb{P}(y, x)\)</span>. If we genuinely pay <span class="math inline">\(L(y, x, \mathbf{ w})\)</span> for every mistake we make, and the future test data is genuinely drawn from <span class="math inline">\(\mathbb{P}(y, x)\)</span> then we can define our expected loss, or risk, to be, <span class="math display">\[
 R(\mathbf{ w}) = \int L(y, x, \mathbf{ w}) \mathbb{P}(y, x) \text{d}y
 \text{d}x.
-\]</span> Of course, in practice, this value can’t be computed <em>but</em> it serves as a reminder of what it is we are aiming to minimize and under certain circumstances it can be approximated.</p>
+\]</span> Of course, in practice, this value can’t be computed <em>but</em> it serves as a reminder of what it is we are aiming to minimise and under certain circumstances it can be approximated.</p>
+<p>Here we have used <span class="math inline">\(L(\cdot)\)</span> as our notation for the <em>loss</em> function. The cost we expect to pay for making errors. This is a different interpretation of the objective function, <span class="math inline">\(E(\cdot)\)</span>, fromt he idea of negative log likelihood we see in Gauss’s probabilistic approach.</p>
 <h2 id="sample-based-approximations">Sample-Based Approximations</h2>
 <p>A sample-based approximation to an expectation involves replacing the true expectation with a sum over samples from the distribution. <span class="math display">\[
 \int f(z) p(z) \text{d}z\approx \frac{1}{s}\sum_{i=1}^s f(z_i).

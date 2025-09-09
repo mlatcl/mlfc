@@ -23,7 +23,7 @@ oldyoutube:
 \define{designMatrix}{\basisMatrix}
 \define{designVariable}{Phi}
 
-\include{_mlfc/includes/mlfc-notebook-setup.md}
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 \section{Nonlinear Regression with Linear Models}
 
@@ -44,11 +44,13 @@ oldyoutube:
 \include{_ml/includes/basis-functions-fitting-to-data.md}
 \include{_ml/includes/basis-functions-log-likelihood.md}
 \include{_ml/includes/basis-functions-optimisation.md}
-\include{_ml/includes/olympic-marathon-all-polynomial.md}
 \include{_ml/includes/non-linear-but-linear-in-parameters.md}
 \notes{\include{_ml/includes/basis-functions-student-fitting-exercise.md}}
-
 \include{_ml/includes/olympic-marathon-polynomial.md}
+\include{_ml/includes/olympic-marathon-all-polynomial.md}
+
+\section{Empirical Risk Minimisation}
+
 \include{_ml/includes/expected-loss.md}
 \include{_ml/includes/empirical-risk-minimization.md}
 \include{_ml/includes/validation-short-intro.md}
