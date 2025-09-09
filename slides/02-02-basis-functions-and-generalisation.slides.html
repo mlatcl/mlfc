@@ -1920,6 +1920,18 @@ Fit of a 9 degree polynomial to the olympic marathon data.
 Fit of a 16 degree polynomial to the olympic marathon data.
 </aside>
 </section>
+<section id="bootstrap-confidence-intervals" class="slide level2">
+<h2>Bootstrap Confidence Intervals</h2>
+<div class="figure">
+<div id="olympic-marathon-bootstrap-confidence-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-confidence.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Bootstrap confidence intervals for a cubic polynomial fit to Olympic marathon data. The shaded region shows the 95% confidence interval, and individual bootstrap fits are shown in light green.
+</aside>
+</section>
 <section id="bias-variance-decomposition" class="slide level2">
 <h2>Bias Variance Decomposition</h2>
 <p>Generalisation error <span class="math display">\[\begin{align*}
@@ -1965,18 +1977,6 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \ma
 </div>
 <aside class="notes">
 Bias-variance tradeoff for polynomial models on Olympic marathon data. The bias decreases with model complexity while variance increases. The optimal model balances these two sources of error.
-</aside>
-</section>
-<section id="bootstrap-confidence-intervals" class="slide level2">
-<h2>Bootstrap Confidence Intervals</h2>
-<div class="figure">
-<div id="olympic-marathon-bootstrap-confidence-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-confidence.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Bootstrap confidence intervals for a cubic polynomial fit to Olympic marathon data. The shaded region shows the 95% confidence interval, and individual bootstrap fits are shown in light green.
 </aside>
 </section>
 <section id="no-free-lunch-theorem" class="slide level2">
