@@ -57,8 +57,7 @@ sns.set_palette('colorblind')}-->
 <p>We introduced machine learning as a way to extract knowledge from data to make predictions through a prediction function and an objective function. We looked at a simple example of predicting whether someone would buy a jumper based on their age and latitude, <em>using logistic regression</em> to model the log-odds of purchase. This highlighted how machine learning can codify predictions through mathematical functions. This is an example of a broader approach known as <em>generalised linear models</em>.</p>
 <p>When taking a probabilistic approach to supervised learning we’re interested in predicting a class label, <span class="math inline">\(y_i\)</span>, given an input, <span class="math inline">\(\mathbf{ x}_i\)</span>. That’s represented probabilisticially as <span class="math inline">\(p(y_i|\mathbf{ x}_i)\)</span>. We can derive this conditional distribution through either (1) modelling the joint distribution, <span class="math inline">\(p(\mathbf{ y}, \mathbf{X})\)</span> and then dividing by the marginal distribution of the inputs, <span class="math inline">\(p(\mathbf{X})\)</span> , or (2) focusing specifically on modeling the conditional density, <span class="math inline">\(p(\mathbf{ y}|\mathbf{X})\)</span>, that directly answers our prediction question. In the <em>generalised linear model</em> we choose the second approach.</p>
 <p>As we move to generalised linear models like logistic regression, we’ll see how directly modeling the conditional density <span class="math inline">\(p(\mathbf{ y}|\mathbf{X})\)</span> can provide more flexibility in our modeling assumptions, while still allowing us to make the specific predictions we need.</p>
-<h1 id="logistic-regression">Logistic Regression</h1>
-<h2 id="logistic-regression-1">Logistic Regression</h2>
+<h2 id="logistic-regression">Logistic Regression</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
@@ -799,295 +798,127 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <li>When dealing with missing data, document your imputation strategy and test its impact on model performance.</li>
 </ul>
 <h1 id="neural-networks">Neural Networks</h1>
-<h2 id="shallow-and-deep-learning">Shallow and Deep Learning</h2>
-<p>So far, we have been talking about <em>linear models</em> or <em>shallow learning</em> as we might think of it. Let’s pause for a moment and consider a <em>fully connected</em> deep neural network model to relate the two ideas.</p>
-<h2 id="deep-neural-network">Deep Neural Network</h2>
+<h2 id="from-basis-functions-to-neural-networks-jax">From Basis Functions to Neural Networks (JAX)</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install daft</span></code></pre></div>
+<p>So far we have been using <code>numpy</code> for building our models. In this session we are going to make use of <code>JAX</code>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>```{<span class="im">import</span> jax</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, grad, jit, value_and_grad</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>Recall $f(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ w}<span class="op">^\</span>top <span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x})$. In JAX, we write basis maps that take inputs <span class="kw">and</span> parameters <span class="kw">and</span> <span class="cf">return</span> features. A standard linear layer <span class="kw">is</span> a basis <span class="cf">with</span> $<span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ x}$.</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_features(x):</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;&quot;&quot;Identity features (no bias), expects x of shape (n, d).&quot;&quot;&quot;</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_linear(params, x, features<span class="op">=</span>linear_features):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Linear model: w^T phi(x) + b.</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">    params: dict with &#39;W&#39; (d-&gt;o) and optional &#39;b&#39; (o,).&quot;&quot;&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> features(x)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> Phi <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>]</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&#39;b&#39;</span> <span class="kw">in</span> params:</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
+<h2 id="parametric-basis-functions">Parametric Basis Functions</h2>
+<p>We define parametric basis layers: affine transforms and non-linear activations. These combine to form neural networks.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> affine(params, x):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Affine transform: x -&gt; xW + b.&quot;&quot;&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>] <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu(x):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.maximum(<span class="fl">0.0</span>, x)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tanh(x):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.tanh(x)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> layer_apply(layer_params, x, activation<span class="op">=</span>relu):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply one dense layer + activation.&quot;&quot;&quot;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> affine(layer_params, x)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> activation(h)</span></code></pre></div>
+<h2 id="multi-layer-perceptron-as-stacked-bases">Multi-Layer Perceptron as Stacked Bases</h2>
+<p>An MLP is a composition: <span class="math inline">\(\mathbf{x} \xrightarrow{\text{affine}} \boldsymbol{ h}_1 \xrightarrow{\sigma} \xrightarrow{\text{affine}} \dots \xrightarrow{\text{affine}} \hat{\mathbf{ y}}\)</span>.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_dense_params(key, in_dim, out_dim, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    k1, k2 <span class="op">=</span> random.split(key)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> scale <span class="op">*</span> random.normal(k1, (in_dim, out_dim))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> scale <span class="op">*</span> random.normal(k2, (out_dim,))</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;W&#39;</span>: W, <span class="st">&#39;b&#39;</span>: b}</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;layer_sizes: [in, h1, h2, ..., out]&quot;&quot;&quot;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> random.split(key, <span class="bu">len</span>(layer_sizes)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    layers <span class="op">=</span> []</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (din, dout) <span class="kw">in</span> <span class="bu">zip</span>(keys, <span class="bu">zip</span>(layer_sizes[:<span class="op">-</span><span class="dv">1</span>], layer_sizes[<span class="dv">1</span>:])):</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>        layers.append(init_dense_params(k, din, dout, scale<span class="op">=</span>scale))</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> layers</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mlp_apply(params, x, activation<span class="op">=</span>relu):</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply MLP to inputs x (n, d). Last layer linear.&quot;&quot;&quot;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> x</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> layer <span class="kw">in</span> params[:<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> layer_apply(layer, h, activation<span class="op">=</span>activation)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Last layer linear (no non-linearity)</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> affine(params[<span class="op">-</span><span class="dv">1</span>], h)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
+<h2 id="loss-and-training-jax-gradjit">Loss and Training (JAX grad/jit)</h2>
+<p>We use squared error and train with gradient descent. JAX allows JIT compilation and automatic differentiation.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Params is a list of dicts; apply tree map-style update</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    new_params <span class="op">=</span> []</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p, g <span class="kw">in</span> <span class="bu">zip</span>(params, grads):</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>        new_params.append({k: p[k] <span class="op">-</span> lr <span class="op">*</span> g[k] <span class="cf">for</span> k <span class="kw">in</span> p})</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_params, loss</span></code></pre></div>
+<h2 id="demo-fit-a-1d-nonlinear-function">Demo: Fit a 1D Nonlinear Function</h2>
+<p>We fit a simple nonlinear mapping with an MLP to illustrate stacking basis layers.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create synthetic 1D regression data</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key):</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> jnp.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> jnp.sin(x) <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> jnp.cos(<span class="dv">2</span><span class="op">*</span>x)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> noise <span class="op">*</span> random.normal(key, f.shape)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> f <span class="op">+</span> eps</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, f</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>x, y, f_true <span class="op">=</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init MLP: 1 -&gt; 64 -&gt; 64 -&gt; 1</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>layer_sizes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">1</span>]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">1e-2</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>apply_fn <span class="op">=</span> partial(mlp_apply, activation<span class="op">=</span>relu)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>loss_trace <span class="op">=</span> []</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    params, loss <span class="op">=</span> update(params, x, y, lr, apply_fn)</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> <span class="dv">100</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>        loss_trace.append((i, <span class="bu">float</span>(loss))) </span></code></pre></div>
 <div class="figure">
-<div id="deep-neural-network-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepgp/deep-nn2.svg" width="70%" style=" ">
+<div id="basis-to-nn-jax-demo-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/basis-to-nn-jax-demo.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="deep-neural-network-magnify" class="magnify" onclick="magnifyFigure(&#39;deep-neural-network&#39;)">
+<div id="basis-to-nn-jax-demo-magnify" class="magnify" onclick="magnifyFigure(&#39;basis-to-nn-jax-demo&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="deep-neural-network-caption" class="caption-frame">
-<p>Figure: A deep neural network. Input nodes are shown at the bottom. Each hidden layer is the result of applying an affine transformation to the previous layer and placing through an activation function.</p>
+<div id="basis-to-nn-jax-demo-caption" class="caption-frame">
+<p>Figure: From basis functions to multilayer neural networks in JAX.</p>
 </div>
 </div>
-<p>Mathematically, each layer of a neural network is given through computing the activation function, <span class="math inline">\(\phi(\cdot)\)</span>, contingent on the previous layer, or the inputs. In this way the activation functions, are composed to generate more complex interactions than would be possible with any single layer. <span class="math display">\[
-\begin{align*}
-    \mathbf{ h}_{1} &amp;= \phi\left(\mathbf{W}_1 \mathbf{ x}\right)\\
-    \mathbf{ h}_{2} &amp;=  \phi\left(\mathbf{W}_2\mathbf{ h}_{1}\right)\\
-    \mathbf{ h}_{3} &amp;= \phi\left(\mathbf{W}_3 \mathbf{ h}_{2}\right)\\
-    f&amp;= \mathbf{ w}_4 ^\top\mathbf{ h}_{3}
-\end{align*}
-\]</span></p>
-<p>Under our basis function perspective, we can see that our deep neural network is mathematical composition of basis function models. Each layer contains a separate basis function set, so <span class="math display">\[
- f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
-\]</span></p>
-<p>In this course there are two reasons for looking at the shallow model. Firstly, it is easier to introduce the concepts of regularisation in the linear model regime. Secondly, the matrix forms we see, e.g., expressions like <span class="math inline">\(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\)</span>, appear in both models.</p>
-<p>For deep learning, we can no longer optimise the parameters of the model through solving a linear system<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Instead, we need to turn to non-linear optimisation algorithms. For deep learning, that’s typically stochastic gradient descent.</p>
-<p>While it’s possible to compute the Hessian in a neural network, <span class="citation" data-cites="Bishop-exact92">Bishop (1992)</span>, we also find that it varies across the parameter space and will not normally be positive definite. In practice, the number of parameters is normally so large that storing the Hessian is impossible (it has quadratic cost in the number of weights/parameters) due to memory constraints.</p>
-<p>This means that while the theory of minima in optimisation is well understood, empirical experiments with large neural networks are hard and the lessons of small models do not all translate to the very large systems.</p>
-<p>We can stay within the framework of linear models but take a step closer to neural network models by introducing functions that are non-linear in the inputs, <span class="math inline">\(\mathbf{ x}\)</span>, known as <em>basis functions</em>.</p>
-<h2 id="overparameterised-systems">Overparameterised Systems</h2>
-<p>If we could examine the Hessian of a neural network at its minimum, we can speculate about what we would find. In particular, we would find that it would have very many low (or negative) eigenvalues in many directions. This is indicative of the parameters being <em>badly determined</em> because of the neural network model being heavily <em>overparameterised</em>. So how does it generalise?</p>
-<p>Simply put, there is not enough regularisation encoded in the objective function of the neural network models we are using to explain the generalisation performance. There must be something in the algorithms we are using that causes these highly overparameterised models to generalise well.</p>
-<h2 id="generalization-and-overfitting">Generalization and Overfitting</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/generalisation-and-overfitting.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/generalisation-and-overfitting.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Once a supervised learning system is trained it can be placed in a sequential pipeline to automate a process that used to be done manually.</p>
-<p>Supervised learning is one of the dominant approaches to learning. But the cost and time associated with labeling data is a major bottleneck for deploying machine learning systems. The process for creating training data requires significant human intervention. For example, internationalization of a speech recognition system would require large speech corpora in new languages.</p>
-<p>An important distinction in machine learning is the separation between training data and test data (or production data). Training data is the data that was used to find the model parameters. Test data (or production data) is the data that is used with the live system. The ability of a machine learning system to predict well on production systems given only its training data is known as its <em>generalization</em> ability. This is the system’s ability to predict in areas where it hasn’t previously seen data.</p>
-<h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<table>
-<tr>
-<td width="70%">
-<ul>
-<li>Gold medal times for Olympic Marathon since 1896.</li>
-<li>Marathons before 1924 didn’t have a standardized distance.</li>
-<li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow times.</li>
-</ul>
-</td>
-<td width="30%">
-<div class="centered centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/eliud-kipchoge_berlin_2015.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-<small>Image from <a href="https://commons.wikimedia.org/wiki/File:Eliud_Kipchoge_in_Berlin_-_2015_(cropped).jpg">Wikimedia Commons</a></small>
-</td>
-</tr>
-</table>
-<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
-<div class="figure">
-<div id="olympic-marathon-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-marathon-caption" class="caption-frame">
-<p>Figure: Olympic marathon pace times since 1896.</p>
-</div>
-</div>
-<p>Things to notice about the data include the outlier in 1904, in that year the Olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed. More recent years see more consistently quick marathons.</p>
-<h2 id="hold-out-validation-on-olympic-marathon-data">Hold Out Validation on Olympic Marathon Data</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-hold-out-validation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-hold-out-validation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<div class="figure">
-<div id="olympic-val-extra-LM-polynomial-number-11-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_val_extra_LM_polynomial_number011.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-val-extra-LM-polynomial-number-11-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-val-extra-LM-polynomial-number-11&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-val-extra-LM-polynomial-number-11-caption" class="caption-frame">
-<p>Figure: Olympic marathon data with validation error for extrapolation.</p>
-</div>
-</div>
-<h2 id="extrapolation">Extrapolation</h2>
-<h2 id="interpolation">Interpolation</h2>
-<div class="figure">
-<div id="olympic-val-inter-LM-polynomial-number-11-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_val_inter_LM_polynomial_number011.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-val-inter-LM-polynomial-number-11-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-val-inter-LM-polynomial-number-11&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-val-inter-LM-polynomial-number-11-caption" class="caption-frame">
-<p>Figure: Olympic marathon data with validation error for interpolation.</p>
-</div>
-</div>
-<h2 id="choice-of-validation-set">Choice of Validation Set</h2>
-<h2 id="hold-out-data">Hold Out Data</h2>
-<p>You have a conclusion as to which model fits best under the training error, but how do the two models perform in terms of validation? In this section we consider <em>hold out</em> validation. In hold out validation we remove a portion of the training data for <em>validating</em> the model on. The remaining data is used for fitting the model (training). Because this is a time series prediction, it makes sense for us to hold out data at the end of the time series. This means that we are validating on future predictions. We will hold out data from after 1980 and fit the model to the data before 1980.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select indices of data to &#39;hold out&#39;</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>indices_hold_out <span class="op">=</span> np.flatnonzero(x<span class="op">&gt;</span><span class="dv">1980</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a training set</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> np.delete(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> np.delete(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a hold out set</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>x_valid <span class="op">=</span> np.take(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>y_valid <span class="op">=</span> np.take(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
-<h3 id="exercise-2">Exercise 2</h3>
-<p>For both the linear and quadratic models, fit the model to the data up until 1980 and then compute the error on the held out data (from 1980 onwards). Which model performs better on the validation data?</p>
-<h2 id="richer-basis-set">Richer Basis Set</h2>
-<p>Now we have an approach for deciding which model to retain, we can consider the entire family of polynomial bases, with arbitrary degrees.</p>
-<h3 id="exercise-3">Exercise 3</h3>
-<p>Now we are going to build a more sophisticated form of basis function, one that can accept arguments to its inputs (similar to those we used in <a href="./week4.ipynb">this lab</a>). Here we will start with a polynomial basis.</p>
-<pre><code>def polynomial(x, degree, loc, scale):
-    degrees =np.arange(degree+1)
-    return ((x-loc)/scale)**degrees</code></pre>
-<p>The basis as we’ve defined it has three arguments as well as the input. The degree of the polynomial, the scale of the polynomial and the offset. These arguments need to be passed to the basis functions whenever they are called. Modify your code to pass these additional arguments to the python function for creating the basis. Do this for each of your functions <code>predict</code>, <code>fit</code> and <code>objective</code>. You will find <code>*args</code> (or <code>**kwargs</code>) useful.</p>
-<p>Write code that tries to fit different models to the data with polynomial basis. Use a maximum degree for your basis from 0 to 17. For each polynomial store the <em>hold out validation error</em> and the <em>training error</em>. When you have finished the computation plot the hold out error for your models and the training error for your p. When computing your polynomial basis use <code>offset=1956.</code> and <code>scale=120.</code> to ensure that the data is mapped (roughly) to the -1, 1 range.</p>
-<p>Which polynomial has the minimum training error? Which polynomial has the minimum validation error?</p>
-<h2 id="bias-variance-decomposition">Bias Variance Decomposition</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bias-variance-dilemma.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bias-variance-dilemma.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>One of Breiman’s ideas for improving predictive performance is known as bagging <span class="citation" data-cites="Breiman-bagging96">(Breiman, 1996)</span>. The idea is to train a number of models on the data such that they overfit (high variance). Then average the predictions of these models. The models are trained on different bootstrap samples <span class="citation" data-cites="Efron:bootstrap79">(Efron, 1979)</span> and their predictions are aggregated giving us the acronym, Bagging. By combining decision trees with bagging, we recover random forests <span class="citation" data-cites="Breiman-forests01">(Breiman, 2001)</span>.</p>
-<p>Bias and variance can also be estimated through Efron’s bootstrap <span class="citation" data-cites="Efron:bootstrap79">(Efron, 1979)</span>, and the traditional view has been that there’s a form of Goldilocks effect, where the best predictions are given by the model that is ‘just right’ for the amount of data available. Not to simple, not too complex. The idea is that bias decreases with increasing model complexity and variance increases with increasing model complexity. Typically plots begin with the Mummy bear on the left (too much bias) end with the Daddy bear on the right (too much variance) and show a dip in the middle where the Baby bear (just) right finds themselves.</p>
-<p>The Daddy bear is typically positioned at the point where the model can exactly interpolate the data. For a generalized linear model <span class="citation" data-cites="McCullagh-gen_linear89">(McCullagh and Nelder, 1989)</span>, this is the point at which the number of parameters is equal to the number of data<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p>The bias-variance decomposition <span class="citation" data-cites="Geman-biasvariance92">(Geman et al., 1992)</span> considers the expected test error for different variations of the <em>training data</em> sampled from, <span class="math inline">\(\mathbb{P}(\mathbf{ x}, y)\)</span> <span class="math display">\[\begin{align*}
-R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \mathbf{ x}) \text{d}y\text{d}\mathbf{ x}\\
-&amp; \triangleq \mathbb{E}\left[ \left(y- f^*(\mathbf{ x})\right)^2 \right].
-\end{align*}\]</span></p>
-<p>This can be decomposed into two parts, <span class="math display">\[
-\begin{align*}
-\mathbb{E}\left[ \left(y- f(\mathbf{ x})\right)^2 \right] = &amp; \text{bias}\left[f^*(\mathbf{ x})\right]^2  + \text{variance}\left[f^*(\mathbf{ x})\right]  +\sigma^2,
-\end{align*}
-\]</span> where the bias is given by <span class="math display">\[
-  \text{bias}\left[f^*(\mathbf{ x})\right] =
-\mathbb{E}\left[f^*(\mathbf{ x})\right] - f(\mathbf{ x})
-\]</span> and it summarizes error that arises from the model’s inability to represent the underlying complexity of the data. For example, if we were to model the marathon pace of the winning runner from the Olympics by computing the average pace across time, then that model would exhibit <em>bias</em> error because the reality of Olympic marathon pace is it is changing (typically getting faster).</p>
-<p>The variance term is given by <span class="math display">\[
-  \text{variance}\left[f^*(\mathbf{ x})\right] = \mathbb{E}\left[\left(f^*(\mathbf{ x}) - \mathbb{E}\left[f^*(\mathbf{ x})\right]\right)^2\right].
-  \]</span> The variance term is often described as arising from a model that is too complex, but we must be careful with this idea. Is the model really too complex relative to the real world that generates the data? The real world is a complex place, and it is rare that we are constructing mathematical models that are more complex than the world around us. Rather, the ‘too complex’ refers to ability to estimate the parameters of the model given the data we have. Slight variations in the training set cause changes in prediction.</p>
-<p>Models that exhibit high variance are sometimes said to ‘overfit’ the data whereas models that exhibit high bias are sometimes described as ‘underfitting’ the data.</p>
-<h2 id="bias-vs-variance-error-plots">Bias vs Variance Error Plots</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bias-variance-plots.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bias-variance-plots.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Helper function for sampling data from two different classes.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<p>Helper function for plotting the decision boundary of the SVM.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>font <span class="op">=</span> {<span class="st">&#39;family&#39;</span> : <span class="st">&#39;sans&#39;</span>,</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;weight&#39;</span> : <span class="st">&#39;bold&#39;</span>,</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;size&#39;</span>   : <span class="dv">22</span>}</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>matplotlib.rc(<span class="st">&#39;font&#39;</span>, <span class="op">**</span>font)</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> svm</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of SVM and fit the data. </span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># SVM regularization parameter</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>gammas <span class="op">=</span> [<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>]</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>per_class<span class="op">=</span><span class="dv">30</span></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>num_samps <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set-up 2x2 grid for plotting.</span></span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">3</span>))</span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>xlim<span class="op">=</span><span class="va">None</span></span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>ylim<span class="op">=</span><span class="va">None</span></span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> samp <span class="kw">in</span> <span class="bu">range</span>(num_samps):</span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>    X, y<span class="op">=</span>create_data(per_class)</span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> []</span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>    titles <span class="op">=</span> []</span>
-<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gamma <span class="kw">in</span> gammas:</span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>        models.append(svm.SVC(kernel<span class="op">=</span><span class="st">&#39;rbf&#39;</span>, gamma<span class="op">=</span>gamma, C<span class="op">=</span>C))</span>
-<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>        titles.append(<span class="st">&#39;$\gamma=</span><span class="sc">{}</span><span class="st">$&#39;</span>.<span class="bu">format</span>(gamma))</span>
-<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> (cl.fit(X, y) <span class="cf">for</span> cl <span class="kw">in</span> models)</span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>    xlim, ylim <span class="op">=</span> decision_boundary_plot(models, X, y, </span>
-<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>                           axs<span class="op">=</span>ax, </span>
-<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>                           filename<span class="op">=</span><span class="st">&#39;bias-variance</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>samp), </span>
-<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>                           directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span></span>
-<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>                           titles<span class="op">=</span>titles,</span>
-<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>                          xlim<span class="op">=</span>xlim,</span>
-<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>                          ylim<span class="op">=</span>ylim)</span></code></pre></div>
-<!---->
-<div class="figure">
-<div id="bias-variance-errors-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/bias-variance000.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/bias-variance010.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="bias-variance-errors-magnify" class="magnify" onclick="magnifyFigure(&#39;bias-variance-errors&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="bias-variance-errors-caption" class="caption-frame">
-<p>Figure: In each figure the simpler model is on the left, and the more complex model is on the right. Each fit is done to a different version of the data set. The simpler model is more consistent in its errors (bias error), whereas the more complex model is varying in its errors (variance error).</p>
-</div>
-</div>
-<h2 id="overfitting">Overfitting</h2>
-<div class="figure">
-<div id="alex-ihler-overfitting-figure" class="figure-frame">
-<iframe width="600" height="450" src="https://www.youtube.com/embed/py8QrZPT48s?start=4m0s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-</iframe>
-</div>
-<div id="alex-ihler-overfitting-magnify" class="magnify" onclick="magnifyFigure(&#39;alex-ihler-overfitting&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="alex-ihler-overfitting-caption" class="caption-frame">
-<p>Figure: Alex Ihler discusses polynomials and overfitting.</p>
-</div>
-</div>
-<p>We can easily develop a simple prediction function that reconstructs the training data exactly, you can just use a look up table. But how would the lookup table predict between the training data, where examples haven’t been seen before? The choice of the class of prediction functions is critical in ensuring that the model generalizes well.</p>
-<p>The generalization error is normally estimated by applying the objective function to a set of data that the model <em>wasn’t</em> trained on, the test data. To ensure good performance we normally want a model that gives us a low generalization error. If we weren’t sure of the right prediction function to use, then we could try 1,000 different prediction functions. Then we could use the one that gives us the lowest error on the test data. But you have to be careful. Selecting a model in this way is like a further stage of training where you are using the test data in the training.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> So when this is done, the data used for this is not known as test data, it is known as <em>validation data</em>. And the associated error is the <em>validation error</em>. Using the validation error for model selection is a standard machine learning technique, but it can be misleading about the final generalization error. Almost all machine learning practitioners know not to use the test data in your training procedure, but sometimes people forget that when validation data is used for model selection that validation error cannot be used as an unbiased estimate of the generalization performance.</p>
-<h2 id="double-descent">Double Descent</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/double-descent.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/double-descent.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<div class="figure">
-<div id="double-descent-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/double-descent.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="double-descent-magnify" class="magnify" onclick="magnifyFigure(&#39;double-descent&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="double-descent-caption" class="caption-frame">
-<p>Figure: <em>Left</em> traditional perspective on generalization. There is a sweet spot of operation where the training error is still non-zero. Overfitting occurs when the variance increases. <em>Right</em> The double descent phenomenon, the modern models operate in an interpolation regime where they reconstruct the training data fully but are well regularized in their interpolations for test data. Figure from <span class="citation" data-cites="Belkin:reconciling19">Belkin et al. (2019)</span>.</p>
-</div>
-</div>
-<p>But the modern empirical finding is that when we move beyond Daddy bear, into the dark forest of the massively overparameterized model we can achieve good generalization. Indeed, recent work is showing that large language models are even <em>memorizing</em> data <span class="citation" data-cites="Carlini-extracting20">(Carlini et al., 2020)</span> like non-parametric models do.</p>
-<p>As <span class="citation" data-cites="Zhang:understanding17">Zhang et al. (2017)</span> starkly illustrated with their random labels experiment, within the dark forest there are some terrible places, big bad wolves of overfitting that will gobble up your model. But as empirical evidence shows there is also a safe and hospitable Grandma’s house where these highly overparameterized models are safely consumed. Fundamentally, it must be about the route you take through the forest, and the precautions you take to ensure the wolf doesn’t see where you’re going and beat you to the door.</p>
-<p>There are two implications of this empirical result. Firstly, that there is a great deal of new theory that needs to be developed. Secondly, that theory is now obliged to conflate two aspects to modelling that we generally like to keep separate: the model and the algorithm.</p>
-<p>Classical statistical theory around predictive generalization focusses specifically on the class of models that is being used for data fitting. Historically, whether that theory follows a Fisher-aligned estimation approach (see e.g., <span class="citation" data-cites="Vapnik:book98">Vapnik (1998)</span>) or model-based Bayesian approach (see e.g., <span class="citation" data-cites="Ghahramani:probabilistic15">Ghahramani (2015)</span>), neither is fully equipped to deal with these new circumstances because, to continue our rather tortured analogy, these theories provide us with a characterization of the <em>destination</em> of the algorithm, and seek to ensure that we reach that destination. Modern machine learning requires theories of the <em>journey</em> and what our route through the forest should be.</p>
-<p>Crucially, the destination is always associated with 100% accuracy on the training set. An objective that is always achievable for the overparameterized model.</p>
-<p>Intuitively, it seems that a highly overparameterized model places Grandma’s house on the edge of the dark forest. Making it easily and quickly accessible to the algorithm. The larger the model, the more exposed Grandma’s house becomes. Perhaps this is due to some form of blessing of dimensionality brings Grandma’s house closer to the edge of the forest in a high dimensional setting. Really, we should think of Grandma’s house as a low dimensional manifold of destinations that are safe. A path through the forest where the wolf of overfitting doesn’t venture. In the GLM case, we know already that when the number of parameters matches the number of data there is precisely one location in parameter space where accuracy on the training data is 100%. Our previous misunderstanding of generalization stemmed from the fact that (seemingly) it is highly unlikely that this single point is a good place to be from the perspective of generalization. Additionally, it is often difficult to find. Finding the precise polynomial coefficients in a least squares regression to exactly fit the basis to a small data set such as the Olympic marathon data requires careful consideration of the numerical properties and an orthogonalization of the design matrix <span class="citation" data-cites="Lawson:least95">(Lawson and Hanson, 1995)</span>.</p>
-<p>It seems that with a highly overparameterized model, these locations become easier to find and they provide good generalization properties. In machine learning this is known as the “double descent phenomenon” (see e.g., <span class="citation" data-cites="Belkin:reconciling19">Belkin et al. (2019)</span>).</p>
-<p>See also this talk by Misha Belkin: <a href="http://www.ipam.ucla.edu/abstract/?tid=15552&amp;pcode=GLWS4" class="uri">http://www.ipam.ucla.edu/abstract/?tid=15552&amp;pcode=GLWS4</a> and these related papers <a href="https://www.pnas.org/content/116/32/15849.short" class="uri">https://www.pnas.org/content/116/32/15849.short</a>, <a href="https://www.pnas.org/content/117/20/10625" class="uri">https://www.pnas.org/content/117/20/10625</a></p>
-<h2 id="neural-tangent-kernel">Neural Tangent Kernel</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/neural-tangent-kernel.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/neural-tangent-kernel.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Another approach to analysis exploits the fact that optimization is occurring in a very high dimensional parameter space. By considering initializations that involve small random weights (known as the NTK initialization) and noting that small updates in the learning mean that the model doesn’t move far from this initialization <span class="citation" data-cites="Jacot-ntk18">(Jacot et al., 2018)</span>.</p>
-<p>For very wide neural networks, when these conditions are fulfilled, the network can be approximately represented by a <em>kernel</em> known as the neural tangent kernel. A kernel is a regularizer that operates in <em>function space</em> rather than <em>feature space</em>.</p>
-<h2 id="regularization-in-optimization">Regularization in Optimization</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/regularisation-in-optimisation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/regularisation-in-optimisation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Another interesting theoretical direction is to study the path that neural network algorithms take when finding the optima. For certain simple linear systems, you can analytically study the ‘gradient flow.’</p>
-<p>Neural networks are normally trained by (stochastic) gradient descent. This is a discrete optimization algorithm where at each point, a step in the direction of the (approximate) gradient is taken.</p>
-<p>Gradient flow replaces this discrete update with a differential equation, where the step at any point is an exact gradient update. As a result, the path of the optimization can be studied as a <em>differential equation</em>.</p>
-<p>By making assumptions about the initialization, the optimum that gradient flow will find can be characterised. For a highly overparameterized linear model, <span class="citation" data-cites="Gunasekar-implicit2017">Gunasekar et al. (2017)</span> show in matrix factorization, that for particular initializations, the optimum will be a <em>global</em> optimum of the objective that minimizes the L2-norm.</p>
-<p>By reparameterizing the linear model so that each <span class="math inline">\(w_i = u_i^2 - v_i^2\)</span> and optimising in the space defined by <span class="math inline">\(\mathbf{u}\)</span> and <span class="math inline">\(\mathbf{v}\)</span> <span class="citation" data-cites="Woodworth-kernel20">Woodworth et al. (2020)</span> show that the L1 norm is found.</p>
-<p>Other papers have looked at <em>deep linear models</em> <span class="citation" data-cites="Arora-convergence19">(Arora et al., 2019)</span> where <span class="math display">\[
-f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1 \mathbf{ x}.
-\]</span> In these models, a gradient flow analysis shows that the model finds solutions where the linear mapping, <span class="math display">\[
-\mathbf{W}= \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1 
-\]</span> is very low rank. This is highly suggestive of another type of regularization that could be occurring in deep neural networks. Low rank parameter matrices mean that the effective capacity of the neural network is reduced. Indeed, empirical observations of the rank of deep nets trained on data suggest that they may be finding such solutions.</p>
+<h2 id="discussion">Discussion</h2>
+<p>Each dense layer is a parametric basis mapping; stacking them with non-linearities yields universal approximators. JAX lets us compose, differentiate, and JIT-compile these computations for efficient training.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li>Section 5.2.2 up to pg 182 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
@@ -1104,45 +935,6 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Arora-convergence19" class="csl-entry" role="doc-biblioentry">
-Arora, S., Cohen, N., Golowich, N., Hu, W., 2019. A convergence analysis of gradient descent for deep linear neural networks, in: International Conference on Learning Representations.
-</div>
-<div id="ref-Belkin:reconciling19" class="csl-entry" role="doc-biblioentry">
-Belkin, M., Hsu, D., Ma, S., Soumik Mandal, and, 2019. Reconciling modern machine-learning practice and the classical bias-variance trade-off. Proc. Natl. Acad. Sci. USA 116, 15849–15854.
-</div>
-<div id="ref-Bishop-exact92" class="csl-entry" role="doc-biblioentry">
-Bishop, C.M., 1992. Exact calculation of the hessian matrix for the multilayer perceptron. Neural Computation 4, 494–501. <a href="https://doi.org/10.1162/neco.1992.4.4.494">https://doi.org/10.1162/neco.1992.4.4.494</a>
-</div>
-<div id="ref-Breiman-forests01" class="csl-entry" role="doc-biblioentry">
-Breiman, L., 2001. Random forests. Mach. Learn. 45, 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>
-</div>
-<div id="ref-Breiman-bagging96" class="csl-entry" role="doc-biblioentry">
-Breiman, L., 1996. Bagging predictors. Machine Learning 24, 123–140. <a href="https://doi.org/10.1007/BF00058655">https://doi.org/10.1007/BF00058655</a>
-</div>
-<div id="ref-Carlini-extracting20" class="csl-entry" role="doc-biblioentry">
-Carlini, N., Tramèr, F., Wallace, E., Jagielski, M., Herbert-Voss, A., Lee, K., Roberts, A., Brown, T., Song, D., Erlingsson, U., Oprea, A., Raffel, C., 2020. Extracting training data from large language models.
-</div>
-<div id="ref-Efron:bootstrap79" class="csl-entry" role="doc-biblioentry">
-Efron, B., 1979. Bootstrap methods: Another look at the jackkife. Annals of Statistics 7, 1–26.
-</div>
-<div id="ref-Geman-biasvariance92" class="csl-entry" role="doc-biblioentry">
-Geman, S., Bienenstock, E., Doursat, R., 1992. Neural networks and the bias/variance dilemma. Neural Computation 4, 1–58. <a href="https://doi.org/10.1162/neco.1992.4.1.1">https://doi.org/10.1162/neco.1992.4.1.1</a>
-</div>
-<div id="ref-Ghahramani:probabilistic15" class="csl-entry" role="doc-biblioentry">
-Ghahramani, Z., 2015. Probabilistic machine learning and artificial intelligence. Nature 452–459.
-</div>
-<div id="ref-Gunasekar-implicit2017" class="csl-entry" role="doc-biblioentry">
-Gunasekar, S., Woodworth, B., Bhojanapalli, S., Neyshabur, B., Srebro, N., 2017. Implicit regularization in matrix factorization.
-</div>
-<div id="ref-Jacot-ntk18" class="csl-entry" role="doc-biblioentry">
-Jacot, A., Gabriel, F., Hongler, C., 2018. Neural tangent kernel: Convergence and generalization in neural networks, in: Bengio, S., Wallach, H., Larochelle, H., Grauman, K., Cesa-Bianchi, N., Garnett, R. (Eds.), Advances in Neural Information Processing Systems. Curran Associates, Inc., pp. 8571–8580.
-</div>
-<div id="ref-Lawson:least95" class="csl-entry" role="doc-biblioentry">
-Lawson, C.L., Hanson, R.J., 1995. Solving least squares problems. SIAM. <a href="https://doi.org/10.1137/1.9781611971217">https://doi.org/10.1137/1.9781611971217</a>
-</div>
-<div id="ref-McCullagh-gen_linear89" class="csl-entry" role="doc-biblioentry">
-McCullagh, P., Nelder, J.A., 1989. Generalized linear models, 2nd ed. Chapman; Hall.
-</div>
 <div id="ref-Robbins:stoch51" class="csl-entry" role="doc-biblioentry">
 Robbins, H., Monro, S., 1951. A stochastic approximation method. Annals of Mathematical Statistics 22, 400–407.
 </div>
@@ -1152,22 +944,5 @@ Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 <div id="ref-Nigeria-nmis14" class="csl-entry" role="doc-biblioentry">
 The Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs), Columbia University, 2014. Nigeria <span>NMIS</span> facility database.
 </div>
-<div id="ref-Vapnik:book98" class="csl-entry" role="doc-biblioentry">
-Vapnik, V.N., 1998. Statistical learning theory. wiley, New York.
 </div>
-<div id="ref-Woodworth-kernel20" class="csl-entry" role="doc-biblioentry">
-Woodworth, B., Gunasekar, S., Lee, J.D., Moroshko, E., Savarese, P., Golan, I., Soudry, D., Srebro, N., 2020. Kernel and rich regimes in overparametrized models.
-</div>
-<div id="ref-Zhang:understanding17" class="csl-entry" role="doc-biblioentry">
-Zhang, C., Bengio, S., Hardt, M., Recht, B., Vinyals, O., 2017. Understanding deep learning requires rethinking generalization, in: https://openreview.net/forum?id=Sy8gdB9xx (Ed.), International Conference on Learning Representations.
-</div>
-</div>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>Apart from the last layer of parmeters in models with quadratic loss functions.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Assuming we are ignoring parameters in the link function and the distribution function.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>Using the test data in your training procedure is a major error in any machine learning procedure. It is extremely dangerous as it gives a misleading assessment of the model performance. The <a href="http://inverseprobability.com/2015/06/04/baidu-on-imagenet">Baidu ImageNet scandal</a> was an example of a team competing in the ImageNet challenge which did this. The team had announced via the publication pre-print server Arxiv that they had a world-leading performance on the ImageNet challenge. This was reported in the mainstream media. Two weeks later the challenge organizers revealed that the team had created multiple accounts for checking their test performance more times than was permitted by the challenge rules. This was then reported as “AI’s first doping scandal.” The team lead was fired by Baidu.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
 
