@@ -478,22 +478,11 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 Polynomial regression fit to Olympic marathon men’s times using <code>statsmodels</code>.
 </aside>
 </section>
-<section id="logistic-regression-with-statsmodels" class="slide level2">
-<h2>Logistic Regression with <code>statsmodels</code></h2>
+<section id="fitting-with-statsmodels" class="slide level2">
+<h2>Fitting with <code>statsmodels</code></h2>
 </section>
-<section id="logistic-regression-model" class="slide level2">
-<h2>Logistic Regression Model</h2>
-<ul>
-<li><p>Logistic regression models binary response <span class="math inline">\(y_i \in \{0,1\}\)</span> vs inputs <span class="math inline">\(\mathbf{ x}_i\)</span>: <span class="math display">\[p(y_i = 1|\mathbf{ x}_i) = \sigma(\mathbf{ w}^\top\mathbf{ x}_i)\]</span> where <span class="math inline">\(\sigma(z) = \frac{1}{1 + \exp(-z)}\)</span> is the sigmoid function</p></li>
-<li><p>Bernoulli distribution: <span class="math display">\[y_i|\mathbf{ x}_i \sim \text{Bernoulli}(\sigma(\mathbf{ w}^\top\mathbf{ x}_i))\]</span></p></li>
-</ul>
-</section>
-<section id="log-odds-and-linear-predictor" class="slide level2">
-<h2>Log-Odds and Linear Predictor</h2>
-<ul>
-<li><p>Log-odds (logit) transformation: <span class="math display">\[\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \mathbf{ w}^\top\mathbf{ x}_i\]</span></p></li>
-<li><p>Coefficients represent change in log-odds: <span class="math display">\[\Delta \text{logit}(p) = w_j \Delta x_j\]</span></p></li>
-</ul>
+<section id="fitting-the-model" class="slide level2">
+<h2>Fitting the Model</h2>
 </section>
 <section id="model-fit-statistics-1" class="slide level2">
 <h2>Model Fit Statistics</h2>
@@ -540,6 +529,18 @@ Polynomial regression fit to Olympic marathon men’s times using <code>statsmod
 </ul></li>
 </ul>
 </section>
+<section id="predictions-of-the-model" class="slide level2">
+<h2>Predictions of the Model</h2>
+<div class="figure">
+<div id="logistic-regression-classification-statsmodels-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//statistics/logistic-regression-classification-statsmodels.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Plot of the logistic regression fit made by <code>statsmodels</code>.
+</aside>
+</section>
 <section id="logistic-regression-classification" class="slide level2">
 <h2>Logistic Regression Classification</h2>
 <div class="figure">
@@ -585,33 +586,6 @@ Logistic regression classification results showing training data and decision bo
 <li>Threshold optimization</li>
 </ul></li>
 </ul>
-</section>
-<section id="design-matrix-for-logistic-regression" class="slide level2">
-<h2>Design Matrix for Logistic Regression</h2>
-<ul>
-<li>The design matrix <span class="math inline">\(\boldsymbol{ \Phi}\)</span> stores our features</li>
-<li>Each row represents one data point</li>
-<li>Each column represents one feature</li>
-<li>For <span class="math inline">\(n\)</span> data points and <span class="math inline">\(p\)</span> features: <span class="math display">\[\boldsymbol{ \Phi}= \begin{bmatrix} 
-1 &amp; x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
-1 &amp; x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-1 &amp; x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
-\end{bmatrix}\]</span></li>
-<li>First column of 1s provides intercept term</li>
-</ul>
-</section>
-<section id="linear-vs-polynomial-logistic-regression" class="slide level2">
-<h2>Linear vs Polynomial Logistic Regression</h2>
-<div class="figure">
-<div id="polynomial-logistic-regression-comparison-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-logistic-regression-comparison-statsmodels.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Comparison between linear and polynomial logistic regression decision boundaries using <code>statsmodels</code>.
-</aside>
 </section>
 <section id="other-glms" class="slide level2">
 <h2>Other GLMs</h2>
