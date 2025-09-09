@@ -444,7 +444,6 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
   \]</span></p>
 <h3 id="multivariate-derivatives-reminder">Multivariate Derivatives Reminder</h3>
 <p>To find the minimum of the objective function, we need to make use of multivariate calculus. The two results we need from multivariate calculus have the following form. <span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> and <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span> or if <span class="math inline">\(\mathbf{A}\)</span> is symmetric (<em>i.e.</em> <span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>) <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}.\]</span></p>
-<p>{ <span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span>  <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}\]</span> </p>
 <h2 id="differentiate">Differentiate</h2>
 <p>Differentiating with respect to the vector <span class="math inline">\(\mathbf{ w}\)</span> we obtain <span class="math display">\[\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}=-\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i+\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}\]</span> Leading to <span class="math display">\[\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}^{*}=\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i.\]</span></p>
 <p>Rewriting this result in matrix notation we obtain: <span class="math display">\[
@@ -462,7 +461,7 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
 \mathbf{A}\mathbf{x} = \mathbf{b}.
 \]</span> For example see the <code>numpy.linalg.solve</code> or <code>torch.linalg.solve</code>.</p>
 <p>But the correct and more stable approach is to make use of the QR decomposition.</p>
-<p>{We can now set up the system to solve with QR decomposition.</p>
+<p>We can now set up the system to solve with QR decomposition.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>

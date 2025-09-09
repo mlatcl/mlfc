@@ -577,11 +577,11 @@ showDivs(0, 'fourier_function');
 <aside class="notes">
 Olympic marathon pace times since 1896.
 </aside>
-<ul>
-<li>Notebook example:
+</section>
+<section id="notebook-example" class="slide level2">
+<h2>Notebook Example</h2>
 <ul>
 <li>In the notebook you are asked to scale the weights to fit functions to Olympic Marathon data.</li>
-</ul></li>
 </ul>
 </section>
 <section id="basis-function-models" class="slide level2">
@@ -647,19 +647,26 @@ L(\mathbf{ w},\sigma^2)= \frac{n}{2}\log\sigma^2 + \frac{\sum_{i=1}^{n}\left(y_i
 </section>
 <section id="multivariate-derivatives-reminder" class="slide level2">
 <h2>Multivariate Derivatives Reminder</h2>
-<p>{ <span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span>  <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}\]</span> </p>
+<span class="math display">\[\frac{\text{d}\mathbf{a}^{\top}\mathbf{ w}}{\text{d}\mathbf{ w}}=\mathbf{a}\]</span> <span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right)\mathbf{ w}\]</span>
+<div class="centered" style="">
+or
+</div>
+<span class="math display">\[\frac{\text{d}\mathbf{ w}^{\top}\mathbf{A}\mathbf{ w}}{\text{d}\mathbf{ w}}=2\mathbf{A}\mathbf{ w}\]</span>
+<div class="centered" style="">
+for symmetric <span class="math inline">\(\mathbf{A}\)</span>.
+</div>
 </section>
 <section id="differentiate" class="slide level2">
 <h2>Differentiate</h2>
 Differentiate wrt <span class="math inline">\(\mathbf{ w}\)</span>
 <span class="math display">\[\begin{aligned}
-\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}= -\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i \\ &amp; +\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}
+\frac{\text{d} E\left(\mathbf{ w},\sigma^2 \right)}{\text{d}\mathbf{ w}}= &amp; -\frac{1}{\sigma^2} \sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i \\ &amp; +\frac{1}{\sigma^2} \left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}
 \end{aligned}\]</span>
 </section>
-<section id="differentiate-1" class="slide level2">
-<h2>Differentiate</h2>
+<section id="find-stationar-point" class="slide level2">
+<h2>Find Stationar Point</h2>
 <ul>
-<li>Leading to <span class="math display">\[\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}^{*}=\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i.\]</span></li>
+<li>Set to zero leading to <span class="math display">\[\left[\sum_{i=1}^{n}\boldsymbol{ \phi}_i\boldsymbol{ \phi}_i^{\top}\right]\mathbf{ w}^{*}=\sum_{i=1}^{n}\boldsymbol{ \phi}_iy_i.\]</span></li>
 </ul>
 </section>
 <section id="matrix-notation" class="slide level2">
@@ -674,7 +681,8 @@ Differentiate wrt <span class="math inline">\(\mathbf{ w}\)</span>
 <li>To find <span class="math inline">\(\mathbf{ w}^{*}\)</span> solve <span class="math display">\[
 \left(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\right)  \mathbf{ w}^{*} = \boldsymbol{ \Phi}^\top \mathbf{ y}
 \]</span></li>
-<li>The equation for <span class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be found .<sup>2.</sup>{*}=$$</li>
+<li>The equation for <span class="math inline">\(\left.\sigma^2\right.^{*}\)</span> may also be found <span class="math display">\[
+\left.\sigma^2\right.^{*}=\frac{\sum_{i=1}^{n}\left(y_i-\left.\mathbf{ w}^{*}\right.^{\top}\boldsymbol{ \phi}_i\right)^{2}}{n}\]</span></li>
 </ul>
 </section>
 <section id="avoid-direct-inverse" class="slide level2">
@@ -694,7 +702,6 @@ Differentiate wrt <span class="math inline">\(\mathbf{ w}\)</span>
 <li>See <code>np.linalg.solve</code></li>
 <li>In practice use <span class="math inline">\(\mathbf{Q}\mathbf{R}\)</span> decomposition (see lab class notes).</li>
 </ul>
-<p>{We can now set up the system to solve with QR decomposition.</p>
 </section>
 <section id="solution-with-qr-decomposition" class="slide level2">
 <h2>Solution with QR Decomposition</h2>
