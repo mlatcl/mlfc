@@ -217,9 +217,28 @@ sns.set_palette('colorblind')}-->
 <li>For classification (logistic regression):</li>
 <li><span class="math display">\[\log \frac{\pi_i}{1-\pi_i} = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\]</span></li>
 </ul>
+<p>{We’ll define our prediction, objective and gradient functions below. But before we start, we need to define a basis function for our model. Let’s start with the linear basis.</p>
 </section>
 <section id="prediction-function" class="slide level2">
 <h2>Prediction Function</h2>
+<p>Now we have the basis function let’s define the prediction function.</p>
+<p>This inverse of the link function is known as the <a href="http://en.wikipedia.org/wiki/Logistic_function">logistic</a> (thus the name logistic regression) or sometimes it is called the sigmoid function. For a particular value of the input to the link function, <span class="math inline">\(f_i = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\)</span> we can plot the value of the inverse link function as below.</p>
+</section>
+<section id="sigmoid-function" class="slide level2">
+<h2>Sigmoid Function</h2>
+<div class="figure">
+<div id="the-logistic-function-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The logistic function.
+</aside>
+</section>
+<section id="prediction-function-1" class="slide level2">
+<h2>Prediction Function</h2>
+<p>Prediction Function</p>
 <ul>
 <li>Can now write <span class="math inline">\(\pi\)</span> as a function of the input and the parameter vector as, <span class="math display">\[\pi(\mathbf{ x},\mathbf{ w}) = \frac{1}{1+
 \exp\left(-\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)}.\]</span></li>
@@ -261,8 +280,8 @@ sns.set_palette('colorblind')}-->
 <li>Probability of positive outcome for the <span class="math inline">\(i\)</span>th data point <span class="math display">\[\pi_i = h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right),\]</span> where <span class="math inline">\(h(\cdot)\)</span> is the <em>inverse</em> link function</li>
 <li>Objective function of the form <span class="math display">\[\begin{align*}
   E(\mathbf{ w}) = &amp; -  \sum_{i=1}^ny_i \log
-  g\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right) \\&amp; -
-  \sum_{i=1}^n(1-y_i)\log \left(1-g\left(\mathbf{ w}^\top
+  h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i)\right) \\&amp; -
+  \sum_{i=1}^n(1-y_i)\log \left(1-h\left(\mathbf{ w}^\top
   \boldsymbol{ \phi}(\mathbf{ x}_i)\right)\right).
  \end{align*}\]</span></li>
 </ul>
@@ -321,6 +340,26 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 </ul></li>
 <li>Similarly to matrix factorisation, for large data <em>stochastic gradient descent</em> (Robbins Munro <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> optimisation procedure) works well.</li>
 </ul>
+</section>
+<section id="logistic-regression-vs-perceptron" class="slide level2">
+<h2>Logistic Regression vs Perceptron</h2>
+<p>{We can think of the Perceptron update as randomly sampling a data point, <span class="math inline">\(i\)</span>, checking its prediction. If the predicted class doesn’t match the true class, <span class="math inline">\(y_i\)</span>, then we update the weights by subtracting <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is positive, and adding <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is negative. <span class="math display">\[
+ \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta(H(\mathbf{ x}_i^\top \mathbf{ w}) (1-y_i) \mathbf{ x}_i - (1-H(\mathbf{ x}_i^\top \mathbf{ w})) y_i \mathbf{ x}_i
+\]</span></p>
+<p>The gradient of the log likelihood of logistic regression is <span class="math display">\[
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
+y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
+(1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i).
+\]</span> so the gradient with respect to one point is <span class="math display">\[
+\frac{\text{d}E_i(\mathbf{ w})}{\text{d}\mathbf{ w}}=y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i) + (1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i).
+\]</span> and the stochastic gradient update for logistic regression (with mini-batch size set to 1) is <span class="math display">\[
+\mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta ((1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right) - y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
+\boldsymbol{ \phi}(\mathbf{ x}_i))
+\]</span></p>
 <!-- SECTION Nigeria NMIS Data -->
 </section>
 <section id="nigeria-nmis-data" class="slide level2">
