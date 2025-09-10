@@ -28,10 +28,14 @@ ipynb: true
 ---
 
 
-\include{_mlfc/includes/mlfc-notebook-setup.md}
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 
 \subsection{Review}
+
+\slides{* In introduction lecture introduced log odds and probability.
+* "Buy a jumper example"
+}
 
 \notes{We introduced machine learning as a way to extract knowledge from data to make predictions through a prediction function and an objective function. We looked at a simple example of predicting whether someone would buy a jumper based on their age and latitude, *using logistic regression* to model the log-odds of purchase. This highlighted how machine learning can codify predictions through mathematical functions. This is an example of a broader approach known as *generalised linear models*.
 
@@ -43,6 +47,7 @@ As we move to generalised linear models like logistic regression, we'll see how 
 \include{_ml/includes/sigmoid-function.md}
 \include{_ml/includes/logistic-regression-prediction-function.md}
 \include{_ml/includes/logistic-regression-maximum-likelihood.md}
+\include{_ml/includes/logistic-regression-optimisation.md}
 \include{_datasets/includes/classification-toy-data.md}
 
 \notes{Now from the toy data we create design matrices with a leading column of ones (an Eins column)}
@@ -59,6 +64,12 @@ phi_minus = np.hstack([np.ones((x_minus.shape[0], 1)), x_minus])}
 
 \include{_statistics/includes/linear-regression-statsmodels.md}
 \include{_statistics/includes/logistic-regression-statsmodels.md}
+
+\include{_ml/includes/categorical-regression-intro.md}
+\include{_ml/includes/soft-arg-max-function.md}
+\include{_ml/includes/categorical-regression-prediction-function.md}
+\include{_ml/includes/categorical-regression-maximum-likelihood.md}
+
 \include{_statistics/includes/other-glms-statsmodels.md}
 
 
