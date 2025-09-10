@@ -3,10 +3,10 @@ title: "Generalised Linear Models"
 author:
 - given: Neil D.
   family: Lawrence
-  url: http://inverseprobability.com
-  institute: University of Cambridge
-  twitter: lawrennd
-  gscholar: r3SJcvoAAAAJ
+  url: 
+  institute: 
+  twitter: 
+  gscholar: 
   orcid: 
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/generalised-linear-models.md
 date: 2025-09-10
@@ -527,7 +527,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <h3 id="exercise-2">Exercise 2</h3>
 <p>Now construct a stochastic gradient descent algorithm and run it on the data. Is it faster or slower than batch gradient descent? What can you do to improve convergence speed?</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install statsmodels</span></code></pre></div>
-<h2 id="linear-regression-with-statsmodels">Linear Regression with <code>statsmodels</code></h2>
+<h2 id="model-diagnostics-and-linear-regression">Model Diagnostics and Linear Regression</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/linear-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/linear-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
@@ -654,19 +654,18 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Scale the year to avoid numerical issues</span></span>
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    x_scaled <span class="op">=</span> (x <span class="op">-</span> <span class="dv">1900</span>) <span class="op">/</span> <span class="dv">100</span>  <span class="co"># Center around 1900 and scale to century units</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to design matrix indicator variable for pre-1914</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> (x[:, <span class="dv">0</span>] <span class="op">&lt;</span> <span class="dv">1914</span>).astype(np.float64)[:, np.newaxis]])</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to design matrix indicator variable for 1914-1945</span></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> np.hstack([Phi, ((x[:, <span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">1914</span>) <span class="op">&amp;</span> (x[:, <span class="dv">0</span>] <span class="op">&lt;=</span> <span class="dv">1945</span>)).astype(np.float64)[:, np.newaxis]])</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to design matrix indicator variable for post-1945</span></span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> np.hstack([Phi, (x[:, <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">1945</span>).astype(np.float64)[:, np.newaxis]])</span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> product_terms:</span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add product terms that multiply the scaled year and the indicator variables.</span></span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>        Phi <span class="op">=</span> np.hstack([Phi, x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> Phi[:, <span class="dv">1</span>:<span class="dv">2</span>], x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> Phi[:, <span class="dv">2</span>:<span class="dv">3</span>]])</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Phi</span></code></pre></div>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> x_scaled</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to design matrix indicator variable for 1914-1945</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> np.hstack([Phi, ((x[:, <span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">1914</span>) <span class="op">&amp;</span> (x[:, <span class="dv">0</span>] <span class="op">&lt;=</span> <span class="dv">1945</span>)).astype(np.float64)[:, np.newaxis]])</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to design matrix indicator variable for post-1945</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> np.hstack([Phi, (x[:, <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">1945</span>).astype(np.float64)[:, np.newaxis]])</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> product_terms:</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add product terms that multiply the scaled year and the indicator variables.</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>        Phi <span class="op">=</span> np.hstack([Phi, x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> Phi[:, <span class="dv">1</span>:<span class="dv">2</span>], x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> Phi[:, <span class="dv">2</span>:<span class="dv">3</span>]])</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> sm.add_constant(Phi)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Phi</span></code></pre></div>
 <div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the model</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> marathon_design_matrix(x)</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(y, Phi)</span></code></pre></div>
@@ -687,27 +686,32 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 </div>
 <p>Let’s check the summary of the results.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
-<p>The augmented model with interactions shows a significant improvement in fit compared to the simpler linear model, with an R-squared value of 0.877 (adjusted R-squared of 0.851). This indicates that about 87% of the variance in marathon times is explained by our model.</p>
-<p>The model includes several key components:</p>
+<p>Using indicator variables for historical periods (and without relying on quadratic terms), the model shows a strong improvement over the simpler linear model, with an R-squared of 0.877 and an adjusted R-squared of 0.851. This indicates that about 87% of the variance in marathon times is explained by our model. The overall model significance is high (F-statistic <span class="math inline">\(p=3.70\times 10^{-10}\)</span>), and the information criteria are AIC <span class="math inline">\(=-4.164\)</span>, BIC <span class="math inline">\(=4.244\)</span>.</p>
+<p>Key parameter estimates (with 95% confidence intervals) are:</p>
 <ul>
-<li>A base time trend (x1 coefficient: -0.5634)</li>
-<li>Indicator variables for different historical periods (pre-1914, 1914-1945, post-1945)</li>
-<li>Interaction terms between the time trend and these periods</li>
+<li>Intercept (const): <span class="math inline">\(4.5876\)</span> (SE <span class="math inline">\(0.113\)</span>), <span class="math inline">\(t=40.533\)</span>, <span class="math inline">\(p=0.000\)</span>, CI <span class="math inline">\([4.354, 4.821]\)</span></li>
+<li><span class="math inline">\(x_1\)</span> (base time trend): <span class="math inline">\(-3.6127\)</span> (SE <span class="math inline">\(1.634\)</span>), <span class="math inline">\(t=-2.211\)</span>, <span class="math inline">\(p=0.037\)</span>, CI <span class="math inline">\([-6.984, -0.241]\)</span></li>
+<li><span class="math inline">\(x_2\)</span> (war period indicator): <span class="math inline">\(-0.7523\)</span> (SE <span class="math inline">\(0.480\)</span>), <span class="math inline">\(t=-1.567\)</span>, <span class="math inline">\(p=0.130\)</span>, CI <span class="math inline">\([-1.743, 0.239]\)</span></li>
+<li><span class="math inline">\(x_3\)</span> (post war indicator): <span class="math inline">\(-0.9399\)</span> (SE <span class="math inline">\(0.211\)</span>), <span class="math inline">\(t=-4.449\)</span>, <span class="math inline">\(p=0.000\)</span>, CI <span class="math inline">\([-1.376, -0.504]\)</span></li>
+<li><span class="math inline">\(x_4\)</span> (wartime time trend): <span class="math inline">\(2.8799\)</span> (SE <span class="math inline">\(2.310\)</span>), <span class="math inline">\(t=1.247\)</span>, <span class="math inline">\(p=0.225\)</span>, CI <span class="math inline">\([-1.888, 7.648]\)</span></li>
+<li><span class="math inline">\(x_5\)</span> (post war time trend): <span class="math inline">\(3.0493\)</span> (SE <span class="math inline">\(1.646\)</span>), <span class="math inline">\(t=1.853\)</span>, <span class="math inline">\(p=0.076\)</span>, CI <span class="math inline">\([-0.348, 6.446]\)</span></li>
 </ul>
-<p>The coefficients reveal interesting patterns:</p>
-<ul>
-<li>The pre-1914 period shows a significant positive effect (x2: 1.5700, p&lt;0.001)</li>
-<li>The wartime period 1914-1945 also shows a positive effect (x3: 0.8176, p=0.030)</li>
-<li>The post-1945 period has a positive effect (x4: 0.6300, p=0.002)</li>
-<li>The interaction terms (x5, x6) suggest different rates of improvement in different periods, though these are less statistically significant (x5: -3.0493, p=0.076; x6: -0.1694, p=0.919)</li>
-</ul>
+<p>These results suggest a strong negative time trend and statistically significant effects for some period indicators, with others being suggestive but not conclusive.</p>
 <p>However, there are some concerns:</p>
 <ol type="1">
-<li>The very high condition number (2.17e+16) suggests serious multicollinearity issues</li>
-<li>The highly significant Jarque-Bera test (p-value 1.34e-24) indicates non-normal residuals</li>
-<li>There’s significant skewness (2.393) and kurtosis (11.065) in the residuals</li>
+<li>The Jarque–Bera test (<span class="math inline">\(p=1.34\times 10^{-24}\)</span>) indicates non-normal residuals. Skewness is <span class="math inline">\(2.393\)</span> and kurtosis is <span class="math inline">\(11.065\)</span>.</li>
+<li>The Durbin–Watson statistic is <span class="math inline">\(2.101\)</span>, suggesting little residual autocorrelation.</li>
+<li>The condition number is <span class="math inline">\(127\)</span>, indicating the design is reasonably well conditioned relative to polynomial/interaction-augmented alternatives.</li>
 </ol>
-<p>Despite these statistical issues, the model captures the major trends in marathon times across different historical periods better than a simple linear regression would.</p>
+<p>The indicator-variable model captures key regime differences and substantially improves fit over the baseline linear model. One side-effect of using abrupt indicator boundaries is that the fitted curve is discontinuous at regime change years. This can create edge effects where adjacent observations on either side of a boundary receive different offsets even if they are close in time.</p>
+<p>If continuity is needed we could consider</p>
+<ul>
+<li>Replacing hard indicators with smooth transition functions (e.g., logistic ramps centered on boundary years)</li>
+<li>Adding interaction terms with polynomial or spline bases to allow the trend to bend smoothly through transitions</li>
+<li>Using piecewise-linear or spline regression with continuity (and optionally slope) constraints at knots</li>
+<li>Hierarchical/regularized models that shrink jump sizes toward zero unless strongly supported by data</li>
+</ul>
+<p>These approaches preserve the idea of regime structure while avoiding artificial jumps at the boundaries.</p>
 <h2 id="fitting-with-statsmodels">Fitting with <code>statsmodels</code></h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

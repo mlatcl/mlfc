@@ -1,12 +1,22 @@
 ---
 title: "Bayesian Regression"
 abstract: "Bayesian formalisms deal with uncertainty in parameters,"
+author:
+- given: Neil D.
+  family: Lawrence
+  url: 
+  institute: 
+  twitter: 
+  gscholar: 
+  orcid: 
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/bayesian-regression.md
 date: 2025-09-15
+time: "09:30"
 week: 3
 session: 1
 featured_image: slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg
 reveal: 03-01-bayesian-regression.slides.html
+transition: None
 ipynb: 03-01-bayesian-regression.ipynb
 youtube: "17zr5dGcUzE"
 layout: lecture
@@ -56,7 +66,7 @@ y_i = mx_i + c + \epsilon_i.
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/underdetermined-system.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/underdetermined-system.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>What about the situation where you have more parameters than data in your simultaneous equation? This is known as an <em>underdetermined</em> system. In fact, this set up is in some sense <em>easier</em> to solve, because we don’t need to think about introducing a slack variable (although it might make a lot of sense from a <em>modelling</em> perspective to do so).</p>
-<p>The way Laplace proposed resolving an overdetermined system, was to introduce slack variables, <span class="math inline">\(\epsilon_i\)</span>, which needed to be estimated for each point. The slack variable represented the difference between our actual prediction and the true observation. This is known as the <em>residual</em>. By introducing the slack variable, we now have an additional <span class="math inline">\(n\)</span> variables to estimate, one for each data point, <span class="math inline">\(\{\epsilon_i\}\)</span>. This turns the overdetermined system into an underdetermined system. Introduction of <span class="math inline">\(n\)</span> variables, plus the original <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> gives us <span class="math inline">\(n+2\)</span> parameters to be estimated from <span class="math inline">\(n\)</span> observations, which makes the system <em>underdetermined</em>. However, we then made a probabilistic assumption about the slack variables, we assumed that the slack variables were distributed according to a probability density. And for the moment we have been assuming that density was the Gaussian, <span class="math display">\[\epsilon_i \sim \mathcal{N}\left(0,\sigma^2\right),\]</span> with zero mean and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>The way Laplace proposed resolving an overdetermined system, was to introduce slack variables, <span class="math inline">\(\epsilon_i\)</span>, which needed to be estimated for each point. The slack variable represented the difference between our actual prediction and the true observation. This is known as the <em>residual</em>. By introducing the slack variable, we now have an additional <span class="math inline">\(n\)</span> variables to estimate, one for each data point, <span class="math inline">\(\{\epsilon_i\}\)</span>. This turns the overdetermined system into an underdetermined system. Introduction of <span class="math inline">\(n\)</span> variables, plus the original <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> gives us <span class="math inline">\(n+2\)</span> parameters to be estimated from <span class="math inline">\(n\)</span> observations, which makes the system <em>underdetermined</em>. However, we then made a probabilistic assumption about the slack variables, we assumed that the slack variables were distributed according to a probability density. And for the moment we have been assuming that density was the Gaussian, <span class="math display">\[\epsilon_i \sim \mathscr{N}\left(0,\sigma^2\right),\]</span> with zero mean and variance <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>The follow up question is whether we can do the same thing with the parameters. If we have two parameters and only one unknown, can we place a probability distribution over the parameters as we did with the slack variables? The answer is yes.</p>
 <h2 id="underdetermined-system-1">Underdetermined System</h2>
 <div class="figure">
@@ -156,7 +166,7 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}).
 <p>The posterior is recovered from the prior using <em>Bayes’ rule</em>. Which is simply a rewriting of the product rule. We can recover Bayes’ rule as follows. The product rule of probability tells us that the joint distribution is given as the product of the conditional and the marginal. Dropping the inputs from our conditioning for the moment we have, <span class="math display">\[
 p(\mathbf{ w}, \mathbf{ y})=p(\mathbf{ y}|\mathbf{ w})p(\mathbf{ w}),
 \]</span> where we see we have related the joint density to the prior density and the <em>likelihood</em> from our previous investigation of regression, <span class="math display">\[
-p(\mathbf{ y}|\mathbf{ w}) = \prod_{i=1}^n\mathcal{N}\left(y_i|\mathbf{ w}^\top \mathbf{ x}_i, \sigma^2\right)
+p(\mathbf{ y}|\mathbf{ w}) = \prod_{i=1}^n\mathscr{N}\left(y_i|\mathbf{ w}^\top \mathbf{ x}_i, \sigma^2\right)
 \]</span> which arises from the assumption that our observation is given by <span class="math display">\[
 y_i = \mathbf{ w}^\top \mathbf{ x}_i + \epsilon_i.
 \]</span> In other words this is the Gaussian likelihood we have been fitting by minimizing the sum of squares. Have a look at <a href="./03-linear-regression.html">the session on multivariate regression</a> as a reminder.</p>
@@ -173,7 +183,7 @@ p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-short.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-short.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>The tradition in Bayesian inference is to place a probability density over the parameters of interest in your model. This choice is made regardless of whether you generally believe those parameters to be stochastic or deterministic in origin. In other words, to a Bayesian, the modelling treatment does not differentiate between epistemic and aleatoric uncertainty. For linear regression we could consider the following Gaussian prior on the intercept parameter, <span class="math display">\[c \sim \mathcal{N}\left(0,\alpha_1\right)\]</span> where <span class="math inline">\(\alpha_1\)</span> is the variance of the prior distribution, its mean being zero.</p>
+<p>The tradition in Bayesian inference is to place a probability density over the parameters of interest in your model. This choice is made regardless of whether you generally believe those parameters to be stochastic or deterministic in origin. In other words, to a Bayesian, the modelling treatment does not differentiate between epistemic and aleatoric uncertainty. For linear regression we could consider the following Gaussian prior on the intercept parameter, <span class="math display">\[c \sim \mathscr{N}\left(0,\alpha_1\right)\]</span> where <span class="math inline">\(\alpha_1\)</span> is the variance of the prior distribution, its mean being zero.</p>
 <h2 id="posterior-distribution">Posterior Distribution</h2>
 <p>The prior distribution is combined with the likelihood of the data given the parameters <span class="math inline">\(p(y|c)\)</span> to give the posterior via <em>Bayes’ rule</em>, <span class="math display">\[
   p(c|y) = \frac{p(y|c)p(c)}{p(y)}
@@ -220,9 +230,9 @@ p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/two-d-gaussian.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/two-d-gaussian.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Consider the distribution of height (in meters) of an adult male human population. We will approximate the marginal density of heights as a Gaussian density with mean given by <span class="math inline">\(1.7\text{m}\)</span> and a standard deviation of <span class="math inline">\(0.15\text{m}\)</span>, implying a variance of <span class="math inline">\(\sigma^2=0.0225\)</span>, <span class="math display">\[
-  p(h) \sim \mathcal{N}\left(1.7,0.0225\right).
+  p(h) \sim \mathscr{N}\left(1.7,0.0225\right).
   \]</span> Similarly, we assume that weights of the population are distributed a Gaussian density with a mean of <span class="math inline">\(75 \text{kg}\)</span> and a standard deviation of <span class="math inline">\(6 kg\)</span> (implying a variance of 36), <span class="math display">\[
-  p(w) \sim \mathcal{N}\left(75,36\right).
+  p(w) \sim \mathscr{N}\left(75,36\right).
   \]</span></p>
 <div class="figure">
 <div id="height-weight-gaussian-figure" class="figure-frame">
@@ -307,9 +317,9 @@ p(\mathbf{ y}) = \frac{1}{\det{2\pi\mathbf{C}}^{\frac{1}{2}}} \exp\left(-\frac{1
 \]</span></p>
 <h2 id="the-prior-density">The Prior Density</h2>
 <p>Let’s assume that the prior density is given by a zero mean Gaussian, which is independent across each of the parameters, <span class="math display">\[
-\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha \mathbf{I}\right)
+\mathbf{ w}\sim \mathscr{N}\left(\mathbf{0},\alpha \mathbf{I}\right)
 \]</span> In other words, we are assuming, for the prior, that each element of the parameters vector, <span class="math inline">\(w_i\)</span>, was drawn from a Gaussian density as follows <span class="math display">\[
-w_i \sim \mathcal{N}\left(0,\alpha\right)
+w_i \sim \mathscr{N}\left(0,\alpha\right)
 \]</span> Let’s start by assigning the parameter of the prior distribution, which is the variance of the prior distribution, <span class="math inline">\(\alpha\)</span>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set prior variance on w</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">4.</span></span>
@@ -359,9 +369,9 @@ w_i \sim \mathcal{N}\left(0,\alpha\right)
 <p>First, let’s consider the case where we have one data point and one feature in our basis set. In otherwords <span class="math inline">\(\mathbf{ f}\)</span> would be a scalar, <span class="math inline">\(\mathbf{ w}\)</span> would be a scalar and <span class="math inline">\(\boldsymbol{ \Phi}\)</span> would be a scalar. In this case we have <span class="math display">\[
 f= \phi w
 \]</span> If <span class="math inline">\(w\)</span> is drawn from a normal density, <span class="math display">\[
-w\sim \mathcal{N}\left(\mu_w,c_w\right)
+w\sim \mathscr{N}\left(\mu_w,c_w\right)
 \]</span> and <span class="math inline">\(\phi\)</span> is a scalar value which we are given, then properties of the Gaussian density tell us that <span class="math display">\[
-\phi w\sim \mathcal{N}\left(\phi\mu_w,\phi^2c_w\right)
+\phi w\sim \mathscr{N}\left(\phi\mu_w,\phi^2c_w\right)
 \]</span> Let’s test this out numerically. First we will draw 200 samples from a standard normal,</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div>
 <p>We can compute the mean of these samples and their variance</p>
@@ -374,7 +384,7 @@ w\sim \mathcal{N}\left(\mu_w,c_w\right)
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</span></code></pre></div>
-<p>If you increase the number of samples then you will see that the sample mean and the sample variance begin to converge towards the true mean and the true variance. Obviously adding an offset to a sample from <code>np.random.normal</code> will change the mean. So if you want to sample from a Gaussian with mean <code>mu</code> and standard deviation <code>sigma</code> one way of doing it is to sample from the standard normal and scale and shift the result, so to sample a set of <span class="math inline">\(w\)</span> from a Gaussian with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\alpha\)</span>, <span class="math display">\[w\sim \mathcal{N}\left(\mu,\alpha\right)\]</span> We can simply scale and offset samples from the <em>standard normal</em>.</p>
+<p>If you increase the number of samples then you will see that the sample mean and the sample variance begin to converge towards the true mean and the true variance. Obviously adding an offset to a sample from <code>np.random.normal</code> will change the mean. So if you want to sample from a Gaussian with mean <code>mu</code> and standard deviation <code>sigma</code> one way of doing it is to sample from the standard normal and scale and shift the result, so to sample a set of <span class="math inline">\(w\)</span> from a Gaussian with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\alpha\)</span>, <span class="math display">\[w\sim \mathscr{N}\left(\mu,\alpha\right)\]</span> We can simply scale and offset samples from the <em>standard normal</em>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</span>
@@ -405,7 +415,7 @@ w\sim \mathcal{N}\left(\mu_w,c_w\right)
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-computation-gaussian.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-computation-gaussian.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We will now attampt to compute the <em>posterior distribution</em>. In the lecture we went through the maths that allows us to compute the posterior distribution for <span class="math inline">\(\mathbf{ w}\)</span>. This distribution is also Gaussian, <span class="math display">\[
-p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
+p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
 \]</span> with covariance, <span class="math inline">\(\mathbf{C}_w\)</span>, given by <span class="math display">\[
 \mathbf{C}_w= \left(\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right)^{-1}
 \]</span> whilst the mean is given by <span class="math display">\[
@@ -470,7 +480,7 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \math
 </td>
 </tr>
 </table>
-<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
+<p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
@@ -559,10 +569,10 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \math
 <p>Gaussian variables have very particular properties, that many other densities don’t exhibit. Perhaps foremost amoungst them is that the sum of any Gaussian distributed set of random variables also turns out to be Gaussian distributed. This property is much rarer than you might expect.</p>
 <h2 id="sum-of-gaussian-distributed-variables">Sum of Gaussian-distributed Variables</h2>
 <p>The sum of Gaussian random variables is also Gaussian, so if we have a random variable <span class="math inline">\(y_i\)</span> drawn from a Gaussian density with mean <span class="math inline">\(\mu_i\)</span> and variance <span class="math inline">\(\sigma^2_i\)</span>, <span class="math display">\[
-y_i \sim \mathcal{N}\left(\mu_i,\sigma^2_i\right)
+y_i \sim \mathscr{N}\left(\mu_i,\sigma^2_i\right)
 \]</span> Then the sum of <span class="math inline">\(K\)</span> independently sampled values of <span class="math inline">\(y_i\)</span> will be drawn from a Gaussian with mean <span class="math inline">\(\sum_{i=1}^K \mu_i\)</span> and variance <span class="math inline">\(\sum_{i=1}^K \sigma_i^2\)</span>, <span class="math display">\[
-\sum_{i=1}^K y_i \sim \mathcal{N}\left(\sum_{i=1}^K \mu_i,\sum_{i=1}^K \sigma_i^2\right).
-\]</span> Let’s try that experimentally. First let’s generate a vector of samples from a standard normal distribution, <span class="math inline">\(z \sim \mathcal{N}\left(0,1\right)\)</span>, then we will scale and offset them, then keep adding them into a vector <code>y_vec</code>.</p>
+\sum_{i=1}^K y_i \sim \mathscr{N}\left(\sum_{i=1}^K \mu_i,\sum_{i=1}^K \sigma_i^2\right).
+\]</span> Let’s try that experimentally. First let’s generate a vector of samples from a standard normal distribution, <span class="math inline">\(z \sim \mathscr{N}\left(0,1\right)\)</span>, then we will scale and offset them, then keep adding them into a vector <code>y_vec</code>.</p>
 <h2 id="sampling-from-gaussians-and-summing-up">Sampling from Gaussians and Summing Up</h2>
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></span>
@@ -584,41 +594,41 @@ f_i = \boldsymbol{ \phi}_i^\top \mathbf{ w}
 \]</span> where <span class="math inline">\(\boldsymbol{ \phi}\)</span> is a column vector from the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and <span class="math inline">\(f_i\)</span> is the <span class="math inline">\(i\)</span>th element of <span class="math inline">\(\mathbf{ f}\)</span>.This vector inner product itself merely implies that <span class="math display">\[
 f_i = \sum_{j=1}^K w_j \phi_{i, j}
 \]</span> and if we now say that <span class="math inline">\(w_i\)</span> is Gaussian distributed, then because a scaled Gaussian is also Gaussian, and because a sum of Gaussians is also Gaussian, we know that <span class="math inline">\(f_i\)</span> is also Gaussian distributed. It merely remains to work out its mean and covariance. We can do this by looking at the expectation under a Gaussian distribution. The expectation of the mean vector is given by <span class="math display">\[
-\left\langle\mathbf{ f}\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \int \mathbf{ f}
-\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
+\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \int \mathbf{ f}
+\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
 \text{d}\mathbf{ w}= \int \boldsymbol{ \Phi}\mathbf{ w}
-\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
+\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
 \text{d}\mathbf{ w}= \boldsymbol{ \Phi}\int \mathbf{ w}
-\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
+\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
 \text{d}\mathbf{ w}= \boldsymbol{ \Phi}\boldsymbol{ \mu}
 \]</span></p>
 <p>Which is straightforward. The expectation of <span class="math inline">\(\mathbf{ f}=\boldsymbol{ \Phi}\mathbf{ w}\)</span> under the Gaussian distribution for <span class="math inline">\(\mathbf{ f}\)</span> is simply <span class="math inline">\(\mathbf{ f}=\boldsymbol{ \Phi}\boldsymbol{ \mu}\)</span>, where <span class="math inline">\(\boldsymbol{ \mu}\)</span> is the <em>mean</em> of the Gaussian density for <span class="math inline">\(\mathbf{ w}\)</span>. Because our prior distribution was Gaussian with zero mean, the expectation under the prior is given by <span class="math display">\[
-\left\langle\mathbf{ f}\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\mathbf{0},\alpha\mathbf{I}\right)} = \mathbf{0}
+\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\mathbf{0},\alpha\mathbf{I}\right)} = \mathbf{0}
 \]</span></p>
 <p>The covariance is a little more complicated. A covariance matrix is defined as <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
-= \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
-- \left\langle\mathbf{ f}\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}\left\langle\mathbf{ f}\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}^\top
-\]</span> we’ve already computed <span class="math inline">\(\left\langle\mathbf{ f}\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}=\boldsymbol{ \Phi}\boldsymbol{ \mu}\)</span> so we can substitute that in to recover <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top \boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
+= \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
+- \left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}^\top
+\]</span> we’ve already computed <span class="math inline">\(\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}=\boldsymbol{ \Phi}\boldsymbol{ \mu}\)</span> so we can substitute that in to recover <span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top \boldsymbol{ \Phi}^\top
 \]</span></p>
 <p>So we need the expectation of <span class="math inline">\(\mathbf{ f}\mathbf{ f}^\top\)</span>. Substituting in <span class="math inline">\(\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}\)</span> we have <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \left\langle\boldsymbol{ \Phi}\mathbf{ w}\mathbf{ w}^\top \boldsymbol{ \Phi}^\top\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top \boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \left\langle\boldsymbol{ \Phi}\mathbf{ w}\mathbf{ w}^\top \boldsymbol{ \Phi}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top \boldsymbol{ \Phi}^\top
 \]</span> <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} \boldsymbol{ \Phi}^\top - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top\boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} \boldsymbol{ \Phi}^\top - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top\boldsymbol{ \Phi}^\top
 \]</span> Which is dependent on the second moment of the Gaussian, <span class="math display">\[
-\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \mathbf{C}+ \boldsymbol{ \mu}\boldsymbol{ \mu}^\top
+\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \mathbf{C}+ \boldsymbol{ \mu}\boldsymbol{ \mu}^\top
 \]</span> that can be substituted in to recover, <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
 \]</span> so in the case of the prior distribution, where we have <span class="math inline">\(\mathbf{C}= \alpha \mathbf{I}\)</span> we can write <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\mathbf{0},\alpha \mathbf{I}\right)} = \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\mathbf{0},\alpha \mathbf{I}\right)} = \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top
 \]</span></p>
 <p>This implies that the prior we have suggested for <span class="math inline">\(\mathbf{ w}\)</span>, which is Gaussian with a mean of zero and covariance of <span class="math inline">\(\alpha \mathbf{I}\)</span> suggests that the distribution for <span class="math inline">\(\mathbf{ w}\)</span> is also Gaussian with a mean of zero and covariance of <span class="math inline">\(\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>. Since our observed output, <span class="math inline">\(\mathbf{ y}\)</span>, is given by a noise corrupted variation of <span class="math inline">\(\mathbf{ f}\)</span>, the final distribution for <span class="math inline">\(\mathbf{ y}\)</span> is given as <span class="math display">\[
 \mathbf{ y}= \mathbf{ f}+ \boldsymbol{ \epsilon}
-\]</span> where the noise, <span class="math inline">\(\boldsymbol{ \epsilon}\)</span>, is sampled from a Gaussian density: <span class="math inline">\(\boldsymbol{ \epsilon}\sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)\)</span>. So, in other words, we are taking a Gaussian distributed random value <span class="math inline">\(\mathbf{ f}\)</span>, <span class="math display">\[
-\mathbf{ f}\sim \mathcal{N}\left(\mathbf{0},\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right)
-\]</span> and adding to it another Gaussian distributed value, <span class="math inline">\(\boldsymbol{ \epsilon}\sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)\)</span>, to form our data observations, <span class="math inline">\(\mathbf{ y}\)</span>. Once again the sum of two (multivariate) Gaussian distributed variables is also Gaussian, with a mean given by the sum of the means (both zero in this case) and the covariance given by the sum of the covariances. So we now have that the marginal likelihood for the data, <span class="math inline">\(p(\mathbf{ y})\)</span> is given by <span class="math display">\[
-p(\mathbf{ y}) = \mathcal{N}\left(\mathbf{ y}|\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2\mathbf{I}\right)
+\]</span> where the noise, <span class="math inline">\(\boldsymbol{ \epsilon}\)</span>, is sampled from a Gaussian density: <span class="math inline">\(\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)\)</span>. So, in other words, we are taking a Gaussian distributed random value <span class="math inline">\(\mathbf{ f}\)</span>, <span class="math display">\[
+\mathbf{ f}\sim \mathscr{N}\left(\mathbf{0},\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right)
+\]</span> and adding to it another Gaussian distributed value, <span class="math inline">\(\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)\)</span>, to form our data observations, <span class="math inline">\(\mathbf{ y}\)</span>. Once again the sum of two (multivariate) Gaussian distributed variables is also Gaussian, with a mean given by the sum of the means (both zero in this case) and the covariance given by the sum of the covariances. So we now have that the marginal likelihood for the data, <span class="math inline">\(p(\mathbf{ y})\)</span> is given by <span class="math display">\[
+p(\mathbf{ y}) = \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2\mathbf{I}\right)
 \]</span> This is our <em>implicit</em> assumption for <span class="math inline">\(\mathbf{ y}\)</span> given our prior assumption for <span class="math inline">\(\mathbf{ w}\)</span>.</p>
 <h2 id="marginal-likelihood">Marginal Likelihood</h2>
 <div style="text-align:right">
@@ -643,9 +653,9 @@ E = \sum_{i=1}^n(y_i - \langle f_i\rangle)^2
 \]</span> where <span class="math inline">\(\langle f_i\rangle\)</span> is the expected output of the model at point <span class="math inline">\(x_i\)</span>.</p>
 <h2 id="computing-error-bars">Computing Error Bars</h2>
 <p>Finally, we can compute error bars for the predictions. The error bars are the standard deviations of the predictions for <span class="math inline">\(\mathbf{ f}=\boldsymbol{ \Phi}\mathbf{ w}\)</span> under the posterior density for <span class="math inline">\(\mathbf{ w}\)</span>. The standard deviations of these predictions can be found from the variance of the prediction at each point. Those variances are the diagonal entries of the covariance matrix. We’ve already computed the form of the covariance under Gaussian expectations, <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
 \]</span> which under the posterior density is given by <span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathcal{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)} = \boldsymbol{ \Phi}\mathbf{C}_w \boldsymbol{ \Phi}^\top
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)} = \boldsymbol{ \Phi}\mathbf{C}_w \boldsymbol{ \Phi}^\top
 \]</span></p>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>The error bars are given by computing the standard deviation of the predictions, <span class="math inline">\(f\)</span>. For a given prediction <span class="math inline">\(f_i\)</span> the variance is <span class="math inline">\(\text{var}(f_i) = \langle f_i^2\rangle - \langle f_i \rangle^2\)</span>. This is given by the diagonal element of the covariance of <span class="math inline">\(\mathbf{ f}\)</span>, <span class="math display">\[

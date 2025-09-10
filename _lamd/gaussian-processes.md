@@ -4,32 +4,31 @@ session: 2
 date: 2025-09-16
 featured_image: slides/diagrams/gp/two_point_sample001.svg
 title: "Gaussian Processes"
-abstract: 
+layout: lecture
+author:
+- family: Lawrence
+  given: Neil D.
+time: "09:30"
+abstract: Gaussian processes are non parameteric Bayesian models that extend the idea of Bayesian linear models to infinite basis functions.
 youtube: B2XhFoCehy8
+transition: None
+reveal: true
+ipynb: true
 ---
 
-\include{_mlfc/includes/mlfc-notebook-setup.md}
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 \subsection{Review}
 
-\slides{* Last week: Logistic Regression and Generalised Linear Models
-* Introduced link functions and different transformations.
-* Showed examples in classification and mentioned possibilities for disease rate models.
-* This week: 
+\slides{* Yesterday: Bayesian regression
+* Today: 
     * Gaussian Processes: non parametric Bayesian modelling}
 
 
-\notes{Over the last two sessions we've begun considering classification models and logistic regresssion. In particular, for naive Bayes, we considered a set of assumptions that allowed us to build a joint model of our data set. In particular for naive Bayes we specified
+\notes{
+\subsection{Generalised Linear Models}
 
-1. Data conditional independence.
-2. Feature conditional independence.
-3. Marginal likelihood of labels was Bernoulli distributed.
-
-This allowed us to specify the joint density of our labels and our input data, $p(\dataVector, \inputMatrix|\boldsymbol{\theta})$. And we conditioned on the training data to make predictions about the test data.}
-
-\subsection{Generalized Linear Models}
-
-\notes{Logistic regression is part of a wider class of models known as *generalized linear models*. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that}\slides{* Logistic regression is a *generalized linear model*
+\notes{Logistic regression is part of a wider class of models known as *generalised linear models*. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that}\slides{* Logistic regression is a *generalised linear model*
 * Prediction function that is linear in parameters}
 $$
 \log \frac{p(\inputVector)}{1-p(\inputVector)} = \mappingFunction(\inputVector; \mappingVector)
@@ -44,8 +43,8 @@ $$
 \mappingFunction(\inputVector) =
 \mappingVector^\top \basisVector(\inputVector).
 $$
-\notes{When we form a Gaussian process we do something that is slightly more akin to the naive Bayes approach, but actually is closely related to the generalized linear model approach.}
-\slides{* Gaussian processes are related to generalized linear models.}
+\notes{When we form a Gaussian process we do something that is slightly more akin to the naive Bayes approach, but actually is closely related to the generalised linear model approach.}
+\slides{* Gaussian processes are related to generalised linear models.}
 
 \include{_gp/includes/gp-intro-lectures.md}
 \include{_gp/includes/gptwopointpred.md}

@@ -5,7 +5,15 @@ date: 2025-09-15
 featured_image: slides/diagrams/ml/olympic_5cv05_BLM_polynomial_number026.svg
 title: "Bayesian Regression"
 abstract: "Bayesian formalisms deal with uncertainty in parameters, "
+layout: lecture
+author:
+- family: Lawrence
+  given: Neil D.
+time: "09:30"
 youtube: 17zr5dGcUzE
+transition: None
+reveal: true
+ipynb: true
 ---
 
 \include{_mlfc/includes/mlfc-notebook-setup.md}

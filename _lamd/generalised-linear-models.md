@@ -8,10 +8,6 @@ layout: lecture
 author:
 - family: Lawrence
   given: Neil D.
-  gscholar: r3SJcvoAAAAJ
-  institute: University of Cambridge
-  twitter: lawrennd
-  url: http://inverseprobability.com
 time: "09:30"
 date: 2025-09-10
 youtube: 1IM_t8miX6s
