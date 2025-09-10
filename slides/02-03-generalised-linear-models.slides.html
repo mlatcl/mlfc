@@ -444,7 +444,7 @@ showDivs(0, 'logistic-regression');
 <h2>Linear Regression Model</h2>
 <ul>
 <li><p>Linear regression models continuous response <span class="math inline">\(y_i\)</span> vs inputs <span class="math inline">\(\mathbf{ x}_i\)</span>: <span class="math display">\[y_i = f(\mathbf{ x}_i) + \epsilon_i\]</span> where <span class="math inline">\(f(\mathbf{ x}_i) = \mathbf{ w}^\top\mathbf{ x}_i\)</span></p></li>
-<li><p>Probabilistic model: <span class="math display">\[p(y_i|\mathbf{ x}_i) = \gaussianDist{\mathbf{ w}^\top\mathbf{ x}_i}{\sigma^2}\]</span></p></li>
+<li><p>Probabilistic model: <span class="math display">\[p(y_i|\mathbf{ x}_i) = \mathscr{N}\left(y_i|\mathbf{ w}^\top\mathbf{ x}_i,\sigma^2\right)\]</span></p></li>
 </ul>
 </section>
 <section id="linear-regression-in-matrix-form" class="slide level2">
@@ -453,14 +453,22 @@ showDivs(0, 'logistic-regression');
 <li><p>Matrix form: <span class="math display">\[\mathbf{ y}= \mathbf{X}\mathbf{ w}+ \boldsymbol{ \epsilon}\]</span></p></li>
 <li><p>Expected prediction: <span class="math display">\[\mathbb{E}[y_i|\mathbf{ x}_i] = \mathbf{ w}^\top\mathbf{ x}_i\]</span></p></li>
 </ul>
+<div class="figure">
+<div id="linear-regression-olympic-marathon-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//statistics/linear-regression-olympic-marathon-statsmodels.svg" width="50%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Plot of the <code>statsmodels</code> fit to the olympic marathon data.
+</aside>
 </section>
 <section id="model-fit-statistics" class="slide level2">
 <h2>Model Fit Statistics</h2>
 <ul>
 <li>Model fit statistics help assess overall performance:
 <ul>
-<li>R-squared shows variance explained<br />
-</li>
+<li>R-squared shows variance explained</li>
 <li>F-statistic tests if model is useful</li>
 <li>AIC/BIC help compare models</li>
 </ul></li>
@@ -473,7 +481,7 @@ showDivs(0, 'logistic-regression');
 <ul>
 <li>Coefficients show effect direction/size</li>
 <li>Standard errors show uncertainty</li>
-<li>P-values test significance</li>
+<li><span class="math inline">\(p\)</span>-values test significance</li>
 </ul></li>
 </ul>
 </section>
@@ -497,6 +505,15 @@ showDivs(0, 'logistic-regression');
 <li>Shows if relationship makes practical sense</li>
 </ul></li>
 </ul>
+<div class="figure">
+<div id="residuals-histogram-olympic-marathon-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//statistics/residuals-histogram-olympic-marathon.svg" width="50%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The histogram of the residuals of the fit to the Olympic Marathon data.
+</aside>
 </section>
 <section id="linear-regression-fit" class="slide level2">
 <h2>Linear Regression Fit</h2>
@@ -547,24 +564,21 @@ Linear regression fit to Olympic marathon men’s times using <code>statsmodels<
 <li>Each row represents one data point</li>
 <li>Each column represents one feature</li>
 <li>For <span class="math inline">\(n\)</span> data points and <span class="math inline">\(p\)</span> features: <span class="math display">\[\boldsymbol{ \Phi}= \begin{bmatrix} 
-x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
-x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+\phi_{11} &amp; \phi_{12} &amp; \cdots &amp; \phi_{1p} \\
+\phi_{21} &amp; \phi_{22} &amp; \cdots &amp; \phi_{2p} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
+\phi_{n1} &amp; \phi_{n2} &amp; \cdots &amp; \phi_{np}
 \end{bmatrix}\]</span></li>
 <li>Also called the feature matrix or model matrix</li>
 </ul>
-</section>
-<section id="augmented-features-with-interactions-regression-fit" class="slide level2">
-<h2>Augmented Features with Interactions Regression Fit</h2>
 <div class="figure">
-<div id="linear-regression-olympic-marathon-men-augmented-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-augmented-statsmodels.svg" width="80%" style=" ">
+<div id="linear-regression-olypmic-marathon-men-augmented-statsmodels-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olypmic-marathon-men-augmented-statsmodels.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
-Polynomial regression fit to Olympic marathon men’s times using <code>statsmodels</code>.
+Plot of the fit obtained when we include indicator variables that identify the pre-1914, across war, and post-war eras.
 </aside>
 </section>
 <section id="categorical-multinomial-regression" class="slide level2">
