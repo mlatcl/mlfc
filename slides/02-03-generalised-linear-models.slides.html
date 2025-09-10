@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="dcterms.date" content="2025-09-10">
-  <title>From Generalised Linear Models to Neural Networks</title>
+  <title>Generalised Linear Models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">From Generalised Linear Models to Neural Networks</h1>
+  <h1 class="title">Generalised Linear Models</h1>
   <p class="author" style="text-align:center"><a href="http://inverseprobability.com">Neil D. Lawrence</a></p>
   <p class="date" style="text-align:center"><time>2025-09-10</time></p>
 </section>
@@ -531,7 +531,7 @@ Location of the over thirty-four thousand health facilities registered in the NM
 <h2>Linear Regression Fit</h2>
 <div class="figure">
 <div id="linear-regression-olympic-marathon-men-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-statsmodels.svg.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-statsmodels.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
@@ -588,7 +588,7 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <h2>Augmented Features with Interactions Regression Fit</h2>
 <div class="figure">
 <div id="linear-regression-olympic-marathon-men-augmented-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-augmented-statsmodels.svg.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-augmented-statsmodels.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
@@ -767,7 +767,7 @@ The Poisson distribution.
 <h2>Poisson Regression Diagnostics</h2>
 <div class="figure">
 <div id="poisson-regression-diagnostics-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/poisson-regression-diagnostics.svg.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/poisson-regression-diagnostics.svg" width="80%" style=" ">
 </object>
 </div>
 </div>
@@ -810,41 +810,6 @@ Diagnostic plots for the Poisson regression model showing actual vs predicted co
 <li>Check model assumptions</li>
 <li>Communicate results clearly</li>
 </ul>
-<!-- SECTION Neural Networks -->
-</section>
-<section id="neural-networks" class="slide level2">
-<h2>Neural Networks</h2>
-</section>
-<section id="from-basis-functions-to-neural-networks-jax" class="slide level2">
-<h2>From Basis Functions to Neural Networks (JAX)</h2>
-<p>{import jax import jax.numpy as jnp from jax import random, grad, jit, value_and_grad from functools import partial</p>
-</section>
-<section id="linear-models-as-basis-weights" class="slide level2">
-<h2>Linear Models as Basis + Weights</h2>
-</section>
-<section id="parametric-basis-functions" class="slide level2">
-<h2>Parametric Basis Functions</h2>
-</section>
-<section id="multi-layer-perceptron-as-stacked-bases" class="slide level2">
-<h2>Multi-Layer Perceptron as Stacked Bases</h2>
-</section>
-<section id="loss-and-training-jax-gradjit" class="slide level2">
-<h2>Loss and Training (JAX grad/jit)</h2>
-</section>
-<section id="demo-fit-a-1d-nonlinear-function" class="slide level2">
-<h2>Demo: Fit a 1D Nonlinear Function</h2>
-<div class="figure">
-<div id="basis-to-nn-jax-demo-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/basis-to-nn-jax-demo.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-From basis functions to multilayer neural networks in JAX.
-</aside>
-</section>
-<section id="discussion" class="slide level2">
-<h2>Discussion</h2>
 </section>
 <section id="further-reading" class="slide level2 scrollable">
 <h2 class="scrollable">Further Reading</h2>

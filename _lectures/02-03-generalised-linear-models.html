@@ -1,5 +1,5 @@
 ---
-title: "From Generalised Linear Models to Neural Networks"
+title: "Generalised Linear Models"
 author:
 - given: Neil D.
   family: Lawrence
@@ -486,7 +486,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gradient descent algorithm</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>w_vals <span class="op">=</span> np.random.normal(size<span class="op">=</span>(X.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, <span class="dv">1</span>), scale <span class="op">=</span> <span class="fl">0.001</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert weights to a pandas DataFrame with column names</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> typeof(X_train) <span class="kw">is</span> pd.DataFrame:</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">type</span>(X_train) <span class="kw">is</span> pd.DataFrame:</span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>w_vals, </span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                     index<span class="op">=</span>[<span class="st">&#39;Eins&#39;</span>] <span class="op">+</span> <span class="bu">list</span>(X_train.columns), </span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                     columns<span class="op">=</span>[<span class="st">&#39;weight&#39;</span>])</span>
@@ -502,7 +502,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a histogram of the weights</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> typeof(w) <span class="kw">is</span> pd.DataFrame:</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">type</span>(w) <span class="kw">is</span> pd.DataFrame:</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    plt.bar(w.index, w[<span class="st">&#39;weight&#39;</span>])</span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    plt.bar(w)</span>
@@ -514,7 +514,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;nmis-logistic-regression-weights.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span>)</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>What does the magnitude of the weight vectors tell you about the different parameters and their influence on outcome? Are the weights of roughly the same size, if not, how might you fix this?</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, linear)</span>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, mlai.linear)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(g_test[y_test]<span class="op">&gt;</span><span class="fl">0.5</span>)</span></code></pre></div>
 <h2 id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
 <h3 id="exercise-2">Exercise 2</h3>
@@ -522,13 +522,13 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install statsmodels</span></code></pre></div>
 <h2 id="linear-regression-with-statsmodels">Linear Regression with <code>statsmodels</code></h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/linear-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/linear-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>In linear regression, we model the relationship between a continuous response variable <span class="math inline">\(y_i\)</span> and input variables <span class="math inline">\(\mathbf{ x}_i\)</span> through a linear function with Gaussian noise:</p>
 <p><span class="math display">\[y_i = f(\mathbf{ x}_i) + \epsilon_i\]</span></p>
 <p>where <span class="math inline">\(f(\mathbf{ x}_i) = \mathbf{ w}^\top\mathbf{ x}_i = \sum_{j=1}^D w_jx_{i,j}\)</span> and <span class="math inline">\(\epsilon_i \sim \mathscr{N}\left(0,\sigma^2\right)\)</span></p>
 <p>This gives us a probabilistic model:</p>
-<p><span class="math display">\[p(y_i|\mathbf{ x}_i) = \gaussianDist{\mathbf{ w}^\top\mathbf{ x}_i}{\sigma^2}\]</span></p>
+<p><span class="math display">\[p(y_i|\mathbf{ x}_i) = \mathscr{N}\left(y_i|\mathbf{ w}^\top\mathbf{ x}_i,\sigma^2\right)\]</span></p>
 <p>The key components are:</p>
 <ul>
 <li><span class="math inline">\(y_i\)</span> is the target/response variable we want to predict</li>
@@ -555,23 +555,23 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
 <p>The statsmodels summary provides several key diagnostic measures that help us evaluate our model fit and identify potential areas for improvement. Since we’re working with one-dimensional data (year vs time), we can visualize everything easily to complement these statistical measures.</p>
-<p>The model fit statistics show a moderately strong fit, with an R-squared of 0.744 indicating that our model explains 74.4% of the variance in the data. The adjusted R-squared of 0.733 confirms this isn’t just due to overfitting. The very low F-statistic p-value (7.40e-09) confirms the model’s overall significance. The AIC (10.08) and BIC (12.67) values will be useful when we compare this model against alternative specifications we might try.</p>
-<p>Looking at the model parameters, we see a coefficient of -0.013 for our predictor, with a small standard error (0.002). The t-statistic of -8.515 and p-value of 0.000 indicate this effect is highly significant. The 95% confidence interval [-0.016, -0.010] gives us good confidence in our estimate. The negative coefficient confirms the expected downward trend in marathon times over the years.</p>
+<p>The model fit statistics show a moderately strong fit, with an R-squared of 0.730 indicating that our model explains 73.0% of the variance in the data. The adjusted R-squared of 0.721 confirms this isn’t just due to overfitting. The very low F-statistic p-value (1.85e-09) confirms the model’s overall significance. The AIC (11.33) and BIC (14.13) values will be useful when we compare this model against alternative specifications we might try.</p>
+<p>Looking at the model parameters, we see a coefficient of -0.0116 for our predictor, with a small standard error (0.001). The t-statistic of -8.710 and p-value of 0.000 indicate this effect is highly significant. The 95% confidence interval [-0.014, -0.009] gives us good confidence in our estimate. The negative coefficient confirms the expected downward trend in marathon times over the years.</p>
 <p>However, the residual diagnostics suggest several potential issues we should investigate:</p>
 <ol type="1">
-<li><p>The Durbin-Watson statistic (1.110) indicates positive autocorrelation in the residuals, though not as severe as we might expect. This suggests we might want to:</p>
+<li><p>The Durbin-Watson statistic (0.981) indicates positive autocorrelation in the residuals. This suggests we might want to:</p>
 <ul>
 <li>Consider time series modeling approaches</li>
 <li>Add polynomial terms to capture non-linear trends</li>
 <li>Investigate if there are distinct “eras” in marathon times</li>
 </ul></li>
-<li><p>The highly significant Jarque-Bera test (p-value 7.67e-12) tells us our residuals aren’t normally distributed. The skew (1.929) and kurtosis (8.534) values show the distribution is strongly right-skewed with very heavy tails. We might want to:</p>
+<li><p>The highly significant Jarque-Bera test (p-value 8.32e-14) tells us our residuals aren’t normally distributed. The skew (1.947) and kurtosis (8.746) values show the distribution is strongly right-skewed with very heavy tails. We might want to:</p>
 <ul>
 <li>Look for outliers or influential points</li>
 <li>Consider robust regression techniques</li>
 <li>Try transforming our response variable</li>
 </ul></li>
-<li><p>The large condition number (1.08e+05) suggests potential numerical instability or multicollinearity issues. While less concerning with single-predictor models, we should:</p>
+<li><p>The large condition number (9.94e+04) suggests potential numerical instability or multicollinearity issues. While less concerning with single-predictor models, we should:</p>
 <ul>
 <li>Consider centering and scaling our predictor</li>
 <li>Watch for numerical precision issues</li>
@@ -596,7 +596,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <p>Any of these transformations would help reduce the condition number while preserving the underlying relationship in our data. The coefficients would change, but the fitted values and overall model quality would remain the same.</p>
 <div class="figure">
 <div id="linear-regression-olympic-marathon-men-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-statsmodels.svg.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-statsmodels.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="linear-regression-olympic-marathon-men-statsmodels-magnify" class="magnify" onclick="magnifyFigure(&#39;linear-regression-olympic-marathon-men-statsmodels&#39;)">
@@ -606,7 +606,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 <p>Figure: Linear regression fit to Olympic marathon men’s times using <code>statsmodels</code>.</p>
 </div>
 </div>
-<p>The plot reveals several key features that help explain our diagnostic statistics:</p>
+<p>The plot reveals features that help explain our diagnostic statistics:</p>
 <ul>
 <li>The 1904 St. Louis Olympics appears as a clear outlier, contributing to the non-normal residuals (Jarque-Bera p=0.00432) and right-skewed distribution (skew=1.385)</li>
 <li>We can observe distinct regimes in the data:
@@ -676,7 +676,7 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
 <div class="figure">
 <div id="linear-regression-olympic-marathon-men-augmented-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-augmented-statsmodels.svg.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-augmented-statsmodels.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="linear-regression-olympic-marathon-men-augmented-statsmodels-magnify" class="magnify" onclick="magnifyFigure(&#39;linear-regression-olympic-marathon-men-augmented-statsmodels&#39;)">
@@ -686,30 +686,30 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <p>Figure: Polynomial regression fit to Olympic marathon men’s times using <code>statsmodels</code>.</p>
 </div>
 </div>
-<p>The augmented model with interactions shows a significant improvement in fit compared to the simpler linear model, with an R-squared value of 0.870 (adjusted R-squared of 0.839). This indicates that about 87% of the variance in marathon times is explained by our model.</p>
+<p>The augmented model with interactions shows a significant improvement in fit compared to the simpler linear model, with an R-squared value of 0.877 (adjusted R-squared of 0.851). This indicates that about 87% of the variance in marathon times is explained by our model.</p>
 <p>The model includes several key components:</p>
 <ul>
-<li>A base time trend (x1 coefficient: -0.6737)</li>
+<li>A base time trend (x1 coefficient: -0.5634)</li>
 <li>Indicator variables for different historical periods (pre-1914, 1914-1945, post-1945)</li>
 <li>Interaction terms between the time trend and these periods</li>
 </ul>
 <p>The coefficients reveal interesting patterns:</p>
 <ul>
-<li>The pre-1914 period shows a significant positive effect (x2: 1.5506, p&lt;0.001)</li>
-<li>The wartime period 1914-1945 also shows a positive effect (x3: 0.7982, p&lt;0.05)</li>
-<li>The post-1945 period has a positive effect (x4: 0.6883, p&lt;0.01)</li>
-<li>The interaction terms (x5, x6) suggest different rates of improvement in different periods, though these are less statistically significant</li>
+<li>The pre-1914 period shows a significant positive effect (x2: 1.5700, p&lt;0.001)</li>
+<li>The wartime period 1914-1945 also shows a positive effect (x3: 0.8176, p=0.030)</li>
+<li>The post-1945 period has a positive effect (x4: 0.6300, p=0.002)</li>
+<li>The interaction terms (x5, x6) suggest different rates of improvement in different periods, though these are less statistically significant (x5: -3.0493, p=0.076; x6: -0.1694, p=0.919)</li>
 </ul>
 <p>However, there are some concerns:</p>
 <ol type="1">
-<li>The very high condition number (2.79e+16) suggests serious multicollinearity issues</li>
-<li>The Jarque-Bera test (p&lt;0.001) indicates non-normal residuals</li>
-<li>There’s significant skewness (2.314) and kurtosis (10.325) in the residuals</li>
+<li>The very high condition number (2.17e+16) suggests serious multicollinearity issues</li>
+<li>The highly significant Jarque-Bera test (p-value 1.34e-24) indicates non-normal residuals</li>
+<li>There’s significant skewness (2.393) and kurtosis (11.065) in the residuals</li>
 </ol>
 <p>Despite these statistical issues, the model captures the major trends in marathon times across different historical periods better than a simple linear regression would.</p>
 <h2 id="fitting-with-statsmodels">Fitting with <code>statsmodels</code></h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <h2 id="fitting-the-model">Fitting the Model</h2>
 <div style="text-align:right">
@@ -822,7 +822,7 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <p>To incorporate multiple features and transformations into our model, we need a systematic way to organize this information through the design matrix.</p>
 <h2 id="other-glms">Other GLMs</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/other-glms-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/other-glms-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/other-glms-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/other-glms-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We’ve introduced the formalism for generalised linear models. Have a think about how you might model count data using the <a href="http://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a> and a log link function for the rate, <span class="math inline">\(\lambda(\mathbf{ x})\)</span>. If you want a data set you can try the <code>pods.datasets.google_trends()</code> for some count data.</p>
 <h2 id="other-glms-1">Other GLMs</h2>
@@ -879,7 +879,7 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <p>In this synthetic example, we generate count data that follows a Poisson distribution where the rate parameter <span class="math inline">\(\lambda\)</span> depends on two predictor variables. This demonstrates how Poisson regression can model count data with multiple predictors.</p>
 <div class="figure">
 <div id="poisson-regression-diagnostics-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/poisson-regression-diagnostics.svg.svg" width="80%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/poisson-regression-diagnostics.svg" width="80%" style=" ">
 </object>
 </div>
 <div id="poisson-regression-diagnostics-magnify" class="magnify" onclick="magnifyFigure(&#39;poisson-regression-diagnostics&#39;)">
@@ -891,7 +891,7 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 </div>
 <h2 id="practical-tips">Practical Tips</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/glm-practical-tips.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/glm-practical-tips.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/glm-practical-tips.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/glm-practical-tips.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>When working with generalised linear models in practice, there are several key considerations that can significantly impact model performance:</p>
 <p>Feature engineering is often the most critical factor in model success:</p>
@@ -932,128 +932,6 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <li>For categorical variables with many levels, consider grouping rare categories.</li>
 <li>When dealing with missing data, document your imputation strategy and test its impact on model performance.</li>
 </ul>
-<h1 id="neural-networks">Neural Networks</h1>
-<h2 id="from-basis-functions-to-neural-networks-jax">From Basis Functions to Neural Networks (JAX)</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>So far we have been using <code>numpy</code> for building our models. In this session we are going to make use of <code>JAX</code>.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>```{<span class="im">import</span> jax</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, grad, jit, value_and_grad</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>Recall $f(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ w}<span class="op">^\</span>top <span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x})$. In JAX, we write basis maps that take inputs <span class="kw">and</span> parameters <span class="kw">and</span> <span class="cf">return</span> features. A standard linear layer <span class="kw">is</span> a basis <span class="cf">with</span> $<span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ x}$.</span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_features(x):</span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;&quot;&quot;Identity features (no bias), expects x of shape (n, d).&quot;&quot;&quot;</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_linear(params, x, features<span class="op">=</span>linear_features):</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Linear model: w^T phi(x) + b.</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">    params: dict with &#39;W&#39; (d-&gt;o) and optional &#39;b&#39; (o,).&quot;&quot;&quot;</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> features(x)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> Phi <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>]</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&#39;b&#39;</span> <span class="kw">in</span> params:</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
-<h2 id="parametric-basis-functions">Parametric Basis Functions</h2>
-<p>We define parametric basis layers: affine transforms and non-linear activations. These combine to form neural networks.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> affine(params, x):</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Affine transform: x -&gt; xW + b.&quot;&quot;&quot;</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>] <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu(x):</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.maximum(<span class="fl">0.0</span>, x)</span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tanh(x):</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.tanh(x)</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> layer_apply(layer_params, x, activation<span class="op">=</span>relu):</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply one dense layer + activation.&quot;&quot;&quot;</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> affine(layer_params, x)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> activation(h)</span></code></pre></div>
-<h2 id="multi-layer-perceptron-as-stacked-bases">Multi-Layer Perceptron as Stacked Bases</h2>
-<p>An MLP is a composition: <span class="math inline">\(\mathbf{x} \xrightarrow{\text{affine}} \boldsymbol{ h}_1 \xrightarrow{\sigma} \xrightarrow{\text{affine}} \dots \xrightarrow{\text{affine}} \hat{\mathbf{ y}}\)</span>.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_dense_params(key, in_dim, out_dim, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    k1, k2 <span class="op">=</span> random.split(key)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> scale <span class="op">*</span> random.normal(k1, (in_dim, out_dim))</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> scale <span class="op">*</span> random.normal(k2, (out_dim,))</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;W&#39;</span>: W, <span class="st">&#39;b&#39;</span>: b}</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;layer_sizes: [in, h1, h2, ..., out]&quot;&quot;&quot;</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> random.split(key, <span class="bu">len</span>(layer_sizes)<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    layers <span class="op">=</span> []</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (din, dout) <span class="kw">in</span> <span class="bu">zip</span>(keys, <span class="bu">zip</span>(layer_sizes[:<span class="op">-</span><span class="dv">1</span>], layer_sizes[<span class="dv">1</span>:])):</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>        layers.append(init_dense_params(k, din, dout, scale<span class="op">=</span>scale))</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> layers</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mlp_apply(params, x, activation<span class="op">=</span>relu):</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply MLP to inputs x (n, d). Last layer linear.&quot;&quot;&quot;</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> x</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> layer <span class="kw">in</span> params[:<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> layer_apply(layer, h, activation<span class="op">=</span>activation)</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Last layer linear (no non-linearity)</span></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> affine(params[<span class="op">-</span><span class="dv">1</span>], h)</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
-<h2 id="loss-and-training-jax-gradjit">Loss and Training (JAX grad/jit)</h2>
-<p>We use squared error and train with gradient descent. JAX allows JIT compilation and automatic differentiation.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Params is a list of dicts; apply tree map-style update</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    new_params <span class="op">=</span> []</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p, g <span class="kw">in</span> <span class="bu">zip</span>(params, grads):</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>        new_params.append({k: p[k] <span class="op">-</span> lr <span class="op">*</span> g[k] <span class="cf">for</span> k <span class="kw">in</span> p})</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_params, loss</span></code></pre></div>
-<h2 id="demo-fit-a-1d-nonlinear-function">Demo: Fit a 1D Nonlinear Function</h2>
-<p>We fit a simple nonlinear mapping with an MLP to illustrate stacking basis layers.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create synthetic 1D regression data</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key):</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> jnp.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> jnp.sin(x) <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> jnp.cos(<span class="dv">2</span><span class="op">*</span>x)</span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> noise <span class="op">*</span> random.normal(key, f.shape)</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> f <span class="op">+</span> eps</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, f</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x, y, f_true <span class="op">=</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key)</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init MLP: 1 -&gt; 64 -&gt; 64 -&gt; 1</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>layer_sizes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">1</span>]</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2000</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">1e-2</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>apply_fn <span class="op">=</span> partial(mlp_apply, activation<span class="op">=</span>relu)</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>loss_trace <span class="op">=</span> []</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    params, loss <span class="op">=</span> update(params, x, y, lr, apply_fn)</span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> <span class="dv">100</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>        loss_trace.append((i, <span class="bu">float</span>(loss))) </span></code></pre></div>
-<div class="figure">
-<div id="basis-to-nn-jax-demo-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/basis-to-nn-jax-demo.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="basis-to-nn-jax-demo-magnify" class="magnify" onclick="magnifyFigure(&#39;basis-to-nn-jax-demo&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="basis-to-nn-jax-demo-caption" class="caption-frame">
-<p>Figure: From basis functions to multilayer neural networks in JAX.</p>
-</div>
-</div>
-<h2 id="discussion">Discussion</h2>
-<p>Each dense layer is a parametric basis mapping; stacking them with non-linearities yields universal approximators. JAX lets us compose, differentiate, and JIT-compile these computations for efficient training.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li>Section 5.2.2 up to pg 182 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>

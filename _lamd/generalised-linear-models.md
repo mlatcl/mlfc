@@ -2,7 +2,7 @@
 week: 2
 session: 3
 featured_image: assets/images/generalised-linear-models.png 
-title: "From Generalised Linear Models to Neural Networks"
+title: "Generalised Linear Models"
 abstract:  >
 layout: lecture
 author:
@@ -57,9 +57,9 @@ phi_minus = np.hstack([np.ones((x_minus.shape[0], 1)), x_minus])}
 
 \installcode{statsmodels}
 
-\include{_ml/includes/linear-regression-statsmodels.md}
-\include{_ml/includes/logistic-regression-statsmodels.md}
-\include{_ml/includes/other-glms-statsmodels.md}
+\include{_statistics/includes/linear-regression-statsmodels.md}
+\include{_statistics/includes/logistic-regression-statsmodels.md}
+\include{_statistics/includes/other-glms-statsmodels.md}
 
 
 
@@ -74,12 +74,7 @@ phi_minus = np.hstack([np.ones((x_minus.shape[0], 1)), x_minus])}
 \notes{We've introduced the formalism for generalised linear models. Have a think about how you might model count data using the [Poisson distribution](http://en.wikipedia.org/wiki/Poisson_distribution) and a log link function for the rate, $\lambda(\inputVector)$. If you want a data set you can try the `pods.datasets.google_trends()` for some count data.}
 
 \include{_ml/includes/poisson-regression.md}
-\include{_ml/includes/glm-practical-tips.md}
-
-\section{Neural Networks}
-
-\include{_ml/includes/basis-to-neural-networks.md}
-
+\include{_statistics/includes/glm-practical-tips.md}
 
 
 
