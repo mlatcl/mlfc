@@ -8,15 +8,15 @@ author:
   twitter: lawrennd
   gscholar: r3SJcvoAAAAJ
   orcid: 
-edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/from-generalised-linear-models-to-neural-networks.md
+edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/generalised-linear-models.md
 date: 2025-09-10
 time: "09:30"
 week: 2
 session: 3
 featured_image: assets/images/generalised-linear-models.png
-reveal: 02-03-from-generalised-linear-models-to-neural-networks.slides.html
+reveal: 02-03-generalised-linear-models.slides.html
 transition: None
-ipynb: 02-03-from-generalised-linear-models-to-neural-networks.ipynb
+ipynb: 02-03-generalised-linear-models.ipynb
 youtube: "1IM_t8miX6s"
 layout: lecture
 categories:
@@ -52,7 +52,7 @@ sns.set_context('paper')
 sns.set_palette('colorblind')}-->
 <h2 id="review">Review</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/from-generalised-linear-models-to-neural-networks.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/from-generalised-linear-models-to-neural-networks.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/generalised-linear-models.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/generalised-linear-models.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We introduced machine learning as a way to extract knowledge from data to make predictions through a prediction function and an objective function. We looked at a simple example of predicting whether someone would buy a jumper based on their age and latitude, <em>using logistic regression</em> to model the log-odds of purchase. This highlighted how machine learning can codify predictions through mathematical functions. This is an example of a broader approach known as <em>generalised linear models</em>.</p>
 <p>When taking a probabilistic approach to supervised learning we’re interested in predicting a class label, <span class="math inline">\(y_i\)</span>, given an input, <span class="math inline">\(\mathbf{ x}_i\)</span>. That’s represented probabilisticially as <span class="math inline">\(p(y_i|\mathbf{ x}_i)\)</span>. We can derive this conditional distribution through either (1) modelling the joint distribution, <span class="math inline">\(p(\mathbf{ y}, \mathbf{X})\)</span> and then dividing by the marginal distribution of the inputs, <span class="math inline">\(p(\mathbf{X})\)</span> , or (2) focusing specifically on modeling the conditional density, <span class="math inline">\(p(\mathbf{ y}|\mathbf{X})\)</span>, that directly answers our prediction question. In the <em>generalised linear model</em> we choose the second approach.</p>
