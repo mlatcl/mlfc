@@ -39,7 +39,18 @@ When taking a probabilistic approach to supervised learning we're interested in 
 
 As we move to generalised linear models like logistic regression, we'll see how directly modeling the conditional density $p(\dataVector|\inputMatrix)$ can provide more flexibility in our modeling assumptions, while still allowing us to make the specific predictions we need.}
 
-\include{_ml/includes/logistic-regression.md}
+\include{_ml/includes/logistic-regression-intro.md}
+\include{_ml/includes/sigmoid-function.md}
+\include{_ml/includes/logistic-regression-prediction-function.md}
+\include{_ml/includes/logistic-regression-maximum-likelihood.md}
+\include{_datasets/includes/classification-toy-data.md}
+
+\notes{Now from the toy data we create design matrices with a leading column of ones (an Eins column)}
+
+\setupcode{import numpy as np}
+\code{phi_plus = np.hstack([np.ones((x_plus.shape[0], 1)), x_plus])
+phi_minus = np.hstack([np.ones((x_minus.shape[0], 1)), x_minus])}
+
 \include{_ml/includes/logistic-regression-perceptron.md}
 \include{_ml/includes/nigeria-nmis-data-logistic.md}
 
