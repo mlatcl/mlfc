@@ -30,9 +30,12 @@ ipynb: true
 
 \notes{But before we start specifically on objective functions we consider the oldest machine learning algorithm, the perceptron.} 
 
-\include{_ml/includes/classification.md}
-
+\include{_ml/includes/classification-intro.md}
+\include{_ml/includes/classification-examples.md}
+\include{_ml/includes/classification-hyperplane.md}
+\include{_datasets/includes/classification-toy-data.md}
 \include{_ml/includes/perceptron.md}
+
 \include{_ml/includes/linear-regression-iterative.md}
 
 

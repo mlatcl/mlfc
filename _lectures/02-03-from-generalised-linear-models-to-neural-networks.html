@@ -203,10 +203,10 @@ f(\mathbf{ w}, \mathbf{ x}_i) = \text{sign}(\mathbf{ x}_i^\top \mathbf{ w})
 f(\mathbf{ w}, \mathbf{ x}) = \pi_i = \inverseLinkFunction(\mathbf{ x}_i^\top \mathbf{ w})
 \]</span> so the two are closely related. We can think of the sigmoid as providing a “soft decision” whereas the sign provides a hard decision.</p>
 <p>Let’s make a more detailed study by considering a <em>stochastic gradient descent</em> algorithm for the logistic regression of the negative log likelihood. We’ll compare that update to the Perceptron update.</p>
-<p>{We can think of the Perceptron update as randomly sampling a data point, <span class="math inline">\(i\)</span>, checking its prediction. If the predicted class doesn’t match the true class, <span class="math inline">\(y_i\)</span>, then we update the weights by subtracting <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is positive, and adding <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is negative. <span class="math display">\[
+<p>We can think of the Perceptron update as randomly sampling a data point, <span class="math inline">\(i\)</span>, checking its prediction. If the predicted class doesn’t match the true class, <span class="math inline">\(y_i\)</span>, then we update the weights by subtracting <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is positive, and adding <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is negative. Using <span class="math inline">\(y_i\in\{0,1\}\)</span> to match logistic regression, a compact update is <span class="math display">\[
  \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta(H(\mathbf{ x}_i^\top \mathbf{ w}) (1-y_i) \mathbf{ x}_i - (1-H(\mathbf{ x}_i^\top \mathbf{ w})) y_i \mathbf{ x}_i
 \]</span></p>
-<p>The gradient of the log likelihood of logistic regression is <span class="math display">\[
+<p>The gradient of the negative log-likelihood of logistic regression is <span class="math display">\[
 \frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
 y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
@@ -219,7 +219,7 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \]</span> and the stochastic gradient update for logistic regression (with mini-batch size set to 1) is <span class="math display">\[
 \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta ((1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right) - y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i))
-\]</span></p>
+\]</span> The difference between the two is that for the perceptron we are using the Heaviside function, <span class="math inline">\(H(\cdot)\)</span>, whereas for logistic regression we’re using the sigmoid, <span class="math inline">\(h(\cdot)\)</span>, which is like a soft version of the Heaviside function.</p>
 <h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

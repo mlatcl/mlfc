@@ -343,10 +343,10 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 </section>
 <section id="logistic-regression-vs-perceptron" class="slide level2">
 <h2>Logistic Regression vs Perceptron</h2>
-<p>{We can think of the Perceptron update as randomly sampling a data point, <span class="math inline">\(i\)</span>, checking its prediction. If the predicted class doesn’t match the true class, <span class="math inline">\(y_i\)</span>, then we update the weights by subtracting <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is positive, and adding <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is negative. <span class="math display">\[
+<p><span class="math display">\[
  \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta(H(\mathbf{ x}_i^\top \mathbf{ w}) (1-y_i) \mathbf{ x}_i - (1-H(\mathbf{ x}_i^\top \mathbf{ w})) y_i \mathbf{ x}_i
 \]</span></p>
-<p>The gradient of the log likelihood of logistic regression is <span class="math display">\[
+<p>The gradient of the negative log-likelihood of logistic regression is <span class="math display">\[
 \frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
 y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
@@ -359,7 +359,7 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \]</span> and the stochastic gradient update for logistic regression (with mini-batch size set to 1) is <span class="math display">\[
 \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta ((1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right) - y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i))
-\]</span></p>
+\]</span> The difference between the two is that for the perceptron we are using the Heaviside function, <span class="math inline">\(H(\cdot)\)</span>, whereas for logistic regression we’re using the sigmoid, <span class="math inline">\(h(\cdot)\)</span>, which is like a soft version of the Heaviside function.</p>
 <!-- SECTION Nigeria NMIS Data -->
 </section>
 <section id="nigeria-nmis-data" class="slide level2">

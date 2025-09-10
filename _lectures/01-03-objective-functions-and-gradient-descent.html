@@ -1,6 +1,15 @@
 ---
 title: "Objective Functions and Gradient Descent"
+venue: "Dedan Kimathi University, Nyeri, Kenya"
 abstract: "<p>In this session we introduce the notion of objective functions and show how they can be used in a simple optimisation systems based on gradients.</p>"
+author:
+- given: Neil
+  family: Lawrence
+  url: 
+  institute: 
+  twitter: 
+  gscholar: 
+  orcid: 
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/objective-functions-and-gradient-descent.md
 date: 2025-09-03
 time: "570"
@@ -109,7 +118,7 @@ y= f(\mathbf{ x}; \mathbf{ w}).
 <p>While the MNIST data doesn’t capture all the nuances of the challenges we face in modern machine learning. It has been an important benchmark data set for and can still be a useful data set for learning about classfication algorithms.</p>
 <h2 id="hyperplane">Hyperplane</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/classification.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/classification.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/classification-hyperplane.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/classification-hyperplane.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The objective of classification is to predict the class the class label, <span class="math inline">\(y_i\)</span>, given the features associated with that data point, <span class="math inline">\(\mathbf{ x}_i\)</span>, using the <em>prediction function</em>. If we are using a linear model, then we can define the prediction function as* Predict class label <span class="math inline">\(y_i\)</span> * Using data features <span class="math inline">\(\mathbf{ x}_i\)</span> * Through the prediction function} <span class="math display">\[
 f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right),
@@ -117,6 +126,9 @@ f(x_i) = \text{sign}\left(\mathbf{ w}^\top \mathbf{ x}_i + b\right),
 <p>In this linear model the decision boundary for classification is given by a <em>hyperplane</em>. The vector, <span class="math inline">\(\mathbf{ w}\)</span>, is the <em><a href="http://en.wikipedia.org/wiki/Normal_(geometry)">normal vector</a></em> to the hyperplane. Any hyperplane can be described by formula <span class="math inline">\(\mathbf{ w}^\top \mathbf{ x}= -b\)</span>.</p>
 <p>Note that this is the same linear form that underpins <em>linear regression</em> but here it is being used to define the hyperplane rather than the regression weights</p>
 <h2 id="toy-data">Toy Data</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/classification-toy-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/classification-toy-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>We’ll consider a toy data set and a decision boundary that separates red crosses from green circles.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed<span class="op">=</span><span class="dv">1000001</span>)</span>
@@ -281,15 +293,25 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>c_vals <span class="op">=</span> np.linspace(c_true<span class="op">-</span><span class="dv">3</span>, c_true<span class="op">+</span><span class="dv">3</span>, <span class="dv">100</span>)</span></code></pre></div>
 <p>Next, we create a 2D grid from these parameter vectors. This grid allows us to evaluate the error function at every combination of <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> values, giving us a complete picture of the error surface over the parameter space we’re exploring.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_grid, c_grid <span class="op">=</span> np.meshgrid(m_vals, c_vals)</span></code></pre></div>
-<p>Now we compute the error function at each combination of parameters. For each point in our grid, we: 1. Use the parameter values to make predictions: <span class="math inline">\(\hat{y}_i = m \cdot x_i + c\)</span><br />
-2. Calculate the squared errors: <span class="math inline">\((y_i - \hat{y}_i)^2\)</span> 3. Sum these squared errors to get the total error for that parameter combination</p>
+<p>Now we compute the error function at each combination of parameters. For each point in our grid, we:</p>
+<ol type="1">
+<li>Use the parameter values to make predictions: <span class="math inline">\(\hat{y}_i = m \cdot x_i + c\)</span><br />
+</li>
+<li>Calculate the squared errors: <span class="math inline">\((y_i - \hat{y}_i)^2\)</span></li>
+<li>Sum these squared errors to get the total error for that parameter combination</li>
+</ol>
 <p>This gives us the complete error surface that we can then visualize. The nested loop structure evaluates the sum of squared errors formula at each <span class="math inline">\((m, c)\)</span> coordinate in our grid.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>E_grid <span class="op">=</span> np.zeros((<span class="dv">100</span>, <span class="dv">100</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        E_grid[i, j] <span class="op">=</span> ((y <span class="op">-</span> m_grid[i, j]<span class="op">*</span>x <span class="op">-</span> c_grid[i, j])<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code></pre></div>
 <p>With our error surface computed, we can now create a contour plot to visualize the optimization landscape. A contour plot shows lines of equal error value, similar to elevation contours on a topographic map.</p>
-<p>Insights from this visualisation include: - <em>Bowl-shaped surface</em>: For linear regression with least squares, the error surface is a smooth, convex bowl with a unique global minimum - <em>Contour lines</em>: Each contour represents parameter combinations that yield the same error value - <em>Minimum location</em>: The centre of the concentric ellipses shows where the error is minimized - this should be close to our true parameter values</p>
+<p>Insights from this visualisation include:</p>
+<ul>
+<li><em>Bowl-shaped surface</em>: For linear regression with least squares, the error surface is a smooth, convex bowl with a unique global minimum</li>
+<li><em>Contour lines</em>: Each contour represents parameter combinations that yield the same error value</li>
+<li><em>Minimum location</em>: The centre of the concentric ellipses shows where the error is minimized - this should be close to our true parameter values</li>
+</ul>
 <p>This visualisation helps explain why least squares regression has nice mathematical properties and why optimisation algorithms converge reliably to the solution.</p>
 <div class="figure">
 <div id="regression-contour-figure" class="figure-frame">
@@ -304,15 +326,27 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 </div>
 </div>
 <p>The contour plot reveals the characteristic elliptical shape of the least squares error surface. The concentric ellipses represent increasing levels of error as we move away from the optimal parameters.</p>
-<p>Key observations from this visualization: - <em>Convex optimisation</em>: The smooth, bowl-shaped surface guarantees that any local minimum is also the global minimum - <em>Parameter sensitivity</em>: The shape of the ellipses tells us how sensitive the error is to changes in each parameter - <em>Optimization efficiency</em>: The regular, predictable shape means we can develop optimisation methods that will converge quickly and reliably - <em>True parameter location</em>: The minimum should occur very close to our known true values (<span class="math inline">\(m_{true} = 1.4\)</span>, <span class="math inline">\(c_{true} = -3.1\)</span>)</p>
+<p>Key observations from this visualization:</p>
+<ul>
+<li><em>Convex optimisation</em>: The smooth, bowl-shaped surface guarantees that any local minimum is also the global minimum</li>
+<li><em>Parameter sensitivity</em>: The shape of the ellipses tells us how sensitive the error is to changes in each parameter</li>
+<li><em>Optimization efficiency</em>: The regular, predictable shape means we can develop optimisation methods that will converge quickly and reliably</li>
+<li><em>True parameter location</em>: The minimum should occur very close to our known true values (<span class="math inline">\(m_{true} = 1.4\)</span>, <span class="math inline">\(c_{true} = -3.1\)</span>)</li>
+</ul>
 <p><em>Warning:</em> This visualisation is great for giving some intuition, but can be quite misleading about how these objective funcitons look in very high dimensions. Unfortunately high dimensions are much harder to visualise.</p>
 <h2 id="steepest-descent">Steepest Descent</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-gradient-descent.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-gradient-descent.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Now that we understand the shape of the error surface from our contour plot, we need an algorithm to find the minimum. Gradient descent is one of the most fundamental optimization algorithms in machine learning.</p>
+<p>Now that we understand the shape of the error surface from our contour plot, we need an algorithm to find the minimum. Gradient descent is one of the most fundamental optimisation algorithms in machine learning.</p>
 <p>The intuition behind gradient descent is simple: imagine you’re standing on a hillside in fog and want to reach the bottom. Even though you can’t see the whole landscape, you can feel the steepest downward slope at your current position. By repeatedly taking steps in the steepest downward direction, you’ll eventually reach the bottom.</p>
-<p>Mathematically, the gradient points in the direction of steepest ascent, so we move in the negative gradient direction to descend toward the minimum. The algorithm works by: 1. Starting with an initial guess for our parameters 2. Computing the gradient (slope) of the error function at that point 3. Taking a small step in the opposite direction of the gradient 4. Repeating until we converge to the minimum</p>
+<p>Mathematically, the gradient points in the direction of steepest ascent, so we move in the negative gradient direction to descend toward the minimum. The algorithm works by:</p>
+<ol type="1">
+<li>Starting with an initial guess for our parameters</li>
+<li>Computing the gradient (slope) of the error function at that point</li>
+<li>Taking a small step in the opposite direction of the gradient</li>
+<li>Repeating until we converge to the minimum</li>
+</ol>
 <h2 id="algorithm">Algorithm</h2>
 <p>The first step in gradient descent is to initialise our parameters with some starting values. The choice of initial values can affect how quickly the algorithm converges, although because of the simple shape of the linear regression objective (known as a convex optimisation), any starting point should eventually reach the global minimum.</p>
 <p>Here we’re starting with <span class="math inline">\(m = 0\)</span> (no slope) and <span class="math inline">\(c = -5\)</span> (a negative intercept). These values are deliberately chosen to be different from our true values (<span class="math inline">\(m_{true} = 1.4\)</span>, <span class="math inline">\(c_{true} = -3.1\)</span>) so we can see the algorithm as it navigates toward the correct solution. Normally you would initialise with smaller values closer to the origin.</p>
@@ -320,9 +354,8 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div>
 <h2 id="offset-gradient">Offset Gradient</h2>
 <p>To implement gradient descent, we need to compute the partial derivatives of our error function with respect to each parameter. We’ll start with the gradient with respect to the intercept parameter <span class="math inline">\(c\)</span>.</p>
-<p>Our error function is <span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - mx_i - c)^2\]</span></p>
-<p>To find how the error changes with respect to <span class="math inline">\(c\)</span>, we use the chain rule. Each squared term contributes to the gradient, and since <span class="math inline">\(c\)</span> appears in every term with a coefficient of <span class="math inline">\(-1\)</span>, the partial derivative becomes: <span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c)\]</span></p>
-<p>The negative sign comes from differentiating the <span class="math inline">\(-c\)</span> term inside the squared expression, and the factor of 2 comes from differentiating the square.</p>
+<p>Our error function is <span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - mx_i - c)^2.\]</span></p>
+<p>To find how the error changes with respect to <span class="math inline">\(c\)</span>, we use the chain rule. Each squared term contributes to the gradient, and since <span class="math inline">\(c\)</span> appears in every term with a coefficient of <span class="math inline">\(-1\)</span>, the partial derivative becomes: <span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c).\]</span> The negative sign comes from differentiating the <span class="math inline">\(-c\)</span> term inside the squared expression, and the factor of 2 comes from differentiating the square.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>c_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star).<span class="bu">sum</span>()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to c is &quot;</span>, c_grad)</span></code></pre></div>
 <h2 id="deriving-the-gradient">Deriving the Gradient</h2>
@@ -344,12 +377,22 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to m is &quot;</span>, m_grad)</span></code></pre></div>
 <h2 id="update-equations">Update Equations</h2>
 <p>Now that we have computed both gradients, we can update our parameter estimates. The key insight is that we don’t want to simply subtract the full gradient from our current parameter values - this would likely cause us to overshoot the minimum.</p>
-<p>Instead, we take small steps in the negative gradient direction. This is crucial because: 1. <em>Gradient changes</em>: As we move through parameter space, the gradient itself changes, so we need to recompute it frequently 2. <em>Overshooting</em>: Large steps might cause us to jump over the minimum and potentially diverge 3. <em>Local information</em>: The gradient only gives us local information about the slope, not global information about the entire surface</p>
+<p>Instead, we take small steps in the negative gradient direction. This is crucial because:</p>
+<ol type="1">
+<li><em>Gradient changes</em>: As we move through parameter space, the gradient itself changes, so we need to recompute it frequently</li>
+<li><em>Overshooting</em>: Large steps might cause us to jump over the minimum and potentially diverge</li>
+<li><em>Local information</em>: The gradient only gives us local information about the slope, not global information about the entire surface</li>
+</ol>
 <p>The size of the step we take is controlled by the learning rate, which we’ll introduce shortly.</p>
 <h2 id="move-in-direction-of-gradient">Move in Direction of Gradient</h2>
-<p>Let’s visualize what a single gradient descent step looks like on our error surface. The plot shows our current parameter position as a green star and the direction we should move (negative gradient direction) as an arrow.</p>
+<p>Let’s visualise what a single gradient descent step looks like on our error surface. The plot shows our current parameter position as a green star and the direction we should move (negative gradient direction) as an arrow.</p>
 <p>The arrow points toward lower error values, following the steepest descent path from our current location. Notice how the arrow is perpendicular to the contour lines - this is always true for gradients, which by definition point in the direction of steepest increase (and thus their negative points in the direction of steepest decrease).</p>
-<p>The length and direction of this arrow tell us: - <em>Direction</em>: Where to move in parameter space - <em>Magnitude</em>: How steep the slope is (longer arrows mean steeper slopes) - <em>Step size</em>: We scale the arrow by the learning rate to determine our actual step size</p>
+<p>The length and direction of this arrow tell us:</p>
+<ul>
+<li><em>Direction</em>: Where to move in parameter space</li>
+<li><em>Magnitude</em>: How steep the slope is (longer arrows mean steeper slopes)</li>
+<li><em>Step size</em>: We scale the arrow by the learning rate to determine our actual step size</li>
+</ul>
 <div class="figure">
 <div id="regression-contour-step-1-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour_step001.svg" width="60%" style=" ">
@@ -388,15 +431,14 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 </ol>
 <p>The beauty of this algorithm is its simplicity and general applicability - the same basic approach works for many different types of models and error functions.</p>
 <h2 id="gradient-descent-algorithm">Gradient Descent Algorithm</h2>
-<p>Let’s run the complete gradient descent algorithm and visualize how the parameters evolve over multiple iterations. The animation will show the path taken through parameter space as the algorithm navigates toward the minimum of the error surface.</p>
+<p>Let’s run the complete gradient descent algorithm and visualise how the parameters evolve over multiple iterations. The animation will show the path taken through parameter space as the algorithm navigates toward the minimum of the error surface.</p>
 <p>Each frame shows:</p>
 <ul>
 <li><em>Current position</em>: The green star indicating our current parameter estimates</li>
 <li><em>Error contours</em>: The background showing the error landscape</li>
 <li><em>Path</em>: The trajectory we’ve taken from the starting point to the current position</li>
 </ul>
-<p>Watch how the algorithm follows a curved path that eventually spiral into the minimum, demonstrating the iterative nature of gradient-based optimization.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>num_plots <span class="op">=</span> plot.regression_contour_fit(x, y, diagrams<span class="op">=</span><span class="st">&#39;./ml&#39;</span>)</span></code></pre></div>
+<p>Watch how the algorithm follows a curved path that eventually spiral into the minimum, demonstrating the iterative nature of gradient-based optimisation.</p>
 <div class="figure">
 <div id="regression-contour-fit-28-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_contour_fit028.svg" width="60%" style=" ">
@@ -450,12 +492,12 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 \]</span> For the intercept parameter <span class="math display">\[c_\text{new} = c_\text{old} + 2\eta\left[(y_i - m_\text{old}x_i - c_\text{old})\right].
 \]</span> Notice how these look exactly like the per-example terms from our batch gradient, but now we apply them immediately rather than accumulating them in a sum.</p>
 <p>The implementation is straightforward: randomly select a data point, compute its contribution to the gradient, and immediately update the parameters. This process repeats for many iterations, with each iteration using a different random example.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose a random point for the update </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># update m</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(x[i]<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star))</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># update c</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose a random point for the update </span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># update m</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(x[i]<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># update c</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star)</span></code></pre></div>
 <h2 id="sgd-for-linear-regression">SGD for Linear Regression</h2>
 <p>Let’s now run the complete stochastic gradient descent algorithm and visualize how it differs from batch gradient descent. The key differences you’ll observe:</p>
 <ol type="1">
@@ -520,6 +562,7 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
 <li>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></li>
 <li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
 <li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
