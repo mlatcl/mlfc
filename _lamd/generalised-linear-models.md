@@ -48,7 +48,7 @@ As we move to generalised linear models like logistic regression, we'll see how 
 \include{_ml/includes/logistic-regression-prediction-function.md}
 \include{_ml/includes/logistic-regression-maximum-likelihood.md}
 \include{_ml/includes/logistic-regression-optimisation.md}
-\include{_datasets/includes/classification-toy-data.md}
+<!--include{_datasets/includes/classification-toy-data.md}
 
 \notes{Now from the toy data we create design matrices with a leading column of ones (an Eins column)}
 
@@ -56,14 +56,14 @@ As we move to generalised linear models like logistic regression, we'll see how 
 \code{phi_plus = np.hstack([np.ones((x_plus.shape[0], 1)), x_plus])
 phi_minus = np.hstack([np.ones((x_minus.shape[0], 1)), x_minus])}
 
-\include{_ml/includes/logistic-regression-perceptron.md}
-\include{_ml/includes/nigeria-nmis-data-logistic.md}
+\include{_ml/includes/logistic-regression-perceptron.md} -->
+\notes{\include{_ml/includes/nigeria-nmis-data-logistic.md}}
 
 
 \installcode{statsmodels}
 
 \include{_statistics/includes/linear-regression-statsmodels.md}
-\include{_statistics/includes/logistic-regression-statsmodels.md}
+\notes{\include{_statistics/includes/logistic-regression-statsmodels.md}}
 
 \include{_ml/includes/categorical-regression-intro.md}
 \include{_ml/includes/soft-arg-max-function.md}

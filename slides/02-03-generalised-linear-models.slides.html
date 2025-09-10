@@ -318,131 +318,124 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 </ul></li>
 <li>Similarly to matrix factorisation, for large data <em>stochastic gradient descent</em> (Robbins Munro <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> optimisation procedure) works well.</li>
 </ul>
-</section>
-<section id="toy-data" class="slide level2">
-<h2>Toy Data</h2>
-<ul>
-<li>Red crosses (+ve) and green circles (-ve).</li>
-</ul>
-<div class="figure">
-<div id="artificial-classification-examples-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/artificial-classification-example.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Red crosses and green circles are sampled from two separate Gaussian distributions with 30 examples of each.
-</aside>
-</section>
-<section id="logistic-regression-vs-perceptron" class="slide level2">
-<h2>Logistic Regression vs Perceptron</h2>
-<p><span class="math display">\[
- \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta(H(\boldsymbol{ \phi}_i^\top \mathbf{ w}) (1-y_i) \boldsymbol{ \phi}_i - (1-H(\boldsymbol{ \phi}_i^\top \mathbf{ w})) y_i \boldsymbol{ \phi}_i
-\]</span></p>
-<p>The gradient of the negative log-likelihood of logistic regression is <span class="math display">\[
-\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
-y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
-\boldsymbol{ \phi}_i +  \sum_{i=1}^n
-(1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
-\boldsymbol{ \phi}_i.
-\]</span> so the gradient with respect to one point is <span class="math display">\[
-\frac{\text{d}E_i(\mathbf{ w})}{\text{d}\mathbf{ w}}=y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
-\boldsymbol{ \phi}_i + (1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
-\boldsymbol{ \phi}_i.
-\]</span> and the stochastic gradient update for logistic regression (with mini-batch size set to 1) is <span class="math display">\[
-\mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta ((1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right) - y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
-\boldsymbol{ \phi}_i)
-\]</span> The difference between the two is that for the perceptron we are using the Heaviside function, <span class="math inline">\(H(\cdot)\)</span>, whereas for logistic regression we’re using the sigmoid, <span class="math inline">\(h(\cdot)\)</span>, which is like a soft version of the Heaviside function.</p>
+<!--include{_datasets/includes/classification-toy-data.md}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Logistic Regression vs Perceptron 
+
+
+
+
+
+
+
+
+
+
+
+
+$$
+ \mappingVector_\text{new} \leftarrow \mappingVector_\text{old} - \eta(\heaviside(\designVector_i^\top \mappingVector) (1-\dataScalar_i) \designVector_i - (1-\heaviside(\designVector_i^\top \mappingVector)) \dataScalar_i \designVector_i
+$$
+
+The gradient of the negative log-likelihood of logistic regression is
+$$
+\frac{\text{d}\errorFunction(\mappingVector)}{\text{d}\mappingVector} = -\sum_{i=1}^\numData
+\dataScalar_i\left(1-\transformationFunction\left(\mappingVector^\top \designVector_i\right)\right)
+\designVector_i +  \sum_{i=1}^\numData
+(1-\dataScalar_i)\left(\transformationFunction\left(\mappingVector^\top \designVector_i\right)\right)
+\designVector_i.
+$$
+so the gradient with respect to one point is 
+$$
+\frac{\text{d}\errorFunction_i(\mappingVector)}{\text{d}\mappingVector}=\dataScalar_i\left(1-\transformationFunction\left(\mappingVector^\top \designVector_i\right)\right)
+\designVector_i + (1-\dataScalar_i)\left(\transformationFunction\left(\mappingVector^\top \designVector_i\right)\right)
+\designVector_i.
+$$
+and the stochastic gradient update for logistic regression (with mini-batch size set to 1) is
+$$
+\mappingVector_\text{new} \leftarrow \mappingVector_\text{old} - \eta ((1-\dataScalar_i)\left(\transformationFunction\left(\mappingVector^\top \designVector_i\right)\right) - \dataScalar_i\left(1-\transformationFunction\left(\mappingVector^\top \designVector_i\right)\right)
+\designVector_i)
+$$
+The difference between the two is that for the perceptron we are using the Heaviside function, $\heaviside(\cdot)$, whereas for logistic regression we're using the sigmoid, $\transformationFunction(\cdot)$, which is like a soft version of the Heaviside function.
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
 <script>
 showDivs(0, 'logistic-regression');
 </script>
-<p><small></small> <input id="range-logistic-regression" type="range" min="0" max="14" value="0" onchange="setDivs('logistic-regression')" oninput="setDivs('logistic-regression')"> <button onclick="plusDivs(-1, 'logistic-regression')">❮</button> <button onclick="plusDivs(1, 'logistic-regression')">❯</button></p>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression000.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression001.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression002.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression003.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression004.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression005.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression006.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression007.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression008.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression009.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression010.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression011.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression012.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression013.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="logistic-regression" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression014.svg" width="60%" style=" ">
-</object>
-</div>
-<!-- SECTION Nigeria NMIS Data -->
-</section>
-<section id="nigeria-nmis-data" class="slide level2">
-<h2>Nigeria NMIS Data</h2>
-</section>
-<section id="nigeria-nmis-data-notebook" class="slide level2">
-<h2>Nigeria NMIS Data: Notebook</h2>
-<div class="figure">
-<div id="nigerian-health-facilities-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/nigerian-health-facilities.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-Location of the over thirty-four thousand health facilities registered in the NMIS data across Nigeria. Each facility plotted according to its latitude and longitude.
-</aside>
-</section>
-<section id="nigeria-nmis-data-classification" class="slide level2">
-<h2>Nigeria NMIS Data Classification</h2>
-</section>
-<section id="batch-gradient-descent" class="slide level2">
-<h2>Batch Gradient Descent</h2>
-</section>
-<section id="stochastic-gradient-descent" class="slide level2">
-<h2>Stochastic Gradient Descent</h2>
+<small></small> <input id="range-logistic-regression" type="range" min="0" max="14" value="0" onchange="setDivs('logistic-regression')" oninput="setDivs('logistic-regression')">
+<button onclick="plusDivs(-1, 'logistic-regression')">❮</button>
+<button onclick="plusDivs(1, 'logistic-regression')">❯</button>
+
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression000.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression001.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression002.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression003.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression004.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression005.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression006.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression007.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression008.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression009.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression010.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression011.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression012.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression013.svg" width="60%" style=" "></object></div>
+<div style="text-align:center;" class="logistic-regression"><object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression014.svg" width="60%" style=" "></object></div>
+
+
+
+
+
+
+ -->
 </section>
 <section id="linear-regression-with-statsmodels" class="slide level2">
 <h2>Linear Regression with <code>statsmodels</code></h2>
@@ -573,115 +566,6 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <aside class="notes">
 Polynomial regression fit to Olympic marathon men’s times using <code>statsmodels</code>.
 </aside>
-</section>
-<section id="fitting-with-statsmodels" class="slide level2">
-<h2>Fitting with <code>statsmodels</code></h2>
-</section>
-<section id="fitting-the-model" class="slide level2">
-<h2>Fitting the Model</h2>
-</section>
-<section id="model-fit-statistics-1" class="slide level2">
-<h2>Model Fit Statistics</h2>
-<ul>
-<li>Model fit statistics help assess classification performance:
-<ul>
-<li>Pseudo R-squared measures (McFadden, Cox-Snell, Nagelkerke)</li>
-<li>Log-likelihood ratio test for model significance</li>
-<li>AIC/BIC help compare models</li>
-</ul></li>
-</ul>
-</section>
-<section id="parameter-estimates-1" class="slide level2">
-<h2>Parameter Estimates</h2>
-<ul>
-<li>Parameter estimates tell us about log-odds relationships:
-<ul>
-<li>Coefficients show change in log-odds per unit change</li>
-<li>Standard errors show coefficient uncertainty</li>
-<li>P-values test significance of each predictor</li>
-<li>Confidence intervals provide range estimates</li>
-</ul></li>
-</ul>
-</section>
-<section id="model-diagnostics" class="slide level2">
-<h2>Model Diagnostics</h2>
-<ul>
-<li>Classification-specific diagnostics:
-<ul>
-<li>Deviance residuals for outlier detection</li>
-<li>Leverage and influence measures</li>
-<li>Goodness-of-fit tests (Hosmer-Lemeshow)</li>
-</ul></li>
-</ul>
-</section>
-<section id="prediction-and-classification" class="slide level2">
-<h2>Prediction and Classification</h2>
-<ul>
-<li>Model predictions and classification:
-<ul>
-<li>Predicted probabilities from fitted model</li>
-<li>Classification using probability threshold (typically 0.5)</li>
-<li>Confusion matrix and classification metrics</li>
-</ul></li>
-</ul>
-</section>
-<section id="predictions-of-the-model" class="slide level2">
-<h2>Predictions of the Model</h2>
-<div class="figure">
-<div id="logistic-regression-classification-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//statistics/logistic-regression-classification-statsmodels.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Plot of the logistic regression fit made by <code>statsmodels</code>.
-</aside>
-</section>
-<section id="logistic-regression-classification" class="slide level2">
-<h2>Logistic Regression Classification</h2>
-<div class="figure">
-<div id="logistic-regression-classification-statsmodels-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression-classification-statsmodels.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Logistic regression classification results showing training data and decision boundary with probability contours using <code>statsmodels</code>.
-</aside>
-</section>
-<section id="classification-performance" class="slide level2">
-<h2>Classification Performance</h2>
-<ul>
-<li>Key classification insights:
-<ul>
-<li>Linear decision boundary separates classes</li>
-<li>Smooth probability transitions</li>
-<li>High confidence far from boundary</li>
-</ul></li>
-</ul>
-</section>
-<section id="model-limitations" class="slide level2">
-<h2>Model Limitations</h2>
-<ul>
-<li>Linear classifier limitations:
-<ul>
-<li>Assumes linear separability</li>
-<li>May underfit complex relationships</li>
-<li>Single decision threshold</li>
-</ul></li>
-</ul>
-</section>
-<section id="model-improvements-1" class="slide level2">
-<h2>Model Improvements</h2>
-<ul>
-<li>Model improvements possible with:
-<ul>
-<li>Polynomial features for non-linear boundaries</li>
-<li>Feature interactions</li>
-<li>Regularization techniques</li>
-<li>Threshold optimization</li>
-</ul></li>
-</ul>
 </section>
 <section id="categorical-multinomial-regression" class="slide level2">
 <h2>Categorical (Multinomial) Regression</h2>
@@ -831,13 +715,12 @@ Diagnostic plots for the Poisson regression model showing actual vs predicted co
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
 <ul>
-<li><p>company: <a href="https://trent.ai">Trent AI</a></p></li>
-<li><p>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></p></li>
-<li><p>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></p></li>
-<li><p><a href="https://the-atomic-human.ai">The Atomic Human</a></p></li>
-<li><p>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></p></li>
-<li><p>blog posts:</p>
-<p><a href="http://inverseprobability.com/2014/07/01/open-data-science">Open Data Science</a></p></li>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
+<li>book: <a href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The Atomic Human</a></li>
+<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
+<li><a href="https://the-atomic-human.ai">The Atomic Human</a></li>
+<li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
+<li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
 </section>
 <section id="references" class="slide level2 unnumbered scrollable">
