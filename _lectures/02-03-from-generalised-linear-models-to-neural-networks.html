@@ -197,29 +197,207 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression-perceptron.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/logistic-regression-perceptron.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We already looked at the Perceptron, where the prediction function was given by <span class="math display">\[
-f(\mathbf{ w}, \mathbf{ x}_i) = \text{sign}(\mathbf{ x}_i^\top \mathbf{ w}) 
+f(\mathbf{ w}, \mathbf{ x}_i) = \text{sign}(\boldsymbol{ \phi}_i^\top \mathbf{ w}) 
 \]</span> and the sign of the output gave us the class, where we had a positive and negative class.</p>
 <p>In logistic regression, the prediction function gives us the probability of positive class, <span class="math display">\[
-f(\mathbf{ w}, \mathbf{ x}) = \pi_i = \inverseLinkFunction(\mathbf{ x}_i^\top \mathbf{ w})
+f(\mathbf{ w}, \mathbf{ x}) = \pi_i = h(\boldsymbol{ \phi}_i^\top \mathbf{ w})
 \]</span> so the two are closely related. We can think of the sigmoid as providing a “soft decision” whereas the sign provides a hard decision.</p>
 <p>Let’s make a more detailed study by considering a <em>stochastic gradient descent</em> algorithm for the logistic regression of the negative log likelihood. We’ll compare that update to the Perceptron update.</p>
-<p>We can think of the Perceptron update as randomly sampling a data point, <span class="math inline">\(i\)</span>, checking its prediction. If the predicted class doesn’t match the true class, <span class="math inline">\(y_i\)</span>, then we update the weights by subtracting <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is positive, and adding <span class="math inline">\(\mathbf{ x}_i\)</span> if the prediction is negative. Using <span class="math inline">\(y_i\in\{0,1\}\)</span> to match logistic regression, a compact update is <span class="math display">\[
- \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta(H(\mathbf{ x}_i^\top \mathbf{ w}) (1-y_i) \mathbf{ x}_i - (1-H(\mathbf{ x}_i^\top \mathbf{ w})) y_i \mathbf{ x}_i
+<p>We can think of the Perceptron update as randomly sampling a data point, <span class="math inline">\(i\)</span>, checking its prediction. If the predicted class doesn’t match the true class, <span class="math inline">\(y_i\)</span>, then we update the weights by subtracting <span class="math inline">\(\boldsymbol{ \phi}_i\)</span> if the prediction is positive, and adding <span class="math inline">\(\boldsymbol{ \phi}_i\)</span> if the prediction is negative. Using <span class="math inline">\(y_i\in\{0,1\}\)</span> to match logistic regression, a compact update is <span class="math display">\[
+ \mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta(H(\boldsymbol{ \phi}_i^\top \mathbf{ w}) (1-y_i) \boldsymbol{ \phi}_i - (1-H(\boldsymbol{ \phi}_i^\top \mathbf{ w})) y_i \boldsymbol{ \phi}_i
 \]</span></p>
 <p>The gradient of the negative log-likelihood of logistic regression is <span class="math display">\[
 \frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = -\sum_{i=1}^n
-y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
-\boldsymbol{ \phi}(\mathbf{ x}_i) +  \sum_{i=1}^n
-(1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
-\boldsymbol{ \phi}(\mathbf{ x}_i).
+y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
+\boldsymbol{ \phi}_i +  \sum_{i=1}^n
+(1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
+\boldsymbol{ \phi}_i.
 \]</span> so the gradient with respect to one point is <span class="math display">\[
-\frac{\text{d}E_i(\mathbf{ w})}{\text{d}\mathbf{ w}}=y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
-\boldsymbol{ \phi}(\mathbf{ x}_i) + (1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
-\boldsymbol{ \phi}(\mathbf{ x}_i).
+\frac{\text{d}E_i(\mathbf{ w})}{\text{d}\mathbf{ w}}=y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
+\boldsymbol{ \phi}_i + (1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
+\boldsymbol{ \phi}_i.
 \]</span> and the stochastic gradient update for logistic regression (with mini-batch size set to 1) is <span class="math display">\[
-\mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta ((1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right) - y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
-\boldsymbol{ \phi}(\mathbf{ x}_i))
+\mathbf{ w}_\text{new} \leftarrow \mathbf{ w}_\text{old} - \eta ((1-y_i)\left(h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right) - y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}_i\right)\right)
+\boldsymbol{ \phi}_i)
 \]</span> The difference between the two is that for the perceptron we are using the Heaviside function, <span class="math inline">\(H(\cdot)\)</span>, whereas for logistic regression we’re using the sigmoid, <span class="math inline">\(h(\cdot)\)</span>, which is like a soft version of the Heaviside function.</p>
+<p>Because <span class="math inline">\(\pi(\boldsymbol{ \phi}_i)=h(\boldsymbol{ \phi}_i)\)</span>, when <span class="math inline">\(h(\boldsymbol{ \phi}_i)&gt;0.5\)</span> we classify as the positive class, otherwise we classify as the negative class. So the decision boundary is just like the peceptron. The vector <span class="math inline">\(\mathbf{ w}\)</span> gives the normal vector for the decision boundary.</p>
+<p>In two dimensions, in the linear basis, the prediction function is <span class="math display">\[
+h\left(w_1 x_{i, 1} + w_2 x_{i, 2} + b\right)
+\]</span> and the equation of a plane is <span class="math display">\[
+w_1 x_{i, 1} + w_2 x_{i, 2} + b = 0
+\]</span> or <span class="math display">\[
+w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
+\]</span></p>
+<p>We can mirror the way we implemented the Perceptron by selecting a point, <span class="math inline">\(i\)</span>, at random and setting the logistic regression weights to that point, <span class="math inline">\(\mathbf{ w}= \boldsymbol{ \phi}_i\)</span>, if it is in the positive class, and setting to <span class="math inline">\(\mathbf{ w}= -\boldsymbol{ \phi}_i\)</span> if it is in the negatvie class. That guarantees that the selected point will be correctly classified.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_logistic_regression(phi_plus, phi_minus, seed<span class="op">=</span><span class="dv">1000001</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Initialise the perceptron algorithm with random weights and bias.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">    The perceptron is a simple binary classifier that learns a linear decision boundary.</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">    This function initialises the weight vector w and bias b by randomly selecting</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">    a point from either the positive or negative class and setting the normal vector</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">    accordingly.</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Mathematical formulation:</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">    The perceptron decision function is f(x) = w^T φ, where:</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - w is the weight vector (normal to the decision boundary)</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">    - φ is the design matrix vector</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">    :param phi_plus: Positive class data points, shape (n_plus, n_features)</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">    :type phi_plus: numpy.ndarray</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">    :param phi_minus: Negative class data points, shape (n_minus, n_features)</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">    :type phi_minus: numpy.ndarray</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">    :param seed: Random seed for reproducible initialisation</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">    :type seed: int, optional</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: Initial weight vector, shape (n_features,)</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: numpy.ndarray</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: Initial bias term</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: float</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: The randomly selected point used for initialisation</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: numpy.ndarray</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples:</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; phi_plus = np.array([[1, 1, 2], [1, 2, 3], [1, 3, 4]])</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; phi_minus = np.array([[1, 0, 0], [1, 1, 0], [1, 0, 1]])</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; w, phi_select = init_logistic_regression(phi_plus, phi_minus)</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; print(f&quot;Weight vector: {w}&quot;)</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed<span class="op">=</span>seed)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># flip a coin (i.e. generate a random number and check if it is greater than 0.5)</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    plus_portion <span class="op">=</span> phi_plus.shape[<span class="dv">0</span>]<span class="op">/</span>(phi_plus.shape[<span class="dv">0</span>] <span class="op">+</span> phi_minus.shape[<span class="dv">0</span>])</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    choose_plus <span class="op">=</span> np.random.rand(<span class="dv">1</span>)<span class="op">&lt;</span>plus_portion</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> choose_plus:</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># generate a random point from the positives</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> np.random.randint(<span class="dv">0</span>, phi_plus.shape[<span class="dv">0</span>])</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        phi_select <span class="op">=</span> phi_plus[index, :]</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> phi_plus[index, :].astype(<span class="bu">float</span>)  <span class="co"># set the normal vector to plus that point</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># generate a random point from the negatives</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> np.random.randint(<span class="dv">0</span>, phi_minus.shape[<span class="dv">0</span>])</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        phi_select <span class="op">=</span> phi_minus[index, :]</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> <span class="op">-</span>phi_minus[index, :].astype(<span class="bu">float</span>)  <span class="co"># set the normal vector to minus that point.</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> w, phi_select</span></code></pre></div>
+<p>Learning then proceeds</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> logistic(x):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Compute the logistic function.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(x))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update_logistic_regression(w, phi_plus, phi_minus, learn_rate):</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Update the logistic regression weights and bias using stochastic gradient descent.</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">    This function implements one step of the perceptron learning algorithm.</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">    It randomly selects a training point and updates the weights if the point</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">    is misclassified.</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Mathematical formulation:</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">    The perceptron update rule is:</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - If y_i = +1 and w^T φ_i ≤ 0: w ← w + η    h(w^Tφ_i) φ_i</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">    - If y_i = -1 and w^T φ_i &gt; 0: w ← w - η (1-h(w^Tφ_i))φ_i</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">    where η is the learning rate.</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">    :param w: Current weight vector, shape (n_features,)</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">    :type w: numpy.ndarray</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">    :param phi_plus: Positive class design matrix, shape (n_plus, n_features)</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">    :type phi_plus: numpy.ndarray</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">    :param phi_minus: Negative class design matrix, shape (n_minus, n_features)</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">    :type phi_minus: numpy.ndarray</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">    :param learn_rate: Learning rate (step size) for weight updates</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">    :type learn_rate: float</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: Updated weight vector</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: numpy.ndarray</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: Updated bias term</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: float</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: The randomly selected point used for the update</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: numpy.ndarray</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">    :returns: True if weights were updated, False otherwise</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co">    :rtype: bool</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples:</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; w = np.array([0.1 0.5, -0.3])</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; phi_plus = np.array([[1, 1, 2], [1, 2, 3]])</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; phi_minus = np.array([[1, 0, 0], [1, 1, 0]])</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">        &gt;&gt;&gt; w_new, phi_select, updated = update_perceptron(w, phi_plus, phi_minus, 0.1)</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select a point at random from the data</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    plus_portion <span class="op">=</span> phi_plus.shape[<span class="dv">0</span>]<span class="op">/</span>(phi_plus.shape[<span class="dv">0</span>] <span class="op">+</span> phi_minus.shape[<span class="dv">0</span>])</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    choose_plus <span class="op">=</span> np.random.rand(<span class="dv">1</span>)<span class="op">&lt;</span>plus_portion</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    updated<span class="op">=</span><span class="va">False</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> choose_plus:</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># choose a point from the positive data</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> np.random.randint(phi_plus.shape[<span class="dv">0</span>])</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>        phi_select <span class="op">=</span> phi_plus[index, :]</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> np.dot(w, phi_select)</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.dot(w, phi_select) <span class="op">&lt;=</span> <span class="fl">0.</span>:</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>            <span class="co"># point is currently incorrectly classified</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>            w <span class="op">+=</span> learn_rate<span class="op">*</span>logistic(a)<span class="op">*</span>phi_select</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>            updated<span class="op">=</span><span class="va">True</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>        <span class="co"># choose a point from the negative data</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> np.random.randint(phi_minus.shape[<span class="dv">0</span>])</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>        phi_select <span class="op">=</span> phi_minus[index, :]</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> np.dot(w, phi_select)</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&gt;</span> <span class="fl">0.</span>:</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>            <span class="co"># point is currently incorrectly classified</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>            w <span class="op">-=</span> learn_rate<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>logistic(a))<span class="op">*</span>phi_select</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> w, phi_select</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>w, phi_select <span class="op">=</span> init_logistic_regression(phi_plus, phi_minus, seed<span class="op">=</span>seed)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    updates <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    iterations <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    setup<span class="op">=</span><span class="va">True</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    f2, ax2 <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>plot.two_figsize)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    handle <span class="op">=</span> init_logistic_regression_plot(f2, ax2, phi_plus, phi_minus, w)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    handle[<span class="st">&#39;plane&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    handle[<span class="st">&#39;arrow&#39;</span>].set_visible(<span class="va">False</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    handle[<span class="st">&#39;circle&#39;</span>] <span class="op">=</span> plt.Circle((phi_select[<span class="dv">0</span>], phi_select[<span class="dv">1</span>]), <span class="fl">0.25</span>, color<span class="op">=</span><span class="st">&#39;b&#39;</span>, fill<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ax2[<span class="dv">0</span>].add_artist(handle[<span class="st">&#39;circle&#39;</span>])</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    ma.write_figure(figure<span class="op">=</span>f2, filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count), directory<span class="op">=</span>diagrams, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    extent <span class="op">=</span> ax2[<span class="dv">0</span>].get_window_extent().transformed(f2.dpi_scale_trans.inverted())</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    ma.write_figure(figure<span class="op">=</span>f2, filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.png&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count), directory<span class="op">=</span>diagrams, bbox_inches<span class="op">=</span>extent, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    handle[<span class="st">&#39;plane&#39;</span>].set_visible(<span class="va">True</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    handle[<span class="st">&#39;arrow&#39;</span>].set_visible(<span class="va">True</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    ma.write_figure(figure<span class="op">=</span>f2, filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count), directory<span class="op">=</span>diagrams, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    ma.write_figure(figure<span class="op">=</span>f2, filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.png&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count), directory<span class="op">=</span>diagrams, bbox_inches<span class="op">=</span>extent, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> updates<span class="op">&lt;</span>max_updates <span class="kw">and</span> iterations<span class="op">&lt;</span>max_iters:</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        iterations <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        w, phi_select, updated <span class="op">=</span> update_logistic_regression(w, phi_plus, phi_minus, learn_rate)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> updated:</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>            updates <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>            count<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>            handle[<span class="st">&#39;circle&#39;</span>].center <span class="op">=</span> phi_select[<span class="dv">1</span>], phi_select[<span class="dv">2</span>]</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>            ma.write_figure(figure<span class="op">=</span>f2, filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count), directory<span class="op">=</span>diagrams, transparent<span class="op">=</span><span class="va">True</span>)     </span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>            ma.write_figure(figure<span class="op">=</span>f2, filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.png&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count), bbox_inches<span class="op">=</span>extent, directory<span class="op">=</span>diagrams, transparent<span class="op">=</span><span class="va">True</span>)        </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>            count<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>            handle <span class="op">=</span> update_logistic_plot(handle, f2, ax2, phi_plus, phi_minus, updates, w, b)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>            ma.write_figure(filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count),</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>                              figure<span class="op">=</span>f2,</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>                              directory<span class="op">=</span>diagrams,</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                              transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>            ma.write_figure(filename<span class="op">=</span><span class="st">&#39;logistic-regression</span><span class="sc">{samp:0&gt;3}</span><span class="st">.png&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>count),</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>                              figure<span class="op">=</span>f2, </span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>                              directory<span class="op">=</span>diagrams,</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>                              bbox_inches<span class="op">=</span>extent,</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>                              transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;Data passes:&#39;</span>, iterations)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code></pre></div>
+<div class="figure">
+<div id="logistic-regression-decision-boundary-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/logistic-regression014.svg" width="60%" style=" ">
+</object>
+</div>
+<div id="logistic-regression-decision-boundary-magnify" class="magnify" onclick="magnifyFigure(&#39;logistic-regression-decision-boundary&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="logistic-regression-decision-boundary-caption" class="caption-frame">
+<p>Figure: The logistic-regression decision boundary.</p>
+</div>
+</div>
 <h1 id="nigeria-nmis-data">Nigeria NMIS Data</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/nigeria-nmis-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -234,21 +412,21 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 <p>Suggested citation: Nigeria NMIS facility database (2014), the Office of the Senior Special Assistant to the President on the Millennium Development Goals (OSSAP-MDGs) &amp; Columbia University</p>
 </blockquote>
 <p>For ease of use we’ve packaged this data set in the <code>pods</code> library</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.nigeria_nmis()[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
 <p>Alternatively, you can access the data directly with the following commands.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://energydata.info/dataset/f85d1796-e7f2-4630-be84-79420174e3bd/resource/6e640a13-cab4-457b-b9e6-0336051bac27/download/healthmopupandbaselinenmisfacility.csv&#39;</span>, <span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&#39;healthmopupandbaselinenmisfacility.csv&#39;</span>)</span></code></pre></div>
 <p>Once it is loaded in the data can be summarized using the <code>describe</code> method in pandas.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code></pre></div>
 <p>We can also find out the dimensions of the dataset using the <code>shape</code> property.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div>
 <p>Dataframes have different functions that you can use to explore and understand your data. In python and the Jupyter notebook it is possible to see a list of all possible functions and attributes by typing the name of the object followed by <code>.&lt;Tab&gt;</code> for example in the above case if we type <code>data.&lt;Tab&gt;</code> it show the columns available (these are attributes in pandas dataframes) such as <code>num_nurses_fulltime</code>, and also functions, such as <code>.describe()</code>.</p>
 <p>For functions we can also see the documentation about the function by following the name with a question mark. This will open a box with documentation at the bottom which can be closed with the x button.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data.describe?</span></code></pre></div>
 <div class="figure">
 <div id="nigerian-health-facilities-figure" class="figure-frame">
 <div class="centered" style="">
@@ -268,94 +446,94 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 </div>
 <p>Our aim will be to predict whether a center has maternal health delivery services given the attributes in the data. We will predict of the number of nurses, the number of doctors, location etc.</p>
 <p>Now we will convert this data into a form which we can use as inputs <code>X</code>, and labels <code>y</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[<span class="op">~</span>pd.isnull(data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>])]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.dropna() <span class="co"># Remove entries with missing values</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">&#39;emergency_transport&#39;</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_chews_fulltime&#39;</span>, </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;phcn_electricity&#39;</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;child_health_measles_immun_calc&#39;</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_nurses_fulltime&#39;</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_doctors_fulltime&#39;</span>, </span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;improved_water_supply&#39;</span>, </span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;improved_sanitation&#39;</span>,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;antenatal_care_yn&#39;</span>, </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;family_planning_yn&#39;</span>,</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;malaria_treatment_artemisinin&#39;</span>, </span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;latitude&#39;</span>, </span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;longitude&#39;</span>]].copy()</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>]<span class="op">==</span><span class="va">True</span>  <span class="co"># set label to be whether there&#39;s a maternal health delivery service</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create series of health center types with the relevant index</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> data[<span class="st">&#39;facility_type_display&#39;</span>].<span class="bu">apply</span>(pd.Series).stack()</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>s.index <span class="op">=</span> s.index.droplevel(<span class="op">-</span><span class="dv">1</span>) <span class="co"># to line up with df&#39;s index</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract from the series the unique list of types.</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> s.unique()</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co"># For each type extract the indices where it is present and add a column to X</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>type_names <span class="op">=</span> []</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> htype <span class="kw">in</span> types:</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> s[s<span class="op">==</span>htype].index.tolist()</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    type_col<span class="op">=</span>htype.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>).replace(<span class="st">&#39;/&#39;</span>,<span class="st">&#39;-&#39;</span>).lower()</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    type_names.append(type_col)</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    X.loc[:, type_col] <span class="op">=</span> <span class="fl">0.0</span> </span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    X.loc[index, type_col] <span class="op">=</span> <span class="fl">1.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[<span class="op">~</span>pd.isnull(data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>])]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.dropna() <span class="co"># Remove entries with missing values</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">&#39;emergency_transport&#39;</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_chews_fulltime&#39;</span>, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;phcn_electricity&#39;</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;child_health_measles_immun_calc&#39;</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_nurses_fulltime&#39;</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;num_doctors_fulltime&#39;</span>, </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;improved_water_supply&#39;</span>, </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;improved_sanitation&#39;</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;antenatal_care_yn&#39;</span>, </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;family_planning_yn&#39;</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;malaria_treatment_artemisinin&#39;</span>, </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;latitude&#39;</span>, </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;longitude&#39;</span>]].copy()</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;maternal_health_delivery_services&#39;</span>]<span class="op">==</span><span class="va">True</span>  <span class="co"># set label to be whether there&#39;s a maternal health delivery service</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create series of health center types with the relevant index</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> data[<span class="st">&#39;facility_type_display&#39;</span>].<span class="bu">apply</span>(pd.Series).stack()</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>s.index <span class="op">=</span> s.index.droplevel(<span class="op">-</span><span class="dv">1</span>) <span class="co"># to line up with df&#39;s index</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract from the series the unique list of types.</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> s.unique()</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># For each type extract the indices where it is present and add a column to X</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>type_names <span class="op">=</span> []</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> htype <span class="kw">in</span> types:</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> s[s<span class="op">==</span>htype].index.tolist()</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    type_col<span class="op">=</span>htype.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>).replace(<span class="st">&#39;/&#39;</span>,<span class="st">&#39;-&#39;</span>).lower()</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    type_names.append(type_col)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    X.loc[:, type_col] <span class="op">=</span> <span class="fl">0.0</span> </span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    X.loc[index, type_col] <span class="op">=</span> <span class="fl">1.0</span></span></code></pre></div>
 <p>This has given us a new data frame <code>X</code> which contains the different facility types in different columns.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X.describe()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>X.describe()</span></code></pre></div>
 <h2 id="batch-gradient-descent">Batch Gradient Descent</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/nigeria-nmis-data-logistic.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/nigeria-nmis-data-logistic.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We will need to define some initial random values for our vector and then minimize the objective by descending the gradient.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate train and test</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.random.permutation(X.shape[<span class="dv">0</span>])</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> <span class="bu">int</span>(np.ceil(X.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X.iloc[train_indices]</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y.iloc[train_indices]<span class="op">==</span><span class="va">True</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X.iloc[test_indices]</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y.iloc[test_indices]<span class="op">==</span><span class="va">True</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gradient descent algorithm</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>w_vals <span class="op">=</span> np.random.normal(size<span class="op">=</span>(X.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, <span class="dv">1</span>), scale <span class="op">=</span> <span class="fl">0.001</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert weights to a pandas DataFrame with column names</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> typeof(X_train) <span class="kw">is</span> pd.DataFrame:</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>w_vals, </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                     index<span class="op">=</span>[<span class="st">&#39;Eins&#39;</span>] <span class="op">+</span> <span class="bu">list</span>(X_train.columns), </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                     columns<span class="op">=</span>[<span class="st">&#39;weight&#39;</span>])</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">1e-9</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>iters <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    g, Phi <span class="op">=</span> predict(w, X_train, mlai.linear)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    w <span class="op">-=</span> eta<span class="op">*</span>gradient(g, Phi, y_train) <span class="op">+</span> <span class="fl">0.001</span><span class="op">*</span>w</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> i <span class="op">%</span> <span class="dv">100</span>:</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Iter&quot;</span>, i, <span class="st">&quot;Objective&quot;</span>, objective(g, y_train))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate train and test</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.random.permutation(X.shape[<span class="dv">0</span>])</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> <span class="bu">int</span>(np.ceil(X.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X.iloc[train_indices]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y.iloc[train_indices]<span class="op">==</span><span class="va">True</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X.iloc[test_indices]</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y.iloc[test_indices]<span class="op">==</span><span class="va">True</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gradient descent algorithm</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>w_vals <span class="op">=</span> np.random.normal(size<span class="op">=</span>(X.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>, <span class="dv">1</span>), scale <span class="op">=</span> <span class="fl">0.001</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert weights to a pandas DataFrame with column names</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> typeof(X_train) <span class="kw">is</span> pd.DataFrame:</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>w_vals, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                     index<span class="op">=</span>[<span class="st">&#39;Eins&#39;</span>] <span class="op">+</span> <span class="bu">list</span>(X_train.columns), </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                     columns<span class="op">=</span>[<span class="st">&#39;weight&#39;</span>])</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">1e-9</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>iters <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iters):</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    g, Phi <span class="op">=</span> predict(w, X_train, mlai.linear)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    w <span class="op">-=</span> eta<span class="op">*</span>gradient(g, Phi, y_train) <span class="op">+</span> <span class="fl">0.001</span><span class="op">*</span>w</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> i <span class="op">%</span> <span class="dv">100</span>:</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Iter&quot;</span>, i, <span class="st">&quot;Objective&quot;</span>, objective(g, y_train))</span></code></pre></div>
 <p>Let’s look at the weights and how they relate to the inputs.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a histogram of the weights</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> typeof(w) <span class="kw">is</span> pd.DataFrame:</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    plt.bar(w.index, w[<span class="st">&#39;weight&#39;</span>])</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    plt.bar(w)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Features&#39;</span>)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Weight Value&#39;</span>)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Model Weights&#39;</span>)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;nmis-logistic-regression-weights.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a histogram of the weights</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> typeof(w) <span class="kw">is</span> pd.DataFrame:</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    plt.bar(w.index, w[<span class="st">&#39;weight&#39;</span>])</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    plt.bar(w)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Features&#39;</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Weight Value&#39;</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Histogram of Model Weights&#39;</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;nmis-logistic-regression-weights.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span>)</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>What does the magnitude of the weight vectors tell you about the different parameters and their influence on outcome? Are the weights of roughly the same size, if not, how might you fix this?</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, linear)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(g_test[y_test]<span class="op">&gt;</span><span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>g_test, Phi_test <span class="op">=</span> predict(w, X_test, linear)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(g_test[y_test]<span class="op">&gt;</span><span class="fl">0.5</span>)</span></code></pre></div>
 <h2 id="stochastic-gradient-descent">Stochastic Gradient Descent</h2>
 <h3 id="exercise-2">Exercise 2</h3>
 <p>Now construct a stochastic gradient descent algorithm and run it on the data. Is it faster or slower than batch gradient descent? What can you do to improve convergence speed?</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install statsmodels</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install statsmodels</span></code></pre></div>
 <h2 id="linear-regression-with-statsmodels">Linear Regression with <code>statsmodels</code></h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-statsmodels.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-statsmodels.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -379,17 +557,17 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 <p>The expected value of our prediction is:</p>
 <p><span class="math display">\[\mathbb{E}[y_i|\mathbf{ x}_i] = \mathbf{ w}^\top\mathbf{ x}_i\]</span></p>
 <p>This linear model forms the foundation for generalized linear models like logistic regression, where we’ll adapt the model for classification by transforming the output through a non-linear function.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo of linear regression using python statsmodels.</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to design matrix</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sm.add_constant(x)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(y, x)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo of linear regression using python statsmodels.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to design matrix</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sm.add_constant(x)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(y, x)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
 <p>The statsmodels summary provides several key diagnostic measures that help us evaluate our model fit and identify potential areas for improvement. Since we’re working with one-dimensional data (year vs time), we can visualize everything easily to complement these statistical measures.</p>
 <p>The model fit statistics show a moderately strong fit, with an R-squared of 0.744 indicating that our model explains 74.4% of the variance in the data. The adjusted R-squared of 0.733 confirms this isn’t just due to overfitting. The very low F-statistic p-value (7.40e-09) confirms the model’s overall significance. The AIC (10.08) and BIC (12.67) values will be useful when we compare this model against alternative specifications we might try.</p>
 <p>Looking at the model parameters, we see a coefficient of -0.013 for our predictor, with a small standard error (0.002). The t-statistic of -8.515 and p-value of 0.000 indicate this effect is highly significant. The 95% confidence interval [-0.016, -0.010] gives us good confidence in our estimate. The negative coefficient confirms the expected downward trend in marathon times over the years.</p>
@@ -480,36 +658,36 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 </ul>
 <p>The design matrix provides a compact way to represent all our feature data and is used directly in model fitting. When we write our linear model as <span class="math inline">\(\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span>, the design matrix <span class="math inline">\(\boldsymbol{ \Phi}\)</span> is multiplied by our parameter vector <span class="math inline">\(\mathbf{ w}\)</span> to generate predictions.</p>
 <p>The design matrix often includes a column of 1s to account for the intercept term in our model. This allows us to write the model in matrix form without explicitly separating out the intercept term.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo of additional features with interactions regression usying python statsmodels.</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the year to avoid numerical issues</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>x_scaled <span class="op">=</span> (x <span class="op">-</span> <span class="dv">1900</span>) <span class="op">/</span> <span class="dv">100</span>  <span class="co"># Center around 1900 and scale to century units</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to design matrix indicator variable for pre-1914</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_scaled, (x[:, <span class="dv">0</span>] <span class="op">&lt;</span> <span class="dv">1914</span>).astype(np.float64)[:, np.newaxis]])</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to design matrix indicator variable for 1914-1945</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_aug, ((x[:, <span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">1914</span>) <span class="op">&amp;</span> (x[:, <span class="dv">0</span>] <span class="op">&lt;=</span> <span class="dv">1945</span>)).astype(np.float64)[:, np.newaxis]])</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to design matrix indicator variable for post-1945</span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_aug, (x[:, <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">1945</span>).astype(np.float64)[:, np.newaxis]])</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add product terms that multiply the scaled year and the indicator variables.</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_aug, x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> x_aug[:, <span class="dv">1</span>:<span class="dv">2</span>], x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> x_aug[:, <span class="dv">2</span>:<span class="dv">3</span>]])</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to design matrix</span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> sm.add_constant(x_aug)</span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Do the linear fit</span></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(y, x_aug)</span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo of additional features with interactions regression usying python statsmodels.</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the year to avoid numerical issues</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>x_scaled <span class="op">=</span> (x <span class="op">-</span> <span class="dv">1900</span>) <span class="op">/</span> <span class="dv">100</span>  <span class="co"># Center around 1900 and scale to century units</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to design matrix indicator variable for pre-1914</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_scaled, (x[:, <span class="dv">0</span>] <span class="op">&lt;</span> <span class="dv">1914</span>).astype(np.float64)[:, np.newaxis]])</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to design matrix indicator variable for 1914-1945</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_aug, ((x[:, <span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">1914</span>) <span class="op">&amp;</span> (x[:, <span class="dv">0</span>] <span class="op">&lt;=</span> <span class="dv">1945</span>)).astype(np.float64)[:, np.newaxis]])</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to design matrix indicator variable for post-1945</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_aug, (x[:, <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">1945</span>).astype(np.float64)[:, np.newaxis]])</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add product terms that multiply the scaled year and the indicator variables.</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> np.hstack([x_aug, x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> x_aug[:, <span class="dv">1</span>:<span class="dv">2</span>], x_scaled[:, <span class="dv">0</span>:<span class="dv">1</span>] <span class="op">*</span> x_aug[:, <span class="dv">2</span>:<span class="dv">3</span>]])</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to design matrix</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>x_aug <span class="op">=</span> sm.add_constant(x_aug)</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Do the linear fit</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(y, x_aug)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
 <div class="figure">
 <div id="linear-regression-olympic-marathon-men-augmented-statsmodels-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//data-science/linear-regression-olympic-marathon-men-augmented-statsmodels.svg.svg" width="80%" style=" ">
@@ -551,39 +729,39 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-train.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-train.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo of logistic regression using python statsmodels.</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a synthetic binary classification dataset</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">200</span>, n_features<span class="op">=</span><span class="dv">2</span>, n_redundant<span class="op">=</span><span class="dv">0</span>, </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                         n_informative<span class="op">=</span><span class="dv">2</span>, n_clusters_per_class<span class="op">=</span><span class="dv">1</span>, </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to DataFrame for easier handling</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(X, columns<span class="op">=</span>[<span class="st">&#39;feature1&#39;</span>, <span class="st">&#39;feature2&#39;</span>])</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;target&#39;</span>] <span class="op">=</span> y</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Split into train and test sets</span></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.random.permutation(df.shape[<span class="dv">0</span>])</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> <span class="bu">int</span>(np.ceil(df.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>))</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> df[[<span class="st">&#39;feature1&#39;</span>, <span class="st">&#39;feature2&#39;</span>]].iloc[train_indices]</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> df[<span class="st">&#39;target&#39;</span>].iloc[train_indices]</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> df[[<span class="st">&#39;feature1&#39;</span>, <span class="st">&#39;feature2&#39;</span>]].iloc[test_indices]</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> df[<span class="st">&#39;target&#39;</span>].iloc[test_indices]</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to design matrix</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>X_test_sm <span class="op">=</span> sm.add_constant(X_test)</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model</span></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.Logit(y_train, X_train_sm)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo of logistic regression using python statsmodels.</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a synthetic binary classification dataset</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">200</span>, n_features<span class="op">=</span><span class="dv">2</span>, n_redundant<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                         n_informative<span class="op">=</span><span class="dv">2</span>, n_clusters_per_class<span class="op">=</span><span class="dv">1</span>, </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to DataFrame for easier handling</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(X, columns<span class="op">=</span>[<span class="st">&#39;feature1&#39;</span>, <span class="st">&#39;feature2&#39;</span>])</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;target&#39;</span>] <span class="op">=</span> y</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Split into train and test sets</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.random.permutation(df.shape[<span class="dv">0</span>])</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>num_train <span class="op">=</span> <span class="bu">int</span>(np.ceil(df.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>train_indices <span class="op">=</span> indices[:num_train]</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>test_indices <span class="op">=</span> indices[num_train:]</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> df[[<span class="st">&#39;feature1&#39;</span>, <span class="st">&#39;feature2&#39;</span>]].iloc[train_indices]</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> df[<span class="st">&#39;target&#39;</span>].iloc[train_indices]</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> df[[<span class="st">&#39;feature1&#39;</span>, <span class="st">&#39;feature2&#39;</span>]].iloc[test_indices]</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> df[<span class="st">&#39;target&#39;</span>].iloc[test_indices]</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add constant term to design matrix</span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>X_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>X_test_sm <span class="op">=</span> sm.add_constant(X_test)</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.Logit(y_train, X_train_sm)</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code></pre></div>
 <h2 id="model-fit-statistics">Model Fit Statistics</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-fit.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-fit.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -611,18 +789,18 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-test.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/logistic-regression-test.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on test set</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>y_pred_proba <span class="op">=</span> results.predict(X_test_sm)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> (y_pred_proba <span class="op">&gt;</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate classification metrics</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, confusion_matrix, classification_report</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Test Accuracy: </span><span class="sc">{</span>accuracy<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Confusion Matrix:</span><span class="ch">\n</span><span class="sc">{</span>conf_matrix<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Classification Report:</span><span class="ch">\n</span><span class="sc">{</span>classification_report(y_test, y_pred)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on test set</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>y_pred_proba <span class="op">=</span> results.predict(X_test_sm)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> (y_pred_proba <span class="op">&gt;</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate classification metrics</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, confusion_matrix, classification_report</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>conf_matrix <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Test Accuracy: </span><span class="sc">{</span>accuracy<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Confusion Matrix:</span><span class="ch">\n</span><span class="sc">{</span>conf_matrix<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Classification Report:</span><span class="ch">\n</span><span class="sc">{</span>classification_report(y_test, y_pred)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="logistic-regression-classification-statsmodels-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//statistics/logistic-regression-classification-statsmodels.svg" width="80%" style=" ">
@@ -695,22 +873,22 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 </ol>
 <p>This multiplicative nature has important implications for interpretation. For example, if we increase one input variable, it has a multiplicative effect on the rate, not an additive one. This can lead to rapid growth in the predicted counts as input values increase.</p>
 <p>Let’s look at another example using synthetic data to demonstrate Poisson regression without relying on external APIs.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some example count data</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">10</span>, n_samples)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">5</span>, n_samples)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((x1, x2))</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># True relationship: y ~ Poisson(exp(1 + 0.3*x1 - 0.2*x2))</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>lambda_true <span class="op">=</span> np.exp(<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">*</span>x1 <span class="op">-</span> <span class="fl">0.2</span><span class="op">*</span>x2)</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.poisson(lambda_true)</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Poisson regression</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>model_synthetic <span class="op">=</span> sm.GLM(y, sm.add_constant(X), family<span class="op">=</span>sm.families.Poisson())</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>result_synthetic <span class="op">=</span> model_synthetic.fit()</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some example count data</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">10</span>, n_samples)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">5</span>, n_samples)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack((x1, x2))</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># True relationship: y ~ Poisson(exp(1 + 0.3*x1 - 0.2*x2))</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>lambda_true <span class="op">=</span> np.exp(<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">*</span>x1 <span class="op">-</span> <span class="fl">0.2</span><span class="op">*</span>x2)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.poisson(lambda_true)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Poisson regression</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>model_synthetic <span class="op">=</span> sm.GLM(y, sm.add_constant(X), family<span class="op">=</span>sm.families.Poisson())</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>result_synthetic <span class="op">=</span> model_synthetic.fit()</span></code></pre></div>
 <p>The <code>statsmodels</code> library in Python provides a convenient way to fit Poisson regression models. The <code>sm.GLM</code> function is used to fit generalized linear models, and we specify the Poisson family to indicate that we’re modeling count data. The <code>sm.add_constant(x)</code> function adds a column of ones to the design matrix to account for the intercept term.</p>
 <p>In this synthetic example, we generate count data that follows a Poisson distribution where the rate parameter <span class="math inline">\(\lambda\)</span> depends on two predictor variables. This demonstrates how Poisson regression can model count data with multiple predictors.</p>
 <div class="figure">
@@ -774,108 +952,108 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>So far we have been using <code>numpy</code> for building our models. In this session we are going to make use of <code>JAX</code>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>```{<span class="im">import</span> jax</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, grad, jit, value_and_grad</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>Recall $f(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ w}<span class="op">^\</span>top <span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x})$. In JAX, we write basis maps that take inputs <span class="kw">and</span> parameters <span class="kw">and</span> <span class="cf">return</span> features. A standard linear layer <span class="kw">is</span> a basis <span class="cf">with</span> $<span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ x}$.</span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_features(x):</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;&quot;&quot;Identity features (no bias), expects x of shape (n, d).&quot;&quot;&quot;</span></span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_linear(params, x, features<span class="op">=</span>linear_features):</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Linear model: w^T phi(x) + b.</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">    params: dict with &#39;W&#39; (d-&gt;o) and optional &#39;b&#39; (o,).&quot;&quot;&quot;</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> features(x)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> Phi <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>]</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&#39;b&#39;</span> <span class="kw">in</span> params:</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>```{<span class="im">import</span> jax</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, grad, jit, value_and_grad</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>Recall $f(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ w}<span class="op">^\</span>top <span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x})$. In JAX, we write basis maps that take inputs <span class="kw">and</span> parameters <span class="kw">and</span> <span class="cf">return</span> features. A standard linear layer <span class="kw">is</span> a basis <span class="cf">with</span> $<span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ x}$.</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_features(x):</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;&quot;&quot;Identity features (no bias), expects x of shape (n, d).&quot;&quot;&quot;</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_linear(params, x, features<span class="op">=</span>linear_features):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Linear model: w^T phi(x) + b.</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">    params: dict with &#39;W&#39; (d-&gt;o) and optional &#39;b&#39; (o,).&quot;&quot;&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> features(x)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> Phi <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>]</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&#39;b&#39;</span> <span class="kw">in</span> params:</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
 <h2 id="parametric-basis-functions">Parametric Basis Functions</h2>
 <p>We define parametric basis layers: affine transforms and non-linear activations. These combine to form neural networks.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> affine(params, x):</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Affine transform: x -&gt; xW + b.&quot;&quot;&quot;</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>] <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu(x):</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.maximum(<span class="fl">0.0</span>, x)</span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tanh(x):</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.tanh(x)</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> layer_apply(layer_params, x, activation<span class="op">=</span>relu):</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply one dense layer + activation.&quot;&quot;&quot;</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> affine(layer_params, x)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> activation(h)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> affine(params, x):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Affine transform: x -&gt; xW + b.&quot;&quot;&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>] <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu(x):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.maximum(<span class="fl">0.0</span>, x)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tanh(x):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.tanh(x)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> layer_apply(layer_params, x, activation<span class="op">=</span>relu):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply one dense layer + activation.&quot;&quot;&quot;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> affine(layer_params, x)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> activation(h)</span></code></pre></div>
 <h2 id="multi-layer-perceptron-as-stacked-bases">Multi-Layer Perceptron as Stacked Bases</h2>
 <p>An MLP is a composition: <span class="math inline">\(\mathbf{x} \xrightarrow{\text{affine}} \boldsymbol{ h}_1 \xrightarrow{\sigma} \xrightarrow{\text{affine}} \dots \xrightarrow{\text{affine}} \hat{\mathbf{ y}}\)</span>.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_dense_params(key, in_dim, out_dim, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    k1, k2 <span class="op">=</span> random.split(key)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> scale <span class="op">*</span> random.normal(k1, (in_dim, out_dim))</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> scale <span class="op">*</span> random.normal(k2, (out_dim,))</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;W&#39;</span>: W, <span class="st">&#39;b&#39;</span>: b}</span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;layer_sizes: [in, h1, h2, ..., out]&quot;&quot;&quot;</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> random.split(key, <span class="bu">len</span>(layer_sizes)<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    layers <span class="op">=</span> []</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (din, dout) <span class="kw">in</span> <span class="bu">zip</span>(keys, <span class="bu">zip</span>(layer_sizes[:<span class="op">-</span><span class="dv">1</span>], layer_sizes[<span class="dv">1</span>:])):</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>        layers.append(init_dense_params(k, din, dout, scale<span class="op">=</span>scale))</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> layers</span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mlp_apply(params, x, activation<span class="op">=</span>relu):</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply MLP to inputs x (n, d). Last layer linear.&quot;&quot;&quot;</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> x</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> layer <span class="kw">in</span> params[:<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> layer_apply(layer, h, activation<span class="op">=</span>activation)</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Last layer linear (no non-linearity)</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> affine(params[<span class="op">-</span><span class="dv">1</span>], h)</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_dense_params(key, in_dim, out_dim, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    k1, k2 <span class="op">=</span> random.split(key)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> scale <span class="op">*</span> random.normal(k1, (in_dim, out_dim))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> scale <span class="op">*</span> random.normal(k2, (out_dim,))</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;W&#39;</span>: W, <span class="st">&#39;b&#39;</span>: b}</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;layer_sizes: [in, h1, h2, ..., out]&quot;&quot;&quot;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> random.split(key, <span class="bu">len</span>(layer_sizes)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    layers <span class="op">=</span> []</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (din, dout) <span class="kw">in</span> <span class="bu">zip</span>(keys, <span class="bu">zip</span>(layer_sizes[:<span class="op">-</span><span class="dv">1</span>], layer_sizes[<span class="dv">1</span>:])):</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>        layers.append(init_dense_params(k, din, dout, scale<span class="op">=</span>scale))</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> layers</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mlp_apply(params, x, activation<span class="op">=</span>relu):</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply MLP to inputs x (n, d). Last layer linear.&quot;&quot;&quot;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> x</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> layer <span class="kw">in</span> params[:<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> layer_apply(layer, h, activation<span class="op">=</span>activation)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Last layer linear (no non-linearity)</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> affine(params[<span class="op">-</span><span class="dv">1</span>], h)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
 <h2 id="loss-and-training-jax-gradjit">Loss and Training (JAX grad/jit)</h2>
 <p>We use squared error and train with gradient descent. JAX allows JIT compilation and automatic differentiation.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Params is a list of dicts; apply tree map-style update</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    new_params <span class="op">=</span> []</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p, g <span class="kw">in</span> <span class="bu">zip</span>(params, grads):</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>        new_params.append({k: p[k] <span class="op">-</span> lr <span class="op">*</span> g[k] <span class="cf">for</span> k <span class="kw">in</span> p})</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_params, loss</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Params is a list of dicts; apply tree map-style update</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    new_params <span class="op">=</span> []</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p, g <span class="kw">in</span> <span class="bu">zip</span>(params, grads):</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>        new_params.append({k: p[k] <span class="op">-</span> lr <span class="op">*</span> g[k] <span class="cf">for</span> k <span class="kw">in</span> p})</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_params, loss</span></code></pre></div>
 <h2 id="demo-fit-a-1d-nonlinear-function">Demo: Fit a 1D Nonlinear Function</h2>
 <p>We fit a simple nonlinear mapping with an MLP to illustrate stacking basis layers.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create synthetic 1D regression data</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key):</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> jnp.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> jnp.sin(x) <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> jnp.cos(<span class="dv">2</span><span class="op">*</span>x)</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> noise <span class="op">*</span> random.normal(key, f.shape)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> f <span class="op">+</span> eps</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, f</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>x, y, f_true <span class="op">=</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key)</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init MLP: 1 -&gt; 64 -&gt; 64 -&gt; 1</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>layer_sizes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">1</span>]</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2000</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">1e-2</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>apply_fn <span class="op">=</span> partial(mlp_apply, activation<span class="op">=</span>relu)</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>loss_trace <span class="op">=</span> []</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    params, loss <span class="op">=</span> update(params, x, y, lr, apply_fn)</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> <span class="dv">100</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>        loss_trace.append((i, <span class="bu">float</span>(loss))) </span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create synthetic 1D regression data</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key):</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> jnp.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> jnp.sin(x) <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> jnp.cos(<span class="dv">2</span><span class="op">*</span>x)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> noise <span class="op">*</span> random.normal(key, f.shape)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> f <span class="op">+</span> eps</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, f</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>x, y, f_true <span class="op">=</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init MLP: 1 -&gt; 64 -&gt; 64 -&gt; 1</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>layer_sizes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">1</span>]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">1e-2</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>apply_fn <span class="op">=</span> partial(mlp_apply, activation<span class="op">=</span>relu)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>loss_trace <span class="op">=</span> []</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    params, loss <span class="op">=</span> update(params, x, y, lr, apply_fn)</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> <span class="dv">100</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>        loss_trace.append((i, <span class="bu">float</span>(loss))) </span></code></pre></div>
 <div class="figure">
 <div id="basis-to-nn-jax-demo-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/basis-to-nn-jax-demo.svg" width="80%" style=" ">
