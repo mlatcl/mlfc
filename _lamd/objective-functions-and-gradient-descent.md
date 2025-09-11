@@ -36,11 +36,16 @@ ipynb: true
 \include{_datasets/includes/classification-toy-data.md}
 \include{_ml/includes/perceptron.md}
 
-\include{_ml/includes/linear-regression-iterative.md}
+\section{Regression}
 
+\include{_ml/includes/regression.md}
+\include{_ml/includes/regression-contour-plot.md}
+\include{_ml/includes/regression-gradient-descent.md}
+\include{_ml/includes/regression-stochastic-gradient-descent.md}
+\include{_ml/includes/regression-reflection.md}
 
 \addreading{@Rogers:book11}{Section 1.1.3} for loss functions.
-
+\addreading{@Bishop-deeplearning24}{Section 8.1} for gradient descent.
 \thanks
 
 \reading
