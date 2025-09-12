@@ -577,7 +577,7 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 </div>
 <p>By defining our multivariate derivatives through vectors, we can now write down the results for some more useful multivariate derivatives. Let’s start with <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> and assume we want the gradient of <span class="math inline">\(\mathbf{b}\)</span> with respect to <span class="math inline">\(\mathbf{A}\)</span>. We assume that <span class="math inline">\(\mathbf{A} \in \Re^{m\times n}\)</span>. To derive the gradient we’ll get there slightly indirectly and consider the gradient of <span class="math inline">\(\mathbf{b}\)</span> first, <span class="math display">\[
 \frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x}
-\]</span> which must be a matrix of size <span class="math inline">\(m \times mn\)</span>. Here we’ve taken the unusual step of defining $ = . We construct this form because it means that we are forming <span class="math inline">\(\mathbf{a}^\prime\)</span> by stacking the columns of <span class="math inline">\(\mathbf{A}^\top\)</span>, which are the rows of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+\]</span> which must be a matrix of size <span class="math inline">\(m \times mn\)</span>. Here we’ve taken the unusual step of defining <span class="math inline">\(\mathbf{a^\prime} = \left(\mathbf{A}^\top\right):\)</span>. We construct this form because it means that we are forming <span class="math inline">\(\mathbf{a}^\prime\)</span> by stacking the columns of <span class="math inline">\(\mathbf{A}^\top\)</span>, which are the rows of <span class="math inline">\(\mathbf{A}\)</span>.</p>
 <p>This makes the derivation straightforward by inspection because the vector <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> is a vector formed of inner products of the different <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>, <span class="math display">\[
 \mathbf{A}\mathbf{x} = \begin{bmatrix}
 \mathbf{a}_{1, :}^\top \mathbf{x} \\
@@ -591,8 +591,9 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 \mathbf{I}_m \otimes \mathbf{x}^\top = \begin{bmatrix}
 \mathbf{x} &amp; \mathbf{0}&amp; \cdots &amp; \mathbf{0}\\
 \mathbf{0}&amp; \mathbf{x}^\top &amp; \cdots &amp; \mathbf{0}\\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-\mathbf{0}&amp; \mathbf{0}&amp; \cdots&amp; \mathbf{x}^\top.
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\mathbf{0}&amp; \mathbf{0}&amp; \cdots&amp; \mathbf{x}^\top
+\end{bmatrix}.
 \]</span> where <span class="math inline">\(\mathbf{I}_m\)</span> is the <span class="math inline">\(m\)</span> dimensional identity matrix. So this means we can write, <span class="math display">\[
 \frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{I}_{m} \otimes \mathbf{x}^\top
 \]</span> because we can see that each row of this matrix contains the derivative of <span class="math inline">\(b_i = \mathbf{a}_{i, :}^\top \mathbf{x}\)</span> with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span>, wherewe constructed <span class="math inline">\(\mathbf{a}^\prime\)</span> to be the stacking of the <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>. The elements are zero apart from those associated with <span class="math inline">\(\mathbf{a}_{i, :}\)</span> where the elements are <span class="math inline">\(\mathbf{x}\)</span>.</p>
