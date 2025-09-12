@@ -578,6 +578,92 @@ Alex Ihler discusses polynomials and overfitting.
 </aside>
 <p><em>Alex Ihler on Polynomials and Overfitting</em></p>
 </section>
+<section id="from-shallow-to-deep" class="slide level2">
+<h2>From Shallow to Deep</h2>
+<p><span class="math display">\[
+f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
+\]</span></p>
+</section>
+<section id="gradient-based-optimization" class="slide level2">
+<h2>Gradient-based optimization</h2>
+<p><span class="math display">\[
+\mathscr{L}(\theta) = \sum_{n=1}^N \ell(y_n, f(x_n, \theta))
+\]</span></p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta)
+\]</span></p>
+</section>
+<section id="basic-multilayer-perceptron" class="slide level2">
+<h2>Basic Multilayer Perceptron</h2>
+<p><span class="math display">\[
+\small
+f_L(x) = \boldsymbol{ \phi}\left(b_L + W_L \boldsymbol{ \phi}\left(b_{L-1} + W_{L-1} \boldsymbol{ \phi}\left( \cdots \boldsymbol{ \phi}\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
+\]</span></p>
+</section>
+<section id="recursive-mlp-definition" class="slide level2">
+<h2>Recursive MLP Definition</h2>
+<p><span class="math display">\[\begin{align}
+f_l(x) &amp;= \boldsymbol{ \phi}\big(W_l f_{l-1}(x) + b_l\big),\quad l=1,\dots,L\\
+f_0(x) &amp;= x
+\end{align}\]</span></p>
+</section>
+<section id="rectified-linear-unit" class="slide level2">
+<h2>Rectified Linear Unit</h2>
+(x) =
+<span class="math display">\[\begin{cases}
+0 &amp; x \le 0\\
+x &amp; x &gt; 0
+\end{cases}\]</span>
+</section>
+<section id="shallow-relu-networks" class="slide level2">
+<h2>Shallow ReLU Networks</h2>
+<p><span class="math display">\[\begin{align}
+\mathbf{h}(x) &amp;= \operatorname{ReLU}(\mathbf{w}_1 x - \mathbf{b}_1)\\
+f(x) &amp;= \mathbf{w}_2^{\top} \, \mathbf{h}(x)
+\end{align}\]</span></p>
+<p>Complexity (1D): number of kinks <span class="math inline">\(\propto\)</span> width of network.</p>
+</section>
+<section id="depth-vs-width-representation-power" class="slide level2">
+<h2>Depth vs Width: Representation Power</h2>
+<ul>
+<li>Single hidden layer: number of kinks <span class="math inline">\(\approx O(\text{width})\)</span></li>
+<li>Deep ReLU networks: kinks <span class="math inline">\(\approx O(2^{\text{depth}})\)</span></li>
+</ul>
+</section>
+<section id="sawtooth-construction" class="slide level2">
+<h2>Sawtooth Construction</h2>
+<p><span class="math display">\[\begin{align}
+f_l(x) &amp;= 2\vert f_{l-1}(x)\vert - 2, \quad f_0(x) = x\\
+f_l(x) &amp;= 2 
+  \operatorname{ReLU}(f_{l-1}(x)) + 2 
+  \operatorname{ReLU}(-f_{l-1}(x)) - 2
+\end{align}\]</span></p>
+<p>Complexity (1D): number of kinks <span class="math inline">\(\approx O(2^{\text{depth}})\)</span>.</p>
+</section>
+<section id="higher-dimensional-geometry" class="slide level2">
+<h2>Higher-dimensional Geometry</h2>
+<ul>
+<li>Regions: piecewise-linear, often triangular/polygonal in 2D</li>
+<li>Continuity arises despite stitching flat regions</li>
+<li>Early layers: few regions; later layers: many more</li>
+</ul>
+</section>
+<section id="generalisation-in-deep-networks" class="slide level2">
+<h2>Generalisation in Deep Networks</h2>
+<ul>
+<li>Classical view: model class + loss determine generalisation</li>
+<li>Deep view: optimisation algorithm (SGD variants) also determines which interpolating solution is found</li>
+<li>Phenomena: double descent; NTK/infinite-width limits; role of initialisation and gradient noise</li>
+</ul>
+</section>
+<section id="factors-affecting-generalisation" class="slide level2">
+<h2>Factors Affecting Generalisation</h2>
+<ul>
+<li><em>Data representativeness</em>: train/test distribution alignment</li>
+<li><em>Number of training points</em>: more samples narrow feasible solutions</li>
+<li><em>Model class size</em>: larger classes require more data</li>
+</ul>
+</section>
 <section id="double-descent" class="slide level2">
 <h2>Double Descent</h2>
 <div class="figure">
@@ -643,8 +729,29 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 \]</span></p>
 <p>Any other results used for matrix differentiation and not explicitly given here may be found in Brookes [2005].</p>
 </section>
+<section id="useful-multivariate-derivatives" class="slide level2">
+<h2>Useful Multivariate Derivatives</h2>
+<p>{Now, to get the gradient with respect to <span class="math inline">\(\mathbf{a} = \vec{\mathbf{A}\)</span> instead of with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span> we reverse the order of the Kronecker product <span class="math display">\[
+\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
+\]</span> which disperses the elements of <span class="math inline">\(\mathbf{x}\)</span> across the matrix, <span class="math display">\[
+\mathbf{x}^\top \otimes \mathbf{I}_{m}  = \begin{bmatrix}
+x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
+\end{bmatrix}
+\]</span> and is the correct for when we are stacking the columns of $. }</p>
+</section>
 <section id="chain-rule-for-neural-networks" class="slide level2">
 <h2>Chain Rule for Neural Networks</h2>
+<p>{We represent the gradient <span class="math display">\[
+\frac{\text{d}\boldsymbol{ \phi}_{d}}{\text{d} \mathbf{ f}_{d}} = \boldsymbol{ \Phi}^\prime
+\]</span> which is a <span class="math inline">\(d_d\times d_d\)</span> sized matrix whose elements are given by <span class="math display">\[
+\frac{\text{d}\phi_i^{(d)}(\mathbf{ f}_{d})}{\text{d} \mathbf{ f}_j^{(d)}
+\]</span> where <span class="math inline">\(\phi_i^({d})(\mathbf{ f}_{d})\)</span> is the <span class="math inline">\(i\)</span>th basis function from the <span class="math inline">\(d\)</span>th layer and <span class="math inline">\(\mathbf{ f}_j^{(d)\)</span> is the <span class="math inline">\(j\)</span>th activation from the same layer. If <span class="math inline">\(\phi_i^({d})(\mathbf{ f}_{d}) = \phi_i^({d})(f^{(d)}_i)\)</span> then this matrix is diagonal.}</p>
+<p>{Then we have the <em>across layer</em> gradients <span class="math display">\[
+\frac{\text{d}\mathbf{ f}_d}{\text{d}\boldsymbol{ \phi}_{d-1} = \mathbf{W}_d,
+\]</span> which should be a <span class="math inline">\(d_d\times d_{d-1}\)</span> size matrix, which matches the shape of <span class="math inline">\(\mathbf{W}_d\)</span>. }</p>
+<p>{This now gives us the ability to compute the gradient of any <span class="math inline">\(\mathbf{W}_\ell\)</span> in the model, <span class="math display">\[
+\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k} = \left[\prod_{i=0}^{k-1} \frac{\text{d} \mathbf{ f}_{\ell - i}}{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}\frac{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}{\text{d} \mathbf{ f}_{\ell - i -1}}\right] \frac{\text{d} \mathbf{ f}_{\ell-k}}{\text{d} \mathbf{ w}_{\ell - k}}
+\]</span> }</p>
 </section>
 <section id="deep-function-composition" class="slide level2">
 <h2>Deep Function Composition</h2>
@@ -811,220 +918,6 @@ H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\
 <li>Practical optimisation and implementation notes (15 min)</li>
 <li>Q&amp;A (5 min)</li>
 </ol>
-</section>
-<section id="recap-basis-functions-and-shallow-models" class="slide level2">
-<h2>Recap: Basis Functions and Shallow Models</h2>
-</section>
-<section id="basis-functions" class="slide level2">
-<h2>Basis Functions</h2>
-<ul>
-<li>Instead of working in input space, <span class="math inline">\(\mathbf{ x}\)</span>..</li>
-<li>Build models in a new space <span class="math inline">\(\boldsymbol{ \phi}(\mathbf{ x})\)</span></li>
-</ul>
-</section>
-<section id="quadratic-basis" class="slide level2">
-<h2>Quadratic Basis</h2>
-<ul>
-<li>Basis functions can be global. E.g. quadratic basis: <span class="math display">\[
-\boldsymbol{ \phi}^\top = [1, x, x^2]
-\]</span></li>
-</ul>
-<p><span class="math display">\[
-\begin{align*}
-\phi_1(x) &amp; = 1, \\
-\phi_2(x) &amp; = x, \\
-\phi_3(x) &amp; = x^2.
-\end{align*}
-\]</span></p>
-</section>
-<section id="quadratic-basis-1" class="slide level2">
-<h2>Quadratic Basis</h2>
-<p><span class="math display">\[
-\boldsymbol{ \phi}(x) = \begin{bmatrix} 1\\ x\\ x^2\end{bmatrix}.
-\]</span></p>
-</section>
-<section id="design-matrix" class="slide level2">
-<h2>Design Matrix</h2>
-<p><span class="math display">\[
-\boldsymbol{ \Phi}(\mathbf{ x}) = 
-\begin{bmatrix} 1 &amp; x_1 &amp;
-x_1^2 \\
-1 &amp; x_2 &amp; x_2^2\\
-\vdots &amp; \vdots &amp; \vdots \\
-1 &amp; x_n&amp; x_n^2
-\end{bmatrix}
-\]</span></p>
-</section>
-<section id="rectified-linear-units" class="slide level2">
-<h2>Rectified Linear Units</h2>
-<ul>
-<li>The ReLU is a basis function used in neural nets</li>
-</ul>
-<p><span class="math display">\[
-\phi_j(x) = xH(x+ v_j)
-\]</span></p>
-<script>
-showDivs(0, 'relu_basis');
-</script>
-<p><small></small> <input id="range-relu_basis" type="range" min="0" max="4" value="0" onchange="setDivs('relu_basis')" oninput="setDivs('relu_basis')"> <button onclick="plusDivs(-1, 'relu_basis')">❮</button> <button onclick="plusDivs(1, 'relu_basis')">❯</button></p>
-<div class="relu_basis" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis000.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_basis" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis001.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_basis" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis002.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_basis" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis003.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_basis" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis004.svg" width="80%" style=" ">
-</object>
-</div>
-</section>
-<section id="functions-derived-from-relu-basis" class="slide level2">
-<h2>Functions Derived from Relu Basis</h2>
-<p><span class="math display">\[
-f(x) = \color{cyan}{w_0}   + \color{green}{w_1 xH(x+1.0) } + \color{yellow}{w_2 xH(x+0.33) } + \color{magenta}{w_3 xH(x-0.33)} +  \color{red}{w_4 xH(x-1.0)}
-\]</span></p>
-<script>
-showDivs(0, 'relu_function');
-</script>
-<p><small></small> <input id="range-relu_function" type="range" min="0" max="4" value="0" onchange="setDivs('relu_function')" oninput="setDivs('relu_function')"> <button onclick="plusDivs(-1, 'relu_function')">❮</button> <button onclick="plusDivs(1, 'relu_function')">❯</button></p>
-<div class="relu_function" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_function000.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_function" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_function001.svg" width="80%" style=" ">
-</object>
-</div>
-<div class="relu_function" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_function002.svg" width="80%" style=" ">
-</object>
-</div>
-</section>
-<section id="shallow-and-deep-learning-1" class="slide level2">
-<h2>Shallow and Deep Learning</h2>
-</section>
-<section id="neural-network-prediction-function-1" class="slide level2">
-<h2>Neural Network Prediction Function</h2>
-<p><span class="math display">\[
- f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
-\]</span></p>
-</section>
-<section id="overparameterised-systems-1" class="slide level2">
-<h2>Overparameterised Systems</h2>
-<ul>
-<li>Neural networks are highly overparameterised.</li>
-<li>If we <em>could</em> examine their Hessian at “optimum”
-<ul>
-<li>Very low (or negative) eigenvalues.</li>
-<li>Error function is not sensitive to changes in parameters.</li>
-<li>Implies parmeters are <em>badly determined</em></li>
-</ul></li>
-</ul>
-</section>
-<section id="whence-generalisation-1" class="slide level2">
-<h2>Whence Generalisation?</h2>
-<ul>
-<li>Not enough regularisation in our objective functions to explain.</li>
-<li>Neural network models are <em>not</em> using traditional generalisation approaches.</li>
-<li>The ability of these models to generalise <em>must</em> be coming somehow from the algorithm*</li>
-<li>How to explain it and control it is perhaps the most interesting theoretical question for neural networks.</li>
-</ul>
-</section>
-<section id="from-shallow-to-deep" class="slide level2">
-<h2>From Shallow to Deep</h2>
-<p><span class="math display">\[
-f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
-\]</span></p>
-</section>
-<section id="gradient-based-optimization" class="slide level2">
-<h2>Gradient-based optimization</h2>
-<p><span class="math display">\[
-\mathscr{L}(\theta) = \sum_{n=1}^N \ell(y_n, f(x_n, \theta))
-\]</span></p>
-<p><span class="math display">\[
-\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta)
-\]</span></p>
-</section>
-<section id="basic-multilayer-perceptron" class="slide level2">
-<h2>Basic Multilayer Perceptron</h2>
-<p><span class="math display">\[
-\small
-f_L(x) = \boldsymbol{ \phi}\left(b_L + W_L \boldsymbol{ \phi}\left(b_{L-1} + W_{L-1} \boldsymbol{ \phi}\left( \cdots \boldsymbol{ \phi}\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
-\]</span></p>
-</section>
-<section id="recursive-mlp-definition" class="slide level2">
-<h2>Recursive MLP Definition</h2>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= \boldsymbol{ \phi}\big(W_l f_{l-1}(x) + b_l\big),\quad l=1,\dots,L\\
-f_0(x) &amp;= x
-\end{align}\]</span></p>
-</section>
-<section id="rectified-linear-unit" class="slide level2">
-<h2>Rectified Linear Unit</h2>
-(x) =
-<span class="math display">\[\begin{cases}
-0 &amp; x \le 0\\
-x &amp; x &gt; 0
-\end{cases}\]</span>
-</section>
-<section id="shallow-relu-networks" class="slide level2">
-<h2>Shallow ReLU Networks</h2>
-<p><span class="math display">\[\begin{align}
-\mathbf{h}(x) &amp;= \operatorname{ReLU}(\mathbf{w}_1 x - \mathbf{b}_1)\\
-f(x) &amp;= \mathbf{w}_2^{\top} \, \mathbf{h}(x)
-\end{align}\]</span></p>
-<p>Complexity (1D): number of kinks <span class="math inline">\(\propto\)</span> width of network.</p>
-</section>
-<section id="depth-vs-width-representation-power" class="slide level2">
-<h2>Depth vs Width: Representation Power</h2>
-<ul>
-<li>Single hidden layer: number of kinks <span class="math inline">\(\approx O(\text{width})\)</span></li>
-<li>Deep ReLU networks: kinks <span class="math inline">\(\approx O(2^{\text{depth}})\)</span></li>
-</ul>
-</section>
-<section id="sawtooth-construction" class="slide level2">
-<h2>Sawtooth Construction</h2>
-<p><span class="math display">\[\begin{align}
-f_l(x) &amp;= 2\vert f_{l-1}(x)\vert - 2, \quad f_0(x) = x\\
-f_l(x) &amp;= 2 
-  \operatorname{ReLU}(f_{l-1}(x)) + 2 
-  \operatorname{ReLU}(-f_{l-1}(x)) - 2
-\end{align}\]</span></p>
-<p>Complexity (1D): number of kinks <span class="math inline">\(\approx O(2^{\text{depth}})\)</span>.</p>
-</section>
-<section id="higher-dimensional-geometry" class="slide level2">
-<h2>Higher-dimensional Geometry</h2>
-<ul>
-<li>Regions: piecewise-linear, often triangular/polygonal in 2D</li>
-<li>Continuity arises despite stitching flat regions</li>
-<li>Early layers: few regions; later layers: many more</li>
-</ul>
-</section>
-<section id="generalisation-in-deep-networks" class="slide level2">
-<h2>Generalisation in Deep Networks</h2>
-<ul>
-<li>Classical view: model class + loss determine generalisation</li>
-<li>Deep view: optimisation algorithm (SGD variants) also determines which interpolating solution is found</li>
-<li>Phenomena: double descent; NTK/infinite-width limits; role of initialisation and gradient noise</li>
-</ul>
-</section>
-<section id="factors-affecting-generalisation" class="slide level2">
-<h2>Factors Affecting Generalisation</h2>
-<ul>
-<li><em>Data representativeness</em>: train/test distribution alignment</li>
-<li><em>Number of training points</em>: more samples narrow feasible solutions</li>
-<li><em>Model class size</em>: larger classes require more data</li>
-</ul>
 <p>David Hogg’s lecture <a href="https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters" class="uri">https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters</a></p>
 <p>The Deep Bootstrap <a href="https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20" class="uri">https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20</a></p>
 <p>Aki Vehtari on Leave One Out Uncertainty: <a href="https://arxiv.org/abs/2008.10296" class="uri">https://arxiv.org/abs/2008.10296</a> (check for his references).</p>

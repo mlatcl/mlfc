@@ -426,6 +426,50 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \ma
 </div>
 <p>We can easily develop a simple prediction function that reconstructs the training data exactly, you can just use a look up table. But how would the lookup table predict between the training data, where examples haven’t been seen before? The choice of the class of prediction functions is critical in ensuring that the model generalizes well.</p>
 <p>The generalization error is normally estimated by applying the objective function to a set of data that the model <em>wasn’t</em> trained on, the test data. To ensure good performance we normally want a model that gives us a low generalization error. If we weren’t sure of the right prediction function to use, then we could try 1,000 different prediction functions. Then we could use the one that gives us the lowest error on the test data. But you have to be careful. Selecting a model in this way is like a further stage of training where you are using the test data in the training.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> So when this is done, the data used for this is not known as test data, it is known as <em>validation data</em>. And the associated error is the <em>validation error</em>. Using the validation error for model selection is a standard machine learning technique, but it can be misleading about the final generalization error. Almost all machine learning practitioners know not to use the test data in your training procedure, but sometimes people forget that when validation data is used for model selection that validation error cannot be used as an unbiased estimate of the generalization performance.</p>
+<h2 id="from-shallow-to-deep">From Shallow to Deep</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/from-shallow-to-deep.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/from-shallow-to-deep.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>A fully-connected deep network composes linear transforms and elementwise non-linearities. Under the basis-function perspective, each layer provides a new basis evaluated on the transformed inputs, then linearly combined and fed forward.</p>
+<p><span class="math display">\[
+f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
+\]</span></p>
+<h2 id="gradient-based-optimization">Gradient-based optimization</h2>
+<p><span class="math display">\[
+\mathscr{L}(\theta) = \sum_{n=1}^N \ell(y_n, f(x_n, \theta))
+\]</span></p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta)
+\]</span></p>
+<h3 id="basic-multilayer-perceptron">Basic Multilayer Perceptron</h3>
+<p><span class="math display">\[
+\small
+f_L(x) = \boldsymbol{ \phi}\left(b_L + W_L \boldsymbol{ \phi}\left(b_{L-1} + W_{L-1} \boldsymbol{ \phi}\left( \cdots \boldsymbol{ \phi}\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
+\]</span></p>
+<h3 id="recursive-mlp-definition">Recursive MLP Definition</h3>
+<h2 id="rectified-linear-unit">Rectified Linear Unit</h2>
+<p>Placeholder figure: basic ReLU shape (zero for negative inputs, identity for positive).</p>
+<p>Other activation functions that are used include hyperbolic tangent, sigmoid, ELU, leaky ReLU. Although ReLU is often preferred for simplicity and fast gradient computation.</p>
+<h2 id="shallow-relu-networks">Shallow ReLU Networks</h2>
+<p>A single layer ReLU network is functionally equivalent to a generalised linear model with a ReLU basis. The difference is that we optimise over the basis function inputs.</p>
+<p>Each hidden unit acts as a basis function with its own kink location and slope.</p>
+<h2 id="depth-vs-width-representation-power">Depth vs Width: Representation Power</h2>
+<p>ReLU networks implement piecewise-linear functions; width increases the number of linear pieces roughly linearly, depth increases them exponentially.</p>
+<h2 id="sawtooth-construction">Sawtooth Construction</h2>
+<p>Illustrative 1D construction showing exponential growth of segments with depth.</p>
+<p>In higher dimensions, these become polyhedral regions with constant gradients inside each region.</p>
+<p>Placeholder mini-figures: depth <span class="math inline">\(0,1,2,3,4,5\)</span> outputs of the sawtooth network showing doubling segments at each step.</p>
+<h2 id="higher-dimensional-geometry">Higher-dimensional Geometry</h2>
+<p>In 2D, ReLU networks partition input space into many polygonal regions. Within each region the mapping is linear, yet globally the function is continuous because adjacent regions meet with consistent boundary values. Depth increases the number and intricacy of these regions across layers.</p>
+<p>Placeholder figure: 2D piecewise-linear tiling (e.g., Hanin and Rolnick, 2019) with coloured regions indicating distinct linear pieces.</p>
+<p>Suggested visual: reuse figures showing partitioned 2D input space with coloured linear regions. If needed, include links or embed static images used in prior notes.</p>
+<h2 id="generalisation-in-deep-networks">Generalisation in Deep Networks</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/generalisation-in-deep-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/generalisation-in-deep-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Neural nets are heavily overparameterised. Classical generalisation bounds based purely on hypothesis class complexity are pessimistic. Empirically, training algorithms exhibit an inductive bias toward solutions that generalise.</p>
+<p>In the overparameterised regime there is not a single training optimum but a  of zero-training-loss solutions (an interpolation manifold). Gradient-based optimisation tends to prefer certain members of this set that generalise better (“nice interpolants”). This preference is an  of the algorithm.</p>
+<p>Additional reading placeholders: Hanin and Rolnick (2019) on typical linear-region counts; Pérez et al. (2019) on parameter-to-function bias toward simplicity; Arora et al. (2019) on deep linear models and implicit biases from parametrisation and initialisation.</p>
 <h2 id="double-descent">Double Descent</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/double-descent.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/double-descent.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -450,6 +494,7 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \ma
 <p>Crucially, the destination is always associated with 100% accuracy on the training set. An objective that is always achievable for the overparameterized model.</p>
 <p>Intuitively, it seems that a highly overparameterized model places Grandma’s house on the edge of the dark forest. Making it easily and quickly accessible to the algorithm. The larger the model, the more exposed Grandma’s house becomes. Perhaps this is due to some form of blessing of dimensionality brings Grandma’s house closer to the edge of the forest in a high dimensional setting. Really, we should think of Grandma’s house as a low dimensional manifold of destinations that are safe. A path through the forest where the wolf of overfitting doesn’t venture. In the GLM case, we know already that when the number of parameters matches the number of data there is precisely one location in parameter space where accuracy on the training data is 100%. Our previous misunderstanding of generalization stemmed from the fact that (seemingly) it is highly unlikely that this single point is a good place to be from the perspective of generalization. Additionally, it is often difficult to find. Finding the precise polynomial coefficients in a least squares regression to exactly fit the basis to a small data set such as the Olympic marathon data requires careful consideration of the numerical properties and an orthogonalization of the design matrix <span class="citation" data-cites="Lawson:least95">(Lawson and Hanson, 1995)</span>.</p>
 <p>It seems that with a highly overparameterized model, these locations become easier to find and they provide good generalization properties. In machine learning this is known as the “double descent phenomenon” (see e.g., <span class="citation" data-cites="Belkin:reconciling19">Belkin et al. (2019)</span>).</p>
+<p>Diagram from <span class="citation" data-cites="Nakkiran-deepdouble19">(<strong>Nakkiran-deepdouble19?</strong>)</span></p>
 <p>See also this talk by Misha Belkin: <a href="http://www.ipam.ucla.edu/abstract/?tid=15552&amp;pcode=GLWS4" class="uri">http://www.ipam.ucla.edu/abstract/?tid=15552&amp;pcode=GLWS4</a> and these related papers <a href="https://www.pnas.org/content/116/32/15849.short" class="uri">https://www.pnas.org/content/116/32/15849.short</a>, <a href="https://www.pnas.org/content/117/20/10625" class="uri">https://www.pnas.org/content/117/20/10625</a></p>
 <h2 id="neural-tangent-kernel">Neural Tangent Kernel</h2>
 <div style="text-align:right">
@@ -526,11 +571,67 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 \frac{\text{d} E}{\text{d} \mathbf{J}:}=\left(\left(\frac{\text{d} E}{\text{d} \mathbf{J}}\right):\right)^{\top}.
 \]</span></p>
 <p>Any other results used for matrix differentiation and not explicitly given here may be found in Brookes [2005].</p>
+<h2 id="useful-multivariate-derivatives">Useful Multivariate Derivatives</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_maths/includes/more-useful-matrix-derivatives.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_maths/includes/more-useful-matrix-derivatives.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>By defining our multivariate derivatives through vectors, we can now write down the results for some more useful multivariate derivatives. Let’s start with <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> and assume we want the gradient of <span class="math inline">\(\mathbf{b}\)</span> with respect to <span class="math inline">\(\mathbf{A}\)</span>. We assume that <span class="math inline">\(\mathbf{A} \in \Re^{m\times n}\)</span>. To derive the gradient we’ll get there slightly indirectly and consider the gradient of <span class="math inline">\(\mathbf{b}\)</span> first, <span class="math display">\[
+\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x}
+\]</span> which must be a matrix of size <span class="math inline">\(m \times mn\)</span>. Here we’ve taken the unusual step of defining $ = . We construct this form because it means that we are forming <span class="math inline">\(\mathbf{a}^\prime\)</span> by stacking the columns of <span class="math inline">\(\mathbf{A}^\top\)</span>, which are the rows of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<p>This makes the derivation straightforward by inspection because the vector <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> is a vector formed of inner products of the different <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>, <span class="math display">\[
+\mathbf{A}\mathbf{x} = \begin{bmatrix}
+\mathbf{a}_{1, :}^\top \mathbf{x} \\
+\mathbf{a}_{2, :}^\top \mathbf{x} \\
+\vdots \\
+\mathbf{a}_{m, :}^\top \mathbf{x}
+\end{bmatrix}.
+\]</span> Recall that the gradient <span class="math display">\[
+\frac{\text{d}\mathbf{a}_{i,:}^\top \mathbf{x}}{\text{d}\mathbf{a}_{i,:}} = \mathbf{x},
+\]</span> where <span class="math inline">\(\mathbf{a}_{i, :}\)</span> is a vector formed from the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(\mathbf{A}\)</span>. So this means means that we should expect our result to consist only of repeated versions of <span class="math inline">\(\mathbf{x}\)</span>. From our definition of vector derivatives, we know we are looking for a result with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(nm\)</span> columns. This is where the Kronecker product comes in. We note that <span class="math inline">\(\mathbf{I}\otimes \mathbf{x}^\top\)</span> provides a tiling of <span class="math inline">\(\mathbf{x}\)</span> of the form, <span class="math display">\[
+\mathbf{I}_m \otimes \mathbf{x}^\top = \begin{bmatrix}
+\mathbf{x} &amp; \mathbf{0}&amp; \cdots &amp; \mathbf{0}\\
+\mathbf{0}&amp; \mathbf{x}^\top &amp; \cdots &amp; \mathbf{0}\\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\mathbf{0}&amp; \mathbf{0}&amp; \cdots&amp; \mathbf{x}^\top.
+\]</span> where <span class="math inline">\(\mathbf{I}_m\)</span> is the <span class="math inline">\(m\)</span> dimensional identity matrix. So this means we can write, <span class="math display">\[
+\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{I}_{m} \otimes \mathbf{x}^\top
+\]</span> because we can see that each row of this matrix contains the derivative of <span class="math inline">\(b_i = \mathbf{a}_{i, :}^\top \mathbf{x}\)</span> with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span>, wherewe constructed <span class="math inline">\(\mathbf{a}^\prime\)</span> to be the stacking of the <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>. The elements are zero apart from those associated with <span class="math inline">\(\mathbf{a}_{i, :}\)</span> where the elements are <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>{Now, to get the gradient with respect to <span class="math inline">\(\mathbf{a} = \vec{\mathbf{A}\)</span> instead of with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span> we reverse the order of the Kronecker product <span class="math display">\[
+\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
+\]</span> which disperses the elements of <span class="math inline">\(\mathbf{x}\)</span> across the matrix, <span class="math display">\[
+\mathbf{x}^\top \otimes \mathbf{I}_{m}  = \begin{bmatrix}
+x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
+\end{bmatrix}
+\]</span> and is the correct for when we are stacking the columns of $. }</p>
 <h2 id="chain-rule-for-neural-networks">Chain Rule for Neural Networks</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/chain-rule-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/chain-rule-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/chain-rule-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/chain-rule-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>We’re now in a position to write down the chain rule for the neural entwork.</p>
+<p>We’re now in a position to write down the chain rule for neural networks.</p>
+<p>To make our derivations general, we will split up the neural network in the following way. First we describe the activations at layer <span class="math inline">\(d\)</span>, <span class="math inline">\(\mathbf{ f}_d\)</span> given the basis functions from the previous layer, <span class="math inline">\(\boldsymbol{ \phi}_{d-1}\)</span> in terms of the weight matrix, <span class="math inline">\(\mathbf{W}_d\)</span>. <span class="math display">\[
+\mathbf{ f}_d= \mathbf{W}_d\boldsymbol{ \phi}_{d-1}
+\]</span> where the basis vector at any given layer <span class="math inline">\(d\)</span> is given by applying the basis functions to the activations, <span class="math display">\[
+\boldsymbol{ \phi}_{d} = \basisFunctionVector_{d}(\mathbf{ f}_{d}),
+\]</span> where <span class="math inline">\(\mathbf{ f}_{d}(\cdot)\)</span> represents the form of the basis functions at the <span class="math inline">\(d\)</span>th layer. These two equations give us everything we need apart from the first layer and final layers where we have <span class="math display">\[
+f_1 = \mathbf{W}_1 \mathbf{ x}
+\]</span> for the first layer. Here we are <em>not</em> showing the index on the data point <span class="math inline">\(i\)</span> to avoid cluttering the notation. In the final layer we have the output of the network given by the inverse link function, <span class="math display">\[
+\mathbf{h} = \mathbf{h}(\mathbf{ f}_L).
+\]</span> so we can assume dummy-basis functions for the output layer and take <span class="math inline">\(\mathbf{h} = \basisFunctionVector_L\)</span>.</p>
+<p>This formalism isn’t fully general as it doesn’t capture the possibility of skip connections where a weight matrix connects e.g. basis functions from layer <span class="math inline">\(d-2\)</span> to the activations of layer <span class="math inline">\(d\)</span>. But it’s sufficient to capture the main aspects of deep neural network gradients.</p>
+<p>These fundamental operations now allow us to use our matrix derivative rules to compute the gradients of the neural network with respect to any layer of weights. To do this we need three fundamental gradients. First the activation gradient, <span class="math inline">\(\tfrac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d}\)</span> where we have defined <span class="math inline">\(\mathbf{ f}_d= (\mathbf{ f}_\layer)\,:\)</span>. This gradient is between a <span class="math inline">\(d_d\)</span> dimensional vector, <span class="math inline">\(\mathbf{ f}_d\)</span>, and a <span class="math inline">\((d_{d-1})d\times 1\)</span> dimensional vector, so it produces a matrix that is <span class="math inline">\(d_d\times (d_{d-1} d)\)</span>, <span class="math display">\[
+\frac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d} = \basisFunctionVector_{\ell-1}^\top \otimes \mathbf{I}_{d_d}.
+\]</span></p>
+<p>{We represent the gradient <span class="math display">\[
+\frac{\text{d}\boldsymbol{ \phi}_{d}}{\text{d} \mathbf{ f}_{d}} = \boldsymbol{ \Phi}^\prime
+\]</span> which is a <span class="math inline">\(d_d\times d_d\)</span> sized matrix whose elements are given by <span class="math display">\[
+\frac{\text{d}\phi_i^{(d)}(\mathbf{ f}_{d})}{\text{d} \mathbf{ f}_j^{(d)}
+\]</span> where <span class="math inline">\(\phi_i^({d})(\mathbf{ f}_{d})\)</span> is the <span class="math inline">\(i\)</span>th basis function from the <span class="math inline">\(d\)</span>th layer and <span class="math inline">\(\mathbf{ f}_j^{(d)\)</span> is the <span class="math inline">\(j\)</span>th activation from the same layer. If <span class="math inline">\(\phi_i^({d})(\mathbf{ f}_{d}) = \phi_i^({d})(f^{(d)}_i)\)</span> then this matrix is diagonal.}</p>
+<p>{Then we have the <em>across layer</em> gradients <span class="math display">\[
+\frac{\text{d}\mathbf{ f}_d}{\text{d}\boldsymbol{ \phi}_{d-1} = \mathbf{W}_d,
+\]</span> which should be a <span class="math inline">\(d_d\times d_{d-1}\)</span> size matrix, which matches the shape of <span class="math inline">\(\mathbf{W}_d\)</span>. }</p>
+<p>{This now gives us the ability to compute the gradient of any <span class="math inline">\(\mathbf{W}_\ell\)</span> in the model, <span class="math display">\[
+\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k} = \left[\prod_{i=0}^{k-1} \frac{\text{d} \mathbf{ f}_{\ell - i}}{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}\frac{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}{\text{d} \mathbf{ f}_{\ell - i -1}}\right] \frac{\text{d} \mathbf{ f}_{\ell-k}}{\text{d} \mathbf{ w}_{\ell - k}}
+\]</span> }</p>
 <h2 id="deep-function-composition">Deep Function Composition</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -636,128 +737,6 @@ H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
 <h2 id="learning-objectives">Learning Objectives</h2>
 <h2 id="agenda">Agenda</h2>
-<h2 id="recap-basis-functions-and-shallow-models">Recap: Basis Functions and Shallow Models</h2>
-<p>We build non-linear predictions with models that are linear in parameters via basis functions. This sets up the contrast with deep models as compositions of basis function stages.</p>
-<h2 id="basis-functions">Basis Functions</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-functions-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Here’s the idea, instead of working directly on the original input space, <span class="math inline">\(\mathbf{ x}\)</span>, we build models in a new space, <span class="math inline">\(\boldsymbol{ \phi}(\mathbf{ x})\)</span> where <span class="math inline">\(\boldsymbol{ \phi}(\cdot)\)</span> is a <em>vector-valued</em> function that is defined on the space <span class="math inline">\(\mathbf{ x}\)</span>.</p>
-<h2 id="quadratic-basis">Quadratic Basis</h2>
-<p>Remember, that a <em>vector-valued function</em> is just a vector that contains functions instead of values. Here’s an example for a one dimensional input space, <span class="math inline">\(x\)</span>, being projected to a <em>quadratic</em> basis. First we consider each basis function in turn, we can think of the elements of our vector as being indexed so that we have <span class="math display">\[
-\begin{align*}
-\phi_1(x) &amp; = 1, \\
-\phi_2(x) &amp; = x, \\
-\phi_3(x) &amp; = x^2.
-\end{align*}
-\]</span> Now we can consider them together by placing them in a vector, <span class="math display">\[
-\boldsymbol{ \phi}(x) = \begin{bmatrix} 1\\ x\\ x^2\end{bmatrix}.
-\]</span> For the vector-valued function, we have simply collected the different functions together in the same vector making them notationally easier to deal with in our mathematics.</p>
-<p>When we consider the vector-valued function for each data point, then we place all the data into a design matrix. The result is a matrix valued function, <span class="math display">\[
-\boldsymbol{ \Phi}(\mathbf{ x}) = 
-\begin{bmatrix} 1 &amp; x_1 &amp;
-x_1^2 \\
-1 &amp; x_2 &amp; x_2^2\\
-\vdots &amp; \vdots &amp; \vdots \\
-1 &amp; x_n&amp; x_n^2
-\end{bmatrix}
-\]</span> where here we are still considering the one dimensional input setting so <span class="math inline">\(\mathbf{ x}\)</span> here represents a vector of our inputs with <span class="math inline">\(n\)</span> elements.</p>
-<h2 id="rectified-linear-units">Rectified Linear Units</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/relu-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/relu-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>The rectified linear unit is a basis function that emerged out of the deep learning community. Rectified linear units are popular in the current generation of multilayer perceptron models, or deep networks. These basis functions start flat, and then become linear functions at a certain threshold. <span class="math display">\[
-\phi_j(x) = xH(x+ v_j)
-\]</span></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu</span></code></pre></div>
-<div class="figure">
-<div id="relu-basis-2-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis004.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="relu-basis-2-magnify" class="magnify" onclick="magnifyFigure(&#39;relu-basis-2&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="relu-basis-2-caption" class="caption-frame">
-<p>Figure: The set of functions which are combined to form a rectified linear unit basis.</p>
-</div>
-</div>
-<h2 id="functions-derived-from-relu-basis">Functions Derived from Relu Basis</h2>
-<p><span class="math display">\[
-f(x) = \color{red}{w_0}   + \color{magenta}{w_1 xH(x+1.0) } + \color{blue}{w_2 xH(x+0.33) } + \color{green}{w_3 xH(x-0.33)} +  \color{cyan}{w_4 xH(x-1.0)}
-\]</span></p>
-<div class="figure">
-<div id="relu-function-2-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_function002.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="relu-function-2-magnify" class="magnify" onclick="magnifyFigure(&#39;relu-function-2&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="relu-function-2-caption" class="caption-frame">
-<p>Figure: A rectified linear unit basis is made up of different rectified linear unit functions centered at different points.</p>
-</div>
-</div>
-<h2 id="shallow-and-deep-learning-1">Shallow and Deep Learning</h2>
-<p>So far, we have been talking about <em>linear models</em> or <em>shallow learning</em> as we might think of it. Let’s pause for a moment and consider a <em>fully connected</em> deep neural network model to relate the two ideas.</p>
-<p>Under our basis function perspective, we can see that our deep neural network is mathematical composition of basis function models. Each layer contains a separate basis function set, so <span class="math display">\[
- f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
-\]</span></p>
-<p>In this course there are two reasons for looking at the shallow model. Firstly, it is easier to introduce the concepts of regularisation in the linear model regime. Secondly, the matrix forms we see, e.g., expressions like <span class="math inline">\(\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}\)</span>, appear in both models.</p>
-<p>For deep learning, we can no longer optimise the parameters of the model through solving a linear system<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Instead, we need to turn to non-linear optimisation algorithms. For deep learning, that’s typically stochastic gradient descent.</p>
-<p>While it’s possible to compute the Hessian in a neural network, <span class="citation" data-cites="Bishop-exact92">Bishop (1992)</span>, we also find that it varies across the parameter space and will not normally be positive definite. In practice, the number of parameters is normally so large that storing the Hessian is impossible (it has quadratic cost in the number of weights/parameters) due to memory constraints.</p>
-<p>This means that while the theory of minima in optimisation is well understood, empirical experiments with large neural networks are hard and the lessons of small models do not all translate to the very large systems.</p>
-<p>We can stay within the framework of linear models but take a step closer to neural network models by introducing functions that are non-linear in the inputs, <span class="math inline">\(\mathbf{ x}\)</span>, known as <em>basis functions</em>.</p>
-<h2 id="overparameterised-systems-1">Overparameterised Systems</h2>
-<p>If we could examine the Hessian of a neural network at its minimum, we can speculate about what we would find. In particular, we would find that it would have very many low (or negative) eigenvalues in many directions. This is indicative of the parameters being <em>badly determined</em> because of the neural network model being heavily <em>overparameterised</em>. So how does it generalise?</p>
-<p>Simply put, there is not enough regularisation encoded in the objective function of the neural network models we are using to explain the generalisation performance. There must be something in the algorithms we are using that causes these highly overparameterised models to generalise well.</p>
-<h2 id="from-shallow-to-deep">From Shallow to Deep</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/from-shallow-to-deep.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/from-shallow-to-deep.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>A fully-connected deep network composes linear transforms and elementwise non-linearities. Under the basis-function perspective, each layer provides a new basis evaluated on the transformed inputs, then linearly combined and fed forward.</p>
-<p><span class="math display">\[
-f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
-\]</span></p>
-<h2 id="gradient-based-optimization">Gradient-based optimization</h2>
-<p><span class="math display">\[
-\mathscr{L}(\theta) = \sum_{n=1}^N \ell(y_n, f(x_n, \theta))
-\]</span></p>
-<p><span class="math display">\[
-\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta)
-\]</span></p>
-<h3 id="basic-multilayer-perceptron">Basic Multilayer Perceptron</h3>
-<p><span class="math display">\[
-\small
-f_L(x) = \boldsymbol{ \phi}\left(b_L + W_L \boldsymbol{ \phi}\left(b_{L-1} + W_{L-1} \boldsymbol{ \phi}\left( \cdots \boldsymbol{ \phi}\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
-\]</span></p>
-<h3 id="recursive-mlp-definition">Recursive MLP Definition</h3>
-<h2 id="rectified-linear-unit">Rectified Linear Unit</h2>
-<p>Placeholder figure: basic ReLU shape (zero for negative inputs, identity for positive).</p>
-<p>Other activation functions that are used include hyperbolic tangent, sigmoid, ELU, leaky ReLU. Although ReLU is often preferred for simplicity and fast gradient computation.</p>
-<h2 id="shallow-relu-networks">Shallow ReLU Networks</h2>
-<p>A single layer ReLU network is functionally equivalent to a generalised linear model with a ReLU basis. The difference is that we optimise over the basis function inputs.</p>
-<p>Each hidden unit acts as a basis function with its own kink location and slope.</p>
-<h2 id="depth-vs-width-representation-power">Depth vs Width: Representation Power</h2>
-<p>ReLU networks implement piecewise-linear functions; width increases the number of linear pieces roughly linearly, depth increases them exponentially.</p>
-<h2 id="sawtooth-construction">Sawtooth Construction</h2>
-<p>Illustrative 1D construction showing exponential growth of segments with depth.</p>
-<p>In higher dimensions, these become polyhedral regions with constant gradients inside each region.</p>
-<p>Placeholder mini-figures: depth <span class="math inline">\(0,1,2,3,4,5\)</span> outputs of the sawtooth network showing doubling segments at each step.</p>
-<h2 id="higher-dimensional-geometry">Higher-dimensional Geometry</h2>
-<p>In 2D, ReLU networks partition input space into many polygonal regions. Within each region the mapping is linear, yet globally the function is continuous because adjacent regions meet with consistent boundary values. Depth increases the number and intricacy of these regions across layers.</p>
-<p>Placeholder figure: 2D piecewise-linear tiling (e.g., Hanin and Rolnick, 2019) with coloured regions indicating distinct linear pieces.</p>
-<p>Suggested visual: reuse figures showing partitioned 2D input space with coloured linear regions. If needed, include links or embed static images used in prior notes.</p>
-<h2 id="generalisation-in-deep-networks">Generalisation in Deep Networks</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/generalisation-in-deep-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/generalisation-in-deep-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Neural nets are heavily overparameterised. Classical generalisation bounds based purely on hypothesis class complexity are pessimistic. Empirically, training algorithms exhibit an inductive bias toward solutions that generalise.</p>
-<p>In the overparameterised regime there is not a single training optimum but a  of zero-training-loss solutions (an interpolation manifold). Gradient-based optimisation tends to prefer certain members of this set that generalise better (“nice interpolants”). This preference is an  of the algorithm.</p>
-<p>Additional reading placeholders: Hanin and Rolnick (2019) on typical linear-region counts; Pérez et al. (2019) on parameter-to-function bias toward simplicity; Arora et al. (2019) on deep linear models and implicit biases from parametrisation and initialisation.</p>
 <p>David Hogg’s lecture <a href="https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters" class="uri">https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters</a></p>
 <p>The Deep Bootstrap <a href="https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20" class="uri">https://twitter.com/PreetumNakkiran/status/1318007088321335297?s=20</a></p>
 <p>Aki Vehtari on Leave One Out Uncertainty: <a href="https://arxiv.org/abs/2008.10296" class="uri">https://arxiv.org/abs/2008.10296</a> (check for his references).</p>
@@ -930,7 +909,6 @@ Zhang, C., Bengio, S., Hardt, M., Recht, B., Vinyals, O., 2017. Understanding de
 <li id="fn1" role="doc-endnote"><p>Apart from the last layer of parmeters in models with quadratic loss functions.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>Assuming we are ignoring parameters in the link function and the distribution function.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>Using the test data in your training procedure is a major error in any machine learning procedure. It is extremely dangerous as it gives a misleading assessment of the model performance. The <a href="http://inverseprobability.com/2015/06/04/baidu-on-imagenet">Baidu ImageNet scandal</a> was an example of a team competing in the ImageNet challenge which did this. The team had announced via the publication pre-print server Arxiv that they had a world-leading performance on the ImageNet challenge. This was reported in the mainstream media. Two weeks later the challenge organizers revealed that the team had created multiple accounts for checking their test performance more times than was permitted by the challenge rules. This was then reported as “AI’s first doping scandal.” The team lead was fired by Baidu.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>Apart from the last layer of parmeters in models with quadratic loss functions.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
