@@ -589,7 +589,7 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 \frac{\text{d}\mathbf{a}_{i,:}^\top \mathbf{x}}{\text{d}\mathbf{a}_{i,:}} = \mathbf{x},
 \]</span> where <span class="math inline">\(\mathbf{a}_{i, :}\)</span> is a vector formed from the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(\mathbf{A}\)</span>. So this means means that we should expect our result to consist only of repeated versions of <span class="math inline">\(\mathbf{x}\)</span>. From our definition of vector derivatives, we know we are looking for a result with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(nm\)</span> columns. This is where the Kronecker product comes in. We note that <span class="math inline">\(\mathbf{I}\otimes \mathbf{x}^\top\)</span> provides a tiling of <span class="math inline">\(\mathbf{x}\)</span> of the form, <span class="math display">\[
 \mathbf{I}_m \otimes \mathbf{x}^\top = \begin{bmatrix}
-\mathbf{x} &amp; \mathbf{0}&amp; \cdots &amp; \mathbf{0}\\
+\mathbf{x}^\top &amp; \mathbf{0}&amp; \cdots &amp; \mathbf{0}\\
 \mathbf{0}&amp; \mathbf{x}^\top &amp; \cdots &amp; \mathbf{0}\\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 \mathbf{0}&amp; \mathbf{0}&amp; \cdots&amp; \mathbf{x}^\top
@@ -612,12 +612,12 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
 <p>To make our derivations general, we will split up the neural network in the following way. First we describe the activations at layer <span class="math inline">\(d\)</span>, <span class="math inline">\(\mathbf{ f}_d\)</span> given the basis functions from the previous layer, <span class="math inline">\(\boldsymbol{ \phi}_{d-1}\)</span> in terms of the weight matrix, <span class="math inline">\(\mathbf{W}_d\)</span>. <span class="math display">\[
 \mathbf{ f}_d= \mathbf{W}_d\boldsymbol{ \phi}_{d-1}
 \]</span> where the basis vector at any given layer <span class="math inline">\(d\)</span> is given by applying the basis functions to the activations, <span class="math display">\[
-\boldsymbol{ \phi}_{d} = \basisFunctionVector_{d}(\mathbf{ f}_{d}),
+\boldsymbol{ \phi}_{d} = \boldsymbol{ \phi}_{d}(\mathbf{ f}_{d}),
 \]</span> where <span class="math inline">\(\mathbf{ f}_{d}(\cdot)\)</span> represents the form of the basis functions at the <span class="math inline">\(d\)</span>th layer. These two equations give us everything we need apart from the first layer and final layers where we have <span class="math display">\[
 f_1 = \mathbf{W}_1 \mathbf{ x}
 \]</span> for the first layer. Here we are <em>not</em> showing the index on the data point <span class="math inline">\(i\)</span> to avoid cluttering the notation. In the final layer we have the output of the network given by the inverse link function, <span class="math display">\[
 \mathbf{h} = \mathbf{h}(\mathbf{ f}_L).
-\]</span> so we can assume dummy-basis functions for the output layer and take <span class="math inline">\(\mathbf{h} = \basisFunctionVector_L\)</span>.</p>
+\]</span> so we can assume dummy-basis functions for the output layer and take <span class="math inline">\(\mathbf{h} = \boldsymbol{ \phi}_L\)</span>.</p>
 <p>This formalism isn’t fully general as it doesn’t capture the possibility of skip connections where a weight matrix connects e.g. basis functions from layer <span class="math inline">\(d-2\)</span> to the activations of layer <span class="math inline">\(d\)</span>. But it’s sufficient to capture the main aspects of deep neural network gradients.</p>
 <p>These fundamental operations now allow us to use our matrix derivative rules to compute the gradients of the neural network with respect to any layer of weights. To do this we need three fundamental gradients. First the activation gradient, <span class="math inline">\(\tfrac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d}\)</span> where we have defined <span class="math inline">\(\mathbf{ f}_d= (\mathbf{ f}_\layer)\,:\)</span>. This gradient is between a <span class="math inline">\(d_d\)</span> dimensional vector, <span class="math inline">\(\mathbf{ f}_d\)</span>, and a <span class="math inline">\((d_{d-1})d\times 1\)</span> dimensional vector, so it produces a matrix that is <span class="math inline">\(d_d\times (d_{d-1} d)\)</span>, <span class="math display">\[
 \frac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d} = \basisFunctionVector_{\ell-1}^\top \otimes \mathbf{I}_{d_d}.
