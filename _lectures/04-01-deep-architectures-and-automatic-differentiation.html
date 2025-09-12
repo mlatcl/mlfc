@@ -620,7 +620,7 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 \]</span> so we can assume dummy-basis functions for the output layer and take <span class="math inline">\(\mathbf{h} = \boldsymbol{ \phi}_L\)</span>.</p>
 <p>This formalism isn’t fully general as it doesn’t capture the possibility of skip connections where a weight matrix connects e.g. basis functions from layer <span class="math inline">\(d-2\)</span> to the activations of layer <span class="math inline">\(d\)</span>. But it’s sufficient to capture the main aspects of deep neural network gradients.</p>
 <p>These fundamental operations now allow us to use our matrix derivative rules to compute the gradients of the neural network with respect to any layer of weights. To do this we need three fundamental gradients. First the activation gradient, <span class="math inline">\(\tfrac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d}\)</span> where we have defined <span class="math inline">\(\mathbf{ f}_d= (\mathbf{ f}_\layer)\,:\)</span>. This gradient is between a <span class="math inline">\(d_d\)</span> dimensional vector, <span class="math inline">\(\mathbf{ f}_d\)</span>, and a <span class="math inline">\((d_{d-1})d\times 1\)</span> dimensional vector, so it produces a matrix that is <span class="math inline">\(d_d\times (d_{d-1} d)\)</span>, <span class="math display">\[
-\frac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d} = \basisFunctionVector_{\ell-1}^\top \otimes \mathbf{I}_{d_d}.
+\frac{\text{d}\mathbf{ f}_d}{\text{d}\mathbf{ w}_d} = \boldsymbol{ \phi}_{\ell-1}^\top \otimes \mathbf{I}_{d_d}.
 \]</span></p>
 <p>{We represent the gradient <span class="math display">\[
 \frac{\text{d}\boldsymbol{ \phi}_{d}}{\text{d} \mathbf{ f}_{d}} = \boldsymbol{ \Phi}^\prime
