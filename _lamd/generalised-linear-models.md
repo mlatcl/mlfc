@@ -81,6 +81,9 @@ phi_minus = np.hstack([np.ones((x_minus.shape[0], 1)), x_minus])}
 \notes{We've introduced the formalism for generalised linear models. Have a think about how you might model count data using the [Poisson distribution](http://en.wikipedia.org/wiki/Poisson_distribution) and a log link function for the rate, $\lambda(\inputVector)$. If you want a data set you can try the `pods.datasets.google_trends()` for some count data.}
 
 \include{_ml/includes/poisson-regression.md}
+\include{_statistics/includes/the-exponential-family.md}
+\include{_statistics/includes/exponential-family-regression.md}
+
 \include{_statistics/includes/glm-practical-tips.md}
 
 

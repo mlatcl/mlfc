@@ -320,6 +320,14 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 \boldsymbol{ \phi}(\mathbf{ x}_i).
 \end{aligned}\]</span>
 </section>
+<section id="objective-gradient-1" class="slide level2">
+<h2>Objective Gradient</h2>
+<p>Multiplying everything out leads to <span class="math display">\[
+\begin{aligned}
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = &amp; -\sum_{i=1}^n
+y_i- h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\boldsymbol{ \phi}(\mathbf{ x}_i).
+\]</span></p>
+</section>
 <section id="optimisation-of-the-function" class="slide level2">
 <h2>Optimisation of the Function</h2>
 <ul>
@@ -705,8 +713,37 @@ The Poisson distribution.
 Diagnostic plots for the Poisson regression model showing actual vs predicted counts and residual analysis.
 </aside>
 </section>
+<section id="the-exponential-family" class="slide level2">
+<h2>The Exponential Family</h2>
+</section>
+<section id="exponential-family-regression" class="slide level2">
+<h2>Exponential Family Regression</h2>
+<p>{For this form the gradient of the log likelihood with respect to the model’s parameters is given by <span class="math display">\[
+\nabla_\mathbf{W}L(\mathbf{W}) = \left(T- \left\langle T\right\rangle_{p(\mathbf{ y}|\boldsymbol{ \theta})})\boldsymbol{ \Phi}.
+\]</span></p>
+</section>
+<section id="bernoulli-as-exponential-family" class="slide level2">
+<h2>Bernoulli as Exponential Family</h2>
+</section>
+<section id="categorical-distribution-as-exponental-family" class="slide level2">
+<h2>Categorical Distribution as Exponental Family</h2>
+</section>
+<section id="gaussian-as-exponential-family" class="slide level2">
+<h2>Gaussian as Exponential Family</h2>
+<p>{The natural parameters of a univariate Gaussian with mean, <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, <span class="math display">\[
+y \sim \mathscr{N}\left((,\mu\right), \sigma^2)
+\]</span> are <span class="math inline">\(\theta_1 = \frac{\mu}{\sigma^2}\)</span> and <span class="math inline">\(\theta_2 = -\tfrac{1}{2\sigma^2}\)</span>. This allows us to write <span class="math display">\[
+p(y | \boldsymbol{ \theta}) = \exp(\nu_1 y + \nu_2 y^2 - A(\boldsymbol{ \theta})
+\]</span> where the log partition function is <span class="math display">\[
+A(\theta_1, \theta_2) = \frac{\theta_1^2}{4\theta_2} - \frac{1}{2}\log\det{-2\theta_2} - \frac{1}{2}\log 2\pi.
+\]</span> </p>
+</section>
+<section id="poisson-distribution-in-exponential-family-form" class="slide level2">
+<h2>Poisson Distribution in Exponential Family Form</h2>
+</section>
 <section id="practical-tips" class="slide level2">
 <h2>Practical Tips</h2>
+<p>{</p>
 <ul>
 <li>Feature engineering is critical</li>
 <li>Build modular pipelines to test features</li>
@@ -725,6 +762,7 @@ Diagnostic plots for the Poisson regression model showing actual vs predicted co
 </section>
 <section id="diagnostic-checks" class="slide level2">
 <h2>Diagnostic Checks</h2>
+<p>Diagnostic checks are essential for building confidence about the model reliability. Create residual plots against fitted values and each predictor. Look for systematic patterns, a U-shaped residual plot suggests missing quadratic terms. For logistic regression, plot predicted probabilities against actual outcomes in bins to check calibration. Calculate influence measures like Cook’s distance to identify outliers. In a house price model, a mansion might have outsized influence on coefficients. Check <a href="https://en.wikipedia.org/wiki/Variance_inflation_factor">variance inflation factors</a> (VIF) for multicollinearity. High VIF (&gt;5-10) suggests problematic correlation between predictors.</p>
 <ul>
 <li>Plot residuals systematically</li>
 <li>Check for non-linear patterns</li>
@@ -732,11 +770,11 @@ Diagnostic plots for the Poisson regression model showing actual vs predicted co
 <li>Test feature relationships</li>
 </ul>
 </section>
-<section id="visualization" class="slide level2">
-<h2>Visualization</h2>
+<section id="visualisation" class="slide level2">
+<h2>Visualisation</h2>
 <ul>
 <li>Always plot raw data first</li>
-<li>Create diagnostic visualizations</li>
+<li>Create diagnostic visualisations</li>
 <li>Check model assumptions</li>
 <li>Communicate results clearly</li>
 </ul>

@@ -202,6 +202,11 @@ y_i\left(1-h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\right)\right)
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dw[:, <span class="va">None</span>]</span></code></pre></div>
 <h2 id="optimisation-of-the-function">Optimisation of the Function</h2>
 <p>Reorganising the gradient to find a stationary point of the function with respect to the parameters <span class="math inline">\(\mathbf{ w}\)</span> turns out to be impossible. Optimisation has to proceed by <em>numerical methods</em>. Options include the multidimensional variant of <a href="http://en.wikipedia.org/wiki/Newton%27s_method">Newton’s method</a> or <a href="http://en.wikipedia.org/wiki/Gradient_method">gradient based optimisation methods</a> like we used for optimising matrix factorisation for the movie recommender system. We recall from matrix factorisation that, for large data, <em>stochastic gradient descent</em> or the Robbins Munro <span class="citation" data-cites="Robbins:stoch51">(Robbins and Monro, 1951)</span> optimisation procedure worked best for function minimisation.</p>
+<p>Multiplying everything out leads to <span class="math display">\[
+\begin{aligned}
+\frac{\text{d}E(\mathbf{ w})}{\text{d}\mathbf{ w}} = &amp; -\sum_{i=1}^n
+y_i- h\left(\mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x})\boldsymbol{ \phi}(\mathbf{ x}_i).
+\]</span></p>
 <h2 id="toy-data">Toy Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/classification-toy-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/classification-toy-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -918,49 +923,84 @@ E(\{\mathbf{ w}_k\}) = -\sum_{i=1}^n\sum_{k=1}^K y_{ik}\log \pi_{ik}.
 <p>Figure: Diagnostic plots for the Poisson regression model showing actual vs predicted counts and residual analysis.</p>
 </div>
 </div>
+<h2 id="the-exponential-family">The Exponential Family</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/the-exponential-family.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/the-exponential-family.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>An important class of distribution is known as the exponential family. These distributions can be written as <span class="math display">\[
+p(\mathbf{ y}| \boldsymbol{ \theta}) = \exp(\boldsymbol{ \theta}^\top T- A(\boldsymbol{ \theta})) h(\boldsymbol{ \theta})
+\]</span> where <span class="math inline">\(\boldsymbol{ \theta}\)</span> is known as the , <span class="math inline">\(T(\mathbf{ y})\)</span> is known as the  and <span class="math inline">\(A\)</span> is the the log partition function, or the  and <span class="math inline">\(h(\cdot)\)</span> is known as the base measure.</p>
+<p>For the moment we’ll ignore the base measure as for several of the distributions we’ll considere it’s constant, so we will consider the form <span class="math display">\[
+p(\mathbf{ y}| \boldsymbol{ \theta}) = \exp(\boldsymbol{ \theta}^\top T- A(\boldsymbol{ \theta})).
+\]</span> This form yields a particularly simple likelihood function <span class="math display">\[
+L(\boldsymbol{ \theta}) = \boldsymbol{ \theta}^\top T- A(\boldsymbol{ \theta})
+\]</span> and since the gradient of the cumulant generating function is the first cumulant of the sufficient statistics, the gradient of the log likelihood also has a simple form. <span class="math display">\[
+\nabla_\boldsymbol{ \theta}L(\boldsymbol{ \theta}) = T- \left\langle T\right\rangle_{p(\mathbf{ y}|\boldsymbol{ \theta})}.
+\]</span> where $ denotes the expecttion under the distribution <span class="math inline">\(p(\cdot)\)</span>.</p>
+<h2 id="exponential-family-regression">Exponential Family Regression</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/exponential-family-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/exponential-family-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>An important class of distribution is known as the exponential family. These distributions can be written as <span class="math display">\[
+p(\mathbf{ y}| \boldsymbol{ \theta}) = \exp(\boldsymbol{ \theta}^\top T- A(\boldsymbol{ \theta})) h(\boldsymbol{ \theta})
+\]</span> where <span class="math inline">\(\boldsymbol{ \theta}\)</span> is known as the , <span class="math inline">\(T(\mathbf{ y})\)</span> is known as the  and <span class="math inline">\(A\)</span> is the the log partition function, or the  and <span class="math inline">\(h(\cdot)\)</span> is known as the base measure.</p>
+<p>For the moment we’ll ignore the base measure as for several of the distributions we’ll considere it’s constant, so we will consider the form <span class="math display">\[
+p(\mathbf{ y}| \boldsymbol{ \theta}) = \exp(\boldsymbol{ \theta}^\top T- A(\boldsymbol{ \theta})).
+\]</span> This form yields a particularly simple likelihood function <span class="math display">\[
+L(\boldsymbol{ \theta}) = \boldsymbol{ \theta}^\top T- A(\boldsymbol{ \theta})
+\]</span> and since the gradient of the cumulant generating function is the first cumulant of the sufficient statistics, the gradient of the log likelihood also has a simple form. <span class="math display">\[
+\nabla_\boldsymbol{ \theta}L(\boldsymbol{ \theta}) = T- \left\langle T\right\rangle_{p(\mathbf{ y}|\boldsymbol{ \theta})}.
+\]</span> where $ denotes the expecttion under the distribution <span class="math inline">\(p(\cdot)\)</span>.</p>
+<p>This leads to a special form of generalised linear model we call the <em>canonical form</em> where the <em>link function</em> is such that the linear function <em>is</em> the natural parameter of the distribution. For example if we have a categorical distribution with natural parameters <span class="math inline">\(\theta_{i,j}\)</span>, the sufficient statistic is a matrix <span class="math inline">\(\mathbf{Y}\)</span> where <span class="math inline">\(y_{i,j} = 1\)</span> if the <span class="math inline">\(j\)</span>th category is observed for the <span class="math inline">\(i\)</span>th data point. Now if we give the natural parameters a <em>linear</em> relationship with the design matrix, <span class="math display">\[
+\boldsymbol{ \Theta}= \boldsymbol{ \Phi}\mathbf{W}
+\]</span> which is equivalent to suggesting that each natural parameter is given by <span class="math display">\[
+\theta_{i,j} = \mathbf{ w}{:, j}^\top\boldsymbol{ \phi}_{i,:}.
+\]</span> The link function that recovers this relation is known as the <em>canonical</em> link function.</p>
+<p>{For this form the gradient of the log likelihood with respect to the model’s parameters is given by <span class="math display">\[
+\nabla_\mathbf{W}L(\mathbf{W}) = \left(T- \left\langle T\right\rangle_{p(\mathbf{ y}|\boldsymbol{ \theta})})\boldsymbol{ \Phi}.
+\]</span> This very simple form covers all the examples we have presented so far. Let’s consider their exponential family form one by one. One of the easiest to start with is the Bernoulli probability.</p>
+<h2 id="bernoulli-as-exponential-family">Bernoulli as Exponential Family</h2>
+<p>The Bernoulli probability is given by <span class="math display">\[
+P(y) = \pi^y(1-\pi)^(1-y)
+\]</span> where <span class="math inline">\(\pi\)</span> is the probability of a <span class="math inline">\(y=1\)</span> outcome. In exponential family form the natural parameter is given by <span class="math inline">\(\theta= \log \frac{\pi}{1-\pi}\)</span> and the sufficient statistics are given by <span class="math inline">\(y\)</span>. The distribution is written as <span class="math display">\[
+P(y|\theta) = \exp(y \theta- \cumualantGeneratingFunction(\theta))
+\]</span> where <span class="math display">\[
+A(\theta) = \log(1 + \exp(\theta)).
+\]</span> We can substitute back into the exponential family form to recover the original form by first recognising that <span class="math display">\[
+\pi_i = \frac{\exp(\theta)}{1+\exp(\theta)}
+\]</span> which implies that <span class="math inline">\(A(\theta) = - \log (1- \pi)\)</span>. Substituting this and the form of the natural parameter back into the distribution we recover <span class="math display">\[
+P(y|\pi) = \exp\left(y\log \pi + (1-y)\log (1-\pi)\right)
+\]</span> which can be rewritten as <span class="math inline">\(\pi^y(1-\pi)^(1-y)\)</span> as required.</p>
+<h2 id="categorical-distribution-as-exponental-family">Categorical Distribution as Exponental Family</h2>
+<p>The categorical distribution can be seen as a generalisation of the Bernoulli to multiple outcomes. For this distribution we have <span class="math display">\[
+P(\mathbf{ y}) = \prod_{j=1}^C \pi_j^y_j
+\]</span> where the <span class="math inline">\(\mathbf{ y}\)</span> is a vector of all zeros apart from the <span class="math inline">\(k\)</span>th element whcih is one.</p>
+<p>The natural parameters are given by <span class="math inline">\(\theta_i = \log \pi_i\)</span> and the sufficient statistics are just given by <span class="math inline">\(\mathbf{ y}\)</span>, <span class="math display">\[
+P(\mathbf{ y}) = \exp\left(\mathbf{ y}^\top \boldsymbol{ \theta}- A(\boldsymbol{ \theta})\right)
+\]</span> where <span class="math inline">\(A(\boldsymbol{ \theta}) = \log \sum_{i=1}^C \exp(\theta_i)\)</span>.</p>
+<h2 id="gaussian-as-exponential-family">Gaussian as Exponential Family</h2>
+<p>{The natural parameters of a univariate Gaussian with mean, <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, <span class="math display">\[
+y \sim \mathscr{N}\left((,\mu\right), \sigma^2)
+\]</span> are <span class="math inline">\(\theta_1 = \frac{\mu}{\sigma^2}\)</span> and <span class="math inline">\(\theta_2 = -\tfrac{1}{2\sigma^2}\)</span>. This allows us to write <span class="math display">\[
+p(y | \boldsymbol{ \theta}) = \exp(\nu_1 y + \nu_2 y^2 - A(\boldsymbol{ \theta})
+\]</span> where the log partition function is <span class="math display">\[
+A(\theta_1, \theta_2) = \frac{\theta_1^2}{4\theta_2} - \frac{1}{2}\log\det{-2\theta_2} - \frac{1}{2}\log 2\pi.
+\]</span> </p>
+<h2 id="poisson-distribution-in-exponential-family-form">Poisson Distribution in Exponential Family Form</h2>
+<p>The Poisson distribution is given by <span class="math display">\[
+P(y| \lambda) = \frac{\lambda^y\exp(-\lambda)}{y!} 
+\]</span> natural parameter of the Poisson is <span class="math inline">\(\theta= \log \lambda\)</span>. The sufficient statistic is <span class="math inline">\(y\)</span> and in the Poisson case we cannot ignore the base measure. It is given by <span class="math inline">\(h(y) = \frac{1}{y!}\)</span>. The log partition function is <span class="math display">\[
+A(\theta) = \exp(\theta)
+\]</span></p>
 <h2 id="practical-tips">Practical Tips</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/glm-practical-tips.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/glm-practical-tips.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>When working with generalised linear models in practice, there are several key considerations that can significantly impact model performance:</p>
-<p>Feature engineering is often the most critical factor in model success:</p>
-<ul>
-<li>Build modular data processing pipelines that allow you to easily test different feature sets. For example, if modeling house prices, you might want to test combinations of raw features (square footage, bedrooms), derived features (price per square foot), and interaction terms (bedrooms × bathrooms).</li>
-<li>Consider non-linear transformations of continuous variables. For instance, taking the log of price data often helps normalize distributions.</li>
-<li>Be thoughtful about encoding categorical variables - one-hot encoding isn’t always optimal. For high-cardinality categories, consider target encoding or feature hashing.</li>
-<li>Scale features appropriately - standardization or min-max scaling depending on your model assumptions.</li>
-<li>Document your feature creation process thoroughly, including the rationale for each transformation.</li>
-</ul>
-<p>Model validation requires careful consideration:</p>
-<ul>
-<li>Cross-validation should match your real-world use case. For time series data, use time-based splits rather than random splits.</li>
-<li>Bootstrap sampling helps understand parameter uncertainty. For example, bootstrapping can show if a coefficient’s sign might flip under different samples.</li>
-<li>Hold-out test sets should be truly independent. In a customer churn model, this might mean testing on future customers rather than a random subset.</li>
-<li>Watch for data leakage, especially with time-dependent features. If predicting customer churn, using future purchase data would create leakage.</li>
-</ul>
-<p>Diagnostic checks are essential for model reliability:</p>
-<ul>
-<li>Create residual plots against fitted values and each predictor. Look for systematic patterns - a U-shaped residual plot suggests missing quadratic terms.</li>
-<li>For logistic regression, plot predicted probabilities against actual outcomes in bins to check calibration.</li>
-<li>Calculate influence measures like Cook’s distance to identify outliers. In a house price model, a mansion might have outsized influence on coefficients.</li>
-<li>Check Variance Inflation Factors (VIF) for multicollinearity. High VIF (&gt;5-10) suggests problematic correlation between predictors.</li>
-</ul>
-<p>Visualization remains crucial throughout:</p>
-<ul>
-<li>Before modeling, create scatter plots, box plots, and histograms to understand your data distribution and relationships.</li>
-<li>Use pairs plots to identify correlations and potential interactions between features.</li>
-<li>Create residual diagnostic plots including Q-Q plots for normality checking.</li>
-<li>When communicating results, focus on interpretable visualizations. For instance, partial dependence plots can show how predictions change with a single feature.</li>
-</ul>
-<p>Additional practical considerations:</p>
-<ul>
-<li>Start simple and add complexity incrementally. A basic linear model often provides a good baseline.</li>
-<li>Keep track of model performance metrics across iterations to ensure changes actually improve results.</li>
-<li>Consider the computational cost of feature engineering - some transformations might not be feasible in production.</li>
-<li>Think about how features will be available in production. If a feature requires complex processing or external data, it might not be practical.</li>
-<li>For categorical variables with many levels, consider grouping rare categories.</li>
-<li>When dealing with missing data, document your imputation strategy and test its impact on model performance.</li>
-</ul>
+<p>{In practice feature engineering is critical to the success of a GLM. Build modular data processing pipelines that allow you to easily test different feature sets. For example, if modeling house prices, you might want to test combinations of raw features (square footage, bedrooms), derived features (price per square foot), and interaction terms (bedrooms <span class="math inline">\(\times\)</span> bathrooms). Consider non-linear transformations of continuous variables. For instance, taking the log of price data often helps normalise distributions. Be thoughtful about encoding categorical variables. One-hot encoding isn’t always optimal, for high-cardinality categories, consider target encoding or feature hashing. Scale features appropriately: standardization or min-max scaling depending on your model assumptions. Document your feature creation process thoroughly, including the rationale for each transformation. Jupyter notebooks can be a good place to do this.</p>
+<p>Model validation requires careful consideration. Cross-validation should match your real-world use case. For time series data, use time-based splits rather than random splits. Bootstrap sampling can help with understanding parameter uncertainty. For example, bootstrapping can show if a coefficient’s sign might flip under different samples. Hold-out test sets should be truly independent. In a customer churn model, this might mean testing on future customers rather than a random subset. Watch for data leakage, especially with time-dependent features. E.g. if predicting customer churn, using future purchase data would create leakage.</p>
+<p>Diagnostic checks are essential for building confidence about the model reliability. Create residual plots against fitted values and each predictor. Look for systematic patterns, a U-shaped residual plot suggests missing quadratic terms. For logistic regression, plot predicted probabilities against actual outcomes in bins to check calibration. Calculate influence measures like Cook’s distance to identify outliers. In a house price model, a mansion might have outsized influence on coefficients. Check <a href="https://en.wikipedia.org/wiki/Variance_inflation_factor">variance inflation factors</a> (VIF) for multicollinearity. High VIF (&gt;5-10) suggests problematic correlation between predictors.</p>
+<p>Visualisation remains crucial throughout. Before modeling, create scatter plots, box plots, and histograms to understand your data distribution and relationships. Use pairs plots to identify correlations and potential interactions between features. Create residual diagnostic plots including Q-Q plots for normality checking. When communicating results, focus on interpretable visualizations. For instance, partial dependence plots can show how predictions change with a single feature.</p>
+<p>Other practical considerations include starting simple and add complexity incrementally. A basic linear model often provides a good baseline. Keep track of model performance metrics across iterations to ensure changes actually improve results. Consider the computational cost of feature engineering: some transformations might not be feasible in production. Think about how features will be available in production. If a feature requires complex processing or external data, it might not be practical. For categorical variables with many levels, consider grouping rare categories. When dealing with missing data, document your imputation strategy and test its impact on model performance. When using the Access, Assess, Address approach remember that documentation of the missing values is part of Assess. Imputation can only occur in Address.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li>Section 5.2.2 up to pg 182 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>

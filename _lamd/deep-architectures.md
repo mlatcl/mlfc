@@ -7,7 +7,7 @@ author:
 - given: Neil
   family: Lawrence
 abstract: >
-  This lecture will explore what happens when we compose layers of basis functions together to form deep neural networks.. 
+  This lecture will explore what happens when we compose layers of basis functions together to form deep neural networks.
 talkscam:
 venue: Dedan Kimathi University of Technology, Nyeri, Kenya
 youtube: -9O5obQZUn0
