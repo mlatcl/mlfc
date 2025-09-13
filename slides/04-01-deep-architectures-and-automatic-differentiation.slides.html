@@ -741,17 +741,6 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
 </section>
 <section id="chain-rule-for-neural-networks" class="slide level2">
 <h2>Chain Rule for Neural Networks</h2>
-<p>{We represent the gradient <span class="math display">\[
-\frac{\text{d}\boldsymbol{ \phi}_{d}}{\text{d} \mathbf{ f}_{d}} = \boldsymbol{ \Phi}^\prime
-\]</span> which is a <span class="math inline">\(d_d\times d_d\)</span> sized matrix whose elements are given by <span class="math display">\[
-\frac{\text{d}\phi_i^{(d)}(\mathbf{ f}_{d})}{\text{d} \mathbf{ f}_j^{(d)}
-\]</span> where <span class="math inline">\(\phi_i^({d})(\mathbf{ f}_{d})\)</span> is the <span class="math inline">\(i\)</span>th basis function from the <span class="math inline">\(d\)</span>th layer and <span class="math inline">\(\mathbf{ f}_j^{(d)\)</span> is the <span class="math inline">\(j\)</span>th activation from the same layer. If <span class="math inline">\(\phi_i^({d})(\mathbf{ f}_{d}) = \phi_i^({d})(f^{(d)}_i)\)</span> then this matrix is diagonal.}</p>
-<p>{Then we have the <em>across layer</em> gradients <span class="math display">\[
-\frac{\text{d}\mathbf{ f}_d}{\text{d}\boldsymbol{ \phi}_{d-1} = \mathbf{W}_d,
-\]</span> which should be a <span class="math inline">\(d_d\times d_{d-1}\)</span> size matrix, which matches the shape of <span class="math inline">\(\mathbf{W}_d\)</span>. }</p>
-<p>{This now gives us the ability to compute the gradient of any <span class="math inline">\(\mathbf{W}_\ell\)</span> in the model, <span class="math display">\[
-\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k} = \left[\prod_{i=0}^{k-1} \frac{\text{d} \mathbf{ f}_{\ell - i}}{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}\frac{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}{\text{d} \mathbf{ f}_{\ell - i -1}}\right] \frac{\text{d} \mathbf{ f}_{\ell-k}}{\text{d} \mathbf{ w}_{\ell - k}}
-\]</span> }</p>
 </section>
 <section id="deep-function-composition" class="slide level2">
 <h2>Deep Function Composition</h2>
