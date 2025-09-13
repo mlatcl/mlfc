@@ -742,17 +742,8 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
 <section id="chain-rule-for-neural-networks" class="slide level2">
 <h2>Chain Rule for Neural Networks</h2>
 </section>
-<section id="deep-function-composition" class="slide level2">
-<h2>Deep Function Composition</h2>
-</section>
-<section id="chain-rule" class="slide level2">
-<h2>Chain rule</h2>
-<p><span class="math display">\[
-\frac{\text{d} \mathbf{ f}\mathbf{ f}_L}{\text{d} \mathbf{ w}} = \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ f}_{L-1}} \frac{\text{d} \mathbf{ f}_{L-1}}{\text{d} \mathbf{ f}_{L-2}} \frac{\text{d} \mathbf{ f}_{L-2}}{\text{d} \mathbf{ f}_{L-3}} \cdots \frac{\text{d} \mathbf{ f}_3}{\text{d} \mathbf{ f}_{2}} \frac{\text{d} \mathbf{ f}_2}{\text{d} \mathbf{ f}_{1}} \frac{\text{d} \mathbf{ f}_1}{\text{d} \mathbf{ w}} 
-\]</span></p>
-</section>
-<section id="how-to-evaluate-this" class="slide level2">
-<h2>How to evaluate this?</h2>
+<section id="evaluating-derivatives" class="slide level2">
+<h2>Evaluating Derivatives</h2>
 <p><span class="math display">\[
 \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ w}} = \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ f}_{L-1}} \frac{\text{d} \mathbf{ f}_{L-1}}{\text{d} \mathbf{ f}_{L-2}} \frac{\text{d} \mathbf{ f}_{L-2}}{\text{d} \mathbf{ f}_{L-3}} \cdots \frac{\text{d} \mathbf{ f}_3}{\text{d} \mathbf{ f}_{2}} \frac{\text{d} \mathbf{ f}_2}{\text{d} \mathbf{ f}_{1}} \frac{\text{d} \mathbf{ f}_1}{\text{d} \mathbf{ w}} 
 \]</span></p>
@@ -790,11 +781,8 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
 \]</span></p>
 <p>Cost: <span class="math display">\[
 \small
-d_0d_1d_2 + d_0d_2d_3 + \ldots + d_0d_{L-1}d_L = d_0 \sum_{l=2}^{L}d_ld_{l-1}
+d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\ell d_{\ell-1}
 \]</span></p>
-</section>
-<section id="automatic-differentiation-1" class="slide level2">
-<h2>Automatic differentiation</h2>
 <p><em>Reverse-mode</em></p>
 <p><span class="math display">\[
 \small
@@ -802,7 +790,7 @@ d_0d_1d_2 + d_0d_2d_3 + \ldots + d_0d_{L-1}d_L = d_0 \sum_{l=2}^{L}d_ld_{l-1}
 \]</span></p>
 <p>Cost: <span class="math display">\[
 \small
- d_Ld_{L-1}d_{L-2} + d_{L}d_{L-2}d_{L-3} + \ldots + d_Ld_{1}d_0 = d_L \sum_{l=0}^{L-2}d_ld_{l+1}
+ d_Ld_{L-1}d_{L-2} + d_{L}d_{L-2} d_{L-3} + \ldots + d_Ld_{1} d_0 = d_L\sum_{\ell=0}^{L-2}d_\ell d_{\ell+1}
 \]</span></p>
 </section>
 <section id="memory-cost-of-autodiff" class="slide level2">
@@ -816,7 +804,7 @@ d_0d_1d_2 + d_0d_2d_3 + \ldots + d_0d_{L-1}d_L = d_0 \sum_{l=2}^{L}d_ld_{l-1}
 <h2>Reverse-mode</h2>
 <p>Cache activations <span class="math inline">\(\{\mathbf{ f}_l\}\)</span> so local Jacobians can be applied during backward; higher memory than forward-mode.</p>
 </section>
-<section id="automatic-differentiation-2" class="slide level2">
+<section id="automatic-differentiation-1" class="slide level2">
 <h2>Automatic differentiation</h2>
 <ul>
 <li>in deep learning we’re most interested in scalar objectives</li>
