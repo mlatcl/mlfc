@@ -73,6 +73,9 @@ $$
 
 \notes{This week we will reinterpret the error as a *probabilistic model*. As Laplace suggests, we will consider the difference between our data and our model to have come from unconsidered factors which exhibit as a probability density. This leads to a more principled definition of least squares error due to [Carl Friederich Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), but inspired by [Pierre-Simon Laplace](https://en.wikipedia.org/wiki/Pierre-Simon_Laplace).}
 
+\include{_physics/includes/gauss-least-squares.md}
+
+
 \include{_ml/includes/univariate-gaussian.md}
 \include{_ml/includes/univariate-gaussian-properties.md}
 \include{_ml/includes/linear-regression-log-likelihood.md}

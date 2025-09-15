@@ -51,6 +51,11 @@ $$}
   $$}
 
 \include{_ml/includes/underdetermined-system.md}
+
+\subsection{Solution}
+
+\slides{* Place 
+
 \include{_ml/includes/types-of-uncertainty.md}
 
 \addreading{@Bishop:book06}{Section 1.2.3 (pg 21–24)}
@@ -58,13 +63,10 @@ $$}
 \addreading{@Bishop:book06}{Section 1.2.3 (pg 21–24)}
 \addreading{@Bishop:book06}{Section 1.2.6 (start from just past eq 1.64 pg 30-32)}
 
-\reading
-
-\include{_physics/includes/gauss-least-squares.md}
 \include{_ml/includes/bayesian-regression1d-short.md}
 \include{_ml/includes/bayesian-regression1d-maths.md}
 
-\notes{\subsection{Bayesian Inference in the Univariate Case}
+\notes{\subsection{Bayesian Inference in the Univariate Case}}
 
 \notes{This video talks about Bayesian inference across the single parameter, the offset $c$, illustrating how the prior and the likelihood combine in one dimension to form a posterior.}
 
@@ -72,8 +74,11 @@ $$}
 
 \subsection{The Joint Density}
 
+\slides{
 * Really want to know the *joint* posterior density over the parameters $c$ *and* $m$.
-* Could now integrate out over $m$, but it’s easier to consider the multivariate case.
+* Could now consider  $m$, but it’s easier to consider the multivariate case.
+}
+\notes{This gives us the distribution over $c$, but in reality we want to know the *joint* posterior density over the parmeters $c$ and $m$. We could find this by now considering $m$, but it's easier to consider the multivariate case.}
 
 \include{_ml/includes/two-d-gaussian.md}
 
@@ -130,7 +135,7 @@ sigma2 = 0.01}
 \include{_ml/includes/bayesian-interpretation-of-regularisation.md}
 
 
-\newslide{Regularized Mean}
+\newslide{Regularised Mean}
 
 \slides{
 * Validation fit here based on mean solution for $\mappingVector$ only.
@@ -142,6 +147,9 @@ sigma2 = 0.01}
   $$
   \mappingVector^* = \left[\basisMatrix^\top\basisMatrix\right]^{-1} \basisMatrix^\top \dataVector
   $$
+}
+\newslide{Regularised Mean}
+\slides{
 * Two are equivalent when $\alpha \rightarrow \infty$.
 * Equivalent to a prior for $\mappingVector$ with infinite variance.
 * In other cases $\alpha \eye$ *regularizes* the system (keeps parameters smaller).
