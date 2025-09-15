@@ -233,7 +233,7 @@ showDivs(0, 'under_determined_system');
 p(c|y) = \frac{p(y|c)p(c)}{p(y)}
 \]</span> <span class="math display">\[
 \text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}
-\]</span>}</li>
+\]</span></li>
 </ul>
 </section>
 <section id="bayes-update" class="slide level2">
@@ -302,15 +302,17 @@ p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) \propto  p(\mathbf{ y}|\mathbf{ x}, 
 p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) \propto  p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)
 \]</span>
 <span class="math display">\[\begin{aligned}
-\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =&amp; -\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2 -\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
-    &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2},
+\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =&amp; -\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2 \\ &amp; -\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
+    &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2} +\text{const}
 \end{aligned}\]</span>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<p>complete the square of the quadratic form to obtain <span class="math display">\[
-\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},
-\]</span> where <span class="math inline">\(\tau^2 = \left(n\sigma^{-2} +\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
+<section id="complete-the-square" class="slide level2">
+<h2>Complete the Square</h2>
+<p><span class="math display">\[
+\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const}
+\]</span> <span class="math display">\[
+\tau^2 = \left(n\sigma^{-2} +\alpha_1^{-1}\right)^{-1}
+\]</span> <span class="math display">\[\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\]</span></p>
 </section>
 <section id="the-joint-density" class="slide level2">
 <h2>The Joint Density</h2>
@@ -546,7 +548,6 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathscr{N}\left(\mathbf{ w
 </section>
 <section id="sampling-from-the-posterior" class="slide level2">
 <h2>Sampling from the Posterior</h2>
-<p>import mlai.plot import mlai}</p>
 <ul>
 <li>Now check samples by extracting <span class="math inline">\(\mathbf{ w}\)</span> from the <em>posterior</em>.</li>
 </ul>
@@ -590,6 +591,9 @@ f_i = \boldsymbol{ \phi}_i^\top \mathbf{ w}
 <p><span class="math display">\[
 f_i = \sum_{j=1}^K w_j \phi_{i, j}
 \]</span></p>
+</section>
+<section id="expectation-under-gaussian" class="slide level2">
+<h2>Expectation under Gaussian</h2>
 <p><span class="math display">\[
 \left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \int \mathbf{ f}
 \mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
@@ -634,12 +638,11 @@ p(\mathbf{ y}) = \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\alpha \boldsymbol{ \Ph
 </section>
 <section id="marginal-likelihood" class="slide level2">
 <h2>Marginal Likelihood</h2>
-<ul>
-<li><p>The marginal likelihood can also be computed, it has the form: <span class="math display">\[
-p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
-\]</span> where <span class="math inline">\(\mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.</p></li>
-<li><p>So it is a zero mean <span class="math inline">\(n\)</span>-dimensional Gaussian with covariance matrix <span class="math inline">\(\mathbf{K}\)</span>.</p></li>
-</ul>
+<p><small> <span class="math display">\[
+  p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
+\]</span></small> <span class="math display">\[
+ \mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}
+ \]</span></p>
 </section>
 <section id="computing-the-mean-and-error-bars-of-the-functions" class="slide level2">
 <h2>Computing the Mean and Error Bars of the Functions</h2>
@@ -668,19 +671,16 @@ f(\mathbf{ x}_i; \mathbf{ w}) = \boldsymbol{ \phi}_i^\top \mathbf{ w}
 <section id="computing-error-bars" class="slide level2">
 <h2>Computing Error Bars</h2>
 <p><span class="math display">\[
-\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
-\]</span> which under the posterior density is given by <span class="math display">\[
 \text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)} = \boldsymbol{ \Phi}\mathbf{C}_w \boldsymbol{ \Phi}^\top
 \]</span></p>
-<p>}</p>
 </section>
 <section id="variance-of-expected-output" class="slide level2">
 <h2>Variance of Expected Output</h2>
 <ul>
-<li>Variance of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
-\begin{aligned}\text{var}(f(\mathbf{ x}_i; \mathbf{ w})) &amp;= \left\langle(f(\mathbf{ x}_i; \mathbf{ w}))^2\right\rangle - \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle^2 \\&amp;= \boldsymbol{ \phi}_i^\top\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle \boldsymbol{ \phi}_i - \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle\left\langle\mathbf{ w}\right\rangle^\top \boldsymbol{ \phi}_i \\&amp;= \boldsymbol{ \phi}_i^\top \mathbf{C}_i\boldsymbol{ \phi}_i
-\end{aligned}
-\]</span> where all these expectations are taken under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
+<li>Variance of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <small>
+<span class="math display">\[\begin{aligned}\text{var}(f(\mathbf{ x}_i; \mathbf{ w})) &amp;= \left\langle(f(\mathbf{ x}_i; \mathbf{ w}))^2\right\rangle - \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle^2 \\&amp;= \boldsymbol{ \phi}_i^\top\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle \boldsymbol{ \phi}_i - \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle\left\langle\mathbf{ w}\right\rangle^\top \boldsymbol{ \phi}_i \\&amp;= \boldsymbol{ \phi}_i^\top \mathbf{C}_i\boldsymbol{ \phi}_i
+\end{aligned}\]</span>
+</small> where all these expectations are taken under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
 </ul>
 </section>
 <section id="olympic-marathon-data" class="slide level2">

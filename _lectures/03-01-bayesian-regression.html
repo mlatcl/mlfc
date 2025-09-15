@@ -110,14 +110,12 @@ y_i = mx_i + c + \epsilon_i.
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-short.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-short.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The tradition in Bayesian inference is to place a probability density over the parameters of interest in your model. This choice is made regardless of whether you generally believe those parameters to be stochastic or deterministic in origin. In other words, to a Bayesian, the modelling treatment does not differentiate between epistemic and aleatoric uncertainty. For linear regression we could consider the following Gaussian prior on the intercept parameter, <span class="math display">\[c \sim \mathscr{N}\left(0,\alpha_1\right)\]</span> where <span class="math inline">\(\alpha_1\)</span> is the variance of the prior distribution, its mean being zero.</p>
-<h2 id="posterior-distribution">Posterior Distribution</h2>
-<ul>
-<li>The posterior is found through <strong>Bayes’ Rule</strong> <span class="math display">\[
-p(c|y) = \frac{p(y|c)p(c)}{p(y)}
-\]</span> <span class="math display">\[
-\text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}
-\]</span>}</li>
-</ul>
+<p>The posterior distribution is found by <em>Bayes’ rule</em>. ## Posterior Distribution</p>
+<p><span class="math display">\[
+  p(c|y) = \frac{p(y|c)p(c)}{p(y)}
+  \]</span> <span class="math display">\[
+  \text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}
+  \]</span></p>
 <p>The prior distribution is combined with the likelihood of the data given the parameters <span class="math inline">\(p(y|c)\)</span> to give the posterior via <em>Bayes’ rule</em>, <span class="math display">\[
   p(c|y) = \frac{p(y|c)p(c)}{p(y)}
   \]</span></p>
@@ -165,7 +163,7 @@ p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) \propto  p(\mathbf{ y}|\mathbf{ x}, 
 <span class="math display">\[\begin{aligned}
     \log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =&amp;-\frac{1}{2\sigma^2} \sum_{i=1}^n(y_i-c \\ &amp; - mx_i)^2-\frac{1}{2\alpha_1} c^2 + \text{const}\\
      = &amp;-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-mx_i)^2 -\left(\frac{n}{2\sigma^2} + \frac{1}{2\alpha_1}\right)c^2\\
-    &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2},
+    &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2} +\text{const},
   \end{aligned}\]</span>
 <p>complete the square of the quadratic form to obtain <span class="math display">\[
 \log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},
@@ -442,9 +440,8 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \math
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> np.random.multivariate_normal(w_mean.flatten(), w_cov)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> np.dot(Phi_pred,w_sample)</span></code></pre></div>
-<p>import mlai.plot</p>
 <p>Now let’s sample several functions and plot them all to see how the predictions fluctuate.</p>
-<p>import mlai.plot import mlai}</p>
+<p>import mlai.plot import mlai</p>
 <div class="figure">
 <div id="polynomial-function-samples-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-function-samples.svg" width="80%" style=" ">
@@ -487,7 +484,8 @@ y_i \sim \mathscr{N}\left(\mu_i,\sigma^2_i\right)
 f_i = \boldsymbol{ \phi}_i^\top \mathbf{ w}
 \]</span> where <span class="math inline">\(\boldsymbol{ \phi}\)</span> is a column vector from the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and <span class="math inline">\(f_i\)</span> is the <span class="math inline">\(i\)</span>th element of <span class="math inline">\(\mathbf{ f}\)</span>.This vector inner product itself merely implies that <span class="math display">\[
 f_i = \sum_{j=1}^K w_j \phi_{i, j}
-\]</span> and if we now say that <span class="math inline">\(w_i\)</span> is Gaussian distributed, then because a scaled Gaussian is also Gaussian, and because a sum of Gaussians is also Gaussian, we know that <span class="math inline">\(f_i\)</span> is also Gaussian distributed. It merely remains to work out its mean and covariance. We can do this by looking at the expectation under a Gaussian distribution. The expectation of the mean vector is given by <span class="math display">\[
+\]</span> and if we now say that <span class="math inline">\(w_i\)</span> is Gaussian distributed, then because a scaled Gaussian is also Gaussian, and because a sum of Gaussians is also Gaussian, we know that <span class="math inline">\(f_i\)</span> is also Gaussian distributed. It merely remains to work out its mean and covariance.</p>
+<p>We can do this by looking at the expectation under a Gaussian distribution. The expectation of the mean vector is given by <span class="math display">\[
 \left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \int \mathbf{ f}
 \mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
 \text{d}\mathbf{ w}= \int \boldsymbol{ \Phi}\mathbf{ w}
@@ -527,12 +525,9 @@ p(\mathbf{ y}) = \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\alpha \boldsymbol{ \Ph
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/polynomial-marginal-likelihood.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/polynomial-marginal-likelihood.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<ul>
-<li><p>The marginal likelihood can also be computed, it has the form: <span class="math display">\[
-p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
-\]</span> where <span class="math inline">\(\mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.</p></li>
-<li><p>So it is a zero mean <span class="math inline">\(n\)</span>-dimensional Gaussian with covariance matrix <span class="math inline">\(\mathbf{K}\)</span>.</p></li>
-</ul>
+<p>The marginal likelihood can also be computed, it has the form <span class="math display">\[
+  p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
+  \]</span> where <span class="math inline">\(\mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>. So it is a zero mean <span class="math inline">\(n\)</span>-dimensional Gaussian with covariance matrix <span class="math inline">\(\mathbf{K}\)</span>.</p>
 <h2 id="computing-the-mean-and-error-bars-of-the-functions">Computing the Mean and Error Bars of the Functions</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/compute-output-expectations.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/compute-output-expectations.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -562,7 +557,6 @@ E = \sum_{i=1}^n(y_i - \langle f_i\rangle)^2
 <p>Now split the data into training and <em>hold out</em> validation sets. Hold out the data for years after 1980. Compute the predictions for different model orders between 0 and 8. Find the model order which fits best according to <em>hold out</em> validation. Is it the same as the maximum likelihood result fom last week?</p>
 <h3 id="exercise-5">Exercise 5</h3>
 <p>Now we will use leave one out cross validation to attempt to see which model is best at interpolating. Do you get the same result as for hold out validation? Compare plots of the hold out validation area for different degrees and the cross validation error for different degrees. Why are they so different? Select a suitable polynomial for characterising the differences in the predictions. Plot the mean function and the error bars for the full data set (to represent the leave one out solution) and the training data from the hold out experiment. Discuss your answer.</p>
-<p>}</p>
 <h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
