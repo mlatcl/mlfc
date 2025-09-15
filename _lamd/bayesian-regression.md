@@ -54,7 +54,9 @@ $$}
 
 \subsection{Solution}
 
-\slides{* Place }
+\slides{* Place a probability distribution over $c$.}
+
+\notes{The solution we saw for overdetermined systems was to place a probability distribution over $\noiseScalar$, here the solution is to place a probability distribution over $c$.}
 
 \include{_ml/includes/types-of-uncertainty.md}
 
@@ -84,15 +86,15 @@ $$}
 
 \subsection{The Prior Density}
 
-Let's assume that the prior density is given by a zero mean Gaussian, which is independent across each of the parameters, 
+\notes{Let's assume that the prior density is given by a zero mean Gaussian, which is independent across each of the parameters,}
 $$
 \mappingVector \sim \gaussianSamp{\zerosVector}{\alpha \eye}
 $$ 
-In other words, we are assuming, for the prior, that each element of the parameters vector, $\mappingScalar_i$, was drawn from a Gaussian density as follows
+\notes{In other words, we are assuming, for the prior, that each element of the parameters vector, $\mappingScalar_i$, was drawn from a Gaussian density as follows}
 $$
 \mappingScalar_i \sim \gaussianSamp{0}{\alpha}
 $$
-Let's start by assigning the parameter of the prior distribution, which is the variance of the prior distribution, $\alpha$.
+\notes{Let's start by assigning the parameter of the prior distribution, which is the variance of the prior distribution, $\alpha$.}
 
 \code{# set prior variance on w
 alpha = 4.
@@ -104,8 +106,6 @@ sigma2 = 0.01}
 
 \addreading{@Bishop:book06}{Multivariate Gaussians: Section 2.3 up to top of pg 85}
 \addreading{@Bishop:book06}{Section 3.3 up to 159 (pg 152–159)}
-
-\reading
 
 \newslide{Revisit Olympics Data}
 \slides{
