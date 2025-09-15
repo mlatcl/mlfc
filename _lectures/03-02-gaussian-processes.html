@@ -1,5 +1,6 @@
 ---
 title: "Gaussian Processes"
+venue: "Dedan Kimathi University, Nyeri, Kenya"
 abstract: "Gaussian processes are non parameteric Bayesian models that extend the idea of Bayesian linear models to infinite basis functions."
 author:
 - given: Neil D.
@@ -195,9 +196,9 @@ p(f_2|f_1) = \mathscr{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1, k_{2, 2} - \frac
 <ul>
 <li><p>Conditional density: <font color="red"><span class="math inline">\(p(f_8|f_1=?)\)</span></font>.</p></li>
 <li><p>Prediction of <span class="math inline">\(\mathbf{ f}_*\)</span> from <span class="math inline">\(\mathbf{ f}\)</span> requires multivariate <em>conditional density</em>.</p></li>
-<li><p>Multivariate conditional density is <em>also</em> Gaussian. <large> <span class="math display">\[
+<li><p>Multivariate conditional density is <em>also</em> Gaussian. <span class="math display">\[
 p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\mathbf{K}_{*,\mathbf{ f}}\mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{ f},\mathbf{K}_{*,*}-\mathbf{K}_{*,\mathbf{ f}} \mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{K}_{\mathbf{ f},*}\right)}
-\]</span> </large></p></li>
+\]</span></p></li>
 <li><p>Here covariance of joint density is given by <span class="math display">\[
 \mathbf{K}= \begin{bmatrix} \mathbf{K}_{\mathbf{ f}, \mathbf{ f}} &amp; \mathbf{K}_{*, \mathbf{ f}}\\ \mathbf{K}_{\mathbf{ f}, *} &amp; \mathbf{K}_{*, *}\end{bmatrix}
 \]</span></p></li>
@@ -761,7 +762,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left(-\frac{\left\Vert \mathbf{
 <p>To answer this question we need to generalize, but before we formalize the concept of generalization let’s introduce some formal representation of what it means to generalize in machine learning.</p>
 <h2 id="gaussian-process-fit">Gaussian Process Fit</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_gp/includes/olympic-marathon-gp.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_gp/includes/olympic-marathon-gp.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-fit.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-fit.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Our first objective will be to perform a Gaussian process fit to the data, we’ll do this using the <a href="https://github.com/SheffieldML/GPy">GPy software</a>.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> GPy</span></code></pre></div>

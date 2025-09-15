@@ -136,6 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <h1 class="title">Gaussian Processes</h1>
   <p class="author" style="text-align:center">Neil D. Lawrence</p>
   <p class="date" style="text-align:center"><time>2025-09-16</time></p>
+  <p class="venue" style="text-align:center">Dedan Kimathi University, Nyeri, Kenya</p>
 </section>
 
 <section class="slide level2">
@@ -163,6 +164,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Gaussian processes is a general framework (basis functions special case)</li>
 <li>Within the framework you can consider models with infinite basis functions.</li>
 </ul>
+</section>
+<section id="gaussian-processes-1" class="slide level2">
+<h2>Gaussian Processes</h2>
 <p><span class="math display">\[
 p(\mathbf{ y}|\mathbf{X}, \mathbf{ w}) =
 \prod_{i=1}^{n} p(y_i | \mathbf{ x}_i, \mathbf{ w})
@@ -368,9 +372,9 @@ showDivs(13, 'two_point_sample3');
 <h2>Prediction with Correlated Gaussians</h2>
 <ul>
 <li><p>Prediction of <span class="math inline">\(\mathbf{ f}_*\)</span> from <span class="math inline">\(\mathbf{ f}\)</span> requires multivariate <em>conditional density</em>.</p></li>
-<li><p>Multivariate conditional density is <em>also</em> Gaussian. <large> <span class="math display">\[
+<li><p>Multivariate conditional density is <em>also</em> Gaussian. <span class="math display">\[
 p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\mathbf{K}_{*,\mathbf{ f}}\mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{ f},\mathbf{K}_{*,*}-\mathbf{K}_{*,\mathbf{ f}} \mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{K}_{\mathbf{ f},*}\right)}
-\]</span> </large></p></li>
+\]</span></p></li>
 <li><p>Here covariance of joint density is given by <span class="math display">\[
 \mathbf{K}= \begin{bmatrix} \mathbf{K}_{\mathbf{ f}, \mathbf{ f}} &amp; \mathbf{K}_{*, \mathbf{ f}}\\ \mathbf{K}_{\mathbf{ f}, *} &amp; \mathbf{K}_{*, *}\end{bmatrix}
 \]</span></p></li>
@@ -387,9 +391,14 @@ p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\boldsymbol{ \mu}
 \]</span> <span class="math display">\[
 \boldsymbol{ \Sigma}= \mathbf{K}_{*,*}-\mathbf{K}_{*,\mathbf{ f}} \mathbf{K}_{\mathbf{ f},\mathbf{ f}}^{-1}\mathbf{K}_{\mathbf{ f},*}
 \]</span> </large></p></li>
-<li><p>Here covariance of joint density is given by <span class="math display">\[
+</ul>
+</section>
+<section id="prediction-with-correlated-gaussians-3" class="slide level2">
+<h2>Prediction with Correlated Gaussians</h2>
+<ul>
+<li>Here covariance of joint density is given by <span class="math display">\[
 \mathbf{K}= \begin{bmatrix} \mathbf{K}_{\mathbf{ f}, \mathbf{ f}} &amp; \mathbf{K}_{*, \mathbf{ f}}\\ \mathbf{K}_{\mathbf{ f}, *} &amp; \mathbf{K}_{*, *}\end{bmatrix}
-\]</span></p></li>
+\]</span></li>
 </ul>
 </section>
 <section id="marginal-likelihood" class="slide level2">

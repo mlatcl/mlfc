@@ -116,6 +116,8 @@ sigma2 = 0.01}
 * Choose noise variance $\dataStd^2 = 0.01$
 }
 
+
+\include{_statistics/includes/gaussian-sample-statitics.md}
 \include{_ml/includes/prior-sampling-basis.md}
 
 \include{_ml/includes/the-bayesian-approach.md}

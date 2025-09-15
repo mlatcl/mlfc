@@ -12,6 +12,7 @@ time: "09:30"
 abstract: Gaussian processes are non parameteric Bayesian models that extend the idea of Bayesian linear models to infinite basis functions.
 youtube: B2XhFoCehy8
 transition: None
+venue: Dedan Kimathi University, Nyeri, Kenya
 reveal: true
 ipynb: true
 ---
@@ -23,8 +24,6 @@ ipynb: true
 \slides{* Yesterday: Bayesian regression
 * Today: 
     * Gaussian Processes: non parametric Bayesian modelling}
-
-
 
 \include{_gp/includes/gp-intro-lectures.md}
 \include{_gp/includes/gptwopointpred.md}
@@ -39,7 +38,9 @@ ipynb: true
 
 \include{_kern/includes/eq-covariance.md}
 
-\include{_gp/includes/olympic-marathon-gp.md}
+\include{_datasets/includes/olympic-marathon-data.md}
+\include{_ml/includes/alan-turing-marathon.md}
+\include{_gp/includes/gp-fit.md}
 
 \include{_gp/includes/della-gatta-gene-gp.md}
 \include{_health/includes/malaria-gp.md}
