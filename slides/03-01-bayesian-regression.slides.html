@@ -513,11 +513,14 @@ w_i \sim \mathscr{N}\left(0,\alpha\right)
 <h2>Generating from the Model</h2>
 <p><span class="math display">\[
 \mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}
-\]</span> * Sample <span class="math display">\[
-  \mathbf{ w}\sim \mathscr{N}\left(0,\alpha\mathbf{I}\right)
-  \]</span> <span class="math display">\[
-  \boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\right)
-  \]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</p>
+\]</span></p>
+<ul>
+<li>Sample <span class="math display">\[
+\mathbf{ w}\sim \mathscr{N}\left(0,\alpha\mathbf{I}\right)
+\]</span> <span class="math display">\[
+\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\right)
+\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
+</ul>
 </section>
 <section id="sampling-from-the-prior" class="slide level2">
 <h2>Sampling from the Prior</h2>
@@ -547,7 +550,7 @@ Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> wi
 </aside>
 <p><span class="math display">\[
 \mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
-\]</span> notes{This involves a matrix multiplication between a fixed matrix <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and a vector that is drawn from a distribution <span class="math inline">\(\mathbf{ w}\)</span>. Because <span class="math inline">\(\mathbf{ w}\)</span> is drawn from a distribution, this imples that <span class="math inline">\(\mathbf{ f}\)</span> should also be drawn from a distribution. There are two distributions we are interested in though. We have just been sampling from the <em>prior</em> distribution to see what sort of functions we get <em>before</em> looking at the data. In Bayesian inference, we also need to compute the <em>posterior</em> distribution and sample from that density. }</p>
+\]</span></p>
 </section>
 <section id="computing-the-posterior" class="slide level2">
 <h2>Computing the Posterior</h2>
@@ -622,6 +625,9 @@ f_i = \sum_{j=1}^K w_j \phi_{i, j}
 <p><span class="math display">\[
 \left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\mathbf{0},\alpha\mathbf{I}\right)} = \mathbf{0}
 \]</span></p>
+</section>
+<section id="expectation-under-gaussian-1" class="slide level2">
+<h2>Expectation under Gaussian</h2>
 <p><span class="math display">\[
 \text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
 = \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
@@ -656,9 +662,9 @@ p(\mathbf{ y}) = \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\alpha \boldsymbol{ \Ph
 <h2>Marginal Likelihood</h2>
 <p><small> <span class="math display">\[
   p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
-\]</span></small> <span class="math display">\[
+\]</span></small> <small><span class="math display">\[
  \mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}
- \]</span></p>
+ \]</span></small></p>
 </section>
 <section id="computing-the-mean-and-error-bars-of-the-functions" class="slide level2">
 <h2>Computing the Mean and Error Bars of the Functions</h2>
