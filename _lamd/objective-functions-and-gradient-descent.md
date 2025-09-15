@@ -19,6 +19,28 @@ ipynb: true
 
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
+\notes{\subsection{Learning Objectives}
+
+* Explain the role of objective functions in ML and their relationship to prediction functions.
+* Implement gradient descent for a simple regression objective; interpret learning curves.
+* Derive and use stochastic gradient descent; contrast with batch GD.
+* Understand step size (learning rate) effects and basic convergence intuition.
+* Connect classification via the perceptron to optimisation of a margin-based objective.
+* Visualise loss landscapes and trajectories (contours) for intuition.
+* Recognise practical considerations: feature scaling, initialisation, stopping criteria.
+* Situate GD within the broader optimisation toolbox (momentum, second-order methods) at a high level.
+
+\subsection{Lecture Timing}
+
+* Framing and objectives — 5 min
+* Perceptron and classification setup — 10 min
+* Toy data and hyperplane intuition — 8 min
+* Regression objective and contour visualisation — 12 min
+* Gradient descent derivation and demo — 15 min
+* Stochastic gradient descent (SGD) — 15 min
+* Practicalities: scaling, step size, stopping — 15 min
+* Wrap-up & Q&A — 10 min}
+
 \newslide{Objective Function}
 \slides{
 - On Monday we introduced ML and motivated the importance of probability.

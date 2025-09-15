@@ -1,12 +1,22 @@
 ---
 title: "Gaussian Processes"
-abstract: "null"
+abstract: "Gaussian processes are non parameteric Bayesian models that extend the idea of Bayesian linear models to infinite basis functions."
+author:
+- given: Neil D.
+  family: Lawrence
+  url: 
+  institute: 
+  twitter: 
+  gscholar: 
+  orcid: 
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/gaussian-processes.md
 date: 2025-09-16
+time: "09:30"
 week: 3
 session: 2
 featured_image: slides/diagrams/gp/two_point_sample001.svg
 reveal: 03-02-gaussian-processes.slides.html
+transition: None
 ipynb: 03-02-gaussian-processes.ipynb
 youtube: "B2XhFoCehy8"
 layout: lecture
@@ -45,22 +55,15 @@ sns.set_palette('colorblind')}-->
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/gaussian-processes.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/gaussian-processes.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Over the last two sessions we’ve begun considering classification models and logistic regresssion. In particular, for naive Bayes, we considered a set of assumptions that allowed us to build a joint model of our data set. In particular for naive Bayes we specified</p>
-<ol type="1">
-<li>Data conditional independence.</li>
-<li>Feature conditional independence.</li>
-<li>Marginal likelihood of labels was Bernoulli distributed.</li>
-</ol>
-<p>This allowed us to specify the joint density of our labels and our input data, <span class="math inline">\(p(\mathbf{ y}, \mathbf{X}|\boldsymbol{\theta})\)</span>. And we conditioned on the training data to make predictions about the test data.</p>
-<h2 id="generalized-linear-models">Generalized Linear Models</h2>
-<p>Logistic regression is part of a wider class of models known as <em>generalized linear models</em>. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that <span class="math display">\[
+<p>{ ## Generalised Linear Models</p>
+<p>Logistic regression is part of a wider class of models known as <em>generalised linear models</em>. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that <span class="math display">\[
 \log \frac{p(\mathbf{ x})}{1-p(\mathbf{ x})} = f(\mathbf{ x}; \mathbf{ w})
 \]</span> where <span class="math inline">\(f(\mathbf{ x}; \mathbf{ w})\)</span> is a linear-in-the-parameters function (here the parameters are <span class="math inline">\(\mathbf{ w}\)</span>, which is generally non-linear in the inputs.</p>
 <p>So far we have considered basis function models of the form</p>
 <p><span class="math display">\[
 f(\mathbf{ x}) =
 \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
-\]</span> When we form a Gaussian process we do something that is slightly more akin to the naive Bayes approach, but actually is closely related to the generalized linear model approach.</p>
+\]</span> When we form a Gaussian process we do something that is slightly more akin to the naive Bayes approach, but actually is closely related to the generalised linear model approach.</p>
 <h2 id="gaussian-processes">Gaussian Processes</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-intro-lectures.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-intro-lectures.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -69,7 +72,7 @@ f(\mathbf{ x}) =
 p(\mathbf{ y}|\mathbf{X}, \mathbf{ w}) =
 \prod_{i=1}^{n} p(y_i | \mathbf{ x}_i, \mathbf{ w})
 \]</span> Gaussian processes are <em>not</em> normally considered to be <em>generative models</em>, but we will be much more interested in the principles of conditioning in Gaussian processes because we will use conditioning to make predictions between our test and training data. We will avoid the data conditional indpendence assumption in favour of a richer assumption about the data, in a Gaussian process we assume data is <em>jointly Gaussian</em> with a particular mean and covariance, <span class="math display">\[
-\mathbf{ y}|\mathbf{X}\sim \mathcal{N}\left(\mathbf{m}(\mathbf{X}),\mathbf{K}(\mathbf{X})\right),
+\mathbf{ y}|\mathbf{X}\sim \mathscr{N}\left(\mathbf{m}(\mathbf{X}),\mathbf{K}(\mathbf{X})\right),
 \]</span> where the conditioning is on the inputs <span class="math inline">\(\mathbf{X}\)</span> which are used for computing the mean and covariance. For this reason they are known as mean and covariance functions.</p>
 <h2 id="prediction-across-two-points-with-gps">Prediction Across Two Points with GPs</h2>
 <div style="text-align:right">
@@ -155,7 +158,7 @@ p(\mathbf{ y}|\mathbf{X}, \mathbf{ w}) =
 <h2 id="prediction-with-correlated-gaussians">Prediction with Correlated Gaussians</h2>
 <p>Of course in practice, rather than manipulating mountains physically, the advantage of the Gaussian density is that we can perform these manipulations mathematically.</p>
 <p>Prediction of <span class="math inline">\(f_2\)</span> given <span class="math inline">\(f_1\)</span> requires the <em>conditional density</em>, <span class="math inline">\(p(f_2|f_1)\)</span>.Another remarkable property of the Gaussian density is that this conditional distribution is <em>also</em> guaranteed to be a Gaussian density. It has the form, <span class="math display">\[
-p(f_2|f_1) = \mathcal{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1, k_{2, 2} - \frac{k_{1,2}^2}{k_{1,1}}\right)
+p(f_2|f_1) = \mathscr{N}\left(f_2|\frac{k_{1, 2}}{k_{1, 1}}f_1, k_{2, 2} - \frac{k_{1,2}^2}{k_{1,1}}\right)
 \]</span>where we have assumed that the covariance of the original joint density was given by <span class="math display">\[
 \mathbf{K}= \begin{bmatrix} k_{1, 1} &amp; k_{1, 2}\\ k_{2, 1} &amp; k_{2, 2}.\end{bmatrix}
 \]</span></p>
@@ -253,13 +256,13 @@ p(\mathbf{ f}_*|\mathbf{ f}) = {\mathcal{N}\left(\mathbf{ f}_*|\boldsymbol{ \mu}
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> polynomial(x, degree<span class="op">=</span>degree, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</span></code></pre></div>
 <h2 id="weight-space-view">Weight Space View</h2>
 <p>To generate typical functional predictions from the model, we need a set of model parameters. We assume that the parameters are drawn independently from a Gaussian density, <span class="math display">\[
-\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha\mathbf{I}\right),
+\mathbf{ w}\sim \mathscr{N}\left(\mathbf{0},\alpha\mathbf{I}\right),
 \]</span> then we can combine this with the definition of our prediction function <span class="math inline">\(f(\mathbf{ x})\)</span>, <span class="math display">\[
 f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 \]</span> We can now sample from the prior density to obtain a vector <span class="math inline">\(\mathbf{ w}\)</span> using the function <code>np.random.normal</code> and combine these parameters with our basis to create some samples of what <span class="math inline">\(f(\mathbf{ x})\)</span> looks like,</p>
 <h2 id="function-space-view">Function Space View</h2>
 <p>The process we have used to generate the samples is a two stage process. To obtain each function, we first generated a sample from the prior, <span class="math display">\[
-\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha \mathbf{I}\right)
+\mathbf{ w}\sim \mathscr{N}\left(\mathbf{0},\alpha \mathbf{I}\right)
 \]</span> then if we compose our basis matrix, <span class="math inline">\(\boldsymbol{ \Phi}\)</span> from the basis functions associated with each row then we get, <span class="math display">\[
 \boldsymbol{ \Phi}= \begin{bmatrix}\boldsymbol{ \phi}(\mathbf{ x}_1) \\ \vdots \\
 \boldsymbol{ \phi}(\mathbf{ x}_n)\end{bmatrix}
@@ -270,7 +273,7 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 \mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
 \]</span></p>
 <p>Now we can use standard properties of multivariate Gaussians to write down the probability density that is implied over <span class="math inline">\(\mathbf{ f}\)</span>. In particular we know that if <span class="math inline">\(\mathbf{ w}\)</span> is sampled from a multivariate normal (or multivariate Gaussian) with covariance <span class="math inline">\(\alpha \mathbf{I}\)</span> and zero mean, then assuming that <span class="math inline">\(\boldsymbol{ \Phi}\)</span> is a deterministic matrix (i.e. it is not sampled from a probability density) then the vector <span class="math inline">\(\mathbf{ f}\)</span> will also be distributed according to a zero mean multivariate normal as follows, <span class="math display">\[
-\mathbf{ f}\sim \mathcal{N}\left(\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right).
+\mathbf{ f}\sim \mathscr{N}\left(\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right).
 \]</span></p>
 <p>The question now is, what happens if we sample <span class="math inline">\(\mathbf{ f}\)</span> directly from this density, rather than first sampling <span class="math inline">\(\mathbf{ w}\)</span> and then multiplying by <span class="math inline">\(\boldsymbol{ \Phi}\)</span>. Let’s try this. First of all we define the covariance as <span class="math display">\[
 \mathbf{K}= \alpha
@@ -312,9 +315,9 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 <p>This image is the covariance expressed between different points on the function. In regression we normally also add independent Gaussian noise to obtain our observations <span class="math inline">\(\mathbf{ y}\)</span>, <span class="math display">\[
 \mathbf{ y}= \mathbf{ f}+ \boldsymbol{\epsilon}
 \]</span> where the noise is sampled from an independent Gaussian distribution with variance <span class="math inline">\(\sigma^2\)</span>, <span class="math display">\[
-\epsilon \sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right).
+\epsilon \sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right).
 \]</span> we can use properties of Gaussian variables, i.e. the fact that sum of two Gaussian variables is also Gaussian, and that it’s covariance is given by the sum of the two covariances, whilst the mean is given by the sum of the means, to write down the marginal likelihood, <span class="math display">\[
-\mathbf{ y}\sim \mathcal{N}\left(\mathbf{0},\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top +\sigma^2\mathbf{I}\right).
+\mathbf{ y}\sim \mathscr{N}\left(\mathbf{0},\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top +\sigma^2\mathbf{I}\right).
 \]</span> Sampling directly from this density gives us the noise corrupted functions,</p>
 <div class="figure">
 <div id="gp-sample-basis-functions-plus-noise-figure" class="figure-frame">
@@ -355,7 +358,7 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}).
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_gp/includes/non-degenerate-gps.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_gp/includes/non-degenerate-gps.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The process described above is degenerate. The covariance function is of rank at most <span class="math inline">\(h\)</span> and since the theoretical amount of data could always increase <span class="math inline">\(n\rightarrow \infty\)</span>, the covariance function is not full rank. This means as we increase the amount of data to infinity, there will come a point where we can’t normalize the process because the multivariate Gaussian has the form, <span class="math display">\[
-\mathcal{N}\left(\mathbf{ f}|\mathbf{0},\mathbf{K}\right) = \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det{\mathbf{K}}^\frac{1}{2}} \exp\left(-\frac{\mathbf{ f}^\top\mathbf{K}\mathbf{ f}}{2}\right)
+\mathscr{N}\left(\mathbf{ f}|\mathbf{0},\mathbf{K}\right) = \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det{\mathbf{K}}^\frac{1}{2}} \exp\left(-\frac{\mathbf{ f}^\top\mathbf{K}\mathbf{ f}}{2}\right)
 \]</span> and a non-degenerate kernel matrix leads to <span class="math inline">\(\det{\mathbf{K}} = 0\)</span> defeating the normalization (it’s equivalent to finding a projection in the high dimensional Gaussian where the variance of the the resulting univariate Gaussian is zero, i.e. there is a null space on the covariance, or alternatively you can imagine there are one or more directions where the Gaussian has become the delta function).</p>
 <div class="centered" style="">
 \radfordNealPicture{15%}
@@ -474,7 +477,7 @@ E(\boldsymbol{\theta}) = \frac{1}{2} \log |\mathbf{K}|
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> GP</span></code></pre></div>
 <h2 id="making-predictions">Making Predictions</h2>
 <p>We now have a probability density that represents functions. How do we make predictions with this density? The density is known as a process because it is <em>consistent</em>. By consistency, here, we mean that the model makes predictions for <span class="math inline">\(\mathbf{ f}\)</span> that are unaffected by future values of <span class="math inline">\(\mathbf{ f}^*\)</span> that are currently unobserved (such as test points). If we think of <span class="math inline">\(\mathbf{ f}^*\)</span> as test points, we can still write down a joint probability density over the training observations, <span class="math inline">\(\mathbf{ f}\)</span> and the test observations, <span class="math inline">\(\mathbf{ f}^*\)</span>. This joint probability density will be Gaussian, with a covariance matrix given by our covariance function, <span class="math inline">\(k(\mathbf{ x}_i, \mathbf{ x}_j)\)</span>. <span class="math display">\[
-\begin{bmatrix}\mathbf{ f}\\ \mathbf{ f}^*\end{bmatrix} \sim \mathcal{N}\left(\mathbf{0},\begin{bmatrix} \mathbf{K}&amp; \mathbf{K}_\ast \\
+\begin{bmatrix}\mathbf{ f}\\ \mathbf{ f}^*\end{bmatrix} \sim \mathscr{N}\left(\mathbf{0},\begin{bmatrix} \mathbf{K}&amp; \mathbf{K}_\ast \\
 \mathbf{K}_\ast^\top &amp; \mathbf{K}_{\ast,\ast}\end{bmatrix}\right)
 \]</span> where here <span class="math inline">\(\mathbf{K}\)</span> is the covariance computed between all the training points, <span class="math inline">\(\mathbf{K}_\ast\)</span> is the covariance matrix computed between the training points and the test points and <span class="math inline">\(\mathbf{K}_{\ast,\ast}\)</span> is the covariance matrix computed betwen all the tests points and themselves. To be clear, let’s compute these now for our example, using <code>x</code> and <code>y</code> for the training data (although <code>y</code> doesn’t enter the covariance) and <code>x_pred</code> as the test locations.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set covariance function parameters</span></span>
@@ -550,16 +553,16 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \boldsymbol{ \phi}(\mathbf{ x})^\top \bolds
 </div>
 <p>Can we determine covariance parameters from the data?</p>
 <p><span class="math display">\[
-\mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}{\det{\mathbf{K}}^{\frac{1}{2}}}}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
+\mathscr{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}{\det{\mathbf{K}}^{\frac{1}{2}}}}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-    \mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}\color{blue}{\det{\mathbf{K}}^{\frac{1}{2}}}}\color{red}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
+    \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}\color{blue}{\det{\mathbf{K}}^{\frac{1}{2}}}}\color{red}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \end{aligned}
 \]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-    \log \mathcal{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=&amp;\color{blue}{-\frac{1}{2}\log\det{\mathbf{K}}}\color{red}{-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}} \\ &amp;-\frac{n}{2}\log2\pi
+    \log \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=&amp;\color{blue}{-\frac{1}{2}\log\det{\mathbf{K}}}\color{red}{-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}} \\ &amp;-\frac{n}{2}\log2\pi
 \end{aligned}
 \]</span></p>
 <p><span class="math display">\[
@@ -709,7 +712,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left(-\frac{\left\Vert \mathbf{
 </td>
 </tr>
 </table>
-<p>The first thing we will do is load a standard data set for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
+<p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
 <div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
@@ -1160,9 +1163,9 @@ k_f(\mathbf{ x}, \mathbf{ x}^\prime) = k_g(\mathbf{ x}, \mathbf{ x}^\prime) + k_
 <p>The fixed basis function covariance just comes from the properties of a multivariate Gaussian, if we decide <span class="math display">\[
 \mathbf{ f}=\boldsymbol{ \Phi}\mathbf{ w}
 \]</span> and then we assume <span class="math display">\[
-\mathbf{ w}\sim \mathcal{N}\left(\mathbf{0},\alpha\mathbf{I}\right)
+\mathbf{ w}\sim \mathscr{N}\left(\mathbf{0},\alpha\mathbf{I}\right)
 \]</span> then it follows from the properties of a multivariate Gaussian that <span class="math display">\[
-\mathbf{ f}\sim \mathcal{N}\left(\mathbf{0},\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right)
+\mathbf{ f}\sim \mathscr{N}\left(\mathbf{0},\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right)
 \]</span> meaning that the vector of observations from the function is jointly distributed as a Gaussian process and the covariance matrix is <span class="math inline">\(\mathbf{K}= \alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>, each element of the covariance matrix can then be found as the inner product between two rows of the basis funciton matrix.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a></span>

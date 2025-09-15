@@ -55,6 +55,37 @@ categories:
 sns.set_style('darkgrid')
 sns.set_context('paper')
 sns.set_palette('colorblind')}-->
+<h2 id="learning-objectives">Learning Objectives</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/linear-algebra-and-regression.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/linear-algebra-and-regression.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<ul>
+<li>Connect objective-function and probabilistic (Gaussian noise) views of linear regression.</li>
+<li>Derive least squares from the Gaussian likelihood and log-likelihood.</li>
+<li>Build and interpret simple OLS models on the Olympic data.</li>
+<li>Visualise optimisation landscapes (contours) and understand coordinate descent behaviour.</li>
+<li>Move to multivariate regression: design vectors/matrices; absorb bias into the design.</li>
+<li>Derive and use the direct solution (normal equations); reason about conditioning.</li>
+<li>Recognise numerical issues with <span class="math inline">\(\boldsymbol{ \Phi}^\top\boldsymbol{ \Phi}\)</span> and apply QR decomposition for stable solves.</li>
+<li>Compare iterative optimisation (coordinate/gradient descent) with closed-form solutions and when to use each.</li>
+<li>Set up objective-based optimisation for multivariate linear regression.</li>
+<li>Be aware of related optimisation methods (Newton, quasi-Newton, momentum) and when they matter.</li>
+</ul>
+<h2 id="lecture-timing">Lecture Timing</h2>
+<ul>
+<li>Review — 5 min</li>
+<li>Regression examples &amp; motivation — 5 min</li>
+<li>Laplace/Gauss probabilistic view — 10 min</li>
+<li>Univariate Gaussian &amp; properties — 8 min</li>
+<li>Likelihood, log-likelihood &amp; sum-of-squares — 12 min</li>
+<li>Olympic data and OLS demo — 10 min</li>
+<li>Coordinate ascent &amp; contour visualisation — 10 min</li>
+<li>Multivariate regression &amp; vector notation — 8 min</li>
+<li>Direct solution (normal equations) — 7 min</li>
+<li>Objective optimisation + movie body count demo — 7 min</li>
+<li>QR decomposition for stability — 6 min</li>
+<li>Wrap-up &amp; Q&amp;A — 2 min</li>
+</ul>
 <h2 id="regression-examples">Regression Examples</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-examples.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-examples.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

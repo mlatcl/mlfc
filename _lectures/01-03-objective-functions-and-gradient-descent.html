@@ -51,6 +51,31 @@ categories:
 sns.set_style('darkgrid')
 sns.set_context('paper')
 sns.set_palette('colorblind')}-->
+<h2 id="learning-objectives">Learning Objectives</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/objective-functions-and-gradient-descent.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/objective-functions-and-gradient-descent.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<ul>
+<li>Explain the role of objective functions in ML and their relationship to prediction functions.</li>
+<li>Implement gradient descent for a simple regression objective; interpret learning curves.</li>
+<li>Derive and use stochastic gradient descent; contrast with batch GD.</li>
+<li>Understand step size (learning rate) effects and basic convergence intuition.</li>
+<li>Connect classification via the perceptron to optimisation of a margin-based objective.</li>
+<li>Visualise loss landscapes and trajectories (contours) for intuition.</li>
+<li>Recognise practical considerations: feature scaling, initialisation, stopping criteria.</li>
+<li>Situate GD within the broader optimisation toolbox (momentum, second-order methods) at a high level.</li>
+</ul>
+<h2 id="lecture-timing">Lecture Timing</h2>
+<ul>
+<li>Framing and objectives — 5 min</li>
+<li>Perceptron and classification setup — 10 min</li>
+<li>Toy data and hyperplane intuition — 8 min</li>
+<li>Regression objective and contour visualisation — 12 min</li>
+<li>Gradient descent derivation and demo — 15 min</li>
+<li>Stochastic gradient descent (SGD) — 15 min</li>
+<li>Practicalities: scaling, step size, stopping — 15 min</li>
+<li>Wrap-up &amp; Q&amp;A — 10 min</li>
+</ul>
 <p>On Monday we introduce machine learning and motivate the importance of probability. We suggested that many machine learning algorithms can be motivated by considering a prediction funcation and an objective function. Together these form our mode that can be combined with data through computation and used to make predictions.</p>
 <p>We also motivated the importance of probability. We introduced Laplace’s Gremlin and suggested that probability is a way of representing our ignorance. But objective functions are not always motivated by probability. Today we consider the optimisation of objective functions.</p>
 <p>But before we start specifically on objective functions we consider the oldest machine learning algorithm, the perceptron.</p>
@@ -224,6 +249,7 @@ x_1 = -\frac{b + x_2w_2}{w_1}
 <p>It’s worth having some reflections on the Perceptron and what it does. The algorithm is simple enough that you can go through the exact updates. What is it doing? When will it fail? What happens when you can’t separate the classes with a linear hyperplane? Why does this stop the algorithm converging? How might you fix the algorithm to make it converge?</p>
 <h2 id="the-objective-function">The Objective Function</h2>
 <p>Another question is where is the objective function? I like the Percptron because if you study the algorithm you get an insight into what its doing and that gives an intuition about how its updating the parameters. But it’s not easy to see how that connects to an objective function. Very often to define an algorithm its much easier to start with an <em>objective function</em> (otherwise known as a loss function, an error function or a cost function).</p>
+<h1 id="regression">Regression</h1>
 <h2 id="objective-functions-and-regression">Objective Functions and Regression</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -544,7 +570,7 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <p>Can you write your own implementation of mini-batch gradient ascent for the regression problem? Allow the user to choose the mini-batch size.</p>
 <h2 id="reflection-on-linear-regression-and-supervised-learning">Reflection on Linear Regression and Supervised Learning</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-iterative.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-iterative.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-reflection.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/regression-reflection.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Think about:</p>
 <ol type="1">
@@ -559,6 +585,7 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 <li><p>Are there any advantages for stochastic gradient descent for small data?</p></li>
 </ol>
 <p>for loss functions.</p>
+<p>for gradient descent.</p>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -571,10 +598,14 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 </ul>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
-<li>Section 1.1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
+<li><p>Section 1.1.3 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>
+<li><p>Section 8.1 of <span class="citation" data-cites="Bishop-deeplearning24">Bishop and Bishop (2024)</span></p></li>
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Bishop-deeplearning24" class="csl-entry" role="doc-biblioentry">
+Bishop, C.M., Bishop, H., 2024. Deep learning: Foundations and concepts. Springer.
+</div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
 Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
 </div>

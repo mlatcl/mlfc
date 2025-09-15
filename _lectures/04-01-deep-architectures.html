@@ -1,7 +1,7 @@
 ---
-title: "Deep Architectures and Automatic Differentiation"
+title: "Deep Architectures"
 venue: "Dedan Kimathi University of Technology, Nyeri, Kenya"
-abstract: "<p>This lecture will cover the foundations of automatic differentiation as well as the different frameworks that exist for building models. It’s based on a lecture originally given by Ferenc Huszár.</p>"
+abstract: "<p>This lecture will explore what happens when we compose layers of basis functions together to form deep neural networks.</p>"
 author:
 - given: Neil
   family: Lawrence
@@ -10,20 +10,13 @@ author:
   twitter: 
   gscholar: 
   orcid: 
-- given: Ferenc
-  family: Huszár
-  url: 
-  institute: 
-  twitter: 
-  gscholar: 
-  orcid: 
-edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/deep-architectures-and-automatic-differentiation.md
+edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/deep-architectures.md
 date: 2025-09-22
 time: "9:30"
 week: 4
 session: 1
-reveal: 04-01-deep-architectures-and-automatic-differentiation.slides.html
-ipynb: 04-01-deep-architectures-and-automatic-differentiation.ipynb
+reveal: 04-01-deep-architectures.slides.html
+ipynb: 04-01-deep-architectures.ipynb
 youtube: "-9O5obQZUn0"
 layout: lecture
 categories:
@@ -59,8 +52,10 @@ sns.set_context('paper')
 sns.set_palette('colorblind')}-->
 <h1 id="neural-networks">Neural Networks</h1>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/deep-architectures-and-automatic-differentiation.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/deep-architectures-and-automatic-differentiation.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/deep-architectures.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/deep-architectures.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
+<h2 id="shallow-and-deep-learning">Shallow and Deep Learning</h2>
+<p>So far, we have been talking about <em>linear models</em> or <em>shallow learning</em> as we might think of it. Let’s pause for a moment and consider a <em>fully connected</em> deep neural network model to relate the two ideas.</p>
 <h2 id="from-basis-functions-to-neural-networks-jax">From Basis Functions to Neural Networks (JAX)</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -74,121 +69,47 @@ sns.set_palette('colorblind')}-->
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>Recall $f(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ w}<span class="op">^\</span>top <span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x})$. In JAX, we write basis maps that take inputs <span class="kw">and</span> parameters <span class="kw">and</span> <span class="cf">return</span> features. A standard linear layer <span class="kw">is</span> a basis <span class="cf">with</span> $<span class="op">\</span>boldsymbol{<span class="op">\</span>phi}(<span class="op">\</span>mathbf{x}) <span class="op">=</span> <span class="op">\</span>mathbf{ x}$.</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_features(x):</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;&quot;&quot;Identity features (no bias), expects x of shape (n, d).&quot;&quot;&quot;</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_linear(params, x, features<span class="op">=</span>linear_features):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Linear model: w^T phi(x) + b.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    params: dict with &#39;W&#39; (d-&gt;o) and optional &#39;b&#39; (o,).&quot;&quot;&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> features(x)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> Phi <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&#39;b&#39;</span> <span class="kw">in</span> params:</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>The generalised linear models we work <span class="cf">with</span> allow us to create a model that <span class="kw">is</span> non<span class="op">-</span>linear <span class="kw">in</span> inputs, but linear <span class="kw">in</span> the parameters,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="op">\</span>mappingFunction(<span class="op">\</span>inputVector_i) <span class="op">=</span> <span class="op">\</span>mappingVector<span class="op">^\</span>top <span class="op">\</span>basisFunctionVector(<span class="op">\</span>inputVector_i).</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>We defined a basis, such <span class="im">as</span> the quadratic basis.</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jax_quadratic(x, <span class="op">**</span>kwargs):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Take in a vector of input values and return the design matrix associated with quadratic basis functions.&quot;&quot;&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.hstack([jnp.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</span></code></pre></div>
+<p>Here we’ve defined the function almost identically to the <code>numpy</code> version, only we imported <code>jax.numpy</code> instead of <code>numpy</code>.</p>
+<p>We can plot the basis just like before.</p>
 <h2 id="parametric-basis-functions">Parametric Basis Functions</h2>
 <p>We define parametric basis layers: affine transforms and non-linear activations. These combine to form neural networks.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> affine(params, x):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Affine transform: x -&gt; xW + b.&quot;&quot;&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">@</span> params[<span class="st">&#39;W&#39;</span>] <span class="op">+</span> params[<span class="st">&#39;b&#39;</span>]</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu(x):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.maximum(<span class="fl">0.0</span>, x)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tanh(x):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.tanh(x)</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> layer_apply(layer_params, x, activation<span class="op">=</span>relu):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply one dense layer + activation.&quot;&quot;&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> affine(layer_params, x)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> activation(h)</span></code></pre></div>
 <h2 id="multi-layer-perceptron-as-stacked-bases">Multi-Layer Perceptron as Stacked Bases</h2>
-<p>An MLP is a composition: <span class="math inline">\(\mathbf{x} \xrightarrow{\text{affine}} \boldsymbol{ h}_1 \xrightarrow{\sigma} \xrightarrow{\text{affine}} \dots \xrightarrow{\text{affine}} \hat{\mathbf{ y}}\)</span>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_dense_params(key, in_dim, out_dim, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    k1, k2 <span class="op">=</span> random.split(key)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> scale <span class="op">*</span> random.normal(k1, (in_dim, out_dim))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> scale <span class="op">*</span> random.normal(k2, (out_dim,))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;W&#39;</span>: W, <span class="st">&#39;b&#39;</span>: b}</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;layer_sizes: [in, h1, h2, ..., out]&quot;&quot;&quot;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> random.split(key, <span class="bu">len</span>(layer_sizes)<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    layers <span class="op">=</span> []</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, (din, dout) <span class="kw">in</span> <span class="bu">zip</span>(keys, <span class="bu">zip</span>(layer_sizes[:<span class="op">-</span><span class="dv">1</span>], layer_sizes[<span class="dv">1</span>:])):</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        layers.append(init_dense_params(k, din, dout, scale<span class="op">=</span>scale))</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> layers</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mlp_apply(params, x, activation<span class="op">=</span>relu):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Apply MLP to inputs x (n, d). Last layer linear.&quot;&quot;&quot;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> x</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> layer <span class="kw">in</span> params[:<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> layer_apply(layer, h, activation<span class="op">=</span>activation)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Last layer linear (no non-linearity)</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> affine(params[<span class="op">-</span><span class="dv">1</span>], h)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span></code></pre></div>
 <h2 id="loss-and-training-jax-gradjit">Loss and Training (JAX grad/jit)</h2>
 <p>We use squared error and train with gradient descent. JAX allows JIT compilation and automatic differentiation.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Params is a list of dicts; apply tree map-style update</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    new_params <span class="op">=</span> []</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p, g <span class="kw">in</span> <span class="bu">zip</span>(params, grads):</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        new_params.append({k: p[k] <span class="op">-</span> lr <span class="op">*</span> g[k] <span class="cf">for</span> k <span class="kw">in</span> p})</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_params, loss</span></code></pre></div>
-<h2 id="demo-fit-a-1d-nonlinear-function">Demo: Fit a 1D Nonlinear Function</h2>
-<p>We fit a simple nonlinear mapping with an MLP to illustrate stacking basis layers.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create synthetic 1D regression data</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> jnp.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> jnp.sin(x) <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> jnp.cos(<span class="dv">2</span><span class="op">*</span>x)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> noise <span class="op">*</span> random.normal(key, f.shape)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> f <span class="op">+</span> eps</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, f</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x, y, f_true <span class="op">=</span> make_data(n<span class="op">=</span><span class="dv">128</span>, noise<span class="op">=</span><span class="fl">0.05</span>, key<span class="op">=</span>key)</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init MLP: 1 -&gt; 64 -&gt; 64 -&gt; 1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>layer_sizes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">1</span>]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> init_mlp_params(key, layer_sizes, scale<span class="op">=</span><span class="fl">0.1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2000</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">1e-2</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>apply_fn <span class="op">=</span> partial(mlp_apply, activation<span class="op">=</span>relu)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>loss_trace <span class="op">=</span> []</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    params, loss <span class="op">=</span> update(params, x, y, lr, apply_fn)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> <span class="dv">100</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        loss_trace.append((i, <span class="bu">float</span>(loss))) </span></code></pre></div>
-<div class="figure">
-<div id="basis-to-nn-jax-demo-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/basis-to-nn-jax-demo.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="basis-to-nn-jax-demo-magnify" class="magnify" onclick="magnifyFigure(&#39;basis-to-nn-jax-demo&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="basis-to-nn-jax-demo-caption" class="caption-frame">
-<p>Figure: From basis functions to multilayer neural networks in JAX.</p>
-</div>
-</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Params is a list of dicts; apply tree map-style update</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    new_params <span class="op">=</span> []</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p, g <span class="kw">in</span> <span class="bu">zip</span>(params, grads):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        new_params.append({k: p[k] <span class="op">-</span> lr <span class="op">*</span> g[k] <span class="cf">for</span> k <span class="kw">in</span> p})</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_params, loss</span></code></pre></div>
+<h2 id="demo-olympics-data-with-a-neural-network">Demo: Olympics Data with a Neural Network</h2>
 <h2 id="discussion">Discussion</h2>
-<p>Each dense layer is a parametric basis mapping; stacking them with non-linearities yields universal approximators. JAX lets us compose, differentiate, and JIT-compile these computations for efficient training.</p>
-<h2 id="shallow-and-deep-learning">Shallow and Deep Learning</h2>
-<p>So far, we have been talking about <em>linear models</em> or <em>shallow learning</em> as we might think of it. Let’s pause for a moment and consider a <em>fully connected</em> deep neural network model to relate the two ideas.</p>
 <h2 id="deep-neural-network">Deep Neural Network</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install daft</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install daft</span></code></pre></div>
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepgp/deep-nn2.svg" width="70%" style=" ">
@@ -250,16 +171,16 @@ sns.set_palette('colorblind')}-->
 </tr>
 </table>
 <p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
@@ -306,16 +227,16 @@ sns.set_palette('colorblind')}-->
 <h2 id="choice-of-validation-set">Choice of Validation Set</h2>
 <h2 id="hold-out-data">Hold Out Data</h2>
 <p>You have a conclusion as to which model fits best under the training error, but how do the two models perform in terms of validation? In this section we consider <em>hold out</em> validation. In hold out validation we remove a portion of the training data for <em>validating</em> the model on. The remaining data is used for fitting the model (training). Because this is a time series prediction, it makes sense for us to hold out data at the end of the time series. This means that we are validating on future predictions. We will hold out data from after 1980 and fit the model to the data before 1980.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select indices of data to &#39;hold out&#39;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>indices_hold_out <span class="op">=</span> np.flatnonzero(x<span class="op">&gt;</span><span class="dv">1980</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a training set</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> np.delete(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> np.delete(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a hold out set</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>x_valid <span class="op">=</span> np.take(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>y_valid <span class="op">=</span> np.take(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select indices of data to &#39;hold out&#39;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>indices_hold_out <span class="op">=</span> np.flatnonzero(x<span class="op">&gt;</span><span class="dv">1980</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a training set</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> np.delete(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> np.delete(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a hold out set</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>x_valid <span class="op">=</span> np.take(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>y_valid <span class="op">=</span> np.take(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>For both the linear and quadratic models, fit the model to the data up until 1980 and then compute the error on the held out data (from 1980 onwards). Which model performs better on the validation data?</p>
 <h2 id="richer-basis-set">Richer Basis Set</h2>
@@ -356,44 +277,44 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \ma
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bias-variance-plots.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bias-variance-plots.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Helper function for sampling data from two different classes.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <p>Helper function for plotting the decision boundary of the SVM.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>font <span class="op">=</span> {<span class="st">&#39;family&#39;</span> : <span class="st">&#39;sans&#39;</span>,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;weight&#39;</span> : <span class="st">&#39;bold&#39;</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;size&#39;</span>   : <span class="dv">22</span>}</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>matplotlib.rc(<span class="st">&#39;font&#39;</span>, <span class="op">**</span>font)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> svm</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of SVM and fit the data. </span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># SVM regularization parameter</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>gammas <span class="op">=</span> [<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>]</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>per_class<span class="op">=</span><span class="dv">30</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>num_samps <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set-up 2x2 grid for plotting.</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">3</span>))</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>xlim<span class="op">=</span><span class="va">None</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>ylim<span class="op">=</span><span class="va">None</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> samp <span class="kw">in</span> <span class="bu">range</span>(num_samps):</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    X, y<span class="op">=</span>create_data(per_class)</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> []</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    titles <span class="op">=</span> []</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gamma <span class="kw">in</span> gammas:</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        models.append(svm.SVC(kernel<span class="op">=</span><span class="st">&#39;rbf&#39;</span>, gamma<span class="op">=</span>gamma, C<span class="op">=</span>C))</span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>        titles.append(<span class="st">&#39;$\gamma=</span><span class="sc">{}</span><span class="st">$&#39;</span>.<span class="bu">format</span>(gamma))</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> (cl.fit(X, y) <span class="cf">for</span> cl <span class="kw">in</span> models)</span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    xlim, ylim <span class="op">=</span> decision_boundary_plot(models, X, y, </span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>                           axs<span class="op">=</span>ax, </span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>                           filename<span class="op">=</span><span class="st">&#39;bias-variance</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>samp), </span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>                           directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>                           titles<span class="op">=</span>titles,</span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>                          xlim<span class="op">=</span>xlim,</span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>                          ylim<span class="op">=</span>ylim)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(<span class="st">&#39;https://raw.githubusercontent.com/lawrennd/talks/gh-pages/mlai.py&#39;</span>,<span class="st">&#39;mlai.py&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>font <span class="op">=</span> {<span class="st">&#39;family&#39;</span> : <span class="st">&#39;sans&#39;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;weight&#39;</span> : <span class="st">&#39;bold&#39;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;size&#39;</span>   : <span class="dv">22</span>}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>matplotlib.rc(<span class="st">&#39;font&#39;</span>, <span class="op">**</span>font)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> svm</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an instance of SVM and fit the data. </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># SVM regularization parameter</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>gammas <span class="op">=</span> [<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>per_class<span class="op">=</span><span class="dv">30</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>num_samps <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set-up 2x2 grid for plotting.</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">3</span>))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>xlim<span class="op">=</span><span class="va">None</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>ylim<span class="op">=</span><span class="va">None</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> samp <span class="kw">in</span> <span class="bu">range</span>(num_samps):</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    X, y<span class="op">=</span>create_data(per_class)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> []</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    titles <span class="op">=</span> []</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gamma <span class="kw">in</span> gammas:</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        models.append(svm.SVC(kernel<span class="op">=</span><span class="st">&#39;rbf&#39;</span>, gamma<span class="op">=</span>gamma, C<span class="op">=</span>C))</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        titles.append(<span class="st">&#39;$\gamma=</span><span class="sc">{}</span><span class="st">$&#39;</span>.<span class="bu">format</span>(gamma))</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> (cl.fit(X, y) <span class="cf">for</span> cl <span class="kw">in</span> models)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    xlim, ylim <span class="op">=</span> decision_boundary_plot(models, X, y, </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>                           axs<span class="op">=</span>ax, </span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>                           filename<span class="op">=</span><span class="st">&#39;bias-variance</span><span class="sc">{samp:0&gt;3}</span><span class="st">.svg&#39;</span>.<span class="bu">format</span>(samp<span class="op">=</span>samp), </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                           directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                           titles<span class="op">=</span>titles,</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>                          xlim<span class="op">=</span>xlim,</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                          ylim<span class="op">=</span>ylim)</span></code></pre></div>
 <!---->
 <div class="figure">
 <div id="bias-variance-errors-figure" class="figure-frame">
@@ -516,7 +437,6 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 \]</span> In these models, a gradient flow analysis shows that the model finds solutions where the linear mapping, <span class="math display">\[
 \mathbf{W}= \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1 
 \]</span> is very low rank. This is highly suggestive of another type of regularization that could be occurring in deep neural networks. Low rank parameter matrices mean that the effective capacity of the neural network is reduced. Indeed, empirical observations of the rank of deep nets trained on data suggest that they may be finding such solutions.</p>
-<p>The first part of this lecture is based on a presentation by Ferenc Huszár on the Deep Neural Network course at the University of Cambridge. Ferenc’s original slides <a href="https://hackmd.io/@fhuszar/H1WZ70kl_#">are here</a> and his notes on approximating with ReLU are <a href="https://hackmd.io/@fhuszar/S1UdOvZe_">here</a>. His notes on automatic differentiation <a href="https://hackmd.io/@fhuszar/SyHTInWeu">are here</a>. His Google colab notebook is <a href="https://colab.research.google.com/drive/1qioPLq-dxOwudPKXU3MxpHr2s4Su3dxI?usp=sharing">here</a>. He also recommended a review paper from <a href="https://jmlr.org/papers/v18/17-468.html">JMLR</a> <span class="citation" data-cites="Baydin-autodiff18">Baydin et al. (2018)</span> (See Figure 2).</p>
 <h2 id="chain-rule-and-back-propgation">Chain Rule and Back Propgation</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/back-propagation-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/back-propagation-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -637,6 +557,7 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
+<p>See also the presentation by Ferenc Huszár on the Deep Neural Network course at the University of Cambridge. Ferenc’s original slides <a href="https://hackmd.io/@fhuszar/H1WZ70kl_#">are here</a> and his notes on approximating with ReLU are <a href="https://hackmd.io/@fhuszar/S1UdOvZe_">here</a>. His notes on automatic differentiation <a href="https://hackmd.io/@fhuszar/SyHTInWeu">are here</a>. His Google colab notebook is <a href="https://colab.research.google.com/drive/1qioPLq-dxOwudPKXU3MxpHr2s4Su3dxI?usp=sharing">here</a>. He also recommended a review paper from <a href="https://jmlr.org/papers/v18/17-468.html">JMLR</a> <span class="citation" data-cites="Baydin-autodiff18">Baydin et al. (2018)</span> (See Figure 2).</p>
 <p>The chain of matrix multiplications gives us a choice about how we evaluate this system. <span class="math display">\[
 \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ w}} = \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ f}_{L-1}} \frac{\text{d} \mathbf{ f}_{L-1}}{\text{d} \mathbf{ f}_{L-2}} \frac{\text{d} \mathbf{ f}_{L-2}}{\text{d} \mathbf{ f}_{L-3}} \cdots \frac{\text{d} \mathbf{ f}_3}{\text{d} \mathbf{ f}_{2}} \frac{\text{d} \mathbf{ f}_2}{\text{d} \mathbf{ f}_{1}} \frac{\text{d} \mathbf{ f}_1}{\text{d} \mathbf{ w}} 
 \]</span></p>
@@ -697,12 +618,12 @@ d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\e
 <h2 id="computational-graphs-and-pytorch-autodiff">Computational Graphs and PyTorch Autodiff</h2>
 <p>Modern frameworks build a dynamic computational graph as you compute, then traverse it in reverse to accumulate gradients.</p>
 <p>Minimal PyTorch example (CPU/GPU agnostic):</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
 <p>PyTorch attaches <code>grad_fn</code> to results, constructs the graph dynamically during forward, and supports GPU execution via <code>.cuda()</code>. These conveniences, together with autodiff, enable fast deep learning experimentation.</p>
 <h2 id="practical-optimisation-notes">Practical Optimisation Notes</h2>
 <h2 id="timing-guidance-for-2-hours">Timing Guidance (for 2 hours)</h2>
@@ -719,14 +640,14 @@ H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\
 \mathbf{v}^\top H(\mathbf{w}) = \frac{\partial}{\partial\mathbf{w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{w}) \right)
 \]</span></p>
 <p>Live-coding HVP in PyTorch (mixed-mode via backward-over-backward or autograd.functional). Using a quadratic ensures a non-zero Hessian (2I):</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
 <h2 id="learning-objectives">Learning Objectives</h2>
 <h2 id="agenda">Agenda</h2>
 <p>David Hogg’s lecture <a href="https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters" class="uri">https://speakerdeck.com/dwhgg/linear-regression-with-huge-numbers-of-parameters</a></p>

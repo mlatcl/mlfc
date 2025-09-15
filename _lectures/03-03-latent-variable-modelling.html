@@ -531,7 +531,7 @@ f_p(\mathbf{ z})\end{bmatrix}
 f_j(\mathbf{ z}) =
 \mathbf{ w}_{j, :}^\top \mathbf{ z},
 \]</span> for each element of the vector valued function, where <span class="math inline">\(\mathbf{ w}_{:, j}\)</span> is the <span class="math inline">\(j\)</span>th column of the matrix <span class="math inline">\(\mathbf{W}\)</span>. In that context each column of <span class="math inline">\(\mathbf{W}\)</span> is a vector of <em>regression weights</em>. This is a multiple input and multiple output regression. Our inputs (or covariates) have dimensionality greater than 1 and our outputs (or response variables) also have dimensionality greater than one. Just as in a standard regression, we are assuming that we don’t observe the function directly (note that this <em>also</em> makes the function a <em>type</em> of latent variable), but we observe some corrupted variant of the function, where the corruption is given by <span class="math inline">\(\boldsymbol{ \epsilon}\)</span>. Just as in linear regression we can assume that this corruption is given by Gaussian noise, where the noise for the <span class="math inline">\(j\)</span>th element of <span class="math inline">\(\mathbf{ y}\)</span> is by, <span class="math display">\[
-\epsilon_j \sim \mathcal{N}\left(0,\sigma^2_j\right).
+\epsilon_j \sim \mathscr{N}\left(0,\sigma^2_j\right).
 \]</span> Of course, just as in a regression problem we also need to make an assumption across the individual data points to form our full likelihood. Our data set now consists of many observations of <span class="math inline">\(\mathbf{ y}\)</span> for diffetent individuals. We store these observations in a <em>design matrix</em>, <span class="math inline">\(\mathbf{Y}\)</span>, where each <em>row</em> of <span class="math inline">\(\mathbf{Y}\)</span> contains the observation for one individual. To emphasize that <span class="math inline">\(\mathbf{ y}\)</span> is a vector derived from a row of <span class="math inline">\(\mathbf{Y}\)</span> we represent the observation of the features associated with the <span class="math inline">\(i\)</span>th individual by <span class="math inline">\(\mathbf{ y}_{i, :}\)</span>, and place each individual in our data matrix,</p>
 <p><span class="math display">\[
 \mathbf{Y}
@@ -552,16 +552,16 @@ f_j(\mathbf{ z}_{i, :}) = \mathbf{ w}_{j, :}^\top
 <h2 id="latent-variables-vs-linear-regression">Latent Variables vs Linear Regression</h2>
 <p>The difference between this model and a multiple output regression is that in the regression case we are provided with the covariates <span class="math inline">\(\mathbf{Z}\)</span>, here they are <em>latent variables</em>. These variables are unknown. Just as we have done in the past for unknowns, we now treat them with a probability distribution. In <em>factor analysis</em> we assume that the latent variables have a Gaussian density which is independent across both across the latent variables associated with the different data points, and across those associated with different data features, so we have, <span class="math display">\[
 x_{i,j} \sim
-\mathcal{N}\left(0,1\right),
+\mathscr{N}\left(0,1\right),
 \]</span> and we can write the density governing the latent variable associated with a single point as, <span class="math display">\[
-\mathbf{ z}_{i, :} \sim \mathcal{N}\left(\mathbf{0},\mathbf{I}\right).
+\mathbf{ z}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right).
 \]</span> If we consider the values of the function for the <span class="math inline">\(i\)</span>th data point as <span class="math display">\[
 \mathbf{f}_{i, :} =
 \mathbf{f}(\mathbf{ z}_{i, :}) = \mathbf{W}\mathbf{ z}_{i, :} 
 \]</span> then we can use the rules for multivariate Gaussian relationships to write that <span class="math display">\[
-\mathbf{f}_{i, :} \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
+\mathbf{f}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span> which implies that the distribution for <span class="math inline">\(\mathbf{ y}_{i, :}\)</span> is given by <span class="math display">\[
-\mathbf{ y}_{i, :} = \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\right)
+\mathbf{ y}_{i, :} = \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\right)
 \]</span> where <span class="math inline">\(\boldsymbol{\Sigma}\)</span> the covariance of the noise variable, <span class="math inline">\(\epsilon_{i, :}\)</span> which for factor analysis is a diagonal matrix (because we have assumed that the noise was <em>independent</em> across the features), <span class="math display">\[
 \boldsymbol{\Sigma} = \begin{bmatrix}\sigma^2_{1} &amp; 0 &amp; 0 &amp; 0\\
 0 &amp; \sigma^2_{2} &amp; 0 &amp; 0\\
@@ -579,7 +579,7 @@ x_{i,j} \sim
 <h1 id="principal-component-analysis">Principal Component Analysis</h1>
 <p>In 1933 <a href="http://en.wikipedia.org/wiki/Harold_Hotelling">Harold Hotelling</a> published on <em>principal component analysis</em> the first mention of this approach <span class="citation" data-cites="Hotelling:analysis33">(Hotelling, 1933)</span>. Hotelling’s inspiration was to provide mathematical foundation for factor analysis methods that were by then widely used within psychology and the social sciences. His model was a factor analysis model, but he considered the noiseless ‘limit’ of the model. In other words he took <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span> so that he had</p>
 <p><span class="math display">\[
-\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0} \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right).
+\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0} \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right).
 \]</span> The paper had two unfortunate effects. Firstly, the resulting model is no longer valid probablistically, because the covariance of this Gaussian is ‘degenerate.’ Because <span class="math inline">\(\mathbf{W}\mathbf{W}^\top\)</span> has rank of at most <span class="math inline">\(q\)</span> where <span class="math inline">\(q&lt;p\)</span> (due to the dimensionality reduction) the determinant of the covariance is zero, meaning the inverse doesn’t exist so the density, <span class="math display">\[
 p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 \lim_{\sigma^2 \rightarrow 0} \frac{1}{(2\pi)^\frac{p}{2}
@@ -590,13 +590,13 @@ p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 <p>However, the paper had one great advantage over standard approaches to factor analysis. Despite the fact that the model was a special case that is subsumed by the more general approach of factor analysis it is this special case that leads to a particular algorithm, namely that the factor loadings (or principal components as Hotelling referred to them) are given by an <em>eigenvalue decomposition</em> of the empirical covariance matrix.</p>
 <h2 id="computation-of-the-marginal-likelihood">Computation of the Marginal Likelihood</h2>
 <p><span class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{ \epsilon}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
+\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
+\mathbf{W}\mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span></p>
 <p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim \mathcal{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
+\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
 \]</span></p>
 <p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999a)</span>)</p>
 <div class="figure">
@@ -612,7 +612,7 @@ p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 <p>Figure: Graphical model representing probabilistic PCA.</p>
 </div>
 </div>
-<p><span class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathcal{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
+<p><span class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
 <h2 id="eigenvalue-decomposition">Eigenvalue Decomposition</h2>
 <p>Eigenvalue problems are widespreads in physics and mathematics, they are often written as a matrix/vector equation but we prefer to write them as a full matrix equation. In an eigenvalue problem you are looking to find a matrix of eigenvectors, <span class="math inline">\(\mathbf{U}\)</span> and a <em>diagonal</em> matrix of eigenvalues, <span class="math inline">\(\boldsymbol{\Lambda}\)</span> that satisfy the <em>matrix</em> equation <span class="math display">\[
 \mathbf{A}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}.
@@ -676,12 +676,12 @@ b_i^2
 <p>This linear relationship between the observed data and the latent variables is at the heart of Hotelling’s original formulation of PCA. It explicitly models the idea that the observed high-dimensional data is generated from a lower-dimensional set of latent variables, with some added noise. This perspective aligns PCA more closely with factor analysis and highlights its nature as a latent variable model.</p>
 <p>Probabilistic PCA (PPCA) provides a probabilistic interpretation of PCA by explicitly modeling the generative process that creates the observed data. The model assumes that each high-dimensional data point <span class="math inline">\(\mathbf{ y}_{i,:}\)</span> is generated from a lower-dimensional latent variable <span class="math inline">\(\mathbf{ z}_{i,:}\)</span> through a linear transformation with added Gaussian noise: <span class="math display">\[
 \mathbf{ y}_{i,:} = \mathbf{W}\mathbf{ z}_{i,:} + \boldsymbol{ \epsilon}_{i,:}
-\]</span> where <span class="math inline">\(\boldsymbol{ \epsilon}_{i,:} \sim \mathcal{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)\)</span> represents isotropic Gaussian noise. The model places a standard Gaussian prior over the latent variables: <span class="math display">\[
-p(\mathbf{ z}_{i,:}) = \mathcal{N}\left(\mathbf{ z}_{i,:}|\mathbf{0},\mathbf{I}\right)
+\]</span> where <span class="math inline">\(\boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)\)</span> represents isotropic Gaussian noise. The model places a standard Gaussian prior over the latent variables: <span class="math display">\[
+p(\mathbf{ z}_{i,:}) = \mathscr{N}\left(\mathbf{ z}_{i,:}|\mathbf{0},\mathbf{I}\right)
 \]</span> Given these assumptions, the conditional probability of observing a data point given its latent representation is: <span class="math display">\[
-p(\mathbf{ y}_{i,:}|\mathbf{ z}_{i,:},\mathbf{W}) = \mathcal{N}\left(\mathbf{ y}_{i,:}|\mathbf{W}\mathbf{ z}_{i,:},\sigma^2\mathbf{I}\right)
+p(\mathbf{ y}_{i,:}|\mathbf{ z}_{i,:},\mathbf{W}) = \mathscr{N}\left(\mathbf{ y}_{i,:}|\mathbf{W}\mathbf{ z}_{i,:},\sigma^2\mathbf{I}\right)
 \]</span> By integrating out the latent variables, we obtain the marginal likelihood of the data: <span class="math display">\[
-p(\mathbf{ y}_{i,:}|\mathbf{W}) = \mathcal{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)
+p(\mathbf{ y}_{i,:}|\mathbf{W}) = \mathscr{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)
 \]</span> This probabilistic formulation, developed by Tipping and Bishop <span class="citation" data-cites="Tipping-probpca99">(Tipping and Bishop, 1999a)</span>, provides a principled framework that not only recovers classical PCA as a special case when <span class="math inline">\(\sigma^2 \to 0\)</span>, but also enables extensions like handling missing data and mixture models.</p>
 <div class="figure">
 <div id="ppca-graph-figure" class="figure-frame">
@@ -700,7 +700,7 @@ p(\mathbf{ y}_{i,:}|\mathbf{W}) = \mathcal{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},
 \boldsymbol{\Sigma} = \sigma^2 \mathbf{I}.
 \]</span> This leads to a marginal likelihood of the form <span class="math display">\[
 p(\mathbf{Y}|\mathbf{W}, \sigma^2)
-= \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
+= \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
 \]</span> where the limit of <span class="math inline">\(\sigma^2\rightarrow 0\)</span> is <em>not</em> taken. This defines a proper probabilistic model. Tippping and Bishop then went on to prove that the <em>maximum likelihood</em> solution of this model with respect to <span class="math inline">\(\mathbf{W}\)</span> is given by an eigenvalue problem. In the probabilistic PCA case the eigenvalues and eigenvectors are given as follows. <span class="math display">\[
 \mathbf{W}= \mathbf{U}\mathbf{L} \mathbf{R}^\top
 \]</span> where <span class="math inline">\(\mathbf{U}\)</span> is the eigenvectors of the empirical covariance matrix <span class="math display">\[
@@ -751,7 +751,7 @@ p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) \propto p(\mathbf{ y}_{i,
 \]</span></p>
 <h3 id="exercise-4">Exercise 4</h3>
 <p>Multiply out the terms in the brackets. Then collect the quadratic term and the linear terms together. Show that the posterior has the form <span class="math display">\[
-\mathbf{ z}_{i, :} | \mathbf{W}\sim \mathcal{N}\left(\boldsymbol{ \mu}_x,\mathbf{C}_x\right)
+\mathbf{ z}_{i, :} | \mathbf{W}\sim \mathscr{N}\left(\boldsymbol{ \mu}_x,\mathbf{C}_x\right)
 \]</span> where <span class="math display">\[
 \mathbf{C}_x = \left(\sigma^{-2}
 \mathbf{W}^\top\mathbf{W}+ \mathbf{I}\right)^{-1}
@@ -900,10 +900,10 @@ f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
 </div>
 <p>We have developed the posterior density over the latent variables given the data and the parameters, and due to symmetries in the underlying prediction function, it has a very similar form to its sister density, the posterior of the weights given the data from Bayesian regression. Two key differences are as follows. If we were to do a Bayesian multiple output regression we would find that the marginal likelihood of the data is independent across the features and correlated across the data, <span class="math display">\[
 p(\mathbf{Y}|\mathbf{Z})
-= \prod_{j=1}^p \mathcal{N}\left(\mathbf{ y}_{:, j}|\mathbf{0},
+= \prod_{j=1}^p \mathscr{N}\left(\mathbf{ y}_{:, j}|\mathbf{0},
 \alpha\mathbf{Z}\mathbf{Z}^\top + \sigma^2 \mathbf{I}\right)
 \]</span> where <span class="math inline">\(\mathbf{ y}_{:, j}\)</span> is a column of the data matrix and the independence is across the <em>features</em>, in probabilistic PCA the marginal likelihood has the form, <span class="math display">\[
-p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
+p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 :}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
 \]</span> where <span class="math inline">\(\mathbf{ y}_{i, :}\)</span> is a row of the data matrix <span class="math inline">\(\mathbf{Y}\)</span> and the independence is across the data points.</p>
 <h1 id="computation-of-the-log-likelihood">Computation of the Log Likelihood</h1>
@@ -1042,9 +1042,9 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
 </div>
 <p>Multi-Dimensional Scaling (MDS) is a classical approach to dimensionality reduction that works directly with similarities or proximities between entities. The goal is to find a geometric configuration that preserves these relationships.</p>
 <h2 id="the-mds-objective">The MDS Objective</h2>
-<p>Given <span class="math inline">\(n\)</span> entities and a matrix of proximity relationships between them <span class="math inline">\(\Delta\)</span> where <span class="math inline">\(\Delta_{ij}\)</span> is the relationship between entity <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, our task is to find an embedding <span class="math inline">\(\mathbf{Y}= [\mathbf{ y}_1, \ldots, \mathbf{ y}_n]\)</span> such that <span class="math inline">\(\|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2} \approx \delta_{ij}\)</span>.</p>
-<p>In MDS this is formulated as minimizing the Frobenius norm between the given proximity matrix <span class="math inline">\(\Delta\)</span> and the one calculated directly from the embedding <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> where <span class="math inline">\(\mathbf{ \MakeUppercase{d}}_{ij} = \|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2}\)</span>:</p>
-<p><span class="math display">\[\hat{\mathbf{Y}} = \argmin_{\mathbf{Y}} \|\mathbf{ \MakeUppercase{d}}- \Delta\|_F\]</span></p>
+<p>Given <span class="math inline">\(n\)</span> entities and a matrix of proximity relationships between them <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> where <span class="math inline">\(\mathbf{ \MakeUppercase{d}}_{ij}\)</span> is the relationship between entity <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, our task is to find an embedding <span class="math inline">\(\mathbf{Y}= [\mathbf{ y}_1, \ldots, \mathbf{ y}_n]\)</span> such that <span class="math inline">\(\|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2} \approx \delta_{ij}\)</span>.</p>
+<p>In MDS this is formulated as minimizing the Frobenius norm between the given proximity matrix <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> and the one calculated directly from the embedding <span class="math inline">\(\boldsymbol{ \Delta}\)</span> where <span class="math inline">\(\boldsymbol{ \Delta}_{ij} = \|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2}\)</span>:</p>
+<p><span class="math display">\[\hat{\mathbf{Y}} = \argmin_{\mathbf{Y}} \|\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}}\|_F\]</span></p>
 <h2 id="properties-of-the-frobenius-norm">Properties of the Frobenius Norm</h2>
 <p>The Frobenius norm is the generalization of the Euclidean norm to matrices. The general element-wise norm for matrices <span class="math inline">\(L_{p,q}\)</span> takes the form:</p>
 <p><span class="math display">\[\|\mathbf{W}\|_{p,q} = \left(\sum_{j=1}^n \left(\sum_{i=1}^m |m_{ij}|^p\right)^{\frac{q}{p}}\right)^{\frac{1}{q}}\]</span></p>
@@ -1053,48 +1053,54 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
 <h2 id="mds-solution">MDS Solution</h2>
 <p>Using the properties of similar matrices that we established earlier, if <span class="math inline">\(\mathbf{A}\sim \mathbf{B}\)</span> then <span class="math inline">\(\mathbf{A}^2 \sim \mathbf{B}^2\)</span> and the trace is invariant under similarity. This means that if we diagonalize a matrix through its eigendecomposition, the Frobenius norm is simply the square root of the sum of the eigenvalues.</p>
 <p>Using this, we can rewrite the MDS optimization problem:</p>
-<p><span class="math display">\[\argmin_{\mathbf{ \MakeUppercase{d}}} \|\mathbf{ \MakeUppercase{d}}- \Delta\|_F^2 = \argmin_{\mathbf{ \MakeUppercase{d}}} \text{trace}(\mathbf{ \MakeUppercase{d}}- \Delta)^2\]</span></p>
-<p>Now we will write <span class="math inline">\(\Delta\)</span> using its eigendecomposition and also rewrite <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> using a similar matrix:</p>
+<p><span class="math display">\[\argmin_{\boldsymbol{ \Delta}} \|\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}}\|_F^2 = \argmin_{\boldsymbol{ \Delta}} \text{trace}(\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}})^2\]</span></p>
+<p>Now we will write <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> using its eigendecomposition and also rewrite <span class="math inline">\(\boldsymbol{ \Delta}\)</span> using a similar matrix:</p>
 <p><span class="math display">\[\argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top - \mathbf{U}\boldsymbol{ \Lambda}\mathbf{U}^\top)^2\]</span></p>
 <p>Using the fact that the trace is invariant under similarity transform, we can pre and post multiply with the known eigenvectors of the proximity matrix:</p>
 <p><span class="math display">\[\argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{U}^\top(\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top - \mathbf{U}\boldsymbol{ \Lambda}\mathbf{U}^\top)\mathbf{U})^2\]</span> <span class="math display">\[= \argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{U}^\top\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top\mathbf{U}- \boldsymbol{ \Lambda})^2\]</span></p>
 <p>From the above we can see that we have a diagonal matrix <span class="math inline">\(\boldsymbol{ \Lambda}\)</span> that we want to match by choosing <span class="math inline">\(\mathbf{W}\)</span> and <span class="math inline">\(\hat{\boldsymbol{ \Lambda}}\)</span>. This means that as <span class="math inline">\(\hat{\boldsymbol{ \Lambda}}\)</span> is diagonal, the minima will be achieved when <span class="math inline">\(\mathbf{U}^\top\mathbf{W}= \mathbf{I}\)</span>. This leads to:</p>
 <p><span class="math display">\[\argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{U}^\top\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top\mathbf{U}- \boldsymbol{ \Lambda})^2 = \argmin_{\hat{\boldsymbol{ \Lambda}}} \text{trace}(\hat{\boldsymbol{ \Lambda}} - \boldsymbol{ \Lambda})^2\]</span> <span class="math display">\[= \sum_{i=1}^N (\hat{\lambda}_i - \lambda_i)^2\]</span></p>
 <h2 id="rank-constrained-solution">Rank-Constrained Solution</h2>
-<p>To provide a rank <span class="math inline">\(d\)</span> approximation <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> to <span class="math inline">\(\Delta\)</span> we should therefore match the largest <span class="math inline">\(d\)</span> eigenvalues and choose:</p>
-<p><span class="math display">\[\mathbf{ \MakeUppercase{d}}= \sum_{i=1}^d \lambda_i u_i u_i^\top\]</span></p>
-<p>where the eigenvalues have been sorted such that <span class="math inline">\(\lambda_i \geq \lambda_j\)</span> when <span class="math inline">\(i &lt; j\)</span>. This leads to the following error of the embedding:</p>
-<p><span class="math display">\[\|\mathbf{ \MakeUppercase{d}}- \Delta\|_F = \sqrt{\sum_{i=d+1}^N \lambda_i^2}\]</span></p>
+<p>To provide a rank <span class="math inline">\(q\)</span> approximation <span class="math inline">\(\boldsymbol{ \Delta}\)</span> to <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> we should therefore match the largest <span class="math inline">\(q\)</span> eigenvalues and choose <span class="math display">\[
+\boldsymbol{ \Delta}= \sum_{j=1}^q\lambda_i u_j u_i^\top
+\]</span> where the eigenvalues have been sorted such that <span class="math inline">\(\lambda_i \geq \lambda_j\)</span> when <span class="math inline">\(i &lt; j\)</span>. This leads to the following error of the embedding: <span class="math display">\[
+\|\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}}\|_F = \sqrt{\sum_{i=q+1}^n\lambda_i^2}
+\]</span></p>
 <h1 id="equivalence-between-mds-and-pca">Equivalence between MDS and PCA</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/mds-pca-equivalence.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/mds-pca-equivalence.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We can derive a simple equivalence between MDS and PCA in the linear setting. While MDS diagonalizes the <span class="math inline">\(n\times n\)</span> Gram matrix <span class="math inline">\(\mathbf{Y}\mathbf{Y}^\top\)</span>, PCA diagonalizes the <span class="math inline">\(p\times p\)</span> sample covariance matrix <span class="math inline">\(\frac{1}{n-1}\mathbf{Y}^\top\mathbf{Y}\)</span>. We’ll show the connection between these diagonalizations and how their eigenvectors relate.</p>
 <h2 id="connecting-the-eigendecompositions">Connecting the Eigendecompositions</h2>
-<p>Starting from the Gram matrix eigendecomposition:</p>
-<p><span class="math display">\[\mathbf{K}= \mathbf{Y}\mathbf{Y}^\top = \mathbf{U}\boldsymbol{ \Lambda}\mathbf{U}^\top\]</span> <span class="math display">\[(\mathbf{Y}\mathbf{Y}^\top)u_i = \lambda_iu_i\]</span></p>
-<p>Multiplying both sides by <span class="math inline">\(\frac{1}{n-1}\mathbf{Y}^\top\)</span> on the left:</p>
-<p><span class="math display">\[\frac{1}{n-1}\mathbf{Y}^\top(\mathbf{Y}\mathbf{Y}^\top)u_i = \lambda_i\frac{1}{n-1}\mathbf{Y}^\top u_i\]</span></p>
-<p><span class="math display">\[\frac{1}{n-1}(\mathbf{Y}^\top\mathbf{Y})\mathbf{Y}^\top u_i = \lambda_i\frac{1}{n-1}\mathbf{Y}^\top u_i\]</span></p>
-<p><span class="math display">\[\mathbf{C}(\mathbf{Y}^\top u_i) = \frac{\lambda_i}{n-1}(\mathbf{Y}^\top u_i)\]</span></p>
+<p>Starting from the Gram matrix eigendecomposition <span class="math display">\[
+\mathbf{K}= \mathbf{Y}\mathbf{Y}^\top = \mathbf{U}\boldsymbol{ \Lambda}\mathbf{U}^\top\]</span> <span class="math display">\[(\mathbf{Y}\mathbf{Y}^\top)u_i = \lambda_iu_i
+\]</span> Multiplying both sides by <span class="math inline">\(\frac{1}{n-1}\mathbf{Y}^\top\)</span> on the left, <span class="math display">\[
+\frac{1}{n-1}\mathbf{Y}^\top(\mathbf{Y}\mathbf{Y}^\top)u_i = \lambda_i\frac{1}{n-1}\mathbf{Y}^\top u_i
+\]</span> <span class="math display">\[
+\frac{1}{n-1}(\mathbf{Y}^\top\mathbf{Y})\mathbf{Y}^\top u_i = \lambda_i\frac{1}{n-1}\mathbf{Y}^\top u_i
+\]</span> <span class="math display">\[
+\mathbf{C}(\mathbf{Y}^\top u_i) = \frac{\lambda_i}{n-1}(\mathbf{Y}^\top u_i)
+\]</span></p>
 <p>Looking at this last equation, we can see this is exactly the behavior of an eigendecomposition of <span class="math inline">\(\mathbf{C}\)</span> where: * The eigenvalue is <span class="math inline">\(\frac{\lambda_i}{n-1}\)</span> * The corresponding eigenvector is <span class="math inline">\(\mathbf{Y}^\top u_i\)</span></p>
 <p>Importantly, as the scaling of the MDS eigenvalue only depends on <span class="math inline">\(n\)</span>, the order of the eigenvalues remains the same.</p>
 <h2 id="orthonormalization">Orthonormalization</h2>
-<p>One detail remains: the eigenvectors should form an orthonormal basis. While we know <span class="math inline">\(\mathbf{U}\)</span> does so, we need to verify this for <span class="math inline">\(\mathbf{Y}^\top u_i\)</span>. For orthogonality:</p>
-<p><span class="math display">\[(\mathbf{Y}^\top u_i)^\top(\mathbf{Y}^\top u_i) = u_i^\top\mathbf{Y}\mathbf{Y}^\top u_i = \lambda_i\]</span></p>
-<p>To achieve normalization, we can scale the vectors:</p>
-<p><span class="math display">\[\left(\frac{1}{\sqrt{\lambda_i}}\mathbf{Y}^\top u_i\right)^\top\left(\frac{1}{\sqrt{\lambda_i}}\mathbf{Y}^\top u_i\right) = 1\]</span></p>
+<p>One detail remains: the eigenvectors should form an orthonormal basis. While we know <span class="math inline">\(\mathbf{U}\)</span> does so, we need to verify this for <span class="math inline">\(\mathbf{Y}^\top u_i\)</span>. For orthogonality <span class="math display">\[
+(\mathbf{Y}^\top u_i)^\top(\mathbf{Y}^\top u_i) = u_i^\top\mathbf{Y}\mathbf{Y}^\top u_i = \lambda_i
+\]</span> To achieve normalization, we can scale the vectors: <span class="math display">\[
+\left(\frac{1}{\sqrt{\lambda_i}}\mathbf{Y}^\top u_i\right)^\top\left(\frac{1}{\sqrt{\lambda_i}}\mathbf{Y}^\top u_i\right) = 1
+\]</span></p>
 <h2 id="equivalence-in-embeddings">Equivalence in Embeddings</h2>
-<p>We can now directly compare the embeddings from both methods. If we take the eigenvector corresponding to the largest eigenvalue <span class="math inline">\(u_1\)</span>:</p>
+<p>We can now directly compare the embeddings from both methods. If we take the eigenvector corresponding to the largest eigenvalue <span class="math inline">\(u_1\)</span></p>
 <p>MDS embedding: <span class="math display">\[\mathbf{ z}_{\text{MDS}} = u_1\sqrt{\lambda_1}\]</span></p>
 <p>PCA embedding (projecting the data onto the eigenvector): <span class="math display">\[\mathbf{ z}_{\text{PCA}} = \mathbf{Y}\left(\frac{\mathbf{Y}^\top u_1}{\sqrt{\lambda_1}}\right) = \frac{\mathbf{Y}\mathbf{Y}^\top u_1}{\sqrt{\lambda_1}} = \frac{\lambda_1u_1}{\sqrt{\lambda_1}} = \sqrt{\lambda_1}u_1\]</span></p>
 <p>Thus the embeddings of the two methods are identical.</p>
 <h2 id="rank-nullity-connection">Rank-Nullity Connection</h2>
 <p>This equivalence shouldn’t be surprising when we consider the rank-nullity theorem. For data <span class="math inline">\(\mathbf{Y}\in \Re^{n\times p}\)</span>, the sample covariance <span class="math inline">\(\mathbf{C}\in \Re^{p\times p}\)</span> has maximum rank <span class="math inline">\(p\)</span> while for MDS we work with the Gram matrix <span class="math inline">\(\mathbf{K}\in \Re^{n\times n}\)</span>.</p>
-<p>However, the maximum rank of the Gram matrix is not <span class="math inline">\(n\)</span> as it is generated from data that only has <span class="math inline">\(p\)</span> degrees of freedom. Therefore its rank is the same as the covariance matrix:</p>
-<p><span class="math display">\[\text{Rank}(\mathbf{Y}^\top\mathbf{Y}) = \text{Rank}(\mathbf{Y}\mathbf{Y}^\top)\]</span></p>
+<p>However, the maximum rank of the Gram matrix is not <span class="math inline">\(n\)</span> as it is generated from data that only has <span class="math inline">\(p\)</span> degrees of freedom. Therefore its rank is the same as the covariance matrix <span class="math display">\[
+\text{Rank}(\mathbf{Y}^\top\mathbf{Y}) = \text{Rank}(\mathbf{Y}\mathbf{Y}^\top)
+\]</span></p>
 <h2 id="implications">Implications</h2>
-<p>This equivalence is important because PCA was derived as a probabilistic model with clear interpretable assumptions. We can now translate these assumptions to MDS:</p>
+<p>This equivalence is important because PCA was derived as a probabilistic model with clear interpretable assumptions. We can now translate these assumptions to MDS</p>
 <ol type="1">
 <li>MDS is also implicitly assuming Gaussian-distributed data</li>
 <li>The Frobenius norm minimization in MDS corresponds to maximum likelihood estimation under this Gaussian assumption</li>
@@ -1112,9 +1118,9 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
 </div>
 <p>While spectral methods like PCA and classical MDS provide analytical solutions through eigendecomposition, many dimensionality reduction problems require iterative optimization approaches. These methods can often capture more complex relationships in the data but come at the cost of potentially getting stuck in local optima.</p>
 <h2 id="stress-functions">Stress Functions</h2>
-<p>A key concept in iterative dimensionality reduction is the stress function, which measures how well the low-dimensional representation preserves relationships in the original data. The classic Kruskal stress function is:</p>
-<p><span class="math display">\[\text{stress} = \sqrt{\frac{\sum_{i&lt;j} (d_{ij} - \hat{d}_{ij})^2}{\sum_{i&lt;j} d_{ij}^2}}\]</span></p>
-<p>where <span class="math inline">\(d_{ij}\)</span> are the original distances and <span class="math inline">\(\hat{d}_{ij}\)</span> are the distances in the reduced space.</p>
+<p>A key concept in iterative dimensionality reduction is the stress function, which measures how well the low-dimensional representation preserves relationships in the original data. The classic Kruskal stress function is: <span class="math display">\[
+\text{stress} = \sqrt{\frac{\sum_{i&lt;j} (d_{ij} - \delta_{ij})^2}{\sum_{i&lt;j} d_{ij}^2}},
+\]</span> where <span class="math inline">\(d_{ij}\)</span> are the original distances and <span class="math inline">\(\delta_{ij}\)</span> are the distances in the reduced space.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
@@ -1124,7 +1130,7 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathcal{N}\left(\mathbf{ y}_{i,
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    denominator <span class="op">=</span> np.<span class="bu">sum</span>(D_original<span class="op">**</span><span class="dv">2</span>)</span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(numerator<span class="op">/</span>denominator)</span></code></pre></div>
 <p>Different stress functions place different emphasis on preserving local versus global structure. For example, Sammon mapping modifies the stress function to give more weight to preserving small distances:</p>
-<p><span class="math display">\[\text{stress}_{\text{Sammon}} = \frac{1}{\sum_{i&lt;j} d_{ij}} \sum_{i&lt;j} \frac{(d_{ij} - \hat{d}_{ij})^2}{d_{ij}}\]</span></p>
+<p><span class="math display">\[\text{stress}_{\text{Sammon}} = \frac{1}{\sum_{i&lt;j} d_{ij}} \sum_{i&lt;j} \frac{(d_{ij} - \delta_{ij})^2}{d_{ij}}\]</span></p>
 <h2 id="local-vs-global-structure-preservation">Local vs Global Structure Preservation</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/local-vs-global-preservation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/local-vs-global-preservation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

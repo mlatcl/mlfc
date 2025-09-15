@@ -21,6 +21,27 @@ ipynb: true
 \include{_mlfc/includes/welcome.md}
 \include{_mlfc/includes/assumed-knowledge.md}
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
+\notes{\subsection{Learning Objectives}
+
+* Define probability as a tool for representing uncertainty (Laplace's perspective) in ML.
+* Distinguish random variables, densities, expectations, and covariances.
+* Work with key distributions used later: Bernoulli, categorical, Gaussian.
+* Interpret entropy and information intuitively; relate to uncertainty reduction.
+* Understand over-/under-determined systems and the role of probability in modeling mismatch.
+* Connect probability to ML goals: prediction functions + objective functions.
+* Navigate the Jupyter/Python/pandas environment for simple probability computations.
+
+\subsection{Lecture Timing}
+
+* Welcome and course framing — 5 min
+* What is ML? tasks and goals — 10 min
+* Ceres discovery, theory of ignorance — 10 min
+* Over-/under-determined systems — 10 min
+* Probability intro: RVs, densities, expectations — 20 min
+* Core distributions: Bernoulli, categorical, Gaussian — 15 min
+* Entropy/information (intuition, not derivations) — 10 min
+* Tools: Jupyter/Python/pandas quick tour — 8 min
+* Wrap-up & reading guidance — 2 min}
 \include{_ml/includes/what-is-ml.md}
 \include{_ml/includes/what-does-machine-learning-do.md}
 \include{_physics/includes/ceres-discovery.md}

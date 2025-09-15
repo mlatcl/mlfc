@@ -18,9 +18,13 @@ ipynb: true
 
 \include{_mlfc/includes/mlfc-notebook-setup.md}
 
+\include{_ml/includes/linear-regression-regularisation.md}
+\include{_ml/includes/training-with-noise-tikhonov-regularisation.md}
+
+
 \subsection{Overdetermined System}
 
-\notes{We can motivate the introduction of probability by considering systems where there were more observations than unknowns. In particular we can consider the simple fitting of the gradient and an offset of a line,
+\notes{In the first lecture motivate the introduction of probability by considering systems where there were more observations than unknowns. In particular we can consider the simple fitting of the gradient and an offset of a line,
 $$ 
 \dataScalar = m\inputScalar +c.
 $$

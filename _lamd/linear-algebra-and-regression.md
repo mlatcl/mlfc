@@ -24,6 +24,34 @@ ipynb: true
 
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
+\notes{\subsection{Learning Objectives}
+
+* Connect objective-function and probabilistic (Gaussian noise) views of linear regression.
+* Derive least squares from the Gaussian likelihood and log-likelihood.
+* Build and interpret simple OLS models on the Olympic data.
+* Visualise optimisation landscapes (contours) and understand coordinate descent behaviour.
+* Move to multivariate regression: design vectors/matrices; absorb bias into the design.
+* Derive and use the direct solution (normal equations); reason about conditioning.
+* Recognise numerical issues with $\designMatrix^\top\designMatrix$ and apply QR decomposition for stable solves.
+* Compare iterative optimisation (coordinate/gradient descent) with closed-form solutions and when to use each.
+* Set up objective-based optimisation for multivariate linear regression.
+* Be aware of related optimisation methods (Newton, quasi-Newton, momentum) and when they matter. 
+
+\subsection{Lecture Timing}
+
+* Review — 5 min
+* Regression examples & motivation — 5 min
+* Laplace/Gauss probabilistic view — 10 min
+* Univariate Gaussian & properties — 8 min
+* Likelihood, log-likelihood & sum-of-squares — 12 min
+* Olympic data and OLS demo — 10 min
+* Coordinate ascent & contour visualisation — 10 min
+* Multivariate regression & vector notation — 8 min
+* Direct solution (normal equations) — 7 min
+* Objective optimisation + movie body count demo — 7 min
+* QR decomposition for stability — 6 min
+* Wrap-up & Q&A — 2 min}
+
 \include{_ml/includes/regression-examples.md}
 \notes{In the [lecture on probability](https://mlatcl.github.io/mlfc/lectures/01-01-probability.html) we explored how Laplace proposed that we should introduce a latent slack variable for dealing with model mismatch.}
 \include{_ml/includes/laplace-latent-variable-solution.md}

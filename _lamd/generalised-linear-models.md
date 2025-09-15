@@ -1,7 +1,7 @@
 ---
 week: 2
 session: 3
-featured_image: assets/images/generalised-linear-models.png 
+featured_image: slides/diagrams/ml/logistic.svg 
 title: "Generalised Linear Models"
 abstract:  >
 layout: lecture
@@ -26,6 +26,32 @@ ipynb: true
 
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
+
+\notes{\subsection{Learning Objectives}
+
+* Understand the GLM framework: linear predictor, link and inverse-link.
+* Derive logistic regression from Bernoulli with log-odds (logit) link.
+* Implement prediction, likelihood, and gradient for logistic regression.
+* Contrast logistic regression updates with the perceptron; interpret decision boundaries.
+* Build and use design matrices; run batch and stochastic gradient descent on a real dataset (NMIS).
+* Use `statsmodels` for linear and logistic regression, and interpret diagnostics.
+* Extend to multiclass via softmax (categorical) regression and its objective.
+* Model counts with Poisson regression and log link; recognise multiplicative effects.
+* Connect GLMs to the exponential family and canonical links.
+* Apply practical modeling tips: feature engineering, validation, diagnostics.}
+
+\notes{\subsection{Lecture Timing}
+
+* Review — 5 min
+* GLM framing (conditional modeling, link functions) — 8 min
+* Logistic regression: prediction & likelihood — 12 min
+* Optimisation & perceptron comparison — 10 min
+* Toy data and design matrices — 8 min
+* Nigeria NMIS logistic regression (batch/SGD, weights) — 10 min
+* `statsmodels`: linear and logistic demos — 10 min
+* Multiclass (softmax) regression — 8 min
+* Poisson regression & exponential family — 12 min
+* Practical tips and Q&A — 7 min}
 
 \subsection{Review}
 

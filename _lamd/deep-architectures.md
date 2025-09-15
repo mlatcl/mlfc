@@ -23,23 +23,25 @@ date: 2025-09-22
 
 \section{Neural Networks}
 
-\include{_ml/includes/basis-to-neural-networks.md}
-
-\addreading{Bishop-deeplearning24}{Chapter 8}
 
 
 \subsection{Shallow and Deep Learning}
 
 \notes{So far, we have been talking about *linear models* or *shallow learning* as we might think of it. Let's pause for a moment and consider a *fully connected* deep neural network model to relate the two ideas.}
 
+\include{_ml/includes/basis-to-neural-networks.md}
+
+\addreading{Bishop-deeplearning24}{Chapter 8}
+\define{\hiddenVector}{\mappingFunctionVector}
+\define{\hiddenScalar}{\mappingFunction}
 \include{_deepnn/includes/deep-neural-network.md}
 
 \newslide{Neural Network Prediction Function}
 
-\notes{Under our basis function perspective, we can see that our deep neural network is mathematical composition of basis function models. Each layer contains a separate basis function set, so}
+\notes{Under our basis function perspective, we can see that our deep neural network is mathematical composition of basis function models. Each layer contains a separate basis function set, so
 $$
  \mappingFunction(\inputVector; \mappingMatrix)  =  \mappingVector_4 ^\top\basisFunction\left(\mappingMatrix_3 \basisFunction\left(\mappingMatrix_2\basisFunction\left(\mappingMatrix_1 \inputVector\right)\right)\right).
-$$
+$$}
 
 \notes{In this course there are two reasons for looking at the shallow model. Firstly, it is easier to introduce the concepts of regularisation in the linear model regime. Secondly, the matrix forms we see, e.g., expressions like $\basisMatrix^\top \basisMatrix$, appear in both models.}
 

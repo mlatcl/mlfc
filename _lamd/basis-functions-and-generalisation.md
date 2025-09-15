@@ -77,7 +77,6 @@ oldyoutube:
 \include{_ml/includes/linear-regression-regularisation.md}
 \include{_ml/includes/training-with-noise-tikhonov-regularisation.md}
 
-
 \reading
 
 \thanks
