@@ -54,7 +54,7 @@ $$}
 
 \subsection{Solution}
 
-\slides{* Place 
+\slides{* Place }
 
 \include{_ml/includes/types-of-uncertainty.md}
 
