@@ -435,105 +435,6 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \math
 \]</span></p>
 <h3 id="exercise-1">Exercise 1</h3>
 <p>Compute the covariance for <span class="math inline">\(\mathbf{ w}\)</span> given the training data, call the resulting variable <code>w_cov</code>. Compute the mean for <span class="math inline">\(\mathbf{ w}\)</span> given the training data. Call the resulting variable <code>w_mean</code>. Assume that <span class="math inline">\(\sigma^2 = 0.01\)</span></p>
-<h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<table>
-<tr>
-<td width="70%">
-<ul>
-<li>Gold medal times for Olympic Marathon since 1896.</li>
-<li>Marathons before 1924 didn’t have a standardized distance.</li>
-<li>Present results using pace per km.</li>
-<li>In 1904 Marathon was badly organized leading to very slow times.</li>
-</ul>
-</td>
-<td width="30%">
-<div class="centered centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/eliud-kipchoge_berlin_2015.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-<small>Image from <a href="https://commons.wikimedia.org/wiki/File:Eliud_Kipchoge_in_Berlin_-_2015_(cropped).jpg">Wikimedia Commons</a></small>
-</td>
-</tr>
-</table>
-<p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
-<div class="figure">
-<div id="olympic-marathon-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-marathon-caption" class="caption-frame">
-<p>Figure: Olympic marathon pace times since 1896.</p>
-</div>
-</div>
-<p>Things to notice about the data include the outlier in 1904, in that year the Olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed. More recent years see more consistently quick marathons.</p>
-<h2 id="olympic-data-with-bayesian-polynomials">Olympic Data with Bayesian Polynomials</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bayesian-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bayesian-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="figure">
-<div id="olympic-blm-polynomial-number-29-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_BLM_polynomial_number026.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-blm-polynomial-number-29&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-blm-polynomial-number-29-caption" class="caption-frame">
-<p>Figure: Bayesian fit with 26th degree polynomial and negative marginal log likelihood.</p>
-</div>
-</div>
-<h2 id="hold-out-validation">Hold Out Validation</h2>
-<p>For the polynomial fit, we will now look at <em>hold out</em> validation, where we are holding out some of the most recent points. This tests the abilit of our model to <em>extrapolate</em>.</p>
-<div class="figure">
-<div id="olympic-val-blm-polynomial-number-29-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_val_BLM_polynomial_number026.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-val-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-val-blm-polynomial-number-29&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-val-blm-polynomial-number-29-caption" class="caption-frame">
-<p>Figure: Bayesian fit with 29th degree polynomial and hold out validation scores.</p>
-</div>
-</div>
-<h2 id="fold-cross-validation">5-fold Cross Validation</h2>
-<p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
-<div class="figure">
-<div id="olympic-5cv05-blm-polynomial-number-29-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number026.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="olympic-5cv05-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-5cv05-blm-polynomial-number-29&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olympic-5cv05-blm-polynomial-number-29-caption" class="caption-frame">
-<p>Figure: Bayesian fit with 29th degree polynomial and five fold cross validation scores.</p>
-</div>
-</div>
-<h2 id="bayesian-interpretation-of-regularisation">Bayesian Interpretation of Regularisation</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-interpretation-of-regularisation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-interpretation-of-regularisation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Bootstrap Predication and Bayesian Misspecified Models: <a href="https://www.jstor.org/stable/3318894#metadata_info_tab_contents" class="uri">https://www.jstor.org/stable/3318894#metadata_info_tab_contents</a></p>
-<p>Edwin Fong and Chris Holmes: On the Marginal Likelihood and Cross Validation <a href="https://arxiv.org/abs/1905.08737" class="uri">https://arxiv.org/abs/1905.08737</a></p>
 <h2 id="sampling-from-the-posterior">Sampling from the Posterior</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-sampling-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-sampling-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -551,19 +452,19 @@ y_i \sim \mathscr{N}\left(\mu_i,\sigma^2_i\right)
 \sum_{i=1}^K y_i \sim \mathscr{N}\left(\sum_{i=1}^K \mu_i,\sum_{i=1}^K \sigma_i^2\right).
 \]</span> Let’s try that experimentally. First let’s generate a vector of samples from a standard normal distribution, <span class="math inline">\(z \sim \mathscr{N}\left(0,1\right)\)</span>, then we will scale and offset them, then keep adding them into a vector <code>y_vec</code>.</p>
 <h2 id="sampling-from-gaussians-and-summing-up">Sampling from Gaussians and Summing Up</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>mus <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, K) <span class="co"># mean values generated linearly spaced between 0 and 5</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>sigmas <span class="op">=</span> np.linspace(<span class="fl">0.5</span>, <span class="dv">2</span>, K) <span class="co"># sigmas generated linearly spaced between 0.5 and 2</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>y_vec <span class="op">=</span> np.zeros(num_samples)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu, sigma <span class="kw">in</span> <span class="bu">zip</span>(mus, sigmas):</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>num_samples) <span class="co"># z is from standard normal</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    y_vec <span class="op">+=</span> z_vec<span class="op">*</span>sigma <span class="op">+</span> mu <span class="co"># add to y z*sigma + mu</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># now y_vec is the sum of each scaled and off set z.</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Sample mean is &#39;</span>, y_vec.mean(), <span class="st">&#39; and sample variance is &#39;</span>, y_vec.var())</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be &#39;</span>, mus.<span class="bu">sum</span>())</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be &#39;</span>, (sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(), <span class="st">&#39; standard deviation &#39;</span>, np.sqrt((sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>())) </span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mus <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, K) <span class="co"># mean values generated linearly spaced between 0 and 5</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sigmas <span class="op">=</span> np.linspace(<span class="fl">0.5</span>, <span class="dv">2</span>, K) <span class="co"># sigmas generated linearly spaced between 0.5 and 2</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>y_vec <span class="op">=</span> np.zeros(num_samples)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu, sigma <span class="kw">in</span> <span class="bu">zip</span>(mus, sigmas):</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>num_samples) <span class="co"># z is from standard normal</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    y_vec <span class="op">+=</span> z_vec<span class="op">*</span>sigma <span class="op">+</span> mu <span class="co"># add to y z*sigma + mu</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># now y_vec is the sum of each scaled and off set z.</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Sample mean is &#39;</span>, y_vec.mean(), <span class="st">&#39; and sample variance is &#39;</span>, y_vec.var())</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be &#39;</span>, mus.<span class="bu">sum</span>())</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be &#39;</span>, (sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(), <span class="st">&#39; standard deviation &#39;</span>, np.sqrt((sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>())) </span></code></pre></div>
 <p>Of course, we can histogram <code>y_vec</code> as well.</p>
 <h2 id="matrix-multiplication-of-gaussian-variables">Matrix Multiplication of Gaussian Variables</h2>
 <p>We are interested in what our model is saying about the sort of functions we are observing. The fact that summing of Gaussian variables leads to new Gaussian variables, and scaling of Gaussian variables <em>also</em> leads to Gaussian variables means that matrix multiplication (which is just a series of sums and scales) also leads to Gaussian densities. Matrix multiplication is just adding and scaling together, in the formula, <span class="math inline">\(\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}\)</span> we can extract the first element from <span class="math inline">\(\mathbf{ f}\)</span> as <span class="math display">\[
@@ -646,6 +547,106 @@ E = \sum_{i=1}^n(y_i - \langle f_i\rangle)^2
 <p>Now split the data into training and <em>hold out</em> validation sets. Hold out the data for years after 1980. Compute the predictions for different model orders between 0 and 8. Find the model order which fits best according to <em>hold out</em> validation. Is it the same as the maximum likelihood result fom last week?</p>
 <h3 id="exercise-5">Exercise 5</h3>
 <p>Now we will use leave one out cross validation to attempt to see which model is best at interpolating. Do you get the same result as for hold out validation? Compare plots of the hold out validation area for different degrees and the cross validation error for different degrees. Why are they so different? Select a suitable polynomial for characterising the differences in the predictions. Plot the mean function and the error bars for the full data set (to represent the leave one out solution) and the training data from the hold out experiment. Discuss your answer.</p>
+<p>}</p>
+<h2 id="olympic-marathon-data">Olympic Marathon Data</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/olympic-marathon-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<table>
+<tr>
+<td width="70%">
+<ul>
+<li>Gold medal times for Olympic Marathon since 1896.</li>
+<li>Marathons before 1924 didn’t have a standardized distance.</li>
+<li>Present results using pace per km.</li>
+<li>In 1904 Marathon was badly organized leading to very slow times.</li>
+</ul>
+</td>
+<td width="30%">
+<div class="centered centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/eliud-kipchoge_berlin_2015.jpg" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+<small>Image from <a href="https://commons.wikimedia.org/wiki/File:Eliud_Kipchoge_in_Berlin_-_2015_(cropped).jpg">Wikimedia Commons</a></small>
+</td>
+</tr>
+</table>
+<p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
+<div class="figure">
+<div id="olympic-marathon-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-marathon-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-marathon&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-marathon-caption" class="caption-frame">
+<p>Figure: Olympic marathon pace times since 1896.</p>
+</div>
+</div>
+<p>Things to notice about the data include the outlier in 1904, in that year the Olympics was in St Louis, USA. Organizational problems and challenges with dust kicked up by the cars following the race meant that participants got lost, and only very few participants completed. More recent years see more consistently quick marathons.</p>
+<h2 id="olympic-data-with-bayesian-polynomials">Olympic Data with Bayesian Polynomials</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bayesian-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bayesian-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="figure">
+<div id="olympic-blm-polynomial-number-29-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_BLM_polynomial_number026.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-blm-polynomial-number-29&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-blm-polynomial-number-29-caption" class="caption-frame">
+<p>Figure: Bayesian fit with 26th degree polynomial and negative marginal log likelihood.</p>
+</div>
+</div>
+<h2 id="hold-out-validation">Hold Out Validation</h2>
+<p>For the polynomial fit, we will now look at <em>hold out</em> validation, where we are holding out some of the most recent points. This tests the abilit of our model to <em>extrapolate</em>.</p>
+<div class="figure">
+<div id="olympic-val-blm-polynomial-number-29-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_val_BLM_polynomial_number026.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-val-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-val-blm-polynomial-number-29&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-val-blm-polynomial-number-29-caption" class="caption-frame">
+<p>Figure: Bayesian fit with 29th degree polynomial and hold out validation scores.</p>
+</div>
+</div>
+<h2 id="fold-cross-validation">5-fold Cross Validation</h2>
+<p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
+<div class="figure">
+<div id="olympic-5cv05-blm-polynomial-number-29-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number026.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="olympic-5cv05-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-5cv05-blm-polynomial-number-29&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="olympic-5cv05-blm-polynomial-number-29-caption" class="caption-frame">
+<p>Figure: Bayesian fit with 29th degree polynomial and five fold cross validation scores.</p>
+</div>
+</div>
+<h2 id="bayesian-interpretation-of-regularisation">Bayesian Interpretation of Regularisation</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-interpretation-of-regularisation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-interpretation-of-regularisation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Bootstrap Predication and Bayesian Misspecified Models: <a href="https://www.jstor.org/stable/3318894#metadata_info_tab_contents" class="uri">https://www.jstor.org/stable/3318894#metadata_info_tab_contents</a></p>
+<p>Edwin Fong and Chris Holmes: On the Marginal Likelihood and Cross Validation <a href="https://arxiv.org/abs/1905.08737" class="uri">https://arxiv.org/abs/1905.08737</a></p>
 <h2 id="further-reading-1">Further Reading</h2>
 <ul>
 <li><p>Section 3.7–3.8 (pg 122–133) of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></p></li>

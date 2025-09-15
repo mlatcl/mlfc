@@ -121,6 +121,9 @@ sigma2 = 0.01}
 \include{_ml/includes/the-bayesian-approach.md}
 
 \include{_ml/includes/posterior-computation-gaussian.md}
+\include{_ml/includes/posterior-sampling-basis.md}
+\include{_ml/includes/polynomial-marginal-likelihood.md}
+\include{_ml/includes/compute-output-expectations.md}
 \include{_ml/includes/olympic-marathon-bayesian-polynomial.md}
 
 \newslide{Model Fit}
@@ -154,9 +157,6 @@ sigma2 = 0.01}
 * Equivalent to a prior for $\mappingVector$ with infinite variance.
 * In other cases $\alpha \eye$ *regularizes* the system (keeps parameters smaller).
 }
-\include{_ml/includes/posterior-sampling-basis.md}
-\include{_ml/includes/polynomial-marginal-likelihood.md}
-\include{_ml/includes/compute-output-expectations.md}
 
 \addreading{@Rogers:book11}{Section 3.7–3.8 (pg 122–133)}
 \addreading{@Bishop:book06}{Section 3.4 (pg 161–165)}

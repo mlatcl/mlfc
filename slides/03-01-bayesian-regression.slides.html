@@ -542,6 +542,73 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathscr{N}\left(\mathbf{ w
 <section id="multivariate-bayesian-inference" class="slide level2">
 <h2>Multivariate Bayesian Inference</h2>
 </section>
+<section id="sampling-from-the-posterior" class="slide level2">
+<h2>Sampling from the Posterior</h2>
+<ul>
+<li>Now check samples by extracting <span class="math inline">\(\mathbf{ w}\)</span> from the <em>posterior</em>.</li>
+</ul>
+</section>
+<section id="sampling-from-the-posterior-1" class="slide level2">
+<h2>Sampling from the Posterior</h2>
+<ul>
+<li>Now for <span class="math inline">\(\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span> need <span class="math display">\[
+\mathbf{ w}\sim \mathscr{N}\left(\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
+\]</span> with <span class="math inline">\(\mathbf{C}_w = \left[\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right]^{-1}\)</span> and <span class="math inline">\(\boldsymbol{ \mu}_w =\mathbf{C}_w \sigma^{-2} \boldsymbol{ \Phi}^\top \mathbf{ y}\)</span> <span class="math display">\[
+\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
+\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
+</ul>
+</section>
+<section id="marginal-likelihood" class="slide level2">
+<h2>Marginal Likelihood</h2>
+<ul>
+<li><p>The marginal likelihood can also be computed, it has the form: <span class="math display">\[
+p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
+\]</span> where <span class="math inline">\(\mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.</p></li>
+<li><p>So it is a zero mean <span class="math inline">\(n\)</span>-dimensional Gaussian with covariance matrix <span class="math inline">\(\mathbf{K}\)</span>.</p></li>
+</ul>
+</section>
+<section id="computing-the-mean-and-error-bars-of-the-functions" class="slide level2">
+<h2>Computing the Mean and Error Bars of the Functions</h2>
+<p><span class="math display">\[
+\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}
+\]</span></p>
+</section>
+<section id="computing-the-expected-output" class="slide level2">
+<h2>Computing the Expected Output</h2>
+<ul>
+<li>Given the posterior for the parameters, how can we compute the expected output at a given location?</li>
+<li>Output of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
+f(\mathbf{ x}_i; \mathbf{ w}) = \boldsymbol{ \phi}_i^\top \mathbf{ w}
+\]</span></li>
+</ul>
+</section>
+<section id="computing-the-expected-output-1" class="slide level2">
+<h2>Computing the Expected Output</h2>
+<ul>
+<li>We want the expected output under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
+<li>Mean of mapping function will be given by <span class="math display">\[
+\begin{aligned} \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)} &amp;= \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)} \\  &amp; = \boldsymbol{ \phi}_i^\top \boldsymbol{ \mu}_w \end{aligned}
+\]</span></li>
+</ul>
+</section>
+<section id="computing-error-bars" class="slide level2">
+<h2>Computing Error Bars</h2>
+<p><span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
+\]</span> which under the posterior density is given by <span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu}_w,\mathbf{C}_w\right)} = \boldsymbol{ \Phi}\mathbf{C}_w \boldsymbol{ \Phi}^\top
+\]</span></p>
+<p>}</p>
+</section>
+<section id="variance-of-expected-output" class="slide level2">
+<h2>Variance of Expected Output</h2>
+<ul>
+<li>Variance of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
+\begin{aligned}\text{var}(f(\mathbf{ x}_i; \mathbf{ w})) &amp;= \left\langle(f(\mathbf{ x}_i; \mathbf{ w}))^2\right\rangle - \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle^2 \\&amp;= \boldsymbol{ \phi}_i^\top\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle \boldsymbol{ \phi}_i - \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle\left\langle\mathbf{ w}\right\rangle^\top \boldsymbol{ \phi}_i \\&amp;= \boldsymbol{ \phi}_i^\top \mathbf{C}_i\boldsymbol{ \phi}_i
+\end{aligned}
+\]</span> where all these expectations are taken under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
+</ul>
+</section>
 <section id="olympic-marathon-data" class="slide level2">
 <h2>Olympic Marathon Data</h2>
 <table>
@@ -975,53 +1042,6 @@ showDivs(1, 'olympic_5cv05_BLM_polynomial_number');
 <li>Two are equivalent when <span class="math inline">\(\alpha \rightarrow \infty\)</span>.</li>
 <li>Equivalent to a prior for <span class="math inline">\(\mathbf{ w}\)</span> with infinite variance.</li>
 <li>In other cases <span class="math inline">\(\alpha \mathbf{I}\)</span> <em>regularizes</em> the system (keeps parameters smaller).</li>
-</ul>
-</section>
-<section id="sampling-from-the-posterior" class="slide level2">
-<h2>Sampling from the Posterior</h2>
-<ul>
-<li>Now check samples by extracting <span class="math inline">\(\mathbf{ w}\)</span> from the <em>posterior</em>.</li>
-</ul>
-</section>
-<section id="sampling-from-the-posterior-1" class="slide level2">
-<h2>Sampling from the Posterior</h2>
-<ul>
-<li>Now for <span class="math inline">\(\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}\)</span> need <span class="math display">\[
-\mathbf{ w}\sim \mathscr{N}\left(\boldsymbol{ \mu}_w,\mathbf{C}_w\right)
-\]</span> with <span class="math inline">\(\mathbf{C}_w = \left[\sigma^{-2}\boldsymbol{ \Phi}^\top \boldsymbol{ \Phi}+ \alpha^{-1}\mathbf{I}\right]^{-1}\)</span> and <span class="math inline">\(\boldsymbol{ \mu}_w =\mathbf{C}_w \sigma^{-2} \boldsymbol{ \Phi}^\top \mathbf{ y}\)</span> <span class="math display">\[
-\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
-\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
-</ul>
-</section>
-<section id="marginal-likelihood" class="slide level2">
-<h2>Marginal Likelihood</h2>
-<ul>
-<li><p>The marginal likelihood can also be computed, it has the form: <span class="math display">\[
-p(\mathbf{ y}|\mathbf{X}, \sigma^2, \alpha) = \frac{1}{(2\pi)^\frac{n}{2}\left|\mathbf{K}\right|^\frac{1}{2}} \exp\left(-\frac{1}{2} \mathbf{ y}^\top \mathbf{K}^{-1} \mathbf{ y}\right)
-\]</span> where <span class="math inline">\(\mathbf{K}= \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.</p></li>
-<li><p>So it is a zero mean <span class="math inline">\(n\)</span>-dimensional Gaussian with covariance matrix <span class="math inline">\(\mathbf{K}\)</span>.</p></li>
-</ul>
-</section>
-<section id="computing-the-expected-output" class="slide level2">
-<h2>Computing the Expected Output</h2>
-<ul>
-<li>Given the posterior for the parameters, how can we compute the expected output at a given location?</li>
-<li>Output of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
-f(\mathbf{ x}_i; \mathbf{ w}) = \boldsymbol{ \phi}_i^\top \mathbf{ w}
-\]</span></li>
-<li>We want the expected output under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
-<li>Mean of mapping function will be given by <span class="math display">\[
-\begin{aligned} \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)} &amp;= \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle_{p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)} \\  &amp; = \boldsymbol{ \phi}_i^\top \boldsymbol{ \mu}_w \end{aligned}
-\]</span></li>
-</ul>
-</section>
-<section id="variance-of-expected-output" class="slide level2">
-<h2>Variance of Expected Output</h2>
-<ul>
-<li>Variance of model at location <span class="math inline">\(\mathbf{ x}_i\)</span> is given by <span class="math display">\[
-\begin{aligned}\text{var}(f(\mathbf{ x}_i; \mathbf{ w})) &amp;= \left\langle(f(\mathbf{ x}_i; \mathbf{ w}))^2\right\rangle - \left\langle f(\mathbf{ x}_i; \mathbf{ w})\right\rangle^2 \\&amp;= \boldsymbol{ \phi}_i^\top\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle \boldsymbol{ \phi}_i - \boldsymbol{ \phi}_i^\top \left\langle\mathbf{ w}\right\rangle\left\langle\mathbf{ w}\right\rangle^\top \boldsymbol{ \phi}_i \\&amp;= \boldsymbol{ \phi}_i^\top \mathbf{C}_i\boldsymbol{ \phi}_i
-\end{aligned}
-\]</span> where all these expectations are taken under the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}, \sigma^2, \alpha)\)</span>.</li>
 </ul>
 </section>
 <section id="further-reading-1" class="slide level2 scrollable">
