@@ -25,26 +25,6 @@ ipynb: true
     * Gaussian Processes: non parametric Bayesian modelling}
 
 
-\notes{
-\subsection{Generalised Linear Models}
-
-\notes{Logistic regression is part of a wider class of models known as *generalised linear models*. In these models we determine that some characteristic of the model is speicified by a function that is liniear in the parameters. So we might suggest that}\slides{* Logistic regression is a *generalised linear model*
-* Prediction function that is linear in parameters}
-$$
-\log \frac{p(\inputVector)}{1-p(\inputVector)} = \mappingFunction(\inputVector; \mappingVector)
-$$
-\notes{where $\mappingFunction(\inputVector; \mappingVector)$ is a linear-in-the-parameters function (here the
-parameters are $\mappingVector$, which is generally non-linear in the inputs.}\slides{* Where $\mappingFunction(\cdot)$ is linear in parameters.}
-\newslide{Basis Functions}
-
-\notes{So far we have considered basis function models of the form}
-\slides{* Linear models have the form}
-$$
-\mappingFunction(\inputVector) =
-\mappingVector^\top \basisVector(\inputVector).
-$$
-\notes{When we form a Gaussian process we do something that is slightly more akin to the naive Bayes approach, but actually is closely related to the generalised linear model approach.}
-\slides{* Gaussian processes are related to generalised linear models.}
 
 \include{_gp/includes/gp-intro-lectures.md}
 \include{_gp/includes/gptwopointpred.md}
