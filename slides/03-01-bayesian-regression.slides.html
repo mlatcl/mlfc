@@ -546,6 +546,7 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathscr{N}\left(\mathbf{ w
 </section>
 <section id="sampling-from-the-posterior" class="slide level2">
 <h2>Sampling from the Posterior</h2>
+<p>import mlai.plot import mlai}</p>
 <ul>
 <li>Now check samples by extracting <span class="math inline">\(\mathbf{ w}\)</span> from the <em>posterior</em>.</li>
 </ul>
@@ -559,6 +560,77 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathscr{N}\left(\mathbf{ w
 \boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
 \]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
 </ul>
+</section>
+<section id="polynomial-function-samples" class="slide level2">
+<h2>Polynomial Function Samples</h2>
+<div class="figure">
+<div id="polynomial-function-samples-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-function-samples.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Samples from a prior distribution over polynomials.
+</aside>
+</section>
+<section id="properties-of-gaussian-variables" class="slide level2">
+<h2>Properties of Gaussian Variables</h2>
+</section>
+<section id="sum-of-gaussian-distributed-variables" class="slide level2">
+<h2>Sum of Gaussian-distributed Variables</h2>
+</section>
+<section id="sampling-from-gaussians-and-summing-up" class="slide level2">
+<h2>Sampling from Gaussians and Summing Up</h2>
+</section>
+<section id="matrix-multiplication-of-gaussian-variables" class="slide level2">
+<h2>Matrix Multiplication of Gaussian Variables</h2>
+<p><span class="math display">\[
+f_i = \boldsymbol{ \phi}_i^\top \mathbf{ w}
+\]</span></p>
+<p><span class="math display">\[
+f_i = \sum_{j=1}^K w_j \phi_{i, j}
+\]</span></p>
+<p><span class="math display">\[
+\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \int \mathbf{ f}
+\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
+\text{d}\mathbf{ w}= \int \boldsymbol{ \Phi}\mathbf{ w}
+\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
+\text{d}\mathbf{ w}= \boldsymbol{ \Phi}\int \mathbf{ w}
+\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)
+\text{d}\mathbf{ w}= \boldsymbol{ \Phi}\boldsymbol{ \mu}
+\]</span></p>
+<p><span class="math display">\[
+\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\mathbf{0},\alpha\mathbf{I}\right)} = \mathbf{0}
+\]</span></p>
+<p><span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
+= \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}
+- \left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}\left\langle\mathbf{ f}\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)}^\top
+\]</span></p>
+<p><span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \left\langle\mathbf{ f}\mathbf{ f}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top \boldsymbol{ \Phi}^\top
+\]</span></p>
+<p><span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \left\langle\boldsymbol{ \Phi}\mathbf{ w}\mathbf{ w}^\top \boldsymbol{ \Phi}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top \boldsymbol{ \Phi}^\top
+\]</span> <span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} \boldsymbol{ \Phi}^\top - \boldsymbol{ \Phi}\boldsymbol{ \mu}\boldsymbol{ \mu}^\top\boldsymbol{ \Phi}^\top
+\]</span> Which is dependent on the second moment of the Gaussian, <span class="math display">\[
+\left\langle\mathbf{ w}\mathbf{ w}^\top\right\rangle_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \mathbf{C}+ \boldsymbol{ \mu}\boldsymbol{ \mu}^\top
+\]</span></p>
+<p><span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\boldsymbol{ \mu},\mathbf{C}\right)} = \boldsymbol{ \Phi}\mathbf{C}\boldsymbol{ \Phi}^\top
+\]</span> so in the case of the prior distribution, where we have <span class="math inline">\(\mathbf{C}= \alpha \mathbf{I}\)</span> we can write <span class="math display">\[
+\text{cov}\left(\mathbf{ f}\right)_{\mathscr{N}\left(\mathbf{ w}|\mathbf{0},\alpha \mathbf{I}\right)} = \alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{ y}= \mathbf{ f}+ \boldsymbol{ \epsilon}
+\]</span></p>
+<p><span class="math display">\[
+\mathbf{ f}\sim \mathscr{N}\left(\mathbf{0},\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right)
+\]</span></p>
+<p><span class="math display">\[
+p(\mathbf{ y}) = \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2\mathbf{I}\right)
+\]</span></p>
 </section>
 <section id="marginal-likelihood" class="slide level2">
 <h2>Marginal Likelihood</h2>
