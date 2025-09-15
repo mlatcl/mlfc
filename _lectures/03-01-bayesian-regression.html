@@ -1,5 +1,6 @@
 ---
 title: "Bayesian Regression"
+venue: "Dedan Kimathi University, Nyeri, Kenya"
 abstract: "Bayesian formalisms deal with uncertainty in parameters,"
 author:
 - given: Neil D.
@@ -55,12 +56,11 @@ sns.set_palette('colorblind')}-->
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/bayesian-regression.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/bayesian-regression.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>We can motivate the introduction of probability by considering systems where there were more observations than unknowns. In particular we can consider the simple fitting of the gradient and an offset of a line, <span class="math display">\[ 
+<p>In the first lecture motivate the introduction of probability by considering systems where there were more observations than unknowns. In particular we can consider the simple fitting of the gradient and an offset of a line, <span class="math display">\[ 
 y= mx+c.
 \]</span> What happens if we have three pairs of observations of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, <span class="math inline">\(\{x_i, y_i\}_{i=1}^3\)</span>. The issue can be solved by introducing a type of <a href="http://en.wikipedia.org/wiki/Slack_variable">slack variable</a>, <span class="math inline">\(\epsilon_i\)</span>, known as noise, such that for each observation we had the equation, <span class="math display">\[
 y_i = mx_i + c + \epsilon_i.
 \]</span></p>
-<!--  -->
 <h1 id="underdetermined-system">Underdetermined System</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/underdetermined-system.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/underdetermined-system.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -85,7 +85,8 @@ y_i = mx_i + c + \epsilon_i.
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/types-of-uncertainty.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/types-of-uncertainty.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>From a philosophical perspective placing a probability distribution over the <em>parameters</em> is known as the <em>Bayesian</em> approach. This is because Thomas Bayes, in a <a href="http://en.wikipedia.org/wiki/An_Essay_towards_solving_a_Problem_in_the_Doctrine_of_Chances">1763 essay</a> published at the Royal Society introduced the <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a> with a probabilistic interpretation for the <em>parameters</em>. Later statisticians such as <a href="http://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> objected to the use of probability distributions for <em>parameters</em>, and so in an effort to discredit the approach the referred to it as Bayesian. However, the earliest practioners of modelling, such as Laplace applied the approach as the most natural thing to do for dealing with unknowns (whether they were parameters or variables). Unfortunately, this dispute led to a split in the modelling community that still has echoes today. It is known as the Bayesian vs Frequentist controversy. From my own perspective, I think that it is a false dichotomy, and that the two approaches are actually complementary. My own focus research focus is on <em>modelling</em> and in that context, the use of probability is vital. For frequenstist statisticians, such as Fisher, the emphasis was on the value of the evidence in the data for a particular hypothesis. This is known as hypothesis testing. The two approaches can be unified because one of the most important approaches to hypothesis testing is to <a href="http://en.wikipedia.org/wiki/Likelihood-ratio_test">compute the ratio of the likelihoods</a>, and the result of applying a probability distribution to the parameters is merely to arrive at a different form of the likelihood.</p>
+<p>From a philosophical perspective placing a probability distribution over the <em>parameters</em> is known as the <em>Bayesian</em> approach. This is because Thomas Bayes, in a <a href="http://en.wikipedia.org/wiki/An_Essay_towards_solving_a_Problem_in_the_Doctrine_of_Chances">1763 essay</a> published at the Royal Society introduced the <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a> with a probabilistic interpretation for the <em>parameters</em>. Later statisticians such as <a href="http://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> objected to the use of probability distributions for <em>parameters</em>, and so in an effort to discredit the approach the referred to it as Bayesian. However, the earliest practioners of modelling, such as Laplace applied the approach as the most natural thing to do for dealing with unknowns (whether they were parameters or variables). Unfortunately, this dispute led to a split in the modelling community that still has echoes today. It is known as the Bayesian vs Frequentist controversy. From my own perspective, I think that it is a false dichotomy, and that the two approaches are actually complementary.</p>
+<p>My own focus research focus is on <em>modelling</em> and in that context, the use of probability is vital. For frequenstist statisticians, such as Fisher, the emphasis was on the value of the evidence in the data for a particular hypothesis. This is known as hypothesis testing. The two approaches can be unified because one of the most important approaches to hypothesis testing is to <a href="http://en.wikipedia.org/wiki/Likelihood-ratio_test">compute the ratio of the likelihoods</a>, and the result of applying a probability distribution to the parameters is merely to arrive at a different form of the likelihood.</p>
 <h2 id="the-bayesian-controversy-philosophical-underpinnings">The Bayesian Controversy: Philosophical Underpinnings</h2>
 <p>A segment from the lecture in 2012 on philsophical underpinnings.</p>
 <div class="figure">
@@ -100,6 +101,9 @@ y_i = mx_i + c + \epsilon_i.
 <p>Figure: The philosophical underpinnings of uncertainty, as discussed in 2012 MLAI lecture.</p>
 </div>
 </div>
+<p>Our model doesn’t capture the entire system, we use the <em>noise</em> model to capture aspects of the system we didn’t model explicitly. It gives the mismatch between our model’s predictions and the data. The Gaussian noise model can be justified by appealing to the central limit theorem, but other noise models are also possible (e.g. the Student-<span class="math inline">\(t\)</span> distribution has heavy tails and deals better with outliers). Maximum likelihood with the Gaussian leads to least squares.</p>
+<p>When we are being Bayesian we are assuming uncertainty in the parameters. This uncertainty comes from e.g. not having seen enough data.</p>
+<p>The parameter uncertainty can be thought of as <em>epistemic</em> uncertainty. I.e. uncertainty that arises from lack of knowledge. But the noise model uncertainty can be thought of as <em>aleatoric</em> uncertainty. It is uncertainty that is intrinsic to the system as we’ve modelled it. No amount of data will reduce it. Note, that this interpretation implies that the split between aleatoric uncertainty and epistemic is a result of our modelling choice. Of course, we can make our model more complex and reduce the amount of aleatoric uncertainty. See for example the bias-variance dilemma.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li><p>Section 1.2.3 (pg 21–24) of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
@@ -154,40 +158,24 @@ y_i = mx_i + c + \epsilon_i.
 <p>Figure: Gauss places his claim for priority on least squares over Legendre who published first. Gauss claims he used least squares for his prediction of the location of Ceres.</p>
 </div>
 </div>
-<h2 id="the-bayesian-approach">The Bayesian Approach</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/the-bayesian-approach.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/the-bayesian-approach.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Now we will study Bayesian approaches to regression. In the Bayesian approach we define a <em>prior</em> density over our parameters, <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> or more generally <span class="math inline">\(\mathbf{ w}\)</span>. This prior distribution gives us a range of expected values for our parameter <em>before</em> we have seen the data. The object in Bayesian inference is to then compute the<em>posterior</em> density which is the effect on the density of having observed the data. In standard probability notation we write the prior distribution as, <span class="math display">\[
-p(\mathbf{ w}),
-\]</span> so it is the <em>marginal</em> distribution for the parameters, i.e. the distribution we have for the parameters without any knowledge about the data. The posterior distribution is written as, <span class="math display">\[
-p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}).
-\]</span> So the posterior distribution is the <em>conditional</em> distribution for the parameters given the data (which in this case consists of pairs of observations including response variables (or targets), <span class="math inline">\(y_i\)</span>, and covariates (or inputs) <span class="math inline">\(\mathbf{ x}_i\)</span>. Where here we are allowing the inputs to be multivariate.</p>
-<p>The posterior is recovered from the prior using <em>Bayes’ rule</em>. Which is simply a rewriting of the product rule. We can recover Bayes’ rule as follows. The product rule of probability tells us that the joint distribution is given as the product of the conditional and the marginal. Dropping the inputs from our conditioning for the moment we have, <span class="math display">\[
-p(\mathbf{ w}, \mathbf{ y})=p(\mathbf{ y}|\mathbf{ w})p(\mathbf{ w}),
-\]</span> where we see we have related the joint density to the prior density and the <em>likelihood</em> from our previous investigation of regression, <span class="math display">\[
-p(\mathbf{ y}|\mathbf{ w}) = \prod_{i=1}^n\mathscr{N}\left(y_i|\mathbf{ w}^\top \mathbf{ x}_i, \sigma^2\right)
-\]</span> which arises from the assumption that our observation is given by <span class="math display">\[
-y_i = \mathbf{ w}^\top \mathbf{ x}_i + \epsilon_i.
-\]</span> In other words this is the Gaussian likelihood we have been fitting by minimizing the sum of squares. Have a look at <a href="./03-linear-regression.html">the session on multivariate regression</a> as a reminder.</p>
-<p>We’ve introduce the likelihood, but we don’t have relationship with the posterior, however, the product rule can also be written in the following way <span class="math display">\[
-p(\mathbf{ w}, \mathbf{ y}) = p(\mathbf{ w}|\mathbf{ y})p(\mathbf{ y}),
-\]</span> where here we have simply used the opposite conditioning. We’ve already introduced the <em>posterior</em> density above. This is the density that represents our belief about the parameters <em>after</em> observing the data. This is combined with the <em>marginal likelihood</em>, sometimes also known as the evidence. It is the marginal likelihood, because it is the original likelihood of the data with the parameters marginalised, <span class="math inline">\(p(\mathbf{ y})\)</span>. Here it’s conditioned on nothing, but in practice you should always remember that everything here is conditioned on things like model choice: which set of basis functions. Because it’s a regression problem, its also conditioned on the inputs. Using the equalitybetween the two different forms of the joint density we recover <span class="math display">\[
-p(\mathbf{ w}|\mathbf{ y}) = \frac{p(\mathbf{ y}|\mathbf{ w})p(\mathbf{ w})}{p(\mathbf{ y})}
-\]</span> where we divided both sides by <span class="math inline">\(p(\mathbf{ y})\)</span> to recover this result. Let’s re-introduce the conditioning on the input locations (or covariates), <span class="math inline">\(\mathbf{X}\)</span> to write the full form of Bayes’ rule for the regression problem. <span class="math display">\[
-p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}) = \frac{p(\mathbf{ y}|\mathbf{ w}, \mathbf{X})p(\mathbf{ w})}{p(\mathbf{ y}|\mathbf{X})}
-\]</span> where the posterior density for the parameters given the data is <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X})\)</span>, the marginal likelihood is <span class="math inline">\(p(\mathbf{ y}|\mathbf{X})\)</span>, the prior density is <span class="math inline">\(p(\mathbf{ w})\)</span> and our original regression likelihood is given by <span class="math inline">\(p(\mathbf{ y}|\mathbf{ w}, \mathbf{X})\)</span>. It turns out that to compute the posterior the only things we need to do are define the prior and the likelihood. The other term on the right hand side can be computed by <em>the sum rule</em>. It is one of the key equations of Bayesian inference, the expectation of the likelihood under the prior, this process is known as marginalisation, <span class="math display">\[
-p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{ w}) \text{d}\mathbf{ w}
-\]</span> I like the term marginalisation, and the description of the probability as the <em>marginal likelihood</em>, because (for me) it somewhat has the implication that the variable name has been removed, and (perhaps) written in the margin. Marginalisation of a variable goes from a likelihood where the variable is in place, to a new likelihood where all possible values of that variable (under the prior) have been considered and weighted in the integral. This implies that all we need for specifying our model is to define the likelihood and the prior. We already have our likelihood from our earlier discussion, so our focus now turns to the prior density.</p>
 <h2 id="prior-distribution">Prior Distribution</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-short.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-short.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The tradition in Bayesian inference is to place a probability density over the parameters of interest in your model. This choice is made regardless of whether you generally believe those parameters to be stochastic or deterministic in origin. In other words, to a Bayesian, the modelling treatment does not differentiate between epistemic and aleatoric uncertainty. For linear regression we could consider the following Gaussian prior on the intercept parameter, <span class="math display">\[c \sim \mathscr{N}\left(0,\alpha_1\right)\]</span> where <span class="math inline">\(\alpha_1\)</span> is the variance of the prior distribution, its mean being zero.</p>
 <h2 id="posterior-distribution">Posterior Distribution</h2>
+<ul>
+<li>The posterior is found through <strong>Bayes’ Rule</strong> <span class="math display">\[
+p(c|y) = \frac{p(y|c)p(c)}{p(y)}
+\]</span> <span class="math display">\[
+\text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}
+\]</span>}</li>
+</ul>
 <p>The prior distribution is combined with the likelihood of the data given the parameters <span class="math inline">\(p(y|c)\)</span> to give the posterior via <em>Bayes’ rule</em>, <span class="math display">\[
   p(c|y) = \frac{p(y|c)p(c)}{p(y)}
-  \]</span> where <span class="math inline">\(p(y)\)</span> is the marginal probability of the data, obtained through integration over the joint density, <span class="math inline">\(p(y, c)=p(y|c)p(c)\)</span>. Overall the equation can be summarized as, <span class="math display">\[
+  \]</span></p>
+<p>where <span class="math inline">\(p(y)\)</span> is the marginal probability of the data, obtained through integration over the joint density, <span class="math inline">\(p(y, c)=p(y|c)p(c)\)</span>. Overall the equation can be summarized as,<br />
+<span class="math display">\[
   \text{posterior} = \frac{\text{likelihood}\times \text{prior}}{\text{marginal likelihood}}.
   \]</span></p>
 <div class="figure">
@@ -207,6 +195,10 @@ p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{
 <p>For the Gaussian case, the normalisation of the posterior can be performed analytically. This is because both the prior and the likelihood have the form of an <em>exponentiated quadratic</em>, <span class="math display">\[
 \exp(a^2)\exp(b^2) = \exp(a^2 + b^2),
 \]</span> and the properties of the exponential mean that the product of two exponentiated quadratics is also an exponentiated quadratic. That implies that the posterior is also Gaussian, because a normalized exponentiated quadratic is a Gaussian distribution.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<h2 id="main-trick">Main Trick</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-maths.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/bayesian-regression1d-maths.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p><span class="math display">\[p(c) = \frac{1}{\sqrt{2\pi\alpha_1}} \exp\left(-\frac{1}{2\alpha_1}c^2\right)\]</span> <span class="math display">\[p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2) = \frac{1}{\left(2\pi\sigma^2\right)^{\frac{n}{2}}} \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i - mx_i - c)^2\right)\]</span></p>
 <p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{p(\mathbf{ y}|\mathbf{ x}, m, \sigma^2)}\]</span></p>
 <p><span class="math display">\[p(c| \mathbf{ y}, \mathbf{ x}, m, \sigma^2) =  \frac{p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c)}{\int p(\mathbf{ y}|\mathbf{ x}, c, m, \sigma^2)p(c) \text{d} c}\]</span></p>
@@ -217,10 +209,21 @@ p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{
     &amp; + c\frac{\sum_{i=1}^n(y_i-mx_i)}{\sigma^2},
   \end{aligned}\]</span></p>
 <p>complete the square of the quadratic form to obtain <span class="math display">\[\log p(c | \mathbf{ y}, \mathbf{ x}, m, \sigma^2) = -\frac{1}{2\tau^2}(c - \mu)^2 +\text{const},\]</span> where <span class="math inline">\(\tau^2 = \left(n\sigma^{-2} +\alpha_1^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\mu = \frac{\tau^2}{\sigma^2} \sum_{i=1}^n(y_i-mx_i)\)</span>.</p>
-<h2 id="the-joint-density">The Joint Density</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/bayesian-regression.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/bayesian-regression.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<p>{## Bayesian Inference in the Univariate Case</p>
+<p>This video talks about Bayesian inference across the single parameter, the offset <span class="math inline">\(c\)</span>, illustrating how the prior and the likelihood combine in one dimension to form a posterior.</p>
+<div class="figure">
+<div id="univariate-bayesian-inference-video-figure" class="figure-frame">
+<iframe width="600" height="450" src="https://www.youtube.com/embed/AvlnFnvFw_0?start=15" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
 </div>
+<div id="univariate-bayesian-inference-video-magnify" class="magnify" onclick="magnifyFigure(&#39;univariate-bayesian-inference-video&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="univariate-bayesian-inference-video-caption" class="caption-frame">
+<p>Figure: Univariate Bayesian inference. Lecture 10 from 2012 MLAI Course.</p>
+</div>
+</div>
+<h2 id="the-joint-density">The Joint Density</h2>
 <ul>
 <li>Really want to know the <em>joint</em> posterior density over the parameters <span class="math inline">\(c\)</span> <em>and</em> <span class="math inline">\(m\)</span>.</li>
 <li>Could now integrate out over <span class="math inline">\(m\)</span>, but it’s easier to consider the multivariate case.</li>
@@ -348,21 +351,25 @@ w_i \sim \mathscr{N}\left(0,\alpha\right)
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>num_data <span class="op">=</span> x.shape[<span class="dv">0</span>]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>num_pred_data <span class="op">=</span> <span class="dv">100</span> <span class="co"># how many points to use for plotting predictions</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(<span class="dv">1890</span>, <span class="dv">2016</span>, num_pred_data)[:, <span class="va">None</span>] <span class="co"># input locations for predictions</span></span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> (<span class="dv">1876</span>,<span class="dv">2044</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>num_data <span class="op">=</span> x.shape[<span class="dv">0</span>]</span></code></pre></div>
 <p>now let’s build the basis matrices. We define the polynomial basis as follows.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> polynomial(x, num_basis<span class="op">=</span><span class="dv">2</span>, loc<span class="op">=</span><span class="fl">0.</span>, scale<span class="op">=</span><span class="fl">1.</span>):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    degree<span class="op">=</span>num_basis<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    degrees <span class="op">=</span> np.arange(degree<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ((x<span class="op">-</span>loc)<span class="op">/</span>scale)<span class="op">**</span>degrees</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>loc<span class="op">=</span><span class="dv">1950</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>scale<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>degree<span class="op">=</span><span class="dv">4</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> basis.Phi(x_pred)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> basis.Phi(x)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>degree<span class="op">=</span><span class="dv">4</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>num_pred_data <span class="op">=</span> <span class="dv">100</span> <span class="co"># how many points to use for plotting predictions</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], num_pred_data)[:, <span class="va">None</span>] <span class="co"># input locations for predictions</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.Basis(mlai.polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, data_limits<span class="op">=</span>data_limits)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> basis.Phi(x_pred)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> basis.Phi(x)</span></code></pre></div>
 <h2 id="sampling-from-the-prior">Sampling from the Prior</h2>
 <p>Now we will sample from the prior to produce a vector <span class="math inline">\(\mathbf{ w}\)</span> and use it to plot a function which is representative of our belief <em>before</em> we fit the data. To do this we are going to use the properties of the Gaussian density and a sample from a <em>standard normal</em> using the function <code>np.random.normal</code>.</p>
 <h2 id="scaling-gaussian-distributed-variables">Scaling Gaussian-distributed Variables</h2>
@@ -373,43 +380,64 @@ w\sim \mathscr{N}\left(\mu_w,c_w\right)
 \]</span> and <span class="math inline">\(\phi\)</span> is a scalar value which we are given, then properties of the Gaussian density tell us that <span class="math display">\[
 \phi w\sim \mathscr{N}\left(\phi\mu_w,\phi^2c_w\right)
 \]</span> Let’s test this out numerically. First we will draw 200 samples from a standard normal,</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div>
 <p>We can compute the mean of these samples and their variance</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
 <p>These are close to zero (the mean) and one (the variance) as you’d expect. Now compute the mean and variance of the scaled version,</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>phi <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>f_vec <span class="op">=</span> phi<span class="op">*</span>w_vec</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be phi*0 = 0.&#39;</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>phi <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f_vec <span class="op">=</span> phi<span class="op">*</span>w_vec</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be phi*0 = 0.&#39;</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</span></code></pre></div>
 <p>If you increase the number of samples then you will see that the sample mean and the sample variance begin to converge towards the true mean and the true variance. Obviously adding an offset to a sample from <code>np.random.normal</code> will change the mean. So if you want to sample from a Gaussian with mean <code>mu</code> and standard deviation <code>sigma</code> one way of doing it is to sample from the standard normal and scale and shift the result, so to sample a set of <span class="math inline">\(w\)</span> from a Gaussian with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\alpha\)</span>, <span class="math display">\[w\sim \mathscr{N}\left(\mu,\alpha\right)\]</span> We can simply scale and offset samples from the <em>standard normal</em>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
 <p>Here the <code>np.sqrt</code> is necesssary because we need to multiply by the standard deviation and we specified the variance as <code>alpha</code>. So scaling and offsetting a Gaussian distributed variable keeps the variable Gaussian, but it effects the mean and variance of the resulting variable.</p>
 <p>To get an idea of the overall shape of the resulting distribution, let’s do the same thing with a histogram of the results.</p>
 <p>Now re-run this histogram with 100,000 samples and check that the both histograms look qualitatively Gaussian.</p>
 <h2 id="sampling-from-the-prior-1">Sampling from the Prior</h2>
 <p>Let’s use this way of constructing samples from a Gaussian to check what functions look like <em>a priori</em>. The process will be as follows. First, we sample a random vector <span class="math inline">\(K\)</span> dimensional from <code>np.random.normal</code>. Then we scale it by <span class="math inline">\(\sqrt{\alpha}\)</span> to obtain a prior sample of <span class="math inline">\(\mathbf{ w}\)</span>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> degree <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>K)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> degree <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>K)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w_sample)</span></code></pre></div>
 <p>Now we can combine our sample from the prior with the basis functions to create a function,</p>
-<p>This shows the recurring problem with the polynomial basis (note the scale on the left hand side!). Our prior allows relatively large coefficients for the basis associated with high polynomial degrees. Because we are operating with input values of around 2000, this leads to output functions of very high values. The fix we have used for this before is to rescale our data before we apply the polynomial basis to it. Above, we set the scale of the basis to 1. Here let’s set it to 100 and try again.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> <span class="fl">100.</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, loc<span class="op">=</span>loc, scale<span class="op">=</span>scale)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> basis.Phi(x_pred)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> basis.Phi(x)</span></code></pre></div>
+<p>Note that we have carefully scaled our data using <code>xlim</code> to ensure that the polynomials don’t go too large. These samples should be well behaved.</p>
 <p>Now we need to recompute the basis functions from above,</p>
 <p>Now let’s loop through some samples and plot various functions as samples from this system,</p>
 <p>The predictions for the mean output can now be computed. We want the expected value of the predictions under the posterior distribution. In matrix form, the predictions can be computed as <span class="math display">\[
 \mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
 \]</span> This involves a matrix multiplication between a fixed matrix <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and a vector that is drawn from a distribution <span class="math inline">\(\mathbf{ w}\)</span>. Because <span class="math inline">\(\mathbf{ w}\)</span> is drawn from a distribution, this imples that <span class="math inline">\(\mathbf{ f}\)</span> should also be drawn from a distribution. There are two distributions we are interested in though. We have just been sampling from the <em>prior</em> distribution to see what sort of functions we get <em>before</em> looking at the data. In Bayesian inference, we need to computer the <em>posterior</em> distribution and sample from that density.</p>
+<h2 id="the-bayesian-approach">The Bayesian Approach</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/the-bayesian-approach.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/the-bayesian-approach.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Now we will study Bayesian approaches to regression. In the Bayesian approach we define a <em>prior</em> density over our parameters, <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> or more generally <span class="math inline">\(\mathbf{ w}\)</span>. This prior distribution gives us a range of expected values for our parameter <em>before</em> we have seen the data. The object in Bayesian inference is to then compute the<em>posterior</em> density which is the effect on the density of having observed the data. In standard probability notation we write the prior distribution as, <span class="math display">\[
+p(\mathbf{ w}),
+\]</span> so it is the <em>marginal</em> distribution for the parameters, i.e. the distribution we have for the parameters without any knowledge about the data. The posterior distribution is written as, <span class="math display">\[
+p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}).
+\]</span> So the posterior distribution is the <em>conditional</em> distribution for the parameters given the data (which in this case consists of pairs of observations including response variables (or targets), <span class="math inline">\(y_i\)</span>, and covariates (or inputs) <span class="math inline">\(\mathbf{ x}_i\)</span>. Where here we are allowing the inputs to be multivariate.</p>
+<p>The posterior is recovered from the prior using <em>Bayes’ rule</em>. Which is simply a rewriting of the product rule. We can recover Bayes’ rule as follows. The product rule of probability tells us that the joint distribution is given as the product of the conditional and the marginal. Dropping the inputs from our conditioning for the moment we have, <span class="math display">\[
+p(\mathbf{ w}, \mathbf{ y})=p(\mathbf{ y}|\mathbf{ w})p(\mathbf{ w}),
+\]</span> where we see we have related the joint density to the prior density and the <em>likelihood</em> from our previous investigation of regression, <span class="math display">\[
+p(\mathbf{ y}|\mathbf{ w}) = \prod_{i=1}^n\mathscr{N}\left(y_i|\mathbf{ w}^\top \mathbf{ x}_i, \sigma^2\right)
+\]</span> which arises from the assumption that our observation is given by <span class="math display">\[
+y_i = \mathbf{ w}^\top \mathbf{ x}_i + \epsilon_i.
+\]</span> In other words this is the Gaussian likelihood we have been fitting by minimizing the sum of squares. Have a look at <a href="./03-linear-regression.html">the session on multivariate regression</a> as a reminder.</p>
+<p>We’ve introduce the likelihood, but we don’t have relationship with the posterior, however, the product rule can also be written in the following way <span class="math display">\[
+p(\mathbf{ w}, \mathbf{ y}) = p(\mathbf{ w}|\mathbf{ y})p(\mathbf{ y}),
+\]</span> where here we have simply used the opposite conditioning. We’ve already introduced the <em>posterior</em> density above. This is the density that represents our belief about the parameters <em>after</em> observing the data. This is combined with the <em>marginal likelihood</em>, sometimes also known as the evidence. It is the marginal likelihood, because it is the original likelihood of the data with the parameters marginalised, <span class="math inline">\(p(\mathbf{ y})\)</span>. Here it’s conditioned on nothing, but in practice you should always remember that everything here is conditioned on things like model choice: which set of basis functions. Because it’s a regression problem, its also conditioned on the inputs. Using the equalitybetween the two different forms of the joint density we recover <span class="math display">\[
+p(\mathbf{ w}|\mathbf{ y}) = \frac{p(\mathbf{ y}|\mathbf{ w})p(\mathbf{ w})}{p(\mathbf{ y})}
+\]</span> where we divided both sides by <span class="math inline">\(p(\mathbf{ y})\)</span> to recover this result. Let’s re-introduce the conditioning on the input locations (or covariates), <span class="math inline">\(\mathbf{X}\)</span> to write the full form of Bayes’ rule for the regression problem. <span class="math display">\[
+p(\mathbf{ w}|\mathbf{ y}, \mathbf{X}) = \frac{p(\mathbf{ y}|\mathbf{ w}, \mathbf{X})p(\mathbf{ w})}{p(\mathbf{ y}|\mathbf{X})}
+\]</span> where the posterior density for the parameters given the data is <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{X})\)</span>, the marginal likelihood is <span class="math inline">\(p(\mathbf{ y}|\mathbf{X})\)</span>, the prior density is <span class="math inline">\(p(\mathbf{ w})\)</span> and our original regression likelihood is given by <span class="math inline">\(p(\mathbf{ y}|\mathbf{ w}, \mathbf{X})\)</span>. It turns out that to compute the posterior the only things we need to do are define the prior and the likelihood. The other term on the right hand side can be computed by <em>the sum rule</em>. It is one of the key equations of Bayesian inference, the expectation of the likelihood under the prior, this process is known as marginalisation, <span class="math display">\[
+p(\mathbf{ y}|\mathbf{X}) = \int p(\mathbf{ y}|\mathbf{ w},\mathbf{X})p(\mathbf{ w}) \text{d}\mathbf{ w}
+\]</span> I like the term marginalisation, and the description of the probability as the <em>marginal likelihood</em>, because (for me) it somewhat has the implication that the variable name has been removed, and (perhaps) written in the margin. Marginalisation of a variable goes from a likelihood where the variable is in place, to a new likelihood where all possible values of that variable (under the prior) have been considered and weighted in the integral. This implies that all we need for specifying our model is to define the likelihood and the prior. We already have our likelihood from our earlier discussion, so our focus now turns to the prior density.</p>
 <h2 id="computing-the-posterior">Computing the Posterior</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-computation-gaussian.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-computation-gaussian.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -423,20 +451,6 @@ p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x}, \sigma^2) = \mathscr{N}\left(\mathbf{ w
 \]</span> Let’s compute the posterior covariance and mean, then we’ll sample from these densities to have a look at the posterior belief about <span class="math inline">\(\mathbf{ w}\)</span> once the data has been accounted for. Remember, the process of Bayesian inference involves combining the prior, <span class="math inline">\(p(\mathbf{ w})\)</span> with the likelihood, <span class="math inline">\(p(\mathbf{ y}|\mathbf{ x}, \mathbf{ w})\)</span> to form the posterior, <span class="math inline">\(p(\mathbf{ w}| \mathbf{ y}, \mathbf{ x})\)</span> through Bayes’ rule, <span class="math display">\[
 p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \mathbf{ w})p(\mathbf{ w})}{p(\mathbf{ y})}
 \]</span> We’ve looked at the samples for our function <span class="math inline">\(\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}\)</span>, which forms the mean of the Gaussian likelihood, under the prior distribution. I.e. we’ve sampled from <span class="math inline">\(p(\mathbf{ w})\)</span> and multiplied the result by the basis matrix. Now we will sample from the posterior density, <span class="math inline">\(p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x})\)</span>, and check that the new samples fit do correspond to the data, i.e. we want to check that the updated distribution includes information from the data set. First we need to compute the posterior mean and <em>covariance</em>.</p>
-<h2 id="bayesian-inference-in-the-univariate-case">Bayesian Inference in the Univariate Case</h2>
-<p>This video talks about Bayesian inference across the single parameter, the offset <span class="math inline">\(c\)</span>, illustrating how the prior and the likelihood combine in one dimension to form a posterior.</p>
-<div class="figure">
-<div id="univariate-bayesian-inference-video-figure" class="figure-frame">
-<iframe width="600" height="450" src="https://www.youtube.com/embed/AvlnFnvFw_0?start=15" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-</iframe>
-</div>
-<div id="univariate-bayesian-inference-video-magnify" class="magnify" onclick="magnifyFigure(&#39;univariate-bayesian-inference-video&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="univariate-bayesian-inference-video-caption" class="caption-frame">
-<p>Figure: Univariate Bayesian inference. Lecture 10 from 2012 MLAI Course.</p>
-</div>
-</div>
 <h2 id="multivariate-bayesian-inference">Multivariate Bayesian Inference</h2>
 <p>This section of the lecture talks about how we extend the idea of Bayesian inference for the multivariate case. It goes through the multivariate Gaussian and how to complete the square in the linear algebra as we managed below.</p>
 <div class="figure">
@@ -512,43 +526,43 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \math
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="figure">
-<div id="olympic-blm-polynomial-number-26-figure" class="figure-frame">
+<div id="olympic-blm-polynomial-number-29-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_BLM_polynomial_number026.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="olympic-blm-polynomial-number-26-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-blm-polynomial-number-26&#39;)">
+<div id="olympic-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-blm-polynomial-number-29&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="olympic-blm-polynomial-number-26-caption" class="caption-frame">
+<div id="olympic-blm-polynomial-number-29-caption" class="caption-frame">
 <p>Figure: Bayesian fit with 26th degree polynomial and negative marginal log likelihood.</p>
 </div>
 </div>
 <h2 id="hold-out-validation">Hold Out Validation</h2>
 <p>For the polynomial fit, we will now look at <em>hold out</em> validation, where we are holding out some of the most recent points. This tests the abilit of our model to <em>extrapolate</em>.</p>
 <div class="figure">
-<div id="olympic-val-blm-polynomial-number-26-figure" class="figure-frame">
+<div id="olympic-val-blm-polynomial-number-29-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_val_BLM_polynomial_number026.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="olympic-val-blm-polynomial-number-26-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-val-blm-polynomial-number-26&#39;)">
+<div id="olympic-val-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-val-blm-polynomial-number-29&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="olympic-val-blm-polynomial-number-26-caption" class="caption-frame">
-<p>Figure: Bayesian fit with 26th degree polynomial and hold out validation scores.</p>
+<div id="olympic-val-blm-polynomial-number-29-caption" class="caption-frame">
+<p>Figure: Bayesian fit with 29th degree polynomial and hold out validation scores.</p>
 </div>
 </div>
 <h2 id="fold-cross-validation">5-fold Cross Validation</h2>
 <p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
 <div class="figure">
-<div id="olympic-5cv05-blm-polynomial-number-26-figure" class="figure-frame">
+<div id="olympic-5cv05-blm-polynomial-number-29-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_5cv05_BLM_polynomial_number026.svg" width="80%" style=" ">
 </object>
 </div>
-<div id="olympic-5cv05-blm-polynomial-number-26-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-5cv05-blm-polynomial-number-26&#39;)">
+<div id="olympic-5cv05-blm-polynomial-number-29-magnify" class="magnify" onclick="magnifyFigure(&#39;olympic-5cv05-blm-polynomial-number-29&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="olympic-5cv05-blm-polynomial-number-26-caption" class="caption-frame">
-<p>Figure: Bayesian fit with 26th degree polynomial and five fold cross validation scores.</p>
+<div id="olympic-5cv05-blm-polynomial-number-29-caption" class="caption-frame">
+<p>Figure: Bayesian fit with 29th degree polynomial and five fold cross validation scores.</p>
 </div>
 </div>
 <h2 id="bayesian-interpretation-of-regularisation">Bayesian Interpretation of Regularisation</h2>

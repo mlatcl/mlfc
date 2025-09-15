@@ -12,15 +12,12 @@ author:
 time: "09:30"
 youtube: 17zr5dGcUzE
 transition: None
+venue: Dedan Kimathi University, Nyeri, Kenya
 reveal: true
 ipynb: true
 ---
 
-\include{_mlfc/includes/mlfc-notebook-setup.md}
-
-\include{_ml/includes/linear-regression-regularisation.md}
-\include{_ml/includes/training-with-noise-tikhonov-regularisation.md}
-
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 \subsection{Overdetermined System}
 
@@ -53,45 +50,6 @@ $$}
   \end{aligned}
   $$}
 
-
-<!-- \slides{A system of two simultaneous equations with two unknowns. -->
-
-<!-- How do we deal with three simultaneous equations with only two unknowns? -->
-
-<!-- $$ -->
-<!-- \begin{aligned} -->
-<!--   \dataScalar_1 = & m\inputScalar_1 + c\\ -->
-<!--   \dataScalar_2 = & m\inputScalar_2 + c -->
-<!-- \end{aligned} -->
-<!-- $$  -->
-      
-<!-- $$ -->
-<!-- \begin{aligned} -->
-<!--   \dataScalar_1-\dataScalar_2 = & m(\inputScalar_1 - \inputScalar_2) -->
-<!-- \end{aligned} -->
-<!-- $$ -->
-      
-<!-- $$ -->
-<!-- \begin{aligned} -->
-<!--  \frac{\dataScalar_1-\dataScalar_2}{\inputScalar_1 - \inputScalar_2} = & m -->
-<!-- \end{aligned} -->
-<!-- $$  -->
-      
-<!-- $$ -->
-<!-- \begin{aligned} -->
-<!--   m & =\frac{\dataScalar_2-\dataScalar_1}{\inputScalar_2 - \inputScalar_1}\\ -->
-<!--   c & = \dataScalar_1 - m \inputScalar_1 -->
-<!-- \end{aligned} -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \begin{aligned} -->
-<!--   \dataScalar_1 = & m\inputScalar_1 + c\\ -->
-<!--   \dataScalar_2 = & m\inputScalar_2 + c\\ -->
-<!--   \dataScalar_3 = & m\inputScalar_3 + c -->
-<!-- \end{aligned} -->
-<!-- $$ -->
-<!-- } -->
-
 \include{_ml/includes/underdetermined-system.md}
 \include{_ml/includes/types-of-uncertainty.md}
 
@@ -103,9 +61,14 @@ $$}
 \reading
 
 \include{_physics/includes/gauss-least-squares.md}
-\include{_ml/includes/the-bayesian-approach.md}
-\include{_ml/includes/bayesian-regression1d.md}
-\include{_ml/includes/bayesian-1d-maths.md}
+\include{_ml/includes/bayesian-regression1d-short.md}
+\include{_ml/includes/bayesian-regression1d-maths.md}
+
+\notes{\subsection{Bayesian Inference in the Univariate Case}
+
+\notes{This video talks about Bayesian inference across the single parameter, the offset $c$, illustrating how the prior and the likelihood combine in one dimension to form a posterior.}
+
+\notes{\figure{\includeyoutube{AvlnFnvFw_0}{600}{450}{15}}{Univariate Bayesian inference. Lecture 10 from 2012 MLAI Course.}{univariate-bayesian-inference-video}}
 
 \subsection{The Joint Density}
 
@@ -149,6 +112,9 @@ sigma2 = 0.01}
 }
 
 \include{_ml/includes/prior-sampling-basis.md}
+
+\include{_ml/includes/the-bayesian-approach.md}
+
 \include{_ml/includes/posterior-computation-gaussian.md}
 \include{_ml/includes/olympic-marathon-bayesian-polynomial.md}
 

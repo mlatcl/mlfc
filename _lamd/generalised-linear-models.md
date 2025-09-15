@@ -18,6 +18,7 @@ oldyoutube:
   year: 2022
 - code: VQvYg3jin-k
   year: 2021
+venue: Dedan Kimathi University, Nyeri, Kenya
 transition: None
 reveal: true
 ipynb: true
