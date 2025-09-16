@@ -25,8 +25,23 @@ ipynb: true
 * Today: 
     * Gaussian Processes: non parametric Bayesian modelling}
 
+
+\newslide{Multivariate Gaussian Properties}
+
+\include{_ml/includes/multivariate-gaussian-properties-summary.md}
+
+\slides{
+\newslide{Linear Gaussian Models}
+}\notes{Gaussian processes are initially of interest because}
+
+1. linear Gaussian models are easier to deal with 
+2. Even the parameters *within* the process can be handled, by considering a particular limit.
+
+\include{_ml/includes/linear-model-overview.md}
+
 \include{_gp/includes/gp-intro-lectures.md}
 \include{_gp/includes/gptwopointpred.md}
+\include{_kern/includes/computing-rbf-covariance.md}
 \include{_gp/includes/gp-from-basis-functions.md}
 
 \include{_gp/includes/non-degenerate-gps.md}
@@ -51,6 +66,12 @@ ipynb: true
 \include{_kern/includes/basis-covariance.md}
 \include{_kern/includes/brownian-covariance.md}
 \include{_kern/includes/mlp-covariance.md}
+\include{_kern/includes/relu-covariance.md}
+\include{_kern/includes/sinc-covariance.md}
+\include{_kern/includes/poly-covariance.md}
+\include{_kern/includes/periodic-covariance.md}
+\include{_kern/includes/lmc-covariance.md}
+\include{_kern/includes/icm-covariance.md}
 
 \include{_gp/includes/gp-summer-school.md}
 \include{_software/includes/gpy-software.md}
