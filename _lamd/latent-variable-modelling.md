@@ -1,7 +1,7 @@
 ---
-week: 3
-session: 3
-date: 2025-09-17
+week: 4
+session: 1
+date: 2025-09-22
 featured_image: slides/diagrams/dimred/dem_manifold_print002.png
 title: "Dimensionality Reduction: Latent Variable Modelling"
 abstract: "In this lecture we turn to *unsupervised learning*. Specifically, we introduce the idea of a latent variable model. Latent variable models are a probabilistic perspective on unsupervised learning which lead to dimensionality reduction algorithms. "
@@ -19,14 +19,21 @@ how we can find paramters by maximizing the likelihood (equivalent to minimizing
 the objective function) in this session we look at latent variables.}
 
 
+
+
+
+
 \include{_ml/includes/clustering.md}
 \include{_dimred/includes/high-dimensional-data.md}
 \include{_dimred/includes/high-dimensional-effects.md}
+\include{_dimred/includes/high-dimensional-data-real.md}
 \include{_dimred/includes/latent-variable-motivation.md}
+\include{_dimred/includes/latent-variables.md}
+
 \include{_dimred/includes/practical-dimensionality-reduction.md}
 \include{_dimred/includes/dimensionality-reduction-failure-modes.md}
 \include{_dimred/includes/high-dimensional-data-real.md}
-\include{_dimred/includes/latent-variables.md}
+f\include{_dimred/includes/latent-variables.md}
 \include{_dimred/includes/principal-component-analysis.md}
 
 \include{_dimred/includes/probabilistic-pca.md}
@@ -36,17 +43,6 @@ the objective function) in this session we look at latent variables.}
 \include{_dimred/includes/ppca-interpretations.md}
 \include{_dimred/includes/pca-in-practice.md}
 \include{_dimred/includes/ppca-marginal-likelihood.md}
-\include{_dimred/includes/ppca-reconstruction.md}
-\include{_dimred/includes/mds-derivation.md}
-\include{_dimred/includes/mds-pca-equivalence.md}
-
-\include{_dimred/includes/iterative-dimensionality-reduction.md}
-\include{_dimred/includes/local-vs-global-preservation.md}
-
-\include{_dimred/includes/t-sne-intro.md}
-\include{_dimred/includes/umap-intro.md}
-
-\include{_dimred/includes/dimensionality-reduction-comparison.md}
 
 \subsection{Summary and Key Points}
 

@@ -47,34 +47,9 @@ ipynb: true
 \include{_gp/includes/non-degenerate-gps.md}
 \include{_gp/includes/gp-function-space.md}
 \include{_gp/includes/gp-covariance-function-importance.md}
-\include{_gp/includes/gp-numerics-and-optimization.md}
 
-\include{_gp/includes/gp-optimize.md}
 
-\include{_kern/includes/eq-covariance.md}
-
-\include{_datasets/includes/olympic-marathon-data.md}
-\include{_ml/includes/alan-turing-marathon.md}
-\include{_gp/includes/gp-fit.md}
-
-\include{_gp/includes/della-gatta-gene-gp.md}
-\include{_health/includes/malaria-gp.md}
-
-\include{_kern/includes/add-covariance.md}
-\include{_gp/includes/bda-forecasting.md}
-
-\include{_kern/includes/basis-covariance.md}
-\include{_kern/includes/brownian-covariance.md}
-\include{_kern/includes/mlp-covariance.md}
-\include{_kern/includes/relu-covariance.md}
-\include{_kern/includes/sinc-covariance.md}
-\include{_kern/includes/poly-covariance.md}
-\include{_kern/includes/periodic-covariance.md}
-\include{_kern/includes/lmc-covariance.md}
-\include{_kern/includes/icm-covariance.md}
-
-\include{_gp/includes/gp-summer-school.md}
-\include{_software/includes/gpy-software.md}
+\reading
 
 \thanks
 
