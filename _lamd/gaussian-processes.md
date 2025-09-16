@@ -42,12 +42,6 @@ ipynb: true
 \include{_gp/includes/gp-intro-lectures.md}
 \include{_gp/includes/gptwopointpred.md}
 \include{_kern/includes/computing-rbf-covariance.md}
-\include{_gp/includes/gp-from-basis-functions.md}
-
-\include{_gp/includes/non-degenerate-gps.md}
-\include{_gp/includes/gp-function-space.md}
-\include{_gp/includes/gp-covariance-function-importance.md}
-
 
 \reading
 

@@ -2,7 +2,7 @@
 week: 4
 session: 2
 title: "Visualisation"
-featured_image: slides/diagrams/dimred/dem_manifold_print002.png
+featured_image: slides/diagrams/dimred/short-circuit-problem.svg
 layout: lecture
 venue: Dedan Kimathi University of Technology, Nyeri, Kenya
 time: "9:30"

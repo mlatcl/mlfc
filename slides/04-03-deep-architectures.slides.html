@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2025-09-22">
+  <meta name="dcterms.date" content="2025-09-24">
   <title>Deep Architectures</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -70,7 +70,7 @@
 <section id="title-slide">
   <h1 class="title">Deep Architectures</h1>
   <p class="author" style="text-align:center">Neil Lawrence</p>
-  <p class="date" style="text-align:center"><time>2025-09-22</time></p>
+  <p class="date" style="text-align:center"><time>2025-09-24</time></p>
   <p class="venue" style="text-align:center">Dedan Kimathi University of Technology, Nyeri, Kenya</p>
 </section>
 
@@ -97,10 +97,6 @@ sns.set_palette('colorblind')}-->
 </section>
 <section id="from-basis-functions-to-neural-networks-jax" class="slide level2">
 <h2>From Basis Functions to Neural Networks (JAX)</h2>
-<p>{import jax import jax.numpy as jnp from jax import random, grad, jit, value_and_grad from functools import partial</p>
-</section>
-<section id="linear-models-as-basis-weights" class="slide level2">
-<h2>Linear Models as Basis + Weights</h2>
 </section>
 <section id="parametric-basis-functions" class="slide level2">
 <h2>Parametric Basis Functions</h2>
@@ -119,7 +115,7 @@ sns.set_palette('colorblind')}-->
 </section>
 <section id="deep-neural-network" class="slide level2">
 <h2>Deep Neural Network</h2>
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepgp/deep-nn1.svg" width="50%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/deep-neural-network.svg" width="50%" style=" ">
 </object>
 </section>
 <section id="deep-neural-network-1" class="slide level2">
@@ -140,9 +136,6 @@ sns.set_palette('colorblind')}-->
 </section>
 <section id="neural-network-prediction-function" class="slide level2">
 <h2>Neural Network Prediction Function</h2>
-<p><span class="math display">\[
- f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
-\]</span></p>
 </section>
 <section id="overparameterised-systems" class="slide level2">
 <h2>Overparameterised Systems</h2>
@@ -721,13 +714,6 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 </section>
 <section id="useful-multivariate-derivatives" class="slide level2">
 <h2>Useful Multivariate Derivatives</h2>
-<p>{Now, to get the gradient with respect to <span class="math inline">\(\mathbf{a} = \vec{\mathbf{A}\)</span> instead of with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span> we reverse the order of the Kronecker product <span class="math display">\[
-\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
-\]</span> which disperses the elements of <span class="math inline">\(\mathbf{x}\)</span> across the matrix, <span class="math display">\[
-\mathbf{x}^\top \otimes \mathbf{I}_{m}  = \begin{bmatrix}
-x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
-\end{bmatrix}
-\]</span> and is the correct for when we are stacking the columns of $. }</p>
 </section>
 <section id="chain-rule-for-neural-networks" class="slide level2">
 <h2>Chain Rule for Neural Networks</h2>

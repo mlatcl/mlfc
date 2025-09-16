@@ -11,12 +11,13 @@ author:
   gscholar: 
   orcid: 
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/deep-architectures.md
-date: 2025-09-22
+date: 2025-09-24
 time: "9:30"
 week: 4
-session: 1
-reveal: 04-01-deep-architectures.slides.html
-ipynb: 04-01-deep-architectures.ipynb
+session: 3
+featured_image: slides/diagrams/deepnn/deep-neural-network.svg
+reveal: 04-03-deep-architectures.slides.html
+ipynb: 04-03-deep-architectures.ipynb
 youtube: "-9O5obQZUn0"
 layout: lecture
 categories:
@@ -61,40 +62,78 @@ sns.set_palette('colorblind')}-->
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>So far we have been using <code>numpy</code> for building our models. In this session we are going to make use of <code>JAX</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>```{<span class="im">import</span> jax</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, grad, jit, value_and_grad</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, grad, jit, value_and_grad</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Linear Models as Basis + Weights</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>The generalised linear models we work <span class="cf">with</span> allow us to create a model that <span class="kw">is</span> non<span class="op">-</span>linear <span class="kw">in</span> inputs, but linear <span class="kw">in</span> the parameters,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="op">\</span>mappingFunction(<span class="op">\</span>inputVector_i) <span class="op">=</span> <span class="op">\</span>mappingVector<span class="op">^\</span>top <span class="op">\</span>basisFunctionVector(<span class="op">\</span>inputVector_i).</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>We defined a basis, such <span class="im">as</span> the quadratic basis.</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span></code></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>The generalised linear models we work <span class="cf">with</span> allow us to create a model that <span class="kw">is</span> non<span class="op">-</span>linear <span class="kw">in</span> inputs, but linear <span class="kw">in</span> the parameters,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">\</span>mappingFunction(<span class="op">\</span>inputVector_i) <span class="op">=</span> <span class="op">\</span>mappingVector<span class="op">^\</span>top <span class="op">\</span>basisFunctionVector(<span class="op">\</span>inputVector_i).</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>We defined a basis, such <span class="im">as</span> the quadratic basis.</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jax_quadratic(x, <span class="op">**</span>kwargs):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Take in a vector of input values and return the design matrix associated with quadratic basis functions.&quot;&quot;&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.hstack([jnp.ones((x.shape[<span class="dv">0</span>], <span class="dv">1</span>)), x, x<span class="op">**</span><span class="dv">2</span>])</span></code></pre></div>
 <p>Here we’ve defined the function almost identically to the <code>numpy</code> version, only we imported <code>jax.numpy</code> instead of <code>numpy</code>.</p>
-<p>We can plot the basis just like before.</p>
-<h2 id="parametric-basis-functions">Parametric Basis Functions</h2>
-<p>We define parametric basis layers: affine transforms and non-linear activations. These combine to form neural networks.</p>
-<h2 id="multi-layer-perceptron-as-stacked-bases">Multi-Layer Perceptron as Stacked Bases</h2>
-<h2 id="loss-and-training-jax-gradjit">Loss and Training (JAX grad/jit)</h2>
-<p>We use squared error and train with gradient descent. JAX allows JIT compilation and automatic differentiation.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_loss(params, x, y, apply_fn):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> apply_fn(params, x)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.mean((y_pred <span class="op">-</span> y)<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure">
+<div id="deep-neural-network-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/neural-network.svg" width="70%" style=" ">
+</object>
+</div>
+<div id="deep-neural-network-magnify" class="magnify" onclick="magnifyFigure(&#39;deep-neural-network&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="deep-neural-network-caption" class="caption-frame">
+<p>Figure: A neural network. Input nodes are shown at the bottom. The hidden layer is the result of applying an affine transformation to the input layer and placing through an activation function.</p>
+</div>
+</div>
+<pre><code>
+We can plot the basis just like before.
+
+
+
+
+           
+
+## Parametric Basis Functions
+
+
+
+
+
+We define parametric basis layers: affine transforms and non-linear activations. These combine to form neural networks.
+
+## Multi-Layer Perceptron as Stacked Bases
+
+
+
+
+
+
+
+## Loss and Training (JAX grad/jit)
+
+
+
+
+
+We use squared error and train with gradient descent. JAX allows JIT compilation and automatic differentiation.
+
+```{.python}
+def mse_loss(params, x, y, apply_fn):
+    y_pred = apply_fn(params, x)
+    return jnp.mean((y_pred - y)**2)</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@jit</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(params, x, y, lr, apply_fn):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    loss, grads <span class="op">=</span> value_and_grad(mse_loss)(params, x, y, apply_fn)</span>
@@ -517,13 +556,13 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 \]</span> where <span class="math inline">\(\mathbf{I}_m\)</span> is the <span class="math inline">\(m\)</span> dimensional identity matrix. So this means we can write, <span class="math display">\[
 \frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{I}_{m} \otimes \mathbf{x}^\top
 \]</span> because we can see that each row of this matrix contains the derivative of <span class="math inline">\(b_i = \mathbf{a}_{i, :}^\top \mathbf{x}\)</span> with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span>, wherewe constructed <span class="math inline">\(\mathbf{a}^\prime\)</span> to be the stacking of the <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>. The elements are zero apart from those associated with <span class="math inline">\(\mathbf{a}_{i, :}\)</span> where the elements are <span class="math inline">\(\mathbf{x}\)</span>.</p>
-<p>{Now, to get the gradient with respect to <span class="math inline">\(\mathbf{a} = \vec{\mathbf{A}\)</span> instead of with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span> we reverse the order of the Kronecker product <span class="math display">\[
+<p>Now, to get the gradient with respect to <span class="math inline">\(\mathbf{a} = \mathbf{A}:\)</span> instead of with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span> we reverse the order of the Kronecker product <span class="math display">\[
 \frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
 \]</span> which disperses the elements of <span class="math inline">\(\mathbf{x}\)</span> across the matrix, <span class="math display">\[
 \mathbf{x}^\top \otimes \mathbf{I}_{m}  = \begin{bmatrix}
 x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
 \end{bmatrix}
-\]</span> and is the correct for when we are stacking the columns of $. }</p>
+\]</span> and is the correct for when we are stacking the columns of $.</p>
 <h2 id="chain-rule-for-neural-networks">Chain Rule for Neural Networks</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/chain-rule-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/chain-rule-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

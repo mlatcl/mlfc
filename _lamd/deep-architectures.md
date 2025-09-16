@@ -2,7 +2,8 @@
 layout: lecture
 title: Deep Architectures
 week: 4
-session: 1
+session: 3
+featured_image: slides/diagrams/deepnn/deep-neural-network.svg
 author:
 - given: Neil
   family: Lawrence
@@ -15,7 +16,7 @@ oldyoutube:
 - code: m3KZLPed7aM
   year: 2021
 time: "9:30"
-date: 2025-09-22
+date: 2025-09-24
 ---
 
 
@@ -34,6 +35,7 @@ date: 2025-09-22
 \addreading{Bishop-deeplearning24}{Chapter 8}
 \define{\hiddenVector}{\mappingFunctionVector}
 \define{\hiddenScalar}{\mappingFunction}
+
 \include{_deepnn/includes/deep-neural-network.md}
 
 \newslide{Neural Network Prediction Function}

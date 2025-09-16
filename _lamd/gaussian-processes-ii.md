@@ -25,6 +25,11 @@ ipynb: true
     * Gaussian Processes: optimising and covariance functions}
 
 
+\include{_gp/includes/gp-from-basis-functions.md}
+
+\include{_gp/includes/non-degenerate-gps.md}
+\include{_gp/includes/gp-function-space.md}
+\include{_gp/includes/gp-covariance-function-importance.md}
 
 \include{_gp/includes/gp-numerics-and-optimization.md}
 
