@@ -180,7 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sampling-from-the-prior" class="slide level2">
 <h2>Sampling from the Prior</h2>
-<p><code>K = degree + 1 z_vec = np.random.normal(size=K) w_sample = z_vec*np.sqrt(alpha)</code></p>
+<pre><code>K = degree + 1
+z_vec = np.random.normal(size=K)
+w_sample = z_vec*np.sqrt(alpha)</code></pre>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -203,7 +205,11 @@ Prior sample of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</spa
 <p><span class="math display">\[
 \mathbf{ f}_s = \boldsymbol{ \Phi}\mathbf{ w}_s.
 \]</span></p>
-<p><code>for i in range(num_samples):     z_vec = np.random.normal(size=K)     w_sample = z_vec*np.sqrt(alpha)     f_sample = np.dot(Phi_pred,w_sample)     _ = ax.plot(x_pred.flatten(), f_sample.flatten(), linewidth=2)</code></p>
+<pre><code>for i in range(num_samples):
+    z_vec = np.random.normal(size=K)
+    w_sample = z_vec*np.sqrt(alpha)
+    f_sample = np.dot(Phi_pred,w_sample)
+    _ = ax.plot(x_pred.flatten(), f_sample.flatten(), linewidth=2)</code></pre>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
@@ -243,7 +249,7 @@ Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> wi
 \mathbf{K}= \alpha
 \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top.
 \]</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> alpha<span class="op">*</span>Phi_pred<span class="op">@</span>Phi_pred.T</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> alpha<span class="op">*</span>Phi_pred<span class="op">@</span>Phi_pred.T</span></code></pre></div>
 </section>
 <section id="section-4" class="slide level2">
 <h2></h2>
