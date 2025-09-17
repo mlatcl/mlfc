@@ -16,7 +16,8 @@ reveal: true
 ipynb: true
 ---
 
-\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}
+\installcode{GPy}}
 
 \subsection{Review}
 
@@ -41,7 +42,6 @@ ipynb: true
 \include{_kern/includes/eq-covariance.md}
 
 \include{_datasets/includes/olympic-marathon-data.md}
-\include{_ml/includes/alan-turing-marathon.md}
 \include{_gp/includes/gp-fit.md}
 
 \include{_gp/includes/della-gatta-gene-gp.md}
