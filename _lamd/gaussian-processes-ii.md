@@ -28,11 +28,14 @@ ipynb: true
 \include{_gp/includes/gp-from-basis-functions.md}
 
 \include{_gp/includes/non-degenerate-gps.md}
-\include{_gp/includes/gp-function-space.md}
+\include{_gp/includes/gp-specify-covariance.md}
+\include{_gp/includes/gp-intro-very-short.md}
+\include{_gp/includes/gp-predictive.md}
 \include{_gp/includes/gp-covariance-function-importance.md}
 
-\include{_gp/includes/gp-numerics-and-optimization.md}
+\section{Parameter Optimisation}
 
+\include{_gp/includes/gp-numerics-and-optimization.md}
 \include{_gp/includes/gp-optimize.md}
 
 \include{_kern/includes/eq-covariance.md}

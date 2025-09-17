@@ -420,8 +420,8 @@ Throwing away such samples we are left with our posterior. This is the collectio
 The elegance of the Gaussian process is that this result can be computed analytically using linear algebra.
 </aside>
 </section>
-<section id="gaussian-process-1" class="slide level2">
-<h2>Gaussian Process</h2>
+<section id="making-predictions-with-gaussian-process" class="slide level2">
+<h2>Making Predictions with Gaussian Process</h2>
 <p><span class="math display">\[
 p(\mathbf{ y}|\mathbf{X}) =
 \frac{1}{(2\pi)^{\frac{n}{2}}|\mathbf{K}|^{\frac{1}{2}}}
@@ -468,6 +468,10 @@ Different blocks of the covariance function. The upper left block is the covaria
 <aside class="notes">
 Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian process Winter School at the University of Sheffield.
 </aside>
+<!-- SECTION Parameter Optimisation -->
+</section>
+<section id="parameter-optimisation" class="slide level2">
+<h2>Parameter Optimisation</h2>
 </section>
 <section id="improving-the-numerics" class="slide level2">
 <h2>Improving the Numerics</h2>
@@ -785,11 +789,9 @@ showDivs(0, 'gp-optimise');
 </section>
 <section id="exponentiated-quadratic-covariance" class="slide level2">
 <h2>Exponentiated Quadratic Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left(-\frac{\left\Vert \mathbf{ x}-\mathbf{ x}^\prime \right\Vert_2^2}{2\ell^2}\right)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="eq-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1190,11 +1192,9 @@ The map of Ugandan districts with an overview of the Malaria situation in each d
 </section>
 <section id="additive-covariance" class="slide level2">
 <h2>Additive Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k_f(\mathbf{ x}, \mathbf{ x}^\prime) = k_g(\mathbf{ x}, \mathbf{ x}^\prime) + k_h(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="add-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1274,11 +1274,9 @@ Two different editions of Bayesian Data Analysis <span class="citation" data-cit
 </section>
 <section id="basis-function-covariance" class="slide level2">
 <h2>Basis Function Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \boldsymbol{ \phi}(\mathbf{ x})^\top \boldsymbol{ \phi}(\mathbf{ x}^\prime)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="basis-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1302,11 +1300,9 @@ A covariance function based on a non-linear basis given by <span class="math inl
 </section>
 <section id="brownian-covariance" class="slide level2">
 <h2>Brownian Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(t, t^\prime)=\alpha \min(t, t^\prime)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="brownian-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1330,11 +1326,9 @@ Brownian motion covariance function.
 </section>
 <section id="mlp-covariance" class="slide level2">
 <h2>MLP Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \arcsin\left(\frac{w \mathbf{ x}^\top \mathbf{ x}^\prime + b}{\sqrt{\left(w \mathbf{ x}^\top \mathbf{ x}+ b + 1\right)\left(w \left.\mathbf{ x}^\prime\right.^\top \mathbf{ x}^\prime + b + 1\right)}}\right)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="mlp-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1358,14 +1352,12 @@ The multi-layer perceptron covariance function. This is derived by considering t
 </section>
 <section id="relu-covariance" class="slide level2">
 <h2>RELU Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = 
 \alpha \arcsin\left(\frac{w \mathbf{ x}^\top \mathbf{ x}^\prime + b}
 {\sqrt{\left(w \mathbf{ x}^\top \mathbf{ x}+ b + 1\right)
 \left(w \left.\mathbf{ x}^\prime\right.^\top \mathbf{ x}^\prime + b + 1\right)}}\right)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="relu-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1389,11 +1381,9 @@ Rectified linear unit covariance function.
 </section>
 <section id="sinc-covariance" class="slide level2">
 <h2>Sinc Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \text{sinc}\left(\pi w r\right)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="sinc-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1417,11 +1407,9 @@ Sinc covariance function.
 </section>
 <section id="polynomial-covariance" class="slide level2">
 <h2>Polynomial Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha(w \mathbf{ x}^\top\mathbf{ x}^\prime + b)^d\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="polynomial-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1445,11 +1433,9 @@ Polynomial covariance function.
 </section>
 <section id="periodic-covariance" class="slide level2">
 <h2>Periodic Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha\exp\left(\frac{-2\sin(\pi rw)^2}{\ell^2}\right)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="periodic-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1473,11 +1459,9 @@ Periodic covariance function.
 </section>
 <section id="linear-model-of-coregionalization-covariance" class="slide level2">
 <h2>Linear Model of Coregionalization Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(i, j, \mathbf{ x}, \mathbf{ x}^\prime) = b_{i,j} k(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="lmc-covariance-plot-figure" class="figure-frame">
 <table>
@@ -1501,11 +1485,9 @@ Linear model of coregionalization covariance function.
 </section>
 <section id="intrinsic-coregionalization-model-covariance" class="slide level2">
 <h2>Intrinsic Coregionalization Model Covariance</h2>
-<small>
 <center>
 <span class="math display">\[k(i, j, \mathbf{ x}, \mathbf{ x}^\prime) = b_{i,j} k(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
 </center>
-<p></small></p>
 <div class="figure">
 <div id="icm-covariance-plot-figure" class="figure-frame">
 <table>
