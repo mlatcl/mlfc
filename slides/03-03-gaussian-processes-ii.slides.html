@@ -180,6 +180,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sampling-from-the-prior" class="slide level2">
 <h2>Sampling from the Prior</h2>
+<p><code>K = degree + 1 z_vec = np.random.normal(size=K) w_sample = z_vec*np.sqrt(alpha)</code></p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>{<code>f_sample = Phi_pred@w_sample</code></p>
+<div class="figure">
+<div id="polynomial-prior-sample-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-prior-sample.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Prior sample of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> with <span class="math inline">\(\mathbf{ w}\)</span> taken from the prior.
+</aside>
 </section>
 <section id="mean-output" class="slide level2">
 <h2>Mean Output</h2>
@@ -189,6 +203,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \mathbf{ f}_s = \boldsymbol{ \Phi}\mathbf{ w}_s.
 \]</span></p>
+<p><code>for i in range(num_samples):     z_vec = np.random.normal(size=K)     w_sample = z_vec*np.sqrt(alpha)     f_sample = np.dot(Phi_pred,w_sample)     _ = ax.plot(x_pred.flatten(), f_sample.flatten(), linewidth=2)</code></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="polynomial-prior-samples-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-prior-samples.svg" width="80%" style=" ">
@@ -213,13 +231,13 @@ Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> wi
 \mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
 \]</span></p>
 </section>
-<section id="section" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathbf{ f}\sim \mathscr{N}\left(\mathbf{0},\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\right).
 \]</span></p>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathbf{K}= \alpha
@@ -227,7 +245,7 @@ Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> wi
 \]</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> alpha<span class="op">*</span>Phi_pred<span class="op">@</span>Phi_pred.T</span></code></pre></div>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <p><small><code>K = alpha*Phi_pred@Phi_pred.T f_sample = np.random.multivariate_normal(mean=np.zeros(x_pred.size), cov=K)</code></small></p>
 <div class="figure">
@@ -240,10 +258,10 @@ Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> wi
 Samples directly from the covariance function implied by the basis function based covariance, <span class="math inline">\(\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>.
 </aside>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="basis-covariance-function-figure" class="figure-frame">
@@ -255,7 +273,7 @@ Samples directly from the covariance function implied by the basis function base
 Covariance of the function implied by the basis set <span class="math inline">\(\alpha\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top\)</span>.
 </aside>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathbf{ y}= \mathbf{ f}+ \boldsymbol{\epsilon}
@@ -267,7 +285,7 @@ Covariance of the function implied by the basis set <span class="math inline">\(
 \mathbf{ y}\sim \mathscr{N}\left(\mathbf{0},\boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top +\sigma^2\mathbf{I}\right).
 \]</span></p>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-8" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="gp-sample-basis-functions-plus-noise-figure" class="figure-frame">
@@ -279,7 +297,7 @@ Covariance of the function implied by the basis set <span class="math inline">\(
 Samples directly from the covariance function implied by the noise corrupted basis function based covariance, <span class="math inline">\(\alpha \boldsymbol{ \Phi}\boldsymbol{ \Phi}^\top + \sigma^2 \mathbf{I}\)</span>.
 </aside>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="gp-sample-basis-functions-plus-large-noise-figure" class="figure-frame">
@@ -304,7 +322,7 @@ Samples directly from the covariance function implied by the noise corrupted bas
 <h2>Infinite Networks</h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">
-<defs> <clipPath id="clip12">
+<defs> <clipPath id="clip11">
 <style>
 circle {
   fill: black;
@@ -315,7 +333,7 @@ circle {
 Radford Neal
 </title>
 <image preserveAspectRatio="xMinYMin slice" width="100%"
-       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/radford-neal.jpg" clip-path="url(#clip12)"/>
+       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/radford-neal.jpg" clip-path="url(#clip11)"/>
 </svg>
 </div>
 <ul>
@@ -375,7 +393,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf
 \left\Vert\mathbf{ x}- \mathbf{ x}^\prime\right\Vert^2 = (\mathbf{ x}- \mathbf{ x}^\prime)^\top (\mathbf{ x}- \mathbf{ x}^\prime) 
 \]</span></p>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample001.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -384,7 +402,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf
 Here we’re showing 20 samples taken from the prior over functions defined by our covarariance
 </aside>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample002.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -393,7 +411,7 @@ Here we’re showing 20 samples taken from the prior over functions defined by o
 We can sample many such functions, in this slide there are now 1000 in total. This is a sample from our prior over functions.
 </aside>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample003.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -402,7 +420,7 @@ We can sample many such functions, in this slide there are now 1000 in total. Th
 Now we observe data. Here there are three data points. Conceptually in Bayesian inference we discard all samples that are distant from the data.
 </aside>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample004.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -411,7 +429,7 @@ Now we observe data. Here there are three data points. Conceptually in Bayesian 
 Throwing away such samples we are left with our posterior. This is the collection of samples from the prior that are consistent with the data.
 </aside>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample005.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -444,6 +462,9 @@ E(\boldsymbol{\theta}) = \frac{1}{2} \log |\mathbf{K}|
 \begin{bmatrix} \mathbf{K}&amp; \mathbf{K}_\ast \\ \mathbf{K}_\ast^\top
 &amp; \mathbf{K}_{\ast,\ast}\end{bmatrix}
 \]</span></p>
+</section>
+<section id="making-predictions-1" class="slide level2">
+<h2>Making Predictions</h2>
 <div class="figure">
 <div id="block-predictive-covariance-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/block-predictive-covariance.svg" width="80%" style=" ">
@@ -493,13 +514,13 @@ Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian p
 <h2>Learning Covariance Parameters</h2>
 <p>Can we determine covariance parameters from the data?</p>
 </section>
-<section id="section-13" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}{\det{\mathbf{K}}^{\frac{1}{2}}}}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \]</span></p>
 </section>
-<section id="section-14" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -507,7 +528,7 @@ Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian p
 \end{aligned}
 \]</span></p>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -900,11 +921,11 @@ Gene expression levels over time for a gene from data provided by <span class="c
 <li>Want to detect if a gene is expressed or not, fit a GP to each gene <span class="citation" data-cites="Kalaitzis:simple11">Kalaitzis and Lawrence (2011)</span>.</li>
 </ul>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">
-<defs> <clipPath id="clip11">
+<defs> <clipPath id="clip10">
 <style>
 circle {
   fill: black;
@@ -915,7 +936,7 @@ circle {
 Freddie Kalaitzis
 </title>
 <image preserveAspectRatio="xMinYMin slice" width="100%"
-       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/freddie-kalaitzis.jpg" clip-path="url(#clip11)"/>
+       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/freddie-kalaitzis.jpg" clip-path="url(#clip10)"/>
 </svg>
 </div>
 <div class="figure">
@@ -932,7 +953,7 @@ The example is taken from the paper “A Simple Approach to Ranking Differential
 <a href="http://www.biomedcentral.com/1471-2105/12/180" class="uri">http://www.biomedcentral.com/1471-2105/12/180</a>
 </center>
 </section>
-<section id="section-17" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 </section>
 <section id="tp53-gene-data-gp" class="slide level2">
@@ -1020,7 +1041,7 @@ Ricardo Andrade Pacheco
        xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/ricardo-andrade-pacheco.png" clip-path="url(#clip9)"/>
 </svg>
 <svg viewBox="0 0 200 200" style="width:15%">
-<defs> <clipPath id="clip10">
+<defs> <clipPath id="clip1">
 <style>
 circle {
   fill: black;
@@ -1031,7 +1052,7 @@ circle {
 John Quinn
 </title>
 <image preserveAspectRatio="xMinYMin slice" width="100%"
-       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/john-quinn.jpg" clip-path="url(#clip10)"/>
+       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/john-quinn.jpg" clip-path="url(#clip1)"/>
 </svg>
 </div>
 <ul>
@@ -1195,11 +1216,11 @@ The map of Ugandan districts with an overview of the Malaria situation in each d
 An additive covariance function formed by combining a linear and an exponentiated quadratic covariance functions.
 </aside>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-20" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">
-<defs> <clipPath id="clip13">
+<defs> <clipPath id="clip12">
 <style>
 circle {
   fill: black;
@@ -1210,7 +1231,7 @@ circle {
 Aki Vehtari
 </title>
 <image preserveAspectRatio="xMinYMin slice" width="100%"
-       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/aki-vehtari.jpg" clip-path="url(#clip13)"/>
+       xlink:href="https://mlatcl.github.io/mlfc/./slides/diagrams//people/aki-vehtari.jpg" clip-path="url(#clip12)"/>
 </svg>
 </div>
 <div class="figure">
