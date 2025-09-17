@@ -279,7 +279,8 @@ Radford Neal
   k_f\left(\mathbf{ x}_i, \mathbf{ x}_j\right) &amp; = \alpha \boldsymbol{ \phi}\left(\mathbf{W}_1, \mathbf{ x}_i\right)^\top \boldsymbol{ \phi}\left(\mathbf{W}_1, \mathbf{ x}_j\right)\\
   &amp; = \alpha \sum_k \phi\left(\mathbf{ w}^{(1)}_k, \mathbf{ x}_i\right) \phi\left(\mathbf{ w}^{(1)}_k, \mathbf{ x}_j\right)
   \end{align*}
-  \]</span> if instead of considering a finite number you sample infinitely many of these activation functions, sampling parameters from a prior density, <span class="math inline">\(p(\mathbf{ v})\)</span>, for each one, <span class="math display">\[
+  \]</span> if instead of considering a finite number you sample infinitely many of these activation functions, sampling parameters from a prior density, <span class="math inline">\(p(\mathbf{ v})\)</span>, for each one,</p>
+<p><span class="math display">\[
 k_f\left(\mathbf{ x}_i, \mathbf{ x}_j\right) = \alpha \int \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_i\right) \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_j\right) p(\mathbf{ w}^{(1)}) \text{d}\mathbf{ w}^{(1)}
 \]</span> And that’s not <em>only</em> for Gaussian <span class="math inline">\(p(\mathbf{ v})\)</span>. In fact this result holds for a range of activations, and a range of prior densities because of the <em>central limit theorem</em>.</p>
 <p>To write it in the form of a probabilistic program, as long as the distribution for <span class="math inline">\(\phi_i\)</span> implied by this short probabilistic program, <span class="math display">\[

@@ -365,6 +365,11 @@ k_f\left(\mathbf{ x}_i, \mathbf{ x}_j\right) &amp; = \alpha \boldsymbol{ \phi}\l
 &amp; = \alpha \sum_k \phi\left(\mathbf{ w}^{(1)}_k, \mathbf{ x}_i\right) \phi\left(\mathbf{ w}^{(1)}_k, \mathbf{ x}_j\right)
 \end{align*}
 \]</span></li>
+</ul>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<ul>
 <li>Sample infinitely many from a prior density, <span class="math inline">\(p(\mathbf{ w}^{(1)})\)</span>, <span class="math display">\[
 k_f\left(\mathbf{ x}_i, \mathbf{ x}_j\right) = \alpha \int \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_i\right) \phi\left(\mathbf{ w}^{(1)}, \mathbf{ x}_j\right) p(\mathbf{ w}^{(1)}) \text{d}\mathbf{ w}^{(1)}
 \]</span></li>
@@ -399,7 +404,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf
 \left\Vert\mathbf{ x}- \mathbf{ x}^\prime\right\Vert^2 = (\mathbf{ x}- \mathbf{ x}^\prime)^\top (\mathbf{ x}- \mathbf{ x}^\prime) 
 \]</span></p>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample001.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -408,7 +413,7 @@ k(\mathbf{ x}, \mathbf{ x}^\prime) = \alpha \exp\left( -\frac{\left\Vert \mathbf
 Here we’re showing 20 samples taken from the prior over functions defined by our covarariance
 </aside>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample002.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -417,7 +422,7 @@ Here we’re showing 20 samples taken from the prior over functions defined by o
 We can sample many such functions, in this slide there are now 1000 in total. This is a sample from our prior over functions.
 </aside>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample003.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -426,7 +431,7 @@ We can sample many such functions, in this slide there are now 1000 in total. Th
 Now we observe data. Here there are three data points. Conceptually in Bayesian inference we discard all samples that are distant from the data.
 </aside>
 </section>
-<section id="section-13" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample004.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -435,7 +440,7 @@ Now we observe data. Here there are three data points. Conceptually in Bayesian 
 Throwing away such samples we are left with our posterior. This is the collection of samples from the prior that are consistent with the data.
 </aside>
 </section>
-<section id="section-14" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//gp/gp_rejection_sample005.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -520,13 +525,13 @@ Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian p
 <h2>Learning Covariance Parameters</h2>
 <p>Can we determine covariance parameters from the data?</p>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \mathscr{N}\left(\mathbf{ y}|\mathbf{0},\mathbf{K}\right)=\frac{1}{(2\pi)^\frac{n}{2}{\det{\mathbf{K}}^{\frac{1}{2}}}}{\exp\left(-\frac{\mathbf{ y}^{\top}\mathbf{K}^{-1}\mathbf{ y}}{2}\right)}
 \]</span></p>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -534,7 +539,7 @@ Introduction to Gaussian processes given by Neil Lawrence at the 2014 Gaussian p
 \end{aligned}
 \]</span></p>
 </section>
-<section id="section-17" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -927,7 +932,7 @@ Gene expression levels over time for a gene from data provided by <span class="c
 <li>Want to detect if a gene is expressed or not, fit a GP to each gene <span class="citation" data-cites="Kalaitzis:simple11">Kalaitzis and Lawrence (2011)</span>.</li>
 </ul>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">
@@ -959,7 +964,7 @@ The example is taken from the paper “A Simple Approach to Ranking Differential
 <a href="http://www.biomedcentral.com/1471-2105/12/180" class="uri">http://www.biomedcentral.com/1471-2105/12/180</a>
 </center>
 </section>
-<section id="section-19" class="slide level2">
+<section id="section-20" class="slide level2">
 <h2></h2>
 </section>
 <section id="tp53-gene-data-gp" class="slide level2">
@@ -1222,7 +1227,7 @@ The map of Ugandan districts with an overview of the Malaria situation in each d
 An additive covariance function formed by combining a linear and an exponentiated quadratic covariance functions.
 </aside>
 </section>
-<section id="section-20" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <div class="centered" style="">
 <svg viewBox="0 0 200 200" style="width:15%">
