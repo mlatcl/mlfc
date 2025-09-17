@@ -1333,42 +1333,11 @@ k(t, t^\prime)=\alpha \min(t, t^\prime)
 <p>Figure: Periodic covariance function.</p>
 </div>
 </div>
-<h2 id="linear-model-of-coregionalization-covariance">Linear Model of Coregionalization Covariance</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_kern/includes/lmc-covariance.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_kern/includes/lmc-covariance.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> lmc_cov</span></code></pre></div>
-<center>
-<span class="math display">\[k(i, j, \mathbf{ x}, \mathbf{ x}^\prime) = b_{i,j} k(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
-</center>
-<div class="figure">
-<div id="lmc-covariance-plot-figure" class="figure-frame">
-<table>
-<tr>
-<td width="45%">
-<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/lmc_covariance.svg" width="100%" style=" ">
-</object>
-</td>
-<td width="45%">
-<div class="centered" style="">
-<img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/lmc_covariance.gif" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div id="lmc-covariance-plot-magnify" class="magnify" onclick="magnifyFigure(&#39;lmc-covariance-plot&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="lmc-covariance-plot-caption" class="caption-frame">
-<p>Figure: Linear model of coregionalization covariance function.</p>
-</div>
-</div>
 <h2 id="intrinsic-coregionalization-model-covariance">Intrinsic Coregionalization Model Covariance</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_kern/includes/icm-covariance.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_kern/includes/icm-covariance.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> icm_cov</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> icm_cov</span></code></pre></div>
 <center>
 <span class="math display">\[k(i, j, \mathbf{ x}, \mathbf{ x}^\prime) = b_{i,j} k(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
 </center>
@@ -1395,6 +1364,47 @@ k(t, t^\prime)=\alpha \min(t, t^\prime)
 <p>Figure: Intrinsic coregionalization model covariance function.</p>
 </div>
 </div>
+<h2 id="linear-model-of-coregionalization-covariance">Linear Model of Coregionalization Covariance</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_kern/includes/lmc-covariance.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_kern/includes/lmc-covariance.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> lmc_cov</span></code></pre></div>
+<center>
+<span class="math display">\[k(i, j, \mathbf{ x}, \mathbf{ x}^\prime) = b_{i,j} k(\mathbf{ x}, \mathbf{ x}^\prime)\]</span>
+</center>
+<div class="figure">
+<div id="lmc-covariance-plot-figure" class="figure-frame">
+<table>
+<tr>
+<td width="45%">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/lmc_covariance.svg" width="100%" style=" ">
+</object>
+</td>
+<td width="45%">
+<div class="centered" style="">
+<img class="negate" src="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/lmc_covariance.gif" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="lmc-covariance-plot-magnify" class="magnify" onclick="magnifyFigure(&#39;lmc-covariance-plot&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="lmc-covariance-plot-caption" class="caption-frame">
+<p>Figure: Linear model of coregionalization covariance function.</p>
+</div>
+</div>
+<h2 id="semi-parametric-latent-factor-covariance">Semi Parametric Latent Factor Covariance</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_kern/includes/slfm-covariance.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_kern/includes/slfm-covariance.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> icm_cov</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> slfm_cov</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> mlai.Kernel(function<span class="op">=</span>mlai.slfm_cov, subkernel<span class="op">=</span>mlai.eq_cov, W<span class="op">=</span>np.asarray([[<span class="dv">1</span>],[<span class="dv">5</span>]]))</span></code></pre></div>
 <h2 id="gpss-gaussian-process-summer-school">GPSS: Gaussian Process Summer School</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-summer-school.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-summer-school.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

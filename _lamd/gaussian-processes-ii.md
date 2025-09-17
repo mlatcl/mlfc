@@ -57,8 +57,9 @@ ipynb: true
 \include{_kern/includes/sinc-covariance.md}
 \include{_kern/includes/poly-covariance.md}
 \include{_kern/includes/periodic-covariance.md}
-\include{_kern/includes/lmc-covariance.md}
 \include{_kern/includes/icm-covariance.md}
+\include{_kern/includes/lmc-covariance.md}
+\include{_kern/includes/slfm-covariance.md}
 
 \include{_gp/includes/gp-summer-school.md}
 \include{_software/includes/gpy-software.md}
