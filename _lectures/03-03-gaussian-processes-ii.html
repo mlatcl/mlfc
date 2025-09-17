@@ -108,7 +108,6 @@ sns.set_palette('colorblind')}-->
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w_sample)</span></code></pre></div>
 <p>Now we can combine our sample from the prior with the basis functions to create a function,</p>
-<p>{<code>f_sample = Phi_pred@w_sample</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> Phi_pred<span class="op">@</span>w_sample</span></code></pre></div>
 <div class="figure">
