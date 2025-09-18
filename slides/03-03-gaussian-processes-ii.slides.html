@@ -1388,6 +1388,36 @@ The multi-layer perceptron covariance function. This is derived by considering t
 Rectified linear unit covariance function.
 </aside>
 </section>
+<section id="bochners-theoerem" class="slide level2">
+<h2>Bochners Theoerem</h2>
+<p>Given a positive finite Borel measure <span class="math inline">\(\mu\)</span> on the real line <span class="math inline">\(\mathbb{R}\)</span>, the Fourier transform <span class="math inline">\(Q\)</span> of <span class="math inline">\(\mu\)</span> is the continuous function <span class="math display">\[
+  Q(t) = \int_{\mathbb{R}} e^{-itx} \text{d} \mu(x).
+  \]</span> <span class="math inline">\(Q\)</span> is continuous since for a fixed <span class="math inline">\(x\)</span>, the function <span class="math inline">\(e^{-itx}\)</span> is continuous and periodic. The function <span class="math inline">\(Q\)</span> is a positive definite function, i.e. the kernel <span class="math inline">\(k(x, x^\prime)= Q(x^\prime - x)\)</span> is positive definite.</p>
+<p>Bochner’s theorem <span class="citation" data-cites="Bochner:book59">(<strong>Bochner:book59?</strong>)</span> says the converse is true, i.e. every positive definite function <span class="math inline">\(Q\)</span> is the Fourier transform of a positive finite Borel measure. A proof can be sketched as follows <span class="citation" data-cites="Stein:interpolation99">(Stein, 1999)</span></p>
+<p><span class="math display">\[
+f(\mathbf{ x}) = \sum_{i=1}^ny_i \delta(\mathbf{ x}-\mathbf{ x}_i),
+\]</span></p>
+<p><span class="math display">\[
+F(\boldsymbol{\omega}) = \int_{-\infty}^\infty f(\mathbf{ x}) \exp\left(-i2\pi \boldsymbol{\omega}^\top \mathbf{ x}\right) \text{d} \mathbf{ x}
+\]</span></p>
+<p><span class="math display">\[
+F(\boldsymbol{\omega}) = \sum_{i=1}^ny_i\exp\left(-i 2\pi \boldsymbol{\omega}^\top \mathbf{ x}_i\right)
+\]</span></p>
+<p><span class="math display">\[
+F(\omega) = \int_{-\infty}^\infty f(t) \left[\cos(2\pi \omega t) - i \sin(2\pi \omega t) \right]\text{d} t
+\]</span></p>
+<p><span class="math display">\[
+\exp(ix) = \cos x + i\sin x 
+\]</span> we can re-express this form as <span class="math display">\[
+F(\omega) = \int_{-\infty}^\infty f(t) \exp(-i 2\pi\omega)\text{d} t
+\]</span></p>
+<p><span class="math display">\[
+f(t) = \int_{-\infty}^\infty F(\omega) \exp(2\pi\omega)\text{d} \omega.
+\]</span></p>
+<div class="centered" style="">
+<a href="https://play.google.com/books/reader?id=TDQJAAAAIAAJ&amp;pg=PA525"><img data-src="https://mlatcl.github.io/mlfc/./slides/diagrams//books/TDQJAAAAIAAJ-PA525.png" /></a>
+</div>
+</section>
 <section id="sinc-covariance" class="slide level2">
 <h2>Sinc Covariance</h2>
 <center>
@@ -1618,6 +1648,9 @@ Mubangizi, M., Andrade-Pacheco, R., Smith, M.T., Quinn, J., Lawrence, N.D., 2014
 </div>
 <div id="ref-Neal:bayesian94" class="csl-entry" role="doc-biblioentry">
 Neal, R.M., 1994. Bayesian learning for neural networks (PhD thesis). Dept. of Computer Science, University of Toronto.
+</div>
+<div id="ref-Stein:interpolation99" class="csl-entry" role="doc-biblioentry">
+Stein, M.L., 1999. Interpolation of spatial data: Some theory for <span>K</span>riging. springer.
 </div>
 </div>
 </section>

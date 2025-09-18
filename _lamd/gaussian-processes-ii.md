@@ -54,6 +54,8 @@ ipynb: true
 \include{_kern/includes/brownian-covariance.md}
 \include{_kern/includes/mlp-covariance.md}
 \include{_kern/includes/relu-covariance.md}
+
+\include{_kern/includes/boechners-theorem.md}
 \include{_kern/includes/sinc-covariance.md}
 \include{_kern/includes/poly-covariance.md}
 \include{_kern/includes/periodic-covariance.md}
