@@ -42,7 +42,7 @@ categories:
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>lawrennd<span class="op">/</span>mlai.git</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
@@ -144,9 +144,7 @@ f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2 x^2}}
 \phi_j(x) = x^j
 \]</span></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <div class="figure">
 <div id="polynomial-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial_basis004.svg" width="80%" style=" ">
@@ -190,9 +188,7 @@ f(x) = {\color{red}{w_0}} + {\color{magenta}{w_1 x}} + {\color{blue}{w_2 x^2}} +
 <p><span class="math display">\[
 \phi_j(x) = \exp\left(-\frac{(x-\mu_j)^2}{\ell^2}\right)
 \]</span></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> radial</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> radial</span></code></pre></div>
 <div class="figure">
 <div id="radial-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/radial_basis002.svg" width="80%" style=" ">
@@ -228,10 +224,8 @@ f(x) = \color{red}{w_1 e^{-2(x+1)^2}}  + \color{magenta}{w_2e^{-2x^2}} + \color{
 <p>The rectified linear unit is a basis function that emerged out of the deep learning community. Rectified linear units are popular in the current generation of multilayer perceptron models, or deep networks. These basis functions start flat, and then become linear functions at a certain threshold. <span class="math display">\[
 \phi_j(x) = xH(x+ v_j)
 \]</span></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu</span></code></pre></div>
 <div class="figure">
 <div id="relu-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/relu_basis004.svg" width="80%" style=" ">
@@ -267,10 +261,8 @@ f(x) = \color{red}{w_0}   + \color{magenta}{w_1 xH(x+1.0) } + \color{blue}{w_2 x
 <p>The rectified linear unit is a basis function that used to be used a lot for neural network models. It’s related to the sigmoid function by a scaling. <span class="math display">\[
 \phi_j(x) = \tanh(v_j x+ v_0)
 \]</span></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> hyperbolic_tangent</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> hyperbolic_tangent</span></code></pre></div>
 <p>Sigmoid or hyperbolic tangent basis was popular in the original generation of multilayer perceptron models, or deep networks. These basis functions start flat, rise and then saturate.</p>
 <div class="figure">
 <div id="hyperbolic_tangent-basis-2-figure" class="figure-frame">
@@ -307,10 +299,8 @@ f(x) = {\color{red}{w_0}}   + {\color{magenta}{w_1 \text{tanh}\left(x+1\right)}}
 <p><a href="https://en.wikipedia.org/wiki/Joseph_Fourier">Joseph Fourier</a> suggested that functions could be converted to a sum of sines and cosines. A Fourier basis is a linear weighted sum of these functions. <span class="math display">\[
 f(x) = w_0  + w_1 \sin(x) + w_2 \cos(x) + w_3 \sin(2x) + w_4 \cos(2x)
 \]</span></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> fourier</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> fourier</span></code></pre></div>
 <div class="figure">
 <div id="fourier-basis-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/fourier_basis004.svg" width="80%" style=" ">
@@ -369,16 +359,16 @@ f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 
 </tr>
 </table>
 <p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
@@ -403,7 +393,7 @@ f(x) = {\color{red}{w_0}}  + {\color{magenta}{w_1 \sin(x)}} + {\color{blue}{w_2 
 <li>Fourier basis</li>
 </ol>
 <p>Write your answers in the code box below creating a new vector of parameters (in the correct order!) for each basis.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.asarray([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]]).shape</span></code></pre></div>
 <h2 id="basis-function-models">Basis Function Models</h2>
 <p><span class="math display">\[
   f(\mathbf{ x}_i) = \sum_{j=1}^mw_j \phi_{i, j}
@@ -462,12 +452,12 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
 \]</span> For example see the <code>numpy.linalg.solve</code> or <code>torch.linalg.solve</code>.</p>
 <p>But the correct and more stable approach is to make use of the QR decomposition.</p>
 <p>We can now set up the system to solve with QR decomposition.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args), </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                   columns <span class="op">=</span> [<span class="ss">f&#39;$x^</span><span class="sc">{n}</span><span class="ss">$&#39;</span> <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(poly_args[<span class="st">&#39;num_basis&#39;</span>])])</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args), </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                   columns <span class="op">=</span> [<span class="ss">f&#39;$x^</span><span class="sc">{n}</span><span class="ss">$&#39;</span> <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(poly_args[<span class="st">&#39;num_basis&#39;</span>])])</span></code></pre></div>
 <h2 id="solution-with-qr-decomposition">Solution with QR Decomposition</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/qr-decomposition-regression.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/qr-decomposition-regression.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -493,11 +483,11 @@ Now we pull out the vectors, <span class="math inline">\(\mathbf{ w}\)</span>, t
 \]</span> which leaves us with a lower triangular system to solve.</p>
 <p>This is a more numerically stable solution because it removes the need to compute <span class="math inline">\(\boldsymbol{ \Phi}^\top\boldsymbol{ \Phi}\)</span> as an intermediate. Computing <span class="math inline">\(\boldsymbol{ \Phi}^\top\boldsymbol{ \Phi}\)</span> is a bad idea because it involves squaring all the elements of <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and thereby potentially reducing the numerical precision with which we can represent the solution. Operating on <span class="math inline">\(\boldsymbol{ \Phi}\)</span> directly preserves the numerical precision of the model.</p>
 <p>This can be more particularly seen when we begin to work with <em>basis functions</em> in the next session. Some systems that can be resolved with the QR decomposition cannot be resolved by using solve directly.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(Phi)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>Phi.columns)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(Phi)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> pd.DataFrame(w, index<span class="op">=</span>Phi.columns)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
 <h2 id="non-linear-but-linear-in-the-parameters">Non-linear but Linear in the Parameters</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-but-linear-in-parameters.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/non-linear-but-linear-in-parameters.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -531,26 +521,24 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span></code></pre></div>
 <p>Define the polynomial basis function.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <p>Now we include the solution for the linear regression through QR-decomposition.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> basis_fit(Phi, y):</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Use QR decomposition to fit the basis.&quot;</span><span class="st">&quot;&quot;</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    Q, R <span class="op">=</span> np.linalg.qr(Phi)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> basis_fit(Phi, y):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Use QR decomposition to fit the basis.&quot;</span><span class="st">&quot;&quot;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    Q, R <span class="op">=</span> np.linalg.qr(Phi)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.linalg.solve_triangular(R, Q.T<span class="op">@</span>y) </span></code></pre></div>
 <h2 id="linear-fit">Linear Fit</h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">2</span>, <span class="co"># two basis functions (1 and x)</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">2</span>, <span class="co"># two basis functions (1 and x)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
 <p>Now we make some predictions for the fit.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">400</span>)[:, np.newaxis]</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">400</span>)[:, np.newaxis]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-2.svg" width="80%" style=" ">
@@ -564,12 +552,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 </div>
 <h2 id="cubic-fit">Cubic Fit</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-4-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-4.svg" width="80%" style=" ">
@@ -584,12 +572,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 <h2 id="th-degree-polynomial-fit">9th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 9th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">10</span>, <span class="co"># basis up to x^9</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">10</span>, <span class="co"># basis up to x^9</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-10-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-10.svg" width="80%" style=" ">
@@ -604,12 +592,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 <h2 id="th-degree-polynomial-fit-1">16th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 16th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">17</span>, <span class="co"># basis up to x^16</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">17</span>, <span class="co"># basis up to x^16</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-17-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-17.svg" width="80%" style=" ">
@@ -624,12 +612,12 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 </div>
 <h2 id="th-degree-polynomial-fit-2">28th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 28th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">29</span>, <span class="co"># basis up to x^28</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">29</span>, <span class="co"># basis up to x^28</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> basis_fit(Phi, y)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>w</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-polynomial-29-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-polynomial-29.svg" width="80%" style=" ">
@@ -646,9 +634,9 @@ f(\mathbf{ x}) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x};
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-all-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>basis<span class="op">=</span>mlai.Basis(mlai.polynomial, number<span class="op">=</span><span class="dv">1</span>, data_limits<span class="op">=</span>xlim)</span></code></pre></div>
 <div class="figure">
 <div id="olympic-lm-polynomial-num-basis-02-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_LM_polynomial_number002.svg" width="80%" style=" ">
@@ -786,16 +774,16 @@ E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 <h2 id="choice-of-validation-set">Choice of Validation Set</h2>
 <h2 id="hold-out-data">Hold Out Data</h2>
 <p>You have a conclusion as to which model fits best under the training error, but how do the two models perform in terms of validation? In this section we consider <em>hold out</em> validation. In hold out validation we remove a portion of the training data for <em>validating</em> the model on. The remaining data is used for fitting the model (training). Because this is a time series prediction, it makes sense for us to hold out data at the end of the time series. This means that we are validating on future predictions. We will hold out data from after 1980 and fit the model to the data before 1980.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select indices of data to &#39;hold out&#39;</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>indices_hold_out <span class="op">=</span> np.flatnonzero(x<span class="op">&gt;</span><span class="dv">1980</span>)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a training set</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> np.delete(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> np.delete(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a hold out set</span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>x_valid <span class="op">=</span> np.take(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>y_valid <span class="op">=</span> np.take(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select indices of data to &#39;hold out&#39;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>indices_hold_out <span class="op">=</span> np.flatnonzero(x<span class="op">&gt;</span><span class="dv">1980</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a training set</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> np.delete(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> np.delete(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a hold out set</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>x_valid <span class="op">=</span> np.take(x, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>y_valid <span class="op">=</span> np.take(y, indices_hold_out, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
 <h3 id="exercise-7">Exercise 7</h3>
 <p>For both the linear and quadratic models, fit the model to the data up until 1980 and then compute the error on the held out data (from 1980 onwards). Which model performs better on the validation data?</p>
 <h2 id="richer-basis-set">Richer Basis Set</h2>
@@ -833,39 +821,39 @@ E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 <p>In bootstrap sampling, we take the sample we have, <span class="math display">\[
 \mathbf{ y}, \mathbf{X}\sim \mathbb{P}(y, \mathbf{ x})
 \]</span> and resample from that data, rather than from the true distribution. So, we have a new data set, <span class="math inline">\(\hat{\mathbf{ y}}\)</span>, <span class="math inline">\(\hat{\mathbf{X}}\)</span> which is sampled from the original <em>with</em> replacement.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap(X):</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Return a bootstrap sample from a data set.&quot;</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    ind <span class="op">=</span> np.random.choice(n, n, replace<span class="op">=</span><span class="va">True</span>) <span class="co"># Sample randomly with replacement.</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[ind, :]  </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap(X):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Return a bootstrap sample from a data set.&quot;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    ind <span class="op">=</span> np.random.choice(n, n, replace<span class="op">=</span><span class="va">True</span>) <span class="co"># Sample randomly with replacement.</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[ind, :]  </span></code></pre></div>
 <h2 id="bootstrap-and-olympic-marathon-data">Bootstrap and Olympic Marathon Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bootstrap-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bootstrap-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>First we define a function to bootstrap resample our dataset.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap(X, y):</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Return a bootstrap sample from a data set.&quot;</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    ind <span class="op">=</span> np.random.choice(n, n, replace<span class="op">=</span><span class="va">True</span>) <span class="co"># Sample randomly with replacement.</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[ind, :], y[ind, :]</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>num_bootstraps <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap_fit(Phi, y, size):</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> np.zeros((Phi.shape[<span class="dv">1</span>], size))</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>        Phi_hat, y_hat <span class="op">=</span> bootstrap(Phi, y)</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>        W[:, i:i<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> basis_fit(Phi_hat, y_hat)</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> W</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap(X, y):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;Return a bootstrap sample from a data set.&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    ind <span class="op">=</span> np.random.choice(n, n, replace<span class="op">=</span><span class="va">True</span>) <span class="co"># Sample randomly with replacement.</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[ind, :], y[ind, :]</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>num_bootstraps <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap_fit(Phi, y, size):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> np.zeros((Phi.shape[<span class="dv">1</span>], size))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        Phi_hat, y_hat <span class="op">=</span> bootstrap(Phi, y)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        W[:, i:i<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> basis_fit(Phi_hat, y_hat)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> W</span></code></pre></div>
 <h2 id="linear-fit-1">Linear Fit</h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">2</span>, <span class="co"># two basis functions (1 and x)</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">2</span>, <span class="co"># two basis functions (1 and x)</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
 <p>Now we make some predictions for the fit.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">400</span>)[:, np.newaxis]</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">400</span>)[:, np.newaxis]</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-bootstrap-polynomial-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-polynomial-2.svg" width="80%" style=" ">
@@ -879,12 +867,12 @@ E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 </div>
 </div>
 <h2 id="cubic-fit-1">Cubic Fit</h2>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">4</span>, <span class="co"># four basis: 1, x, x^2, x^3</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-bootstrap-polynomial-4-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-polynomial-4.svg" width="80%" style=" ">
@@ -899,12 +887,12 @@ E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 </div>
 <h2 id="th-degree-polynomial-fit-3">9th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 9th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">10</span>, <span class="co"># basis up to x^9</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">10</span>, <span class="co"># basis up to x^9</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-bootstrap-polynomial-10-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-polynomial-10.svg" width="80%" style=" ">
@@ -919,12 +907,12 @@ E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 </div>
 <h2 id="th-degree-polynomial-fit-4">16th Degree Polynomial Fit</h2>
 <p>Now we’ll try a 16th degree polynomial fit to the data.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">17</span>, <span class="co"># basis up to x^16</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>:<span class="dv">17</span>, <span class="co"># basis up to x^16</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;data_limits&#39;</span>:xlim}</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> Phi_pred<span class="op">@</span>W_hat</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-bootstrap-polynomial-17-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-polynomial-17.svg" width="80%" style=" ">
@@ -939,40 +927,40 @@ E(\mathbf{ w}) =  (\mathbf{ y}- \mathbf{ f})^\top(\mathbf{ y}- \mathbf{ f})
 </div>
 <h2 id="bootstrap-confidence-intervals">Bootstrap Confidence Intervals</h2>
 <p>We can also use the bootstrap to create confidence intervals for our predictions, showing the uncertainty in our model.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_polynomial_bootstrap_confidence(x, y, x_pred, degree<span class="op">=</span><span class="dv">3</span>, num_bootstraps<span class="op">=</span><span class="dv">50</span>):</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Plot bootstrap confidence intervals for polynomial fit.</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x: training inputs</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param y: training outputs</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x_pred: prediction points</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :param degree: polynomial degree</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param num_bootstraps: number of bootstrap samples</span></span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>    poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>: degree <span class="op">+</span> <span class="dv">1</span>, <span class="st">&#39;data_limits&#39;</span>: xlim}</span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>    W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>    Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
-<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>    f_pred_bootstrap <span class="op">=</span> Phi_pred <span class="op">@</span> W_hat  <span class="co"># Shape: (n_pred_points, n_bootstrap_samples)</span></span>
-<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Transpose to get shape (n_bootstrap_samples, n_pred_points)</span></span>
-<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>    f_pred_bootstrap <span class="op">=</span> f_pred_bootstrap.T</span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute confidence intervals</span></span>
-<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>    f_mean <span class="op">=</span> np.mean(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># Mean across bootstrap samples</span></span>
-<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a>    f_std <span class="op">=</span> np.std(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># Std across bootstrap samples</span></span>
-<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure all arrays have the right shape</span></span>
-<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_mean.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a>        f_mean <span class="op">=</span> f_mean.flatten()</span>
-<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_std.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a>        f_std <span class="op">=</span> f_std.flatten()</span>
-<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a>    f_lower <span class="op">=</span> f_mean <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> f_std  <span class="co"># 95% confidence interval</span></span>
-<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a>    f_upper <span class="op">=</span> f_mean <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> f_std</span>
-<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f_mean, f_lower, f_upper, f_pred_bootstrap</span></code></pre></div>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>f_mean, f_lower, f_upper, f_pred_bootstrap <span class="op">=</span> plot_polynomial_bootstrap_confidence(x, y, x_pred, degree<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_polynomial_bootstrap_confidence(x, y, x_pred, degree<span class="op">=</span><span class="dv">3</span>, num_bootstraps<span class="op">=</span><span class="dv">50</span>):</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Plot bootstrap confidence intervals for polynomial fit.</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x: training inputs</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param y: training outputs</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x_pred: prediction points</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :param degree: polynomial degree</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param num_bootstraps: number of bootstrap samples</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>: degree <span class="op">+</span> <span class="dv">1</span>, <span class="st">&#39;data_limits&#39;</span>: xlim}</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>    Phi_pred <span class="op">=</span> mlai.polynomial(x_pred, <span class="op">**</span>poly_args)</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>    f_pred_bootstrap <span class="op">=</span> Phi_pred <span class="op">@</span> W_hat  <span class="co"># Shape: (n_pred_points, n_bootstrap_samples)</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Transpose to get shape (n_bootstrap_samples, n_pred_points)</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>    f_pred_bootstrap <span class="op">=</span> f_pred_bootstrap.T</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute confidence intervals</span></span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>    f_mean <span class="op">=</span> np.mean(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># Mean across bootstrap samples</span></span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>    f_std <span class="op">=</span> np.std(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># Std across bootstrap samples</span></span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure all arrays have the right shape</span></span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_mean.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a>        f_mean <span class="op">=</span> f_mean.flatten()</span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_std.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>        f_std <span class="op">=</span> f_std.flatten()</span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>    f_lower <span class="op">=</span> f_mean <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> f_std  <span class="co"># 95% confidence interval</span></span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>    f_upper <span class="op">=</span> f_mean <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> f_std</span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f_mean, f_lower, f_upper, f_pred_bootstrap</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>f_mean, f_lower, f_upper, f_pred_bootstrap <span class="op">=</span> plot_polynomial_bootstrap_confidence(x, y, x_pred, degree<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-bootstrap-confidence-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bootstrap-confidence.svg" width="80%" style=" ">
@@ -1018,71 +1006,71 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \ma
 </div>
 <p>We can use the bootstrap to characterise the bias and variance for different polynomials on the olympic data. The bootstrap allows us to estimate how much the model predictions vary when trained on different samples from the same underlying distribution.</p>
 <p>For each polynomial degree, we compute the bias and variance by comparing the bootstrap predictions at the training inputs against the observed targets. Concretely, we average the bootstrap predictions per training input and measure squared error to the observed <span class="math inline">\(y\)</span> (bias<span class="math inline">\(^2\)</span>), and we average the bootstrap prediction variance across training inputs (variance). This non-OOB bootstrap estimate exhibits the expected pattern: high bias for low-degree polynomials and higher variance for high-degree polynomials.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_bias_variance(x_pred, f_pred_bootstrap, f_full_dataset):</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compute bias and variance from bootstrap predictions.</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x_pred: prediction points</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param f_pred_bootstrap: bootstrap predictions (n_bootstrap, n_points)</span></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param f_full_dataset: prediction from full dataset</span></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mean prediction across bootstrap samples</span></span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>    f_mean <span class="op">=</span> np.mean(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure f_mean has the right shape (flatten if needed)</span></span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_mean.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>        f_mean <span class="op">=</span> f_mean.flatten()</span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_full_dataset.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>        f_full_dataset <span class="op">=</span> f_full_dataset.flatten()</span>
-<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bias: difference between mean bootstrap prediction and full dataset prediction</span></span>
-<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>    bias <span class="op">=</span> np.mean((f_mean <span class="op">-</span> f_full_dataset)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Variance: average variance of bootstrap predictions around their mean</span></span>
-<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>    variance <span class="op">=</span> np.mean(np.var(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>))</span>
-<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> bias, variance, f_mean</span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_polynomial_bias_variance(x, y, x_pred, max_degree<span class="op">=</span><span class="dv">6</span>, num_bootstraps<span class="op">=</span><span class="dv">50</span>):</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Analyze bias-variance tradeoff for polynomial models.</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x: training inputs</span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param y: training outputs  </span></span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x_pred: prediction points</span></span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :param max_degree: maximum polynomial degree to test</span></span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param num_bootstraps: number of bootstrap samples</span></span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    degrees <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, max_degree <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>    biases <span class="op">=</span> []</span>
-<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>    variances <span class="op">=</span> []</span>
-<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>    total_errors <span class="op">=</span> []</span>
-<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> degree <span class="kw">in</span> degrees:</span>
-<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Bootstrap predictions for this degree</span></span>
-<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>        poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>: degree <span class="op">+</span> <span class="dv">1</span>, <span class="st">&#39;data_limits&#39;</span>: xlim}</span>
-<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>        Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
-<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>        W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span>
-<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Predictions at training inputs for each bootstrap model</span></span>
-<span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Phi: (n_train, n_basis), W_hat: (n_basis, B) -&gt; (n_train, B)</span></span>
-<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>        F_train <span class="op">=</span> (Phi <span class="op">@</span> W_hat).T  <span class="co"># (B, n_train)</span></span>
-<span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Per-point bootstrap mean and variance of predictions</span></span>
-<span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a>        mu <span class="op">=</span> F_train.mean(axis<span class="op">=</span><span class="dv">0</span>)            <span class="co"># (n_train,)</span></span>
-<span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a>        var_point <span class="op">=</span> F_train.var(axis<span class="op">=</span><span class="dv">0</span>)      <span class="co"># (n_train,)</span></span>
-<span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Bias^2 and Variance using observed targets as reference</span></span>
-<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a>        bias <span class="op">=</span> np.mean((mu <span class="op">-</span> y.flatten())<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a>        variance <span class="op">=</span> np.mean(var_point)</span>
-<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a>        biases.append(bias)</span>
-<span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a>        variances.append(variance)</span>
-<span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a>        total_errors.append(bias <span class="op">+</span> variance)</span>
-<span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> degrees, biases, variances, total_errors</span></code></pre></div>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>degrees, biases, variances, total_errors <span class="op">=</span> analyze_polynomial_bias_variance(x, y, x_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_bias_variance(x_pred, f_pred_bootstrap, f_full_dataset):</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compute bias and variance from bootstrap predictions.</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x_pred: prediction points</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param f_pred_bootstrap: bootstrap predictions (n_bootstrap, n_points)</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param f_full_dataset: prediction from full dataset</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mean prediction across bootstrap samples</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    f_mean <span class="op">=</span> np.mean(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure f_mean has the right shape (flatten if needed)</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_mean.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>        f_mean <span class="op">=</span> f_mean.flatten()</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_full_dataset.ndim <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>        f_full_dataset <span class="op">=</span> f_full_dataset.flatten()</span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bias: difference between mean bootstrap prediction and full dataset prediction</span></span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a>    bias <span class="op">=</span> np.mean((f_mean <span class="op">-</span> f_full_dataset)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Variance: average variance of bootstrap predictions around their mean</span></span>
+<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a>    variance <span class="op">=</span> np.mean(np.var(f_pred_bootstrap, axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb56-23"><a href="#cb56-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> bias, variance, f_mean</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_polynomial_bias_variance(x, y, x_pred, max_degree<span class="op">=</span><span class="dv">6</span>, num_bootstraps<span class="op">=</span><span class="dv">50</span>):</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Analyze bias-variance tradeoff for polynomial models.</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x: training inputs</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param y: training outputs  </span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param x_pred: prediction points</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :param max_degree: maximum polynomial degree to test</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param num_bootstraps: number of bootstrap samples</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>    degrees <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, max_degree <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>    biases <span class="op">=</span> []</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>    variances <span class="op">=</span> []</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>    total_errors <span class="op">=</span> []</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> degree <span class="kw">in</span> degrees:</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Bootstrap predictions for this degree</span></span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>        poly_args <span class="op">=</span> {<span class="st">&#39;num_basis&#39;</span>: degree <span class="op">+</span> <span class="dv">1</span>, <span class="st">&#39;data_limits&#39;</span>: xlim}</span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>        Phi <span class="op">=</span> mlai.polynomial(x, <span class="op">**</span>poly_args)</span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>        W_hat <span class="op">=</span> bootstrap_fit(Phi, y, num_bootstraps)</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Predictions at training inputs for each bootstrap model</span></span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Phi: (n_train, n_basis), W_hat: (n_basis, B) -&gt; (n_train, B)</span></span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>        F_train <span class="op">=</span> (Phi <span class="op">@</span> W_hat).T  <span class="co"># (B, n_train)</span></span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Per-point bootstrap mean and variance of predictions</span></span>
+<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a>        mu <span class="op">=</span> F_train.mean(axis<span class="op">=</span><span class="dv">0</span>)            <span class="co"># (n_train,)</span></span>
+<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a>        var_point <span class="op">=</span> F_train.var(axis<span class="op">=</span><span class="dv">0</span>)      <span class="co"># (n_train,)</span></span>
+<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Bias^2 and Variance using observed targets as reference</span></span>
+<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a>        bias <span class="op">=</span> np.mean((mu <span class="op">-</span> y.flatten())<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a>        variance <span class="op">=</span> np.mean(var_point)</span>
+<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-33"><a href="#cb57-33" aria-hidden="true" tabindex="-1"></a>        biases.append(bias)</span>
+<span id="cb57-34"><a href="#cb57-34" aria-hidden="true" tabindex="-1"></a>        variances.append(variance)</span>
+<span id="cb57-35"><a href="#cb57-35" aria-hidden="true" tabindex="-1"></a>        total_errors.append(bias <span class="op">+</span> variance)</span>
+<span id="cb57-36"><a href="#cb57-36" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb57-37"><a href="#cb57-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> degrees, biases, variances, total_errors</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>degrees, biases, variances, total_errors <span class="op">=</span> analyze_polynomial_bias_variance(x, y, x_pred)</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-bias-variance-plots-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic-marathon-bias-variance-plots.svg" width="80%" style=" ">
@@ -1107,9 +1095,9 @@ R(\mathbf{ w}) = &amp; \int \left(y- f^*(\mathbf{ x})\right)^2 \mathbb{P}(y, \ma
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/no-free-lunch-theorem.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/no-free-lunch-theorem.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Also related on generalisation error is the so called ‘no free lunch theorem,’ which refers to our inability to decide what a better learning algorithm is without making assumptions about the data <span class="citation" data-cites="Wolpert:lack96">(Wolpert, 1996)</span> (see also <span class="citation" data-cites="Wolpert-supervised02">Wolpert (2002)</span>).</p>
+<p>Also related to generalisation error is the ‘no free lunch theorem,’ which refers to our inability to decide what a better learning algorithm is without making assumptions about the data <span class="citation" data-cites="Wolpert-lack96">(<strong>Wolpert-lack96?</strong>)</span> (see also <span class="citation" data-cites="Wolpert-supervised02">Wolpert (2002)</span>).</p>
 <p>NFL results show that without constraints on the data-generating distribution, no learning algorithm outperforms another in expectation. Any advantage derives from aligning the learner’s inductive bias with the structure present in the data.</p>
-<p>We’ve seen how model complexity trades bias for variance and how resampling quantifies variability. NFL explains why there is no globally optimal choice: effective generalisation requires assumptions tailored to the task (basis choice, degree, smoothness, priors).</p>
+<p>We’ve seen how model complexity trades bias for variance and how resampling quantifies variability. The no free lunch theorem explains why there is no globally optimal choice: effective generalisation requires assumptions tailored to the task (basis choice, degree, smoothness, priors).</p>
 <h2 id="regularisation">Regularisation</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-regularisation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/linear-regression-regularisation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -1189,9 +1177,6 @@ Wahba, G., 1990. Spline models for observational data, First. ed. SIAM. <a href=
 </div>
 <div id="ref-Wolpert-supervised02" class="csl-entry" role="doc-biblioentry">
 Wolpert, D.H., 2002. The supervised learning no-free-lunch theorems, in: Roy, R., Köppen, M., Ovaska, S., Furuhashi, T., Hoffmann, F. (Eds.), Soft Computing and Industry. Springer, London, pp. 25–. <a href="https://doi.org/10.1007/978-1-4471-0123-9_3">https://doi.org/10.1007/978-1-4471-0123-9_3</a>
-</div>
-<div id="ref-Wolpert:lack96" class="csl-entry" role="doc-biblioentry">
-Wolpert, D.H., 1996. The lack of a priori distinctions between learning algorithms. Neural Computation 8. <a href="https://doi.org/10.1162/neco.1996.8.7.1341">https://doi.org/10.1162/neco.1996.8.7.1341</a>
 </div>
 </div>
 <section class="footnotes" role="doc-endnotes">

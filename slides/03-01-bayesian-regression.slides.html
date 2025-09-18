@@ -509,21 +509,8 @@ w_i \sim \mathscr{N}\left(0,\alpha\right)
 <li><p>Choose noise variance <span class="math inline">\(\sigma^2 = 0.01\)</span></p></li>
 </ul>
 </section>
-<section id="generating-from-the-model" class="slide level2">
-<h2>Generating from the Model</h2>
-<p><span class="math display">\[
-\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}
-\]</span></p>
-<ul>
-<li>Sample <span class="math display">\[
-\mathbf{ w}\sim \mathscr{N}\left(0,\alpha\mathbf{I}\right)
-\]</span> <span class="math display">\[
-\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\right)
-\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
-</ul>
-</section>
-<section id="sampling-from-the-prior" class="slide level2">
-<h2>Sampling from the Prior</h2>
+<section id="sampling-from-a-gaussian" class="slide level2">
+<h2>Sampling from a Gaussian</h2>
 </section>
 <section id="scaling-gaussian-distributed-variables" class="slide level2">
 <h2>Scaling Gaussian-distributed Variables</h2>
@@ -537,8 +524,57 @@ w\sim \mathscr{N}\left(\mu_w,c_w\right)
 \phi w\sim \mathscr{N}\left(\phi\mu_w,\phi^2c_w\right)
 \]</span></p>
 </section>
-<section id="sampling-from-the-prior-1" class="slide level2">
+<section id="generating-from-the-model" class="slide level2">
+<h2>Generating from the Model</h2>
+<p><span class="math display">\[
+\mathbf{ y}= \boldsymbol{ \Phi}\mathbf{ w}+ \boldsymbol{ \epsilon}
+\]</span></p>
+<ul>
+<li>Sample <span class="math display">\[
+\mathbf{ w}\sim \mathscr{N}\left(0,\alpha\mathbf{I}\right)
+\]</span> <span class="math display">\[
+\boldsymbol{ \epsilon}\sim \mathscr{N}\left(\mathbf{0},\sigma^2\right)
+\]</span> with <span class="math inline">\(\alpha=1\)</span> and <span class="math inline">\(\sigma^2 = 0.01\)</span>.</li>
+</ul>
+</section>
+<section id="olympic-marathon-polynomial-sample" class="slide level2">
+<h2>Olympic Marathon Polynomial Sample</h2>
+</section>
+<section id="sampling-from-the-prior" class="slide level2">
 <h2>Sampling from the Prior</h2>
+<pre><code>K = degree + 1
+z_vec = np.random.normal(size=K)
+w_sample = z_vec*np.sqrt(alpha)</code></pre>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p><code>f_sample = Phi_pred@w_sample</code></p>
+<div class="figure">
+<div id="polynomial-prior-sample-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-prior-sample.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Prior sample of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> with <span class="math inline">\(\mathbf{ w}\)</span> taken from the prior.
+</aside>
+</section>
+<section id="mean-output" class="slide level2">
+<h2>Mean Output</h2>
+<ul>
+<li>Each sample <span class="math inline">\(\mathbf{ w}_s\)</span> has a prediction <span class="math inline">\(\mathbf{ f}_s\)</span></li>
+</ul>
+<p><span class="math display">\[
+\mathbf{ f}_s = \boldsymbol{ \Phi}\mathbf{ w}_s.
+\]</span></p>
+<pre><code>for i in range(num_samples):
+    z_vec = np.random.normal(size=K)
+    w_sample = z_vec*np.sqrt(alpha)
+    f_sample = np.dot(Phi_pred,w_sample)
+    _ = ax.plot(x_pred.flatten(), f_sample.flatten(), linewidth=2)</code></pre>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="polynomial-prior-samples-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-prior-samples.svg" width="80%" style=" ">
@@ -548,9 +584,6 @@ w\sim \mathscr{N}\left(\mu_w,c_w\right)
 <aside class="notes">
 Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> with <span class="math inline">\(\mathbf{ w}\)</span> taken from the prior.
 </aside>
-<p><span class="math display">\[
-\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
-\]</span></p>
 </section>
 <section id="computing-the-posterior" class="slide level2">
 <h2>Computing the Posterior</h2>

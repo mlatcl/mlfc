@@ -42,7 +42,7 @@ categories:
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>lawrennd<span class="op">/</span>mlai.git</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
@@ -200,9 +200,7 @@ w_1 x_{i, 1} + w_2 x_{i, 2} = -b.
 \text{sign}(\mathbf{ w}^\top\mathbf{ x}_i) = \text{sign}(y_i\mathbf{ x}_i^\top \mathbf{ x}_i) = y_i
 \]</span> which means that the point we’ve selected will be correctly classified.</p>
 <p>For simple data sets like our artifical red and green crosses, this algorithm can actually be so good that it gets the decision boundary very close from the start.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> init_perceptron</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> init_perceptron</span></code></pre></div>
 <h2 id="drawing-decision-boundary">Drawing Decision Boundary</h2>
 <div class="figure">
 <div id="perceptron-init-figure" class="figure-frame">
@@ -229,9 +227,7 @@ x_1 = -\frac{b + x_2w_2}{w_1}
 <li><p>Conversely if the line leaves the sides of the plot then we want to plot a line with values in the <span class="math inline">\(x\)</span> direction given by the limits of the plot. Then the values in the <span class="math inline">\(y\)</span> direction can be computed from the formula. Whether the line leaves the top/bottom or the sides of the plot is dependent on the relative values of <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span>.</p></li>
 </ol>
 <p>This motivates a simple <code>if</code> statement to check which situation we’re in.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> update_perceptron</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> update_perceptron</span></code></pre></div>
 <p>The code for plotting the perceptron boundary is also provided. Here note how many more lines are required for plotting than are required for updating! The plotting code runs an entire optimisation of the Perceptron algorithm showing the histrogram of points projected onto the <em>normal vector</em>, <span class="math inline">\(\mathbf{ w}\)</span>.</p>
 <div class="figure">
 <div id="perceptron-decision-boundary-figure" class="figure-frame">
@@ -263,15 +259,15 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 \]</span> The algorithm’s job is to find the values of <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> that minimize this error function.</p>
 <p>To demonstrate how regression works, we’ll create an artificial dataset where we know the true underlying relationship. This allows us to test whether our algorithm can recover the parameters we used to generate the data.</p>
 <p>We start by creating some random input values from a normal distribution. These will serve as our feature values <span class="math inline">\(x_i\)</span>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p>We now need to decide on a <em>true</em> value for <span class="math inline">\(m\)</span> and a <em>true</em> value for <span class="math inline">\(c\)</span> to use for generating the data. In real-world scenarios, we don’t know these values - that’s what we’re trying to learn. But for this demonstration, we’ll choose specific values so we can verify our algorithm works correctly.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m_true <span class="op">=</span> <span class="fl">1.4</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>c_true <span class="op">=</span> <span class="op">-</span><span class="fl">3.1</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m_true <span class="op">=</span> <span class="fl">1.4</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>c_true <span class="op">=</span> <span class="op">-</span><span class="fl">3.1</span></span></code></pre></div>
 <p>Now we can generate our target values using the linear relationship. The mathematical formula <span class="math inline">\(y_i = mx_i + c\)</span> translates directly into code. This creates an exact linear relationship - each point will lie exactly on the line defined by our chosen slope and intercept.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> m_true<span class="op">*</span>x<span class="op">+</span>c_true</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> m_true<span class="op">*</span>x<span class="op">+</span>c_true</span></code></pre></div>
 <p>Plotting our artificial data helps us visualise the linear relationship we’ve created. Since we generated the data deterministically using our linear function, all points should lie exactly on a straight line. This gives us a baseline to understand how the algorithm should perform in the ideal case.</p>
 <div class="figure">
 <div id="linear-regression-figure" class="figure-frame">
@@ -289,11 +285,11 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <h2 id="noise-corrupted-plot">Noise Corrupted Plot</h2>
 <p>To make our artificial dataset more realistic, we add Gaussian noise to our target values. This simulates the random variations we’d encounter in real data. The noise has zero mean, so it doesn’t systematically bias our data, but it does add random scatter around the true linear relationship.</p>
 <p>The standard deviation of the noise (0.5 in this case) controls how much the data deviates from the perfect line. Larger noise values make the regression problem more challenging, while smaller values keep the data closer to the underlying linear trend.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> np.random.normal(scale<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">1</span>)) <span class="co"># standard deviation of the noise is 0.5</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> m_true<span class="op">*</span>x <span class="op">+</span> c_true <span class="op">+</span> noise</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;r.&#39;</span>, markersize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>])</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(filename<span class="op">=</span><span class="st">&#39;regression_noise.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> np.random.normal(scale<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">1</span>)) <span class="co"># standard deviation of the noise is 0.5</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> m_true<span class="op">*</span>x <span class="op">+</span> c_true <span class="op">+</span> noise</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&#39;r.&#39;</span>, markersize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(filename<span class="op">=</span><span class="st">&#39;regression_noise.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./ml&#39;</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <div class="figure">
 <div id="linear-regression-noise-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/regression_noise.svg" width="60%" style=" ">
@@ -313,12 +309,12 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <p>To understand how the least squares algorithm works, it’s helpful to visualize the error function as a surface in parameter space. Since we have two parameters (<span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>), our error function <span class="math inline">\(E(m, c)\)</span> defines a surface in 3D space where the height at any point represents the error for that combination of parameters.</p>
 <p>The global minimum of this surface is given by the optimal parameter values that best fit our data according to the least squares objective. By visualising this surface through contour plots, we can gain intuition about the optimization landscape and understand why gradient-based methods work effectively for this problem.</p>
 <p>First, we create vectors of parameter values to explore around the true values we used to generate the data. We sample points in a range around the true parameters to see how the error function behaves in the local neighborhood.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an array of linearly separated values around m_true</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m_vals <span class="op">=</span> np.linspace(m_true<span class="op">-</span><span class="dv">3</span>, m_true<span class="op">+</span><span class="dv">3</span>, <span class="dv">100</span>) </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create an array of linearly separated values around c_true</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>c_vals <span class="op">=</span> np.linspace(c_true<span class="op">-</span><span class="dv">3</span>, c_true<span class="op">+</span><span class="dv">3</span>, <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an array of linearly separated values around m_true</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>m_vals <span class="op">=</span> np.linspace(m_true<span class="op">-</span><span class="dv">3</span>, m_true<span class="op">+</span><span class="dv">3</span>, <span class="dv">100</span>) </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create an array of linearly separated values around c_true</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>c_vals <span class="op">=</span> np.linspace(c_true<span class="op">-</span><span class="dv">3</span>, c_true<span class="op">+</span><span class="dv">3</span>, <span class="dv">100</span>)</span></code></pre></div>
 <p>Next, we create a 2D grid from these parameter vectors. This grid allows us to evaluate the error function at every combination of <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> values, giving us a complete picture of the error surface over the parameter space we’re exploring.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_grid, c_grid <span class="op">=</span> np.meshgrid(m_vals, c_vals)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m_grid, c_grid <span class="op">=</span> np.meshgrid(m_vals, c_vals)</span></code></pre></div>
 <p>Now we compute the error function at each combination of parameters. For each point in our grid, we:</p>
 <ol type="1">
 <li>Use the parameter values to make predictions: <span class="math inline">\(\hat{y}_i = m \cdot x_i + c\)</span><br />
@@ -327,10 +323,10 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <li>Sum these squared errors to get the total error for that parameter combination</li>
 </ol>
 <p>This gives us the complete error surface that we can then visualize. The nested loop structure evaluates the sum of squared errors formula at each <span class="math inline">\((m, c)\)</span> coordinate in our grid.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>E_grid <span class="op">=</span> np.zeros((<span class="dv">100</span>, <span class="dv">100</span>))</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        E_grid[i, j] <span class="op">=</span> ((y <span class="op">-</span> m_grid[i, j]<span class="op">*</span>x <span class="op">-</span> c_grid[i, j])<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>E_grid <span class="op">=</span> np.zeros((<span class="dv">100</span>, <span class="dv">100</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        E_grid[i, j] <span class="op">=</span> ((y <span class="op">-</span> m_grid[i, j]<span class="op">*</span>x <span class="op">-</span> c_grid[i, j])<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code></pre></div>
 <p>With our error surface computed, we can now create a contour plot to visualize the optimization landscape. A contour plot shows lines of equal error value, similar to elevation contours on a topographic map.</p>
 <p>Insights from this visualisation include:</p>
 <ul>
@@ -376,14 +372,14 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <h2 id="algorithm">Algorithm</h2>
 <p>The first step in gradient descent is to initialise our parameters with some starting values. The choice of initial values can affect how quickly the algorithm converges, although because of the simple shape of the linear regression objective (known as a convex optimisation), any starting point should eventually reach the global minimum.</p>
 <p>Here we’re starting with <span class="math inline">\(m = 0\)</span> (no slope) and <span class="math inline">\(c = -5\)</span> (a negative intercept). These values are deliberately chosen to be different from our true values (<span class="math inline">\(m_{true} = 1.4\)</span>, <span class="math inline">\(c_{true} = -3.1\)</span>) so we can see the algorithm as it navigates toward the correct solution. Normally you would initialise with smaller values closer to the origin.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div>
 <h2 id="offset-gradient">Offset Gradient</h2>
 <p>To implement gradient descent, we need to compute the partial derivatives of our error function with respect to each parameter. We’ll start with the gradient with respect to the intercept parameter <span class="math inline">\(c\)</span>.</p>
 <p>Our error function is <span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - mx_i - c)^2.\]</span></p>
 <p>To find how the error changes with respect to <span class="math inline">\(c\)</span>, we use the chain rule. Each squared term contributes to the gradient, and since <span class="math inline">\(c\)</span> appears in every term with a coefficient of <span class="math inline">\(-1\)</span>, the partial derivative becomes: <span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} c} = -2\sum_{i=1}^n(y_i - mx_i - c).\]</span> The negative sign comes from differentiating the <span class="math inline">\(-c\)</span> term inside the squared expression, and the factor of 2 comes from differentiating the square.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>c_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star).<span class="bu">sum</span>()</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to c is &quot;</span>, c_grad)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>c_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star).<span class="bu">sum</span>()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to c is &quot;</span>, c_grad)</span></code></pre></div>
 <h2 id="deriving-the-gradient">Deriving the Gradient</h2>
 <p>To understand how we derived the gradient formula, let’s work through the calculus step by step.</p>
 <p>The error function has the form: <span class="math display">\[E(m, c) = \sum_{i=1}^n(y_i - mx_i - c)^2\]</span></p>
@@ -399,8 +395,8 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <p>For the derivative with respect to <span class="math inline">\(m\)</span>, each term <span class="math inline">\((y_i - mx_i - c)^2\)</span> contributes: 1. <em>Outer function</em>: Still <span class="math inline">\(2u\)</span> where <span class="math inline">\(u = (y_i - mx_i - c)\)</span> 2. <em>Inner function</em>: The derivative of <span class="math inline">\((y_i - mx_i - c)\)</span> with respect to <span class="math inline">\(m\)</span> is <span class="math inline">\(-x_i\)</span></p>
 <p>This gives us: <span class="math display">\[\frac{\text{d}E(m, c)}{\text{d} m} = -2\sum_{i=1}^nx_i(y_i - mx_i - c)\]</span></p>
 <p>Notice that each term is weighted by <span class="math inline">\(x_i\)</span>, which makes intuitive sense: data points with larger input values have more influence on the slope parameter.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(x<span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star)).<span class="bu">sum</span>()</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to m is &quot;</span>, m_grad)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>m_grad <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">*</span>(x<span class="op">*</span>(y<span class="op">-</span>m_star<span class="op">*</span>x <span class="op">-</span> c_star)).<span class="bu">sum</span>()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Gradient with respect to m is &quot;</span>, m_grad)</span></code></pre></div>
 <h2 id="update-equations">Update Equations</h2>
 <p>Now that we have computed both gradients, we can update our parameter estimates. The key insight is that we don’t want to simply subtract the full gradient from our current parameter values - this would likely cause us to overshoot the minimum.</p>
 <p>Instead, we take small steps in the negative gradient direction. This is crucial because:</p>
@@ -442,11 +438,11 @@ E(m, c) = \sum_{i=1}^n(y_i - f(x_i))^2
 <h2 id="update-code">Update Code</h2>
 <p>Let’s implement the parameter updates in code. We choose a learning rate of 0.01, which is small enough to ensure stable convergence but large enough to make reasonable progress.</p>
 <p>The code shows the before and after parameter values, demonstrating how a single gradient descent step moves us closer to the optimal solution. After this update, we would recompute the gradients at our new position and repeat the process.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original m was&quot;</span>, m_star, <span class="st">&quot;and original c was&quot;</span>, c_star)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>learn_rate <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">-</span> learn_rate<span class="op">*</span>c_grad</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">-</span> learn_rate<span class="op">*</span>m_grad</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;New m is&quot;</span>, m_star, <span class="st">&quot;and new c is&quot;</span>, c_star)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original m was&quot;</span>, m_star, <span class="st">&quot;and original c was&quot;</span>, c_star)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>learn_rate <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">-</span> learn_rate<span class="op">*</span>c_grad</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">-</span> learn_rate<span class="op">*</span>m_grad</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;New m is&quot;</span>, m_star, <span class="st">&quot;and new c is&quot;</span>, c_star)</span></code></pre></div>
 <h2 id="iterating-updates">Iterating Updates</h2>
 <p>One gradient step only takes us partway to the minimum. The full gradient descent algorithm requires iterating these updates until convergence. The process is:</p>
 <ol type="1">
@@ -518,12 +514,12 @@ m_\text{new} = m_\text{old} + 2\eta\left[x_i (y_i - m_\text{old}x_i - c_\text{ol
 \]</span> For the intercept parameter <span class="math display">\[c_\text{new} = c_\text{old} + 2\eta\left[(y_i - m_\text{old}x_i - c_\text{old})\right].
 \]</span> Notice how these look exactly like the per-example terms from our batch gradient, but now we apply them immediately rather than accumulating them in a sum.</p>
 <p>The implementation is straightforward: randomly select a data point, compute its contribution to the gradient, and immediately update the parameters. This process repeats for many iterations, with each iteration using a different random example.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose a random point for the update </span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># update m</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(x[i]<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star))</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># update c</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose a random point for the update </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.random.randint(x.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># update m</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>m_star <span class="op">=</span> m_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(x[i]<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># update c</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>c_star <span class="op">=</span> c_star <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>learn_rate<span class="op">*</span>(y[i]<span class="op">-</span>m_star<span class="op">*</span>x[i] <span class="op">-</span> c_star)</span></code></pre></div>
 <h2 id="sgd-for-linear-regression">SGD for Linear Regression</h2>
 <p>Let’s now run the complete stochastic gradient descent algorithm and visualize how it differs from batch gradient descent. The key differences you’ll observe:</p>
 <ol type="1">

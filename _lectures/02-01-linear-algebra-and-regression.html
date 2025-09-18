@@ -46,7 +46,7 @@ categories:
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>lawrennd<span class="op">/</span>mlai.git</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
@@ -160,6 +160,53 @@ sns.set_palette('colorblind')}-->
 E(\mathbf{ w}) = \sum_{i=1}^n \left(y_i - \mathbf{ x}_i^\top \mathbf{ w}\right)^2.
 \]</span></p>
 <p>This week we will reinterpret the error as a <em>probabilistic model</em>. As Laplace suggests, we will consider the difference between our data and our model to have come from unconsidered factors which exhibit as a probability density. This leads to a more principled definition of least squares error due to <a href="https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss">Carl Friederich Gauss</a>, but inspired by <a href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace">Pierre-Simon Laplace</a>.</p>
+<h2 id="sum-of-squares-and-probability">Sum of Squares and Probability</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_physics/includes/gauss-least-squares.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_physics/includes/gauss-least-squares.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>In the overdetermined system we introduced a new set of slack variables, <span class="math inline">\(\{\epsilon_i\}_{i=1}^n\)</span>, on top of our parameters <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>. We dealt with the variables by placing a probability distribution over them. This gives rise to the likelihood and for the case of Gaussian distributed variables, it gives rise to the sum of squares error. It was Gauss who first made this connection in his volume on <em>Theoria Motus Corprum Coelestium</em> <span class="citation" data-cites="Gauss-theoria09">(Gauss, 1809)</span> (written in Latin)</p>
+<div class="figure">
+<div id="gauss-theoria-ls-figure" class="figure-frame">
+<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA213&amp;output=embed" width="700" height="500">
+</iframe>
+</div>
+<div id="gauss-theoria-ls-magnify" class="magnify" onclick="magnifyFigure(&#39;gauss-theoria-ls&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="gauss-theoria-ls-caption" class="caption-frame">
+<p>Figure: Gauss’s book <em>Theoria Motus Corprum Coelestium</em> <span class="citation" data-cites="Gauss-theoria09">(Gauss, 1809)</span> motivates the use of least squares through a probabilistic forumation.</p>
+</div>
+</div>
+<p>The relevant section roughly translates as</p>
+<blockquote>
+<p>… It is clear, that for the product <span class="math inline">\(\Omega = h^\mu \pi^{-\frac{1}{2}\mu} e^{-hh(vv + v^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \dots)}\)</span> to be maximised the sum <span class="math inline">\(vv + v ^\prime v^\prime + v^{\prime\prime} v^{\prime\prime} + \text{etc}.\)</span> ought to be minimized. <em>Therefore, the most probable values of the unknown quantities <span class="math inline">\(p , q, r , s \text{etc}.\)</span>, should be that in which the sum of the squares of the differences between the functions <span class="math inline">\(V, V^\prime, V^{\prime\prime} \text{etc}\)</span>, and the observed values is minimized</em>, for all observations of the same degree of precision is presumed.</p>
+</blockquote>
+<p>It’s on the strength of this paragraph that the density is known as the Gaussian, despite the fact that four pages later Gauss credits the necessary integral for the density to Laplace, and it was also Laplace that did a lot of the original work on dealing with these errors through probability. <a href="http://www.hup.harvard.edu/catalog.php?isbn=9780674403413">Stephen Stigler’s book on the measurement of uncertainty before 1900</a> <span class="citation" data-cites="Stigler:table99">(Stigler, 1999)</span> has a nice chapter on this.</p>
+<div class="figure">
+<div id="gauss-laplace-gaussian-figure" class="figure-frame">
+<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA217&amp;output=embed" width="700" height="500">
+</iframe>
+</div>
+<div id="gauss-laplace-gaussian-magnify" class="magnify" onclick="magnifyFigure(&#39;gauss-laplace-gaussian&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="gauss-laplace-gaussian-caption" class="caption-frame">
+<p>Figure: Gauss credits Laplace with the invention of the Gaussian density here.</p>
+</div>
+</div>
+<p>where the crediting to the Laplace is about halfway through the last paragraph. This book was published in 1809, four years after  in an appendix to one of his chapters on the orbit of comets. Gauss goes on to make a claim for priority on the method on page 221 (towards the end of the first paragraph …).</p>
+<div class="figure">
+<div id="gauss-least-squares-priority-figure" class="figure-frame">
+<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.uk/books?id=ORUOAAAAQAAJ&amp;pg=PA221&amp;output=embed" width="700" height="500">
+</iframe>
+</div>
+<div id="gauss-least-squares-priority-magnify" class="magnify" onclick="magnifyFigure(&#39;gauss-least-squares-priority&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="gauss-least-squares-priority-caption" class="caption-frame">
+<p>Figure: Gauss places his claim for priority on least squares over Legendre who published first. Gauss claims he used least squares for his prediction of the location of Ceres.</p>
+</div>
+</div>
 <h2 id="the-gaussian-density">The Gaussian Density</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/univariate-gaussian.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/univariate-gaussian.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -862,11 +909,17 @@ E(\mathbf{ w})=
 <div id="ref-Bishop:book06" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
+<div id="ref-Gauss-theoria09" class="csl-entry" role="doc-biblioentry">
+Gauss, C.F., 1809. Theoria motus corporum coelestium in sectionibus conicis solem ambientium. F. Perthes und I. H. Besser, Hamburg.
+</div>
 <div id="ref-Legendre:nouvelles05" class="csl-entry" role="doc-biblioentry">
 Legendre, A.-M., 1805. Nouvelles méthodes pour la détermination des orbites des comètes. F. Didot.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
 Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+</div>
+<div id="ref-Stigler:table99" class="csl-entry" role="doc-biblioentry">
+Stigler, S.M., 1999. Statistics on the table: The history of statistical concepts and methods. harvard, Cambridge, MA.
 </div>
 </div>
 

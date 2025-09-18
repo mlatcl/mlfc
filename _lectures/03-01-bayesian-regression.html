@@ -43,7 +43,7 @@ categories:
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>lawrennd<span class="op">/</span>mlai.git</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
@@ -287,6 +287,39 @@ w_i \sim \mathscr{N}\left(0,\alpha\right)
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set the noise variance</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="op">=</span> <span class="fl">0.01</span></span></code></pre></div>
+<h2 id="sampling-from-a-gaussian">Sampling from a Gaussian</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_statistics/includes/gaussian-sample-statitics.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_statistics/includes/gaussian-sample-statitics.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<p>Let’s test the relationship between samples and the true mean numerically. First we will draw 200 samples from a standard normal.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div>
+<p>We can compute the mean of these samples and their variance</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
+<p>These are close to zero (the mean) and one (the variance) as you’d expect. Now compute the mean and variance of the scaled version,</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>phi <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>f_vec <span class="op">=</span> phi<span class="op">*</span>w_vec</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be phi*0 = 0.&#39;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</span></code></pre></div>
+<p>If you increase the number of samples then you will see that the sample mean and the sample variance begin to converge towards the true mean and the true variance. Obviously adding an offset to a sample from <code>np.random.normal</code> will change the mean. So if you want to sample from a Gaussian with mean <code>mu</code> and standard deviation <code>sigma</code> one way of doing it is to sample from the standard normal and scale and shift the result, so to sample a set of <span class="math inline">\(w\)</span> from a Gaussian with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\alpha\)</span>, <span class="math display">\[w\sim \mathscr{N}\left(\mu,\alpha\right)\]</span> We can simply scale and offset samples from the <em>standard normal</em>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
+<p>Here the <code>np.sqrt</code> is necesssary because we need to multiply by the standard deviation and we specified the variance as <code>alpha</code>. So scaling and offsetting a Gaussian distributed variable keeps the variable Gaussian, but it effects the mean and variance of the resulting variable.</p>
+<p>To get an idea of the overall shape of the resulting distribution, let’s do the same thing with a histogram of the results.</p>
+<p>Now re-run this histogram with 100,000 samples and check that the both histograms look qualitatively Gaussian.</p>
+<h2 id="scaling-gaussian-distributed-variables">Scaling Gaussian-distributed Variables</h2>
+<p>First, let’s consider the case where we have one data point and one feature in our basis set. In otherwords <span class="math inline">\(\mathbf{ f}\)</span> would be a scalar, <span class="math inline">\(\mathbf{ w}\)</span> would be a scalar and <span class="math inline">\(\boldsymbol{ \Phi}\)</span> would be a scalar. In this case we have <span class="math display">\[
+f= \phi w
+\]</span> If <span class="math inline">\(w\)</span> is drawn from a normal density, <span class="math display">\[
+w\sim \mathscr{N}\left(\mu_w,c_w\right)
+\]</span> and <span class="math inline">\(\phi\)</span> is a scalar value which we are given, then properties of the Gaussian density tell us that <span class="math display">\[
+\phi w\sim \mathscr{N}\left(\phi\mu_w,\phi^2c_w\right)
+\]</span></p>
 <h2 id="generating-from-the-model">Generating from the Model</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/prior-sampling-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/prior-sampling-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -298,73 +331,64 @@ w_i \sim \mathscr{N}\left(0,\alpha\right)
 <li>Repeat to try and characterise the type of functions you are generating.</li>
 </ol>
 <p>Given a prior variance (as defined above) we can now sample from the prior distribution and combine with a basis set to see what assumptions we are making about the functions <em>a priori</em> (i.e. before we’ve seen the data). Firstly we compute the basis function matrix. We will do it both for our training data, and for a range of prediction locations (<code>x_pred</code>).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> (<span class="dv">1876</span>,<span class="dv">2044</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>num_data <span class="op">=</span> x.shape[<span class="dv">0</span>]</span></code></pre></div>
+<h2 id="olympic-marathon-polynomial-sample">Olympic Marathon Polynomial Sample</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-polynomial-sample.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-polynomial-sample.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> (<span class="dv">1876</span>,<span class="dv">2044</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>num_data <span class="op">=</span> x.shape[<span class="dv">0</span>]</span></code></pre></div>
 <p>Now let’s build the basis matrices. We define the polynomial basis as follows.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>degree<span class="op">=</span><span class="dv">4</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>num_pred_data <span class="op">=</span> <span class="dv">100</span> <span class="co"># how many points to use for plotting predictions</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], num_pred_data)[:, <span class="va">None</span>] <span class="co"># input locations for predictions</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.Basis(mlai.polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, data_limits<span class="op">=</span>data_limits)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> basis.Phi(x_pred)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> basis.Phi(x)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>degree<span class="op">=</span><span class="dv">4</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>num_pred_data <span class="op">=</span> <span class="dv">100</span> <span class="co"># how many points to use for plotting predictions</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>x_pred <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], num_pred_data)[:, <span class="va">None</span>] <span class="co"># input locations for predictions</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>data_limits<span class="op">=</span>xlim</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>basis <span class="op">=</span> mlai.Basis(polynomial, number<span class="op">=</span>degree<span class="op">+</span><span class="dv">1</span>, data_limits<span class="op">=</span>data_limits)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>Phi_pred <span class="op">=</span> basis.Phi(x_pred)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>Phi <span class="op">=</span> basis.Phi(x)</span></code></pre></div>
 <h2 id="sampling-from-the-prior">Sampling from the Prior</h2>
 <p>Now we will sample from the prior to produce a vector <span class="math inline">\(\mathbf{ w}\)</span> and use it to plot a function which is representative of our belief <em>before</em> we fit the data. To do this we are going to use the properties of the Gaussian density and a sample from a <em>standard normal</em> using the function <code>np.random.normal</code>.</p>
-<h2 id="scaling-gaussian-distributed-variables">Scaling Gaussian-distributed Variables</h2>
-<p>First, let’s consider the case where we have one data point and one feature in our basis set. In otherwords <span class="math inline">\(\mathbf{ f}\)</span> would be a scalar, <span class="math inline">\(\mathbf{ w}\)</span> would be a scalar and <span class="math inline">\(\boldsymbol{ \Phi}\)</span> would be a scalar. In this case we have <span class="math display">\[
-f= \phi w
-\]</span> If <span class="math inline">\(w\)</span> is drawn from a normal density, <span class="math display">\[
-w\sim \mathscr{N}\left(\mu_w,c_w\right)
-\]</span> and <span class="math inline">\(\phi\)</span> is a scalar value which we are given, then properties of the Gaussian density tell us that <span class="math display">\[
-\phi w\sim \mathscr{N}\left(\phi\mu_w,\phi^2c_w\right)
-\]</span> Let’s test this out numerically. First we will draw 200 samples from a standard normal,</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div>
-<p>We can compute the mean of these samples and their variance</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
-<p>These are close to zero (the mean) and one (the variance) as you’d expect. Now compute the mean and variance of the scaled version,</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>phi <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f_vec <span class="op">=</span> phi<span class="op">*</span>w_vec</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be phi*0 = 0.&#39;</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be phi*phi*1 = &#39;</span>, phi<span class="op">*</span>phi)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample mean is &#39;</span>, f_vec.mean())</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;f sample variance is &#39;</span>, f_vec.var())</span></code></pre></div>
-<p>If you increase the number of samples then you will see that the sample mean and the sample variance begin to converge towards the true mean and the true variance. Obviously adding an offset to a sample from <code>np.random.normal</code> will change the mean. So if you want to sample from a Gaussian with mean <code>mu</code> and standard deviation <code>sigma</code> one way of doing it is to sample from the standard normal and scale and shift the result, so to sample a set of <span class="math inline">\(w\)</span> from a Gaussian with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\alpha\)</span>, <span class="math display">\[w\sim \mathscr{N}\left(\mu,\alpha\right)\]</span> We can simply scale and offset samples from the <em>standard normal</em>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">4</span> <span class="co"># mean of the distribution</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span> <span class="co"># variance of the distribution</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>w_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">200</span>)<span class="op">*</span>np.sqrt(alpha) <span class="op">+</span> mu</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample mean is &#39;</span>, w_vec.mean())</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;w sample variance is &#39;</span>, w_vec.var())</span></code></pre></div>
-<p>Here the <code>np.sqrt</code> is necesssary because we need to multiply by the standard deviation and we specified the variance as <code>alpha</code>. So scaling and offsetting a Gaussian distributed variable keeps the variable Gaussian, but it effects the mean and variance of the resulting variable.</p>
-<p>To get an idea of the overall shape of the resulting distribution, let’s do the same thing with a histogram of the results.</p>
-<p>Now re-run this histogram with 100,000 samples and check that the both histograms look qualitatively Gaussian.</p>
-<h2 id="sampling-from-the-prior-1">Sampling from the Prior</h2>
 <p>Let’s use this way of constructing samples from a Gaussian to check what functions look like <em>a priori</em>. The process will be as follows. First, we sample a random vector <span class="math inline">\(K\)</span> dimensional from <code>np.random.normal</code>. Then we scale it by <span class="math inline">\(\sqrt{\alpha}\)</span> to obtain a prior sample of <span class="math inline">\(\mathbf{ w}\)</span>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> degree <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>K)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> degree <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>K)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> z_vec<span class="op">*</span>np.sqrt(alpha)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w_sample)</span></code></pre></div>
 <p>Now we can combine our sample from the prior with the basis functions to create a function,</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> np.dot(Phi_pred,w_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> Phi_pred<span class="op">@</span>w_sample</span></code></pre></div>
+<div class="figure">
+<div id="polynomial-prior-sample-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/polynomial-prior-sample.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="polynomial-prior-sample-magnify" class="magnify" onclick="magnifyFigure(&#39;polynomial-prior-sample&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="polynomial-prior-sample-caption" class="caption-frame">
+<p>Figure: Prior sample of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> with <span class="math inline">\(\mathbf{ w}\)</span> taken from the prior.</p>
+</div>
+</div>
 <p>Note that we have carefully scaled our data using <code>xlim</code> to ensure that the polynomials don’t go too large. These samples should be well behaved.</p>
 <p>Now we need to recompute the basis functions from above,</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> np.dot(Phi_pred, w_sample)</span></code></pre></div>
+<h2 id="mean-output">Mean Output</h2>
+<p>The prediction function can now be computed. In matrix form, the predictions can be computed as <span class="math display">\[
+\mathbf{ f}_s = \boldsymbol{ \Phi}\mathbf{ w}_s.
+\]</span> This involves a matrix multiplication between a fixed matrix <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and a vector drawn from a distribution <span class="math inline">\(p(\mathbf{ w})\)</span>. Because <span class="math inline">\(\mathbf{ w}_s\)</span> is drawn from a distribution, this imples that <span class="math inline">\(\mathbf{ f}_s\)</span> should also be drawn from a distribution.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> Phi_pred<span class="op">@</span>w_sample</span></code></pre></div>
 <p>Now let’s loop through some samples and plot various functions as samples from this system,</p>
 <div class="figure">
 <div id="polynomial-prior-samples-figure" class="figure-frame">
@@ -378,9 +402,7 @@ w\sim \mathscr{N}\left(\mu_w,c_w\right)
 <p>Figure: Samples of <span class="math inline">\(\boldsymbol{ \Phi}\mathbf{ w}\)</span> with <span class="math inline">\(\mathbf{ w}\)</span> taken from the prior.</p>
 </div>
 </div>
-<p>The predictions for the mean output can now be computed. We want the expected value of the predictions under the posterior distribution. In matrix form, the predictions can be computed as <span class="math display">\[
-\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}.
-\]</span> This involves a matrix multiplication between a fixed matrix <span class="math inline">\(\boldsymbol{ \Phi}\)</span> and a vector that is drawn from a distribution <span class="math inline">\(\mathbf{ w}\)</span>. Because <span class="math inline">\(\mathbf{ w}\)</span> is drawn from a distribution, this imples that <span class="math inline">\(\mathbf{ f}\)</span> should also be drawn from a distribution. There are two distributions we are interested in though. We have just been sampling from the <em>prior</em> distribution to see what sort of functions we get <em>before</em> looking at the data. In Bayesian inference, we also need to compute the <em>posterior</em> distribution and sample from that density.</p>
+<p>There are two distributions we are interested in though. We have just been sampling from the <em>prior</em> distribution to see what sort of functions we get <em>before</em> looking at the data. In Bayesian inference, we also need to compute the <em>posterior</em> distribution and sample from that density.</p>
 <h2 id="the-bayesian-approach">The Bayesian Approach</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/the-bayesian-approach.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/the-bayesian-approach.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -444,10 +466,10 @@ p(\mathbf{ w}|\mathbf{ y}, \mathbf{ x}) = \frac{p(\mathbf{ y}|\mathbf{ x}, \math
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-sampling-basis.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/posterior-sampling-basis.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>Before we were able to sample the prior values for the mean <em>independently</em> from a Gaussian using <code>np.random.normal</code> and scaling the result. However, observing the data <em>correlates</em> the parameters. Recall this from the first lab where we had a correlation between the offset, <span class="math inline">\(c\)</span> and the slope <span class="math inline">\(m\)</span> which caused such problems with the coordinate ascent algorithm. We need to sample from a <em>correlated</em> Gaussian. For this we can use <code>np.random.multivariate_normal</code>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> np.random.multivariate_normal(w_mean.flatten(), w_cov)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> np.dot(Phi_pred,w_sample)</span></code></pre></div>
+<p>Sample the prior values for the mean <em>independently</em> from a Gaussian using <code>np.random.normal</code> and scaling the result. However, observing the data <em>correlates</em> the parameters. Recall this from the first lab where we had a correlation between the offset, <span class="math inline">\(c\)</span> and the slope <span class="math inline">\(m\)</span> which caused such problems with the coordinate ascent algorithm. We need to sample from a <em>correlated</em> Gaussian. For this we can use <code>np.random.multivariate_normal</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>w_sample <span class="op">=</span> np.random.multivariate_normal(w_mean.flatten(), w_cov)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>f_sample <span class="op">=</span> np.dot(Phi_pred,w_sample)</span></code></pre></div>
 <p>Now let’s sample several functions and plot them all to see how the predictions fluctuate.</p>
 <p>import mlai.plot import mlai</p>
 <div class="figure">
@@ -473,19 +495,19 @@ y_i \sim \mathscr{N}\left(\mu_i,\sigma^2_i\right)
 \sum_{i=1}^K y_i \sim \mathscr{N}\left(\sum_{i=1}^K \mu_i,\sum_{i=1}^K \sigma_i^2\right).
 \]</span> Let’s try that experimentally. First let’s generate a vector of samples from a standard normal distribution, <span class="math inline">\(z \sim \mathscr{N}\left(0,1\right)\)</span>, then we will scale and offset them, then keep adding them into a vector <code>y_vec</code>.</p>
 <h2 id="sampling-from-gaussians-and-summing-up">Sampling from Gaussians and Summing Up</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>mus <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, K) <span class="co"># mean values generated linearly spaced between 0 and 5</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>sigmas <span class="op">=</span> np.linspace(<span class="fl">0.5</span>, <span class="dv">2</span>, K) <span class="co"># sigmas generated linearly spaced between 0.5 and 2</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>y_vec <span class="op">=</span> np.zeros(num_samples)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu, sigma <span class="kw">in</span> <span class="bu">zip</span>(mus, sigmas):</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>num_samples) <span class="co"># z is from standard normal</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    y_vec <span class="op">+=</span> z_vec<span class="op">*</span>sigma <span class="op">+</span> mu <span class="co"># add to y z*sigma + mu</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># now y_vec is the sum of each scaled and off set z.</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Sample mean is &#39;</span>, y_vec.mean(), <span class="st">&#39; and sample variance is &#39;</span>, y_vec.var())</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be &#39;</span>, mus.<span class="bu">sum</span>())</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be &#39;</span>, (sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(), <span class="st">&#39; standard deviation &#39;</span>, np.sqrt((sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>())) </span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">10</span> <span class="co"># how many Gaussians to add.</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>num_samples <span class="op">=</span> <span class="dv">1000</span> <span class="co"># how many samples to have in y_vec</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>mus <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, K) <span class="co"># mean values generated linearly spaced between 0 and 5</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>sigmas <span class="op">=</span> np.linspace(<span class="fl">0.5</span>, <span class="dv">2</span>, K) <span class="co"># sigmas generated linearly spaced between 0.5 and 2</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>y_vec <span class="op">=</span> np.zeros(num_samples)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu, sigma <span class="kw">in</span> <span class="bu">zip</span>(mus, sigmas):</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    z_vec <span class="op">=</span> np.random.normal(size<span class="op">=</span>num_samples) <span class="co"># z is from standard normal</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    y_vec <span class="op">+=</span> z_vec<span class="op">*</span>sigma <span class="op">+</span> mu <span class="co"># add to y z*sigma + mu</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># now y_vec is the sum of each scaled and off set z.</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Sample mean is &#39;</span>, y_vec.mean(), <span class="st">&#39; and sample variance is &#39;</span>, y_vec.var())</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True mean should be &#39;</span>, mus.<span class="bu">sum</span>())</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;True variance should be &#39;</span>, (sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>(), <span class="st">&#39; standard deviation &#39;</span>, np.sqrt((sigmas<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>())) </span></code></pre></div>
 <p>Of course, we can histogram <code>y_vec</code> as well.</p>
 <h2 id="matrix-multiplication-of-gaussian-variables">Matrix Multiplication of Gaussian Variables</h2>
 <p>We are interested in what our model is saying about the sort of functions we are observing. The fact that summing of Gaussian variables leads to new Gaussian variables, and scaling of Gaussian variables <em>also</em> leads to Gaussian variables means that matrix multiplication (which is just a series of sums and scales) also leads to Gaussian densities. Matrix multiplication is just adding and scaling together, in the formula, <span class="math inline">\(\mathbf{ f}= \boldsymbol{ \Phi}\mathbf{ w}\)</span> we can extract the first element from <span class="math inline">\(\mathbf{ f}\)</span> as <span class="math display">\[
@@ -588,16 +610,16 @@ E = \sum_{i=1}^n(y_i - \langle f_i\rangle)^2
 </tr>
 </table>
 <p>The Olympic Marathon data is a standard dataset for regression modelling. The data consists of the pace of Olympic Gold Medal Marathon winners for the Olympics from 1896 to present. Let’s load in the data and plot.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.olympic_marathon_men()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>offset <span class="op">=</span> y.mean()</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> np.sqrt(y.var())</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> (y <span class="op">-</span> offset)<span class="op">/</span>scale</span></code></pre></div>
 <div class="figure">
 <div id="olympic-marathon-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/olympic-marathon.svg" width="80%" style=" ">
@@ -616,8 +638,8 @@ E = \sum_{i=1}^n(y_i - \langle f_i\rangle)^2
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bayesian-polynomial.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/olympic-marathon-bayesian-polynomial.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Five fold cross validation tests the ability of the model to <em>interpolate</em>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <div class="figure">
 <div id="olympic-blm-polynomial-number-29-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/olympic_BLM_polynomial_number026.svg" width="80%" style=" ">
