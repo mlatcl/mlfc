@@ -42,7 +42,7 @@ categories:
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install notutils</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pods</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install mlai</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>lawrennd<span class="op">/</span>mlai.git</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> notutils</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
@@ -1211,9 +1211,7 @@ k(t, t^\prime)=\alpha \min(t, t^\prime)
 <div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu_cov</span></code></pre></div>
 <center>
 <span class="math display">\[k(\mathbf{ x}, \mathbf{ x}^\prime) = 
-\alpha \arcsin\left(\frac{w \mathbf{ x}^\top \mathbf{ x}^\prime + b}
-{\sqrt{\left(w \mathbf{ x}^\top \mathbf{ x}+ b + 1\right)
-\left(w \left.\mathbf{ x}^\prime\right.^\top \mathbf{ x}^\prime + b + 1\right)}}\right)\]</span>
+\frac{\|\mathbf{ x}\| \|\mathbf{ x}^\prime\|}{2\pi} \left(\pi - \arccos\left(\frac{\mathbf{ x}^\top \mathbf{ x}^\prime + b}{\|\mathbf{ x}\| \|\mathbf{ x}^\prime\|}\right)\right)\]</span>
 </center>
 <div class="figure">
 <div id="relu-covariance-plot-figure" class="figure-frame">
@@ -1399,12 +1397,10 @@ k(t, t^\prime)=\alpha \min(t, t^\prime)
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_kern/includes/slfm-covariance.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_kern/includes/slfm-covariance.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> icm_cov</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> slfm_cov</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> mlai.Kernel(function<span class="op">=</span>mlai.slfm_cov, subkernel<span class="op">=</span>mlai.eq_cov, W<span class="op">=</span>np.asarray([[<span class="dv">1</span>],[<span class="dv">5</span>]]))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> slfm_cov</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <h2 id="gpss-gaussian-process-summer-school">GPSS: Gaussian Process Summer School</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-summer-school.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_gp/includes/gp-summer-school.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
