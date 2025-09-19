@@ -4,7 +4,14 @@ session: 1
 date: 2025-09-22
 featured_image: slides/diagrams/dimred/dem_manifold_print002.png
 title: "Dimensionality Reduction: Latent Variable Modelling"
+layout: lecture
+author:
+- family: Lawrence
+  given: Neil D.
+time: "09:30"
 abstract: "In this lecture we turn to *unsupervised learning*. Specifically, we introduce the idea of a latent variable model. Latent variable models are a probabilistic perspective on unsupervised learning which lead to dimensionality reduction algorithms. "
+transition: None
+venue: Dedan Kimathi University, Nyeri, Kenya
 youtube: 0mtK2_rc0IY
 ---
 
