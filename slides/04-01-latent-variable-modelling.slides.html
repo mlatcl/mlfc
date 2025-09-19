@@ -196,10 +196,11 @@ E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \bol
 </section>
 <section id="k-means-clustering-2" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
+<div>
 <script>
 showDivs(1, 'kmeans-clustering');
 </script>
-<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering'); document.getElementById('range-kmeans-clustering').value = Math.max(1, parseInt(document.getElementById('range-kmeans-clustering').value) - 1);">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering'); document.getElementById('range-kmeans-clustering').value = Math.min(26, parseInt(document.getElementById('range-kmeans-clustering').value) + 1);">❯</button></p>
+<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering');">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering');">❯</button></p>
 <div class="kmeans-clustering" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_001.svg" width="40%" style=" ">
 </object>
@@ -252,148 +253,7 @@ showDivs(1, 'kmeans-clustering');
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_013.svg" width="40%" style=" ">
 </object>
 </div>
-</section>
-<section id="k-means-clustering-3" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-means Clustering</h2>
-</section>
-<section id="mathematical-formulation-1" class="slide level2">
-<h2>Mathematical Formulation</h2>
-<ul>
-<li>Represent objects as data vectors <span class="math inline">\(\mathbf{ x}_i\)</span></li>
-<li>Represent cluster centers as vectors <span class="math inline">\(\boldsymbol{ \mu}_j\)</span></li>
-<li>Define similarity/distance between objects and centers</li>
-<li>Distance function: <span class="math inline">\(d_{ij} = f(\mathbf{ x}_i, \boldsymbol{ \mu}_j)\)</span></li>
-</ul>
-</section>
-<section id="squared-distance-1" class="slide level2">
-<h2>Squared Distance</h2>
-<ul>
-<li>Common choice: squared distance <span class="math display">\[
-d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
-\]</span></li>
-<li>Goal: find centers close to many data points</li>
-</ul>
-</section>
-<section id="objective-function-2" class="slide level2">
-<h2>Objective Function</h2>
-<ul>
-<li>Given similarity measure, need number of cluster centers, <span class="math inline">\(K\)</span>.</li>
-<li>Find their location by allocating each center to a sub-set of the points and minimizing the sum of the squared errors, <span class="math display">\[
-E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
-\]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all indices of data points allocated to the <span class="math inline">\(j\)</span>th center.</li>
-</ul>
-</section>
-<section id="k-means-clustering-4" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
-<ul>
-<li><em><span class="math inline">\(k\)</span>-means clustering</em> is simple and quick to implement.</li>
-<li>Very <em>initialisation</em> sensitive.</li>
-</ul>
-</section>
-<section id="initialisation-1" class="slide level2">
-<h2>Initialisation</h2>
-<ul>
-<li>Initialisation is the process of selecting a starting set of parameters.</li>
-<li>Optimisation result can depend on the starting point.</li>
-<li>For <span class="math inline">\(k\)</span>-means clustering you need to choose an initial set of centers.</li>
-<li>Optimisation surface has many local optima, algorithm gets stuck in ones near initialisation.</li>
-</ul>
-</section>
-<section id="k-means-algorithm-1" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-means Algorithm</h2>
-<ul>
-<li>Simple iterative clustering algorithm</li>
-<li>Key steps:
-<ol type="1">
-<li>Initialize with random centers</li>
-<li>Assign points to nearest center</li>
-<li>Update centers as cluster means</li>
-<li>Repeat until stable</li>
-</ol></li>
-</ul>
-</section>
-<section id="objective-function-3" class="slide level2">
-<h2>Objective Function</h2>
-<ul>
-<li>Minimizes sum of squared distances: <span class="math display">\[
-E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)
-\]</span></li>
-<li>Solution not guaranteed to be global or unique</li>
-<li>Represents a non-convex optimization problem</li>
-</ul>
-</section>
-<section id="k-means-clustering-5" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
-<script>
-showDivs(1, 'kmeans-clustering');
-</script>
-<p><small></small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering'); document.getElementById('range-kmeans-clustering').value = Math.max(1, parseInt(document.getElementById('range-kmeans-clustering').value) - 1);">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering'); document.getElementById('range-kmeans-clustering').value = Math.min(26, parseInt(document.getElementById('range-kmeans-clustering').value) + 1);">❯</button></p>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_001.svg" width="40%" style=" ">
-</object>
 </div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_002.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_003.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_004.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_005.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_006.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_007.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_008.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_009.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_010.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_011.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_012.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_013.svg" width="40%" style=" ">
-</object>
-</div>
-<p><em>Clustering with the <span class="math inline">\(k\)</span>-means clustering algorithm.</em></p>
-</section>
-<section id="k-means-clustering-6" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
-<div class="figure">
-<div id="k-means-clustering-figure" class="figure-frame">
-<iframe width="600" height="450" src="https://www.youtube.com/embed/mfqmoUN-Cuw?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-</iframe>
-</div>
-</div>
-<aside class="notes">
-<span class="math inline">\(k\)</span>-means clustering by Alex Ihler.
-</aside>
-<p><em><span class="math inline">\(k\)</span>-means clustering by Alex Ihler</em></p>
 </section>
 <section id="hierarchical-clustering" class="slide level2">
 <h2>Hierarchical Clustering</h2>
@@ -431,7 +291,6 @@ Visualization of the first two dimensions of the oil flow data from <span class=
 <aside class="notes">
 Hierarchical clustering applied to oil flow data. The dendrogram shows how different flow regimes are grouped based on their measurement similarities. The three main flow regimes (homogeneous, annular, and laminar) should form distinct clusters.
 </aside>
-<p>{In this example, we’ve applied hierarchical clustering to the oil flow data set. The data contains measurements from different flow regimes in a multiphase flow facility. The dendrogram shows how measurements naturally cluster into different flow types. Ward’s linkage method is used as it tends to create compact, evenly-sized clusters.</p>
 </section>
 <section id="phylogenetic-trees" class="slide level2">
 <h2>Phylogenetic Trees</h2>
@@ -480,10 +339,11 @@ Hierarchical clustering applied to oil flow data. The dendrogram shows how diffe
 </section>
 <section id="usps-samples" class="slide level2">
 <h2>USPS Samples</h2>
+<div>
 <script>
 showDivs(0, 'dem-six-sample');
 </script>
-<p><small></small> <input id="range-dem-six-sample" type="range" min="0" max="4" value="0" onchange="setDivs('dem-six-sample')" oninput="setDivs('dem-six-sample')"> <button onclick="plusDivs(-1, 'dem-six-sample'); document.getElementById('range-dem-six-sample').value = Math.max(0, parseInt(document.getElementById('range-dem-six-sample').value) - 1);">❮</button> <button onclick="plusDivs(1, 'dem-six-sample'); document.getElementById('range-dem-six-sample').value = Math.min(4, parseInt(document.getElementById('range-dem-six-sample').value) + 1);">❯</button></p>
+<p><small>Six Samples</small> <input id="range-dem-six-sample" type="range" min="0" max="4" value="0" onchange="setDivs('dem-six-sample')" oninput="setDivs('dem-six-sample')"> <button onclick="plusDivs(-1, 'dem-six-sample');">❮</button> <button onclick="plusDivs(1, 'dem-six-sample');">❯</button></p>
 <div class="dem-six-sample" style="text-align:center;">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six000.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -504,6 +364,7 @@ showDivs(0, 'dem-six-sample');
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six003.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
+</div>
 <ul>
 <li>Even if we sample every nanonsecond from now until end of universe you won’t see original six!</li>
 </ul>
@@ -513,10 +374,11 @@ showDivs(0, 'dem-six-sample');
 <ul>
 <li>Rotate a prototype</li>
 </ul>
+<div>
 <script>
 showDivs(1, 'dem-six-rotate');
 </script>
-<p><small></small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate'); document.getElementById('range-dem-six-rotate').value = Math.max(1, parseInt(document.getElementById('range-dem-six-rotate').value) - 1);">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate'); document.getElementById('range-dem-six-rotate').value = Math.min(6, parseInt(document.getElementById('range-dem-six-rotate').value) + 1);">❯</button></p>
+<p><small>Six Rotation</small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate');">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate');">❯</button></p>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate001.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -545,6 +407,7 @@ showDivs(1, 'dem-six-rotate');
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate006.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
 </div>
 </div>
 </section>
@@ -902,10 +765,11 @@ L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{
 </section>
 <section id="pca-directions" class="slide level2">
 <h2>PCA directions</h2>
+<div>
 <script>
 showDivs(0, 'pca-directions');
 </script>
-<p><small></small> <input id="range-pca-directions" type="range" min="0" max="3" value="0" onchange="setDivs('pca-directions')" oninput="setDivs('pca-directions')"> <button onclick="plusDivs(-1, 'pca-directions'); document.getElementById('range-pca-directions').value = Math.max(0, parseInt(document.getElementById('range-pca-directions').value) - 1);">❮</button> <button onclick="plusDivs(1, 'pca-directions'); document.getElementById('range-pca-directions').value = Math.min(3, parseInt(document.getElementById('range-pca-directions').value) + 1);">❯</button></p>
+<p><small></small> <input id="range-pca-directions" type="range" min="0" max="3" value="0" onchange="setDivs('pca-directions')" oninput="setDivs('pca-directions')"> <button onclick="plusDivs(-1, 'pca-directions');">❮</button> <button onclick="plusDivs(1, 'pca-directions');">❯</button></p>
 <div class="pca-directions" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-000.svg" width="60%" style=" ">
 </object>
@@ -921,6 +785,7 @@ showDivs(0, 'pca-directions');
 <div class="pca-directions" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-003.svg" width="60%" style=" ">
 </object>
+</div>
 </div>
 <p><em>Maximum variance directions are eigenvectors of the covariance matrix</em></p>
 </section>
