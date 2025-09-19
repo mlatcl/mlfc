@@ -36,7 +36,7 @@ the objective function) in this session we look at latent variables.}
 \include{_dimred/includes/practical-dimensionality-reduction.md}
 \include{_dimred/includes/dimensionality-reduction-failure-modes.md}
 \include{_dimred/includes/high-dimensional-data-real.md}
-f\include{_dimred/includes/latent-variables.md}
+\include{_dimred/includes/latent-variables.md}
 \include{_dimred/includes/principal-component-analysis.md}
 
 \include{_dimred/includes/probabilistic-pca.md}

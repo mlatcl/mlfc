@@ -108,29 +108,6 @@
 </ul></li>
 </ul>
 </section>
-<section id="k-means-clustering" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-means Clustering</h2>
-<ul>
-<li>Simple iterative clustering algorithm</li>
-<li>Key steps:
-<ol type="1">
-<li>Initialize with random centers</li>
-<li>Assign points to nearest center</li>
-<li>Update centers as cluster means</li>
-<li>Repeat until stable</li>
-</ol></li>
-</ul>
-</section>
-<section id="objective-function" class="slide level2">
-<h2>Objective Function</h2>
-<ul>
-<li>Minimizes sum of squared distances: <span class="math display">\[
-E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)
-\]</span></li>
-<li>Solution not guaranteed to be global or unique</li>
-<li>Represents a non-convex optimization problem</li>
-</ul>
-</section>
 <section id="task" class="slide level2">
 <h2>Task</h2>
 <ul>
@@ -147,6 +124,9 @@ E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \bol
 <li>In clustering, we find these ideals as cluster centers</li>
 <li>Data points are allocated to their nearest center</li>
 </ul>
+</section>
+<section id="k-means-clustering" class="slide level2">
+<h2><span class="math inline">\(k\)</span>-means Clustering</h2>
 </section>
 <section id="mathematical-formulation" class="slide level2">
 <h2>Mathematical Formulation</h2>
@@ -166,7 +146,7 @@ d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
 <li>Goal: find centers close to many data points</li>
 </ul>
 </section>
-<section id="objective-function-1" class="slide level2">
+<section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
 <li>Given similarity measure, need number of cluster centers, <span class="math inline">\(K\)</span>.</li>
@@ -191,33 +171,53 @@ E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^
 <li>Optimisation surface has many local optima, algorithm gets stuck in ones near initialisation.</li>
 </ul>
 </section>
+<section id="k-means-algorithm" class="slide level2">
+<h2><span class="math inline">\(k\)</span>-means Algorithm</h2>
+<ul>
+<li>Simple iterative clustering algorithm</li>
+<li>Key steps:
+<ol type="1">
+<li>Initialize with random centers</li>
+<li>Assign points to nearest center</li>
+<li>Update centers as cluster means</li>
+<li>Repeat until stable</li>
+</ol></li>
+</ul>
+</section>
+<section id="objective-function-1" class="slide level2">
+<h2>Objective Function</h2>
+<ul>
+<li>Minimizes sum of squared distances: <span class="math display">\[
+E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)
+\]</span></li>
+<li>Solution not guaranteed to be global or unique</li>
+<li>Represents a non-convex optimization problem</li>
+</ul>
+</section>
 <section id="k-means-clustering-2" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
-<div class="animation-container" data-group="kmeans-clustering" style="margin: 20px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: #f9f9f9;">
+<div class="animation-container" data-group="kmeans-clustering">
 <script>
 showDivs(1, 'kmeans-clustering');
-// Add keyboard support for Reveal.js compatibility
+// Add keyboard support that works with existing functions
 document.addEventListener('keydown', function(event) {
-    if (event.target.closest('.animation-container')) return; // Don't interfere with other controls
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    if (event.key === 'ArrowLeft') {
         const container = document.querySelector('[data-group="kmeans-clustering"]');
-        if (container) {
+        if (container && container.offsetParent !== null) {
             event.preventDefault();
-            if (event.key === 'ArrowLeft') plusDivs(-1, 'kmeans-clustering');
-            if (event.key === 'ArrowRight') plusDivs(1, 'kmeans-clustering');
+            plusDivs(-1, 'kmeans-clustering');
+        }
+    }
+    if (event.key === 'ArrowRight') {
+        const container = document.querySelector('[data-group="kmeans-clustering"]');
+        if (container && container.offsetParent !== null) {
+            event.preventDefault();
+            plusDivs(1, 'kmeans-clustering');
         }
     }
 });
 </script>
-<label for="range-kmeans-clustering" style="display: block; margin-bottom: 10px; font-weight: bold;"></label> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')" aria-label="Animation control for " style="width: 100%; margin-bottom: 10px;">
-<div style="text-align: center;">
-<button onclick="plusDivs(-1, &#39;kmeans-clustering&#39;)" aria-label="Previous frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-❮ Previous
-</button>
-<button onclick="plusDivs(1, &#39;kmeans-clustering&#39;)" aria-label="Next frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-Next ❯
-</button>
-</div>
+<p><small></small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering')">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering')">❯</button></p>
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="kmeans-clustering" style="text-align:center;">
@@ -313,6 +313,193 @@ Next ❯
 <p><em>Clustering with the <span class="math inline">\(k\)</span>-means clustering algorithm.</em></p>
 </section>
 <section id="k-means-clustering-3" class="slide level2">
+<h2><span class="math inline">\(k\)</span>-means Clustering</h2>
+</section>
+<section id="mathematical-formulation-1" class="slide level2">
+<h2>Mathematical Formulation</h2>
+<ul>
+<li>Represent objects as data vectors <span class="math inline">\(\mathbf{ x}_i\)</span></li>
+<li>Represent cluster centers as vectors <span class="math inline">\(\boldsymbol{ \mu}_j\)</span></li>
+<li>Define similarity/distance between objects and centers</li>
+<li>Distance function: <span class="math inline">\(d_{ij} = f(\mathbf{ x}_i, \boldsymbol{ \mu}_j)\)</span></li>
+</ul>
+</section>
+<section id="squared-distance-1" class="slide level2">
+<h2>Squared Distance</h2>
+<ul>
+<li>Common choice: squared distance <span class="math display">\[
+d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
+\]</span></li>
+<li>Goal: find centers close to many data points</li>
+</ul>
+</section>
+<section id="objective-function-2" class="slide level2">
+<h2>Objective Function</h2>
+<ul>
+<li>Given similarity measure, need number of cluster centers, <span class="math inline">\(K\)</span>.</li>
+<li>Find their location by allocating each center to a sub-set of the points and minimizing the sum of the squared errors, <span class="math display">\[
+E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
+\]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all indices of data points allocated to the <span class="math inline">\(j\)</span>th center.</li>
+</ul>
+</section>
+<section id="k-means-clustering-4" class="slide level2">
+<h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
+<ul>
+<li><em><span class="math inline">\(k\)</span>-means clustering</em> is simple and quick to implement.</li>
+<li>Very <em>initialisation</em> sensitive.</li>
+</ul>
+</section>
+<section id="initialisation-1" class="slide level2">
+<h2>Initialisation</h2>
+<ul>
+<li>Initialisation is the process of selecting a starting set of parameters.</li>
+<li>Optimisation result can depend on the starting point.</li>
+<li>For <span class="math inline">\(k\)</span>-means clustering you need to choose an initial set of centers.</li>
+<li>Optimisation surface has many local optima, algorithm gets stuck in ones near initialisation.</li>
+</ul>
+</section>
+<section id="k-means-algorithm-1" class="slide level2">
+<h2><span class="math inline">\(k\)</span>-means Algorithm</h2>
+<ul>
+<li>Simple iterative clustering algorithm</li>
+<li>Key steps:
+<ol type="1">
+<li>Initialize with random centers</li>
+<li>Assign points to nearest center</li>
+<li>Update centers as cluster means</li>
+<li>Repeat until stable</li>
+</ol></li>
+</ul>
+</section>
+<section id="objective-function-3" class="slide level2">
+<h2>Objective Function</h2>
+<ul>
+<li>Minimizes sum of squared distances: <span class="math display">\[
+E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)^\top\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}_{j, :}\right)
+\]</span></li>
+<li>Solution not guaranteed to be global or unique</li>
+<li>Represents a non-convex optimization problem</li>
+</ul>
+</section>
+<section id="k-means-clustering-5" class="slide level2">
+<h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
+<div class="animation-container" data-group="kmeans-clustering">
+<script>
+showDivs(1, 'kmeans-clustering');
+// Add keyboard support that works with existing functions
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowLeft') {
+        const container = document.querySelector('[data-group="kmeans-clustering"]');
+        if (container && container.offsetParent !== null) {
+            event.preventDefault();
+            plusDivs(-1, 'kmeans-clustering');
+        }
+    }
+    if (event.key === 'ArrowRight') {
+        const container = document.querySelector('[data-group="kmeans-clustering"]');
+        if (container && container.offsetParent !== null) {
+            event.preventDefault();
+            plusDivs(1, 'kmeans-clustering');
+        }
+    }
+});
+</script>
+<p><small></small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering')">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering')">❯</button></p>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_001.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_002.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-15" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_003.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-16" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_004.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_005.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-18" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_006.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-19" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_007.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-20" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_008.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-21" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_009.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-22" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_010.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-23" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_011.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-24" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_012.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+<section id="section-25" class="slide level2">
+<h2></h2>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_013.svg" width="40%" style=" ">
+</object>
+</div>
+</section>
+</div>
+<p><em>Clustering with the <span class="math inline">\(k\)</span>-means clustering algorithm.</em></p>
+</section>
+<section id="k-means-clustering-6" class="slide level2">
 <h2><span class="math inline">\(k\)</span>-Means Clustering</h2>
 <div class="figure">
 <div id="k-means-clustering-figure" class="figure-frame">
@@ -349,6 +536,9 @@ Next ❯
 <aside class="notes">
 Visualization of the first two dimensions of the oil flow data from <span class="citation" data-cites="Bishop-oil93">Bishop and James (1993)</span>
 </aside>
+</section>
+<section id="hierarchical-clustering-of-oil-flow-data" class="slide level2">
+<h2>Hierarchical Clustering of Oil Flow Data</h2>
 <div class="figure">
 <div id="hierarchical-clustering-oil-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/hierarchical-clustering-oil.svg" width="80%" style=" ">
@@ -358,15 +548,7 @@ Visualization of the first two dimensions of the oil flow data from <span class=
 <aside class="notes">
 Hierarchical clustering applied to oil flow data. The dendrogram shows how different flow regimes are grouped based on their measurement similarities. The three main flow regimes (homogeneous, annular, and laminar) should form distinct clusters.
 </aside>
-<div class="figure">
-<div id="alex-ihler-hierarchical-clustering-figure" class="figure-frame">
-<iframe width="600" height="450" src="https://www.youtube.com/embed/OcoE7JlbXvY?start=" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-</iframe>
-</div>
-</div>
-<aside class="notes">
-Hierarchical Clustering by Alex Ihler.
-</aside>
+<p>{In this example, we’ve applied hierarchical clustering to the oil flow data set. The data contains measurements from different flow regimes in a multiphase flow facility. The dendrogram shows how measurements naturally cluster into different flow types. Ward’s linkage method is used as it tends to create compact, evenly-sized clusters.</p>
 </section>
 <section id="phylogenetic-trees" class="slide level2">
 <h2>Phylogenetic Trees</h2>
@@ -415,32 +597,29 @@ Hierarchical Clustering by Alex Ihler.
 </section>
 <section id="usps-samples" class="slide level2">
 <h2>USPS Samples</h2>
-<div class="animation-container" data-group="dem-six-sample" style="margin: 20px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: #f9f9f9;">
+<div class="animation-container" data-group="dem-six-sample">
 <script>
 showDivs(0, 'dem-six-sample');
-// Add keyboard support for Reveal.js compatibility
+// Add keyboard support that works with existing functions
 document.addEventListener('keydown', function(event) {
-    if (event.target.closest('.animation-container')) return; // Don't interfere with other controls
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    if (event.key === 'ArrowLeft') {
         const container = document.querySelector('[data-group="dem-six-sample"]');
-        if (container) {
+        if (container && container.offsetParent !== null) {
             event.preventDefault();
-            if (event.key === 'ArrowLeft') plusDivs(-1, 'dem-six-sample');
-            if (event.key === 'ArrowRight') plusDivs(1, 'dem-six-sample');
+            plusDivs(-1, 'dem-six-sample');
+        }
+    }
+    if (event.key === 'ArrowRight') {
+        const container = document.querySelector('[data-group="dem-six-sample"]');
+        if (container && container.offsetParent !== null) {
+            event.preventDefault();
+            plusDivs(1, 'dem-six-sample');
         }
     }
 });
 </script>
-<label for="range-dem-six-sample" style="display: block; margin-bottom: 10px; font-weight: bold;"></label> <input id="range-dem-six-sample" type="range" min="0" max="4" value="0" onchange="setDivs('dem-six-sample')" oninput="setDivs('dem-six-sample')" aria-label="Animation control for " style="width: 100%; margin-bottom: 10px;">
-<div style="text-align: center;">
-<button onclick="plusDivs(-1, &#39;dem-six-sample&#39;)" aria-label="Previous frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-❮ Previous
-</button>
-<button onclick="plusDivs(1, &#39;dem-six-sample&#39;)" aria-label="Next frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-Next ❯
-</button>
-</div>
-<section id="section-13" class="slide level2">
+<p><small></small> <input id="range-dem-six-sample" type="range" min="0" max="4" value="0" onchange="setDivs('dem-six-sample')" oninput="setDivs('dem-six-sample')"> <button onclick="plusDivs(-1, 'dem-six-sample')">❮</button> <button onclick="plusDivs(1, 'dem-six-sample')">❯</button></p>
+<section id="section-26" class="slide level2">
 <h2></h2>
 <div class="dem-six-sample" style="text-align:center;">
 <div class="centered" style="">
@@ -448,7 +627,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-14" class="slide level2">
+<section id="section-27" class="slide level2">
 <h2></h2>
 <div class="dem-six-sample" style="text-align:center;">
 <div class="centered" style="">
@@ -456,7 +635,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-28" class="slide level2">
 <h2></h2>
 <div class="dem-six-sample" style="text-align:center;">
 <div class="centered" style="">
@@ -464,7 +643,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-29" class="slide level2">
 <h2></h2>
 <div class="dem-six-sample" style="text-align:center;">
 <div class="centered" style="">
@@ -482,32 +661,29 @@ Next ❯
 <ul>
 <li>Rotate a prototype</li>
 </ul>
-<div class="animation-container" data-group="dem-six-rotate" style="margin: 20px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: #f9f9f9;">
+<div class="animation-container" data-group="dem-six-rotate">
 <script>
 showDivs(1, 'dem-six-rotate');
-// Add keyboard support for Reveal.js compatibility
+// Add keyboard support that works with existing functions
 document.addEventListener('keydown', function(event) {
-    if (event.target.closest('.animation-container')) return; // Don't interfere with other controls
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    if (event.key === 'ArrowLeft') {
         const container = document.querySelector('[data-group="dem-six-rotate"]');
-        if (container) {
+        if (container && container.offsetParent !== null) {
             event.preventDefault();
-            if (event.key === 'ArrowLeft') plusDivs(-1, 'dem-six-rotate');
-            if (event.key === 'ArrowRight') plusDivs(1, 'dem-six-rotate');
+            plusDivs(-1, 'dem-six-rotate');
+        }
+    }
+    if (event.key === 'ArrowRight') {
+        const container = document.querySelector('[data-group="dem-six-rotate"]');
+        if (container && container.offsetParent !== null) {
+            event.preventDefault();
+            plusDivs(1, 'dem-six-rotate');
         }
     }
 });
 </script>
-<label for="range-dem-six-rotate" style="display: block; margin-bottom: 10px; font-weight: bold;"></label> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')" aria-label="Animation control for " style="width: 100%; margin-bottom: 10px;">
-<div style="text-align: center;">
-<button onclick="plusDivs(-1, &#39;dem-six-rotate&#39;)" aria-label="Previous frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-❮ Previous
-</button>
-<button onclick="plusDivs(1, &#39;dem-six-rotate&#39;)" aria-label="Next frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-Next ❯
-</button>
-</div>
-<section id="section-17" class="slide level2">
+<p><small></small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate')">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate')">❯</button></p>
+<section id="section-30" class="slide level2">
 <h2></h2>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
@@ -515,7 +691,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-31" class="slide level2">
 <h2></h2>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
@@ -523,7 +699,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-19" class="slide level2">
+<section id="section-32" class="slide level2">
 <h2></h2>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
@@ -531,7 +707,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-20" class="slide level2">
+<section id="section-33" class="slide level2">
 <h2></h2>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
@@ -539,7 +715,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-21" class="slide level2">
+<section id="section-34" class="slide level2">
 <h2></h2>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
@@ -547,7 +723,7 @@ Next ❯
 </div>
 </div>
 </section>
-<section id="section-22" class="slide level2">
+<section id="section-35" class="slide level2">
 <h2></h2>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
@@ -557,7 +733,7 @@ Next ❯
 </section>
 </div>
 </section>
-<section id="section-23" class="slide level2">
+<section id="section-36" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="dem-six-mainfold-print-figure" class="figure-frame">
@@ -878,7 +1054,6 @@ The Swiss roll dataset is a classic example of data with nonlinear structure. Th
 <li>Not accounting for noise</li>
 </ul></li>
 </ul>
-<p>f</p>
 </section>
 <section id="principal-component-analysis-1" class="slide level2">
 <h2>Principal Component Analysis</h2>
@@ -912,53 +1087,50 @@ L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{
 </section>
 <section id="pca-directions" class="slide level2">
 <h2>PCA directions</h2>
-<div class="animation-container" data-group="pca-directions" style="margin: 20px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: #f9f9f9;">
+<div class="animation-container" data-group="pca-directions">
 <script>
 showDivs(0, 'pca-directions');
-// Add keyboard support for Reveal.js compatibility
+// Add keyboard support that works with existing functions
 document.addEventListener('keydown', function(event) {
-    if (event.target.closest('.animation-container')) return; // Don't interfere with other controls
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    if (event.key === 'ArrowLeft') {
         const container = document.querySelector('[data-group="pca-directions"]');
-        if (container) {
+        if (container && container.offsetParent !== null) {
             event.preventDefault();
-            if (event.key === 'ArrowLeft') plusDivs(-1, 'pca-directions');
-            if (event.key === 'ArrowRight') plusDivs(1, 'pca-directions');
+            plusDivs(-1, 'pca-directions');
+        }
+    }
+    if (event.key === 'ArrowRight') {
+        const container = document.querySelector('[data-group="pca-directions"]');
+        if (container && container.offsetParent !== null) {
+            event.preventDefault();
+            plusDivs(1, 'pca-directions');
         }
     }
 });
 </script>
-<label for="range-pca-directions" style="display: block; margin-bottom: 10px; font-weight: bold;"></label> <input id="range-pca-directions" type="range" min="0" max="3" value="0" onchange="setDivs('pca-directions')" oninput="setDivs('pca-directions')" aria-label="Animation control for " style="width: 100%; margin-bottom: 10px;">
-<div style="text-align: center;">
-<button onclick="plusDivs(-1, &#39;pca-directions&#39;)" aria-label="Previous frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-❮ Previous
-</button>
-<button onclick="plusDivs(1, &#39;pca-directions&#39;)" aria-label="Next frame" style="margin: 0 10px; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-Next ❯
-</button>
-</div>
-<section id="section-24" class="slide level2">
+<p><small></small> <input id="range-pca-directions" type="range" min="0" max="3" value="0" onchange="setDivs('pca-directions')" oninput="setDivs('pca-directions')"> <button onclick="plusDivs(-1, 'pca-directions')">❮</button> <button onclick="plusDivs(1, 'pca-directions')">❯</button></p>
+<section id="section-37" class="slide level2">
 <h2></h2>
 <div class="pca-directions" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-000.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-25" class="slide level2">
+<section id="section-38" class="slide level2">
 <h2></h2>
 <div class="pca-directions" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-001.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-26" class="slide level2">
+<section id="section-39" class="slide level2">
 <h2></h2>
 <div class="pca-directions" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-002.svg" width="60%" style=" ">
 </object>
 </div>
 </section>
-<section id="section-27" class="slide level2">
+<section id="section-40" class="slide level2">
 <h2></h2>
 <div class="pca-directions" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-003.svg" width="60%" style=" ">
