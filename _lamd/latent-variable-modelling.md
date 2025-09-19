@@ -15,19 +15,15 @@ venue: Dedan Kimathi University, Nyeri, Kenya
 youtube: 0mtK2_rc0IY
 ---
 
-\include{_mlfc/includes/mlfc-notebook-setup.md}
+\notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
 \subsection{Review}
 
-\notes{So far in our classes we have focussed mainly on regression
-problems, which are examples of supervised learning. We have considered the
+\notes{So far in our classes we have focussed on regression 
+problems and generalised linear models. These are examples of supervised learning. We have considered the
 relationship between the likelihood and the objective function and we have shown
 how we can find paramters by maximizing the likelihood (equivalent to minimizing
 the objective function) in this session we look at latent variables.}
-
-
-
-
 
 
 \include{_ml/includes/clustering.md}

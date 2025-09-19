@@ -1,12 +1,23 @@
 ---
 title: "Dimensionality Reduction: Latent Variable Modelling"
+venue: "Dedan Kimathi University, Nyeri, Kenya"
 abstract: "In this lecture we turn to <em>unsupervised learning</em>. Specifically, we introduce the idea of a latent variable model. Latent variable models are a probabilistic perspective on unsupervised learning which lead to dimensionality reduction algorithms."
+author:
+- given: Neil D.
+  family: Lawrence
+  url: 
+  institute: 
+  twitter: 
+  gscholar: 
+  orcid: 
 edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/latent-variable-modelling.md
 date: 2025-09-22
+time: "09:30"
 week: 4
 session: 1
 featured_image: slides/diagrams/dimred/dem_manifold_print002.png
 reveal: 04-01-latent-variable-modelling.slides.html
+transition: None
 ipynb: 04-01-latent-variable-modelling.ipynb
 youtube: "0mtK2_rc0IY"
 layout: lecture
@@ -45,20 +56,11 @@ sns.set_palette('colorblind')}-->
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/latent-variable-modelling.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/latent-variable-modelling.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>So far in our classes we have focussed mainly on regression problems, which are examples of supervised learning. We have considered the relationship between the likelihood and the objective function and we have shown how we can find paramters by maximizing the likelihood (equivalent to minimizing the objective function) in this session we look at latent variables.</p>
+<p>So far in our classes we have focussed on regression problems and generalised linear models. These are examples of supervised learning. We have considered the relationship between the likelihood and the objective function and we have shown how we can find paramters by maximizing the likelihood (equivalent to minimizing the objective function) in this session we look at latent variables.</p>
 <h2 id="clustering">Clustering</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/clustering.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/clustering.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<ul>
-<li>Common approach for grouping data points</li>
-<li>Assigns data points to discrete groups</li>
-<li>Examples include:
-<ul>
-<li>Animal classification</li>
-<li>Political affiliation grouping</li>
-</ul></li>
-</ul>
 <p>Clustering is a common approach to data analysis, though we will not cover it in great depth in this course. The fundamental idea is to associate each data point <span class="math inline">\(\mathbf{ y}_{i, :}\)</span> with one of <span class="math inline">\(k\)</span> different discrete groups. This approach raises interesting questions - for instance, when clustering animals into groups, we might ask whether animal traits are truly discrete or continuous in nature. Similar questions arise when clustering political affiliations.</p>
 <p>Humans seem to have a natural affinity for discrete clustering approaches. This makes clustering particularly useful when collaborating with biologists, who often think in terms of discrete categories. However, we should be mindful that this preference for discrete categories may sometimes oversimplify continuous variations in data.</p>
 <p>There is a subtle but important distinction between clustering and vector quantisation. In true clustering, we typically expect to see reductions in data density between natural groups - essentially, gaps in the data that separate different clusters. This definition isn’t universally applied though, and vector quantization may partition data without requiring such density gaps. For our current discussion, we’ll treat them similarly, focusing on the common challenges they share: how to allocate points to groups and, more challengingly, how to determine the optimal number of groups.</p>
