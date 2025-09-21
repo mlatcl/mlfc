@@ -583,6 +583,7 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <li>If dimensions are independent, we expect low variance, Gaussian behavior for the distribution of squared distances.</li>
 </ul>
 <p><strong>Distance distribution for a Gaussian with <span class="math inline">\(p=1000\)</span>, <span class="math inline">\(n=1000\)</span></strong></p>
+<p>{# Generate 1000D Gaussian data np.random.seed(22) Y = np.random.randn(1000, 1000)</p>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 
@@ -613,7 +614,7 @@ Simulation of oil flow
 </center>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="oil-flow-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+<object class="oil-flow-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 </div>
@@ -627,7 +628,7 @@ Ohio State University motion capture
 </center>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="osu-run1-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+<object class="osu-run1-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 </div>
@@ -650,7 +651,7 @@ Spellman yeast cell cycle
 </center>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="spellman-yeast-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/spellman-yeast_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+<object class="spellman-yeast-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/spellman-yeast_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 </div>
@@ -679,7 +680,7 @@ Della Gatta gene expression
 </center>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="della-gatta-gene-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/della-gatta-gene_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+<object class="della-gatta-gene-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/della-gatta-gene_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 </div>
@@ -714,7 +715,7 @@ Robot wireless navigation
 </center>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="robot-wireless-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+<object class="robot-wireless-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 </div>
@@ -735,7 +736,6 @@ Robot wireless navigation
 <section id="d-gaussian" class="slide level2">
 <h2>1000-D Gaussian</h2>
 <p><strong>Distance distribution for a different Gaussian with <span class="math inline">\(p=1000\)</span></strong></p>
-<p>{import numpy as np</p>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances2.svg" width="40%" style=" ">
@@ -872,76 +872,6 @@ The rotated sixes projected onto the first two principal components of the ‘ro
 <li>Conclusion: Deal with high dimensional data by looking for a lower dimensional non-linear embedding.</li>
 </ul></li>
 </ul>
-</section>
-<section id="high-dimensional-data-effects" class="slide level2">
-<h2>High Dimensional Data Effects</h2>
-<ul>
-<li>High dimensional spaces behave very differently from our 3D intuitions</li>
-<li>Two key effects:
-<ul>
-<li>Data moves to a “shell” at one standard deviation from mean</li>
-<li>Distances between points become constant</li>
-</ul></li>
-<li>Let’s see this experimentally</li>
-</ul>
-</section>
-<section id="pairwise-distances-in-high-d-gaussian-data" class="slide level2">
-<h2>Pairwise Distances in High-D Gaussian Data</h2>
-<div class="figure">
-<div id="high-d-distances-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/high-d-distances.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Distribution of pairwise distances between points in high-dimensional Gaussian data. The red line shows the theoretical gamma distribution.
-</aside>
-</section>
-<section id="pairwise-distances-in-high-d-gaussian-data-1" class="slide level2">
-<h2>Pairwise Distances in High-D Gaussian Data</h2>
-<ul>
-<li>Plot shows pairwise distances in high-D Gaussian data</li>
-<li>Red line: theoretical gamma distribution</li>
-<li>Notice tight concentration of distances</li>
-</ul>
-</section>
-<section id="structured-high-dimensional-data" class="slide level2">
-<h2>Structured High Dimensional Data</h2>
-<ul>
-<li>What about data with underlying structure?</li>
-<li>Let’s create data that lies on a 2D manifold</li>
-<li>Embed it in 1000D space</li>
-</ul>
-</section>
-<section id="pairwise-distances-in-structured-high-d-data" class="slide level2">
-<h2>Pairwise Distances in Structured High-D Data</h2>
-<div class="figure">
-<div id="structured-high-d-distances-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/structured-high-d-distances.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Distribution of pairwise distances for structured high-dimensional data. The distribution differs significantly from pure high-dimensional data, reflecting the underlying 2D structure.
-</aside>
-</section>
-<section id="pairwise-distances-in-structured-high-d-data-1" class="slide level2">
-<h2>Pairwise Distances in Structured High-D Data</h2>
-<ul>
-<li>Distance distribution differs from pure high-D case</li>
-<li>Matches 2D theoretical curve better than 1000D</li>
-<li>Real data often has low intrinsic dimensionality</li>
-<li>This is why PCA and other dimension reduction works!</li>
-</ul>
-</section>
-<section id="high-dimensional-effects-in-real-data" class="slide level2">
-<h2>High Dimensional Effects in Real Data</h2>
-</section>
-<section id="oil-flow-data-1" class="slide level2">
-<h2>Oil Flow Data</h2>
-</section>
-<section id="implications-for-dimensionality-reduction" class="slide level2">
-<h2>Implications for Dimensionality Reduction</h2>
 </section>
 <section id="latent-variables-and-dimensionality-reduction" class="slide level2">
 <h2>Latent Variables and Dimensionality Reduction</h2>
@@ -1155,6 +1085,15 @@ The Swiss roll dataset is a classic example of data with nonlinear structure. Th
 <li>Not accounting for noise</li>
 </ul></li>
 </ul>
+</section>
+<section id="high-dimensional-effects-in-real-data" class="slide level2">
+<h2>High Dimensional Effects in Real Data</h2>
+</section>
+<section id="oil-flow-data-1" class="slide level2">
+<h2>Oil Flow Data</h2>
+</section>
+<section id="implications-for-dimensionality-reduction" class="slide level2">
+<h2>Implications for Dimensionality Reduction</h2>
 </section>
 <section id="principal-component-analysis-1" class="slide level2">
 <h2>Principal Component Analysis</h2>
