@@ -375,7 +375,7 @@ Hierarchical clustering applied to oil flow data. The dendrogram shows how diffe
 <h2>Mixtures of Gaussians</h2>
 <div class="figure">
 <div id="artificial-mog-1-no-ovals-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem-artificial-mog-1.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-1.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
@@ -384,7 +384,7 @@ Two dimensional Gaussian data set.
 </aside>
 <div class="figure">
 <div id="artificial-mog-2-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem-artificial-mog-2.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-2.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
@@ -409,35 +409,82 @@ Two dimensional data sets. Complex structure not a problem for mixtures of Gauss
 </ol></li>
 <li>Let’s consider a Gaussian “egg.”</li>
 </ul>
-<p>Such a model seems intuitively appealing. When the  approach to optimizing such powerful models was first described by  the statistics community it must have seemed to some that the main remaining challenge for density estimation was principally computational. There are, of course, applications for which for which a mixture of Gaussians is an appropriate model ( low dimensional data). Such applications are not the focus of  book. We are more interested in the failings of the Gaussian mixture. There are two foundation assumptions which underpin this model. We described them both in our early appeal to intuition. The first assumption is that the data is generated through prototypes. We will not consider this assumption further. We will focus on the second assumption: how the prototypes are corrupted to obtain the data we observe. For the Gaussian mixture model the prototypes are corrupted by Gaussian noise with a particular covariance. It is this second assumption that we would like to consider first. In particular, we are going to examine the special case where the covariance is given by a constant diagonal matrix. We will see that the behavior of a Gaussian in low dimensional space can be quite misleading when we develop intuitions as to how these densities behave in higher dimensions. By higher dimensionality we can think of dimensionality that is difficult to visualize directly,  dimensionality greater than <span class="math inline">\(p=3\)</span>.</p>
 </section>
 <section id="dimensionality-greater-than-three" class="slide level2">
 <h2>Dimensionality Greater than Three</h2>
-<p>In higher dimensions  that seem reasonable in two or three dimensions can fail dramatically. Note the emphasis on models. In this section, we are not making any statements about how a `realistic’ data set behaves in higher dimensions, we are making statements about modeling failures in higher dimensions. In particular we will focus on what assumptions the model makes about where the data is distributed in higher dimensions. We will illustrate the ideas through introducing the Gaussian egg. The Gaussian egg is a hard boiled egg that consists of three parts: the yolk of the egg, the white of the egg and a thin boundary shell between the yolk and the white. In an over boiled egg the boundary layer is often green from iron sulfide formed by reactions between the white and the yolk, giving a bad taste. We therefore refer to this as the ``green’’ of the egg. We will consider spherical Gaussian distributions which have covariance matrices of the form <span class="math inline">\(\sigma^2\mathbf{I}\)</span>. We define the volume of the density associated with the yolk as part of the egg that is within <span class="math inline">\(0.95\sigma\)</span> of the mean. The green is defined to be the region from <span class="math inline">\(0.95\sigma\)</span> to <span class="math inline">\(1.05\sigma\)</span>. Finally, the yolk is all the density beyond <span class="math inline">\(1.05\sigma\)</span>. We assume the density of the egg varies according to the Gaussian density, so that the density at the center of the egg is highest, and density falls off with the exponentiated negative squared Euclidean distance from the mean. We take the overall mass of our egg to be one. The question we now ask is how much of our egg’s mass is now taken up by the three component parts: the green, the white and the yolk. The proportions of the mass are dependent on the dimensionality of our egg.</p>
-The answer is found through integrating over the Gaussian. For a one dimensional egg we can find the portion of the Gaussian that sits inside 0.95 of a standard deviation’s distance from the mean as [ _{-0.95}^{0.95}  . ] The other portions can be found similarly. For higher dimensional Gaussians the integral is slightly more difficult. To compute it, we will switch from considering the Gaussian density that governs the data directly to the density over squared distances from the mean that the Gaussian implies. Before we introduce that approach, we show three low dimensional Gaussian eggs in  indicating their associated masses for the yolk, the green and the white. %
 </section>
 <section id="the-gaussian-egg" class="slide level2">
 <h2>The Gaussian Egg</h2>
-<p>Three D: } }</p>
+<p>{* See also Exercise 1.4 in <span class="citation" data-cites="Bishop:book95">Bishop (1995)</span></p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+
+</div>
+</div>
+<aside class="notes">
+</aside>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="svgplot " data=".svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Volumes associated with the one dimensional Gaussian egg. Here the yolk has 65.8%, the green has 4.8% and the white has 29.4% of the mass.
+</aside>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="svgplot " data=".svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Volumes associated with the regions in the two dimensional Gaussian egg. The yolk contains 59.4%, the green contains 7.4% and the white 33.2%.
+</aside>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="svgplot " data=".svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Volumes associated with the regions in the three dimensional Gaussian egg. Here the yolk has 56.1% the green has 9.2% the white has 34.7%.
+</aside>
 </section>
 <section id="mathematics" class="slide level2">
 <h2>Mathematics</h2>
 <p><strong>What is the density of probability mass?</strong></p>
 <p>For a d-dimensional Gaussian distribution:</p>
 <ol type="1">
-<li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathcal{N}(0, \sigma^2)\)</span></li>
+<li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathscr{N}\left(0,\sigma^2\right)\)</span></li>
 <li><strong>Squared components</strong>: <span class="math inline">\(y_{i,k}^2 \sim \sigma^2 \chi_1^2\)</span> (scaled chi-squared)</li>
-<li><strong>Gamma distribution</strong>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2\sigma^2})\)</span></li>
-<li><strong>Sum of squares</strong>: <span class="math inline">\(\sum_{k=1}^d y_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})\)</span></li>
-<li><strong>Expected value</strong>: <span class="math inline">\(\langle \sum_{k=1}^d y_{i,k}^2 \rangle = d\sigma^2\)</span></li>
-<li><strong>Normalized sum</strong>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^d y_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})\)</span></li>
-<li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{d}\sum_{k=1}^d y_{i,k}^2 \rangle = \sigma^2\)</span></li>
+<li><strong>Gamma distribution</strong>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})\)</span></li>
+<li><strong>Sum of squares</strong>: <span class="math inline">\(\sum_{k=1}^py_{i,k}^2 \sim \text{Gamma}(\frac{p}{2}, \frac{1}{2\sigma^2})\)</span></li>
+<li><strong>Expected value</strong>: <span class="math inline">\(\langle \sum_{k=1}^py_{i,k}^2 \rangle = p\sigma^2\)</span></li>
+<li><strong>Normalized sum</strong>: <span class="math inline">\(\frac{1}{p}\sum_{k=1}^py_{i,k}^2 \sim \text{Gamma}(\frac{p}{2}, \frac{d}{2\sigma^2})\)</span></li>
+<li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{p}\sum_{k=1}^py_{i,k}^2 \rangle = \sigma^2\)</span></li>
 </ol>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<ul>
+<li>Square of sample from Gaussian is scaled chi-squared density</li>
+<li>Chi squared density is a variant of the gamma density with shape parameter <span class="math inline">\(a=\frac{1}{2}\)</span>, rate parameter <span class="math inline">\(b=\frac{1}{2\sigma^{2}}\)</span>, <span class="math display">\[
+  \mathscr{G}\left(x|a,b\right)=\frac{b^{a}}{\Gamma\left(a\right)}x^{a-1}e^{-bx}
+  \]</span></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<ul>
+<li>Addition of gamma random variables with the same rate is gamma with sum of shape parameters (<span class="math inline">\(y_{i,k}\)</span>s are independent)</li>
+<li>Scaling of gamma density scales the rate parameter</li>
+</ul>
 </section>
 <section id="where-is-the-mass" class="slide level2">
 <h2>Where is the Mass?</h2>
 <ul>
-<li>Squared distances are gamma distributed. \begin{figure}</li>
+<li>Squared distances are gamma distributed.</li>
 </ul>
 <div class="figure">
 <div id="dimension-mass-figure" class="figure-frame">
@@ -480,10 +527,6 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <section id="high-dimensional-gaussians-and-interpoint-distances" class="slide level2">
 <h2>High Dimensional Gaussians and Interpoint Distances</h2>
 </section>
-<section id="looking-at-gaussian-samples-1" class="slide level2">
-<h2>Looking at Gaussian Samples</h2>
-<p>\begin{figure}</p>
-</section>
 <section id="interpoint-distances" class="slide level2">
 <h2>Interpoint Distances</h2>
 <ul>
@@ -498,14 +541,14 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 </ol>
 <p>For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
 <ol start="4" type="1">
-<li><strong>Sum of squared differences</strong>: <span class="math inline">\(\sum_{k=1}^d (y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{4\sigma^2})\)</span></li>
-<li><strong>Normalized distance</strong>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^d (y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{4\sigma^2})\)</span></li>
+<li><strong>Sum of squared differences</strong>: <span class="math inline">\(\sum_{k=1}^p(y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{p}{2},\frac{1}{4\sigma^2}\right)\)</span></li>
+<li><strong>Normalized distance</strong>: <span class="math inline">\(\frac{1}{p}\sum_{k=1}^p(\datasScalar_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{p}{2},\frac{p}{4\sigma^2}\right)\)</span></li>
 </ol>
 <p><strong>Key Results:</strong></p>
 <ul>
 <li>Mean distance: <span class="math inline">\(2\sigma^2\)</span></li>
-<li>Variance: <span class="math inline">\(\frac{8\sigma^2}{d}\)</span> (decreases with dimension!)</li>
-<li>All points become equidistant as <span class="math inline">\(d \to \infty\)</span></li>
+<li>Variance: <span class="math inline">\(\frac{8\sigma^2}{p}\)</span> (decreases with dimension!)</li>
+<li>All points become equidistant as <span class="math inline">\(p\to \infty\)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -725,7 +768,7 @@ Robot wireless navigation
 correlated-gaussian-distances2
 </aside>
 </section>
-<section id="section" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <ol type="1">
 <li><p>Gaussian has a specific low rank covariance matrix <span class="math inline">\(\mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\)</span>.</p></li>
@@ -812,7 +855,7 @@ showDivs(1, 'dem-six-rotate');
 </div>
 </div>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="dem-six-mainfold-print-figure" class="figure-frame">
@@ -1465,6 +1508,9 @@ Reconstruction from the latent space of the faces data.
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Bishop:book95" class="csl-entry" role="doc-biblioentry">
+Bishop, C.M., 1995. Neural networks for pattern recognition. Oxford University Press.
+</div>
 <div id="ref-Bishop-oil93" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., James, G.D., 1993. Analysis of multiphase flows using dual-energy gamma densitometry and neural networks. Nuclear Instruments and Methods in Physics Research A327, 580–593. <a href="https://doi.org/10.1016/0168-9002(93)90728-Z">https://doi.org/10.1016/0168-9002(93)90728-Z</a>
 </div>
