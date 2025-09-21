@@ -1,0 +1,1 @@
+Initial data points - each point is its own cluster
