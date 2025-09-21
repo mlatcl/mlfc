@@ -1,7 +1,7 @@
 ---
-title: "Dimensionality Reduction: Latent Variable Modelling"
+title: "Clustering and High Dimensions"
 venue: "Dedan Kimathi University, Nyeri, Kenya"
-abstract: "In this lecture we turn to <em>unsupervised learning</em>. Specifically, we introduce the idea of a latent variable model. Latent variable models are a probabilistic perspective on unsupervised learning which lead to dimensionality reduction algorithms."
+abstract: "In this lecture we turn to <em>unsupervised learning</em>. We look at clustering models and consider how data behaves in high dimensions."
 author:
 - given: Neil D.
   family: Lawrence
@@ -10,15 +10,15 @@ author:
   twitter: 
   gscholar: 
   orcid: 
-edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/latent-variable-modelling.md
+edit_url: https://github.com/mlatcl/mlfc/edit/gh-pages/_lamd/clustering-and-high-dimensions.md
 date: 2025-09-22
 time: "09:30"
 week: 4
 session: 1
 featured_image: slides/diagrams/dimred/dem_manifold_print002.png
-reveal: 04-01-latent-variable-modelling.slides.html
+reveal: 04-01-clustering-and-high-dimensions.slides.html
 transition: None
-ipynb: 04-01-latent-variable-modelling.ipynb
+ipynb: 04-01-clustering-and-high-dimensions.ipynb
 youtube: "0mtK2_rc0IY"
 layout: lecture
 categories:
@@ -54,7 +54,7 @@ sns.set_context('paper')
 sns.set_palette('colorblind')}-->
 <h2 id="review">Review</h2>
 <div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/latent-variable-modelling.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/latent-variable-modelling.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/clustering-and-high-dimensions.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/clustering-and-high-dimensions.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>So far in our classes we have focussed on regression problems and generalised linear models. These are examples of supervised learning. We have considered the relationship between the likelihood and the objective function and we have shown how we can find paramters by maximizing the likelihood (equivalent to minimizing the objective function) in this session we look at latent variables.</p>
 <h2 id="clustering">Clustering</h2>
