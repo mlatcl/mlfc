@@ -132,8 +132,8 @@
 <h2>Mathematical Formulation</h2>
 <ul>
 <li>Represent objects as data vectors <span class="math inline">\(\mathbf{ x}_i\)</span></li>
-<li>Represent cluster centers as vectors <span class="math inline">\(\boldsymbol{ \mu}_j\)</span></li>
-<li>Define similarity/distance between objects and centers</li>
+<li>Represent cluster centres as vectors <span class="math inline">\(\boldsymbol{ \mu}_j\)</span></li>
+<li>Define similarity/distance between objects and centres</li>
 <li>Distance function: <span class="math inline">\(d_{ij} = f(\mathbf{ x}_i, \boldsymbol{ \mu}_j)\)</span></li>
 </ul>
 </section>
@@ -143,13 +143,13 @@
 <li>Common choice: squared distance <span class="math display">\[
 d_{ij} = (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
 \]</span></li>
-<li>Goal: find centers close to many data points</li>
+<li>Goal: find centres close to many data points</li>
 </ul>
 </section>
 <section id="objective-function" class="slide level2">
 <h2>Objective Function</h2>
 <ul>
-<li>Given similarity measure, need number of cluster centers, <span class="math inline">\(K\)</span>.</li>
+<li>Given similarity measure, need number of cluster centres, <span class="math inline">\(K\)</span>.</li>
 <li>Find their location by allocating each center to a sub-set of the points and minimizing the sum of the squared errors, <span class="math display">\[
 E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^2
 \]</span> here <span class="math inline">\(\mathbf{i}_j\)</span> is all indices of data points allocated to the <span class="math inline">\(j\)</span>th center.</li>
@@ -167,7 +167,7 @@ E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^
 <ul>
 <li>Initialisation is the process of selecting a starting set of parameters.</li>
 <li>Optimisation result can depend on the starting point.</li>
-<li>For <span class="math inline">\(k\)</span>-means clustering you need to choose an initial set of centers.</li>
+<li>For <span class="math inline">\(k\)</span>-means clustering you need to choose an initial set of centres.</li>
 <li>Optimisation surface has many local optima, algorithm gets stuck in ones near initialisation.</li>
 </ul>
 </section>
@@ -177,9 +177,9 @@ E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^
 <li>Simple iterative clustering algorithm</li>
 <li>Key steps:
 <ol type="1">
-<li>Initialize with random centers</li>
+<li>Initialize with random centres</li>
 <li>Assign points to nearest center</li>
-<li>Update centers as cluster means</li>
+<li>Update centres as cluster means</li>
 <li>Repeat until stable</li>
 </ol></li>
 </ul>
@@ -257,16 +257,55 @@ showDivs(1, 'kmeans-clustering');
 </section>
 <section id="hierarchical-clustering" class="slide level2">
 <h2>Hierarchical Clustering</h2>
+</section>
+<section id="mathematical-formulation-1" class="slide level2">
+<h2>Mathematical Formulation</h2>
 <ul>
-<li>Form taxonomies of the cluster centers</li>
-<li>Like humans apply to animals, to form <em>phylogenies</em></li>
-<li>Builds a tree structure showing relationships between data points</li>
-<li>Two main approaches:
-<ul>
-<li>Agglomerative (bottom-up): Start with individual points and merge</li>
-<li>Divisive (top-down): Start with one cluster and split</li>
-</ul></li>
+<li>Start with each data point as its own cluster</li>
+<li>Define distance between clusters (linkage criterion)</li>
+<li>At each step, merge the two closest clusters</li>
+<li>Continue until all points are in one cluster</li>
+<li>Result: A tree structure (dendrogram) showing merge history</li>
 </ul>
+</section>
+<section id="linkage-criteria" class="slide level2">
+<h2>Linkage Criteria</h2>
+<ul>
+<li><strong>Single linkage</strong>: Distance between closest points in clusters</li>
+<li><strong>Complete linkage</strong>: Distance between farthest points in clusters<br />
+</li>
+<li><strong>Average linkage</strong>: Average distance between all point pairs</li>
+<li><strong>Ward linkage</strong>: Minimizes within-cluster variance increase</li>
+</ul>
+</section>
+<section id="algorithm" class="slide level2">
+<h2>Algorithm</h2>
+<ul>
+<li><strong>Step 1</strong>: Start with n clusters (one per point)</li>
+<li><strong>Step 2</strong>: Compute distance matrix between all clusters</li>
+<li><strong>Step 3</strong>: Find and merge the two closest clusters</li>
+<li><strong>Step 4</strong>: Update distance matrix</li>
+<li><strong>Step 5</strong>: Repeat until one cluster remains</li>
+</ul>
+<div class="figure">
+<div id="hierarchical-clustering-figure" class="figure-frame">
+<table>
+<tr>
+<td width="40%">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering.svg" width="100%" style=" ">
+</object>
+</td>
+<td width="40%">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering_dendogram.svg" width="100%" style=" ">
+</object>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<aside class="notes">
+Hierarchical clustering of some artificial data.
+</aside>
 </section>
 <section id="oil-flow-data" class="slide level2">
 <h2>Oil Flow Data</h2>
@@ -329,7 +368,372 @@ Hierarchical clustering applied to oil flow data. The dendrogram shows how diffe
 <li>Dirichlet process: Infinite, non-parametric clustering</li>
 </ul>
 </section>
+<section id="thinking-in-high-dimensions" class="slide level2">
+<h2>Thinking in High Dimensions</h2>
+</section>
+<section id="mixtures-of-gaussians" class="slide level2">
+<h2>Mixtures of Gaussians</h2>
+<div class="figure">
+<div id="artificial-mog-1-no-ovals-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem-artificial-mog-1.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Two dimensional Gaussian data set.
+</aside>
+<div class="figure">
+<div id="artificial-mog-2-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem-artificial-mog-2.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Two dimensional data sets. Complex structure not a problem for mixtures of Gaussians.
+</aside>
+<!-- SECTION High Dimensional Data -->
+</section>
 <section id="high-dimensional-data" class="slide level2">
+<h2>High Dimensional Data</h2>
+</section>
+<section id="thinking-in-high-dimensions-1" class="slide level2">
+<h2>Thinking in High Dimensions</h2>
+<ul>
+<li>Two dimensional plots of Gaussians can be misleading.</li>
+<li>Our low dimensional intuitions can fail dramatically.</li>
+<li>Two major issues:
+<ol type="1">
+<li>In high dimensions all the data moves to a ‘shell.’ There is nothing near the mean!</li>
+<li>Distances between points become constant.</li>
+<li>These affects apply to many densities.</li>
+</ol></li>
+<li>Let’s consider a Gaussian “egg.”</li>
+</ul>
+<p>Such a model seems intuitively appealing. When the  approach to optimizing such powerful models was first described by  the statistics community it must have seemed to some that the main remaining challenge for density estimation was principally computational. There are, of course, applications for which for which a mixture of Gaussians is an appropriate model ( low dimensional data). Such applications are not the focus of  book. We are more interested in the failings of the Gaussian mixture. There are two foundation assumptions which underpin this model. We described them both in our early appeal to intuition. The first assumption is that the data is generated through prototypes. We will not consider this assumption further. We will focus on the second assumption: how the prototypes are corrupted to obtain the data we observe. For the Gaussian mixture model the prototypes are corrupted by Gaussian noise with a particular covariance. It is this second assumption that we would like to consider first. In particular, we are going to examine the special case where the covariance is given by a constant diagonal matrix. We will see that the behavior of a Gaussian in low dimensional space can be quite misleading when we develop intuitions as to how these densities behave in higher dimensions. By higher dimensionality we can think of dimensionality that is difficult to visualize directly,  dimensionality greater than <span class="math inline">\(p=3\)</span>.</p>
+</section>
+<section id="dimensionality-greater-than-three" class="slide level2">
+<h2>Dimensionality Greater than Three</h2>
+<p>In higher dimensions  that seem reasonable in two or three dimensions can fail dramatically. Note the emphasis on models. In this section, we are not making any statements about how a `realistic’ data set behaves in higher dimensions, we are making statements about modeling failures in higher dimensions. In particular we will focus on what assumptions the model makes about where the data is distributed in higher dimensions. We will illustrate the ideas through introducing the Gaussian egg. The Gaussian egg is a hard boiled egg that consists of three parts: the yolk of the egg, the white of the egg and a thin boundary shell between the yolk and the white. In an over boiled egg the boundary layer is often green from iron sulfide formed by reactions between the white and the yolk, giving a bad taste. We therefore refer to this as the ``green’’ of the egg. We will consider spherical Gaussian distributions which have covariance matrices of the form <span class="math inline">\(\sigma^2\mathbf{I}\)</span>. We define the volume of the density associated with the yolk as part of the egg that is within <span class="math inline">\(0.95\sigma\)</span> of the mean. The green is defined to be the region from <span class="math inline">\(0.95\sigma\)</span> to <span class="math inline">\(1.05\sigma\)</span>. Finally, the yolk is all the density beyond <span class="math inline">\(1.05\sigma\)</span>. We assume the density of the egg varies according to the Gaussian density, so that the density at the center of the egg is highest, and density falls off with the exponentiated negative squared Euclidean distance from the mean. We take the overall mass of our egg to be one. The question we now ask is how much of our egg’s mass is now taken up by the three component parts: the green, the white and the yolk. The proportions of the mass are dependent on the dimensionality of our egg.</p>
+The answer is found through integrating over the Gaussian. For a one dimensional egg we can find the portion of the Gaussian that sits inside 0.95 of a standard deviation’s distance from the mean as [ _{-0.95}^{0.95}  . ] The other portions can be found similarly. For higher dimensional Gaussians the integral is slightly more difficult. To compute it, we will switch from considering the Gaussian density that governs the data directly to the density over squared distances from the mean that the Gaussian implies. Before we introduce that approach, we show three low dimensional Gaussian eggs in  indicating their associated masses for the yolk, the green and the white. %
+</section>
+<section id="the-gaussian-egg" class="slide level2">
+<h2>The Gaussian Egg</h2>
+<p>Three D: } }</p>
+</section>
+<section id="mathematics" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a d-dimensional Gaussian distribution:</p>
+<ol type="1">
+<li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathcal{N}(0, \sigma^2)\)</span></li>
+<li><strong>Squared components</strong>: <span class="math inline">\(y_{i,k}^2 \sim \sigma^2 \chi_1^2\)</span> (scaled chi-squared)</li>
+<li><strong>Gamma distribution</strong>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2\sigma^2})\)</span></li>
+<li><strong>Sum of squares</strong>: <span class="math inline">\(\sum_{k=1}^d y_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})\)</span></li>
+<li><strong>Expected value</strong>: <span class="math inline">\(\langle \sum_{k=1}^d y_{i,k}^2 \rangle = d\sigma^2\)</span></li>
+<li><strong>Normalized sum</strong>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^d y_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})\)</span></li>
+<li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{d}\sum_{k=1}^d y_{i,k}^2 \rangle = \sigma^2\)</span></li>
+</ol>
+</section>
+<section id="where-is-the-mass" class="slide level2">
+<h2>Where is the Mass?</h2>
+<ul>
+<li>Squared distances are gamma distributed. \begin{figure}</li>
+</ul>
+<div class="figure">
+<div id="dimension-mass-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimension-mass.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Plot of probability mass versus dimension. Plot shows the volume of density inside 0.95 of a standard deviation (yellow), between 0.95 and 1.05 standard deviations (green), over 1.05 and standard deviations (white).
+</aside>
+</section>
+<section id="distribution-of-mass-against-dimensionality" class="slide level2">
+<h2>Distribution of Mass against Dimensionality</h2>
+</section>
+<section id="the-gamma-density" class="slide level2">
+<h2>The Gamma Density</h2>
+%
+<div class="figure">
+<div id="distance2-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/distance2.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Distance from mean of the density (circle) to a given data point (square).
+</aside>
+</section>
+<section id="looking-at-gaussian-samples" class="slide level2">
+<h2>Looking at Gaussian Samples</h2>
+<div class="figure">
+<div id="projected-2d-gaussian-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/projected-2d-gaussian.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Looking at a projected Gaussian. This plot shows, in two dimensions, samples from a potentially very high dimensional Gaussian density. The mean of the Gaussian is at the origin. There appears to be a lot of data near the mean, but when we bear in mind that the original data was sampled from a much higher dimensional Gaussian we realize that the data has been projected down to the mean from those other dimensions that we are not visualizing.
+</aside>
+</section>
+<section id="high-dimensional-gaussians-and-interpoint-distances" class="slide level2">
+<h2>High Dimensional Gaussians and Interpoint Distances</h2>
+</section>
+<section id="looking-at-gaussian-samples-1" class="slide level2">
+<h2>Looking at Gaussian Samples</h2>
+<p>\begin{figure}</p>
+</section>
+<section id="interpoint-distances" class="slide level2">
+<h2>Interpoint Distances</h2>
+<ul>
+<li><p>The other effect in high dimensions is all points become equidistant.</p></li>
+<li><p>Can show this for Gaussians with a similar proof to the above:</p>
+<p><strong>Interpoint Distance Analysis:</strong></p>
+<p>For two points <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> in d-dimensional space:</p>
+<ol type="1">
+<li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span> and <span class="math inline">\(y_{j,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span></li>
+<li><strong>Difference</strong>: <span class="math inline">\(y_{i,k} - y_{j,k} \sim \mathcal{N}(0, 2\sigma_k^2)\)</span></li>
+<li><strong>Squared difference</strong>: <span class="math inline">\((y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{4\sigma_k^2})\)</span></li>
+</ol>
+<p>For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
+<ol start="4" type="1">
+<li><strong>Sum of squared differences</strong>: <span class="math inline">\(\sum_{k=1}^d (y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{4\sigma^2})\)</span></li>
+<li><strong>Normalized distance</strong>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^d (y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{4\sigma^2})\)</span></li>
+</ol>
+<p><strong>Key Results:</strong></p>
+<ul>
+<li>Mean distance: <span class="math inline">\(2\sigma^2\)</span></li>
+<li>Variance: <span class="math inline">\(\frac{8\sigma^2}{d}\)</span> (decreases with dimension!)</li>
+<li>All points become equidistant as <span class="math inline">\(d \to \infty\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="central-limit-theorem-and-non-gaussian-case" class="slide level2">
+<h2>Central Limit Theorem and Non-Gaussian Case</h2>
+<ul>
+<li><p>We can compute the density of squared distance <em>analytically</em> for spherical, independent Gaussian data.</p></li>
+<li><p>More generally, for <em>independent</em> data, the <em>central limit theorem</em> applies.</p>
+<ul>
+<li>The mean squared distance in high dimensional space is the mean of the variances.</li>
+<li>The variance about the mean scales as <span class="math inline">\(p^{-1}\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>In high dimensions if individual dimensions are <em>independent</em> the distributions behave counter intuitively.</li>
+<li>All data sits at one standard deviation from the mean.</li>
+<li>The densities of squared distances can be analytically calculated for the Gaussian case.</li>
+<li>For non-Gaussian  systems we can invoke the central limit theorem.</li>
+<li>Next we will consider example data sets and see how their interpoint distances are distributed.</li>
+</ul>
+</section>
+<section id="example-data-sets" class="slide level2">
+<h2>Example Data Sets</h2>
+</section>
+<section id="sanity-check" class="slide level2">
+<h2>Sanity Check</h2>
+<p><strong>Data sampled from independent Gaussian distribution</strong></p>
+<ul>
+<li>If dimensions are independent, we expect low variance, Gaussian behavior for the distribution of squared distances.</li>
+</ul>
+<p><strong>Distance distribution for a Gaussian with <span class="math inline">\(p=1000\)</span>, <span class="math inline">\(n=1000\)</span></strong></p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+
+</div>
+</div>
+<aside class="notes">
+A good match betwen theory and the samples for a 1000 dimensional Gaussian distribution.
+</aside>
+</section>
+<section id="sanity-check-1" class="slide level2">
+<h2>Sanity Check</h2>
+<p><strong>Same data generation, but fewer data points.</strong></p>
+<ul>
+<li>If dimensions are independent, we expect low variance, Gaussian behaviour for the distribution of squared distances.</li>
+</ul>
+<p>**Distance distribution for a Gaussian with <span class="math inline">\(p=1000\)</span>, </p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-distances-100.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+A good match betwen theory and the samples for a 100 dimensional Gaussian distribution.
+</aside>
+<center>
+Simulation of oil flow
+</center>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="oil-flow-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="osu-motion-capture-data-run-1" class="slide level2">
+<h2>OSU Motion Capture Data: Run 1</h2>
+<center>
+Ohio State University motion capture
+</center>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="osu-run1-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="spellman-yeast-cell-cycle-data" class="slide level2">
+<h2>Spellman Yeast Cell Cycle Data</h2>
+<div class="figure">
+<div id="spellman-yeast-data-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/spellman-yeast-data.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Gene YAR015W from <span class="citation" data-cites="Spellman:yeastcellcy98">Spellman et al. (1998)</span> for the cdc15 Time Course
+</aside>
+<center>
+Spellman yeast cell cycle
+</center>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="spellman-yeast-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/spellman-yeast_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="della-gatta-gene-data" class="slide level2">
+<h2>Della Gatta Gene Data</h2>
+<ul>
+<li>Given given expression levels in the form of a time series from <span class="citation" data-cites="DellaGatta:direct08">Della Gatta et al. (2008)</span>.</li>
+</ul>
+</section>
+<section id="della-gatta-gene-data-1" class="slide level2">
+<h2>Della Gatta Gene Data</h2>
+<div class="figure">
+<div id="della-gatta-gene-data-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/della-gatta-gene.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Gene expression levels over time for a gene from data provided by <span class="citation" data-cites="DellaGatta:direct08">Della Gatta et al. (2008)</span>. We would like to understand whether there is signal in the data, or we are only observing noise.
+</aside>
+<center>
+Della Gatta gene expression
+</center>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="della-gatta-gene-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/della-gatta-gene_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="grid-corpus-vowels-data" class="slide level2">
+<h2>Grid Corpus Vowels Data</h2>
+<div class="figure">
+<div id="grid-corpus-vowels-data-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/grid-corpus-vowels-data.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+<center>
+Grid corpus vowels
+</center>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="grid-corpus-vowles-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/grid-corpus-vowles_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="robot-wireless-data" class="slide level2">
+<h2>Robot Wireless Data</h2>
+<div class="figure">
+<div id="robot-wireless-ground-truth-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/robot-wireless-ground-truth.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Ground truth movement for the position taken while recording the multivariate time-course of wireless access point signal strengths.
+</aside>
+</section>
+<section id="robot-wifi-data" class="slide level2">
+<h2>Robot WiFi Data</h2>
+<div class="figure">
+<div id="robot-wireless-data-dim-1-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/robot-wireless-dim-1.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Output dimension 1 from the robot wireless data. This plot shows signal strength changing over time.
+</aside>
+<center>
+Robot wireless navigation
+</center>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="robot-wireless-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+</aside>
+</section>
+<section id="where-does-practice-depart-from-our-theory" class="slide level2">
+<h2>Where does practice depart from our theory?</h2>
+<ul>
+<li>The situation for real data does not reflect what we expect.</li>
+<li>Real data exhibits greater variances on interpoint distances.
+<ul>
+<li>Somehow the real data seems to have a smaller effective dimension.</li>
+</ul></li>
+<li>Let’s look at another <span class="math inline">\(p=1000\)</span>.</li>
+</ul>
+</section>
+<section id="d-gaussian" class="slide level2">
+<h2>1000-D Gaussian</h2>
+<p><strong>Distance distribution for a different Gaussian with <span class="math inline">\(p=1000\)</span></strong></p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances2.svg" width="40%" style=" ">
+</object>
+<p>Interpoint squared distance distribution for Gaussian with <span class="math inline">\(p=1000\)</span>.</p>
+</div>
+</div>
+<aside class="notes">
+correlated-gaussian-distances2
+</aside>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<ol type="1">
+<li><p>Gaussian has a specific low rank covariance matrix <span class="math inline">\(\mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\)</span>.</p></li>
+<li><p>Take <span class="math inline">\(\sigma^{2}=1e-2\)</span> and sample <span class="math inline">\(\mathbf{W}\in\Re^{1000\times2}\)</span> from <span class="math inline">\(\mathscr{N}\left(0,1\right)\)</span>.</p></li>
+<li><p>Theoretical curve taken assuming dimensionality of 2.</p></li>
+</ol>
+</section>
+<section id="high-dimensional-data-1" class="slide level2">
 <h2>High Dimensional Data</h2>
 <ul>
 <li>USPS Data Set Handwritten Digit</li>
@@ -371,14 +775,11 @@ showDivs(0, 'dem-six-sample');
 </section>
 <section id="simple-model-of-digit" class="slide level2">
 <h2>Simple Model of Digit</h2>
-<ul>
-<li>Rotate a prototype</li>
-</ul>
 <div>
 <script>
 showDivs(1, 'dem-six-rotate');
 </script>
-<p><small>Six Rotation</small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate');">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate');">❯</button></p>
+<p><small>Rotate Prototype</small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate');">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate');">❯</button></p>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate001.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
@@ -411,7 +812,7 @@ showDivs(1, 'dem-six-rotate');
 </div>
 </div>
 </section>
-<section id="section" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="dem-six-mainfold-print-figure" class="figure-frame">
@@ -975,6 +1376,72 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 \text{const}
 \]</span> where we also defined <span class="math inline">\(\mathbf{B}=\mathbf{Y}^\top\mathbf{W}\)</span>. Finally, notice that <span class="math inline">\(\text{tr}\left(\mathbf{Y}\mathbf{Y}^\top\right)=\text{tr}\left(\mathbf{Y}^\top\mathbf{Y}\right)\)</span> can be computed faster as the sum of all the elements of <span class="math inline">\(\mathbf{Y}\circ\mathbf{Y}\)</span>, where <span class="math inline">\(\circ\)</span> denotes the element-wise (or <a href="http://en.wikipedia.org/wiki/Hadamard_product_(matrices)">Hadamard</a>) product.</p>
 </section>
+<section id="reconstruction-of-the-data" class="slide level2">
+<h2>Reconstruction of the Data</h2>
+<p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
+<p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
+</section>
+<section id="other-data-sets-to-explore" class="slide level2">
+<h2>Other Data Sets to Explore</h2>
+<p>Below there are a few other data sets from <code>pods</code> you might want to explore with PCA. Both of them have <span class="math inline">\(p\)</span>&gt;<span class="math inline">\(n\)</span> so you need to consider how to do the larger eigenvalue probleme efficiently without large demands on computer memory.</p>
+<p>The data is actually quite high dimensional, and solving the eigenvalue problem in the high dimensional space can take some time. At this point we turn to a neat trick, you don’t have to solve the full eigenvalue problem in the <span class="math inline">\(p\times p\)</span> covariance, you can choose instead to solve the related eigenvalue problem in the <span class="math inline">\(n\times n\)</span> space, and in this case <span class="math inline">\(n=200\)</span> which is much smaller than <span class="math inline">\(p\)</span>.</p>
+<p>The original eigenvalue problem has the form <span class="math display">\[
+\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}
+\]</span> But if we premultiply by <span class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span class="math display">\[
+\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
+\]</span> but it turns out that we can write <span class="math display">\[
+\mathbf{U}^\prime = \mathbf{Y}\mathbf{U} \Lambda^{\frac{1}{2}}
+\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span> is an orthorormal matrix because <span class="math display">\[
+\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} \Lambda^{-\frac{1}{2}}
+\]</span> and since <span class="math inline">\(\mathbf{U}\)</span> diagonalises <span class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span class="math display">\[
+\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \Lambda
+\]</span> then <span class="math display">\[
+\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \mathbf{I}
+\]</span></p>
+</section>
+<section id="olivetti-faces" class="slide level2">
+<h2>Olivetti Faces</h2>
+<div class="figure">
+<div id="olivetti-faces-data-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Data set from Olivetti Research Laboratory of faces.
+</aside>
+<p><code>im = np.reshape(Y[1, :].flatten(), (64, 64)).T}</code></p>
+</section>
+<section id="visualizing-the-eigenvectors" class="slide level2">
+<h2>Visualizing the Eigenvectors</h2>
+<div class="figure">
+<div id="dem-olivetti-faces-eigenvectors-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+First 9 eigenvectors of the Olivetti faces data.
+</aside>
+</section>
+<section id="reconstruction" class="slide level2">
+<h2>Reconstruction</h2>
+<div class="figure">
+<div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Reconstruction from the latent space of the faces data.
+</aside>
+</section>
+<section id="gene-expression" class="slide level2">
+<h2>Gene Expression</h2>
+</section>
 <section id="summary-and-key-points" class="slide level2">
 <h2>Summary and Key Points</h2>
 </section>
@@ -1001,11 +1468,17 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 <div id="ref-Bishop-oil93" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., James, G.D., 1993. Analysis of multiphase flows using dual-energy gamma densitometry and neural networks. Nuclear Instruments and Methods in Physics Research A327, 580–593. <a href="https://doi.org/10.1016/0168-9002(93)90728-Z">https://doi.org/10.1016/0168-9002(93)90728-Z</a>
 </div>
+<div id="ref-DellaGatta:direct08" class="csl-entry" role="doc-biblioentry">
+Della Gatta, G., Bansal, M., Ambesi-Impiombato, A., Antonini, D., Missero, C., Bernardo, D. di, 2008. Direct targets of the TRP63 transcription factor revealed by a combination of gene expression profiling and reverse engineering. Genome Research 18, 939–948. <a href="https://doi.org/10.1101/gr.073601.107">https://doi.org/10.1101/gr.073601.107</a>
+</div>
 <div id="ref-Hotelling:analysis33" class="csl-entry" role="doc-biblioentry">
 Hotelling, H., 1933. Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology 24, 417–441.
 </div>
 <div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
 Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
+</div>
+<div id="ref-Spellman:yeastcellcy98" class="csl-entry" role="doc-biblioentry">
+Spellman, P.T., Sherlock, G., Zhang, M.Q., Iyer, V.R., Anders, K., Eisen, M.B., Brown, P.O., Botstein, D., Futcher, B., 1998. Comprehensive identification of cell cycle-regulated genes of the yeast <span><em>Saccharomyces</em></span> <span> <em>cerevisiae</em></span> by microarray hybridization. Molecular Biology of the Cell 9, 3273–3297.
 </div>
 <div id="ref-Tipping-probpca99" class="csl-entry" role="doc-biblioentry">
 Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a>

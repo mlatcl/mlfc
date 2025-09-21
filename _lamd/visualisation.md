@@ -31,7 +31,6 @@ reveal: True
 
 \include{_dimred/includes/visualisation-motivation.md}
 
-\include{_dimred/includes/ppca-reconstruction.md}
 \include{_dimred/includes/mds-derivation.md}
 \include{_dimred/includes/mds-pca-equivalence.md}
 

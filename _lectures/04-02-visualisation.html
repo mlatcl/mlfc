@@ -91,109 +91,6 @@ sns.set_palette('colorblind')}-->
 <p>The book, “Why Red Doesn’t Sound Like a Bell” by J. Kevin O’Regan <span class="citation" data-cites="ORegan-whyred19">(O’Regan, 2011)</span> suggests a sensorimotor approach to understanding our consciousness. One that depends on how our senses interact with the world around us. The implication is that our consciousness is as much a function of our environment as of our mind. This is particularly interesting for social interaction, where our external environment is populated by other intelligent entities. If we accept this interpretation it would imply that we should pay a lot of attention to modes of human to human interaction when developing environments in which we can feel comfortable and able to perform.</p>
 <p>In this lecture we’ll introduce the basics of visualisation through the lens of dimensionality reduction - techniques that help us represent high-dimensional data.</p>
 <p>See <span class="citation" data-cites="Lawrence-atomic24">Lawrence (2024)</span> bandwidth, communication p. 10-12,16,21,29,31,34,38,41,44,65-67,76,81,90-91,104,115,149,196,214,216,235,237-238,302,334. See <span class="citation" data-cites="Lawrence-atomic24">Lawrence (2024)</span> MacKay, Donald p. 227-228,230-237,267-270. See <span class="citation" data-cites="Lawrence-atomic24">Lawrence (2024)</span> optic nerve/tract p. 205,235. See <span class="citation" data-cites="Lawrence-atomic24">Lawrence (2024)</span> O’Regan, Kevin p. 236-240,250,259,262-263,297,299. See <span class="citation" data-cites="Lawrence-atomic24">Lawrence (2024)</span> saccade p. 236,238,259-260,297,301. See <span class="citation" data-cites="Lawrence-atomic24">Lawrence (2024)</span> visual system/visual cortex p. 204-206,209,235-239,249-250,255,259,260,268-270,281,294,297,301,324,330.</p>
-<h2 id="reconstruction-of-the-data">Reconstruction of the Data</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/ppca-reconstruction.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/ppca-reconstruction.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
-<p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
-<h3 id="exercise-1">Exercise 1</h3>
-<p>Project the motion capture data onto its principal components, and then use the <em>mean posterior estimate</em> to reconstruct the data from the latent variables at the data points. Use two latent dimensions. What is the sum of squares error for the reconstruction?</p>
-<h2 id="other-data-sets-to-explore">Other Data Sets to Explore</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/pca-other-data-sets.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/pca-other-data-sets.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Below there are a few other data sets from <code>pods</code> you might want to explore with PCA. Both of them have <span class="math inline">\(p\)</span>&gt;<span class="math inline">\(n\)</span> so you need to consider how to do the larger eigenvalue probleme efficiently without large demands on computer memory.</p>
-<p>The data is actually quite high dimensional, and solving the eigenvalue problem in the high dimensional space can take some time. At this point we turn to a neat trick, you don’t have to solve the full eigenvalue problem in the <span class="math inline">\(p\times p\)</span> covariance, you can choose instead to solve the related eigenvalue problem in the <span class="math inline">\(n\times n\)</span> space, and in this case <span class="math inline">\(n=200\)</span> which is much smaller than <span class="math inline">\(p\)</span>.</p>
-<p>The original eigenvalue problem has the form <span class="math display">\[
-\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}
-\]</span> But if we premultiply by <span class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span class="math display">\[
-\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
-\]</span> but it turns out that we can write <span class="math display">\[
-\mathbf{U}^\prime = \mathbf{Y}\mathbf{U} \Lambda^{\frac{1}{2}}
-\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span> is an orthorormal matrix because <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} \Lambda^{-\frac{1}{2}}
-\]</span> and since <span class="math inline">\(\mathbf{U}\)</span> diagonalises <span class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span class="math display">\[
-\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \Lambda
-\]</span> then <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \mathbf{I}
-\]</span></p>
-<h2 id="olivetti-faces">Olivetti Faces</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/olivetti-eigenfaces.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/olivetti-eigenfaces.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>You too can create your own eigenfaces. In this example we load in the ‘Olivetti Face’ data set, a small data set of 200 faces from the <a href="http://en.wikipedia.org/wiki/Olivetti_Research_Laboratory">Olivetti Research Laboratory</a>. Below we load in the data and display an image of the second face in the data set (i.e., indexed by 1).</p>
-<div class="figure">
-<div id="olivetti-faces-data-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="olivetti-faces-data-magnify" class="magnify" onclick="magnifyFigure(&#39;olivetti-faces-data&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="olivetti-faces-data-caption" class="caption-frame">
-<p>Figure: Data set from Olivetti Research Laboratory of faces.</p>
-</div>
-</div>
-<p>Note that to display the face we had to reshape the appropriate row of the data matrix. This is because the images are turned into vectors by stacking columns of the image on top of each other to form a vector. The operation</p>
-<p><code>im = np.reshape(Y[1, :].flatten(), (64, 64)).T}</code></p>
-<p>recovers the original image into a matrix <code>im</code> by using the <code>np.reshape</code> function to return the vector to a matrix.</p>
-<h2 id="visualizing-the-eigenvectors">Visualizing the Eigenvectors</h2>
-<p>Each retained eigenvector is stored in the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(\mathbf{U}\)</span>. Each of these eigenvectors is associated with particular directions of variation in the original data. Principal component analysis implies that we can reconstruct any face by using a weighted sum of these eigenvectors where the weights for each face are given by the relevant vector of the latent variables, <span class="math inline">\(\mathbf{ z}_{i, :}\)</span> and the diagonal elements of the matrix <span class="math inline">\(\mathbf{L}\)</span>. We can visualize the eigenvectors <span class="math inline">\(\mathbf{U}\)</span> as images by performing the same reshape operation we used to recover the image associated with a data point above. Below we do this for the first nine eigenvectors of the Olivetti Faces data.</p>
-<div class="figure">
-<div id="dem-olivetti-faces-eigenvectors-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="dem-olivetti-faces-eigenvectors-magnify" class="magnify" onclick="magnifyFigure(&#39;dem-olivetti-faces-eigenvectors&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="dem-olivetti-faces-eigenvectors-caption" class="caption-frame">
-<p>Figure: First 9 eigenvectors of the Olivetti faces data.</p>
-</div>
-</div>
-<h2 id="reconstruction">Reconstruction</h2>
-<p>We can now attempt to reconstruct a given training point from these eigenvectors. As we mentioned above, the reconstruction is dependent on the value of the latent variable and the weights from the matrix <span class="math inline">\(\mathbf{L}\)</span>. First let’s compute the value of the latent variables for the point we want to construct. Then we’ll use them to compute the weightings of each of the eigenvectors.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>reconstruction_weights <span class="op">=</span> mu_x[display_index, :]<span class="op">*</span>ell</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruction_weights)</span></code></pre></div>
-<p>This vector of reconstruction weights is applied to the ‘template images’ given by the eigenvectors to give us our reconstruction. Below we weight these templates and combine to form the reconstructed image, and show the comparison to the original image.</p>
-<div class="figure">
-<div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="dem-olivetti-faces-reconstruction-magnify" class="magnify" onclick="magnifyFigure(&#39;dem-olivetti-faces-reconstruction&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="dem-olivetti-faces-reconstruction-caption" class="caption-frame">
-<p>Figure: Reconstruction from the latent space of the faces data.</p>
-</div>
-</div>
-<p>The quality of the reconstruction is a bit blurry, it can be improved by increasing the number of template images used (i.e. increasing the <em>latent dimensionality</em>).</p>
-<h2 id="gene-expression">Gene Expression</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/spellman-eigengenes.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/spellman-eigengenes.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<p>Each of the cells in your body stores your entire genetic code in your DNA, but at any one moment it is only ‘expressing’ a small portion of that code. Your cells are mainly constructed of protein, and these proteins are manufactured by first transcribing the DNA to RNA and then translating the RNA to protein. If the DNA is the cells hard drive, then one role of the RNA is to act like a cache of data that is being read from the hard drive at any one time. Gene expression arrays allow us to measure the quantity of different types of RNA in the cell, effectively analyzing what’s in the cache (although we have to destroy the cell or the tissue to access it). A gene expression experiment often consists of a time course or a series of experiments that characterise the gene expression of cells at any given time.</p>
-<p>We will now load in one of the earliest gene expression data sets from a <a href="http://www.ncbi.nlm.nih.gov/pubmed/9843569">1998 paper by Spellman et al.</a>, it consists of gene expression measurements of over six thousand genes in a range of conditions for brewer’s yeast. The experiment was designed for understanding the cell cycle of the genes. The expectation is that there should be oscillating signals inside the cell.</p>
-<p>First we extract the principal components of the gene expression.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load in data and replace missing values with zero</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>pods.datasets.spellman_yeast_cdc15()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>].fillna(<span class="dv">0</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
-<p>Now, looking through, we find that there is indeed a latent variable that appears to oscilate at approximately the right frequency. The 4th latent dimension (<code>index=3</code>) can be plotted across the time course as follows.</p>
-<p>To reveal an oscillating shape. We can see which genes correspond to this shape by examining the associated column of <span class="math inline">\(\mathbf{U}\)</span>. Let’s augment our data matrix with this score.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gene_list <span class="op">=</span> Y.T</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gene_list[<span class="st">&#39;oscilation&#39;</span>] <span class="op">=</span> np.sqrt(U[:, <span class="dv">3</span>]<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gene_list.sort(columns<span class="op">=</span><span class="st">&#39;oscilation&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>).index[:<span class="dv">4</span>]</span></code></pre></div>
-<p>We can look up the first three genes in this list which now ranks the genes according to how strongly they respond to the fourth latent dimension. <a href="http://www.ncbi.nlm.nih.gov/gene/">The NCBI gene database</a> allows us to search for the function of these genes. Looking at the function of the four genes that respond most strongly to the third latent variable they are all genes that encode <a href="http://en.wikipedia.org/wiki/Histone">histone</a> proteins. The histone is thesupport scaffold for the DNA that ensures it folds correctly within the cell creating the nucleosomes. It seems to make sense that production of histone proteins should be strongly correlated with the cell cycle, as when the cell divides it needs to create a large number of histone proteins for creating the duplicated nucleosomes. The relevant links giving the descriptions of each gene given here: <a href="http://www.ncbi.nlm.nih.gov/gene/851810">YDR224C</a>, <a href="http://www.ncbi.nlm.nih.gov/gene/851811">YDR225W</a>, <a href="http://www.ncbi.nlm.nih.gov/gene/852283">YBL003C</a> and <a href="http://www.ncbi.nlm.nih.gov/gene/855701">YNL030W</a>.</p>
 <h1 id="multi-dimensional-scaling">Multi-Dimensional Scaling</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/mds-derivation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/mds-derivation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -279,33 +176,192 @@ sns.set_palette('colorblind')}-->
 <p>A key concept in iterative dimensionality reduction is the stress function, which measures how well the low-dimensional representation preserves relationships in the original data. The classic Kruskal stress function is: <span class="math display">\[
 \text{stress} = \sqrt{\frac{\sum_{i&lt;j} (d_{ij} - \delta_{ij})^2}{\sum_{i&lt;j} d_{ij}^2}},
 \]</span> where <span class="math inline">\(d_{ij}\)</span> are the original distances and <span class="math inline">\(\delta_{ij}\)</span> are the distances in the reduced space.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_stress(D_original, D_reduced):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compute Kruskal&#39;s stress between original and reduced distances&quot;&quot;&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    numerator <span class="op">=</span> np.<span class="bu">sum</span>((D_original <span class="op">-</span> D_reduced)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    denominator <span class="op">=</span> np.<span class="bu">sum</span>(D_original<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(numerator<span class="op">/</span>denominator)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> kruskal_stress</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> generate_swiss_roll</span></code></pre></div>
 <p>Different stress functions place different emphasis on preserving local versus global structure. For example, Sammon mapping modifies the stress function to give more weight to preserving small distances:</p>
 <p><span class="math display">\[\text{stress}_{\text{Sammon}} = \frac{1}{\sum_{i&lt;j} d_{ij}} \sum_{i&lt;j} \frac{(d_{ij} - \delta_{ij})^2}{d_{ij}}\]</span></p>
+<h2 id="gradient-descent-for-stress-minimisation">Gradient Descent for Stress Minimisation</h2>
+<p>To optimize the stress function using gradient descent, we need to compute the gradient of the stress with respect to the latent coordinates. This can be done in two stages: first computing the gradient of stress with respect to distances, then the gradient of distances with respect to the latent coordinates.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stress_gradient_wrt_distances(D_original, D_reduced):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compute gradient of Kruskal stress with respect to reduced distances&quot;&quot;&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    numerator <span class="op">=</span> np.<span class="bu">sum</span>((D_original <span class="op">-</span> D_reduced)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    denominator <span class="op">=</span> np.<span class="bu">sum</span>(D_original<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Gradient of stress with respect to D_reduced</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    d_stress_d_D_reduced <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> (D_original <span class="op">-</span> D_reduced) <span class="op">/</span> (denominator <span class="op">*</span> np.sqrt(numerator<span class="op">/</span>denominator))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_stress_d_D_reduced</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_gradient_wrt_coordinates(X):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compute gradient of pairwise distances with respect to coordinates&quot;&quot;&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    n, d <span class="op">=</span> X.shape</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    d_dist_d_X <span class="op">=</span> np.zeros((n, d))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">!=</span> j:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Distance between points i and j</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                diff <span class="op">=</span> X[i] <span class="op">-</span> X[j]</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                dist <span class="op">=</span> np.linalg.norm(diff)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dist <span class="op">&gt;</span> <span class="fl">1e-10</span>:  <span class="co"># Avoid division by zero</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Gradient of distance with respect to X[i]</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                    d_dist_d_X[i] <span class="op">+=</span> (diff <span class="op">/</span> dist)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Gradient of distance with respect to X[j] </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                    d_dist_d_X[j] <span class="op">-=</span> (diff <span class="op">/</span> dist)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_dist_d_X</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stress_gradient_wrt_coordinates(X, D_original):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compute gradient of Kruskal stress with respect to latent coordinates&quot;&quot;&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute current distances</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    D_reduced <span class="op">=</span> np.zeros((X.shape[<span class="dv">0</span>], X.shape[<span class="dv">0</span>]))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">0</span>]):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">0</span>]):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            D_reduced[i, j] <span class="op">=</span> np.linalg.norm(X[i] <span class="op">-</span> X[j])</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Gradient of stress with respect to distances</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    d_stress_d_D <span class="op">=</span> stress_gradient_wrt_distances(D_original, D_reduced)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Gradient of distances with respect to coordinates</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    d_dist_d_X <span class="op">=</span> distance_gradient_wrt_coordinates(X)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Chain rule: gradient of stress with respect to coordinates</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    d_stress_d_X <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">0</span>]):</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">0</span>]):</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">!=</span> j:</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                diff <span class="op">=</span> X[i] <span class="op">-</span> X[j]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                dist <span class="op">=</span> np.linalg.norm(diff)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dist <span class="op">&gt;</span> <span class="fl">1e-10</span>:</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                    d_stress_d_X[i] <span class="op">+=</span> d_stress_d_D[i, j] <span class="op">*</span> (diff <span class="op">/</span> dist)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                    d_stress_d_X[j] <span class="op">-=</span> d_stress_d_D[i, j] <span class="op">*</span> (diff <span class="op">/</span> dist)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_stress_d_X</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradient_descent_stress(X_init, D_original, learning_rate<span class="op">=</span><span class="fl">0.01</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, max_iterations<span class="op">=</span><span class="dv">100</span>, tolerance<span class="op">=</span><span class="fl">1e-6</span>):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Perform gradient descent with momentum to minimize Kruskal stress&quot;&quot;&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> X_init.copy()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    velocity <span class="op">=</span> np.zeros_like(X)  <span class="co"># Initialize velocity for momentum</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    stress_history <span class="op">=</span> []</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iteration <span class="kw">in</span> <span class="bu">range</span>(max_iterations):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute current stress</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        D_reduced <span class="op">=</span> np.zeros((X.shape[<span class="dv">0</span>], X.shape[<span class="dv">0</span>]))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">0</span>]):</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">0</span>]):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                D_reduced[i, j] <span class="op">=</span> np.linalg.norm(X[i] <span class="op">-</span> X[j])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        stress <span class="op">=</span> kruskal_stress(D_original, D_reduced)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        stress_history.append(stress)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute gradient</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        gradient <span class="op">=</span> stress_gradient_wrt_coordinates(X, D_original)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update velocity with momentum</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        velocity <span class="op">=</span> momentum <span class="op">*</span> velocity <span class="op">-</span> learning_rate <span class="op">*</span> gradient</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update coordinates using velocity</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        X_new <span class="op">=</span> X <span class="op">+</span> velocity</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check for convergence</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.linalg.norm(X_new <span class="op">-</span> X) <span class="op">&lt;</span> tolerance:</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f&quot;Converged after </span><span class="sc">{</span>iteration <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> iterations&quot;</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> X_new</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> iteration <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f&quot;Iteration </span><span class="sc">{</span>iteration<span class="sc">}</span><span class="ss">: stress = </span><span class="sc">{</span>stress<span class="sc">:.6f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, stress_history</span></code></pre></div>
+<h2 id="example-gradient-descent-in-action">Example: Gradient Descent in Action</h2>
+<p>Let’s demonstrate the gradient descent algorithm on a simple example. We’ll start with a 2D dataset and reduce it to 1D using iterative optimization.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, squareform</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Swiss roll dataset</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>X_original, t_original <span class="op">=</span> generate_swiss_roll(n_points<span class="op">=</span><span class="dv">100</span>, noise<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute original distances</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>D_original <span class="op">=</span> squareform(pdist(X_original))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize 2D embedding randomly</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>X_init <span class="op">=</span> np.random.randn(<span class="dv">100</span>, <span class="dv">2</span>) <span class="op">*</span> <span class="fl">0.01</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Original data shape:&quot;</span>, X_original.shape)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Initial embedding shape:&quot;</span>, X_init.shape)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Initial stress:&quot;</span>, kruskal_stress(D_original, squareform(pdist(X_init))))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run gradient descent with momentum</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_final, stress_history <span class="op">=</span> gradient_descent_stress(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    X_init, D_original, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">0.01</span>, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    momentum<span class="op">=</span><span class="fl">0.9</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    max_iterations<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    tolerance<span class="op">=</span><span class="fl">1e-8</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Final stress: </span><span class="sc">{</span>stress_history[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Stress reduction: </span><span class="sc">{</span>stress_history[<span class="dv">0</span>] <span class="op">-</span> stress_history[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Converged in </span><span class="sc">{</span><span class="bu">len</span>(stress_history)<span class="sc">}</span><span class="ss"> iterations&quot;</span>)</span></code></pre></div>
+<p>The gradient descent algorithm successfully reduces the Kruskal stress, finding a 2D embedding that preserves the pairwise distances from the original 3D Swiss roll data as well as possible. The convergence plot shows how the stress decreases over iterations, demonstrating the optimization process in action. The color coding shows how the algorithm preserves the underlying manifold structure.</p>
+<h2 id="effect-of-momentum">Effect of Momentum</h2>
+<p>Let’s compare the performance of gradient descent with and without momentum to demonstrate the speedup:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare gradient descent with and without momentum</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Without momentum</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Running gradient descent without momentum...&quot;</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>X_no_momentum, stress_history_no_momentum <span class="op">=</span> gradient_descent_stress(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    X_init, D_original, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">0.01</span>, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    momentum<span class="op">=</span><span class="fl">0.0</span>,  <span class="co"># No momentum</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    max_iterations<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    tolerance<span class="op">=</span><span class="fl">1e-8</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>time_no_momentum <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># With momentum</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Running gradient descent with momentum...&quot;</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>X_momentum, stress_history_momentum <span class="op">=</span> gradient_descent_stress(</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    X_init, D_original, </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">0.01</span>, </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    momentum<span class="op">=</span><span class="fl">0.9</span>,  <span class="co"># With momentum</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    max_iterations<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    tolerance<span class="op">=</span><span class="fl">1e-8</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>time_momentum <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">No momentum: </span><span class="sc">{</span><span class="bu">len</span>(stress_history_no_momentum)<span class="sc">}</span><span class="ss"> iterations, </span><span class="sc">{</span>time_no_momentum<span class="sc">:.2f}</span><span class="ss">s&quot;</span>)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;With momentum: </span><span class="sc">{</span><span class="bu">len</span>(stress_history_momentum)<span class="sc">}</span><span class="ss"> iterations, </span><span class="sc">{</span>time_momentum<span class="sc">:.2f}</span><span class="ss">s&quot;</span>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Speedup: </span><span class="sc">{</span>time_no_momentum<span class="op">/</span>time_momentum<span class="sc">:.1f}</span><span class="ss">x&quot;</span>)</span></code></pre></div>
+<h2 id="comparison-with-classical-mds">Comparison with Classical MDS</h2>
+<p>Let’s compare our iterative approach with the classical MDS solution to see how they perform:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classical MDS solution</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> MDS</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>mds <span class="op">=</span> MDS(n_components<span class="op">=</span><span class="dv">2</span>, dissimilarity<span class="op">=</span><span class="st">&#39;precomputed&#39;</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>X_mds <span class="op">=</span> mds.fit_transform(D_original)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare stress values</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>stress_gd <span class="op">=</span> kruskal_stress(D_original, squareform(pdist(X_momentum)))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>stress_mds <span class="op">=</span> kruskal_stress(D_original, squareform(pdist(X_mds)))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Gradient Descent (with momentum) Stress: </span><span class="sc">{</span>stress_gd<span class="sc">:.6f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Classical MDS Stress: </span><span class="sc">{</span>stress_mds<span class="sc">:.6f}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>Both methods achieve similar results, with classical MDS typically providing the global optimum for this type of problem. However, the iterative gradient descent approach is more flexible and can be extended to handle constraints, non-Euclidean distances, and other modifications that would be difficult with classical methods.</p>
 <h2 id="local-vs-global-structure-preservation">Local vs Global Structure Preservation</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/local-vs-global-preservation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/local-vs-global-preservation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>An important consideration in dimensionality reduction is whether to focus on preserving local or global structure. Local methods like LLE and t-SNE excel at preserving local neighborhood relationships but may distort global structure, while methods like classical MDS attempt to preserve all pairwise distances.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_swiss_roll(n_points<span class="op">=</span><span class="dv">1000</span>, noise<span class="op">=</span><span class="fl">0.05</span>):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Generate Swiss roll dataset&quot;&quot;&quot;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fl">1.5</span> <span class="op">*</span> np.pi <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.random.rand(n_points))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">21</span> <span class="op">*</span> np.random.rand(n_points)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> t <span class="op">*</span> np.cos(t)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> t <span class="op">*</span> np.sin(t)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.stack([x, y, z])</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    X <span class="op">+=</span> noise <span class="op">*</span> np.random.randn(<span class="op">*</span>X.shape)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X.T, t</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> generate_swiss_roll</span></code></pre></div>
 <p>The Swiss roll is a classic example where preserving only local structure can fail. Points that are close in the ambient space may be far apart on the manifold - this is known as the “short-circuiting” problem.</p>
 <div class="figure">
 <div id="short-circuit-problem-figure" class="figure-frame">
@@ -324,30 +380,43 @@ sns.set_palette('colorblind')}-->
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/t-sne-intro.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/t-sne-intro.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>t-Distributed Stochastic Neighbor Embedding (t-SNE) is a dimensionality reduction technique that focuses on preserving local structure. It converts distances between points into probabilities and tries to match these probabilities in the low-dimensional space.</p>
+<p>The idea in t-SNE is to convert distances in data space into probabilities. This is done through two stages. First a neighbourhood graph is formed, so each point, <span class="math inline">\(i\)</span>, is related to its <span class="math inline">\(k\)</span> nearest neighbours.</p>
+<p>If the squared distances between two data points are given by <span class="math inline">\(d_{i,j}^2\)</span>, then the probability of point <span class="math inline">\(i\)</span> linking to point <span class="math inline">\(j\)</span> is given by, <span class="math display">\[
+p(r_{i,j} | \mathbf{ \MakeUppercase{d}}) = \pi_{i,j} =  \frac{\exp -\frac{d_{i,j}^2}{2\sigma^2}}{\sum_{k\in \mathscr{N}\left( i \right)}\exp -d_{i,j}}
+\]</span> where <span class="math inline">\(r_{i,j} = 1\)</span> if the two points are linked, <span class="math inline">\(\pi_{i,j}\)</span> is the probability of that link and the neighbourhood of <span class="math inline">\(i\)</span> is given by <span class="math inline">\(\mathscr{N}(i)\)</span>.</p>
+<p>This is compared with probabilities in <em>latent</em> space which are given by <span class="math display">\[
+p(s_{i,j} | \boldsymbol{ \Delta}) = q_{i,j} = (1 + \delta_{i,j})^(-1),
+\]</span> where <span class="math inline">\(s_{i,j} = 1\)</span> if two points are linked in the latent space and <span class="math inline">\(q_{i,j}\)</span> is the probability of that link. The latent distances are given by <span class="math display">\[
+\delta_{i,j} = (\mathbf{ z}_{i, :} - \mathbf{ z}_{j, :})^\top*\mathbf{ z}_{i, :} - \mathbf{ z}_{j, :}).
+\]</span>}</p>
+<p><span class="math inline">\(t\)</span>-SNE then minimises the KL divergence between these two link distributions. <span class="math display">\[
+E(\mathbf{Z}= \sum_i \sum_{j\in\mathscr{N}\left( i \right)} p_{i,k} \log \frac{p_{i,k}}{q_{i,k}}
+\]</span>}</p>
 <p>The approach was originally proposed by <span class="citation" data-cites="Hinton-sne02">Hinton and Roweis (n.d.)</span>, then later modified using the <span class="math inline">\(t\)</span>-distribution in the latent space by <span class="citation" data-cites="Maaten-tsne08">van der Maaten and Hinton (2008)</span>.</p>
 <p>The basic idea is to minimise the Kullback-Leibler divergence between a distribution defined in the latent space and a distribution defined in the data space. The distribution is over neighbours in each space, by definition the probability of point <span class="math inline">\(j\)</span> being selected as a neighbor of point <span class="math inline">\(i\)</span> is:</p>
 <p><span class="math display">\[p_{j|i} = \frac{\exp(-\|\mathbf{ y}_i - \mathbf{ y}_j\|^2/2\sigma_i^2)}{\sum_{k \neq i} \exp(-\|\mathbf{ y}_i - \mathbf{ y}_k\|^2/2\sigma_i^2)}\]</span></p>
 <p>where <span class="math inline">\(\sigma_i\)</span> is chosen to achieve a desired perplexity. In the low-dimensional space, a t-distribution is used instead:</p>
 <p><span class="math display">\[q_{ij} = \frac{(1 + \|\mathbf{ z}_i - \mathbf{ z}_j\|^2)^{-1}}{\sum_{k \neq l} (1 + \|\mathbf{ z}_k - \mathbf{ z}_l\|^2)^{-1}}\]</span></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.plot <span class="im">import</span> tsne_example</span></code></pre></div>
 <h2 id="oil-flow-data">Oil Flow Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/oil-flow-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/oil-flow-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>This data set is from a physics-based simulation of oil flow in a pipeline. The data was generated as part of a project to determine the fraction of oil, water and gas in North Sea oil pipes <span class="citation" data-cites="Bishop:gtm96">(<strong>Bishop:gtm96?</strong>)</span>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.oil()</span></code></pre></div>
+<p>This data set is from a physics-based simulation of oil flow in a pipeline. The data was generated as part of a project to determine the fraction of oil, water and gas in North Sea oil pipes <span class="citation" data-cites="Bishop-oil93">(Bishop and James, 1993)</span>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.oil()</span></code></pre></div>
 <p>The data consists of 1000 12-dimensional observations of simulated oil flow in a pipeline. Each observation is labelled according to the multi-phase flow configuration (homogeneous, annular or laminar).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data[&quot;Y&quot;] from [1, -1, -1] in each row to rows of 0 or 1 or 2</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows with 1 in first column (class 0)</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>class0 <span class="op">=</span> (Y[:, <span class="dv">0</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">0</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows with 1 in second column (class 1) </span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>class1 <span class="op">=</span> (Y[:, <span class="dv">1</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">1</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows with 1 in third column (class 2)</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>class2 <span class="op">=</span> (Y[:, <span class="dv">2</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine into single array of class labels 0,1,2</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> class0 <span class="op">+</span> class1 <span class="op">+</span> class2</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data[&quot;Y&quot;] from [1, -1, -1] in each row to rows of 0 or 1 or 2</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows with 1 in first column (class 0)</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>class0 <span class="op">=</span> (Y[:, <span class="dv">0</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">0</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows with 1 in second column (class 1) </span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>class1 <span class="op">=</span> (Y[:, <span class="dv">1</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">1</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows with 1 in third column (class 2)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>class2 <span class="op">=</span> (Y[:, <span class="dv">2</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine into single array of class labels 0,1,2</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> class0 <span class="op">+</span> class1 <span class="op">+</span> class2</span></code></pre></div>
 <p>The data is returned as a dictionary containing training and test inputs (‘X,’ ‘Xtst’), training and test labels (‘Y,’ ‘Ytst’), and the names of the features.</p>
 <div class="figure">
 <div id="oil-flow-data-figure" class="figure-frame">
@@ -362,11 +431,11 @@ sns.set_palette('colorblind')}-->
 </div>
 </div>
 <p>As normal we include the citation information for the data.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;citation&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;citation&#39;</span>])</span></code></pre></div>
 <p>And extra information about the data is included, as standard, under the keys <code>info</code> and <code>details</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;details&#39;</span>])</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;details&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <div class="figure">
 <div id="t-sne-oil-flow-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/t-sne-oil-flow.svg" width="80%" style=" ">
@@ -388,40 +457,40 @@ sns.set_palette('colorblind')}-->
 <p>UMAP constructs a weighted graph, for points <span class="math inline">\(\mathbf{ y}_i\)</span> and <span class="math inline">\(\mathbf{ y}_j\)</span>, the weight is:</p>
 <p><span class="math display">\[w_{ij} = \exp\left(\frac{-d(\mathbf{ y}_i, \mathbf{ y}_j) - \rho_i}{\sigma_i}\right)\]</span></p>
 <p>where <span class="math inline">\(\rho_i\)</span> is the distance to the nearest neighbor of <span class="math inline">\(i\)</span>, and <span class="math inline">\(\sigma_i\)</span> is chosen to achieve a desired local connectivity. This forms a high-dimensional fuzzy topological representation which UMAP then tries to approximate in lower dimensions.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_umap_tsne(n_samples<span class="op">=</span><span class="dv">1000</span>, noise<span class="op">=</span><span class="fl">0.1</span>, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">42</span>):</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compare UMAP and t-SNE on the two moons dataset&quot;&quot;&quot;</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate data</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    X, labels <span class="op">=</span> make_moons(n_samples<span class="op">=</span>n_samples, </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                          noise<span class="op">=</span>noise, </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                          random_state<span class="op">=</span>random_state)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create figure</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                                  figsize<span class="op">=</span>plot.two_figsize)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># t-SNE embedding</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span>random_state)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    ax1.scatter(X_tsne[:, <span class="dv">0</span>], X_tsne[:, <span class="dv">1</span>], </span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">&#39;t-SNE&#39;</span>)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># UMAP embedding</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> umap</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    reducer <span class="op">=</span> umap.UMAP(random_state<span class="op">=</span>random_state)</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    X_umap <span class="op">=</span> reducer.fit_transform(X)</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    ax2.scatter(X_umap[:, <span class="dv">0</span>], X_umap[:, <span class="dv">1</span>], </span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">&#39;UMAP&#39;</span>)</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_umap_tsne(n_samples<span class="op">=</span><span class="dv">1000</span>, noise<span class="op">=</span><span class="fl">0.1</span>, </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                         random_state<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compare UMAP and t-SNE on the two moons dataset&quot;&quot;&quot;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate data</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    X, labels <span class="op">=</span> make_moons(n_samples<span class="op">=</span>n_samples, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                          noise<span class="op">=</span>noise, </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                          random_state<span class="op">=</span>random_state)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create figure</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                                  figsize<span class="op">=</span>plot.two_figsize)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># t-SNE embedding</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span>random_state)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    ax1.scatter(X_tsne[:, <span class="dv">0</span>], X_tsne[:, <span class="dv">1</span>], </span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">&#39;t-SNE&#39;</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># UMAP embedding</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> umap</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    reducer <span class="op">=</span> umap.UMAP(random_state<span class="op">=</span>random_state)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    X_umap <span class="op">=</span> reducer.fit_transform(X)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    ax2.scatter(X_umap[:, <span class="dv">0</span>], X_umap[:, <span class="dv">1</span>], </span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">&#39;UMAP&#39;</span>)</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
 <p>UMAP has several advantages over t-SNE:</p>
 <ol type="1">
 <li><strong>Speed</strong>: UMAP is significantly faster than t-SNE, especially for large datasets</li>
@@ -436,97 +505,97 @@ sns.set_palette('colorblind')}-->
 <li><code>min_dist</code>: Controls how tightly points are allowed to pack together</li>
 <li><code>metric</code>: The distance metric used in the high-dimensional space</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_umap_params(X, labels, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                        n_neighbors<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">50</span>], </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                        min_dist<span class="op">=</span>[<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span>],</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                        random_state<span class="op">=</span><span class="dv">42</span>):</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Plot UMAP embeddings with different parameter settings&quot;&quot;&quot;</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="bu">len</span>(n_neighbors), <span class="bu">len</span>(min_dist), </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                            figsize<span class="op">=</span>(<span class="dv">5</span><span class="op">*</span><span class="bu">len</span>(min_dist), </span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="dv">5</span><span class="op">*</span><span class="bu">len</span>(n_neighbors)))</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, nn <span class="kw">in</span> <span class="bu">enumerate</span>(n_neighbors):</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, md <span class="kw">in</span> <span class="bu">enumerate</span>(min_dist):</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>            reducer <span class="op">=</span> umap.UMAP(n_neighbors<span class="op">=</span>nn,</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>                              min_dist<span class="op">=</span>md,</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>                              random_state<span class="op">=</span>random_state)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            X_umap <span class="op">=</span> reducer.fit_transform(X)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            axes[i,j].scatter(X_umap[:, <span class="dv">0</span>], X_umap[:, <span class="dv">1</span>],</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>                            c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            axes[i,j].set_title(<span class="ss">f&#39;n_neighbors=</span><span class="sc">{nn}</span><span class="ss">, min_dist=</span><span class="sc">{md}</span><span class="ss">&#39;</span>)</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_umap_params(X, labels, </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                        n_neighbors<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">50</span>], </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                        min_dist<span class="op">=</span>[<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span>],</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                        random_state<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Plot UMAP embeddings with different parameter settings&quot;&quot;&quot;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="bu">len</span>(n_neighbors), <span class="bu">len</span>(min_dist), </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                            figsize<span class="op">=</span>(<span class="dv">5</span><span class="op">*</span><span class="bu">len</span>(min_dist), </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="dv">5</span><span class="op">*</span><span class="bu">len</span>(n_neighbors)))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, nn <span class="kw">in</span> <span class="bu">enumerate</span>(n_neighbors):</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, md <span class="kw">in</span> <span class="bu">enumerate</span>(min_dist):</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>            reducer <span class="op">=</span> umap.UMAP(n_neighbors<span class="op">=</span>nn,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>                              min_dist<span class="op">=</span>md,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>                              random_state<span class="op">=</span>random_state)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>            X_umap <span class="op">=</span> reducer.fit_transform(X)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>            axes[i,j].scatter(X_umap[:, <span class="dv">0</span>], X_umap[:, <span class="dv">1</span>],</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>                            c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>            axes[i,j].set_title(<span class="ss">f&#39;n_neighbors=</span><span class="sc">{nn}</span><span class="ss">, min_dist=</span><span class="sc">{md}</span><span class="ss">&#39;</span>)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
 <p>Unlike t-SNE, UMAP can also be used to learn a reusable transformation. This means it can: 1. Transform new data points without rerunning the entire algorithm 2. Be used as part of a larger machine learning pipeline 3. Support supervised and semi-supervised dimensionality reduction</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of supervised UMAP</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> supervised_umap_example(X_train, y_train, X_test, y_test,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                          random_state<span class="op">=</span><span class="dv">42</span>):</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Demonstrate supervised UMAP&quot;&quot;&quot;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit UMAP with labels</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    reducer <span class="op">=</span> umap.UMAP(n_neighbors<span class="op">=</span><span class="dv">15</span>,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                       min_dist<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                       random_state<span class="op">=</span>random_state)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    reducer.fit(X_train, y<span class="op">=</span>y_train)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Transform test data</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    X_test_umap <span class="op">=</span> reducer.transform(X_test)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot results</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_figsize)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    scatter <span class="op">=</span> ax.scatter(X_test_umap[:, <span class="dv">0</span>], </span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>                        X_test_umap[:, <span class="dv">1</span>],</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>                        c<span class="op">=</span>y_test, </span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>                        cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(scatter)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">&#39;Supervised UMAP Embedding&#39;</span>)</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of supervised UMAP</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> supervised_umap_example(X_train, y_train, X_test, y_test,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                          random_state<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Demonstrate supervised UMAP&quot;&quot;&quot;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit UMAP with labels</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    reducer <span class="op">=</span> umap.UMAP(n_neighbors<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                       min_dist<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                       random_state<span class="op">=</span>random_state)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    reducer.fit(X_train, y<span class="op">=</span>y_train)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Transform test data</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    X_test_umap <span class="op">=</span> reducer.transform(X_test)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot results</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_figsize)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    scatter <span class="op">=</span> ax.scatter(X_test_umap[:, <span class="dv">0</span>], </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>                        X_test_umap[:, <span class="dv">1</span>],</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>                        c<span class="op">=</span>y_test, </span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>                        cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(scatter)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">&#39;Supervised UMAP Embedding&#39;</span>)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
 <h2 id="comparing-dimensionality-reduction-methods">Comparing Dimensionality Reduction Methods</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/dimensionality-reduction-comparison.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/dimensionality-reduction-comparison.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>Different dimensionality reduction methods have different strengths and are suited to different tasks. Here’s a comparison of the main approaches we’ve covered:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_dim_reduction_methods(X, labels, random_state<span class="op">=</span><span class="dv">42</span>):</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compare different dimensionality reduction methods&quot;&quot;&quot;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    fig, ((ax1, ax2), (ax3, ax4)) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                                    figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PCA</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    X_pca <span class="op">=</span> pca.fit_transform(X)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    ax1.scatter(X_pca[:, <span class="dv">0</span>], X_pca[:, <span class="dv">1</span>], </span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">&#39;PCA&#39;</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># MDS</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.manifold <span class="im">import</span> MDS</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    mds <span class="op">=</span> MDS(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span>random_state)</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    X_mds <span class="op">=</span> mds.fit_transform(X)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    ax2.scatter(X_mds[:, <span class="dv">0</span>], X_mds[:, <span class="dv">1</span>], </span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">&#39;MDS&#39;</span>)</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># t-SNE</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span>random_state)</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    ax3.scatter(X_tsne[:, <span class="dv">0</span>], X_tsne[:, <span class="dv">1</span>], </span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    ax3.set_title(<span class="st">&#39;t-SNE&#39;</span>)</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># UMAP</span></span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> umap</span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    reducer <span class="op">=</span> umap.UMAP(random_state<span class="op">=</span>random_state)</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    X_umap <span class="op">=</span> reducer.fit_transform(X)</span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    ax4.scatter(X_umap[:, <span class="dv">0</span>], X_umap[:, <span class="dv">1</span>], </span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    ax4.set_title(<span class="st">&#39;UMAP&#39;</span>)</span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_dim_reduction_methods(X, labels, random_state<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Compare different dimensionality reduction methods&quot;&quot;&quot;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    fig, ((ax1, ax2), (ax3, ax4)) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                                    figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PCA</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    X_pca <span class="op">=</span> pca.fit_transform(X)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    ax1.scatter(X_pca[:, <span class="dv">0</span>], X_pca[:, <span class="dv">1</span>], </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">&#39;PCA&#39;</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># MDS</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.manifold <span class="im">import</span> MDS</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    mds <span class="op">=</span> MDS(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span>random_state)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    X_mds <span class="op">=</span> mds.fit_transform(X)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    ax2.scatter(X_mds[:, <span class="dv">0</span>], X_mds[:, <span class="dv">1</span>], </span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">&#39;MDS&#39;</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># t-SNE</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span>random_state)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    ax3.scatter(X_tsne[:, <span class="dv">0</span>], X_tsne[:, <span class="dv">1</span>], </span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    ax3.set_title(<span class="st">&#39;t-SNE&#39;</span>)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># UMAP</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> umap</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    reducer <span class="op">=</span> umap.UMAP(random_state<span class="op">=</span>random_state)</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>    X_umap <span class="op">=</span> reducer.fit_transform(X)</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>    ax4.scatter(X_umap[:, <span class="dv">0</span>], X_umap[:, <span class="dv">1</span>], </span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>labels, cmap<span class="op">=</span>plt.cm.viridis)</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>    ax4.set_title(<span class="st">&#39;UMAP&#39;</span>)</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code></pre></div>
 <p>Here’s a summary of when to use each method:</p>
 <ol type="1">
 <li><p><strong>PCA</strong>:</p>

@@ -134,72 +134,6 @@
 <aside class="notes">
 Kevin O’Regan’s book, “Why Red Doesn’t Sound Like a Bell” is about the sensiorimotor perspective on feel and ranges from our senses to our consciousness.
 </aside>
-</section>
-<section id="reconstruction-of-the-data" class="slide level2">
-<h2>Reconstruction of the Data</h2>
-<p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
-<p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
-</section>
-<section id="other-data-sets-to-explore" class="slide level2">
-<h2>Other Data Sets to Explore</h2>
-<p>Below there are a few other data sets from <code>pods</code> you might want to explore with PCA. Both of them have <span class="math inline">\(p\)</span>&gt;<span class="math inline">\(n\)</span> so you need to consider how to do the larger eigenvalue probleme efficiently without large demands on computer memory.</p>
-<p>The data is actually quite high dimensional, and solving the eigenvalue problem in the high dimensional space can take some time. At this point we turn to a neat trick, you don’t have to solve the full eigenvalue problem in the <span class="math inline">\(p\times p\)</span> covariance, you can choose instead to solve the related eigenvalue problem in the <span class="math inline">\(n\times n\)</span> space, and in this case <span class="math inline">\(n=200\)</span> which is much smaller than <span class="math inline">\(p\)</span>.</p>
-<p>The original eigenvalue problem has the form <span class="math display">\[
-\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}
-\]</span> But if we premultiply by <span class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span class="math display">\[
-\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
-\]</span> but it turns out that we can write <span class="math display">\[
-\mathbf{U}^\prime = \mathbf{Y}\mathbf{U} \Lambda^{\frac{1}{2}}
-\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span> is an orthorormal matrix because <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} \Lambda^{-\frac{1}{2}}
-\]</span> and since <span class="math inline">\(\mathbf{U}\)</span> diagonalises <span class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span class="math display">\[
-\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \Lambda
-\]</span> then <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \mathbf{I}
-\]</span></p>
-</section>
-<section id="olivetti-faces" class="slide level2">
-<h2>Olivetti Faces</h2>
-<div class="figure">
-<div id="olivetti-faces-data-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-Data set from Olivetti Research Laboratory of faces.
-</aside>
-<p><code>im = np.reshape(Y[1, :].flatten(), (64, 64)).T}</code></p>
-</section>
-<section id="visualizing-the-eigenvectors" class="slide level2">
-<h2>Visualizing the Eigenvectors</h2>
-<div class="figure">
-<div id="dem-olivetti-faces-eigenvectors-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-First 9 eigenvectors of the Olivetti faces data.
-</aside>
-</section>
-<section id="reconstruction" class="slide level2">
-<h2>Reconstruction</h2>
-<div class="figure">
-<div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-Reconstruction from the latent space of the faces data.
-</aside>
-</section>
-<section id="gene-expression" class="slide level2">
-<h2>Gene Expression</h2>
 <!-- SECTION Multi-Dimensional Scaling -->
 </section>
 <section id="multi-dimensional-scaling" class="slide level2">
@@ -251,6 +185,18 @@ Reconstruction from the latent space of the faces data.
 <section id="stress-functions" class="slide level2">
 <h2>Stress Functions</h2>
 </section>
+<section id="gradient-descent-for-stress-minimisation" class="slide level2">
+<h2>Gradient Descent for Stress Minimisation</h2>
+</section>
+<section id="example-gradient-descent-in-action" class="slide level2">
+<h2>Example: Gradient Descent in Action</h2>
+</section>
+<section id="effect-of-momentum" class="slide level2">
+<h2>Effect of Momentum</h2>
+</section>
+<section id="comparison-with-classical-mds" class="slide level2">
+<h2>Comparison with Classical MDS</h2>
+</section>
 <section id="local-vs-global-structure-preservation" class="slide level2">
 <h2>Local vs Global Structure Preservation</h2>
 <div class="figure">
@@ -265,6 +211,10 @@ The short-circuiting problem occurs when points that are close in the ambient sp
 </section>
 <section id="t-sne" class="slide level2">
 <h2>t-SNE</h2>
+<p>, <span class="math display">\[
+where $s_{i,j} = 1$ if two points are linked in the latent space and $q_{i,j}$ is the probability of that link. The latent distances are given by
+\]</span> <em>{i,j} = (</em>{i, :} - <em>{j, :})^</em>{i, :} - _{j, :}). $$}</p>
+<p>= <em>i </em>{j} p_{i,k}  $$}</p>
 <ul>
 <li>Converts distances to probabilities</li>
 <li>Uses t-distribution in low-dimensional space</li>
