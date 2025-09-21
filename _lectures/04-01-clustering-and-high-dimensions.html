@@ -668,57 +668,14 @@ Della Gatta gene expression
 <p>Figure:</p>
 </div>
 </div>
-<h2 id="grid-corpus-vowels-data">Grid Corpus Vowels Data</h2>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/grid-corpus-vowels-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/grid-corpus-vowels-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.grid_corpous_vowels()</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Y&#39;</span>].describe()</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Y&#39;</span>].columns)</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Y&#39;</span>].index)</span></code></pre></div>
-<div class="figure">
-<div id="grid-corpus-vowels-data-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/grid-corpus-vowels-data.svg" width="80%" style=" ">
-</object>
-</div>
-<div id="grid-corpus-vowels-data-magnify" class="magnify" onclick="magnifyFigure(&#39;grid-corpus-vowels-data&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="grid-corpus-vowels-data-caption" class="caption-frame">
-<p>Figure:</p>
-</div>
-</div>
-<p>As normal we include the citation information for the data.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;citation&#39;</span>])</span></code></pre></div>
-<p>And extra information about the data is included, as standard, under the keys <code>info</code> and <code>details</code>.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;info&#39;</span>])</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;details&#39;</span>])</span></code></pre></div>
-<center>
-Grid corpus vowels
-</center>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
-<div class="figure">
-<div id="-figure" class="figure-frame">
-<object class="grid-corpus-vowles-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/grid-corpus-vowles_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
-</object>
-</div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
-<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
-</div>
-<div id="-caption" class="caption-frame">
-<p>Figure:</p>
-</div>
-</div>
 <h2 id="robot-wireless-data">Robot Wireless Data</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/robot-wireless-data.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/robot-wireless-data.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>The robot wireless data is taken from an experiment run by Brian Ferris at University of Washington. It consists of the measurements of WiFi access point signal strengths as Brian walked in a loop. It was published at IJCAI in 2007 <span class="citation" data-cites="Ferris:wifi07">(Ferris et al., 2007)</span>.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>pods.datasets.robot_wireless()</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>pods.datasets.robot_wireless()</span></code></pre></div>
 <p>The ground truth is recorded in the data, the actual loop is given in the plot below.</p>
 <h2 id="robot-wireless-ground-truth">Robot Wireless Ground Truth</h2>
 <div class="figure">
@@ -751,7 +708,7 @@ Grid corpus vowels
 <center>
 Robot wireless navigation
 </center>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="robot-wireless-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared_distance.svg" width="Interpoint squared distance distribution for ." style=" ">
@@ -764,52 +721,31 @@ Robot wireless navigation
 <p>Figure:</p>
 </div>
 </div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create low-rank covariance matrix</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> np.random.randn(<span class="dv">1000</span>, <span class="dv">2</span>)</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>cov_matrix <span class="op">=</span> W <span class="op">@</span> W.T <span class="op">+</span> <span class="fl">1e-2</span> <span class="op">*</span> np.eye(<span class="dv">1000</span>)</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from correlated Gaussian</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.zeros(<span class="dv">1000</span>)</span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.multivariate_normal(mean, cov_matrix, <span class="dv">1000</span>)</span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot first version</span></span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>fig1, ax1 <span class="op">=</span> plot_squared_distances(Y, <span class="st">&#39;Correlated Gaussian (1000D)&#39;</span>)</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(figure<span class="op">=</span><span class="st">&#39;correlated-gaussian-distances-1000.svg&#39;</span>, </span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>                  directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span>
-<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize data to have variance 1 for each dimension</span></span>
-<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>varY <span class="op">=</span> np.var(Y, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>stdY <span class="op">=</span> np.sqrt(varY)</span>
-<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>Y_normalized <span class="op">=</span> Y <span class="op">/</span> stdY</span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute distances</span></span>
-<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>distances <span class="op">=</span> pdist(Y_normalized, metric<span class="op">=</span><span class="st">&#39;sqeuclidean&#39;</span>)</span>
-<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> distances[distances <span class="op">&gt;</span> <span class="fl">1e-10</span>]  <span class="co"># Remove very small distances</span></span>
-<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize distances</span></span>
-<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> v <span class="op">/</span> np.mean(v)</span>
-<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create histogram</span></span>
-<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a>fig2, ax2 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_figsize)</span>
-<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a>vals, x <span class="op">=</span> np.histogram(v, bins<span class="op">=</span><span class="dv">50</span>, density<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a>x_centers <span class="op">=</span> (x[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> x[<span class="dv">1</span>:]) <span class="op">/</span> <span class="dv">2</span></span>
-<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a>ax2.bar(x_centers, vals, alpha<span class="op">=</span><span class="fl">0.7</span>, color<span class="op">=</span><span class="st">&#39;blue&#39;</span>, width<span class="op">=</span>x[<span class="dv">1</span>]<span class="op">-</span>x[<span class="dv">0</span>])</span>
-<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical gamma distribution (assuming effective dimension of 2)</span></span>
-<span id="cb59-34"><a href="#cb59-34" aria-hidden="true" tabindex="-1"></a>x_theory <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">100</span>)</span>
-<span id="cb59-35"><a href="#cb59-35" aria-hidden="true" tabindex="-1"></a>gamma_pdf <span class="op">=</span> gamma.pdf(x_theory, W.shape[<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>, scale<span class="op">=</span>W.shape[<span class="dv">1</span>]<span class="op">/</span><span class="dv">4</span>)</span>
-<span id="cb59-36"><a href="#cb59-36" aria-hidden="true" tabindex="-1"></a>ax2.plot(x_theory, gamma_pdf, <span class="st">&#39;k-&#39;</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">&#39;Theoretical (d=2)&#39;</span>)</span>
-<span id="cb59-37"><a href="#cb59-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-38"><a href="#cb59-38" aria-hidden="true" tabindex="-1"></a>ax2.set_xlim([<span class="dv">0</span>, <span class="dv">6</span>])</span>
-<span id="cb59-39"><a href="#cb59-39" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">&#39;squared distance&#39;</span>)</span>
-<span id="cb59-40"><a href="#cb59-40" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">&#39;density&#39;</span>)</span>
-<span id="cb59-41"><a href="#cb59-41" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">&#39;Normalized Correlated Gaussian Distances&#39;</span>)</span>
-<span id="cb59-42"><a href="#cb59-42" aria-hidden="true" tabindex="-1"></a>ax2.legend()</span>
-<span id="cb59-43"><a href="#cb59-43" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb59-44"><a href="#cb59-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-45"><a href="#cb59-45" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(filename<span class="op">=</span><span class="st">&#39;correlated-gaussian-distances2.svg&#39;</span>, </span>
-<span id="cb59-46"><a href="#cb59-46" aria-hidden="true" tabindex="-1"></a>                  directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>```{<span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>```{.python}</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create low-rank covariance matrix</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">22</span>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> np.random.randn(<span class="dv">1000</span>, <span class="dv">2</span>)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>cov_matrix <span class="op">=</span> W <span class="op">@</span> W.T <span class="op">+</span> <span class="fl">1e-2</span> <span class="op">*</span> np.eye(<span class="dv">1000</span>)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from correlated Gaussian</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.zeros(<span class="dv">1000</span>)</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.multivariate_normal(mean, cov_matrix, <span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, squareform</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> gamma</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize data to have variance 1 for each dimension</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>varY <span class="op">=</span> np.var(Y, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>stdY <span class="op">=</span> np.sqrt(varY)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>Y_normalized <span class="op">=</span> Y <span class="op">/</span> stdY</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute distances</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>distances <span class="op">=</span> pdist(Y_normalized, metric<span class="op">=</span><span class="st">&#39;sqeuclidean&#39;</span>)</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> distances[distances <span class="op">&gt;</span> <span class="fl">1e-10</span>]  <span class="co"># Remove very small distances</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize distances</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> v <span class="op">/</span> np.mean(v)</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances2.svg" width="40%" style=" ">
@@ -864,7 +800,7 @@ Robot wireless navigation
 <h2 id="simple-model-of-digit">Simple Model of Digit</h2>
 <p>So, an independent pixel model for this digit doesn’t seem sensible. The total space is enormous, and yet the space occupied by the type of data we’re interested in is relatively small.</p>
 <p>Consider a different type of model. One where we take a prototype six and we rotate it left and right to create new data.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install scikit<span class="op">-</span>image</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install scikit<span class="op">-</span>image</span></code></pre></div>
 <div class="figure">
 <div id="dem-six-rotate-figure" class="figure-frame">
 <table>
@@ -930,18 +866,18 @@ Robot wireless navigation
 <li>Distances between points become constant</li>
 </ol>
 <p>Let’s explore these effects with some experiments.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate high-dimensional Gaussian data</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">1000</span>  <span class="co"># dimensions</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span>   <span class="co"># number of points</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.normal(size<span class="op">=</span>(n, d))</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y, title<span class="op">=</span><span class="ss">f&#39;Distance Distribution for </span><span class="sc">{d}</span><span class="ss">-D Gaussian Data&#39;</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;high-d-distances.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate high-dimensional Gaussian data</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">1000</span>  <span class="co"># dimensions</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span>   <span class="co"># number of points</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.normal(size<span class="op">=</span>(n, d))</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y, title<span class="op">=</span><span class="ss">f&#39;Distance Distribution for </span><span class="sc">{d}</span><span class="ss">-D Gaussian Data&#39;</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;high-d-distances.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="high-d-distances-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/high-d-distances.svg" width="80%" style=" ">
@@ -957,16 +893,16 @@ Robot wireless navigation
 <p>This plot shows the distribution of pairwise distances between points in our high-dimensional Gaussian data. The red line shows the theoretical prediction - a gamma distribution with shape parameter d/2 and scale 2/d. The close match between theory and practice demonstrates how in high dimensions, distances between random points become highly concentrated around a particular value.</p>
 <h2 id="structured-high-dimensional-data">Structured High Dimensional Data</h2>
 <p>Now let’s look at what happens when we introduce structure into our high-dimensional data. We’ll create data that actually lies in a lower-dimensional space, but embedded in high dimensions.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data that lies on a 2D manifold embedded in 1000D</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> np.random.normal(size<span class="op">=</span>(d, <span class="dv">2</span>))  <span class="co"># 2D latent directions</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>latent <span class="op">=</span> np.random.normal(size<span class="op">=</span>(n, <span class="dv">2</span>))  <span class="co"># 2D latent points</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>Y_structured <span class="op">=</span> latent <span class="op">@</span> W.T  <span class="co"># Project to high dimensions</span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y_structured, </span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>                         title<span class="op">=</span><span class="st">&#39;Distance Distribution for Structured High-D Data&#39;</span>, </span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>                         ax<span class="op">=</span>ax)</span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;structured-high-d-distances.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data that lies on a 2D manifold embedded in 1000D</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> np.random.normal(size<span class="op">=</span>(d, <span class="dv">2</span>))  <span class="co"># 2D latent directions</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>latent <span class="op">=</span> np.random.normal(size<span class="op">=</span>(n, <span class="dv">2</span>))  <span class="co"># 2D latent points</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>Y_structured <span class="op">=</span> latent <span class="op">@</span> W.T  <span class="co"># Project to high dimensions</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y_structured, </span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>                         title<span class="op">=</span><span class="st">&#39;Distance Distribution for Structured High-D Data&#39;</span>, </span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>                         ax<span class="op">=</span>ax)</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;structured-high-d-distances.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="structured-high-d-distances-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/structured-high-d-distances.svg" width="80%" style=" ">
@@ -988,24 +924,24 @@ Robot wireless navigation
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/high-dimensional-data-real.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/high-dimensional-data-real.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We’ve seen how high-dimensional random data behaves in a very specific way, with highly concentrated distance distributions. Now let’s examine some real datasets to see how they differ.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
 <p>First let’s look at a motion capture dataset, which despite having high dimension, is constrained by the physics of human movement.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.osu_run1()</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y, title<span class="op">=</span><span class="st">&#39;Distance Distribution for Motion Capture Data&#39;</span>, ax<span class="op">=</span>ax)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.osu_run1()</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y, title<span class="op">=</span><span class="st">&#39;Distance Distribution for Motion Capture Data&#39;</span>, ax<span class="op">=</span>ax)</span></code></pre></div>
 <p>Notice how the distance distribution is much more spread out than we would expect for random high-dimensional data. This suggests that the motion capture data has much lower intrinsic dimensionality than its ambient dimension, due to the physical constraints of human movement.</p>
 <h2 id="oil-flow-data-1">Oil Flow Data</h2>
 <p>Now let’s look at the oil flow dataset, which contains measurements from gamma densitometry sensors.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.oil()</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y, title<span class="op">=</span><span class="st">&#39;Distance Distribution for Oil Flow Data&#39;</span>, ax<span class="op">=</span>ax)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.oil()</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;X&#39;</span>]</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>plot.distance_distribution(Y, title<span class="op">=</span><span class="st">&#39;Distance Distribution for Oil Flow Data&#39;</span>, ax<span class="op">=</span>ax)</span></code></pre></div>
 <p>Again we see a deviation from what we would expect for random high-dimensional data. The oil flow data shows clear structure in its distance distribution, reflecting the physical constraints of fluid dynamics that govern the system.</p>
 <h2 id="implications-for-dimensionality-reduction">Implications for Dimensionality Reduction</h2>
 <p>These examples demonstrate why dimensionality reduction can be so effective on real datasets:</p>
@@ -1025,26 +961,26 @@ Robot wireless navigation
 <li><p>Genetic data may record thousands of gene expression levels, but these are often controlled by a much smaller number of regulatory processes.</p></li>
 <li><p>Images contain millions of pixels, but the actual meaningful content often lies on a much lower-dimensional manifold.</p></li>
 </ol>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example showing how a 1D curve appears in 2D</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">100</span>)</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.column_stack([np.cos(t), np.sin(t)])</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(x[:, <span class="dv">0</span>], x[:, <span class="dv">1</span>], <span class="st">&#39;b.&#39;</span>) </span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">&#39;$x_1$&#39;</span>)</span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">&#39;$x_2$&#39;</span>)</span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the latent variable representation </span></span>
-<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].plot(t, np.zeros_like(t), <span class="st">&#39;r.&#39;</span>)</span>
-<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">&#39;$z$&#39;</span>)</span>
-<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_yticks([])</span>
-<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;latent-variable-example.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example showing how a 1D curve appears in 2D</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">100</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.column_stack([np.cos(t), np.sin(t)])</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(x[:, <span class="dv">0</span>], x[:, <span class="dv">1</span>], <span class="st">&#39;b.&#39;</span>) </span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">&#39;$x_1$&#39;</span>)</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">&#39;$x_2$&#39;</span>)</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the latent variable representation </span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].plot(t, np.zeros_like(t), <span class="st">&#39;r.&#39;</span>)</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">&#39;$z$&#39;</span>)</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_yticks([])</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;latent-variable-example.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="latent-variable-example-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/latent-variable-example.svg" width="80%" style=" ">
@@ -1202,26 +1138,26 @@ b_i^2
 <li>How to validate the reduction is capturing important structure</li>
 <li>What preprocessing steps are needed</li>
 </ol>
-<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_data_reconstruction(X, dim_reducer, num_components):</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Visualize reconstruction error vs number of components&quot;&quot;&quot;</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> []</span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    dims <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, num_components<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> d <span class="kw">in</span> dims:</span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>        dim_reducer.set_params(n_components<span class="op">=</span>d)</span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>        X_reduced <span class="op">=</span> dim_reducer.fit_transform(X)</span>
-<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>        X_reconstructed <span class="op">=</span> dim_reducer.inverse_transform(X_reduced)</span>
-<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>        error <span class="op">=</span> np.mean((X <span class="op">-</span> X_reconstructed) <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>        errors.append(error)</span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>    ax.plot(dims, errors, <span class="st">&#39;b-&#39;</span>)</span>
-<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&#39;Number of Components&#39;</span>)</span>
-<span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&#39;Reconstruction Error&#39;</span>)</span>
-<span id="cb70-17"><a href="#cb70-17" aria-hidden="true" tabindex="-1"></a>    ax.set_yscale(<span class="st">&#39;log&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_data_reconstruction(X, dim_reducer, num_components):</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Visualize reconstruction error vs number of components&quot;&quot;&quot;</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> []</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    dims <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, num_components<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> d <span class="kw">in</span> dims:</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>        dim_reducer.set_params(n_components<span class="op">=</span>d)</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>        X_reduced <span class="op">=</span> dim_reducer.fit_transform(X)</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>        X_reconstructed <span class="op">=</span> dim_reducer.inverse_transform(X_reduced)</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>        error <span class="op">=</span> np.mean((X <span class="op">-</span> X_reconstructed) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>        errors.append(error)</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>    ax.plot(dims, errors, <span class="st">&#39;b-&#39;</span>)</span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&#39;Number of Components&#39;</span>)</span>
+<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&#39;Reconstruction Error&#39;</span>)</span>
+<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>    ax.set_yscale(<span class="st">&#39;log&#39;</span>)</span></code></pre></div>
 <p>One common approach for choosing the latent dimensionality is to look at the reconstruction error as a function of the number of components. An “elbow” in this curve often suggests a good tradeoff between complexity and accuracy.</p>
 <p>Before applying dimensionality reduction, it’s usually important to: 1. Center the data by removing the mean 2. Scale features to have unit variance if they’re on different scales 3. Handle missing values appropriately</p>
 <h2 id="when-dimensionality-reduction-fails">When Dimensionality Reduction Fails</h2>
@@ -1234,30 +1170,30 @@ b_i^2
 <li>When the relationship between dimensions is highly nonlinear</li>
 <li>When different parts of the data have different intrinsic dimensionality</li>
 </ol>
-<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot <span class="im">as</span> plot</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <h2 id="the-swiss-roll-example">The Swiss Roll Example</h2>
-<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data that lies on a Swiss roll manifold</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_swiss_roll(n_points<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fl">1.5</span> <span class="op">*</span> np.pi <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.random.rand(n_points))</span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">21</span> <span class="op">*</span> np.random.rand(n_points)</span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> t <span class="op">*</span> np.cos(t)</span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> t <span class="op">*</span> np.sin(t)</span>
-<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.column_stack((x, y, z)), t</span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>X, t <span class="op">=</span> generate_swiss_roll()</span>
-<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
-<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">&#39;3d&#39;</span>)</span>
-<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> ax.scatter(X[:, <span class="dv">0</span>], X[:, <span class="dv">1</span>], X[:, <span class="dv">2</span>], c<span class="op">=</span>t, cmap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
-<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">&#39;$x$&#39;</span>)</span>
-<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">&#39;$y$&#39;</span>) </span>
-<span id="cb72-16"><a href="#cb72-16" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">&#39;$z$&#39;</span>)</span>
-<span id="cb72-17"><a href="#cb72-17" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter)</span>
-<span id="cb72-18"><a href="#cb72-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-19"><a href="#cb72-19" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;swiss-roll.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data that lies on a Swiss roll manifold</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_swiss_roll(n_points<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fl">1.5</span> <span class="op">*</span> np.pi <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.random.rand(n_points))</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">21</span> <span class="op">*</span> np.random.rand(n_points)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> t <span class="op">*</span> np.cos(t)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> t <span class="op">*</span> np.sin(t)</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.column_stack((x, y, z)), t</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>X, t <span class="op">=</span> generate_swiss_roll()</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>plot.big_wide_figsize)</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">&#39;3d&#39;</span>)</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> ax.scatter(X[:, <span class="dv">0</span>], X[:, <span class="dv">1</span>], X[:, <span class="dv">2</span>], c<span class="op">=</span>t, cmap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">&#39;$x$&#39;</span>)</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">&#39;$y$&#39;</span>) </span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">&#39;$z$&#39;</span>)</span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter)</span>
+<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&#39;swiss-roll.svg&#39;</span>, directory<span class="op">=</span><span class="st">&#39;./dimred&#39;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="swiss-roll-example-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/swiss-roll.svg" width="80%" style=" ">
@@ -1284,13 +1220,13 @@ b_i^2
 \mathbf{S}=\frac{1}{n}\sum_{i=1}^n\left(\mathbf{ y}_{i, :}-\boldsymbol{ \mu}\right)\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}\right)^\top
 \]</span></p>
 <p>The modern interpretation focuses on finding a set of orthogonal directions (principal components) along which the data varies the most, but Hotelling’s original formulation was derived from the idea of latent variables. The optimization problem we solve today, which maximizes the variance along each direction while maintaining orthogonality constraints, arises as the solution of the original latent variable formulation <span class="citation" data-cites="Tipping-probpca99">(Tipping and Bishop, 1999a)</span>.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate correlated 2D Gaussian samples</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>num_points <span class="op">=</span> <span class="dv">200</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.8</span>], </span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>                [<span class="fl">1.8</span>, <span class="fl">2.0</span>]])</span>
-<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.multivariate_normal(mean, cov, num_points)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate correlated 2D Gaussian samples</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>num_points <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.8</span>], </span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>                [<span class="fl">1.8</span>, <span class="fl">2.0</span>]])</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.multivariate_normal(mean, cov, num_points)</span></code></pre></div>
 <div class="figure">
 <div id="pca-directions-003-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-003.svg" width="\width" style=" ">
@@ -1352,9 +1288,9 @@ p(\mathbf{Y}|\mathbf{W}, \sigma^2)
 <p>This view helps explain why PPCA works well when the manifold hypothesis holds and the manifold is approximately linear. When the manifold is nonlinear, we need more sophisticated methods like kernel PCA or neural network-based approaches.</p>
 <h2 id="python-implementation-of-probabilistic-pca">Python Implementation of Probabilistic PCA</h2>
 <p>We will now implement this algorithm in python.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ppca_eig</span></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>ppca <span class="op">=</span> ppca_eig</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ppca_eig</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>ppca <span class="op">=</span> ppca_eig</span></code></pre></div>
 <p>In practice we may not wish to compute the eigenvectors of the covariance matrix directly. This is because it requires us to estimate the covariance, which involves a sum of squares term, before estimating the eigenvectors. We can estimate the eigenvectors directly either through <a href="http://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a> or <a href="http://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a>. We saw a similar issue arise when , where we also wished to avoid computation of <span class="math inline">\(\mathbf{Z}^\top\mathbf{Z}\)</span> (or in the case of  <span class="math inline">\(\boldsymbol{\Phi}^\top\boldsymbol{\Phi}\)</span>).</p>
 <h2 id="posterior-for-principal-component-analysis">Posterior for Principal Component Analysis</h2>
 <p>Under the latent variable model justification for principal component analysis, we are normally interested in inferring something about the latent variables given the data. This is the distribution, <span class="math display">\[
@@ -1385,7 +1321,7 @@ p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) \propto p(\mathbf{ y}_{i,
 <p>Now let’s implement the system in code.</p>
 <h3 id="exercise-5">Exercise 5</h3>
 <p>Use the values for <span class="math inline">\(\mathbf{W}\)</span> and <span class="math inline">\(\sigma^2\)</span> you have computed, along with the data set <span class="math inline">\(\mathbf{Y}\)</span> to compute the posterior density over <span class="math inline">\(\mathbf{Z}\)</span>. Write a function of the form</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, W, sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, W, sigma2)</span></code></pre></div>
 <p>where <code>mu_x</code> and <code>C_x</code> are the posterior mean and posterior covariance for the given <span class="math inline">\(\mathbf{Y}\)</span>.</p>
 <p>Don’t forget to subtract the mean of the data <code>Y</code> inside your function before computing the posterior: remember we assumed at the beginning of our analysis that the data had been centred (i.e. the mean was removed).</p>
 <h2 id="numerically-stable-and-efficient-version">Numerically Stable and Efficient Version</h2>
@@ -1410,22 +1346,22 @@ c_i = \frac{\sigma^2}{\sigma^2 + \ell^2_i}
 \]</span> <span class="math display">\[
 \boldsymbol{ \mu}_x = \mathbf{D}\mathbf{U}^\top \mathbf{ y}_{i, :}
 \]</span> where <span class="math inline">\(\mathbf{D}\)</span> is a diagonal matrix with diagonal elements given by <span class="math inline">\(d_{i} = \frac{\ell_i}{\sigma^2 + \ell_i^2}\)</span>.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ppca_svd</span></code></pre></div>
-<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ppca_posterior</span></code></pre></div>
-<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>ppca <span class="op">=</span> ppca_svd</span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> ppca_posterior</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ppca_svd</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ppca_posterior</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>ppca <span class="op">=</span> ppca_svd</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> ppca_posterior</span></code></pre></div>
 <h2 id="scikit-learn-implementation-pca">Scikit-learn implementation PCA</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/oil-flow-sklearn-pca.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/oil-flow-sklearn-pca.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We’ve implemented PCA as part of supporting the learning process, but in practice we can use the <code>scikit-learn</code> implementation. Let’s try it on the oil flow data.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install scikit<span class="op">-</span>learn</span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>pca.fit(X)</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.transform(X)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install scikit<span class="op">-</span>learn</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>pca.fit(X)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.transform(X)</span></code></pre></div>
 <div class="figure">
 <div id="oil-flow-pca-sklearn-figure" class="figure-frame">
 <p></p>
@@ -1442,28 +1378,28 @@ c_i = \frac{\sigma^2}{\sigma^2 + \ell^2_i}
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/mocap-ppca.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/mocap-ppca.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>For our first example we’ll consider some motion capture data of a man breaking into a run. <a href="http://en.wikipedia.org/wiki/Motion_capture">Motion capture data</a> involves capturing a 3-d point cloud to represent a character, often by an underlying skeleton. For this data set, from Ohio State University, we have 54 frame of motion capture, each frame containing 102 values, which are the 3-d locations of 34 different points from the subject’s skeleton.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.osu_run1()</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.osu_run1()</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <p>Once the data is loaded in we can examine the first two principal components as follows,</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
-<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>plt.plot(mu_x[:, <span class="dv">0</span>], mu_x[:, <span class="dv">1</span>], <span class="st">&#39;rx-&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>plt.plot(mu_x[:, <span class="dv">0</span>], mu_x[:, <span class="dv">1</span>], <span class="st">&#39;rx-&#39;</span>)</span></code></pre></div>
 <p>Here because the data is a time course, we have connected points that are neighbouring in time. This highlights the form of the run, which involves 3 paces. This projects in our low dimensional space to 3 loops. We can examin how much residual variance there is in the system by looking at <code>sigma2</code>.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sigma2)</span></code></pre></div>
 <h2 id="robot-navigation-example">Robot Navigation Example</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/robot-wireless-ppca.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/robot-wireless-ppca.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>In the next example we will load in data from a robot navigation problem. The data consists of wireless access point strengths as recorded by a robot performing a loop around the University of Washington’s Computer Science department in Seattle. The robot records all the wireless access points it can cache and stores their signal strength.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.robot_wireless()</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>Y.shape</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.robot_wireless()</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>Y.shape</span></code></pre></div>
 <p>There are 215 observations of 30 different access points. In this case the model is suggesting that the access point signal strength should be linearly dependent on the location in the map. In other words we are expecting the access point strength for the <span class="math inline">\(j\)</span>th access point at robot position <span class="math inline">\(x_{i, :}\)</span> to be represented by <span class="math inline">\(y_{i, j} = \mathbf{ w}_{j, :}^\top \mathbf{ z}_{i, :} + \epsilon_{i,j}\)</span>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y.T, q)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y.T, q)</span></code></pre></div>
 <h1 id="interpretations-of-principal-component-analysis">Interpretations of Principal Component Analysis</h1>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/ppca-interpretations.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/ppca-interpretations.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -1597,9 +1533,9 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 </div>
 <h2 id="reconstruction">Reconstruction</h2>
 <p>We can now attempt to reconstruct a given training point from these eigenvectors. As we mentioned above, the reconstruction is dependent on the value of the latent variable and the weights from the matrix <span class="math inline">\(\mathbf{L}\)</span>. First let’s compute the value of the latent variables for the point we want to construct. Then we’ll use them to compute the weightings of each of the eigenvectors.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>reconstruction_weights <span class="op">=</span> mu_x[display_index, :]<span class="op">*</span>ell</span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruction_weights)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>reconstruction_weights <span class="op">=</span> mu_x[display_index, :]<span class="op">*</span>ell</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruction_weights)</span></code></pre></div>
 <p>This vector of reconstruction weights is applied to the ‘template images’ given by the eigenvectors to give us our reconstruction. Below we weight these templates and combine to form the reconstructed image, and show the comparison to the original image.</p>
 <div class="figure">
 <div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
@@ -1622,18 +1558,18 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 <p>Each of the cells in your body stores your entire genetic code in your DNA, but at any one moment it is only ‘expressing’ a small portion of that code. Your cells are mainly constructed of protein, and these proteins are manufactured by first transcribing the DNA to RNA and then translating the RNA to protein. If the DNA is the cells hard drive, then one role of the RNA is to act like a cache of data that is being read from the hard drive at any one time. Gene expression arrays allow us to measure the quantity of different types of RNA in the cell, effectively analyzing what’s in the cache (although we have to destroy the cell or the tissue to access it). A gene expression experiment often consists of a time course or a series of experiments that characterise the gene expression of cells at any given time.</p>
 <p>We will now load in one of the earliest gene expression data sets from a <a href="http://www.ncbi.nlm.nih.gov/pubmed/9843569">1998 paper by Spellman et al.</a>, it consists of gene expression measurements of over six thousand genes in a range of conditions for brewer’s yeast. The experiment was designed for understanding the cell cycle of the genes. The expectation is that there should be oscillating signals inside the cell.</p>
 <p>First we extract the principal components of the gene expression.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load in data and replace missing values with zero</span></span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>pods.datasets.spellman_yeast_cdc15()</span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>].fillna(<span class="dv">0</span>)</span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
-<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load in data and replace missing values with zero</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>pods.datasets.spellman_yeast_cdc15()</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
 <p>Now, looking through, we find that there is indeed a latent variable that appears to oscilate at approximately the right frequency. The 4th latent dimension (<code>index=3</code>) can be plotted across the time course as follows.</p>
 <p>To reveal an oscillating shape. We can see which genes correspond to this shape by examining the associated column of <span class="math inline">\(\mathbf{U}\)</span>. Let’s augment our data matrix with this score.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>gene_list <span class="op">=</span> Y.T</span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>gene_list[<span class="st">&#39;oscilation&#39;</span>] <span class="op">=</span> np.sqrt(U[:, <span class="dv">3</span>]<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>gene_list.sort(columns<span class="op">=</span><span class="st">&#39;oscilation&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>).index[:<span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>gene_list <span class="op">=</span> Y.T</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>gene_list[<span class="st">&#39;oscilation&#39;</span>] <span class="op">=</span> np.sqrt(U[:, <span class="dv">3</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>gene_list.sort(columns<span class="op">=</span><span class="st">&#39;oscilation&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>).index[:<span class="dv">4</span>]</span></code></pre></div>
 <p>We can look up the first three genes in this list which now ranks the genes according to how strongly they respond to the fourth latent dimension. <a href="http://www.ncbi.nlm.nih.gov/gene/">The NCBI gene database</a> allows us to search for the function of these genes. Looking at the function of the four genes that respond most strongly to the third latent variable they are all genes that encode <a href="http://en.wikipedia.org/wiki/Histone">histone</a> proteins. The histone is thesupport scaffold for the DNA that ensures it folds correctly within the cell creating the nucleosomes. It seems to make sense that production of histone proteins should be strongly correlated with the cell cycle, as when the cell divides it needs to create a large number of histone proteins for creating the duplicated nucleosomes. The relevant links giving the descriptions of each gene given here: <a href="http://www.ncbi.nlm.nih.gov/gene/851810">YDR224C</a>, <a href="http://www.ncbi.nlm.nih.gov/gene/851811">YDR225W</a>, <a href="http://www.ncbi.nlm.nih.gov/gene/852283">YBL003C</a> and <a href="http://www.ncbi.nlm.nih.gov/gene/855701">YNL030W</a>.</p>
 <h2 id="summary-and-key-points">Summary and Key Points</h2>
 <p>We’ve covered several key ideas about dimensionality reduction:</p>
