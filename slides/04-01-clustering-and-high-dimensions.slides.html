@@ -200,7 +200,7 @@ E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \bol
 <script>
 showDivs(1, 'kmeans-clustering');
 </script>
-<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="1" max="26" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering');">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering');">❯</button></p>
+<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="1" max="12" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering');">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering');">❯</button></p>
 <div class="kmeans-clustering" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_001.svg" width="40%" style=" ">
 </object>
@@ -247,10 +247,6 @@ showDivs(1, 'kmeans-clustering');
 </div>
 <div class="kmeans-clustering" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_012.svg" width="40%" style=" ">
-</object>
-</div>
-<div class="kmeans-clustering" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_013.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
@@ -415,35 +411,36 @@ Two dimensional data sets. Complex structure not a problem for mixtures of Gauss
 </section>
 <section id="the-gaussian-egg" class="slide level2">
 <h2>The Gaussian Egg</h2>
-<p>{* See also Exercise 1.4 in <span class="citation" data-cites="Bishop:book95">Bishop (1995)</span></p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-
-</div>
-</div>
-<aside class="notes">
-</aside>
-<div class="figure">
-<div id="-figure" class="figure-frame">
-<object class="svgplot " data=".svg" width="40%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-volume-1D.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
 Volumes associated with the one dimensional Gaussian egg. Here the yolk has 65.8%, the green has 4.8% and the white has 29.4% of the mass.
 </aside>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="svgplot " data=".svg" width="40%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-volume-2D.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
 Volumes associated with the regions in the two dimensional Gaussian egg. The yolk contains 59.4%, the green contains 7.4% and the white 33.2%.
 </aside>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="svgplot " data=".svg" width="40%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-volume-13.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
@@ -465,7 +462,7 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 <li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{p}\sum_{k=1}^py_{i,k}^2 \rangle = \sigma^2\)</span></li>
 </ol>
 </section>
-<section id="section" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <ul>
 <li>Square of sample from Gaussian is scaled chi-squared density</li>
@@ -474,7 +471,7 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
   \]</span></li>
 </ul>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <ul>
 <li>Addition of gamma random variables with the same rate is gamma with sum of shape parameters (<span class="math inline">\(y_{i,k}\)</span>s are independent)</li>
@@ -583,7 +580,6 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <li>If dimensions are independent, we expect low variance, Gaussian behavior for the distribution of squared distances.</li>
 </ul>
 <p><strong>Distance distribution for a Gaussian with <span class="math inline">\(p=1000\)</span>, <span class="math inline">\(n=1000\)</span></strong></p>
-<p>{# Generate 1000D Gaussian data np.random.seed(22) Y = np.random.randn(1000, 1000)</p>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 
@@ -747,7 +743,7 @@ Robot wireless navigation
 correlated-gaussian-distances2
 </aside>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <ol type="1">
 <li><p>Gaussian has a specific low rank covariance matrix <span class="math inline">\(\mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\)</span>.</p></li>
@@ -834,7 +830,7 @@ showDivs(1, 'dem-six-rotate');
 </div>
 </div>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="dem-six-mainfold-print-figure" class="figure-frame">
@@ -1426,9 +1422,6 @@ Reconstruction from the latent space of the faces data.
 <section id="references" class="slide level2 unnumbered scrollable">
 <h2 class="unnumbered scrollable">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Bishop:book95" class="csl-entry" role="doc-biblioentry">
-Bishop, C.M., 1995. Neural networks for pattern recognition. Oxford University Press.
-</div>
 <div id="ref-Bishop-oil93" class="csl-entry" role="doc-biblioentry">
 Bishop, C.M., James, G.D., 1993. Analysis of multiphase flows using dual-energy gamma densitometry and neural networks. Nuclear Instruments and Methods in Physics Research A327, 580–593. <a href="https://doi.org/10.1016/0168-9002(93)90728-Z">https://doi.org/10.1016/0168-9002(93)90728-Z</a>
 </div>
