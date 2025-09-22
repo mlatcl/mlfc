@@ -274,7 +274,7 @@ E(\mathbf{M}) = \sum_{i=1}^k \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbo
 <p>This figure shows the means and variances of a mixture of multivariate (two dimensional) Gaussian densities (<span class="citation" data-cites="McLachlan-mix88">McLachlan and Basford (1988)</span>). The fit seems to be a good approximation to the data.</p>
 <p>Models of this type can also be justified by appeals to our intuition. The way I like to think of these mixture models is as a summary of the data by a series of prototypes (represented by the means of the Gaussian components of the mixture density). These prototypes are subject to distortions. The density associated with each component represents the range of distortions that the data can undergo. In the case of the mixture of Gaussians, the distortions are of the form of adding zero mean, Gaussian distributed, random noise with a particular covariance matrix.</p>
 <h2 id="mixtures-of-gaussians">Mixtures of Gaussians</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_figsize)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>num_centres <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>num_data <span class="op">=</span> <span class="dv">200</span></span>
@@ -301,7 +301,7 @@ E(\mathbf{M}) = \sum_{i=1}^k \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbo
 <span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>mlai.write_figure(<span class="st">&quot;artificial-mog-2.svg&quot;</span>, directory<span class="op">=</span><span class="st">&quot;./dimred/&quot;</span>)</span></code></pre></div>
 <div class="figure">
 <div id="artificial-mog-1-no-ovals-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-1.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-1.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="artificial-mog-1-no-ovals-magnify" class="magnify" onclick="magnifyFigure(&#39;artificial-mog-1-no-ovals&#39;)">
@@ -313,7 +313,7 @@ E(\mathbf{M}) = \sum_{i=1}^k \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbo
 </div>
 <div class="figure">
 <div id="artificial-mog-2-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-2.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-2.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="artificial-mog-2-magnify" class="magnify" onclick="magnifyFigure(&#39;artificial-mog-2&#39;)">
