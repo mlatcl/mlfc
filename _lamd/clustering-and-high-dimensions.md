@@ -32,7 +32,6 @@ the objective function) in this session we look at latent variables.}
 
 \include{_dimred/includes/thinking-in-high-dimensions.md}
 \include{_datasets/includes/dimred-example-datasets.md}
-\include{_dimred/includes/high-dimensional-data.md}
 
 \subsection{Summary and Key Points}
 
