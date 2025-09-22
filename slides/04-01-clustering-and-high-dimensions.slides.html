@@ -267,32 +267,122 @@ showDivs(1, 'kmeans-clustering');
 <section id="linkage-criteria" class="slide level2">
 <h2>Linkage Criteria</h2>
 <ul>
-<li><strong>Single linkage</strong>: Distance between closest points in clusters</li>
-<li><strong>Complete linkage</strong>: Distance between farthest points in clusters<br />
+<li><em>Single linkage</em>: Distance between closest points in clusters</li>
+<li><em>Complete linkage</em>: Distance between farthest points in clusters<br />
 </li>
-<li><strong>Average linkage</strong>: Average distance between all point pairs</li>
-<li><strong>Ward linkage</strong>: Minimizes within-cluster variance increase</li>
+<li><em>Average linkage</em>: Average distance between all point pairs</li>
+<li><em>Ward linkage</em>: Minimises within-cluster variance increase</li>
+</ul>
+</section>
+<section id="wards-criterion" class="slide level2">
+<h2>Ward’s Criterion</h2>
+<ul>
+<li><p>Ward’s method minimizes the increase in within-cluster variance</p></li>
+<li><p>Mathematical formulation: <span class="math inline">\(\Delta = \frac{n_i n_j}{n_i + n_j} \|\mathbf{c}_i - \mathbf{c}_j\|^2\)</span></p></li>
+<li><p>Where <span class="math inline">\(\mathbf{c}_i, \mathbf{c}_j\)</span> are cluster centroids and <span class="math inline">\(n_i, n_j\)</span> are cluster sizes</p></li>
+<li><p>Creates compact, roughly spherical clusters</p></li>
+<li><p>Particularly effective for data with clear cluster structure</p></li>
+<li><p><strong>Why Ward’s works well:</strong></p>
+<ul>
+<li>Minimises information loss during merging</li>
+<li>Creates clusters with minimal internal variance</li>
+<li>Produces balanced cluster sizes</li>
+<li>Mathematically optimal for spherical clusters</li>
+</ul></li>
+</ul>
+</section>
+<section id="mathematical-derivation" class="slide level2">
+<h2>Mathematical Derivation</h2>
+<ul>
+<li><em>Within-cluster sum of squares (WCSS):</em>
+<ul>
+<li><span class="math inline">\(WCSS = \sum_{i=1}^k \sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \mathbf{c}_i\|^2\)</span></li>
+</ul></li>
+<li><em>Ward’s criterion:</em> Minimise increase in WCSS when merging</li>
+<li>This is the same criterion as used for objective in <span class="math inline">\(k\)</span>-means</li>
+<li><strong>Key insight:</strong> For spherical clusters, this is equivalent to minimising centroid distance weighted by cluster sizes</li>
+</ul>
+</section>
+<section id="mathematical-derivation-of-ward-distance" class="slide level2">
+<h2>Mathematical Derivation of Ward Distance</h2>
+<ul>
+<li>Start with two clusters <span class="math inline">\(C_i\)</span> and <span class="math inline">\(C_j\)</span> with centroids <span class="math inline">\(\mathbf{c}_i, \mathbf{c}_j\)</span></li>
+<li>After merging: new centroid <span class="math display">\[
+\mathbf{c}_{ij} = \frac{n_i \mathbf{c}_i + n_j \mathbf{c}_j}{n_i + n_j}
+\]</span></li>
+<li>Increase in WCSS: <span class="math display">\[
+\Delta = \frac{n_i n_j}{n_i + n_j} \|\mathbf{c}_i - \mathbf{c}_j\|^2
+\]</span></li>
+</ul>
+</section>
+<section id="mathematical-derivation---ii" class="slide level2">
+<h2>Mathematical Derivation - II</h2>
+<ul>
+<li><em>Step 1:</em> Original WCSS for separate clusters <span class="math display">\[
+WCSS_{original} = \sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \mathbf{c}_i\|^2 + \sum_{\mathbf{x} \in C_j} \|\mathbf{x} - \mathbf{c}_j\|^2
+\]</span></li>
+<li><em>Step 2:</em> New WCSS after merging <span class="math display">\[
+WCSS_{new} = \sum_{\mathbf{x} \in C_i \cup C_j} \|\mathbf{x} - \mathbf{c}_{ij}\|^2
+\]</span></li>
+<li><em>Step 3:</em> Increase in WCSS <span class="math display">\[
+\Delta = WCSS_{new} - WCSS_{original}
+\]</span></li>
+</ul>
+</section>
+<section id="mathematical-derivation---iii" class="slide level2">
+<h2>Mathematical Derivation - III</h2>
+<ul>
+<li><em>Expanding the new WCSS:</em> <span class="math display">\[
+WCSS_{new} = \sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \mathbf{c}_{ij}\|^2 + \sum_{\mathbf{x} \in C_j} \|\mathbf{x} - \mathbf{c}_{ij}\|^2
+\]</span></li>
+<li><strong>Key identity:</strong> <span class="math display">\[
+\|\mathbf{x} - \mathbf{c}_{ij}\|^2 = \|\mathbf{x} - \mathbf{c}_i\|^2 + \|\mathbf{c}_i - \mathbf{c}_{ij}\|^2 + 2(\mathbf{x} - \mathbf{c}_i)^T(\mathbf{c}_i - \mathbf{c}_{ij})\]</span></li>
+</ul>
+</section>
+<section id="mathematical-derivation---iv" class="slide level2">
+<h2>Mathematical Derivation - IV</h2>
+<ul>
+<li><em>After simplification:</em> <span class="math display">\[
+WCSS_{new} = WCSS_{original} + n_i \|\mathbf{c}_i - \mathbf{c}_{ij}\|^2 + n_j \|\mathbf{c}_j - \mathbf{c}_{ij}\|^2
+\]</span></li>
+<li><em>Substituting the centroid formula:</em> <span class="math display">\[
+\mathbf{c}_{ij} = \frac{n_i \mathbf{c}_i + n_j \mathbf{c}_j}{n_i + n_j}
+\]</span></li>
+<li><strong>Final result:</strong> <span class="math display">\[
+\Delta = \frac{n_i n_j}{n_i + n_j} \|\mathbf{c}_i - \mathbf{c}_j\|^2
+\]</span></li>
+</ul>
+</section>
+<section id="local-optimality" class="slide level2">
+<h2>Local Optimality</h2>
+<ul>
+<li><em>Why this works well for spherical clusters:</em>
+<ul>
+<li>Spherical clusters have minimal WCSS for given number of points</li>
+<li>Ward’s method makes <em>locally</em> optimal choices at each merge step</li>
+<li>The weighting <span class="math inline">\(\frac{n_i n_j}{n_i + n_j}\)</span> prevents premature merging of large clusters</li>
+</ul></li>
 </ul>
 </section>
 <section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
 <ul>
-<li><strong>Step 1</strong>: Start with n clusters (one per point)</li>
-<li><strong>Step 2</strong>: Compute distance matrix between all clusters</li>
-<li><strong>Step 3</strong>: Find and merge the two closest clusters</li>
-<li><strong>Step 4</strong>: Update distance matrix</li>
-<li><strong>Step 5</strong>: Repeat until one cluster remains</li>
+<li><em>Step 1</em>: Start with <span class="math inline">\(n\)</span> clusters (one per point)</li>
+<li><em>Step 2</em>: Compute distance matrix between all clusters</li>
+<li><em>Step 3</em>: Find and merge the two closest clusters</li>
+<li><em>Step 4</em>: Update distance matrix</li>
+<li><em>Step 5</em>: Repeat until one cluster remains</li>
 </ul>
 <div class="figure">
 <div id="hierarchical-clustering-figure" class="figure-frame">
 <table>
 <tr>
 <td width="40%">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering.svg" width="100%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering_000.svg" width="100%" style=" ">
 </object>
 </td>
 <td width="40%">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering_dendogram.svg" width="100%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering_001.svg" width="100%" style=" ">
 </object>
 </td>
 </tr>
@@ -300,7 +390,7 @@ showDivs(1, 'kmeans-clustering');
 </div>
 </div>
 <aside class="notes">
-Hierarchical clustering of some artificial data.
+Hierarchical clustering of some artificial data. On the left we have an artificially generated data set containing three clusters. On the right we can see the dendogram formed by clustering using Ward’s criterion.
 </aside>
 </section>
 <section id="oil-flow-data" class="slide level2">
@@ -355,13 +445,6 @@ Hierarchical clustering applied to oil flow data. The dendrogram shows how diffe
 <li>Learns abstract rules</li>
 <li>Builds causal theories</li>
 </ul></li>
-</ul>
-</section>
-<section id="other-clustering-approaches" class="slide level2">
-<h2>Other Clustering Approaches</h2>
-<ul>
-<li>Spectral clustering: Graph-based non-convex clustering</li>
-<li>Dirichlet process: Infinite, non-parametric clustering</li>
 </ul>
 </section>
 <section id="thinking-in-high-dimensions" class="slide level2">

@@ -26,7 +26,10 @@ how we can find paramters by maximizing the likelihood (equivalent to minimizing
 the objective function) in this session we look at latent variables.}
 
 
-\include{_ml/includes/clustering.md}
+\include{_ml/includes/clustering-intro.md}
+\include{_ml/includes/k-means-clustering.md}
+\include{_ml/includes/hierarchical-clustering.md}
+
 \include{_dimred/includes/thinking-in-high-dimensions.md}
 \include{_datasets/includes/dimred-example-datasets.md}
 \include{_dimred/includes/high-dimensional-data.md}
