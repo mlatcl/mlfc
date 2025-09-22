@@ -143,52 +143,40 @@ showDivs(0, 'dem-six-sample');
 </ul>
 <div>
 <script>
-showDivs(1, 'dem-six-rotate');
+showDivs(0, 'dem-six-rotate');
 </script>
-<p><small>Rotate Prototype</small> <input id="range-dem-six-rotate" type="range" min="1" max="6" value="1" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate');">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate');">❯</button></p>
+<p><small>Rotate Prototype</small> <input id="range-dem-six-rotate" type="range" min="0" max="5" value="0" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate');">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate');">❯</button></p>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate001.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate002.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate000.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate003.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate001.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate004.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate002.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate005.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate003.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 <div class="dem-six-rotate" style="text-align:center;">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate006.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate004.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div class="dem-six-rotate" style="text-align:center;">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate005.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
 </div>
-</section>
-<section id="pca-of-rotated-sixes" class="slide level2">
-<h2>PCA of Rotated Sixes</h2>
-<div class="figure">
-<div id="dem-manifold-pca-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_manifold_pca.svg" width="60%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-The rotated sixes projected onto the first two principal components. The data lives on a one-dimensional manifold in the high-dimensional space, forming approximately a circle in the 2D projection.
-</aside>
 </section>
 <section id="interpoint-distances-for-rotated-sixes" class="slide level2">
 <h2>Interpoint Distances for Rotated Sixes</h2>
@@ -201,21 +189,60 @@ The rotated sixes projected onto the first two principal components. The data li
 <aside class="notes">
 Inter-point squared distances for the rotated digits data. Much of the data structure can be seen in the matrix. All points are ordered by angle of rotation. We can see that the distance between two points with similar angle of rotation is small (note in the upper right and lower left corners the low distances associated with 6s rotated by roughly 360 degrees and unrotated 6s).
 </aside>
+<div class="figure">
+<div id="rotated-sixes-squared-distances-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/rotated-sixes_squared-distances.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Hisgogram of squared distances vs theory for the rotated sixes.
+</aside>
+</section>
+<section id="pca-of-rotated-sixes" class="slide level2">
+<h2>PCA of Rotated Sixes</h2>
+<div class="figure">
+<div id="six-manifold-001-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_manifold_001.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The rotated sixes projected onto the first two principal components. The data lives on a one-dimensional manifold in the high-dimensional space, forming approximately a circle in the 2D projection.
+</aside>
+<div class="figure">
+<div id="six-manifold-002-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_manifold_002.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The rotated sixes projected onto the first two principal components as sixes and nines. The six and nine data live on two separate one-dimensional manifolds in the high-dimensional space, forming two arcs from a circle in the 2D projection.
+</aside>
+<div class="figure">
+<div id="six-manifold-002-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_manifold_002.svg" width="60%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The rotated sixes projected onto the first two principal components as sixes and nines. The six and nine data live on two separate one-dimensional manifolds in the high-dimensional space, forming two arcs from a circle in the 2D projection.
+</aside>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="figure">
-<div id="dem-six-mainfold-print-figure" class="figure-frame">
+<div id="six-mainfold-figure" class="figure-frame">
 <table>
 <tr>
 <td width="30%">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_manifold_print001.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_manifold_001.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </td>
 <td width="30%">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_manifold_print002.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_manifold_002.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </td>
 </tr>
