@@ -521,13 +521,9 @@ y_{i,k}-y_{j,k}\sim\mathscr{N}\left(0,2\sigma_{k}^{2}\right)]
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/dimred-example-datasets.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/dimred-example-datasets.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>{<strong>Data sampled from independent Gaussian distribution</strong></p>
-<ul>
-<li>If dimensions are independent, we expect low variance, Gaussian behavior for the distribution of squared distances.</li>
-</ul>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 1000D Gaussian data</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">22</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">24</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.randn(<span class="dv">1000</span>, <span class="dv">1000</span>)</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">

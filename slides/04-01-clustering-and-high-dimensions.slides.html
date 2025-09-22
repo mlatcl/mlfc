@@ -708,7 +708,7 @@ y_{i,k}^2 \sim \mathscr{G}\left(\frac{1}{2},\frac{1}{2\sigma^2}\right)
 <p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
 <p><strong>Expected value</strong>:</p>
 <p><span class="math display">\[
-\langle \sum_{k=1}^dy_{i,k}^2 \rangle = d\sigma^2
+\left\langle\sum_{k=1}^dy_{i,k}^2\right\rangle = d\sigma^2
 \]</span></p>
 </section>
 <section id="mathematics-5" class="slide level2">
@@ -721,8 +721,8 @@ y_{i,k}^2 \sim \mathscr{G}\left(\frac{1}{2},\frac{1}{2\sigma^2}\right)
 <section id="mathematics-6" class="slide level2">
 <h2>Mathematics</h2>
 <p><strong>What is the density of probability mass?</strong></p>
-<p><strong>Expected normalized</strong>: <span class="math display">\[
-\langle \frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \rangle = \sigma^2
+<p><strong>Expected normalised</strong>: <span class="math display">\[
+\frac{1}{d}\left\langle\sum_{k=1}^dy_{i,k}^2\right\rangle = \sigma^2
 \]</span></p>
 </section>
 <section id="distribution-of-mass-against-dimensionality" class="slide level2">
@@ -839,7 +839,7 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <section id="interpoint-distance-analysis-2" class="slide level2">
 <h2>Interpoint Distance Analysis</h2>
 <p><em>Normalised distance</em>: <span class="math display">\[
-\frac{1}{d}\sum_{k=1}^d(\datasScalar_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{d}{4\sigma^2}\right)
+\frac{1}{d}\sum_{k=1}^d(y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{d}{4\sigma^2}\right)
 \]</span></p>
 </section>
 <section id="key-results" class="slide level2">
@@ -879,7 +879,7 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 </section>
 <section id="sanity-check" class="slide level2">
 <h2>Sanity Check</h2>
-<p>{<strong>Data sampled from independent Gaussian distribution</strong></p>
+<p><strong>Data sampled from independent Gaussian distribution</strong></p>
 <ul>
 <li>If dimensions are independent, we expect low variance, Gaussian behavior for the distribution of squared distances.</li>
 </ul>

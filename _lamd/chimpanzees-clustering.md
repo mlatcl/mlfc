@@ -1,6 +1,6 @@
 ---
 title: "Practical 5: Clustering Chimpanzees"
-practical: 2
+practical: 5
 featured_image: slides/diagrams/ml/kmeans-chimpanzee.png
 abstract: >
   In this self-guided practical we showcase a practical example of K-means clustering on Chimpanzee faces. Using a pre-trained classifier to generate a vector encoding of each portrait, we analyse the best parameter selection, and finally, implement K-means clustering.
