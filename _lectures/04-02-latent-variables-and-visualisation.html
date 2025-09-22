@@ -210,10 +210,7 @@ p(\mathbf{ y}=\text{given\,image}) = \pi^{849}(1-\pi)^{3,648 - 849
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Project data onto principal components</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard approach: X = U @ diag(s) gives the projections</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> U <span class="op">@</span> np.diag(s)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the results</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>np.savez(<span class="st">&#39;dem_manifold.npz&#39;</span>, X<span class="op">=</span>X, Y<span class="op">=</span>Y, eigenvalues<span class="op">=</span>eigenvalues, eigenvectors<span class="op">=</span>Vt.T)</span></code></pre></div>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> U <span class="op">@</span> np.diag(s)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_pca_manifold(X, Y, dims, filename, show_every<span class="op">=</span><span class="dv">20</span>, angle_ranges<span class="op">=</span><span class="va">None</span>, colors<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Plot PCA manifold with optional angle range filtering&quot;&quot;&quot;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>plot.big_figsize)</span>
@@ -882,9 +879,9 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 </div>
 <p>Multi-Dimensional Scaling (MDS) is a classical approach to dimensionality reduction that works directly with similarities or proximities between entities. The goal is to find a geometric configuration that preserves these relationships.</p>
 <h2 id="the-mds-objective">The MDS Objective</h2>
-<p>Given <span class="math inline">\(n\)</span> entities and a matrix of proximity relationships between them <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> where <span class="math inline">\(\mathbf{ \MakeUppercase{d}}_{ij}\)</span> is the relationship between entity <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, our task is to find an embedding <span class="math inline">\(\mathbf{Y}= [\mathbf{ y}_1, \ldots, \mathbf{ y}_n]\)</span> such that <span class="math inline">\(\|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2} \approx \delta_{ij}\)</span>.</p>
-<p>In MDS this is formulated as minimizing the Frobenius norm between the given proximity matrix <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> and the one calculated directly from the embedding <span class="math inline">\(\boldsymbol{ \Delta}\)</span> where <span class="math inline">\(\boldsymbol{ \Delta}_{ij} = \|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2}\)</span>:</p>
-<p><span class="math display">\[\hat{\mathbf{Y}} = \argmin_{\mathbf{Y}} \|\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}}\|_F\]</span></p>
+<p>Given <span class="math inline">\(n\)</span> entities and a matrix of proximity relationships between them <span class="math inline">\(\mathbf{ D}\)</span> where <span class="math inline">\(\mathbf{ D}_{ij}\)</span> is the relationship between entity <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, our task is to find an embedding <span class="math inline">\(\mathbf{Y}= [\mathbf{ y}_1, \ldots, \mathbf{ y}_n]\)</span> such that <span class="math inline">\(\|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2} \approx \delta_{ij}\)</span>.</p>
+<p>In MDS this is formulated as minimizing the Frobenius norm between the given proximity matrix <span class="math inline">\(\mathbf{ D}\)</span> and the one calculated directly from the embedding <span class="math inline">\(\boldsymbol{ \Delta}\)</span> where <span class="math inline">\(\boldsymbol{ \Delta}_{ij} = \|\mathbf{ y}_i - \mathbf{ y}_j\|_{L2}\)</span>:</p>
+<p><span class="math display">\[\hat{\mathbf{Y}} = \argmin_{\mathbf{Y}} \|\boldsymbol{ \Delta}- \mathbf{ D}\|_F\]</span></p>
 <h2 id="properties-of-the-frobenius-norm">Properties of the Frobenius Norm</h2>
 <p>The Frobenius norm is the generalization of the Euclidean norm to matrices. The general element-wise norm for matrices <span class="math inline">\(L_{p,q}\)</span> takes the form:</p>
 <p><span class="math display">\[\|\mathbf{W}\|_{p,q} = \left(\sum_{j=1}^n \left(\sum_{i=1}^m |m_{ij}|^p\right)^{\frac{q}{p}}\right)^{\frac{1}{q}}\]</span></p>
@@ -893,18 +890,18 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 <h2 id="mds-solution">MDS Solution</h2>
 <p>Using the properties of similar matrices that we established earlier, if <span class="math inline">\(\mathbf{A}\sim \mathbf{B}\)</span> then <span class="math inline">\(\mathbf{A}^2 \sim \mathbf{B}^2\)</span> and the trace is invariant under similarity. This means that if we diagonalize a matrix through its eigendecomposition, the Frobenius norm is simply the square root of the sum of the eigenvalues.</p>
 <p>Using this, we can rewrite the MDS optimization problem:</p>
-<p><span class="math display">\[\argmin_{\boldsymbol{ \Delta}} \|\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}}\|_F^2 = \argmin_{\boldsymbol{ \Delta}} \text{trace}(\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}})^2\]</span></p>
-<p>Now we will write <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> using its eigendecomposition and also rewrite <span class="math inline">\(\boldsymbol{ \Delta}\)</span> using a similar matrix:</p>
+<p><span class="math display">\[\argmin_{\boldsymbol{ \Delta}} \|\boldsymbol{ \Delta}- \mathbf{ D}\|_F^2 = \argmin_{\boldsymbol{ \Delta}} \text{trace}(\boldsymbol{ \Delta}- \mathbf{ D})^2\]</span></p>
+<p>Now we will write <span class="math inline">\(\mathbf{ D}\)</span> using its eigendecomposition and also rewrite <span class="math inline">\(\boldsymbol{ \Delta}\)</span> using a similar matrix:</p>
 <p><span class="math display">\[\argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top - \mathbf{U}\boldsymbol{ \Lambda}\mathbf{U}^\top)^2\]</span></p>
 <p>Using the fact that the trace is invariant under similarity transform, we can pre and post multiply with the known eigenvectors of the proximity matrix:</p>
 <p><span class="math display">\[\argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{U}^\top(\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top - \mathbf{U}\boldsymbol{ \Lambda}\mathbf{U}^\top)\mathbf{U})^2\]</span> <span class="math display">\[= \argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{U}^\top\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top\mathbf{U}- \boldsymbol{ \Lambda})^2\]</span></p>
 <p>From the above we can see that we have a diagonal matrix <span class="math inline">\(\boldsymbol{ \Lambda}\)</span> that we want to match by choosing <span class="math inline">\(\mathbf{W}\)</span> and <span class="math inline">\(\hat{\boldsymbol{ \Lambda}}\)</span>. This means that as <span class="math inline">\(\hat{\boldsymbol{ \Lambda}}\)</span> is diagonal, the minima will be achieved when <span class="math inline">\(\mathbf{U}^\top\mathbf{W}= \mathbf{I}\)</span>. This leads to:</p>
 <p><span class="math display">\[\argmin_{\mathbf{W}, \hat{\boldsymbol{ \Lambda}}} \text{trace}(\mathbf{U}^\top\mathbf{W}\hat{\boldsymbol{ \Lambda}}\mathbf{W}^\top\mathbf{U}- \boldsymbol{ \Lambda})^2 = \argmin_{\hat{\boldsymbol{ \Lambda}}} \text{trace}(\hat{\boldsymbol{ \Lambda}} - \boldsymbol{ \Lambda})^2\]</span> <span class="math display">\[= \sum_{i=1}^N (\hat{\lambda}_i - \lambda_i)^2\]</span></p>
 <h2 id="rank-constrained-solution">Rank-Constrained Solution</h2>
-<p>To provide a rank <span class="math inline">\(q\)</span> approximation <span class="math inline">\(\boldsymbol{ \Delta}\)</span> to <span class="math inline">\(\mathbf{ \MakeUppercase{d}}\)</span> we should therefore match the largest <span class="math inline">\(q\)</span> eigenvalues and choose <span class="math display">\[
+<p>To provide a rank <span class="math inline">\(q\)</span> approximation <span class="math inline">\(\boldsymbol{ \Delta}\)</span> to <span class="math inline">\(\mathbf{ D}\)</span> we should therefore match the largest <span class="math inline">\(q\)</span> eigenvalues and choose <span class="math display">\[
 \boldsymbol{ \Delta}= \sum_{j=1}^q\lambda_i u_j u_i^\top
 \]</span> where the eigenvalues have been sorted such that <span class="math inline">\(\lambda_i \geq \lambda_j\)</span> when <span class="math inline">\(i &lt; j\)</span>. This leads to the following error of the embedding: <span class="math display">\[
-\|\boldsymbol{ \Delta}- \mathbf{ \MakeUppercase{d}}\|_F = \sqrt{\sum_{i=q+1}^n\lambda_i^2}
+\|\boldsymbol{ \Delta}- \mathbf{ D}\|_F = \sqrt{\sum_{i=q+1}^n\lambda_i^2}
 \]</span></p>
 <h1 id="equivalence-between-mds-and-pca">Equivalence between MDS and PCA</h1>
 <div style="text-align:right">
@@ -1255,7 +1252,7 @@ p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
 <p>t-Distributed Stochastic Neighbor Embedding (t-SNE) is a dimensionality reduction technique that focuses on preserving local structure. It converts distances between points into probabilities and tries to match these probabilities in the low-dimensional space.</p>
 <p>The idea in t-SNE is to convert distances in data space into probabilities. This is done through two stages. First a neighbourhood graph is formed, so each point, <span class="math inline">\(i\)</span>, is related to its <span class="math inline">\(k\)</span> nearest neighbours.</p>
 <p>If the squared distances between two data points are given by <span class="math inline">\(d_{i,j}^2\)</span>, then the probability of point <span class="math inline">\(i\)</span> linking to point <span class="math inline">\(j\)</span> is given by, <span class="math display">\[
-p(r_{i,j} | \mathbf{ \MakeUppercase{d}}) = \pi_{i,j} =  \frac{\exp -\frac{d_{i,j}^2}{2\sigma^2}}{\sum_{k\in \mathscr{N}\left( i \right)}\exp -d_{i,j}}
+p(r_{i,j} | \mathbf{ D}) = \pi_{i,j} =  \frac{\exp -\frac{d_{i,j}^2}{2\sigma^2}}{\sum_{k\in \mathscr{N}\left( i \right)}\exp -d_{i,j}}
 \]</span> where <span class="math inline">\(r_{i,j} = 1\)</span> if the two points are linked, <span class="math inline">\(\pi_{i,j}\)</span> is the probability of that link and the neighbourhood of <span class="math inline">\(i\)</span> is given by <span class="math inline">\(\mathscr{N}(i)\)</span>.</p>
 <p>This is compared with probabilities in <em>latent</em> space which are given by <span class="math display">\[
 p(s_{i,j} | \boldsymbol{ \Delta}) = q_{i,j} = (1 + \delta_{i,j})^(-1),
