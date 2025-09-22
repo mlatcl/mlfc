@@ -784,17 +784,20 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 </section>
 <section id="interpoint-distance-analysis" class="slide level2">
 <h2>Interpoint Distance Analysis</h2>
-<pre><code>For two points $i$ and $j$ in d-dimensional space:
-
-1. *Individual components*: $y_{i,k} \sim \mathcal{N}(0, \sigma_k^2)$ and $y_{j,k} \sim \mathcal{N}(0, \sigma_k^2)$
-2. *Difference*: $y_{i,k} - y_{j,k} \sim \mathcal{N}(0, 2\sigma_k^2)$
-3. *Squared difference*: $(y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{4\sigma_k^2})$</code></pre>
+<p>For two points <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> in d-dimensional space:</p>
+<ol type="1">
+<li><em>Individual components</em>: <span class="math inline">\(y_{i,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span> and <span class="math inline">\(y_{j,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span></li>
+<li><em>Difference</em>: <span class="math inline">\(y_{i,k} - y_{j,k} \sim \mathcal{N}(0, 2\sigma_k^2)\)</span></li>
+<li><em>Squared difference</em>: <span class="math inline">\((y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{4\sigma_k^2})\)</span></li>
+</ol>
 </section>
 <section id="interpoint-distance-analysis-1" class="slide level2">
 <h2>Interpoint Distance Analysis</h2>
 <p>{ For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
-<pre><code>4. *Sum of squared differences*: $\sum_{k=1}^\dataDim (y_{i,k} - \dataScalar_{j,k})^2 \sim \gammaSamp{\frac{\dataDim}{2}}{\frac{1}{4\dataStd^2}}$
-5. *Normalized distance*: $\frac{1}{\dataDim}\sum_{k=1}^\dataDim (\datasScalar_{i,k} - \dataScalar_{j,k})^2 \sim \gammaSamp{\frac{\dataDim}{2}}{\frac{\dataDim}{4\dataStd^2}}$</code></pre>
+<ol start="4" type="1">
+<li><em>Sum of squared differences</em>: <span class="math inline">\(\sum_{k=1}^d(y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{1}{4\sigma^2}\right)\)</span></li>
+<li><em>Normalized distance</em>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^d(\datasScalar_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{d}{4\sigma^2}\right)\)</span></li>
+</ol>
 </section>
 <section id="key-results" class="slide level2">
 <h2>Key Results</h2>
@@ -819,6 +822,11 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <li>In high dimensions if individual dimensions are <em>independent</em> the distributions behave counter intuitively.</li>
 <li>All data sits at one standard deviation from the mean.</li>
 <li>The densities of squared distances can be analytically calculated for the Gaussian case.</li>
+</ul>
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<ul>
 <li>For non-Gaussian  systems we can invoke the central limit theorem.</li>
 <li>Next we will consider example data sets and see how their interpoint distances are distributed.</li>
 </ul>
