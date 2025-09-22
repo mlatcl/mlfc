@@ -29,6 +29,24 @@ reveal: True
 
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
+\include{_dimred/includes/high-dimensional-data.md}
+\include{_dimred/includes/latent-variable-motivation.md}
+\include{_dimred/includes/latent-variables.md}
+
+\include{_dimred/includes/practical-dimensionality-reduction.md}
+\include{_dimred/includes/dimensionality-reduction-failure-modes.md}
+\include{_dimred/includes/high-dimensional-data-real.md}
+\include{_dimred/includes/latent-variables.md}
+\include{_dimred/includes/principal-component-analysis.md}
+
+\include{_dimred/includes/probabilistic-pca.md}
+
+\include{_dimred/includes/mocap-ppca.md}
+\include{_dimred/includes/robot-wireless-ppca.md}
+\include{_dimred/includes/ppca-interpretations.md}
+\include{_dimred/includes/pca-in-practice.md}
+\include{_dimred/includes/ppca-marginal-likelihood.md}
+\include{_dimred/includes/ppca-reconstruction.md}
 \include{_dimred/includes/visualisation-motivation.md}
 
 \include{_dimred/includes/mds-derivation.md}

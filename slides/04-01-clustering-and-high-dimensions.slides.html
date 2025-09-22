@@ -200,7 +200,7 @@ E=\sum_{j=1}^K \sum_{i\ \text{allocated to}\ j}  \left(\mathbf{ y}_{i, :} - \bol
 <script>
 showDivs(1, 'kmeans-clustering');
 </script>
-<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="1" max="12" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering');">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering');">❯</button></p>
+<p><small><span class="math inline">\(k\)</span>-means</small> <input id="range-kmeans-clustering" type="range" min="1" max="22" value="1" onchange="setDivs('kmeans-clustering')" oninput="setDivs('kmeans-clustering')"> <button onclick="plusDivs(-1, 'kmeans-clustering');">❮</button> <button onclick="plusDivs(1, 'kmeans-clustering');">❯</button></p>
 <div class="kmeans-clustering" style="text-align:center;">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_001.svg" width="40%" style=" ">
 </object>
@@ -249,6 +249,46 @@ showDivs(1, 'kmeans-clustering');
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_012.svg" width="40%" style=" ">
 </object>
 </div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_013.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_014.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_015.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_016.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_017.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_018.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_019.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_020.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_021.svg" width="40%" style=" ">
+</object>
+</div>
+<div class="kmeans-clustering" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_022.svg" width="40%" style=" ">
+</object>
+</div>
 </div>
 </section>
 <section id="hierarchical-clustering" class="slide level2">
@@ -277,11 +317,19 @@ showDivs(1, 'kmeans-clustering');
 <section id="wards-criterion" class="slide level2">
 <h2>Ward’s Criterion</h2>
 <ul>
-<li><p>Ward’s method minimizes the increase in within-cluster variance</p></li>
-<li><p>Mathematical formulation: <span class="math inline">\(\Delta = \frac{n_i n_j}{n_i + n_j} \|\mathbf{c}_i - \mathbf{c}_j\|^2\)</span></p></li>
-<li><p>Where <span class="math inline">\(\mathbf{c}_i, \mathbf{c}_j\)</span> are cluster centroids and <span class="math inline">\(n_i, n_j\)</span> are cluster sizes</p></li>
+<li>Ward’s method minimizes the increase in within-cluster variance</li>
+<li>Set every data point as cluster size 1.</li>
+<li>Select as <span class="math display">\[
+\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_j\|^2
+\]</span></li>
+<li>Where <span class="math inline">\(\boldsymbol{ \mu}_i, \boldsymbol{ \mu}_j\)</span> are cluster centroids and <span class="math inline">\(n_i, n_j\)</span> are cluster sizes</li>
+</ul>
+</section>
+<section id="wards-criterion-1" class="slide level2">
+<h2>Ward’s Criterion</h2>
+<ul>
 <li><p>Creates compact, roughly spherical clusters</p></li>
-<li><p>Particularly effective for data with clear cluster structure</p></li>
+<li><p>Effective for data with clear cluster structure</p></li>
 <li><p><strong>Why Ward’s works well:</strong></p>
 <ul>
 <li>Minimises information loss during merging</li>
@@ -294,11 +342,11 @@ showDivs(1, 'kmeans-clustering');
 <section id="mathematical-derivation" class="slide level2">
 <h2>Mathematical Derivation</h2>
 <ul>
-<li><em>Within-cluster sum of squares (WCSS):</em>
+<li><em>Within-cluster sum of squares (<span class="math inline">\(E(\mathbf{M})\)</span>):</em>
 <ul>
-<li><span class="math inline">\(WCSS = \sum_{i=1}^k \sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \mathbf{c}_i\|^2\)</span></li>
+<li><span class="math inline">\(E(\mathbf{M}) = \sum_{i=1}^k \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{ \mu}_i\|^2\)</span></li>
 </ul></li>
-<li><em>Ward’s criterion:</em> Minimise increase in WCSS when merging</li>
+<li><em>Ward’s criterion:</em> Minimise increase in <span class="math inline">\(E(\mathbf{M})\)</span> when merging</li>
 <li>This is the same criterion as used for objective in <span class="math inline">\(k\)</span>-means</li>
 <li><strong>Key insight:</strong> For spherical clusters, this is equivalent to minimising centroid distance weighted by cluster sizes</li>
 </ul>
@@ -306,62 +354,67 @@ showDivs(1, 'kmeans-clustering');
 <section id="mathematical-derivation-of-ward-distance" class="slide level2">
 <h2>Mathematical Derivation of Ward Distance</h2>
 <ul>
-<li>Start with two clusters <span class="math inline">\(C_i\)</span> and <span class="math inline">\(C_j\)</span> with centroids <span class="math inline">\(\mathbf{c}_i, \mathbf{c}_j\)</span></li>
+<li>Start with two clusters <span class="math inline">\(C_i\)</span> and <span class="math inline">\(C_j\)</span> with centroids <span class="math inline">\(\boldsymbol{ \mu}_i, \boldsymbol{ \mu}_j\)</span></li>
 <li>After merging: new centroid <span class="math display">\[
-\mathbf{c}_{ij} = \frac{n_i \mathbf{c}_i + n_j \mathbf{c}_j}{n_i + n_j}
+\boldsymbol{ \mu}_{ij} = \frac{n_i \boldsymbol{ \mu}_i + n_j \boldsymbol{ \mu}_j}{n_i + n_j}
 \]</span></li>
-<li>Increase in WCSS: <span class="math display">\[
-\Delta = \frac{n_i n_j}{n_i + n_j} \|\mathbf{c}_i - \mathbf{c}_j\|^2
+<li>Increase in <span class="math inline">\(E(\mathbf{M})\)</span>: <span class="math display">\[
+\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_j\|^2
 \]</span></li>
 </ul>
 </section>
 <section id="mathematical-derivation---ii" class="slide level2">
 <h2>Mathematical Derivation - II</h2>
 <ul>
-<li><em>Step 1:</em> Original WCSS for separate clusters <span class="math display">\[
-WCSS_{original} = \sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \mathbf{c}_i\|^2 + \sum_{\mathbf{x} \in C_j} \|\mathbf{x} - \mathbf{c}_j\|^2
+<li><em>Step 1:</em> Original <span class="math inline">\(E(\mathbf{M})\)</span> for separate clusters <span class="math display">\[
+E(\mathbf{M})_{\text{original}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{ \mu}_i\|^2 + \sum_{\mathbf{ x}\in C_j} \|\mathbf{ x}- \boldsymbol{ \mu}_j\|^2
 \]</span></li>
-<li><em>Step 2:</em> New WCSS after merging <span class="math display">\[
-WCSS_{new} = \sum_{\mathbf{x} \in C_i \cup C_j} \|\mathbf{x} - \mathbf{c}_{ij}\|^2
+<li><em>Step 2:</em> New <span class="math inline">\(E(\mathbf{M})\)</span> after merging <span class="math display">\[
+E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i \cup C_j} \|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2
 \]</span></li>
-<li><em>Step 3:</em> Increase in WCSS <span class="math display">\[
-\Delta = WCSS_{new} - WCSS_{original}
+<li><em>Step 3:</em> Increase in <span class="math inline">\(E(\mathbf{M})\)</span> <span class="math display">\[
+\Delta_{i,j} = E(\mathbf{M})_{\text{new}} - E(\mathbf{M})_{\text{original}}
 \]</span></li>
 </ul>
 </section>
 <section id="mathematical-derivation---iii" class="slide level2">
 <h2>Mathematical Derivation - III</h2>
 <ul>
-<li><em>Expanding the new WCSS:</em> <span class="math display">\[
-WCSS_{new} = \sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \mathbf{c}_{ij}\|^2 + \sum_{\mathbf{x} \in C_j} \|\mathbf{x} - \mathbf{c}_{ij}\|^2
+<li><em>Expanding the new <span class="math inline">\(E(\mathbf{M})\)</span>:</em> <span class="math display">\[
+E(\mathbf{M})_{\text{new}} = \sum_{\mathbf{ x}\in C_i} \|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2 + \sum_{\mathbf{ x}\in C_j} \|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2
 \]</span></li>
-<li><strong>Key identity:</strong> <span class="math display">\[
-\|\mathbf{x} - \mathbf{c}_{ij}\|^2 = \|\mathbf{x} - \mathbf{c}_i\|^2 + \|\mathbf{c}_i - \mathbf{c}_{ij}\|^2 + 2(\mathbf{x} - \mathbf{c}_i)^T(\mathbf{c}_i - \mathbf{c}_{ij})\]</span></li>
+<li><strong>Key identity</strong>
+<span class="math display">\[\begin{aligned}
+\|\mathbf{ x}- \boldsymbol{ \mu}_{ij}\|^2 = &amp; \|\mathbf{ x}- \boldsymbol{ \mu}_i\|^2 \\ &amp; + \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij}\|^2 \\ &amp; + 2(\mathbf{ x}- \boldsymbol{ \mu}_i)^\top(\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij})
+\end{aligned}\]</span></li>
 </ul>
 </section>
 <section id="mathematical-derivation---iv" class="slide level2">
 <h2>Mathematical Derivation - IV</h2>
 <ul>
-<li><em>After simplification:</em> <span class="math display">\[
-WCSS_{new} = WCSS_{original} + n_i \|\mathbf{c}_i - \mathbf{c}_{ij}\|^2 + n_j \|\mathbf{c}_j - \mathbf{c}_{ij}\|^2
-\]</span></li>
-<li><em>Substituting the centroid formula:</em> <span class="math display">\[
-\mathbf{c}_{ij} = \frac{n_i \mathbf{c}_i + n_j \mathbf{c}_j}{n_i + n_j}
+<li>After simplification
+<span class="math display">\[\begin{aligned}
+E(\mathbf{M})_{\text{new}} = &amp; E(\mathbf{M})_{\text{original}} \\ &amp; + n_i \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_{ij}\|^2 \\ &amp; + n_j \|\boldsymbol{ \mu}_j - \boldsymbol{ \mu}_{ij}\|^2
+\end{aligned}\]</span></li>
+</ul>
+</section>
+<section id="mathematica-derivation---v" class="slide level2">
+<h2>Mathematica Derivation - V</h2>
+<ul>
+<li>Substituting the centroid formula <span class="math display">\[
+\boldsymbol{ \mu}_{ij} = \frac{n_i \boldsymbol{ \mu}_i + n_j \boldsymbol{ \mu}_j}{n_i + n_j}
 \]</span></li>
 <li><strong>Final result:</strong> <span class="math display">\[
-\Delta = \frac{n_i n_j}{n_i + n_j} \|\mathbf{c}_i - \mathbf{c}_j\|^2
+\Delta_{i,j} = \frac{n_i n_j}{n_i + n_j} \|\boldsymbol{ \mu}_i - \boldsymbol{ \mu}_j\|^2
 \]</span></li>
 </ul>
 </section>
 <section id="local-optimality" class="slide level2">
 <h2>Local Optimality</h2>
 <ul>
-<li><em>Why this works well for spherical clusters:</em>
-<ul>
-<li>Spherical clusters have minimal WCSS for given number of points</li>
+<li>Spherical clusters have minimal <span class="math inline">\(E(\mathbf{M})\)</span> for given number of points</li>
 <li>Ward’s method makes <em>locally</em> optimal choices at each merge step</li>
 <li>The weighting <span class="math inline">\(\frac{n_i n_j}{n_i + n_j}\)</span> prevents premature merging of large clusters</li>
-</ul></li>
 </ul>
 </section>
 <section id="algorithm" class="slide level2">
@@ -373,6 +426,9 @@ WCSS_{new} = WCSS_{original} + n_i \|\mathbf{c}_i - \mathbf{c}_{ij}\|^2 + n_j \|
 <li><em>Step 4</em>: Update distance matrix</li>
 <li><em>Step 5</em>: Repeat until one cluster remains</li>
 </ul>
+</section>
+<section id="wards-criterion-on-artificial-data" class="slide level2">
+<h2>Ward’s Criterion on Artificial Data</h2>
 <div class="figure">
 <div id="hierarchical-clustering-figure" class="figure-frame">
 <table>
@@ -382,7 +438,7 @@ WCSS_{new} = WCSS_{original} + n_i \|\mathbf{c}_i - \mathbf{c}_{ij}\|^2 + n_j \|
 </object>
 </td>
 <td width="40%">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering_001.svg" width="100%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/hierarchical_clustering_001.svg" width="100%" style=" ">
 </object>
 </td>
 </tr>
@@ -409,7 +465,7 @@ Visualization of the first two dimensions of the oil flow data from <span class=
 <h2>Hierarchical Clustering of Oil Flow Data</h2>
 <div class="figure">
 <div id="hierarchical-clustering-oil-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/hierarchical-clustering-oil.svg" width="60%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/hierarchical-clustering-oil.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -461,6 +517,9 @@ Hierarchical clustering applied to oil flow data. The dendrogram shows how diffe
 <aside class="notes">
 Two dimensional Gaussian data set.
 </aside>
+</section>
+<section id="mixtures-of-gaussians-1" class="slide level2">
+<h2>Mixtures of Gaussians</h2>
 <div class="figure">
 <div id="artificial-mog-2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/artificial-mog-2.svg" width="40%" style=" ">
@@ -489,14 +548,26 @@ Two dimensional data sets. Complex structure not a problem for mixtures of Gauss
 <li>Let’s consider a Gaussian “egg.”</li>
 </ul>
 </section>
+<section id="distance-from-a-mean" class="slide level2">
+<h2>Distance from a Mean</h2>
+<div class="figure">
+<div id="distance2-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/distance2.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Distance from mean of the density (circle) to a given data point (square).
+</aside>
+</section>
 <section id="dimensionality-greater-than-three" class="slide level2">
 <h2>Dimensionality Greater than Three</h2>
 </section>
 <section id="the-gaussian-egg" class="slide level2">
 <h2>The Gaussian Egg</h2>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
+<section id="d-egg" class="slide level2">
+<h2>1D Egg</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-volume-1D.svg" width="40%" style=" ">
@@ -506,8 +577,11 @@ Two dimensional data sets. Complex structure not a problem for mixtures of Gauss
 <aside class="notes">
 Volumes associated with the one dimensional Gaussian egg. Here the yolk has 65.8%, the green has 4.8% and the white has 29.4% of the mass.
 </aside>
+<center>
+Here the <font color="blue">yolk</font> has 65.8%, the <font color="magenta">green</font> has 4.8% and the white has 29.4%
+</center>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
@@ -518,8 +592,11 @@ Volumes associated with the one dimensional Gaussian egg. Here the yolk has 65.8
 <aside class="notes">
 Volumes associated with the regions in the two dimensional Gaussian egg. The yolk contains 59.4%, the green contains 7.4% and the white 33.2%.
 </aside>
+<center>
+Here the <font color="blue">yolk</font> has 59.4%, the <font color="magenta">green</font> has 7.4% and the white has 33.2%
+</center>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
@@ -530,19 +607,29 @@ Volumes associated with the regions in the two dimensional Gaussian egg. The yol
 <aside class="notes">
 Volumes associated with the regions in the three dimensional Gaussian egg. Here the yolk has 56.1% the green has 9.2% the white has 34.7%.
 </aside>
+<center>
+Here the <font color="blue">yolk</font> has 56.1%, the <font color="magenta">green</font> has 9.2% and the white has 34.7%
+</center>
 </section>
 <section id="mathematics" class="slide level2">
 <h2>Mathematics</h2>
 <p><strong>What is the density of probability mass?</strong></p>
-<p>For a d-dimensional Gaussian distribution:</p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
 <ol type="1">
 <li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathscr{N}\left(0,\sigma^2\right)\)</span></li>
 <li><strong>Squared components</strong>: <span class="math inline">\(y_{i,k}^2 \sim \sigma^2 \chi_1^2\)</span> (scaled chi-squared)</li>
 <li><strong>Gamma distribution</strong>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})\)</span></li>
-<li><strong>Sum of squares</strong>: <span class="math inline">\(\sum_{k=1}^py_{i,k}^2 \sim \text{Gamma}(\frac{p}{2}, \frac{1}{2\sigma^2})\)</span></li>
-<li><strong>Expected value</strong>: <span class="math inline">\(\langle \sum_{k=1}^py_{i,k}^2 \rangle = p\sigma^2\)</span></li>
-<li><strong>Normalized sum</strong>: <span class="math inline">\(\frac{1}{p}\sum_{k=1}^py_{i,k}^2 \sim \text{Gamma}(\frac{p}{2}, \frac{d}{2\sigma^2})\)</span></li>
-<li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{p}\sum_{k=1}^py_{i,k}^2 \rangle = \sigma^2\)</span></li>
+</ol>
+</section>
+<section id="mathematics-1" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<ol start="4" type="1">
+<li><strong>Sum of squares</strong>: <span class="math inline">\(\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})\)</span></li>
+<li><strong>Expected value</strong>: <span class="math inline">\(\langle \sum_{k=1}^dy_{i,k}^2 \rangle = d\sigma^2\)</span></li>
+<li><strong>Normalized sum</strong>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})\)</span></li>
+<li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \rangle = \sigma^2\)</span></li>
 </ol>
 </section>
 <section id="distribution-of-mass-against-dimensionality" class="slide level2">
@@ -553,7 +640,14 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 </section>
 <section id="gamma-density-formula" class="slide level2">
 <h2>Gamma Density Formula</h2>
-<p><span class="math display">\[\mathscr{G}\left(x|a,b\right)=\frac{b^{a}}{\Gamma\left(a\right)}x^{a-1}e^{-bx}\]</span> * Shape parameter: <span class="math inline">\(a\)</span> (controls form) * Rate parameter: <span class="math inline">\(b\)</span> (controls scale) * Gamma function: <span class="math inline">\(\Gamma\left(a\right)=\int_{0}^{\infty}x^{a-1}e^{-x}\text{d}x\)</span></p>
+<center>
+<span class="math display">\[\mathscr{G}\left(x|a,b\right)=\frac{b^{a}}{\Gamma\left(a\right)}x^{a-1}e^{-bx}\]</span>
+</center>
+<ul>
+<li>Shape parameter: <span class="math inline">\(a\)</span> (controls form)</li>
+<li>Rate parameter: <span class="math inline">\(b\)</span> (controls scale)</li>
+<li>Gamma function: <span class="math inline">\(\Gamma\left(a\right)=\int_{0}^{\infty}x^{a-1}e^{-x}\text{d}x\)</span></li>
+</ul>
 </section>
 <section id="gamma-properties" class="slide level2">
 <h2>Gamma Properties</h2>
@@ -566,8 +660,8 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 <section id="special-cases" class="slide level2">
 <h2>Special Cases</h2>
 <ul>
-<li><em>Exponential:</em> <span class="math inline">\(a=1\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\left\langle x\right\rangle_{b}\)</span></li>
-<li><em>Chi-squared (1 df):</em> <span class="math inline">\(a=\frac{1}{2}, b=\frac{1}{2}\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\chi_{1}^{2}\left(x\right)\)</span></li>
+<li>Exponential <span class="math inline">\(a=1\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\left\langle x\right\rangle_{b}\)</span></li>
+<li><span class="math inline">\(\chi^2\)</span> (chi-squared, 1 df) <span class="math inline">\(a=\frac{1}{2}, b=\frac{1}{2}\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\chi_{1}^{2}\left(x\right)\)</span></li>
 </ul>
 </section>
 <section id="other-important-applications" class="slide level2">
@@ -581,10 +675,10 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 <h2>Additive Property</h2>
 <ul>
 <li>If <span class="math display">\[
-  X_k \sim \text{Gamma}(a_k, b)
+  x_k \sim \text{Gamma}(a_k, b)
   \]</span> for <span class="math inline">\(k=1,\ldots,d\)</span></li>
 <li>Then <span class="math display">\[
-  \sum_{k=1}^d X_k \sim \text{Gamma}(\sum_{k=1}^d a_k, b)
+  \sum_{k=1}^dx_k \sim \text{Gamma}(\sum_{k=1}^d a_k, b)
   \]</span></li>
 </ul>
 </section>
@@ -635,17 +729,17 @@ The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to th
 The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to the sum of five standardised normal variables <span class="math inline">\(\sum_{i=1}^5 z^2_i\)</span>.
 </aside>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
+<section id="square-of-sample" class="slide level2">
+<h2>Square of Sample</h2>
 <ul>
 <li>Square of sample from Gaussian is scaled chi-squared density</li>
-<li>Chi squared density is a variant of the gamma density with shape parameter <span class="math inline">\(a=\frac{1}{2}\)</span>, rate parameter <span class="math inline">\(b=\frac{1}{2\sigma^{2}}\)</span>, <span class="math display">\[
+<li><span class="math inline">\(\chi^2\)</span> density is a variant of the gamma <span class="math inline">\(a=\frac{1}{2}\)</span>, <span class="math inline">\(b=\frac{1}{2\sigma^{2}}\)</span>, <span class="math display">\[
   \mathscr{G}\left(x|a,b\right)=\frac{b^{a}}{\Gamma\left(a\right)}x^{a-1}e^{-bx}
   \]</span></li>
 </ul>
 </section>
-<section id="section-4" class="slide level2">
-<h2></h2>
+<section id="distance-distributions" class="slide level2">
+<h2>Distance Distributions</h2>
 <ul>
 <li>Addition of gamma random variables with the same rate is gamma with sum of shape parameters (<span class="math inline">\(y_{i,k}\)</span>s are independent)</li>
 <li>Scaling of gamma density scales the rate parameter</li>
@@ -658,21 +752,12 @@ The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to th
 </ul>
 <div class="figure">
 <div id="dimension-mass-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dimension-mass.svg" width="40%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dimension-mass.svg" width="40%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
 Plot of probability mass versus dimension. Plot shows the volume of density inside 0.95 of a standard deviation (yellow), between 0.95 and 1.05 standard deviations (green), over 1.05 and standard deviations (white).
-</aside>
-<div class="figure">
-<div id="distance2-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/distance2.svg" width="40%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Distance from mean of the density (circle) to a given data point (square).
 </aside>
 </section>
 <section id="looking-at-gaussian-samples" class="slide level2">
@@ -693,37 +778,39 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <section id="interpoint-distances" class="slide level2">
 <h2>Interpoint Distances</h2>
 <ul>
-<li><p>The other effect in high dimensions is all points become equidistant.</p></li>
-<li><p>Can show this for Gaussians with a similar proof to the above:</p>
-<p><strong>Interpoint Distance Analysis:</strong></p>
-<p>For two points <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> in d-dimensional space:</p>
-<ol type="1">
-<li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span> and <span class="math inline">\(y_{j,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span></li>
-<li><strong>Difference</strong>: <span class="math inline">\(y_{i,k} - y_{j,k} \sim \mathcal{N}(0, 2\sigma_k^2)\)</span></li>
-<li><strong>Squared difference</strong>: <span class="math inline">\((y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{4\sigma_k^2})\)</span></li>
-</ol>
-<p>For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
-<ol start="4" type="1">
-<li><strong>Sum of squared differences</strong>: <span class="math inline">\(\sum_{k=1}^p(y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{p}{2},\frac{1}{4\sigma^2}\right)\)</span></li>
-<li><strong>Normalized distance</strong>: <span class="math inline">\(\frac{1}{p}\sum_{k=1}^p(\datasScalar_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{p}{2},\frac{p}{4\sigma^2}\right)\)</span></li>
-</ol>
-<p><strong>Key Results:</strong></p>
+<li>The other effect in high dimensions is all points become equidistant.</li>
+<li>Can show this for Gaussians with a similar proof to the above.</li>
+</ul>
+</section>
+<section id="interpoint-distance-analysis" class="slide level2">
+<h2>Interpoint Distance Analysis</h2>
+<pre><code>For two points $i$ and $j$ in d-dimensional space:
+
+1. *Individual components*: $y_{i,k} \sim \mathcal{N}(0, \sigma_k^2)$ and $y_{j,k} \sim \mathcal{N}(0, \sigma_k^2)$
+2. *Difference*: $y_{i,k} - y_{j,k} \sim \mathcal{N}(0, 2\sigma_k^2)$
+3. *Squared difference*: $(y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{4\sigma_k^2})$</code></pre>
+</section>
+<section id="interpoint-distance-analysis-1" class="slide level2">
+<h2>Interpoint Distance Analysis</h2>
+<p>{ For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
+<pre><code>4. *Sum of squared differences*: $\sum_{k=1}^\dataDim (y_{i,k} - \dataScalar_{j,k})^2 \sim \gammaSamp{\frac{\dataDim}{2}}{\frac{1}{4\dataStd^2}}$
+5. *Normalized distance*: $\frac{1}{\dataDim}\sum_{k=1}^\dataDim (\datasScalar_{i,k} - \dataScalar_{j,k})^2 \sim \gammaSamp{\frac{\dataDim}{2}}{\frac{\dataDim}{4\dataStd^2}}$</code></pre>
+</section>
+<section id="key-results" class="slide level2">
+<h2>Key Results</h2>
 <ul>
 <li>Mean distance: <span class="math inline">\(2\sigma^2\)</span></li>
-<li>Variance: <span class="math inline">\(\frac{8\sigma^2}{p}\)</span> (decreases with dimension!)</li>
-<li>All points become equidistant as <span class="math inline">\(p\to \infty\)</span></li>
-</ul></li>
+<li>Variance: <span class="math inline">\(\frac{8\sigma^2}{d}\)</span> (decreases with dimension!)</li>
+<li>All points become equidistant as <span class="math inline">\(d\to \infty\)</span></li>
 </ul>
 </section>
 <section id="central-limit-theorem-and-non-gaussian-case" class="slide level2">
 <h2>Central Limit Theorem and Non-Gaussian Case</h2>
 <ul>
-<li><p>We can compute the density of squared distance <em>analytically</em> for spherical, independent Gaussian data.</p></li>
-<li><p>More generally, for <em>independent</em> data, the <em>central limit theorem</em> applies.</p>
-<ul>
-<li>The mean squared distance in high dimensional space is the mean of the variances.</li>
-<li>The variance about the mean scales as <span class="math inline">\(p^{-1}\)</span>.</li>
-</ul></li>
+<li><em>Analytic</em> for spherical, independent Gaussian data.</li>
+<li>For <em>independent</em> data, the <em>central limit theorem</em> applies.</li>
+<li>The mean squared distance in high D is the mean of the variances.</li>
+<li>The variance about the mean scales as <span class="math inline">\(d^{-1}\)</span>.</li>
 </ul>
 </section>
 <section id="summary" class="slide level2">
@@ -741,11 +828,13 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 </section>
 <section id="sanity-check" class="slide level2">
 <h2>Sanity Check</h2>
-<p><strong>Data sampled from independent Gaussian distribution</strong></p>
+<p>{<strong>Data sampled from independent Gaussian distribution</strong></p>
 <ul>
 <li>If dimensions are independent, we expect low variance, Gaussian behavior for the distribution of squared distances.</li>
 </ul>
-<p><strong>Distance distribution for a Gaussian with <span class="math inline">\(p=1000\)</span>, <span class="math inline">\(n=1000\)</span></strong></p>
+</section>
+<section id="sanity-check-1" class="slide level2">
+<h2>Sanity Check</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 
@@ -754,14 +843,19 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <aside class="notes">
 A good match betwen theory and the samples for a 1000 dimensional Gaussian distribution.
 </aside>
+<center>
+Distance distribution for a Gaussian with <span class="math inline">\(d=1000\)</span>, <span class="math inline">\(n=1000\)</span> and theory
+</center>
 </section>
-<section id="sanity-check-1" class="slide level2">
+<section id="sanity-check-2" class="slide level2">
 <h2>Sanity Check</h2>
 <p><strong>Same data generation, but fewer data points.</strong></p>
 <ul>
 <li>If dimensions are independent, we expect low variance, Gaussian behaviour for the distribution of squared distances.</li>
 </ul>
-<p>**Distance distribution for a Gaussian with <span class="math inline">\(p=1000\)</span>, </p>
+</section>
+<section id="sanity-check-3" class="slide level2">
+<h2>Sanity Check</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-distances-100.svg" width="40%" style=" ">
@@ -772,8 +866,14 @@ A good match betwen theory and the samples for a 1000 dimensional Gaussian distr
 A good match betwen theory and the samples for a 100 dimensional Gaussian distribution.
 </aside>
 <center>
+Distance distribution for a Gaussian with <span class="math inline">\(d=1000\)</span> and <span class="math inline">\(n=100\)</span>
+</center>
+<center>
 Simulation of oil flow
 </center>
+</section>
+<section id="histogram-for" class="slide level2">
+<h2>Histogram for</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="oil-flow-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
@@ -788,6 +888,9 @@ Simulation of oil flow
 <center>
 Ohio State University motion capture
 </center>
+</section>
+<section id="histogram-for-1" class="slide level2">
+<h2>Histogram for</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="osu-run1-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
@@ -796,29 +899,8 @@ Ohio State University motion capture
 </div>
 <aside class="notes">
 </aside>
-</section>
-<section id="spellman-yeast-cell-cycle-data" class="slide level2">
-<h2>Spellman Yeast Cell Cycle Data</h2>
-<div class="figure">
-<div id="spellman-yeast-data-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//datasets/spellman-yeast-data.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Gene YAR015W from <span class="citation" data-cites="Spellman:yeastcellcy98">Spellman et al. (1998)</span> for the cdc15 Time Course
-</aside>
-<center>
-Spellman yeast cell cycle
-</center>
-<div class="figure">
-<div id="-figure" class="figure-frame">
-<object class="spellman-yeast-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/spellman-yeast_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-</aside>
+<!--include{_datasets/includes/spellman-yeast-data.md}
+includesquareddistance{spellman-yeast}{Spellman yeast cell cycle}{}-->
 </section>
 <section id="della-gatta-gene-data" class="slide level2">
 <h2>Della Gatta Gene Data</h2>
@@ -840,6 +922,9 @@ Gene expression levels over time for a gene from data provided by <span class="c
 <center>
 Della Gatta gene expression
 </center>
+</section>
+<section id="histogram-for-2" class="slide level2">
+<h2>Histogram for</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="della-gatta-gene-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/della-gatta-gene_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
@@ -875,6 +960,9 @@ Output dimension 1 from the robot wireless data. This plot shows signal strength
 <center>
 Robot wireless navigation
 </center>
+</section>
+<section id="histogram-for-3" class="slide level2">
+<h2>Histogram for</h2>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="robot-wireless-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
@@ -892,24 +980,24 @@ Robot wireless navigation
 <ul>
 <li>Somehow the real data seems to have a smaller effective dimension.</li>
 </ul></li>
-<li>Let’s look at another <span class="math inline">\(p=1000\)</span>.</li>
+<li>Let’s look at another <span class="math inline">\(d=1000\)</span>.</li>
 </ul>
 </section>
 <section id="d-gaussian" class="slide level2">
 <h2>1000-D Gaussian</h2>
-<p><strong>Distance distribution for a different Gaussian with <span class="math inline">\(p=1000\)</span></strong></p>
+<p><strong>Distance distribution for a different Gaussian with <span class="math inline">\(d=1000\)</span></strong></p>
 <div class="figure">
 <div id="-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances2.svg" width="40%" style=" ">
 </object>
-<p>Interpoint squared distance distribution for Gaussian with <span class="math inline">\(p=1000\)</span>.</p>
+<p>Interpoint squared distance distribution for Gaussian with <span class="math inline">\(d=1000\)</span>.</p>
 </div>
 </div>
 <aside class="notes">
 correlated-gaussian-distances2
 </aside>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <ol type="1">
 <li><p>Gaussian has a specific low rank covariance matrix <span class="math inline">\(\mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\)</span>.</p></li>
@@ -996,7 +1084,7 @@ showDivs(1, 'dem-six-rotate');
 </div>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <div class="figure">
 <div id="dem-six-mainfold-print-figure" class="figure-frame">
@@ -1035,544 +1123,8 @@ The rotated sixes projected onto the first two principal components of the ‘ro
 </ul></li>
 </ul>
 </section>
-<section id="latent-variables-and-dimensionality-reduction" class="slide level2">
-<h2>Latent Variables and Dimensionality Reduction</h2>
-<ul>
-<li>Real data often has lower intrinsic dimensionality than measurements</li>
-<li>Examples:
-<ul>
-<li>Motion capture: Many coordinates but few degrees of freedom</li>
-<li>Genetic data: Thousands of genes controlled by few regulators</li>
-<li>Images: Millions of pixels but simpler underlying structure</li>
-</ul></li>
-</ul>
-</section>
-<section id="latent-variable-example" class="slide level2">
-<h2>Latent Variable Example</h2>
-<div class="figure">
-<div id="latent-variable-example-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/latent-variable-example.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Data that appears 2-dimensional (left) can be described by a single latent variable <span class="math inline">\(z\)</span> (right) that traces out the curve.
-</aside>
-</section>
-<section id="latent-variable-example-1" class="slide level2">
-<h2>Latent Variable Example</h2>
-<ul>
-<li>Example shows 2D data described by 1D latent variable</li>
-<li>Left: Data in original 2D space</li>
-<li>Right: Same data represented by single latent variable <span class="math inline">\(z\)</span></li>
-<li>Goal: Find these simpler underlying representations</li>
-</ul>
-<!-- SECTION Latent Variables -->
-</section>
-<section id="latent-variables" class="slide level2">
-<h2>Latent Variables</h2>
-<!-- SECTION Your Personality -->
-</section>
-<section id="your-personality" class="slide level2">
-<h2>Your Personality</h2>
-</section>
-<section id="factor-analysis-model" class="slide level2">
-<h2>Factor Analysis Model</h2>
-<p><span class="math display">\[
-\mathbf{ y}= \mathbf{f}(\mathbf{ z}) + \boldsymbol{ \epsilon},
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{f}(\mathbf{ z}) = \mathbf{W}\mathbf{ z}
-\]</span></p>
-</section>
-<section id="closely-related-to-linear-regression" class="slide level2">
-<h2>Closely Related to Linear Regression</h2>
-<p><span class="math display">\[
-\mathbf{f}(\mathbf{ z}) =
-\begin{bmatrix} f_1(\mathbf{ z}) \\ f_2(\mathbf{ z}) \\ \vdots \\
-f_p(\mathbf{ z})\end{bmatrix}
-\]</span></p>
-<p><span class="math display">\[
-f_j(\mathbf{ z}) =
-\mathbf{ w}_{j, :}^\top \mathbf{ z},
-\]</span></p>
-<p><span class="math display">\[
-\epsilon_j \sim \mathscr{N}\left(0,\sigma^2_j\right).
-\]</span></p>
-</section>
-<section id="data-representation" class="slide level2">
-<h2>Data Representation</h2>
-<p><span class="math display">\[
-\mathbf{Y}
-= \begin{bmatrix} \mathbf{ y}_{1, :}^\top \\ \mathbf{ y}_{2, :}^\top \\ \vdots \\
-\mathbf{ y}_{n, :}^\top\end{bmatrix},
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{F} = \mathbf{Z}\mathbf{W}^\top,
-\]</span></p>
-</section>
-<section id="latent-variables-vs-linear-regression" class="slide level2">
-<h2>Latent Variables vs Linear Regression</h2>
-<p><span class="math display">\[
-x_{i,j} \sim
-\mathscr{N}\left(0,1\right),
-\]</span> and we can write the density governing the latent variable associated with a single point as, <span class="math display">\[
-\mathbf{ z}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right).
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{f}_{i, :} =
-\mathbf{f}(\mathbf{ z}_{i, :}) = \mathbf{W}\mathbf{ z}_{i, :} 
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{f}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
-\]</span></p>
-</section>
-<section id="data-distribution" class="slide level2">
-<h2>Data Distribution</h2>
-<p><span class="math display">\[
-\mathbf{ y}_{i, :} = \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\right)
-\]</span></p>
-<p><span class="math display">\[
-\boldsymbol{\Sigma} = \begin{bmatrix}\sigma^2_{1} &amp; 0 &amp; 0 &amp; 0\\
-0 &amp; \sigma^2_{2} &amp; 0 &amp; 0\\
-                                     0 &amp; 0 &amp; \ddots &amp;
-0\\
-                                     0 &amp; 0 &amp; 0 &amp; \sigma^2_p\end{bmatrix}.
-\]</span></p>
-</section>
-<section id="mean-vector" class="slide level2">
-<h2>Mean Vector</h2>
-<p><span class="math display">\[
-\mathbf{ y}_{i, :} = \mathbf{W}\mathbf{ z}_{i, :} +
-\boldsymbol{ \mu}+ \boldsymbol{ \epsilon}_{i, :}
-\]</span></p>
-<p><span class="math display">\[
-\boldsymbol{ \mu}= \frac{1}{n} \sum_{i=1}^n
-\mathbf{ y}_{i, :},
-\]</span> <span class="math inline">\(\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \boldsymbol{\Sigma}\)</span></p>
-<!-- SECTION Principal Component Analysis -->
-</section>
-<section id="principal-component-analysis" class="slide level2">
-<h2>Principal Component Analysis</h2>
-<p><span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span> took <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span> so <span class="math display">\[
-\mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0} \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right).
-\]</span></p>
-</section>
-<section id="degenerate-covariance" class="slide level2">
-<h2>Degenerate Covariance</h2>
-<p><small> <span class="math display">\[
-p(\mathbf{ y}_{i, :}|\mathbf{W}) =
-\lim_{\sigma^2 \rightarrow 0} \frac{1}{(2\pi)^\frac{p}{2}
-|\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}|^{\frac{1}{2}}}
-\exp\left(-\frac{1}{2}\mathbf{ y}_{i, :}\left[\mathbf{W}\mathbf{W}^\top+ \sigma^2
-\mathbf{I}\right]^{-1}\mathbf{ y}_{i, :}\right),
-\]</span></small></p>
-</section>
-<section id="computation-of-the-marginal-likelihood" class="slide level2">
-<h2>Computation of the Marginal Likelihood</h2>
-<p><span class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{W}\mathbf{ z}_{i, :} + \boldsymbol{ \epsilon}_{i, :} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
-\]</span></p>
-</section>
-<section id="linear-latent-variable-model-ii" class="slide level2">
-<h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>)</p>
-<div class="figure">
-<div id="ppca-graph-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/ppca_graph.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-Graphical model representing probabilistic PCA.
-</aside>
-<p><span class="math display">\[p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}\right)\]</span></p>
-</section>
-<section id="linear-latent-variable-model-ii-1" class="slide level2">
-<h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>) <span class="math display">\[
-  p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{C}\right),\quad \mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}
-  \]</span> <span class="math display">\[
-  \log p\left(\mathbf{Y}|\mathbf{W}\right)=-\frac{n}{2}\log\left|\mathbf{C}\right|-\frac{1}{2}\text{tr}\left(\mathbf{C}^{-1}\mathbf{Y}^{\top}\mathbf{Y}\right)+\text{const.}
-  \]</span> If <span class="math inline">\(\mathbf{U}_{q}\)</span> are first <span class="math inline">\(q\)</span> principal eigenvectors of <span class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span> and the corresponding eigenvalues are <span class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <span class="math display">\[
-  \mathbf{W}=\mathbf{U}_{q}\mathbf{L}\mathbf{R}^{\top},\quad\mathbf{L}=\left(\boldsymbol{\Lambda}_{q}-\sigma^{2}\mathbf{I}\right)^{\frac{1}{2}}
-  \]</span> where <span class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation matrix.</p>
-</section>
-<section id="practical-considerations" class="slide level2">
-<h2>Practical Considerations</h2>
-</section>
-<section id="when-dimensionality-reduction-fails" class="slide level2">
-<h2>When Dimensionality Reduction Fails</h2>
-<ul>
-<li>Dimensionality reduction can fail in several key scenarios:
-<ul>
-<li>Truly high dimensional data with no simpler structure</li>
-<li>Highly nonlinear relationships between dimensions</li>
-<li>Varying intrinsic dimensionality across data</li>
-</ul></li>
-</ul>
-</section>
-<section id="the-swiss-roll-example" class="slide level2">
-<h2>The Swiss Roll Example</h2>
-<ul>
-<li>Classic example of nonlinear structure</li>
-<li>2D manifold embedded in 3D</li>
-<li>Linear methods like PCA fail</li>
-<li>Requires nonlinear methods (t-SNE, UMAP)</li>
-</ul>
-<div class="figure">
-<div id="swiss-roll-example-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/swiss-roll.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-The Swiss roll dataset is a classic example of data with nonlinear structure. The color represents the position along the roll, showing how points that are far apart in the original space are actually close in the intrinsic manifold.
-</aside>
-</section>
-<section id="common-failure-modes" class="slide level2">
-<h2>Common Failure Modes</h2>
-<ul>
-<li>Key failure scenarios:
-<ul>
-<li>Linear methods on nonlinear manifolds</li>
-<li>Assuming global structure when only local exists</li>
-<li>Not accounting for noise</li>
-</ul></li>
-</ul>
-</section>
-<section id="high-dimensional-effects-in-real-data" class="slide level2">
-<h2>High Dimensional Effects in Real Data</h2>
-</section>
-<section id="oil-flow-data-1" class="slide level2">
-<h2>Oil Flow Data</h2>
-</section>
-<section id="implications-for-dimensionality-reduction" class="slide level2">
-<h2>Implications for Dimensionality Reduction</h2>
-</section>
-<section id="principal-component-analysis-1" class="slide level2">
-<h2>Principal Component Analysis</h2>
-<ul>
-<li>PCA (<span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span>) is a linear embedding</li>
-<li>Today its presented as:
-<ul>
-<li>Rotate to find ‘directions’ in data with maximal variance</li>
-<li>How do we find these directions?</li>
-</ul></li>
-</ul>
-<p><span class="math display">\[
-\mathbf{S}=\frac{1}{n}\sum_{i=1}^n\left(\mathbf{ y}_{i, :}-\boldsymbol{ \mu}\right)\left(\mathbf{ y}_{i, :} - \boldsymbol{ \mu}\right)^\top
-\]</span></p>
-</section>
-<section id="principal-component-analysis-2" class="slide level2">
-<h2>Principal Component Analysis</h2>
-<ul>
-<li>Find directions in the data, <span class="math inline">\(\mathbf{ z}= \mathbf{U}\mathbf{ y}\)</span>, for which variance is maximized.</li>
-</ul>
-</section>
-<section id="lagrangian" class="slide level2">
-<h2>Lagrangian</h2>
-<ul>
-<li><p>Solution is found via constrained optimisation (which uses <a href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange multipliers</a>): <span class="math display">\[
-L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{u}_{1}+\lambda_{1}\left(1-\mathbf{u}_{1}^{\top}\mathbf{u}_{1}\right)
-\]</span></p></li>
-<li><p>Gradient with respect to <span class="math inline">\(\mathbf{u}_{1}\)</span> <span class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span> rearrange to form <span class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span> Which is known as an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue problem</em></a>.</p></li>
-<li><p>Further directions that are <em>orthogonal</em> to the first can also be shown to be eigenvectors of the covariance.</p></li>
-</ul>
-</section>
-<section id="pca-directions" class="slide level2">
-<h2>PCA directions</h2>
-<div>
-<script>
-showDivs(0, 'pca-directions');
-</script>
-<p><small></small> <input id="range-pca-directions" type="range" min="0" max="3" value="0" onchange="setDivs('pca-directions')" oninput="setDivs('pca-directions')"> <button onclick="plusDivs(-1, 'pca-directions');">❮</button> <button onclick="plusDivs(1, 'pca-directions');">❯</button></p>
-<div class="pca-directions" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-000.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="pca-directions" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-001.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="pca-directions" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-002.svg" width="60%" style=" ">
-</object>
-</div>
-<div class="pca-directions" style="text-align:center;">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/pca-directions-003.svg" width="60%" style=" ">
-</object>
-</div>
-</div>
-<p><em>Maximum variance directions are eigenvectors of the covariance matrix</em></p>
-</section>
-<section id="probabilistic-pca" class="slide level2">
-<h2>Probabilistic PCA</h2>
-<ul>
-<li><p>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>, with a lower dimensional set of latent variables <span class="math inline">\(\mathbf{Z}\)</span>.</p></li>
-<li><p>Assume a linear relationship of the form <span class="math display">\[
-\mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},
-\]</span> where <span class="math display">\[
-\boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
-\]</span></p></li>
-<li><p>PPCA defines a probabilistic model where:</p>
-<ul>
-<li>Data is generated from latent variables through linear transformation</li>
-<li>Gaussian noise is added to the transformed variables</li>
-<li>Latent variables have standard Gaussian prior</li>
-</ul></li>
-<li><p>Maximum likelihood recovers classical PCA</p></li>
-</ul>
-</section>
-<section id="graphical-model-representing-probabilistic-pca" class="slide level2">
-<h2>Graphical model representing probabilistic PCA</h2>
-<div class="figure">
-<div id="ppca-graph-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/ppca_graph.svg" width="40%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Graphical model representing probabilistic PCA.
-</aside>
-<!-- SECTION Probabilistic PCA -->
-</section>
-<section id="probabilistic-pca-1" class="slide level2">
-<h2>Probabilistic PCA</h2>
-<p><span class="math display">\[
-\boldsymbol{\Sigma} = \sigma^2 \mathbf{I}.
-\]</span></p>
-<p><span class="math display">\[
-p(\mathbf{Y}|\mathbf{W}, \sigma^2)
-= \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{W}= \mathbf{U}\mathbf{L} \mathbf{R}^\top
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{S} = \sum_{i=1}^n(\mathbf{ y}_{i, :} - \boldsymbol{ \mu})(\mathbf{ y}_{i,:} - \boldsymbol{ \mu})^\top,
-\]</span></p>
-<p><span class="math display">\[
-\ell_i = \sqrt{\lambda_i - \sigma^2}
-\]</span></p>
-</section>
-<section id="ppca-as-manifold-learning" class="slide level2">
-<h2>PPCA as Manifold Learning</h2>
-</section>
-<section id="posterior-for-principal-component-analysis" class="slide level2">
-<h2>Posterior for Principal Component Analysis</h2>
-<p><span class="math display">\[
-p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :})
-\]</span></p>
-<p><span class="math display">\[
-p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) \propto p(\mathbf{ y}_{i,
-:}|\mathbf{W}, \mathbf{ z}_{i, :}, \sigma^2) p(\mathbf{ z}_{i, :})
-\]</span></p>
-<p><span class="math display">\[
-\log p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) = \log p(\mathbf{ y}_{i, :}|\mathbf{W},
-\mathbf{ z}_{i, :}, \sigma^2) + \log p(\mathbf{ z}_{i, :}) + \text{const}
-\]</span></p>
-<p><span class="math display">\[
-\log p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) =
--\frac{1}{2\sigma^2} (\mathbf{ y}_{i, :} - \mathbf{W}\mathbf{ z}_{i,
-:})^\top(\mathbf{ y}_{i, :} - \mathbf{W}\mathbf{ z}_{i, :}) - \frac{1}{2}
-\mathbf{ z}_{i, :}^\top \mathbf{ z}_{i, :} + \text{const}
-\]</span></p>
-</section>
-<section id="scikit-learn-implementation-pca" class="slide level2">
-<h2>Scikit-learn implementation PCA</h2>
-<div class="figure">
-<div id="oil-flow-pca-sklearn-figure" class="figure-frame">
-<p></p>
-</div>
-</div>
-<aside class="notes">
-PCA of the oil flow data.
-</aside>
-</section>
-<section id="examples-motion-capture-data" class="slide level2">
-<h2>Examples: Motion Capture Data</h2>
-<p>For our first example we’ll consider some motion capture data of a man breaking into a run. <a href="http://en.wikipedia.org/wiki/Motion_capture">Motion capture data</a> involves capturing a 3-d point cloud to represent a character, often by an underlying skeleton. For this data set, from Ohio State University, we have 54 frame of motion capture, each frame containing 102 values, which are the 3-d locations of 34 different points from the subject’s skeleton.</p>
-<p>Once the data is loaded in we can examine the first two principal components as follows,</p>
-<p>Here because the data is a time course, we have connected points that are neighbouring in time. This highlights the form of the run, which involves 3 paces. This projects in our low dimensional space to 3 loops. We can examin how much residual variance there is in the system by looking at <code>sigma2</code>.</p>
-</section>
-<section id="robot-navigation-example" class="slide level2">
-<h2>Robot Navigation Example</h2>
-<ul>
-<li>Example involving 215 observations of 30 access points.</li>
-<li>Infer location of ‘robot’ and accesspoints.</li>
-<li>This is known as SLAM (simulataneous localization and mapping).</li>
-</ul>
-<!-- SECTION Interpretations of Principal Component Analysis -->
-</section>
-<section id="interpretations-of-principal-component-analysis" class="slide level2">
-<h2>Interpretations of Principal Component Analysis</h2>
-</section>
-<section id="relationship-to-matrix-factorization" class="slide level2">
-<h2>Relationship to Matrix Factorization</h2>
-<ul>
-<li><p>PCA is closely related to matrix factorisation.</p></li>
-<li><p>Instead of <span class="math inline">\(\mathbf{Z}\)</span>, <span class="math inline">\(\mathbf{W}\)</span></p></li>
-<li><p>Define Users <span class="math inline">\(\mathbf{U}\)</span> and items <span class="math inline">\(\mathbf{V}\)</span></p></li>
-<li><p>Matrix factorisation: <span class="math display">\[
-f_{i, j} =
-\mathbf{u}_{i, :}^\top \mathbf{v}_{j, :} 
-\]</span> PCA: <span class="math display">\[
-f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :} 
-\]</span></p></li>
-</ul>
-</section>
-<section id="other-interpretations-of-pca-separating-model-and-algorithm" class="slide level2">
-<h2>Other Interpretations of PCA: Separating Model and Algorithm</h2>
-<ul>
-<li>PCA introduced as latent variable model (a model).</li>
-<li>Solution is through an eigenvalue problem (an algorithm).</li>
-<li>This causes some confusion about what PCA is.</li>
-</ul>
-<p><span class="math display">\[
-\mathbf{Y}= \mathbf{V} \boldsymbol{\Lambda} \mathbf{U}^\top
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{Y}^\top\mathbf{Y}=
-\mathbf{U}\boldsymbol{\Lambda}\mathbf{V}^\top\mathbf{V} \boldsymbol{\Lambda}
-\mathbf{U}^\top = \mathbf{U}\boldsymbol{\Lambda}^2 \mathbf{U}^\top
-\]</span></p>
-</section>
-<section id="separating-model-and-algorithm" class="slide level2">
-<h2>Separating Model and Algorithm</h2>
-<ul>
-<li>Separation between <em>model</em> and <em>algorithm</em> is helpful conceptually.</li>
-<li>Even if in practice they conflate (e.g. deep neural networks).</li>
-<li>Sometimes difficult to pull apart.</li>
-<li>Helpful to revisit algorithms with modelling perspective in mind.
-<ul>
-<li>Probabilistic numerics</li>
-</ul></li>
-</ul>
-<!-- SECTION PPCA Marginal Likelihood -->
-</section>
-<section id="ppca-marginal-likelihood" class="slide level2">
-<h2>PPCA Marginal Likelihood</h2>
-<p>We have developed the posterior density over the latent variables given the data and the parameters, and due to symmetries in the underlying prediction function, it has a very similar form to its sister density, the posterior of the weights given the data from Bayesian regression. Two key differences are as follows. If we were to do a Bayesian multiple output regression we would find that the marginal likelihood of the data is independent across the features and correlated across the data, <span class="math display">\[
-p(\mathbf{Y}|\mathbf{Z})
-= \prod_{j=1}^p \mathscr{N}\left(\mathbf{ y}_{:, j}|\mathbf{0},
-\alpha\mathbf{Z}\mathbf{Z}^\top + \sigma^2 \mathbf{I}\right)
-\]</span> where <span class="math inline">\(\mathbf{ y}_{:, j}\)</span> is a column of the data matrix and the independence is across the <em>features</em>, in probabilistic PCA the marginal likelihood has the form, <span class="math display">\[
-p(\mathbf{Y}|\mathbf{W}) = \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i,
-:}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
-\]</span> where <span class="math inline">\(\mathbf{ y}_{i, :}\)</span> is a row of the data matrix <span class="math inline">\(\mathbf{Y}\)</span> and the independence is across the data points.</p>
-<!-- SECTION Computation of the Log Likelihood -->
-</section>
-<section id="computation-of-the-log-likelihood" class="slide level2">
-<h2>Computation of the Log Likelihood</h2>
-<p>The quality of the model can be assessed using the log likelihood of this Gaussian form. <span class="math display">\[
-\log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2} \log \left|
-\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right| -\frac{1}{2}
-\sum_{i=1}^n\mathbf{ y}_{i, :}^\top \left(\mathbf{W}\mathbf{W}^\top + \sigma^2
-\mathbf{I}\right)^{-1} \mathbf{ y}_{i, :} +\text{const}
-\]</span> but this can be computed more rapidly by exploiting the low rank form of the covariance covariance, <span class="math inline">\(\mathbf{C}= \mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\)</span> and the fact that <span class="math inline">\(\mathbf{W}= \mathbf{U}\mathbf{L}\mathbf{R}^\top\)</span>. Specifically, we first use the decomposition of <span class="math inline">\(\mathbf{W}\)</span> to write: <span class="math display">\[
--\frac{n}{2} \log \left| \mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right|
-= -\frac{n}{2} \sum_{i=1}^q \log (\ell_i^2 + \sigma^2) - \frac{n(p-q)}{2}\log
-\sigma^2,
-\]</span> where <span class="math inline">\(\ell_i\)</span> is the <span class="math inline">\(i\)</span>th diagonal element of <span class="math inline">\(\mathbf{L}\)</span>. Next, we use the <a href="http://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury matrix identity</a> which allows us to write the inverse as a quantity which contains another inverse in a smaller matrix: <span class="math display">\[
-(\sigma^2 \mathbf{I}+ \mathbf{W}\mathbf{W}^\top)^{-1} =
-\sigma^{-2}\mathbf{I}-\sigma^{-4}\mathbf{W}{\underbrace{(\mathbf{I}+\sigma^{-2}\mathbf{W}^\top\mathbf{W})}_{\mathbf{C}_x}}^{-1}\mathbf{W}^\top
-\]</span> So, it turns out that the original inversion of the <span class="math inline">\(p \times p\)</span> matrix can be done by forming a quantity which contains the inversion of a <span class="math inline">\(q \times q\)</span> matrix which, moreover, turns out to be the quantity <span class="math inline">\(\mathbf{C}_x\)</span> of the posterior.</p>
-<p>Now, we put everything together to obtain: <span class="math display">\[
-\log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2} \sum_{i=1}^q
-\log (\ell_i^2 + \sigma^2)
-- \frac{n(p-q)}{2}\log \sigma^2 - \frac{1}{2} \text{tr}\left(\mathbf{Y}^\top \left(
-\sigma^{-2}\mathbf{I}-\sigma^{-4}\mathbf{W}\mathbf{C}_x
-\mathbf{W}^\top \right) \mathbf{Y}\right) + \text{const},
-\]</span> where we used the fact that a scalar sum can be written as <span class="math inline">\(\sum_{i=1}^n\mathbf{ y}_{i,:}^\top \mathbf{K}\mathbf{ y}_{i,:} = \text{tr}\left(\mathbf{Y}^\top \mathbf{K}\mathbf{Y}\right)\)</span>, for any matrix <span class="math inline">\(\mathbf{K}\)</span> of appropriate dimensions. We now use the properties of the trace <span class="math inline">\(\text{tr}\left(\mathbf{A}+\mathbf{B}\right)=\text{tr}\left(\mathbf{A}\right)+\text{tr}\left(\mathbf{B}\right)\)</span> and <span class="math inline">\(\text{tr}\left(c \mathbf{A}\right) = c \text{tr}\left(\mathbf{A}\right)\)</span>, where <span class="math inline">\(c\)</span> is a scalar and <span class="math inline">\(\mathbf{A},\mathbf{B}\)</span> matrices of compatible sizes. Therefore, the final log likelihood takes the form: <span class="math display">\[
-\log p(\mathbf{Y}|\mathbf{W}) = -\frac{n}{2}
-\sum_{i=1}^q \log (\ell_i^2 + \sigma^2) - \frac{n(p-q)}{2}\log \sigma^2 -
-\frac{\sigma^{-2}}{2} \text{tr}\left(\mathbf{Y}^\top \mathbf{Y}\right)
-+\frac{\sigma^{-4}}{2} \text{tr}\left(\mathbf{B}\mathbf{C}_x\mathbf{B}^\top\right) +
-\text{const}
-\]</span> where we also defined <span class="math inline">\(\mathbf{B}=\mathbf{Y}^\top\mathbf{W}\)</span>. Finally, notice that <span class="math inline">\(\text{tr}\left(\mathbf{Y}\mathbf{Y}^\top\right)=\text{tr}\left(\mathbf{Y}^\top\mathbf{Y}\right)\)</span> can be computed faster as the sum of all the elements of <span class="math inline">\(\mathbf{Y}\circ\mathbf{Y}\)</span>, where <span class="math inline">\(\circ\)</span> denotes the element-wise (or <a href="http://en.wikipedia.org/wiki/Hadamard_product_(matrices)">Hadamard</a>) product.</p>
-</section>
-<section id="reconstruction-of-the-data" class="slide level2">
-<h2>Reconstruction of the Data</h2>
-<p>Given any posterior projection of a data point, we can replot the original data as a function of the input space.</p>
-<p>We will now try to reconstruct the motion capture figure form some different places in the latent plot.</p>
-</section>
-<section id="other-data-sets-to-explore" class="slide level2">
-<h2>Other Data Sets to Explore</h2>
-<p>Below there are a few other data sets from <code>pods</code> you might want to explore with PCA. Both of them have <span class="math inline">\(p\)</span>&gt;<span class="math inline">\(n\)</span> so you need to consider how to do the larger eigenvalue probleme efficiently without large demands on computer memory.</p>
-<p>The data is actually quite high dimensional, and solving the eigenvalue problem in the high dimensional space can take some time. At this point we turn to a neat trick, you don’t have to solve the full eigenvalue problem in the <span class="math inline">\(p\times p\)</span> covariance, you can choose instead to solve the related eigenvalue problem in the <span class="math inline">\(n\times n\)</span> space, and in this case <span class="math inline">\(n=200\)</span> which is much smaller than <span class="math inline">\(p\)</span>.</p>
-<p>The original eigenvalue problem has the form <span class="math display">\[
-\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{U}\boldsymbol{\Lambda}
-\]</span> But if we premultiply by <span class="math inline">\(\mathbf{Y}\)</span> then we can solve, <span class="math display">\[
-\mathbf{Y}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \mathbf{Y}\mathbf{U}\boldsymbol{\Lambda}
-\]</span> but it turns out that we can write <span class="math display">\[
-\mathbf{U}^\prime = \mathbf{Y}\mathbf{U} \Lambda^{\frac{1}{2}}
-\]</span> where <span class="math inline">\(\mathbf{U}^\prime\)</span> is an orthorormal matrix because <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \Lambda^{-\frac{1}{2}}\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} \Lambda^{-\frac{1}{2}}
-\]</span> and since <span class="math inline">\(\mathbf{U}\)</span> diagonalises <span class="math inline">\(\mathbf{Y}^\top\mathbf{Y}\)</span>, <span class="math display">\[
-\mathbf{U}\mathbf{Y}^\top\mathbf{Y}\mathbf{U} = \Lambda
-\]</span> then <span class="math display">\[
-\left.\mathbf{U}^\prime\right.^\top\mathbf{U}^\prime = \mathbf{I}
-\]</span></p>
-</section>
-<section id="olivetti-faces" class="slide level2">
-<h2>Olivetti Faces</h2>
-<div class="figure">
-<div id="olivetti-faces-data-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/olivetti_faces_data.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-Data set from Olivetti Research Laboratory of faces.
-</aside>
-<p><code>im = np.reshape(Y[1, :].flatten(), (64, 64)).T}</code></p>
-</section>
-<section id="visualizing-the-eigenvectors" class="slide level2">
-<h2>Visualizing the Eigenvectors</h2>
-<div class="figure">
-<div id="dem-olivetti-faces-eigenvectors-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_eigenvectors.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-First 9 eigenvectors of the Olivetti faces data.
-</aside>
-</section>
-<section id="reconstruction" class="slide level2">
-<h2>Reconstruction</h2>
-<div class="figure">
-<div id="dem-olivetti-faces-reconstruction-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_olivetti_faces_reconstruction.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-</div>
-<aside class="notes">
-Reconstruction from the latent space of the faces data.
-</aside>
-</section>
-<section id="gene-expression" class="slide level2">
-<h2>Gene Expression</h2>
-</section>
 <section id="summary-and-key-points" class="slide level2">
 <h2>Summary and Key Points</h2>
-</section>
-<section id="further-reading" class="slide level2 scrollable">
-<h2 class="scrollable">Further Reading</h2>
-<ul>
-<li>Chapter 7 up to pg 249 of <span class="citation" data-cites="Rogers:book11">Rogers and Girolami (2011)</span></li>
-</ul>
 </section>
 <section id="thanks" class="slide level2 scrollable">
 <h2 class="scrollable">Thanks!</h2>
@@ -1593,18 +1145,6 @@ Bishop, C.M., James, G.D., 1993. Analysis of multiphase flows using dual-energy 
 </div>
 <div id="ref-DellaGatta:direct08" class="csl-entry" role="doc-biblioentry">
 Della Gatta, G., Bansal, M., Ambesi-Impiombato, A., Antonini, D., Missero, C., Bernardo, D. di, 2008. Direct targets of the TRP63 transcription factor revealed by a combination of gene expression profiling and reverse engineering. Genome Research 18, 939–948. <a href="https://doi.org/10.1101/gr.073601.107">https://doi.org/10.1101/gr.073601.107</a>
-</div>
-<div id="ref-Hotelling:analysis33" class="csl-entry" role="doc-biblioentry">
-Hotelling, H., 1933. Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology 24, 417–441.
-</div>
-<div id="ref-Rogers:book11" class="csl-entry" role="doc-biblioentry">
-Rogers, S., Girolami, M., 2011. A first course in machine learning. CRC Press.
-</div>
-<div id="ref-Spellman:yeastcellcy98" class="csl-entry" role="doc-biblioentry">
-Spellman, P.T., Sherlock, G., Zhang, M.Q., Iyer, V.R., Anders, K., Eisen, M.B., Brown, P.O., Botstein, D., Futcher, B., 1998. Comprehensive identification of cell cycle-regulated genes of the yeast <span><em>Saccharomyces</em></span> <span> <em>cerevisiae</em></span> by microarray hybridization. Molecular Biology of the Cell 9, 3273–3297.
-</div>
-<div id="ref-Tipping-probpca99" class="csl-entry" role="doc-biblioentry">
-Tipping, M.E., Bishop, C.M., 1999. Probabilistic principal component analysis. Journal of the Royal Statistical Society, B 6, 611–622. <a href="https://doi.org/doi:10.1111/1467-9868.00196">https://doi.org/doi:10.1111/1467-9868.00196</a>
 </div>
 </div>
 </section>
