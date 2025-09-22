@@ -611,50 +611,6 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 Here the <font color="blue">yolk</font> has 56.1%, the <font color="magenta">green</font> has 9.2% and the white has 34.7%
 </center>
 </section>
-<section id="mathematics" class="slide level2">
-<h2>Mathematics</h2>
-<p><strong>What is the density of probability mass?</strong></p>
-<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
-<ol type="1">
-<li><em>Individual components</em>: <span class="math inline">\(y_{i,k} \sim \mathscr{N}\left(0,\sigma^2\right)\)</span></li>
-<li><em>Squared components</em>: <span class="math inline">\(y_{i,k}^2 \sim \sigma^2 \chi_1^2\)</span> (scaled chi-squared)</li>
-<li><em>Gamma distribution</em>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})\)</span></li>
-</ol>
-</section>
-<section id="mathematics-1" class="slide level2">
-<h2>Mathematics</h2>
-<p><strong>What is the density of probability mass?</strong></p>
-<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
-<p><strong>Sum of squares</strong>: <span class="math display">\[
-\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})
-\]</span></p>
-</section>
-<section id="mathematics-2" class="slide level2">
-<h2>Mathematics</h2>
-<p><strong>What is the density of probability mass?</strong></p>
-<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
-<p><strong>Expected value</strong>:</p>
-<p><span class="math display">\[
-\langle \sum_{k=1}^dy_{i,k}^2 \rangle = d\sigma^2
-\]</span></p>
-</section>
-<section id="mathematics-3" class="slide level2">
-<h2>Mathematics</h2>
-<p><strong>What is the density of probability mass?</strong></p>
-<p><strong>Normalized sum</strong>: <span class="math display">\[
-\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})
-\]</span></p>
-</section>
-<section id="mathematics-4" class="slide level2">
-<h2>Mathematics</h2>
-<p><strong>What is the density of probability mass?</strong></p>
-<p><strong>Expected normalized</strong>: <span class="math display">\[
-\langle \frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \rangle = \sigma^2
-\]</span></p>
-</section>
-<section id="distribution-of-mass-against-dimensionality" class="slide level2">
-<h2>Distribution of Mass against Dimensionality</h2>
-</section>
 <section id="the-gamma-density" class="slide level2">
 <h2>The Gamma Density</h2>
 </section>
@@ -709,6 +665,64 @@ Here the <font color="blue">yolk</font> has 56.1%, the <font color="magenta">gre
 <li>Scale parameter: <span class="math inline">\(\beta = b^{-1}\)</span> (alternative)</li>
 <li>Watch out for different software conventions.</li>
 </ul>
+</section>
+<section id="mathematics" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<p><em>Individual components</em>: <span class="math display">\[
+y_{i,k} \sim \mathscr{N}\left(0,\sigma^2\right)
+\]</span></p>
+</section>
+<section id="mathematics-1" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<p><em>Squared components</em>: <span class="math display">\[
+y_{i,k}^2 \sim \sigma^2 \chi_1^2
+\]</span> (scaled chi-squared)</p>
+</section>
+<section id="mathematics-2" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<p><em>Gamma distribution</em>: <span class="math display">\[
+y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})
+\]</span></p>
+</section>
+<section id="mathematics-3" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<p><strong>Sum of squares</strong>: <span class="math display">\[
+\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})
+\]</span></p>
+</section>
+<section id="mathematics-4" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<p><strong>Expected value</strong>:</p>
+<p><span class="math display">\[
+\langle \sum_{k=1}^dy_{i,k}^2 \rangle = d\sigma^2
+\]</span></p>
+</section>
+<section id="mathematics-5" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p><strong>Normalized sum</strong>: <span class="math display">\[
+\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})
+\]</span></p>
+</section>
+<section id="mathematics-6" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p><strong>Expected normalized</strong>: <span class="math display">\[
+\langle \frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \rangle = \sigma^2
+\]</span></p>
+</section>
+<section id="distribution-of-mass-against-dimensionality" class="slide level2">
+<h2>Distribution of Mass against Dimensionality</h2>
 </section>
 <section id="chi-squared-distributions" class="slide level2">
 <h2>chi-squared Distributions</h2>
