@@ -691,7 +691,7 @@ y_{i,k}^2 \sim \sigma^2 \chi_1^2
 <p><strong>What is the density of probability mass?</strong></p>
 <p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
 <p><em>Gamma distribution</em>: <span class="math display">\[
-y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})
+y_{i,k}^2 \sim \mathscr{G}\left(\frac{1}{2},\frac{1}{2\sigma^2}\right)
 \]</span></p>
 </section>
 <section id="mathematics-3" class="slide level2">
@@ -699,7 +699,7 @@ y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})
 <p><strong>What is the density of probability mass?</strong></p>
 <p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
 <p><strong>Sum of squares</strong>: <span class="math display">\[
-\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})
+\sum_{k=1}^dy_{i,k}^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{1}{2\sigma^2}\right)
 \]</span></p>
 </section>
 <section id="mathematics-4" class="slide level2">
@@ -715,7 +715,7 @@ y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})
 <h2>Mathematics</h2>
 <p><strong>What is the density of probability mass?</strong></p>
 <p><strong>Normalized sum</strong>: <span class="math display">\[
-\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})
+\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{d}{2\sigma^2}\right)
 \]</span></p>
 </section>
 <section id="mathematics-6" class="slide level2">
@@ -826,7 +826,7 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 <ol type="1">
 <li><em>Individual components</em>: <span class="math inline">\(y_{i,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span> and <span class="math inline">\(y_{j,k} \sim \mathcal{N}(0, \sigma_k^2)\)</span></li>
 <li><em>Difference</em>: <span class="math inline">\(y_{i,k} - y_{j,k} \sim \mathcal{N}(0, 2\sigma_k^2)\)</span></li>
-<li><em>Squared difference</em>: <span class="math inline">\((y_{i,k} - y_{j,k})^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{4\sigma_k^2})\)</span></li>
+<li><em>Squared difference</em>: <span class="math inline">\((y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{1}{2},\frac{1}{4\sigma_k^2}\right)\)</span></li>
 </ol>
 </section>
 <section id="interpoint-distance-analysis-1" class="slide level2">
