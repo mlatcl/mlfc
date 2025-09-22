@@ -551,6 +551,90 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 <section id="the-gamma-density" class="slide level2">
 <h2>The Gamma Density</h2>
 </section>
+<section id="gamma-density-formula" class="slide level2">
+<h2>Gamma Density Formula</h2>
+<p><span class="math display">\[\mathscr{G}\left(x|a,b\right)=\frac{b^{a}}{\Gamma\left(a\right)}x^{a-1}e^{-bx}\]</span> * Shape parameter: <span class="math inline">\(a\)</span> (controls form) * Rate parameter: <span class="math inline">\(b\)</span> (controls scale) * Gamma function: <span class="math inline">\(\Gamma\left(a\right)=\int_{0}^{\infty}x^{a-1}e^{-x}\text{d}x\)</span></p>
+</section>
+<section id="gamma-properties" class="slide level2">
+<h2>Gamma Properties</h2>
+<ul>
+<li>Mean: <span class="math inline">\(\frac{a}{b}\)</span>,</li>
+<li>Variance: <span class="math inline">\(\frac{a}{b^{2}}\)</span></li>
+<li>Support: <span class="math inline">\(x &gt; 0\)</span> (positive numbers only)</li>
+</ul>
+</section>
+<section id="special-cases" class="slide level2">
+<h2>Special Cases</h2>
+<ul>
+<li><em>Exponential:</em> <span class="math inline">\(a=1\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\left\langle x\right\rangle_{b}\)</span></li>
+<li><em>Chi-squared (1 df):</em> <span class="math inline">\(a=\frac{1}{2}, b=\frac{1}{2}\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\chi_{1}^{2}\left(x\right)\)</span></li>
+</ul>
+</section>
+<section id="other-important-applications" class="slide level2">
+<h2>Other Important Applications</h2>
+<ul>
+<li>Conjugate prior for Gaussian precision (inverse variance)</li>
+<li>Modeling waiting times and lifetimes</li>
+</ul>
+</section>
+<section id="additive-property" class="slide level2">
+<h2>Additive Property</h2>
+<ul>
+<li>If <span class="math display">\[
+  X_k \sim \text{Gamma}(a_k, b)
+  \]</span> for <span class="math inline">\(k=1,\ldots,d\)</span></li>
+<li>Then <span class="math display">\[
+  \sum_{k=1}^d X_k \sim \text{Gamma}(\sum_{k=1}^d a_k, b)
+  \]</span></li>
+</ul>
+</section>
+<section id="warning-parameterisation-confusion" class="slide level2">
+<h2>Warning: Parameterisation Confusion</h2>
+<ul>
+<li>Rate parameter: <span class="math inline">\(b\)</span> (used here)</li>
+<li>Scale parameter: <span class="math inline">\(\beta = b^{-1}\)</span> (alternative)</li>
+<li>Watch out for different software conventions.</li>
+</ul>
+</section>
+<section id="chi-squared-distributions" class="slide level2">
+<h2>chi-squared Distributions</h2>
+</section>
+<section id="z2" class="slide level2">
+<h2><span class="math inline">\(z^2\)</span></h2>
+<div class="figure">
+<div id="chi-squared-1d-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/chi-squared-1d.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The <span class="math inline">\(\chi^2\)</span> distribution which gives the distribution of the square of a standardised normal variable <span class="math inline">\(z^2\)</span>.
+</aside>
+</section>
+<section id="z_12-z_22" class="slide level2">
+<h2><span class="math inline">\(z_1^2 + z_2^2\)</span></h2>
+<div class="figure">
+<div id="gamma-2d-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gamma-2d.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to the sum of two standardised normal variables <span class="math inline">\(z_1^2 + z_2^2\)</span>.
+</aside>
+</section>
+<section id="sum_i15-z2_i" class="slide level2">
+<h2><span class="math inline">\(\sum_{i=1}^5 z^2_i\)</span></h2>
+<div class="figure">
+<div id="gamma-5d-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gamma-5d.svg" width="40%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to the sum of five standardised normal variables <span class="math inline">\(\sum_{i=1}^5 z^2_i\)</span>.
+</aside>
+</section>
 <section id="section-3" class="slide level2">
 <h2></h2>
 <ul>
@@ -581,7 +665,6 @@ Volumes associated with the regions in the three dimensional Gaussian egg. Here 
 <aside class="notes">
 Plot of probability mass versus dimension. Plot shows the volume of density inside 0.95 of a standard deviation (yellow), between 0.95 and 1.05 standard deviations (green), over 1.05 and standard deviations (white).
 </aside>
-%
 <div class="figure">
 <div id="distance2-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/distance2.svg" width="40%" style=" ">
