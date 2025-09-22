@@ -538,11 +538,11 @@ y_{i,k}-y_{j,k}\sim\mathscr{N}\left(0,2\sigma_{k}^{2}\right)]
 </div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 1000D Gaussian data with 100 points</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">22</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">24</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.randn(<span class="dv">100</span>, <span class="dv">1000</span>)</span></code></pre></div>
 <div class="figure">
 <div id="gaussian-distances-100-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-distances-100.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-distances-100_squared-distances.svg" width="40%" style=" ">
 </object>
 </div>
 <div id="gaussian-distances-100-magnify" class="magnify" onclick="magnifyFigure(&#39;gaussian-distances-100&#39;)">
@@ -558,7 +558,7 @@ Simulation of oil flow
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="oil-flow-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
+<object class="oil-flow_squared-distances-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow_squared-distances.svg" width="Histogram of interpoint squared distance distribution for Simulation of oil flow. The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 <div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
@@ -585,7 +585,7 @@ Ohio State University motion capture
 <div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="osu-run1-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
+<object class="osu-run1_squared-distances-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1_squared-distances.svg" width="Histogram of interpoint squared distance distribution for Ohio State University motion capture. The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 <div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
@@ -631,7 +631,7 @@ Della Gatta gene expression
 <div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="della-gatta-gene-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/della-gatta-gene_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
+<object class="della-gatta-gene_squared-distances-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/della-gatta-gene_squared-distances.svg" width="Histogram of interpoint squared distance distribution for Della Gatta gene expression. The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 <div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
@@ -684,7 +684,7 @@ Robot wireless navigation
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&quot;Y&quot;</span>]</span></code></pre></div>
 <div class="figure">
 <div id="-figure" class="figure-frame">
-<object class="robot-wireless-squared-distance-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared_distance.svg" width="Histogram of interpoint squared distance distribution for . The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
+<object class="robot-wireless_squared-distances-plot" data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot-wireless_squared-distances.svg" width="Histogram of interpoint squared distance distribution for Robot wireless navigation. The theoretical curve from the Gamma distribution is superimposed on the histogram." style=" ">
 </object>
 </div>
 <div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
@@ -703,6 +703,18 @@ Robot wireless navigation
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from correlated Gaussian</span></span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.zeros(<span class="dv">1000</span>)</span>
 <span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.multivariate_normal(mean, cov_matrix, <span class="dv">1000</span>)</span></code></pre></div>
+<div class="figure">
+<div id="correlated-gaussian-distances-1000-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances-1000_squared-distances.svg" width="60%" style=" ">
+</object>
+</div>
+<div id="correlated-gaussian-distances-1000-magnify" class="magnify" onclick="magnifyFigure(&#39;correlated-gaussian-distances-1000&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="correlated-gaussian-distances-1000-caption" class="caption-frame">
+<p>Figure: Interpoint squared distance distribution for Gaussian with <span class="math inline">\(d=1000\)</span> but low rank covariance.</p>
+</div>
+</div>
 <div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> pdist, squareform</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> gamma</span></code></pre></div>
 <div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize data to have variance 1 for each dimension</span></span>
@@ -717,16 +729,15 @@ Robot wireless navigation
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize distances</span></span>
 <span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> v <span class="op">/</span> np.mean(v)</span></code></pre></div>
 <div class="figure">
-<div id="-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances2.svg" width="40%" style=" ">
+<div id="correlated-gaussian-distances2-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/correlated-gaussian-distances2.svg" width="60%" style=" ">
 </object>
-<p>Interpoint squared distance distribution for Gaussian with <span class="math inline">\(d=1000\)</span>.</p>
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="correlated-gaussian-distances2-magnify" class="magnify" onclick="magnifyFigure(&#39;correlated-gaussian-distances2&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
-<p>Figure: correlated-gaussian-distances2</p>
+<div id="correlated-gaussian-distances2-caption" class="caption-frame">
+<p>Figure: Interpoint squared distance distribution for Gaussian with <span class="math inline">\(d=1000\)</span> and theoretical curve for <span class="math inline">\(d=2\)</span>.</p>
 </div>
 </div>
 <h2 id="high-dimensional-data-1">High Dimensional Data</h2>
