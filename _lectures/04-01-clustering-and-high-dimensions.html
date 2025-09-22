@@ -15,7 +15,7 @@ date: 2025-09-22
 time: "09:30"
 week: 4
 session: 1
-featured_image: slides/diagrams/dimred/dem_manifold_print002.png
+featured_image: slides/diagrams/ml/kmeans_clustering_022.svg
 reveal: 04-01-clustering-and-high-dimensions.slides.html
 transition: None
 ipynb: 04-01-clustering-and-high-dimensions.ipynb
@@ -123,14 +123,14 @@ E(\mathbf{M}) = \sum_{i \in \mathbf{i}_j} (\mathbf{ x}_i - \boldsymbol{ \mu}_j)^
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Final objective: </span><span class="sc">{</span>objective_store[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Objective improvement: </span><span class="sc">{</span>objective_store[<span class="dv">0</span>] <span class="op">-</span> objective_store[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <div class="figure">
-<div id="kmeans-clustering-026-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_013.svg" width="\width" style=" ">
+<div id="kmeans-clustering-022-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/kmeans_clustering_022.svg" width="\width" style=" ">
 </object>
 </div>
-<div id="kmeans-clustering-026-magnify" class="magnify" onclick="magnifyFigure(&#39;kmeans-clustering-026&#39;)">
+<div id="kmeans-clustering-022-magnify" class="magnify" onclick="magnifyFigure(&#39;kmeans-clustering-022&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="kmeans-clustering-026-caption" class="caption-frame">
+<div id="kmeans-clustering-022-caption" class="caption-frame">
 <p>Figure: Clustering with the <span class="math inline">\(k\)</span>-means clustering algorithm.</p>
 </div>
 </div>
@@ -526,13 +526,13 @@ y_{i,k}-y_{j,k}\sim\mathscr{N}\left(0,2\sigma_{k}^{2}\right)]
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">24</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.randn(<span class="dv">1000</span>, <span class="dv">1000</span>)</span></code></pre></div>
 <div class="figure">
-<div id="-figure" class="figure-frame">
+<div id="gaussian-distances-1000-figure" class="figure-frame">
 
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="gaussian-distances-1000-magnify" class="magnify" onclick="magnifyFigure(&#39;gaussian-distances-1000&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
+<div id="gaussian-distances-1000-caption" class="caption-frame">
 <p>Figure: A good match betwen theory and the samples for a 1000 dimensional Gaussian distribution.</p>
 </div>
 </div>
@@ -541,14 +541,14 @@ y_{i,k}-y_{j,k}\sim\mathscr{N}\left(0,2\sigma_{k}^{2}\right)]
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">22</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.random.randn(<span class="dv">100</span>, <span class="dv">1000</span>)</span></code></pre></div>
 <div class="figure">
-<div id="-figure" class="figure-frame">
+<div id="gaussian-distances-100-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gaussian-distances-100.svg" width="40%" style=" ">
 </object>
 </div>
-<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<div id="gaussian-distances-100-magnify" class="magnify" onclick="magnifyFigure(&#39;gaussian-distances-100&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
-<div id="-caption" class="caption-frame">
+<div id="gaussian-distances-100-caption" class="caption-frame">
 <p>Figure: A good match betwen theory and the samples for a 100 dimensional Gaussian distribution.</p>
 </div>
 </div>
