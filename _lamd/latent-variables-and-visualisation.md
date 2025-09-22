@@ -2,7 +2,7 @@
 week: 4
 session: 2
 title: "Latent Variables and Visualisation"
-featured_image: slides/diagrams/dimred/short-circuit-problem.svg
+featured_image: slides/diagrams/dimred/dem_manifold_print002.png
 layout: lecture
 venue: Dedan Kimathi University of Technology, Nyeri, Kenya
 time: "9:30"

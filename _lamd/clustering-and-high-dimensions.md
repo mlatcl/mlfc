@@ -2,7 +2,7 @@
 week: 4
 session: 1
 date: 2025-09-22
-featured_image: slides/diagrams/dimred/dem_manifold_print002.png
+featured_image: slides/diagrams/ml/kmeans_clustering_022.svg
 title: "Clustering and High Dimensions"
 layout: lecture
 author:
