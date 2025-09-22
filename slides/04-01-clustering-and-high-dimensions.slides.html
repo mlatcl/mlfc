@@ -616,21 +616,41 @@ Here the <font color="blue">yolk</font> has 56.1%, the <font color="magenta">gre
 <p><strong>What is the density of probability mass?</strong></p>
 <p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
 <ol type="1">
-<li><strong>Individual components</strong>: <span class="math inline">\(y_{i,k} \sim \mathscr{N}\left(0,\sigma^2\right)\)</span></li>
-<li><strong>Squared components</strong>: <span class="math inline">\(y_{i,k}^2 \sim \sigma^2 \chi_1^2\)</span> (scaled chi-squared)</li>
-<li><strong>Gamma distribution</strong>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})\)</span></li>
+<li><em>Individual components</em>: <span class="math inline">\(y_{i,k} \sim \mathscr{N}\left(0,\sigma^2\right)\)</span></li>
+<li><em>Squared components</em>: <span class="math inline">\(y_{i,k}^2 \sim \sigma^2 \chi_1^2\)</span> (scaled chi-squared)</li>
+<li><em>Gamma distribution</em>: <span class="math inline">\(y_{i,k}^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2y^2})\)</span></li>
 </ol>
 </section>
 <section id="mathematics-1" class="slide level2">
 <h2>Mathematics</h2>
 <p><strong>What is the density of probability mass?</strong></p>
 <p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
-<ol start="4" type="1">
-<li><strong>Sum of squares</strong>: <span class="math inline">\(\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})\)</span></li>
-<li><strong>Expected value</strong>: <span class="math inline">\(\langle \sum_{k=1}^dy_{i,k}^2 \rangle = d\sigma^2\)</span></li>
-<li><strong>Normalized sum</strong>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})\)</span></li>
-<li><strong>Expected normalized</strong>: <span class="math inline">\(\langle \frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \rangle = \sigma^2\)</span></li>
-</ol>
+<p><strong>Sum of squares</strong>: <span class="math display">\[
+\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{1}{2\sigma^2})
+\]</span></p>
+</section>
+<section id="mathematics-2" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p>For a <span class="math inline">\(d\)</span>-dimensional Gaussian distribution:</p>
+<p><strong>Expected value</strong>:</p>
+<p><span class="math display">\[
+\langle \sum_{k=1}^dy_{i,k}^2 \rangle = d\sigma^2
+\]</span></p>
+</section>
+<section id="mathematics-3" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p><strong>Normalized sum</strong>: <span class="math display">\[
+\frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \sim \text{Gamma}(\frac{d}{2}, \frac{d}{2\sigma^2})
+\]</span></p>
+</section>
+<section id="mathematics-4" class="slide level2">
+<h2>Mathematics</h2>
+<p><strong>What is the density of probability mass?</strong></p>
+<p><strong>Expected normalized</strong>: <span class="math display">\[
+\langle \frac{1}{d}\sum_{k=1}^dy_{i,k}^2 \rangle = \sigma^2
+\]</span></p>
 </section>
 <section id="distribution-of-mass-against-dimensionality" class="slide level2">
 <h2>Distribution of Mass against Dimensionality</h2>
@@ -697,7 +717,7 @@ Here the <font color="blue">yolk</font> has 56.1%, the <font color="magenta">gre
 <h2><span class="math inline">\(z^2\)</span></h2>
 <div class="figure">
 <div id="chi-squared-1d-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/chi-squared-1d.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/chi-squared-1d.svg" width="70%" style=" ">
 </object>
 </div>
 </div>
@@ -709,7 +729,7 @@ The <span class="math inline">\(\chi^2\)</span> distribution which gives the dis
 <h2><span class="math inline">\(z_1^2 + z_2^2\)</span></h2>
 <div class="figure">
 <div id="gamma-2d-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gamma-2d.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gamma-2d.svg" width="70%" style=" ">
 </object>
 </div>
 </div>
@@ -721,7 +741,7 @@ The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to th
 <h2><span class="math inline">\(\sum_{i=1}^5 z^2_i\)</span></h2>
 <div class="figure">
 <div id="gamma-5d-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gamma-5d.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/gamma-5d.svg" width="70%" style=" ">
 </object>
 </div>
 </div>
@@ -747,24 +767,24 @@ The scaled <span class="math inline">\(\chi^2\)</span> squared, equivalent to th
 </section>
 <section id="where-is-the-mass" class="slide level2">
 <h2>Where is the Mass?</h2>
-<ul>
-<li>Squared distances are gamma distributed.</li>
-</ul>
 <div class="figure">
 <div id="dimension-mass-figure" class="figure-frame">
-<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dimension-mass.svg" width="40%" style=" ">
+<object class data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dimension-mass.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
 Plot of probability mass versus dimension. Plot shows the volume of density inside 0.95 of a standard deviation (yellow), between 0.95 and 1.05 standard deviations (green), over 1.05 and standard deviations (white).
 </aside>
+<center>
+Proportions of volumes between yolk, green and white as <span class="math inline">\(d\rightarrow 1024\)</span> (log scale)
+</center>
 </section>
 <section id="looking-at-gaussian-samples" class="slide level2">
 <h2>Looking at Gaussian Samples</h2>
 <div class="figure">
 <div id="projected-2d-gaussian-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/projected-2d-gaussian.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/projected-2d-gaussian.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -793,11 +813,16 @@ Looking at a projected Gaussian. This plot shows, in two dimensions, samples fro
 </section>
 <section id="interpoint-distance-analysis-1" class="slide level2">
 <h2>Interpoint Distance Analysis</h2>
-<p>{ For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
-<ol start="4" type="1">
-<li><em>Sum of squared differences</em>: <span class="math inline">\(\sum_{k=1}^d(y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{1}{4\sigma^2}\right)\)</span></li>
-<li><em>Normalized distance</em>: <span class="math inline">\(\frac{1}{d}\sum_{k=1}^d(\datasScalar_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{d}{4\sigma^2}\right)\)</span></li>
-</ol>
+<p>For spherical Gaussian where <span class="math inline">\(\sigma_k^2 = \sigma^2\)</span>:</p>
+<p><em>Sum of squared differences</em>: <span class="math display">\[
+\sum_{k=1}^d(y_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{1}{4\sigma^2}\right)
+\]</span></p>
+</section>
+<section id="interpoint-distance-analysis-2" class="slide level2">
+<h2>Interpoint Distance Analysis</h2>
+<p><em>Normalised distance</em>: <span class="math display">\[
+\frac{1}{d}\sum_{k=1}^d(\datasScalar_{i,k} - y_{j,k})^2 \sim \mathscr{G}\left(\frac{d}{2},\frac{d}{4\sigma^2}\right)
+\]</span></p>
 </section>
 <section id="key-results" class="slide level2">
 <h2>Key Results</h2>
