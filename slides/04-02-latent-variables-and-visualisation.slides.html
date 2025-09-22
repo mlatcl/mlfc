@@ -267,39 +267,6 @@ The rotated sixes projected onto the first two principal components of the ‘ro
 <li>Conclusion: Deal with high dimensional data by looking for a lower dimensional non-linear embedding.</li>
 </ul></li>
 </ul>
-</section>
-<section id="latent-variables-and-dimensionality-reduction" class="slide level2">
-<h2>Latent Variables and Dimensionality Reduction</h2>
-<ul>
-<li>Real data often has lower intrinsic dimensionality than measurements</li>
-<li>Examples:
-<ul>
-<li>Motion capture: Many coordinates but few degrees of freedom</li>
-<li>Genetic data: Thousands of genes controlled by few regulators</li>
-<li>Images: Millions of pixels but simpler underlying structure</li>
-</ul></li>
-</ul>
-</section>
-<section id="latent-variable-example" class="slide level2">
-<h2>Latent Variable Example</h2>
-<div class="figure">
-<div id="latent-variable-example-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/latent-variable-example.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-Data that appears 2-dimensional (left) can be described by a single latent variable <span class="math inline">\(z\)</span> (right) that traces out the curve.
-</aside>
-</section>
-<section id="latent-variable-example-1" class="slide level2">
-<h2>Latent Variable Example</h2>
-<ul>
-<li>Example shows 2D data described by 1D latent variable</li>
-<li>Left: Data in original 2D space</li>
-<li>Right: Same data represented by single latent variable <span class="math inline">\(z\)</span></li>
-<li>Goal: Find these simpler underlying representations</li>
-</ul>
 <!-- SECTION Latent Variables -->
 </section>
 <section id="latent-variables" class="slide level2">
@@ -438,58 +405,6 @@ Graphical model representing probabilistic PCA.
   \mathbf{W}=\mathbf{U}_{q}\mathbf{L}\mathbf{R}^{\top},\quad\mathbf{L}=\left(\boldsymbol{\Lambda}_{q}-\sigma^{2}\mathbf{I}\right)^{\frac{1}{2}}
   \]</span> where <span class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation matrix.</p>
 </section>
-<section id="practical-considerations" class="slide level2">
-<h2>Practical Considerations</h2>
-</section>
-<section id="when-dimensionality-reduction-fails" class="slide level2">
-<h2>When Dimensionality Reduction Fails</h2>
-<ul>
-<li>Dimensionality reduction can fail in several key scenarios:
-<ul>
-<li>Truly high dimensional data with no simpler structure</li>
-<li>Highly nonlinear relationships between dimensions</li>
-<li>Varying intrinsic dimensionality across data</li>
-</ul></li>
-</ul>
-</section>
-<section id="the-swiss-roll-example" class="slide level2">
-<h2>The Swiss Roll Example</h2>
-<ul>
-<li>Classic example of nonlinear structure</li>
-<li>2D manifold embedded in 3D</li>
-<li>Linear methods like PCA fail</li>
-<li>Requires nonlinear methods (t-SNE, UMAP)</li>
-</ul>
-<div class="figure">
-<div id="swiss-roll-example-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/swiss-roll.svg" width="80%" style=" ">
-</object>
-</div>
-</div>
-<aside class="notes">
-The Swiss roll dataset is a classic example of data with nonlinear structure. The color represents the position along the roll, showing how points that are far apart in the original space are actually close in the intrinsic manifold.
-</aside>
-</section>
-<section id="common-failure-modes" class="slide level2">
-<h2>Common Failure Modes</h2>
-<ul>
-<li>Key failure scenarios:
-<ul>
-<li>Linear methods on nonlinear manifolds</li>
-<li>Assuming global structure when only local exists</li>
-<li>Not accounting for noise</li>
-</ul></li>
-</ul>
-</section>
-<section id="high-dimensional-effects-in-real-data" class="slide level2">
-<h2>High Dimensional Effects in Real Data</h2>
-</section>
-<section id="oil-flow-data" class="slide level2">
-<h2>Oil Flow Data</h2>
-</section>
-<section id="implications-for-dimensionality-reduction" class="slide level2">
-<h2>Implications for Dimensionality Reduction</h2>
-</section>
 <section id="principal-component-analysis-1" class="slide level2">
 <h2>Principal Component Analysis</h2>
 <ul>
@@ -622,7 +537,7 @@ p(\mathbf{ z}_{i, :} | \mathbf{ y}_{i, :}) \propto p(\mathbf{ y}_{i,
 <section id="scikit-learn-implementation-pca" class="slide level2">
 <h2>Scikit-learn implementation PCA</h2>
 </section>
-<section id="oil-flow-data-1" class="slide level2">
+<section id="oil-flow-data" class="slide level2">
 <h2>Oil Flow Data</h2>
 <div class="figure">
 <div id="oil-flow-data-figure" class="figure-frame">
@@ -821,6 +736,81 @@ Reconstruction from the latent space of the faces data.
 </section>
 <section id="gene-expression" class="slide level2">
 <h2>Gene Expression</h2>
+<!-- SECTION Multi-Dimensional Scaling -->
+</section>
+<section id="multi-dimensional-scaling" class="slide level2">
+<h2>Multi-Dimensional Scaling</h2>
+</section>
+<section id="the-mds-objective" class="slide level2">
+<h2>The MDS Objective</h2>
+</section>
+<section id="properties-of-the-frobenius-norm" class="slide level2">
+<h2>Properties of the Frobenius Norm</h2>
+</section>
+<section id="mds-solution" class="slide level2">
+<h2>MDS Solution</h2>
+</section>
+<section id="rank-constrained-solution" class="slide level2">
+<h2>Rank-Constrained Solution</h2>
+<!-- SECTION Equivalence between MDS and PCA -->
+</section>
+<section id="equivalence-between-mds-and-pca" class="slide level2">
+<h2>Equivalence between MDS and PCA</h2>
+</section>
+<section id="connecting-the-eigendecompositions" class="slide level2">
+<h2>Connecting the Eigendecompositions</h2>
+</section>
+<section id="orthonormalization" class="slide level2">
+<h2>Orthonormalization</h2>
+</section>
+<section id="equivalence-in-embeddings" class="slide level2">
+<h2>Equivalence in Embeddings</h2>
+</section>
+<section id="rank-nullity-connection" class="slide level2">
+<h2>Rank-Nullity Connection</h2>
+</section>
+<section id="implications" class="slide level2">
+<h2>Implications</h2>
+</section>
+<section id="when-dimensionality-reduction-fails" class="slide level2">
+<h2>When Dimensionality Reduction Fails</h2>
+<ul>
+<li>Dimensionality reduction can fail in several key scenarios:
+<ul>
+<li>Truly high dimensional data with no simpler structure</li>
+<li>Highly nonlinear relationships between dimensions</li>
+<li>Varying intrinsic dimensionality across data</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-swiss-roll-example" class="slide level2">
+<h2>The Swiss Roll Example</h2>
+<ul>
+<li>Classic example of nonlinear structure</li>
+<li>2D manifold embedded in 3D</li>
+<li>Linear methods like PCA fail</li>
+<li>Requires nonlinear methods (t-SNE, UMAP)</li>
+</ul>
+<div class="figure">
+<div id="swiss-roll-example-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/swiss-roll.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The Swiss roll dataset is a classic example of data with nonlinear structure. The color represents the position along the roll, showing how points that are far apart in the original space are actually close in the intrinsic manifold.
+</aside>
+</section>
+<section id="common-failure-modes" class="slide level2">
+<h2>Common Failure Modes</h2>
+<ul>
+<li>Key failure scenarios:
+<ul>
+<li>Linear methods on nonlinear manifolds</li>
+<li>Assuming global structure when only local exists</li>
+<li>Not accounting for noise</li>
+</ul></li>
+</ul>
 </section>
 <section id="visualization-and-human-perception" class="slide level2">
 <h2>Visualization and Human Perception</h2>
@@ -875,41 +865,6 @@ Reconstruction from the latent space of the faces data.
 <aside class="notes">
 Kevin O’Regan’s book, “Why Red Doesn’t Sound Like a Bell” is about the sensiorimotor perspective on feel and ranges from our senses to our consciousness.
 </aside>
-<!-- SECTION Multi-Dimensional Scaling -->
-</section>
-<section id="multi-dimensional-scaling" class="slide level2">
-<h2>Multi-Dimensional Scaling</h2>
-</section>
-<section id="the-mds-objective" class="slide level2">
-<h2>The MDS Objective</h2>
-</section>
-<section id="properties-of-the-frobenius-norm" class="slide level2">
-<h2>Properties of the Frobenius Norm</h2>
-</section>
-<section id="mds-solution" class="slide level2">
-<h2>MDS Solution</h2>
-</section>
-<section id="rank-constrained-solution" class="slide level2">
-<h2>Rank-Constrained Solution</h2>
-<!-- SECTION Equivalence between MDS and PCA -->
-</section>
-<section id="equivalence-between-mds-and-pca" class="slide level2">
-<h2>Equivalence between MDS and PCA</h2>
-</section>
-<section id="connecting-the-eigendecompositions" class="slide level2">
-<h2>Connecting the Eigendecompositions</h2>
-</section>
-<section id="orthonormalization" class="slide level2">
-<h2>Orthonormalization</h2>
-</section>
-<section id="equivalence-in-embeddings" class="slide level2">
-<h2>Equivalence in Embeddings</h2>
-</section>
-<section id="rank-nullity-connection" class="slide level2">
-<h2>Rank-Nullity Connection</h2>
-</section>
-<section id="implications" class="slide level2">
-<h2>Implications</h2>
 </section>
 <section id="iterative-dimensionality-reduction" class="slide level2">
 <h2>Iterative Dimensionality Reduction</h2>
@@ -964,7 +919,7 @@ where $s_{i,j} = 1$ if two points are linked in the latent space and $q_{i,j}$ i
 <li>Results depend on perplexity parameter</li>
 </ul>
 </section>
-<section id="oil-flow-data-2" class="slide level2">
+<section id="oil-flow-data-1" class="slide level2">
 <h2>Oil Flow Data</h2>
 <div class="figure">
 <div id="oil-flow-data-figure" class="figure-frame">
