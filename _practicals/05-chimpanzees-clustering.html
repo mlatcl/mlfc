@@ -39,6 +39,9 @@ categories:
 
 -->
 <h2 id="chimpanzee-faces">Chimpanzee Faces</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_datasets/includes/chimpanzee-faces.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_datasets/includes/chimpanzee-faces.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>We know that human faces are unique to each of us. But did you know that chimpanzees also have unique faces?</p>
 <p>We will be checking if different images of the same chimpanzee would naturally cluster together. Using a sample set of 25 photos of 5 chimpanzees from <a href="https://arxiv.org/abs/2507.10552">Iashin et al., 2025</a>, let’s see if we are able to cluster the dataset.</p>
 <p>Let’s download the photos (and other code we will need later). The <a href="https://github.com/v-iashin/ChimpUFE">ChimpUFE</a> repo was created by Iashin et al. We will also be using their pre-trained neural networks for creating embeddings of the chimp’s faces.</p>
@@ -48,7 +51,10 @@ categories:
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cd ChimpUFE <span class="op">&amp;&amp;</span> pip install <span class="op">-</span>r requirements.txt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>P .<span class="op">/</span>ChimpUFE<span class="op">/</span>assets<span class="op">/</span>weights https:<span class="op">//</span>github.com<span class="op">/</span>v<span class="op">-</span>iashin<span class="op">/</span>ChimpUFE<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="fl">.0</span><span class="op">/</span><span class="dv">25</span><span class="op">-</span><span class="dv">06</span><span class="op">-</span><span class="dv">06</span>T20<span class="op">-</span><span class="dv">51</span><span class="op">-</span><span class="dv">36</span>_330k.pth</span></code></pre></div>
 <p>This is what the chimps look like:</p>
-<h2 id="clustering">Clustering</h2>
+<h2 id="k-means-clustering"><span class="math inline">\(k\)</span> Means Clustering</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/kmeans-chimpanzee-faces.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/kmeans-chimpanzee-faces.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>Let’s use the images directly to try to cluster the pictures. After extracting the pixel values, we will apply dimensionality reduction so that we can visualise the process.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -133,6 +139,9 @@ categories:
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>performance_stats(history_e, classes)</span></code></pre></div>
 <p>Looks like there’s no big improvement, and actually, the PCA images beats full images! While the lack of improvement on 2d embeddings is unexpected (and probably with more data we would see a significant differences), the 2d PCA over raw images is actually expected to do better. Why?</p>
 <h2 id="other-datasets">Other datasets</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/kmeans-other-chimpanzees.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/kmeans-other-chimpanzees.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>Another bigger dataset of labeled chimpanzee images was published here: <a href="https://pub.inf-cv.uni-jena.de/pdf/freytag2016chimpanzee.pdf">paper</a>, <a href="https://github.com/cvjena/chimpanzee_faces?tab=readme-ov-file">github</a>.</p>
 <p><em>Alexander Freytag and Erik Rodner and Marcel Simon and Alexander Loos and Hjalmar Kühl and Joachim Denzler: “Chimpanzee Faces in the Wild: Log-Euclidean CNNs for Predicting Identities and Attributes of Primates,” German Conference on Pattern Recognition (GCPR), 2016 .</em></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone https:<span class="op">//</span>github.com<span class="op">/</span>cvjena<span class="op">/</span>chimpanzee_faces.git</span></code></pre></div>
@@ -188,6 +197,9 @@ categories:
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>performance_stats(history_freytag_e2d, classes_freytag)</span></code></pre></div>
 <p>The adjusted Rand index tells us that our approach worked on the new dataset!</p>
 <h2 id="hierarchical-clustering">Hierarchical Clustering</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/hierarchical-clustering-chimpanzees.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/hierarchical-clustering-chimpanzees.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <p>Hierarchical clustering is an alternative method, where all elements are at first considered their own clusters, and repetetively join the closest clusters together, until only one remains. This is very nicely visualised using <a href="https://en.wikipedia.org/wiki/Dendrogram">dendrograms</a>.</p>
 <h3 id="exercise-3">Exercise 3</h3>
 <p>Using our earlier dataset, let’s conduct hierarchical clustering, and produce a dendrogram.</p>
