@@ -1,1 +1,1 @@
-Iteration 3: Update centres to mean of assigned points
+Iteration 2: Update centres to mean of assigned points
