@@ -585,13 +585,14 @@ c_i = \frac{\sigma^2}{\sigma^2 + \ell^2_i}
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>lbls <span class="op">=</span> class0 <span class="op">+</span> class1 <span class="op">+</span> class2</span></code></pre></div>
 <div class="figure">
 <div id="oil-flow-pca-sklearn-figure" class="figure-frame">
-<p></p>
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow-pca_sklearn.svg" width="60%" style=" ">
+</object>
 </div>
 <div id="oil-flow-pca-sklearn-magnify" class="magnify" onclick="magnifyFigure(&#39;oil-flow-pca-sklearn&#39;)">
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="oil-flow-pca-sklearn-caption" class="caption-frame">
-<p>Figure: PCA of the oil flow data.</p>
+<p>Figure: PCA of the oil flow data. The flow is homogeneous, annular and stratified.</p>
 </div>
 </div>
 <h2 id="the-probabilistic-pca-model">The Probabilistic PCA Model</h2>
@@ -627,13 +628,14 @@ c_i = \frac{\sigma^2}{\sigma^2 + \ell^2_i}
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;citation&#39;</span>])</span></code></pre></div>
 <p>And extra information about the data is included, as standard, under the keys under <code>details</code>.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;details&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span></code></pre></div>
 <p>Once the data is loaded in we can examine the first two principal components as follows,</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y, q)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>mu_x, C_x <span class="op">=</span> posterior(Y, U, ell, sigma2)</span></code></pre></div>
 <div class="figure">
 <div id="dem-osu-run1-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_osu_run1.svg" width="70%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1-pca.svg" width="60%" style=" ">
 </object>
 </div>
 <div id="dem-osu-run1-magnify" class="magnify" onclick="magnifyFigure(&#39;dem-osu-run1&#39;)">
@@ -644,18 +646,29 @@ c_i = \frac{\sigma^2}{\sigma^2 + \ell^2_i}
 </div>
 </div>
 <p>Here because the data is a time course, we have connected points that are neighbouring in time. This highlights the form of the run, which involves 3 paces. This projects in our low dimensional space to 3 loops. We can examin how much residual variance there is in the system by looking at <code>sigma2</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sigma2)</span></code></pre></div>
 <h2 id="robot-navigation-example">Robot Navigation Example</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_dimred/includes/robot-wireless-ppca.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_dimred/includes/robot-wireless-ppca.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>In the next example we will load in data from a robot navigation problem. The data consists of wireless access point strengths as recorded by a robot performing a loop around the University of Washington’s Computer Science department in Seattle. The robot records all the wireless access points it can cache and stores their signal strength.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.robot_wireless()</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>Y.shape</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pods</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pods.datasets.robot_wireless()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[<span class="st">&#39;Y&#39;</span>]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>Y.shape</span></code></pre></div>
 <p>There are 215 observations of 30 different access points. In this case the model is suggesting that the access point signal strength should be linearly dependent on the location in the map. In other words we are expecting the access point strength for the <span class="math inline">\(j\)</span>th access point at robot position <span class="math inline">\(x_{i, :}\)</span> to be represented by <span class="math inline">\(y_{i, j} = \mathbf{ w}_{j, :}^\top \mathbf{ z}_{i, :} + \epsilon_{i,j}\)</span>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>U, ell, sigma2 <span class="op">=</span> ppca(Y.T, q)</span></code></pre></div>
+<div class="figure">
+<div id="robot-wireless-pca-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot_wireless_pca.svg" width style=" ">
+</object>
+</div>
+<div id="robot-wireless-pca-magnify" class="magnify" onclick="magnifyFigure(&#39;robot-wireless-pca&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="robot-wireless-pca-caption" class="caption-frame">
+<p>Figure: PCA of the robot wireless data.</p>
+</div>
+</div>
 <h1 id="interpretations-of-principal-component-analysis">Interpretations of Principal Component Analysis</h1>
 <h2 id="principal-component-analysis-1">Principal Component Analysis</h2>
 <div style="text-align:right">

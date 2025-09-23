@@ -489,11 +489,12 @@ Visualization of the first two dimensions of the oil flow data from <span class=
 </aside>
 <div class="figure">
 <div id="oil-flow-pca-sklearn-figure" class="figure-frame">
-<p></p>
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/oil-flow-pca_sklearn.svg" width="60%" style=" ">
+</object>
 </div>
 </div>
 <aside class="notes">
-PCA of the oil flow data.
+PCA of the oil flow data. The flow is homogeneous, annular and stratified.
 </aside>
 </section>
 <section id="the-probabilistic-pca-model" class="slide level2">
@@ -516,7 +517,7 @@ Mapping a two dimensional plane to a higher dimensional space in a linear way. D
 <h2>OSU Motion Capture Data: Run 1</h2>
 <div class="figure">
 <div id="dem-osu-run1-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_osu_run1.svg" width="70%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/osu-run1-pca.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
@@ -531,6 +532,15 @@ First two principal components of motion capture data of an individual running.
 <li>Infer location of ‘robot’ and access points.</li>
 <li>This is known as SLAM (simulataneous localization and mapping).</li>
 </ul>
+<div class="figure">
+<div id="robot-wireless-pca-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/robot_wireless_pca.svg" width style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+PCA of the robot wireless data.
+</aside>
 <!-- SECTION Interpretations of Principal Component Analysis -->
 </section>
 <section id="interpretations-of-principal-component-analysis" class="slide level2">
@@ -562,8 +572,14 @@ First two principal components of motion capture data of an individual running.
 <li><p>Solution is found via constrained optimisation (which uses <a href="https://en.wikipedia.org/wiki/Lagrange_multiplier">Lagrange multipliers</a>): <span class="math display">\[
 L\left(\mathbf{u}_{1},\lambda_{1}\right)=\mathbf{u}_{1}^{\top}\mathbf{S}\mathbf{u}_{1}+\lambda_{1}\left(1-\mathbf{u}_{1}^{\top}\mathbf{u}_{1}\right)
 \]</span></p></li>
-<li><p>Gradient with respect to <span class="math inline">\(\mathbf{u}_{1}\)</span> <span class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span> rearrange to form <span class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span> Which is known as an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue problem</em></a>.</p></li>
-<li><p>Further directions that are <em>orthogonal</em> to the first can also be shown to be eigenvectors of the covariance.</p></li>
+<li><p>Gradient with respect to <span class="math inline">\(\mathbf{u}_{1}\)</span> <span class="math display">\[\frac{\text{d}L\left(\mathbf{u}_{1},\lambda_{1}\right)}{\text{d}\mathbf{u}_{1}}=2\mathbf{S}\mathbf{u}_{1}-2\lambda_{1}\mathbf{u}_{1}\]</span></p></li>
+</ul>
+</section>
+<section id="lagrangian-1" class="slide level2">
+<h2>Lagrangian</h2>
+<ul>
+<li>Rearrange to form <span class="math display">\[\mathbf{S}\mathbf{u}_{1}=\lambda_{1}\mathbf{u}_{1}.\]</span> Which is known as an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"><em>eigenvalue problem</em></a>.</li>
+<li>Further directions that are <em>orthogonal</em> to the first can also be shown to be eigenvectors of the covariance.</li>
 </ul>
 </section>
 <section id="pca-directions" class="slide level2">
