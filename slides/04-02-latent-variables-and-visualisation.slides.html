@@ -124,57 +124,52 @@ showDivs(0, 'dem-six-sample');
 <section id="probability-of-random-image-generation" class="slide level2">
 <h2>Probability of Random Image Generation</h2>
 <ul>
-<li><strong>Independent pixel model:</strong>
+<li>Independent pixel model
 <ul>
 <li>Each pixel modeled as independent binomial trial</li>
-<li>Probability of pixel being “on”: <span class="math inline">\(\pi= \frac{849}{3,648} \approx 0.233\)</span></li>
+<li>Probability of pixel being “on”<span class="math display">\[\pi= \frac{849}{3,648} \approx 0.233\]</span></li>
 </ul></li>
-<li><strong>Probability of original image:</strong>
+<li>Probability of original image <span class="math display">\[p(\text{original six}) = \pi^{849}(1-\pi)^{2799} = 2.67 \times 10^{-860}
+\]</span></li>
+</ul>
+</section>
+<section id="probability-of-random-image-generation-1" class="slide level2">
+<h2>Probability of Random Image Generation</h2>
 <ul>
-<li><span class="math inline">\(p(\text{original six}) = \pi^{849}(1-\pi)^{2799} = 2.67 \times 10^{-860}\)</span></li>
-</ul></li>
-<li><strong>This is astronomically small!</strong>
-<ul>
+<li>This is astronomically small!</li>
 <li>Even sampling every nanosecond until end of universe won’t find it</li>
-</ul></li>
 </ul>
 </section>
 <section id="rotate-a-prototype" class="slide level2">
 <h2>Rotate a Prototype</h2>
 <div>
 <script>
-showDivs(0, 'dem-six-rotate');
+showDivs(1, 'six-rotate');
 </script>
-<p><small>Rotate Prototype</small> <input id="range-dem-six-rotate" type="range" min="0" max="5" value="0" onchange="setDivs('dem-six-rotate')" oninput="setDivs('dem-six-rotate')"> <button onclick="plusDivs(-1, 'dem-six-rotate');">❮</button> <button onclick="plusDivs(1, 'dem-six-rotate');">❯</button></p>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate000.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<p><small>Rotate Prototype</small> <input id="range-six-rotate" type="range" min="1" max="5" value="1" onchange="setDivs('six-rotate')" oninput="setDivs('six-rotate')"> <button onclick="plusDivs(-1, 'six-rotate');">❮</button> <button onclick="plusDivs(1, 'six-rotate');">❯</button></p>
+<div class="six-rotate" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_rotate000.svg" width="50%" style=" ">
+</object>
 </div>
+<div class="six-rotate" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_rotate001.svg" width="50%" style=" ">
+</object>
 </div>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate001.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<div class="six-rotate" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_rotate002.svg" width="50%" style=" ">
+</object>
 </div>
+<div class="six-rotate" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_rotate003.svg" width="50%" style=" ">
+</object>
 </div>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate002.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<div class="six-rotate" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_rotate004.svg" width="50%" style=" ">
+</object>
 </div>
-</div>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate003.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate004.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div class="dem-six-rotate" style="text-align:center;">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/dem_six_rotate005.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
+<div class="six-rotate" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/six_rotate005.svg" width="50%" style=" ">
+</object>
 </div>
 </div>
 </section>
@@ -241,10 +236,43 @@ Hisgogram of squared distances vs theory for the rotated sixes.
 </section>
 <section id="latent-variables" class="slide level2">
 <h2>Latent Variables</h2>
-<!-- SECTION Your Personality -->
+<ul>
+<li><em>Hidden/unobservable</em> variables we infer from observations</li>
+<li><em>Compression</em> of complex data into simpler concepts</li>
+<li><em>Examples</em>: motives, intentions, underlying causes</li>
+</ul>
+</section>
+<section id="robotics-and-state-estimation" class="slide level2">
+<h2>Robotics and State Estimation</h2>
+<ul>
+<li><em>Robot state</em>: position, speed, direction (latent)</li>
+<li><em>Sensors</em>: only provide partial observations</li>
+<li><em>Uncertainty</em>: true state must be inferred</li>
+</ul>
+</section>
+<section id="experimental-design-and-confounders" class="slide level2">
+<h2>Experimental Design and Confounders</h2>
+<ul>
+<li><em>Confounders</em>: hidden variables affecting outcomes</li>
+<li><em>Randomisation</em>: breaks correlation with treatment</li>
+<li><em>Example</em>: sunlight vs fertiliser effect</li>
+</ul>
+</section>
+<section id="probabilistic-framework" class="slide level2">
+<h2>Probabilistic Framework</h2>
+<ul>
+<li><em>Epistemic uncertainty</em>: degree of belief as probability</li>
+<li><em>State space models</em>: probabilistic graphical models</li>
+<li><em>This session</em>: linear latent variable models</li>
+</ul>
 </section>
 <section id="your-personality" class="slide level2">
 <h2>Your Personality</h2>
+<ul>
+<li><em>High-dimensional</em> questionnaire responses</li>
+<li><em>Few underlying traits</em> drive behaviour</li>
+<li><em>Compression</em>: many questions → few factors</li>
+</ul>
 </section>
 <section id="factor-analysis-model" class="slide level2">
 <h2>Factor Analysis Model</h2>
@@ -283,6 +311,14 @@ f_j(\mathbf{ z}) =
 </section>
 <section id="latent-variables-vs-linear-regression" class="slide level2">
 <h2>Latent Variables vs Linear Regression</h2>
+</section>
+<section id="latent-vs-observed-variables" class="slide level2">
+<h2>Latent vs Observed Variables</h2>
+<ul>
+<li><em>Regression</em>: covariates <span class="math inline">\(\mathbf{Z}\)</span> are observed</li>
+<li><em>Factor analysis</em>: <span class="math inline">\(\mathbf{Z}\)</span> are latent/unknown</li>
+<li><em>Solution</em>: treat as probability distributions</li>
+</ul>
 <p><span class="math display">\[
 x_{i,j} \sim
 \mathscr{N}\left(0,1\right),
@@ -324,6 +360,14 @@ x_{i,j} \sim
 </section>
 <section id="principal-component-analysis" class="slide level2">
 <h2>Principal Component Analysis</h2>
+</section>
+<section id="hotellings-pca-1933" class="slide level2">
+<h2>Hotelling’s PCA (1933)</h2>
+<ul>
+<li><em>Mathematical foundation</em> for factor analysis</li>
+<li><em>Noiseless limit</em>: <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span></li>
+<li><em>Eigenvalue decomposition</em> of covariance matrix</li>
+</ul>
 <p><span class="citation" data-cites="Hotelling:analysis33">Hotelling (1933)</span> took <span class="math inline">\(\sigma^2_i \rightarrow 0\)</span> so <span class="math display">\[
 \mathbf{ y}_{i, :} \sim \lim_{\sigma^2 \rightarrow 0} \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right).
 \]</span></p>
@@ -340,9 +384,9 @@ p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 </section>
 <section id="computation-of-the-marginal-likelihood" class="slide level2">
 <h2>Computation of the Marginal Likelihood</h2>
-<p>{<span class="math display">\[
+<p><small><span class="math display">\[
 \mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},\quad \mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{I}\right), \quad \boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^{2}\mathbf{I}\right)
-\]</span>}</p>
+\]</span></small></p>
 <p><span class="math display">\[
 \mathbf{W}\mathbf{ z}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\mathbf{W}\mathbf{W}^\top\right)
 \]</span></p>
@@ -352,12 +396,11 @@ p(\mathbf{ y}_{i, :}|\mathbf{W}) =
 </section>
 <section id="linear-latent-variable-model-ii" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>)</p>
+<p><em>Probabilistic PCA Max. Likelihood Soln</em> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>)</p>
 <div class="figure">
 <div id="ppca-graphical-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/ppca_graphical.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/ppca_graphical.svg" width="40%" style=" ">
+</object>
 </div>
 </div>
 <aside class="notes">
@@ -367,66 +410,48 @@ Graphical model representing probabilistic PCA.
 </section>
 <section id="linear-latent-variable-model-ii-1" class="slide level2">
 <h2>Linear Latent Variable Model II</h2>
-<p><strong>Probabilistic PCA Max. Likelihood Soln</strong> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>) <span class="math display">\[
+<p><em>Probabilistic PCA Max. Likelihood Soln</em> (<span class="citation" data-cites="Tipping-probpca99">Tipping and Bishop (1999)</span>) <small><span class="math display">\[
   p\left(\mathbf{Y}|\mathbf{W}\right)=\prod_{i=1}^{n}\mathscr{N}\left(\mathbf{ y}_{i,:}|\mathbf{0},\mathbf{C}\right),\quad \mathbf{C}=\mathbf{W}\mathbf{W}^{\top}+\sigma^{2}\mathbf{I}
-  \]</span> <span class="math display">\[
+  \]</span></small> <small><span class="math display">\[
   \log p\left(\mathbf{Y}|\mathbf{W}\right)=-\frac{n}{2}\log\left|\mathbf{C}\right|-\frac{1}{2}\text{tr}\left(\mathbf{C}^{-1}\mathbf{Y}^{\top}\mathbf{Y}\right)+\text{const.}
-  \]</span> If <span class="math inline">\(\mathbf{U}_{q}\)</span> are first <span class="math inline">\(q\)</span> principal eigenvectors of <span class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span> and the corresponding eigenvalues are <span class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <span class="math display">\[
+  \]</span></small> If <span class="math inline">\(\mathbf{U}_{q}\)</span> are first <span class="math inline">\(q\)</span> principal eigenvectors of <span class="math inline">\(n^{-1}\mathbf{Y}^{\top}\mathbf{Y}\)</span> and the corresponding eigenvalues are <span class="math inline">\(\boldsymbol{\Lambda}_{q}\)</span>, <small><span class="math display">\[
   \mathbf{W}=\mathbf{U}_{q}\mathbf{L}\mathbf{R}^{\top},\quad\mathbf{L}=\left(\boldsymbol{\Lambda}_{q}-\sigma^{2}\mathbf{I}\right)^{\frac{1}{2}}
-  \]</span> where <span class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation matrix.</p>
+  \]</span></small> where <span class="math inline">\(\mathbf{R}\)</span> is an arbitrary rotation matrix.</p>
 </section>
 <section id="probabilistic-pca" class="slide level2">
 <h2>Probabilistic PCA</h2>
 <ul>
-<li><p>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>, with a lower dimensional set of latent variables <span class="math inline">\(\mathbf{Z}\)</span>.</p></li>
-<li><p>Assume a linear relationship of the form <span class="math display">\[
+<li>Represent data, <span class="math inline">\(\mathbf{Y}\)</span>, with a lower dimensional set of latent variables <span class="math inline">\(\mathbf{Z}\)</span>.</li>
+<li>Assume a linear relationship of the form <span class="math display">\[
 \mathbf{ y}_{i,:}=\mathbf{W}\mathbf{ z}_{i,:}+\boldsymbol{ \epsilon}_{i,:},
 \]</span> where <span class="math display">\[
 \boldsymbol{ \epsilon}_{i,:} \sim \mathscr{N}\left(\mathbf{0},\sigma^2\mathbf{I}\right)
-\]</span></p></li>
-<li><p>PPCA defines a probabilistic model where:</p>
+\]</span></li>
+</ul>
+</section>
+<section id="probabilistic-pca-1" class="slide level2">
+<h2>Probabilistic PCA</h2>
+<ul>
+<li>PPCA defines a probabilistic model where:
 <ul>
 <li>Data is generated from latent variables through linear transformation</li>
 <li>Gaussian noise is added to the transformed variables</li>
 <li>Latent variables have standard Gaussian prior</li>
 </ul></li>
-<li><p>Maximum likelihood recovers classical PCA</p></li>
+<li>Maximum likelihood recovers classical PCA</li>
 </ul>
 </section>
 <section id="graphical-model-representing-probabilistic-pca" class="slide level2">
 <h2>Graphical model representing probabilistic PCA</h2>
 <div class="figure">
 <div id="ppca-graphical_model-figure" class="figure-frame">
-<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/ppca_graphical_model.svg" width="40%" style=" ">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//dimred/ppca_graphical_model.svg" width="60%" style=" ">
 </object>
 </div>
 </div>
 <aside class="notes">
 Graphical model representing probabilistic PCA.
 </aside>
-<!-- SECTION Probabilistic PCA -->
-</section>
-<section id="probabilistic-pca-1" class="slide level2">
-<h2>Probabilistic PCA</h2>
-<p><span class="math display">\[
-\boldsymbol{\Sigma} = \sigma^2 \mathbf{I}.
-\]</span></p>
-<p><span class="math display">\[
-p(\mathbf{Y}|\mathbf{W}, \sigma^2)
-= \prod_{i=1}^n\mathscr{N}\left(\mathbf{ y}_{i, :}|\mathbf{0},\mathbf{W}\mathbf{W}^\top + \sigma^2 \mathbf{I}\right)
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{W}= \mathbf{U}\mathbf{L} \mathbf{R}^\top
-\]</span></p>
-<p><span class="math display">\[
-\mathbf{S} = \sum_{i=1}^n(\mathbf{ y}_{i, :} - \boldsymbol{ \mu})(\mathbf{ y}_{i,:} - \boldsymbol{ \mu})^\top,
-\]</span></p>
-<p><span class="math display">\[
-\ell_i = \sqrt{\lambda_i - \sigma^2}
-\]</span></p>
-</section>
-<section id="ppca-as-manifold-learning" class="slide level2">
-<h2>PPCA as Manifold Learning</h2>
 </section>
 <section id="posterior-for-principal-component-analysis" class="slide level2">
 <h2>Posterior for Principal Component Analysis</h2>
@@ -620,7 +645,6 @@ f_{i, j} = \mathbf{ z}_{i, :}^\top \mathbf{ w}_{j, :}
 <li>Phenomena of renaming common also in ML</li>
 </ul></li>
 </ul>
-<p>{Principal component analysis is so effective in practice that there has almost developed a mini-industry in renaming the method itself (which is ironic, given its origin as a renaming of factor analysis). In particular <a href="http://en.wikipedia.org/wiki/Latent_semantic_indexing">Latent Semantic Indexing</a> in text processing is simply PCA on a particular representation of the term frequencies of the document. There is a particular fad to rename the eigenvectors after the nature of the data you are examining, perhaps initially triggered by <a href="http://www.face-rec.org/algorithms/PCA/jcn.pdf">Turk and Pentland’s</a> paper on eigenfaces, but also with <a href="https://wiki.inf.ed.ac.uk/twiki/pub/CSTR/ListenSemester1_2007_8/kuhn-%20junqua-eigenvoice-icslp1998.pdf">eigenvoices</a> and <a href="http://www.biomedcentral.com/1752-0509/1/54">eigengenes</a>.</p>
 </section>
 <section id="applying-pca" class="slide level2">
 <h2>Applying PCA</h2>
