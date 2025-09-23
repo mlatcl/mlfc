@@ -2,7 +2,7 @@
 week: 4
 session: 2
 title: "Latent Variables and Visualisation"
-featured_image: slides/diagrams/dimred/dem_manifold_print002.png
+featured_image: slides/diagrams/dimred/six_manifold_002.svg
 layout: lecture
 venue: Dedan Kimathi University of Technology, Nyeri, Kenya
 time: "9:30"
@@ -32,17 +32,26 @@ reveal: True
 \include{_dimred/includes/high-dimensional-data.md}
 \include{_dimred/includes/latent-variables.md}
 
-\include{_dimred/includes/principal-component-analysis.md}
-
 \include{_dimred/includes/probabilistic-pca.md}
 \include{_dimred/includes/probabilistic-pca-model.md}
 
-\include{_dimred/includes/mocap-ppca.md}
+\include{_dimred/includes/osu-run1-ppca.md}
 \include{_dimred/includes/robot-wireless-ppca.md}
-\include{_dimred/includes/ppca-interpretations.md}
-\include{_dimred/includes/pca-in-practice.md}
+
+
+\section{Interpretations of Principal Component Analysis}
+
+\include{_dimred/includes/principal-component-analysis.md}
+\include{_dimred/includes/pca-and-matrix-factorisation.md}
+\include{_dimred/includes/pca-and-model-algorithm-separation.md}
+\include{_dimred/includes/pca-effectiveness.md}
+
+\section{Derivation of PPCA}
+
 \include{_dimred/includes/ppca-marginal-likelihood.md}
 \include{_dimred/includes/ppca-reconstruction.md}
+
+\section{Multidimensional Scaling}
 
 \include{_dimred/includes/mds-derivation.md}
 \include{_dimred/includes/mds-pca-equivalence.md}
