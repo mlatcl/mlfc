@@ -38,7 +38,6 @@ reveal: True
 \include{_dimred/includes/osu-run1-ppca.md}
 \include{_dimred/includes/robot-wireless-ppca.md}
 
-
 \section{Interpretations of Principal Component Analysis}
 
 \include{_dimred/includes/principal-component-analysis.md}
@@ -51,21 +50,10 @@ reveal: True
 \include{_dimred/includes/ppca-marginal-likelihood.md}
 \include{_dimred/includes/ppca-reconstruction.md}
 
-\section{Multidimensional Scaling}
-
-\include{_dimred/includes/mds-derivation.md}
-\include{_dimred/includes/mds-pca-equivalence.md}
 
 \include{_dimred/includes/dimensionality-reduction-failure-modes.md}
 \include{_dimred/includes/visualisation-motivation.md}
 
-
-\include{_dimred/includes/iterative-dimensionality-reduction.md}
-\include{_dimred/includes/local-vs-global-preservation.md}
-
-\include{_dimred/includes/t-sne-intro.md}
-\include{_dimred/includes/umap-intro.md}
-\include{_dimred/includes/dimensionality-reduction-comparison.md}
 
 
 \thanks
