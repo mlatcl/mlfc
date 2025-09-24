@@ -54,12 +54,11 @@ sns.set_palette('colorblind')}-->
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/deep-architectures-and-automatic-differentiation.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/deep-architectures-and-automatic-differentiation.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<h2 id="shallow-and-deep-learning">Shallow and Deep Learning</h2>
+<h2 id="from-basis-functions-to-neural-networks">From Basis Functions to Neural Networks</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/basis-to-neural-networks.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>So far, we have been talking about <em>linear models</em> or <em>shallow learning</em> as we might think of it. Let’s pause for a moment and consider a <em>fully connected</em> deep neural network model to relate the two ideas.</p>
-<h2 id="from-basis-functions-to-neural-networks">From Basis Functions to Neural Networks</h2>
 <p>Under our basis function perspective, we can see that our deep neural network is mathematical composition of basis function models. Each layer contains a separate basis function set, so <span class="math display">\[
 f(\mathbf{ x}; \mathbf{W}) = \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left(\mathbf{W}_2\phi\left(\mathbf{W}_1 \mathbf{ x}\right)\right)\right).
 \]</span></p>
@@ -77,8 +76,8 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left
 <h2 id="linear-models-as-basis-weights">Linear Models as Basis + Weights</h2>
 <p>The generalised linear models we work with allow us to create a model that is non-linear in inputs, but linear in the parameters, <span class="math display">\[
 f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
-\]</span> We defined a basis, such as the quadratic basis.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> quadratic_basis</span></code></pre></div>
+\]</span> We defined a basis, such as the polynomial basis.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/neural-network.svg" width="70%" style=" ">
@@ -127,15 +126,15 @@ f(\mathbf{ x}; \mathbf{W})  =  \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\le
 \]</span></p>
 <h2 id="gradient-based-optimization">Gradient-based optimization</h2>
 <p><span class="math display">\[
-\mathscr{L}(\theta) = \sum_{n=1}^N \ell(y_n, f(x_n, \theta))
+E(\mathbf{W}) = \sum_{i=1}^nE(\mathbf{ y}_i, f(\mathbf{ x}_i; \mathbf{W}))
 \]</span></p>
 <p><span class="math display">\[
-\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta)
+\mathbf{W}_{t+1} = \mathbf{W}_t - \eta \nabla_\mathbf{W}E(\mathbf{W})
 \]</span></p>
 <h3 id="basic-multilayer-perceptron">Basic Multilayer Perceptron</h3>
 <p><span class="math display">\[
 \small
-f_L(x) = \boldsymbol{ \phi}\left(b_L + W_L \boldsymbol{ \phi}\left(b_{L-1} + W_{L-1} \boldsymbol{ \phi}\left( \cdots \boldsymbol{ \phi}\left(b_1 + W_1 x\right) \cdots \right)\right)\right)
+f_L(\mathbf{ x}) = \boldsymbol{ \phi}\left(\mathbf{b}_L+ \mathbf{W}_L\boldsymbol{ \phi}\left(\mathbf{b}_{L-1} + \mathbf{W}_{L-1} \boldsymbol{ \phi}\left( \cdots \boldsymbol{ \phi}\left(\mathbf{b}_1 + \mathbf{W}_1 \mathbf{ x}\right) \cdots \right)\right)\right)
 \]</span></p>
 <h3 id="recursive-mlp-definition">Recursive MLP Definition</h3>
 <h2 id="rectified-linear-unit">Rectified Linear Unit</h2>
@@ -219,7 +218,9 @@ f_L(x) = \boldsymbol{ \phi}\left(b_L + W_L \boldsymbol{ \phi}\left(b_{L-1} + W_{
 f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}).
 \]</span> We already have the gradient with respect to <span class="math inline">\(\mathbf{ w}\)</span>, which is simply. <span class="math display">\[
 \frac{\text{d}f_i}{\text{d}\mathbf{ w}} = \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}),
-\]</span> we now need the gradient with respect to <span class="math inline">\(\mathbf{ v}\)</span>. This can be computed by the chain rule as, <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[\frac{\text{d}f^L_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\]</span></p>
+<p>we now need the gradient with respect to <span class="math inline">\(\mathbf{ v}\)</span>. This can be computed by the chain rule as, <span class="math display">\[
 \frac{\text{d}f^L_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}.
 \]</span> But we have to be careful here. This is the chain rule, but it contains a new challenge, <span class="math inline">\(\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\)</span> is the derivative of a <em>vector</em> with respect to a <em>matrix</em>. How do we deal with this?</p>
 <h2 id="matrix-vector-chain-rule">Matrix Vector Chain Rule</h2>
@@ -240,30 +241,41 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
     \mathbf{a}_{:, q}
     \end{bmatrix}
 \]</span></p>
+<p><span class="math display">\[\frac{\text{d} \mathbf{a}}{\text{d} \mathbf{b}} \in \Re^{m \times n}\]</span></p>
 <p>Next we consider the derivative of one vector with respect to another as <span class="math display">\[ \frac{\text{d} \mathbf{a}}{\text{d} \mathbf{b}} \in
 \Re^{m \times n} 
 \]</span> if <span class="math inline">\(\mathbf{a} \in \Re^{m \times 1}\)</span> and <span class="math inline">\(\mathbf{b} \in \Re^{n \times 1}\)</span>.</p>
 <p>This now means that to obtain matrix-matrix derivatives we make use of <span class="math inline">\(\mathbf{C}:\)</span>: to indicate a vector formed from the matrix <span class="math inline">\(\mathbf{C}\)</span> by stacking the columns of <span class="math inline">\(\mathbf{C}\)</span> to form a <span class="math inline">\(\Re^{m n \times 1}\)</span> vector if <span class="math inline">\(\mathbf{C} \in \Re^{m \times n}\)</span>.</p>
+<p><span class="math display">\[\frac{\text{d} \mathbf{E}}{\text{d} \mathbf{C}} \in \Re^{pq \times mn}\]</span></p>
 <p>Under this notation we can write the derivative of a matrix <span class="math inline">\(\mathbf{E} \in \Re^{p \times q}\)</span> with respect to <span class="math inline">\(\mathbf{C}\)</span> as <span class="math inline">\(\frac{\text{d} \mathbf{E}}{\text{d} \mathbf{C}} \in \Re^{p q \times m n}\)</span>. This notation makes it easier to apply the chain rule while maintaining matrix notation.</p>
 <p>This entails the use of Kronecker products, we denote the Kronecker product of <span class="math inline">\(\mathbf{F}\)</span> and <span class="math inline">\(\mathbf{G}\)</span> as <span class="math inline">\(\mathbf{F} \otimes \mathbf{G}\)</span>.</p>
 <h2 id="kronecker-products">Kronecker Products</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_maths/includes/kronecker-products.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_maths/includes/kronecker-products.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
+<p><span class="math display">\[(\mathbf{E}:)^{\top} \mathbf{F} \otimes \mathbf{G}=\left(\left(\mathbf{G}^{\top} \mathbf{E F}\right):\right)^{\top}\]</span></p>
 <p>In most cases Kronecker products they arise below they are later removed using this relationship <span class="math display">\[
 (\mathbf{E}:)^{\top} \mathbf{F} \otimes \mathbf{G}=\left(\left(\mathbf{G}^{\top} \mathbf{E F}\right):\right)^{\top}
-\]</span> this form typically arises whenever the chain rule is applied, <span class="math display">\[ 
+\]</span> this form typically arises whenever the chain rule is applied,</p>
+<p><span class="math display">\[\frac{\text{d} E}{\text{d} \mathbf{H}:} \frac{\text{d} \mathbf{H}:}{\text{d} \mathbf{J}:}=\frac{\text{d} E}{\text{d} \mathbf{J}:}\]</span></p>
+<p><span class="math display">\[\frac{\text{d}\mathbf{H}}{\text{d} \mathbf{J}} = \mathbf{F} \otimes \mathbf{G}\]</span></p>
+<p><span class="math display">\[ 
 \frac{\text{d} E}{\text{d} \mathbf{H}:} \frac{\text{d}
 \mathbf{H}:}{\text{d} \mathbf{J}:}=\frac{\text{d}
 E}{\text{d} \mathbf{J}:}, 
 \]</span> as we normally find that <span class="math inline">\(\frac{\text{d} \mathbf{H}}{\text{d} \mathbf{J}}\)</span> has the form of a Kronecker product, <span class="math display">\[
 \frac{\text{d}\mathbf{H}}{\text{d} \mathbf{J}} = \mathbf{F} \otimes \mathbf{G}
-\]</span> and we expect the result of <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{H}}\)</span> and <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{J}}\)</span> to be in the form <span class="math inline">\((\mathbf{E}:)^\top\)</span>. The following two identities for Kronecker products will also prove useful. <span class="math display">\[
+\]</span> and we expect the result of <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{H}}\)</span> and <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{J}}\)</span> to be in the form <span class="math inline">\((\mathbf{E}:)^\top\)</span>.</p>
+<p><span class="math display">\[\mathbf{F}^{\top} \otimes \mathbf{G}^{\top}=(\mathbf{F} \otimes \mathbf{G})^{\top}\]</span></p>
+<p><span class="math display">\[(\mathbf{E} \otimes \mathbf{G})(\mathbf{F} \otimes \mathbf{H})=\mathbf{E F} \otimes \mathbf{G H}\]</span></p>
+<p>The following two identities for Kronecker products will also prove useful. <span class="math display">\[
 \mathbf{F}^{\top} \otimes \mathbf{G}^{\top}=(\mathbf{F} \otimes \mathbf{G})^{\top}
 \]</span> and <span class="math display">\[
 (\mathbf{E} \otimes \mathbf{G})(\mathbf{F} \otimes
 \mathbf{H})=\mathbf{E F} \otimes \mathbf{G H}
-\]</span> Generally we will use two ways of writing the derivative of a scalar with respect to a matrix, <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{J}}\)</span> and <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{J}}\)</span>, the first being a row vector and the second is a matrix of the same dimension of <span class="math inline">\(\mathbf{J}\)</span>. The second representation is more convenient for summarising the result, the first is easier to wield when computing the result. The equivalence of the representations is given by <span class="math display">\[ 
+\]</span></p>
+<p><span class="math display">\[\frac{\text{d} E}{\text{d} \mathbf{J}:}=\left(\left(\frac{\text{d} E}{\text{d} \mathbf{J}}\right):\right)^{\top}\]</span></p>
+<p>Generally we will use two ways of writing the derivative of a scalar with respect to a matrix, <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{J}}\)</span> and <span class="math inline">\(\frac{\text{d} E}{\text{d} \mathbf{J}}\)</span>, the first being a row vector and the second is a matrix of the same dimension of <span class="math inline">\(\mathbf{J}\)</span>. The second representation is more convenient for summarising the result, the first is easier to wield when computing the result. The equivalence of the representations is given by <span class="math display">\[ 
 \frac{\text{d} E}{\text{d}
 \mathbf{J}:}=\left(\left(\frac{\text{d} E}{\text{d}
 \mathbf{J}}\right):\right)^{\top}.
@@ -272,9 +284,17 @@ E}{\text{d} \mathbf{J}:},
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_maths/includes/more-useful-matrix-derivatives.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_maths/includes/more-useful-matrix-derivatives.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<p>By defining our multivariate derivatives through vectors, we can now write down the results for some more useful multivariate derivatives. Let’s start with <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> and assume we want the gradient of <span class="math inline">\(\mathbf{b}\)</span> with respect to <span class="math inline">\(\mathbf{A}\)</span>. We assume that <span class="math inline">\(\mathbf{A} \in \Re^{m\times n}\)</span>. To derive the gradient we’ll get there slightly indirectly and consider the gradient of <span class="math inline">\(\mathbf{b}\)</span> first, <span class="math display">\[
+<p>By defining our multivariate derivatives through vectors, we can now write down the results for some more useful multivariate derivatives. Let’s start with <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> and assume we want the gradient of <span class="math inline">\(\mathbf{b}\)</span> with respect to <span class="math inline">\(\mathbf{A}\)</span>. We assume that <span class="math inline">\(\mathbf{A} \in \Re^{m\times n}\)</span>. To derive the gradient we’ll get there slightly indirectly and consider the gradient of <span class="math inline">\(\mathbf{b}\)</span> first,</p>
+<p><span class="math display">\[\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x}\]</span></p>
+<p><span class="math display">\[
 \frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x}
 \]</span> which must be a matrix of size <span class="math inline">\(m \times mn\)</span>. Here we’ve taken the unusual step of defining <span class="math inline">\(\mathbf{a^\prime} = \left(\mathbf{A}^\top\right):\)</span>. We construct this form because it means that we are forming <span class="math inline">\(\mathbf{a}^\prime\)</span> by stacking the columns of <span class="math inline">\(\mathbf{A}^\top\)</span>, which are the rows of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<p><span class="math display">\[\mathbf{A}\mathbf{x} = \begin{bmatrix}
+\mathbf{a}_{1, :}^\top \mathbf{x} \\
+\mathbf{a}_{2, :}^\top \mathbf{x} \\
+\vdots \\
+\mathbf{a}_{m, :}^\top \mathbf{x}
+\end{bmatrix}\]</span></p>
 <p>This makes the derivation straightforward by inspection because the vector <span class="math inline">\(\mathbf{b} = \mathbf{A}\mathbf{x}\)</span> is a vector formed of inner products of the different <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>, <span class="math display">\[
 \mathbf{A}\mathbf{x} = \begin{bmatrix}
 \mathbf{a}_{1, :}^\top \mathbf{x} \\
@@ -284,18 +304,31 @@ E}{\text{d} \mathbf{J}:},
 \end{bmatrix}.
 \]</span> Recall that the gradient <span class="math display">\[
 \frac{\text{d}\mathbf{a}_{i,:}^\top \mathbf{x}}{\text{d}\mathbf{a}_{i,:}} = \mathbf{x},
-\]</span> where <span class="math inline">\(\mathbf{a}_{i, :}\)</span> is a vector formed from the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(\mathbf{A}\)</span>. So this means means that we should expect our result to consist only of repeated versions of <span class="math inline">\(\mathbf{x}\)</span>. From our definition of vector derivatives, we know we are looking for a result with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(nm\)</span> columns. This is where the Kronecker product comes in. We note that <span class="math inline">\(\mathbf{I}\otimes \mathbf{x}^\top\)</span> provides a tiling of <span class="math inline">\(\mathbf{x}\)</span> of the form, <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{a}_{i, :}\)</span> is a vector formed from the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(\mathbf{A}\)</span>. So this means means that we should expect our result to consist only of repeated versions of <span class="math inline">\(\mathbf{x}\)</span>. From our definition of vector derivatives, we know we are looking for a result with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(nm\)</span> columns. This is where the Kronecker product comes in.</p>
+<p><span class="math display">\[\mathbf{I}_m \otimes \mathbf{x}^\top = \begin{bmatrix}
+\mathbf{x}^\top &amp; \mathbf{0}&amp; \cdots &amp; \mathbf{0}\\
+\mathbf{0}&amp; \mathbf{x}^\top &amp; \cdots &amp; \mathbf{0}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\mathbf{0}&amp; \mathbf{0}&amp; \cdots&amp; \mathbf{x}^\top
+\end{bmatrix}\]</span></p>
+<p>We note that <span class="math inline">\(\mathbf{I}\otimes \mathbf{x}^\top\)</span> provides a tiling of <span class="math inline">\(\mathbf{x}\)</span> of the form, <span class="math display">\[
 \mathbf{I}_m \otimes \mathbf{x}^\top = \begin{bmatrix}
 \mathbf{x}^\top &amp; \mathbf{0}&amp; \cdots &amp; \mathbf{0}\\
 \mathbf{0}&amp; \mathbf{x}^\top &amp; \cdots &amp; \mathbf{0}\\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 \mathbf{0}&amp; \mathbf{0}&amp; \cdots&amp; \mathbf{x}^\top
 \end{bmatrix}.
-\]</span> where <span class="math inline">\(\mathbf{I}_m\)</span> is the <span class="math inline">\(m\)</span> dimensional identity matrix. So this means we can write, <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{I}_m\)</span> is the <span class="math inline">\(m\)</span> dimensional identity matrix.</p>
+<p><span class="math display">\[\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{I}_{m} \otimes \mathbf{x}^\top\]</span></p>
+<p>So this means we can write, <span class="math display">\[
 \frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{I}_{m} \otimes \mathbf{x}^\top
 \]</span> because we can see that each row of this matrix contains the derivative of <span class="math inline">\(b_i = \mathbf{a}_{i, :}^\top \mathbf{x}\)</span> with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span>, wherewe constructed <span class="math inline">\(\mathbf{a}^\prime\)</span> to be the stacking of the <em>rows</em> of <span class="math inline">\(\mathbf{A}\)</span>. The elements are zero apart from those associated with <span class="math inline">\(\mathbf{a}_{i, :}\)</span> where the elements are <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p><span class="math display">\[\frac{\text{d}}{\text{d} \mathbf{a}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m}\]</span></p>
+<p><span class="math display">\[\mathbf{x}^\top \otimes \mathbf{I}_{m} = \begin{bmatrix}
+x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
+\end{bmatrix}\]</span></p>
 <p>Now, to get the gradient with respect to <span class="math inline">\(\mathbf{a} = \mathbf{A}:\)</span> instead of with respect to <span class="math inline">\(\mathbf{a}^\prime\)</span> we reverse the order of the Kronecker product <span class="math display">\[
-\frac{\text{d}}{\text{d} \mathbf{a^\prime}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
+\frac{\text{d}}{\text{d} \mathbf{a}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
 \]</span> which disperses the elements of <span class="math inline">\(\mathbf{x}\)</span> across the matrix, <span class="math display">\[
 \mathbf{x}^\top \otimes \mathbf{I}_{m}  = \begin{bmatrix}
 x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
@@ -306,28 +339,39 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/chain-rule-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/chain-rule-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>We’re now in a position to write down the chain rule for neural networks.</p>
+<p><span class="math display">\[\mathbf{ f}_\ell= \mathbf{W}_\ell\boldsymbol{ \phi}_{\ell-1}\]</span></p>
+<p><span class="math display">\[\boldsymbol{ \phi}_{\ell} = \boldsymbol{ \phi}_{\ell}(\mathbf{ f}_{\ell})\]</span></p>
 <p>To make our derivations general, we will split up the neural network in the following way. First we describe the activations at layer <span class="math inline">\(\ell\)</span>, <span class="math inline">\(\mathbf{ f}_\ell\)</span> given the basis functions from the previous layer, <span class="math inline">\(\boldsymbol{ \phi}_{\ell-1}\)</span> in terms of the weight matrix, <span class="math inline">\(\mathbf{W}_\ell\)</span>. <span class="math display">\[
 \mathbf{ f}_\ell= \mathbf{W}_\ell\boldsymbol{ \phi}_{\ell-1}
 \]</span> where the basis vector at any given layer <span class="math inline">\(\ell\)</span> is given by applying the basis functions to the activations, <span class="math display">\[
 \boldsymbol{ \phi}_{\ell} = \boldsymbol{ \phi}_{\ell}(\mathbf{ f}_{\ell}),
-\]</span> where <span class="math inline">\(\mathbf{ f}_{\ell}(\cdot)\)</span> represents the form of the basis functions at the <span class="math inline">\(\ell\)</span>th layer. These two equations give us everything we need apart from the first layer and final layers where we have <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{ f}_{\ell}(\cdot)\)</span> represents the form of the basis functions at the <span class="math inline">\(\ell\)</span>th layer.</p>
+<p><span class="math display">\[f_1 = \mathbf{W}_1 \mathbf{ x}\]</span></p>
+<p><span class="math display">\[\mathbf{h} = \mathbf{h}(\mathbf{ f}_L)\]</span></p>
+<p>These two equations give us everything we need apart from the first layer and final layers where we have <span class="math display">\[
 f_1 = \mathbf{W}_1 \mathbf{ x}
 \]</span> for the first layer. Here we are <em>not</em> showing the index on the data point <span class="math inline">\(i\)</span> to avoid cluttering the notation. In the final layer we have the output of the network given by the inverse link function, <span class="math display">\[
 \mathbf{h} = \mathbf{h}(\mathbf{ f}_L).
 \]</span> so we can assume dummy-basis functions for the output layer and take <span class="math inline">\(\mathbf{h} = \boldsymbol{ \phi}_L\)</span>.</p>
 <p>This formalism isn’t fully general as it doesn’t capture the possibility of skip connections where a weight matrix connects e.g. basis functions from layer <span class="math inline">\(\ell-2\)</span> to the activations of layer <span class="math inline">\(\ell\)</span>. But it’s sufficient to capture the main aspects of deep neural network gradients.</p>
-<p>These fundamental operations now allow us to use our matrix derivative rules to compute the gradients of the neural network with respect to any layer of weights. To do this we need three fundamental gradients. First the activation gradient, <span class="math inline">\(\tfrac{\text{d}\mathbf{ f}_\ell}{\text{d}\mathbf{ w}_\ell}\)</span> where we have defined <span class="math inline">\(\mathbf{ f}_\ell= (\mathbf{ f}_\ell)\!:\)</span>. This gradient is between a <span class="math inline">\(d_\ell\)</span> dimensional vector, <span class="math inline">\(\mathbf{ f}_\ell\)</span>, and a <span class="math inline">\((d_{\ell-1})d\times 1\)</span> dimensional vector, so it produces a matrix that is <span class="math inline">\(d_\ell\times (d_{\ell-1} d)\)</span>, <span class="math display">\[
+<p>These fundamental operations now allow us to use our matrix derivative rules to compute the gradients of the neural network with respect to any layer of weights. To do this we need three fundamental gradients. First the activation gradient,</p>
+<p><span class="math display">\[\frac{\text{d}\mathbf{ f}_\ell}{\text{d}\mathbf{ w}_\ell} = \boldsymbol{ \phi}_{\ell-1}^\top \otimes \mathbf{I}_{d_\ell}\]</span></p>
+<p><span class="math inline">\(\tfrac{\text{d}\mathbf{ f}_\ell}{\text{d}\mathbf{ w}_\ell}\)</span> where we have defined <span class="math inline">\(\mathbf{ f}_\ell= (\mathbf{ f}_\ell)\!:\)</span>. This gradient is between a <span class="math inline">\(d_\ell\)</span> dimensional vector, <span class="math inline">\(\mathbf{ f}_\ell\)</span>, and a <span class="math inline">\((d_{\ell-1})d\times 1\)</span> dimensional vector, so it produces a matrix that is <span class="math inline">\(d_\ell\times (d_{\ell-1} d)\)</span>, <span class="math display">\[
 \frac{\text{d}\mathbf{ f}_\ell}{\text{d}\mathbf{ w}_\ell}
 = \boldsymbol{ \phi}_{\ell-1}^\top \otimes \mathbf{I}_{d_\ell}.  
 \]</span></p>
+<p><span class="math display">\[\frac{\text{d}\boldsymbol{ \phi}_{\ell}}{\text{d} \mathbf{ f}_{\ell}} = \boldsymbol{ \Phi}^\prime\]</span></p>
+<p><span class="math display">\[\frac{\text{d}\phi_i^{(\ell)}(\mathbf{ f}_{\ell})}{\text{d} f_j^{(\ell)}}\]</span></p>
 <p>We represent the gradient <span class="math display">\[
 \frac{\text{d}\boldsymbol{ \phi}_{\ell}}{\text{d} \mathbf{ f}_{\ell}} = \boldsymbol{ \Phi}^\prime
 \]</span> which is a <span class="math inline">\(d_\ell\times d_\ell\)</span> sized matrix whose elements are given by <span class="math display">\[
 \frac{\text{d}\phi_i^{(\ell)}(\mathbf{ f}_{\ell})}{\text{d} f_j^{(\ell)}}
 \]</span> where <span class="math inline">\(\phi_i^{(\ell)}(\mathbf{ f}_{\ell})\)</span> is the <span class="math inline">\(i\)</span>th basis function from the <span class="math inline">\(\ell\)</span>th layer and <span class="math inline">\(f_j^{(\ell)}\)</span> is the <span class="math inline">\(j\)</span>th activation from the same layer. If <span class="math inline">\(\phi_i^{(\ell)}(\mathbf{ f}_{\ell}) = \phi_i^{(\ell)}(f^{(\ell)}_i)\)</span> then this matrix is diagonal.</p>
+<p><span class="math display">\[\frac{\text{d}\mathbf{ f}_\ell}{\text{d}\boldsymbol{ \phi}_{\ell-1}} = \mathbf{W}_\ell\]</span></p>
 <p>Then we have the <em>across layer</em> gradients <span class="math display">\[
 \frac{\text{d}\mathbf{ f}_\ell}{\text{d}\boldsymbol{ \phi}_{\ell-1}} = \mathbf{W}_\ell,
 \]</span> which should be a <span class="math inline">\(d_\ell\times d_{\ell-1}\)</span> size matrix, which matches the shape of <span class="math inline">\(\mathbf{W}_\ell\)</span>.</p>
+<p><span class="math display">\[\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} = \left[\prod_{i=0}^{k-1} \frac{\text{d} \mathbf{ f}_{\ell - i}}{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}\frac{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}{\text{d} \mathbf{ f}_{\ell - i -1}}\right] \frac{\text{d} \mathbf{ f}_{\ell-k}}{\text{d} \mathbf{ w}_{\ell - k}}\]</span></p>
 <p>This now gives us the ability to compute the gradient of any <span class="math inline">\(\mathbf{W}_\ell\)</span> in the model, <span class="math display">\[
 \frac{\text{d}
 \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} =
