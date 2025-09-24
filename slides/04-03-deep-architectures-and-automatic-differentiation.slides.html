@@ -775,6 +775,9 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
 \small
 d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\ell d_{\ell-1}
 \]</span></p>
+</section>
+<section id="automatic-differentiation-1" class="slide level2">
+<h2>Automatic Differentiation</h2>
 <p><em>Reverse-mode</em></p>
 <p><span class="math display">\[
 \small
@@ -790,13 +793,18 @@ d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\e
 </section>
 <section id="forward-mode" class="slide level2">
 <h2>Forward-mode</h2>
-<p>Store only: * current activation <span class="math inline">\(\mathbf{ f}_l\)</span> (<span class="math inline">\(d_l\)</span>) * running JVP of size <span class="math inline">\(d_0 \times d_l\)</span> * current Jacobian <span class="math inline">\(d_l \times d_{l+1}\)</span></p>
+<p>Store only:</p>
+<ul>
+<li>current activation <span class="math inline">\(\mathbf{ f}_l\)</span> (<span class="math inline">\(d_l\)</span>)</li>
+<li>running JVP of size <span class="math inline">\(d_0 \times d_l\)</span></li>
+<li>current Jacobian <span class="math inline">\(d_l \times d_{l+1}\)</span></li>
+</ul>
 </section>
 <section id="reverse-mode" class="slide level2">
 <h2>Reverse-mode</h2>
 <p>Cache activations <span class="math inline">\(\{\mathbf{ f}_l\}\)</span> so local Jacobians can be applied during backward; higher memory than forward-mode.</p>
 </section>
-<section id="automatic-differentiation-1" class="slide level2">
+<section id="automatic-differentiation-2" class="slide level2">
 <h2>Automatic differentiation</h2>
 <ul>
 <li>in deep learning we’re most interested in scalar objectives</li>
@@ -814,6 +822,11 @@ d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\e
 <li><em>Terminology</em>: forward-mode = JVP; reverse-mode = VJP</li>
 <li><em>Non-scalar outputs</em>: seed vector required (e.g. <code>backward(grad_outputs)</code>)</li>
 <li><em>Stopping grads</em>: <code>.detach()</code>, <code>no_grad()</code> in PyTorch</li>
+</ul>
+</section>
+<section id="autodiff-practical-details-1" class="slide level2">
+<h2>Autodiff: Practical Details</h2>
+<ul>
 <li><em>Grad accumulation</em>: <code>.grad</code> accumulates by default; call <code>zero_grad()</code></li>
 <li><em>Memory</em>: backprop caches intermediates; use checkpointing/rematerialisation</li>
 <li><em>Mixed-mode</em>: combine forward+reverse for Hessian-vector products</li>
@@ -914,14 +927,14 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 <section id="example-calculating-a-hessian" class="slide level2">
 <h2>Example: calculating a Hessian</h2>
 <p><span class="math display">\[
-H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\mathbf{w})
-:= \frac{\partial}{\partial\mathbf{w}} \mathbf{g}(\mathbf{w})
+H(\mathbb{w}) = \frac{\text{d}^2}{\text{d}\mathbf{ w}\text{d}\mathbf{ w}^\top} L(\mathbf{ w})
+:= \frac{\text{d}}{\text{d}\mathbf{ w}} \mathbf{g}(\mathbf{ w})
 \]</span></p>
 </section>
 <section id="example-hessian-vector-product" class="slide level2">
 <h2>Example: Hessian-vector product</h2>
 <p><span class="math display">\[
-\mathbf{v}^\top H(\mathbf{w}) = \frac{\partial}{\partial\mathbf{w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{w}) \right)
+\mathbf{v}^\top H(\mathbf{ w}) = \frac{\text{d}}{\text{d}\mathbf{ w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{ w}) \right)
 \]</span></p>
 </section>
 <section id="further-reading-1" class="slide level2 scrollable">

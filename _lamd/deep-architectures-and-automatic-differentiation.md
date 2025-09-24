@@ -95,16 +95,16 @@ models to generalise well.}
 \subsection{Example: calculating a Hessian}
 
 $$
-H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\mathbf{w})
-:= \frac{\partial}{\partial\mathbf{w}} \mathbf{g}(\mathbf{w})
+H(\mathbb{w}) = \frac{\text{d}^2}{\text{d}\weightVector\text{d}\weightVector^\top} L(\weightVector)
+:= \frac{\text{d}}{\text{d}\weightVector} \mathbf{g}(\weightVector)
 $$
 
-\notes{Efficient strategy: compute $\mathbf{g}(\mathbf{w})$ with reverse-mode, then apply forward-mode to obtain Hessian columns or HVPs (reverse-over-forward). Framework helpers: JAX `jax.jacfwd(jax.jacrev(f))`, PyTorch `autograd.functional.hessian` (memory heavy for large models).}
+\notes{Efficient strategy: compute $\mathbf{g}(\weightVector)$ with reverse-mode, then apply forward-mode to obtain Hessian columns or HVPs (reverse-over-forward). Framework helpers: JAX `jax.jacfwd(jax.jacrev(f))`, PyTorch `autograd.functional.hessian` (memory heavy for large models).}
 
 \subsection{Example: Hessian-vector product}
 
 $$
-\mathbf{v}^\top H(\mathbf{w}) = \frac{\partial}{\partial\mathbf{w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{w}) \right)
+\mathbf{v}^\top H(\weightVector) = \frac{\text{d}}{\text{d}\weightVector} \left( \mathbf{v}^\top \mathbf{g}(\weightVector) \right)
 $$
 
 \notes{Live-coding HVP in PyTorch (mixed-mode via backward-over-backward or autograd.functional). Using a quadratic ensures a non-zero Hessian (2I):}

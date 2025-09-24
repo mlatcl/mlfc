@@ -611,13 +611,13 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{W}_4 \mathbf{W}_3 \mathbf{W}_2 \mathbf{W}_1
 <h2 id="further-reading">Further Reading</h2>
 <h2 id="example-calculating-a-hessian">Example: calculating a Hessian</h2>
 <p><span class="math display">\[
-H(\mathbb{w}) = \frac{\partial^2}{\partial\mathbf{w}\partial\mathbf{w}^\top} L(\mathbf{w})
-:= \frac{\partial}{\partial\mathbf{w}} \mathbf{g}(\mathbf{w})
+H(\mathbb{w}) = \frac{\text{d}^2}{\text{d}\mathbf{ w}\text{d}\mathbf{ w}^\top} L(\mathbf{ w})
+:= \frac{\text{d}}{\text{d}\mathbf{ w}} \mathbf{g}(\mathbf{ w})
 \]</span></p>
-<p>Efficient strategy: compute <span class="math inline">\(\mathbf{g}(\mathbf{w})\)</span> with reverse-mode, then apply forward-mode to obtain Hessian columns or HVPs (reverse-over-forward). Framework helpers: JAX <code>jax.jacfwd(jax.jacrev(f))</code>, PyTorch <code>autograd.functional.hessian</code> (memory heavy for large models).</p>
+<p>Efficient strategy: compute <span class="math inline">\(\mathbf{g}(\mathbf{ w})\)</span> with reverse-mode, then apply forward-mode to obtain Hessian columns or HVPs (reverse-over-forward). Framework helpers: JAX <code>jax.jacfwd(jax.jacrev(f))</code>, PyTorch <code>autograd.functional.hessian</code> (memory heavy for large models).</p>
 <h2 id="example-hessian-vector-product">Example: Hessian-vector product</h2>
 <p><span class="math display">\[
-\mathbf{v}^\top H(\mathbf{w}) = \frac{\partial}{\partial\mathbf{w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{w}) \right)
+\mathbf{v}^\top H(\mathbf{ w}) = \frac{\text{d}}{\text{d}\mathbf{ w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{ w}) \right)
 \]</span></p>
 <p>Live-coding HVP in PyTorch (mixed-mode via backward-over-backward or autograd.functional). Using a quadratic ensures a non-zero Hessian (2I):</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
