@@ -1,6 +1,7 @@
 ---
 layout: lecture
 title: Deep Architectures
+featured_image: slides/diagrams/deepnn/relu-network-2d.svg
 week: 4
 session: 3
 author:
