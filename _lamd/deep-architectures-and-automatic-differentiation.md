@@ -15,12 +15,23 @@ youtube: -9O5obQZUn0
 oldyoutube: 
 - code: m3KZLPed7aM
   year: 2021
+transition: None
 time: "9:30"
 date: 2025-09-24
 ---
 
 
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
+
+\section{Review}
+
+\notes{By this point in the course we have covered the foundations sufficiently for you to look at three Cambridge courses.}
+
+* [Advanced Data Science](https://mlatcl.github.io/advds/)
+* [ML and the Physical World](https://mlatcl.github.io/mlphysical/)
+* [Deep Neural Networks](https://mlatcl.github.io/deepnn/)
+
+\notes{Today we will give some insight into the third of those courses, deep neural networks.}
 
 \section{Basis Functions to Neural Networks}
 
