@@ -88,6 +88,8 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left
 f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span> We defined a basis, such as the polynomial basis.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<br />
+
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/neural-network.svg" width="70%" style=" ">
@@ -100,14 +102,23 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 <p>Figure: A neural network. Input nodes are shown at the bottom. The hidden layer is the result of applying an affine transformation to the input layer and placing through an activation function.</p>
 </div>
 </div>
-<p>}</p>
 <h2 id="deep-neural-network">Deep Neural Network</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install daft</span></code></pre></div>
-{import matplotlib # Comment for google colab (no latex available) matplotlib.rc(‘text,’ usetex=True) matplotlib.rcParams[‘text.latex.preamble’]=r’
-<p>’</p>
+<div class="figure">
+<div id="deep-neural-network-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/deep-neural-network.svg" width="50%" style=" ">
+</object>
+</div>
+<div id="deep-neural-network-magnify" class="magnify" onclick="magnifyFigure(&#39;deep-neural-network&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="deep-neural-network-caption" class="caption-frame">
+<p>Figure: A deep neural network</p>
+</div>
+</div>
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepgp/deep-nn2.svg" width="70%" style=" ">
@@ -231,9 +242,9 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 \]</span> We already have the gradient with respect to <span class="math inline">\(\mathbf{ w}\)</span>, which is simply. <span class="math display">\[
 \frac{\text{d}f_i}{\text{d}\mathbf{ w}} = \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}),
 \]</span></p>
-<p><span class="math display">\[\frac{\text{d}f^L_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\]</span></p>
+<p><span class="math display">\[\frac{\text{d}f_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\]</span></p>
 <p>we now need the gradient with respect to <span class="math inline">\(\mathbf{ v}\)</span>. This can be computed by the chain rule as, <span class="math display">\[
-\frac{\text{d}f^L_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}.
+\frac{\text{d}f_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}.
 \]</span> But we have to be careful here. This is the chain rule, but it contains a new challenge, <span class="math inline">\(\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\)</span> is the derivative of a <em>vector</em> with respect to a <em>matrix</em>. How do we deal with this?</p>
 <h2 id="matrix-vector-chain-rule">Matrix Vector Chain Rule</h2>
 <div style="text-align:right">
@@ -245,6 +256,12 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_maths/includes/matrix-stacking.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_maths/includes/matrix-stacking.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
+<p><span class="math display">\[\mathbf{a} = \begin{bmatrix}
+\mathbf{a}_{:, 1}\\
+\mathbf{a}_{:, 2}\\
+\vdots\\
+\mathbf{a}_{:, q}
+\end{bmatrix}\]</span></p>
 <p>A stacking operation takes a matrix, <span class="math inline">\(\mathbf{A}\)</span>, and rewrites it as a vector where each column of <span class="math inline">\(\mathbf{A}\)</span> is stacked on top of one another to give a new vector <span class="math inline">\(\mathbf{a}\)</span>, <span class="math display">\[
 \mathbf{a} = \begin{bmatrix}
 \mathbf{a}_{:, 1}\\
@@ -265,6 +282,84 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i; \mathbf{V}
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_maths/includes/kronecker-products.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_maths/includes/kronecker-products.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
+<h2 id="visual-examples">Visual Examples</h2>
+<div class="figure">
+<div id="kronecker-illustrate-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_illustrate.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="kronecker-illustrate-magnify" class="magnify" onclick="magnifyFigure(&#39;kronecker-illustrate&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="kronecker-illustrate-caption" class="caption-frame">
+<p>Figure: Illustration of the Kronecker product.</p>
+</div>
+</div>
+<div class="figure">
+<div id="kronecker-ik-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK.svg" width="80%" style=" ">
+</object>
+</div>
+<div id="kronecker-ik-magnify" class="magnify" onclick="magnifyFigure(&#39;kronecker-ik&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="kronecker-ik-caption" class="caption-frame">
+<p>Figure: Kronecker product between two matrices.</p>
+</div>
+</div>
+<div class="figure">
+<div id="kronecker-ik-highlighted-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK_highlighted005.svg" width="60%" style=" ">
+</object>
+</div>
+<div id="kronecker-ik-highlighted-magnify" class="magnify" onclick="magnifyFigure(&#39;kronecker-ik-highlighted&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="kronecker-ik-highlighted-caption" class="caption-frame">
+<p>Figure: The marginal distribution for the first three variables (highlighted) is given by <span class="math inline">\(\mathbf{K}\)</span> when the form of stacking is <span class="math inline">\(\mathbf{I} \otimes \mathbf{K}\)</span>. This is the ‘column stacking’ case.</p>
+</div>
+</div>
+<div class="figure">
+<div id="kronecker-ki-highlighted-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_KI_highlighted002.svg" width="60%" style=" ">
+</object>
+</div>
+<div id="kronecker-ki-highlighted-magnify" class="magnify" onclick="magnifyFigure(&#39;kronecker-ki-highlighted&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="kronecker-ki-highlighted-caption" class="caption-frame">
+<p>Figure: The marginal distribution for the first three variables (highlighted) is independent when the form of stacking is <span class="math inline">\(\mathbf{K} \otimes \mathbf{I}\)</span>. This is the ‘row stacking’ case.</p>
+</div>
+</div>
+<p><span class="math display">\[(\mathbf{A} \otimes \mathbf{B})_{ij} = a_{i_1 j_1} b_{i_2 j_2}\]</span></p>
+<p>The Kronecker product of two matrices <span class="math inline">\(\mathbf{A} \in \Re^{m \times n}\)</span> and <span class="math inline">\(\mathbf{B} \in \Re^{p \times q}\)</span> is defined as: <span class="math display">\[
+(\mathbf{A} \otimes \mathbf{B})_{ij} = a_{i_1 j_1} b_{i_2 j_2}
+\]</span> where <span class="math inline">\(i = (i_1-1)p + i_2\)</span> and <span class="math inline">\(j = (j_1-1)q + j_2\)</span>.</p>
+<h2 id="matrix-stacking-and-kronecker-products">Matrix Stacking and Kronecker Products</h2>
+<p>There are two main ways to stack matrices:</p>
+<p><strong>Column Stacking</strong>: Each column of <span class="math inline">\(\mathbf{A}\)</span> becomes a block: <span class="math display">\[
+\mathbf{a} = \begin{bmatrix}
+\mathbf{a}_{:, 1}\\
+\mathbf{a}_{:, 2}\\
+\vdots\\
+\mathbf{a}_{:, n}
+\end{bmatrix}
+\]</span></p>
+<p><strong>Row Stacking</strong>: Each row of <span class="math inline">\(\mathbf{A}\)</span> becomes a block: <span class="math display">\[
+\mathbf{a} = \begin{bmatrix}
+\mathbf{a}_{1, :}\\
+\mathbf{a}_{2, :}\\
+\vdots\\
+\mathbf{a}_{m, :}
+\end{bmatrix}
+\]</span></p>
+<h2 id="computational-advantages">Computational Advantages</h2>
+<p>The Kronecker structure provides significant computational advantages</p>
+<ol type="1">
+<li><strong>Memory efficiency</strong>: Instead of storing an <span class="math inline">\(n \times n\)</span> matrix, we store smaller component matrices</li>
+<li><strong>Computational efficiency</strong>: Matrix operations scale better with Kronecker structure</li>
+<li><strong>Numerical stability</strong>: Often more stable than direct computation of large matrices</li>
+</ol>
 <p><span class="math display">\[(\mathbf{E}:)^{\top} \mathbf{F} \otimes \mathbf{G}=\left(\left(\mathbf{G}^{\top} \mathbf{E F}\right):\right)^{\top}\]</span></p>
 <p>In most cases Kronecker products they arise below they are later removed using this relationship <span class="math display">\[
 (\mathbf{E}:)^{\top} \mathbf{F} \otimes \mathbf{G}=\left(\left(\mathbf{G}^{\top} \mathbf{E F}\right):\right)^{\top}

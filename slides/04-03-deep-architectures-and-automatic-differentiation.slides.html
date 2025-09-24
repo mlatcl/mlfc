@@ -112,6 +112,8 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left
 <p><span class="math display">\[
 f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span></p>
+<br />
+
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//ml/neural-network.svg" width="70%" style=" ">
@@ -121,14 +123,18 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 <aside class="notes">
 A neural network. Input nodes are shown at the bottom. The hidden layer is the result of applying an affine transformation to the input layer and placing through an activation function.
 </aside>
-<p>}</p>
 </section>
 <section id="deep-neural-network" class="slide level2">
 <h2>Deep Neural Network</h2>
-{import matplotlib # Comment for google colab (no latex available) matplotlib.rc(‘text,’ usetex=True) matplotlib.rcParams[‘text.latex.preamble’]=r’
-<p>’</p>
+<div class="figure">
+<div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/deep-neural-network.svg" width="50%" style=" ">
 </object>
+</div>
+</div>
+<aside class="notes">
+A deep neural network
+</aside>
 </section>
 <section id="deep-neural-network-1" class="slide level2">
 <h2>Deep Neural Network</h2>
@@ -281,7 +287,7 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 </section>
 <section id="chain-rule-application" class="slide level2">
 <h2>Chain Rule Application</h2>
-<p><small><span class="math display">\[\frac{\text{d}f^L_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\]</span></small></p>
+<p><span class="math display">\[\frac{\text{d}f_i}{\text{d}\mathbf{V}} = \frac{\text{d}f_i}{\text{d}\boldsymbol{ \phi}_i}\frac{\text{d}\boldsymbol{ \phi}_i}{\text{d} \mathbf{V}}\]</span></p>
 </section>
 <section id="the-matrix-challenge" class="slide level2">
 <h2>The Matrix Challenge</h2>
@@ -305,17 +311,36 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 <section id="brookes-approach" class="slide level2">
 <h2>Brookes’ Approach</h2>
 <ul>
-<li><strong>Never compute</strong> matrix derivatives directly</li>
+<li><em>Never</em> compute matrix derivatives directly</li>
 <li><strong>Stacking operation</strong>: intermediate step</li>
 <li><strong>Vector derivatives</strong>: easier to handle</li>
 </ul>
 </section>
 <section id="matrix-stacking" class="slide level2">
 <h2>Matrix Stacking</h2>
+<ul>
+<li><strong>Input</strong>: matrix <span class="math inline">\(\mathbf{A}\)</span></li>
+<li><strong>Output</strong>: vector <span class="math inline">\(\mathbf{a}\)</span></li>
+<li><strong>Process</strong>: stack columns vertically</li>
+</ul>
+</section>
+<section id="stacking-formula" class="slide level2">
+<h2>Stacking Formula</h2>
+<p><small><span class="math display">\[\mathbf{a} = \begin{bmatrix}
+\mathbf{a}_{:, 1}\\
+\mathbf{a}_{:, 2}\\
+\vdots\\
+\mathbf{a}_{:, q}
+\end{bmatrix}\]</span></small></p>
+<ul>
+<li><strong>Column stacking</strong>: each column becomes a block</li>
+<li><strong>Order</strong>: first column at top, last at bottom</li>
+<li><strong>Size</strong>: <span class="math inline">\(mn \times 1\)</span> vector from <span class="math inline">\(m \times n\)</span> matrix</li>
+</ul>
 </section>
 <section id="vector-derivatives" class="slide level2">
 <h2>Vector Derivatives</h2>
-<p><small><span class="math display">\[\frac{\text{d} \mathbf{a}}{\text{d} \mathbf{b}} \in \Re^{m \times n}\]</span></small></p>
+<p><span class="math display">\[\frac{\text{d} \mathbf{a}}{\text{d} \mathbf{b}} \in \Re^{m \times n}\]</span></p>
 <ul>
 <li><strong>Input</strong>: <span class="math inline">\(\mathbf{a} \in \Re^{m \times 1}\)</span>, <span class="math inline">\(\mathbf{b} \in \Re^{n \times 1}\)</span></li>
 <li><strong>Output</strong>: <span class="math inline">\(m \times n\)</span> matrix</li>
@@ -325,14 +350,14 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 <section id="matrix-stacking-notation" class="slide level2">
 <h2>Matrix Stacking Notation</h2>
 <ul>
-<li><strong><span class="math inline">\(\mathbf{C}:\)</span></strong>: vector formed from matrix <span class="math inline">\(\mathbf{C}\)</span></li>
+<li><strong><span class="math inline">\(\mathbf{C}\!:\)</span></strong> vector formed from matrix <span class="math inline">\(\mathbf{C}\)</span></li>
 <li><strong>Stacking</strong>: columns of <span class="math inline">\(\mathbf{C}\)</span> → <span class="math inline">\(\Re^{mn \times 1}\)</span> vector</li>
 <li><strong>Condition</strong>: <span class="math inline">\(\mathbf{C} \in \Re^{m \times n}\)</span></li>
 </ul>
 </section>
 <section id="matrix-matrix-derivatives" class="slide level2">
 <h2>Matrix-Matrix Derivatives</h2>
-<p><small><span class="math display">\[\frac{\text{d} \mathbf{E}}{\text{d} \mathbf{C}} \in \Re^{pq \times mn}\]</span></small></p>
+<p><span class="math display">\[\frac{\text{d} \mathbf{E}}{\text{d} \mathbf{C}} \in \Re^{pq \times mn}\]</span></p>
 <ul>
 <li><strong>Input</strong>: <span class="math inline">\(\mathbf{E} \in \Re^{p \times q}\)</span>, <span class="math inline">\(\mathbf{C} \in \Re^{m \times n}\)</span></li>
 <li><strong>Output</strong>: <span class="math inline">\(pq \times mn\)</span> matrix</li>
@@ -350,9 +375,179 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 <section id="kronecker-products-1" class="slide level2">
 <h2>Kronecker Products</h2>
 </section>
+<section id="kronecker-product-definition" class="slide level2">
+<h2>Kronecker Product Definition</h2>
+<ul>
+<li><strong>Notation</strong>: <span class="math inline">\(\mathbf{A} \otimes \mathbf{B}\)</span></li>
+<li><strong>Input</strong>: matrices <span class="math inline">\(\mathbf{A} \in \Re^{m \times n}\)</span>, <span class="math inline">\(\mathbf{B} \in \Re^{p \times q}\)</span></li>
+<li><strong>Output</strong>: <span class="math inline">\((mp) \times (nq)\)</span> matrix</li>
+</ul>
+</section>
+<section id="visual-examples" class="slide level2">
+<h2>Visual Examples</h2>
+<div class="figure">
+<div id="kronecker-illustrate-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_illustrate.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Illustration of the Kronecker product.
+</aside>
+</section>
+<section id="kronecker-product-visualization" class="slide level2">
+<h2>Kronecker Product Visualization</h2>
+<div class="figure">
+<div id="kronecker-ik-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Kronecker product between two matrices.
+</aside>
+</section>
+<section id="column-vs-row-stacking" class="slide level2">
+<h2>Column vs Row Stacking</h2>
+<ul>
+<li><strong>Column stacking</strong>: <span class="math inline">\(\mathbf{I} \otimes \mathbf{K}\)</span> - time independence</li>
+<li><strong>Row stacking</strong>: <span class="math inline">\(\mathbf{K} \otimes \mathbf{I}\)</span> - dimension independence<br />
+</li>
+<li><strong>Different structure</strong>: affects which variables are correlated</li>
+</ul>
+</section>
+<section id="column-stacking-animation" class="slide level2">
+<h2>Column Stacking Animation</h2>
+<div>
+<script>
+showDivs(0, 'kronecker-IK-highlighted');
+</script>
+<p><small></small> <input id="range-kronecker-IK-highlighted" type="range" min="0" max="5" value="0" onchange="setDivs('kronecker-IK-highlighted')" oninput="setDivs('kronecker-IK-highlighted')"> <button onclick="plusDivs(-1, 'kronecker-IK-highlighted');">❮</button> <button onclick="plusDivs(1, 'kronecker-IK-highlighted');">❯</button></p>
+<div class="kronecker-IK-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK_highlighted001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-IK-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK_highlighted002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-IK-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK_highlighted003.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-IK-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK_highlighted004.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-IK-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_IK_highlighted005.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+</section>
+<section id="row-stacking-animation" class="slide level2">
+<h2>Row Stacking Animation</h2>
+<div>
+<script>
+showDivs(1, 'kronecker-ki-highlighted');
+</script>
+<p><small></small> <input id="range-kronecker-ki-highlighted" type="range" min="1" max="5" value="1" onchange="setDivs('kronecker-ki-highlighted')" oninput="setDivs('kronecker-ki-highlighted')"> <button onclick="plusDivs(-1, 'kronecker-ki-highlighted');">❮</button> <button onclick="plusDivs(1, 'kronecker-ki-highlighted');">❯</button></p>
+<div class="kronecker-ki-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_KI_highlighted001.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-ki-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_KI_highlighted002.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-ki-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_KI_highlighted003.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-ki-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_KI_highlighted004.svg" width="80%" style=" ">
+</object>
+</div>
+<div class="kronecker-ki-highlighted" style="text-align:center;">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//kern/kronecker_KI_highlighted005.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+</section>
+<section id="kronecker-product-formula" class="slide level2">
+<h2>Kronecker Product Formula</h2>
+<p><small><span class="math display">\[(\mathbf{A} \otimes \mathbf{B})_{ij} = a_{i_1 j_1} b_{i_2 j_2}\]</span></small></p>
+<ul>
+<li><strong>Index mapping</strong>: <span class="math inline">\(i = (i_1-1)p + i_2\)</span>, <span class="math inline">\(j = (j_1-1)q + j_2\)</span></li>
+<li><strong>Block structure</strong>: each element of <span class="math inline">\(\mathbf{A}\)</span> scaled by <span class="math inline">\(\mathbf{B}\)</span></li>
+<li><strong>Size</strong>: <span class="math inline">\((mp) \times (nq)\)</span> result</li>
+</ul>
+</section>
+<section id="basic-properties" class="slide level2">
+<h2>Basic Properties</h2>
+<ul>
+<li><strong>Distributive</strong>: <span class="math inline">\((\mathbf{A} + \mathbf{B}) \otimes \mathbf{C} = \mathbf{A} \otimes \mathbf{C} + \mathbf{B} \otimes \mathbf{C}\)</span></li>
+<li><strong>Associative</strong>: <span class="math inline">\((\mathbf{A} \otimes \mathbf{B}) \otimes \mathbf{C} = \mathbf{A} \otimes (\mathbf{B} \otimes \mathbf{C})\)</span></li>
+<li><strong>Mixed product</strong>: <span class="math inline">\((\mathbf{A} \otimes \mathbf{B})(\mathbf{C} \otimes \mathbf{D}) = \mathbf{A}\mathbf{C} \otimes \mathbf{B}\mathbf{D}\)</span></li>
+</ul>
+</section>
+<section id="identity-and-zero" class="slide level2">
+<h2>Identity and Zero</h2>
+<ul>
+<li><strong>Identity</strong>: <span class="math inline">\(\mathbf{I}_m \otimes \mathbf{I}_n = \mathbf{I}_{mn}\)</span></li>
+<li><strong>Zero</strong>: <span class="math inline">\(\mathbf{0} \otimes \mathbf{A} = \mathbf{A} \otimes \mathbf{0} = \mathbf{0}\)</span></li>
+<li><strong>Scalar</strong>: <span class="math inline">\(c \otimes \mathbf{A} = \mathbf{A} \otimes c = c\mathbf{A}\)</span></li>
+</ul>
+</section>
+<section id="transpose-and-inverse" class="slide level2">
+<h2>Transpose and Inverse</h2>
+<ul>
+<li><strong>Transpose</strong>: <span class="math inline">\((\mathbf{A} \otimes \mathbf{B})^\top = \mathbf{A}^\top \otimes \mathbf{B}^\top\)</span></li>
+<li><strong>Inverse</strong>: <span class="math inline">\((\mathbf{A} \otimes \mathbf{B})^{-1} = \mathbf{A}^{-1} \otimes \mathbf{B}^{-1}\)</span> (when both exist)</li>
+<li><strong>Determinant</strong>: <span class="math inline">\(\det(\mathbf{A} \otimes \mathbf{B}) = \det(\mathbf{A})^q \det(\mathbf{B})^m\)</span></li>
+</ul>
+</section>
+<section id="matrix-stacking-and-kronecker-products" class="slide level2">
+<h2>Matrix Stacking and Kronecker Products</h2>
+</section>
+<section id="column-stacking" class="slide level2">
+<h2>Column Stacking</h2>
+<ul>
+<li><strong>Stacking</strong>: place columns of matrix on top of each other</li>
+<li><strong>Notation</strong>: <span class="math inline">\(\mathbf{a} = \text{vec}(\mathbf{A})\)</span></li>
+<li><strong>Kronecker form</strong>: <span class="math inline">\(\mathbf{I} \otimes \mathbf{K}\)</span> for column-wise structure</li>
+</ul>
+</section>
+<section id="row-stacking" class="slide level2">
+<h2>Row Stacking</h2>
+<ul>
+<li><strong>Alternative</strong>: stack rows instead of columns</li>
+<li><strong>Kronecker form</strong>: <span class="math inline">\(\mathbf{K} \otimes \mathbf{I}\)</span> for row-wise structure</li>
+<li><strong>Different structure</strong>: changes which variables are independent</li>
+</ul>
+</section>
+<section id="computational-advantages" class="slide level2">
+<h2>Computational Advantages</h2>
+</section>
+<section id="efficient-matrix-operations" class="slide level2">
+<h2>Efficient Matrix Operations</h2>
+<ul>
+<li><strong>Inversion</strong>: <span class="math inline">\((\mathbf{A} \otimes \mathbf{B})^{-1} = \mathbf{A}^{-1} \otimes \mathbf{B}^{-1}\)</span></li>
+<li><strong>Eigenvalues</strong>: <span class="math inline">\(\lambda_i(\mathbf{A} \otimes \mathbf{B}) = \lambda_j(\mathbf{A}) \lambda_k(\mathbf{B})\)</span></li>
+<li><strong>Determinant</strong>: <span class="math inline">\(\det(\mathbf{A} \otimes \mathbf{B}) = \det(\mathbf{A})^q \det(\mathbf{B})^m\)</span></li>
+</ul>
+</section>
+<section id="memory-and-speed-benefits" class="slide level2">
+<h2>Memory and Speed Benefits</h2>
+<ul>
+<li><strong>Storage</strong>: avoid storing full covariance matrix</li>
+<li><strong>Operations</strong>: work with smaller component matrices</li>
+<li><strong>Scaling</strong>: <span class="math inline">\(O(n^3)\)</span> becomes <span class="math inline">\(O(n_1^3 + n_2^3)\)</span> for <span class="math inline">\(n = n_1 n_2\)</span></li>
+</ul>
+</section>
 <section id="kronecker-product-simplification" class="slide level2">
 <h2>Kronecker Product Simplification</h2>
-<p><small><span class="math display">\[(\mathbf{E}:)^{\top} \mathbf{F} \otimes \mathbf{G}=\left(\left(\mathbf{G}^{\top} \mathbf{E F}\right):\right)^{\top}\]</span></small></p>
+<p><span class="math display">\[(\mathbf{E}:)^{\top} \mathbf{F} \otimes \mathbf{G}=\left(\left(\mathbf{G}^{\top} \mathbf{E F}\right):\right)^{\top}\]</span></p>
 <ul>
 <li><strong>Removal rule</strong>: Kronecker products often simplified</li>
 <li><strong>Chain rule</strong>: typically produces this form</li>
@@ -361,8 +556,8 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 </section>
 <section id="chain-rule-application-1" class="slide level2">
 <h2>Chain Rule Application</h2>
-<p><small><span class="math display">\[\frac{\text{d} E}{\text{d} \mathbf{H}:} \frac{\text{d} \mathbf{H}:}{\text{d} \mathbf{J}:}=\frac{\text{d} E}{\text{d} \mathbf{J}:}\]</span></small></p>
-<p><small><span class="math display">\[\frac{\text{d}\mathbf{H}}{\text{d} \mathbf{J}} = \mathbf{F} \otimes \mathbf{G}\]</span></small></p>
+<p><span class="math display">\[\frac{\text{d} E}{\text{d} \mathbf{H}:} \frac{\text{d} \mathbf{H}:}{\text{d} \mathbf{J}:}=\frac{\text{d} E}{\text{d} \mathbf{J}:}\]</span></p>
+<p><span class="math display">\[\frac{\text{d}\mathbf{H}}{\text{d} \mathbf{J}} = \mathbf{F} \otimes \mathbf{G}\]</span></p>
 </section>
 <section id="kronecker-product-identities" class="slide level2">
 <h2>Kronecker Product Identities</h2>
@@ -376,7 +571,7 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 <li><strong>Row vector</strong>: easier computation</li>
 <li><strong>Matrix</strong>: better summarization</li>
 </ul>
-<p><small><span class="math display">\[\frac{\text{d} E}{\text{d} \mathbf{J}:}=\left(\left(\frac{\text{d} E}{\text{d} \mathbf{J}}\right):\right)^{\top}\]</span></small></p>
+<p><span class="math display">\[\frac{\text{d} E}{\text{d} \mathbf{J}:}=\left(\left(\frac{\text{d} E}{\text{d} \mathbf{J}}\right):\right)^{\top}\]</span></p>
 </section>
 <section id="useful-multivariate-derivatives" class="slide level2">
 <h2>Useful Multivariate Derivatives</h2>
