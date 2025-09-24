@@ -96,6 +96,8 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install daft</span></code></pre></div>
+{import matplotlib # Comment for google colab (no latex available) matplotlib.rc(‘text,’ usetex=True) matplotlib.rcParams[‘text.latex.preamble’]=r’
+<p>’</p>
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepgp/deep-nn2.svg" width="70%" style=" ">
@@ -331,7 +333,7 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
 \frac{\text{d}}{\text{d} \mathbf{a}} \mathbf{A} \mathbf{x} = \mathbf{x}^\top \otimes \mathbf{I}_{m} 
 \]</span> which disperses the elements of <span class="math inline">\(\mathbf{x}\)</span> across the matrix, <span class="math display">\[
 \mathbf{x}^\top \otimes \mathbf{I}_{m}  = \begin{bmatrix}
-x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdot &amp; x_n \mathbf{I}_m
+x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
 \end{bmatrix}
 \]</span> and is the correct for when we are stacking the columns of $.</p>
 <h2 id="chain-rule-for-neural-networks">Chain Rule for Neural Networks</h2>
@@ -384,7 +386,7 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
 <p>See also the presentation by Ferenc Huszár on the Deep Neural Network course at the University of Cambridge. Ferenc’s original slides <a href="https://hackmd.io/@fhuszar/H1WZ70kl_#">are here</a> and his notes on approximating with ReLU are <a href="https://hackmd.io/@fhuszar/S1UdOvZe_">here</a>. His notes on automatic differentiation <a href="https://hackmd.io/@fhuszar/SyHTInWeu">are here</a>. His Google colab notebook is <a href="https://colab.research.google.com/drive/1qioPLq-dxOwudPKXU3MxpHr2s4Su3dxI?usp=sharing">here</a>. He also recommended a review paper from <a href="https://jmlr.org/papers/v18/17-468.html">JMLR</a> <span class="citation" data-cites="Baydin-autodiff18">Baydin et al. (2018)</span> (See Figure 2).</p>
-<p>The chain of matrix multiplications gives us a choice about how we evaluate this system. <span class="math display">\[
+<p>The chain of matrix multiplications gives us a choice about how we evaluate this system. If we want to take the derivative of the ouptut function with respect to the weights we need to compute the chain rule. <span class="math display">\[
 \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ w}} = \frac{\text{d} \mathbf{ f}_L}{\text{d} \mathbf{ f}_{L-1}} \frac{\text{d} \mathbf{ f}_{L-1}}{\text{d} \mathbf{ f}_{L-2}} \frac{\text{d} \mathbf{ f}_{L-2}}{\text{d} \mathbf{ f}_{L-3}} \cdots \frac{\text{d} \mathbf{ f}_3}{\text{d} \mathbf{ f}_{2}} \frac{\text{d} \mathbf{ f}_2}{\text{d} \mathbf{ f}_{1}} \frac{\text{d} \mathbf{ f}_1}{\text{d} \mathbf{ w}} 
 \]</span></p>
 <p><span class="math display">\[
