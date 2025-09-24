@@ -455,13 +455,19 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 \frac{\text{d}\mathbf{ f}_\ell}{\text{d}\boldsymbol{ \phi}_{\ell-1}} = \mathbf{W}_\ell,
 \]</span> which should be a <span class="math inline">\(d_\ell\times d_{\ell-1}\)</span> size matrix, which matches the shape of <span class="math inline">\(\mathbf{W}_\ell\)</span>.</p>
 <p><span class="math display">\[\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} = \left[\prod_{i=0}^{k-1} \frac{\text{d} \mathbf{ f}_{\ell - i}}{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}\frac{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}{\text{d} \mathbf{ f}_{\ell - i -1}}\right] \frac{\text{d} \mathbf{ f}_{\ell-k}}{\text{d} \mathbf{ w}_{\ell - k}}\]</span></p>
+<p><span class="math display">\[\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} = \left[\prod_{i=0}^{k-1} \mathbf{W}_{\ell - i} \boldsymbol{ \Phi}^\prime_{\ell - i -1}\right] \boldsymbol{ \phi}_{\ell-k-1}^\top \otimes \mathbf{I}_{d_{\ell-k}}\]</span></p>
 <p>This now gives us the ability to compute the gradient of any <span class="math inline">\(\mathbf{W}_\ell\)</span> in the model, <span class="math display">\[
 \frac{\text{d}
 \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} =
 \left[\prod_{i=0}^{k-1} \frac{\text{d} \mathbf{ f}_{\ell - i}}{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}\frac{\text{d} \boldsymbol{ \phi}_{\ell - i -1}}{\text{d} \mathbf{ f}_{\ell - i -1}}\right]
 \frac{\text{d} \mathbf{ f}_{\ell-k}}{\text{d}
 \mathbf{ w}_{\ell - k}}
-\]</span></p>
+\]</span> Substituting the matrix derivatives we derived: <span class="math display">\[
+\frac{\text{d}
+\mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} =
+\left[\prod_{i=0}^{k-1} \mathbf{W}_{\ell - i} \boldsymbol{ \Phi}^\prime_{\ell - i -1}\right]
+\boldsymbol{ \phi}_{\ell-k-1}^\top \otimes \mathbf{I}_{d_{\ell-k}}
+\]</span> where <span class="math inline">\(\boldsymbol{ \Phi}^\prime_{\ell - i -1}\)</span> is the derivative matrix for the basis functions at layer <span class="math inline">\(\ell - i -1\)</span>. This gives us the complete gradient computation for any weight matrix in the network.</p>
 <h2 id="evaluating-derivatives">Evaluating Derivatives</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>

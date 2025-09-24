@@ -374,9 +374,6 @@ Deep ReLU network output showing complex piecewise-linear regions in 2D. Each re
 </section>
 <section id="kronecker-products-1" class="slide level2">
 <h2>Kronecker Products</h2>
-</section>
-<section id="kronecker-product-definition" class="slide level2">
-<h2>Kronecker Product Definition</h2>
 <ul>
 <li><strong>Notation</strong>: <span class="math inline">\(\mathbf{A} \otimes \mathbf{B}\)</span></li>
 <li><strong>Input</strong>: matrices <span class="math inline">\(\mathbf{A} \in \Re^{m \times n}\)</span>, <span class="math inline">\(\mathbf{B} \in \Re^{p \times q}\)</span></li>
@@ -674,6 +671,15 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
 <li><strong>Product</strong>: of all intermediate gradients</li>
 <li><strong>Chain</strong>: from layer <span class="math inline">\(\ell\)</span> back to layer <span class="math inline">\(\ell-k\)</span></li>
 <li><strong>Complete</strong>: gradient computation for any layer</li>
+</ul>
+</section>
+<section id="substituted-matrix-form" class="slide level2">
+<h2>Substituted Matrix Form</h2>
+<p><small><span class="math display">\[\frac{\text{d} \mathbf{ f}_\ell}{\text{d}\mathbf{ w}_{\ell-k}} = \left[\prod_{i=0}^{k-1} \mathbf{W}_{\ell - i} \boldsymbol{ \Phi}^\prime_{\ell - i -1}\right] \boldsymbol{ \phi}_{\ell-k-1}^\top \otimes \mathbf{I}_{d_{\ell-k}}\]</span></small></p>
+<ul>
+<li><strong>Weight matrices</strong>: <span class="math inline">\(\mathbf{W}_{\ell - i}\)</span> for across-layer gradients</li>
+<li><strong>Basis derivatives</strong>: <span class="math inline">\(\boldsymbol{ \Phi}^\prime_{\ell - i -1}\)</span> for activation derivatives</li>
+<li><strong>Final term</strong>: Kronecker product for activation gradient</li>
 </ul>
 </section>
 <section id="evaluating-derivatives" class="slide level2">
