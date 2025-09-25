@@ -49,11 +49,7 @@ reveal: True
 
 \include{_dimred/includes/ppca-marginal-likelihood.md}
 \include{_dimred/includes/ppca-reconstruction.md}
-
-
-\include{_dimred/includes/dimensionality-reduction-failure-modes.md}
 \include{_dimred/includes/visualisation-motivation.md}
-
 
 
 \thanks

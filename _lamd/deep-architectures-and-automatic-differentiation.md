@@ -39,6 +39,9 @@ date: 2025-09-24
 \include{_deepnn/includes/deep-neural-network.md}
 \include{_deepnn/includes/from-shallow-to-deep.md}
 \include{_ml/includes/chain-rule-and-back-propagation.md}
+\include{_ml/includes/loss-functions.md}
+\include{_deepnn/includes/simple-deep-nn-implementation.md}
+
 \include{_ml/includes/automatic-differentiation.md}
 
 \subsection{Overparameterised Systems}

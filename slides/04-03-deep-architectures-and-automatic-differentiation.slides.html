@@ -213,6 +213,42 @@ f(x) &amp;= \mathbf{w}_2^{\top} \, \mathbf{h}(x)
 <aside class="notes">
 Output of a 2D ReLU network with 3 hidden units, showing piecewise-linear regions.
 </aside>
+</section>
+<section id="relu-activations" class="slide level2">
+<h2>ReLU Activations</h2>
+<div class="figure">
+<div id="relu-activations-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/relu-activations.svg" width="50%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Decision boundaries for the ReLU network.
+</aside>
+</section>
+<section id="decision-boundaries" class="slide level2">
+<h2>Decision Boundaries</h2>
+<div class="figure">
+<div id="decision-boundaries-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/activation-summary.svg" width="50%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Decision boundaries for the ReLU network.
+</aside>
+</section>
+<section id="decision-boundaries-1" class="slide level2">
+<h2>Decision Boundaries</h2>
+<div class="figure">
+<div id="decision-boundaries-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/decision-boundaries.svg" width="50%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Decision boundaries for the ReLU network.
+</aside>
 <p>Complexity (1D): number of kinks <span class="math inline">\(\propto\)</span> width of network.</p>
 </section>
 <section id="depth-vs-width-representation-power" class="slide level2">
@@ -655,6 +691,18 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
 <li><strong>Diagonal</strong>: if basis functions depend only on their own activations</li>
 </ul>
 </section>
+<section id="activations-and-gradients" class="slide level2">
+<h2>Activations and Gradients</h2>
+<div class="figure">
+<div id="activation-functions-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/activation-functions.svg" width="70%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Some different activation functions (solid line) and their gradients (dashed line).
+</aside>
+</section>
 <section id="across-layer-gradient" class="slide level2">
 <h2>Across-Layer Gradient</h2>
 <p><small><span class="math display">\[\frac{\text{d}\mathbf{ f}_\ell}{\text{d}\boldsymbol{ \phi}_{\ell-1}} = \mathbf{W}_\ell\]</span></small></p>
@@ -681,6 +729,66 @@ x_1 \mathbf{I}_m &amp; x_2 \mathbf{I}_m &amp; \cdots &amp; x_n \mathbf{I}_m
 <li><strong>Basis derivatives</strong>: <span class="math inline">\(\boldsymbol{ \Phi}^\prime_{\ell - i -1}\)</span> for activation derivatives</li>
 <li><strong>Final term</strong>: Kronecker product for activation gradient</li>
 </ul>
+</section>
+<section id="gradient-verification" class="slide level2">
+<h2>Gradient Verification</h2>
+</section>
+<section id="verify-neural-network-gradients" class="slide level2">
+<h2>Verify Neural Network Gradients</h2>
+</section>
+<section id="loss-functions" class="slide level2">
+<h2>Loss Functions</h2>
+</section>
+<section id="test-loss-function-gradients" class="slide level2">
+<h2>Test loss function gradients</h2>
+</section>
+<section id="simple-deep-nn-implementation" class="slide level2">
+<h2>Simple Deep NN Implementation</h2>
+</section>
+<section>
+<section id="create-data" class="title-slide slide level1">
+<h1>Create data</h1>
+<p>X_reg, y_reg = create_synthetic_data(200, ‘regression’) X_cls, y_cls = create_synthetic_data(200, ‘classification’)</p>
+<p>print(f“Regression data: {X_reg.shape} -&gt; {y_reg.shape}”) print(f“Classification data: {X_cls.shape} -&gt; {y_cls.shape}”)</p>
+</section>
+<section id="create-and-test-neural-network" class="slide level2">
+<h2>Create and Test Neural Network</h2>
+</section>
+<section id="test-backpopagation" class="slide level2">
+<h2>Test Backpopagation</h2>
+</section>
+<section id="train-network-for-regression" class="slide level2">
+<h2>Train Network for Regression</h2>
+<p>mlai.write_figure(“nn-regression-training-progress.svg,” directory=“./ml”) }</p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+
+</div>
+</div>
+<aside class="notes">
+</aside>
+<p>{&lt;object class=“svgplot” data=“https://mlatcl.github.io/mlfc/./slides/diagrams//ml/nn-regression-trainng-progress.”svg" width=“50%” style=" "&gt;</object>}{Neural Network Training Progress for a regression model){nn-regression-training-progress}</p>
+<div class="figure">
+<div id="classification-training-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/classification-training.svg" width="70%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Training error for the fitting of the neural network. Left is training loss, right is training accuracy
+</aside>
+</section>
+<section id="visualise-decision-boundary" class="slide level2">
+<h2>Visualise Decision Boundary</h2>
+<div class="figure">
+<div id="neural-network-decision-boundary-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/neural-network-decision-boundary.svg" width="50%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Decision boundary for the trained neural network
+</aside>
 </section>
 <section id="evaluating-derivatives" class="slide level2">
 <h2>Evaluating Derivatives</h2>
@@ -915,7 +1023,7 @@ Brookes, M., 2005. The matrix reference manual.
 Jacot, A., Gabriel, F., Hongler, C., 2018. Neural tangent kernel: Convergence and generalization in neural networks, in: Bengio, S., Wallach, H., Larochelle, H., Grauman, K., Cesa-Bianchi, N., Garnett, R. (Eds.), Advances in Neural Information Processing Systems. Curran Associates, Inc., pp. 8571–8580.
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

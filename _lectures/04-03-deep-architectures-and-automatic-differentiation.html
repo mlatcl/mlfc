@@ -78,16 +78,17 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left
 <p>This means that while the theory of minima in optimisation is well understood, empirical experiments with large neural networks are hard and the lessons of small models do not all translate to the very large systems.</p>
 <p>We can stay within the framework of linear models but take a step closer to neural network models by introducing functions that are non-linear in the inputs, <span class="math inline">\(\mathbf{ x}\)</span>, known as <em>basis functions</em>.</p>
 <p>In our session on basis funcitons we showed how linear models can be used to create non linear prediction functions. Amoung the basis functions we considered were the ReLU basis function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> Model</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> linear_activation</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> sigmoid_activation</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu_activation</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> NeuralNetwork</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> Activation</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> LinearActivation</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> SigmoidActivation</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ReLUActivation</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> Model</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> NeuralNetwork</span></code></pre></div>
 <h2 id="linear-models-as-basis-weights">Linear Models as Basis + Weights</h2>
 <p>The generalised linear models we work with allow us to create a model that is non-linear in inputs, but linear in the parameters, <span class="math display">\[
 f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span> We defined a basis, such as the polynomial basis.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> polynomial</span></code></pre></div>
 <br />
 
 <div class="figure">
@@ -106,7 +107,7 @@ f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/deep-neural-network.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install daft</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="st">&#39;daft-pgm&#39;</span></span></code></pre></div>
 <div class="figure">
 <div id="deep-neural-network-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/deep-neural-network.svg" width="50%" style=" ">
@@ -161,7 +162,8 @@ f_L(\mathbf{ x}) = \boldsymbol{ \phi}\left(\mathbf{b}_L+ \mathbf{W}_L\boldsymbol
 \]</span></p>
 <h3 id="recursive-mlp-definition">Recursive MLP Definition</h3>
 <h2 id="rectified-linear-unit">Rectified Linear Unit</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> relu_activation</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> Activation</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ReLUActivation</span></code></pre></div>
 <div class="figure">
 <div id="relu-activation-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/relu-activation.svg" width="60%" style=" ">
@@ -178,13 +180,13 @@ f_L(\mathbf{ x}) = \boldsymbol{ \phi}\left(\mathbf{b}_L+ \mathbf{W}_L\boldsymbol
 <h2 id="shallow-relu-networks">Shallow ReLU Networks</h2>
 <p>A single layer ReLU network is equivalent to a generalised linear model with a ReLU basis. The difference is that we optimise over the basis function inputs.</p>
 <p>Each hidden unit acts as a basis function with its own kink location and slope.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> NeuralNetwork</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>X1, X2 <span class="op">=</span> np.meshgrid(x1, x2)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>nn <span class="op">=</span> NeuralNetwork([<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span>], [relu_activation, linear_activation])</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>X_pred <span class="op">=</span> np.hstack([X1.flatten()[:, np.newaxis], X2.flatten()[:, np.newaxis]])</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> nn.predict(X_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> NeuralNetwork</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>X1, X2 <span class="op">=</span> np.meshgrid(x1, x2)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>nn <span class="op">=</span> NeuralNetwork([<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span>], [ReLUActivation(), LinearActivation()])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>X_pred <span class="op">=</span> np.hstack([X1.flatten()[:, np.newaxis], X2.flatten()[:, np.newaxis]])</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>f_pred <span class="op">=</span> nn.predict(X_pred)</span></code></pre></div>
 <div class="figure">
 <div id="relu-network-2d-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/relu-network-2d.svg" width="60%" style=" ">
@@ -197,13 +199,55 @@ f_L(\mathbf{ x}) = \boldsymbol{ \phi}\left(\mathbf{b}_L+ \mathbf{W}_L\boldsymbol
 <p>Figure: Output of a 2D ReLU network with 3 hidden units, showing piecewise-linear regions.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>X1, X2 <span class="op">=</span> np.meshgrid(x1, x2)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and use network</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>nn <span class="op">=</span> NeuralNetwork([<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">1</span>], [ReLUActivation(), LinearActivation()])</span></code></pre></div>
+<div class="figure">
+<div id="relu-activations-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/relu-activations.svg" width="50%" style=" ">
+</object>
+</div>
+<div id="relu-activations-magnify" class="magnify" onclick="magnifyFigure(&#39;relu-activations&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="relu-activations-caption" class="caption-frame">
+<p>Figure: Decision boundaries for the ReLU network.</p>
+</div>
+</div>
+<div class="figure">
+<div id="decision-boundaries-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/activation-summary.svg" width="50%" style=" ">
+</object>
+</div>
+<div id="decision-boundaries-magnify" class="magnify" onclick="magnifyFigure(&#39;decision-boundaries&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="decision-boundaries-caption" class="caption-frame">
+<p>Figure: Decision boundaries for the ReLU network.</p>
+</div>
+</div>
+<div class="figure">
+<div id="decision-boundaries-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/decision-boundaries.svg" width="50%" style=" ">
+</object>
+</div>
+<div id="decision-boundaries-magnify" class="magnify" onclick="magnifyFigure(&#39;decision-boundaries&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="decision-boundaries-caption" class="caption-frame">
+<p>Figure: Decision boundaries for the ReLU network.</p>
+</div>
+</div>
 <h2 id="depth-vs-width-representation-power">Depth vs Width: Representation Power</h2>
 <p>ReLU networks implement piecewise-linear functions. Increasing the width of the network increases the number of linear pieces roughly linearly, increasing the depth increases them exponentially. This exponential growth in representational power with depth is what makes deep networks so powerful for complex function approximation.</p>
 <h2 id="sawtooth-construction">Sawtooth Construction</h2>
-<p>The sawtooth construction provides a concrete example of how depth leads to exponential growth in representational power. This 1D construction shows how each layer doubles the number of linear segments.</p>
+<p>The sawtooth construction provides an example of how depth can to exponential growth in representational power. This 1D construction shows how each layer doubles the number of linear segments.</p>
 <p>In higher dimensions, these become polyhedral regions with constant gradients inside each region. Each layer creates more complex boundaries between linear regions.</p>
 <div class="figure">
 <div id="sawtooth-construction-figure" class="figure-frame">
@@ -450,6 +494,30 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 \]</span> which is a <span class="math inline">\(d_\ell\times d_\ell\)</span> sized matrix whose elements are given by <span class="math display">\[
 \frac{\text{d}\phi_i^{(\ell)}(\mathbf{ f}_{\ell})}{\text{d} f_j^{(\ell)}}
 \]</span> where <span class="math inline">\(\phi_i^{(\ell)}(\mathbf{ f}_{\ell})\)</span> is the <span class="math inline">\(i\)</span>th basis function from the <span class="math inline">\(\ell\)</span>th layer and <span class="math inline">\(f_j^{(\ell)}\)</span> is the <span class="math inline">\(j\)</span>th activation from the same layer. If <span class="math inline">\(\phi_i^{(\ell)}(\mathbf{ f}_{\ell}) = \phi_i^{(\ell)}(f^{(\ell)}_i)\)</span> then this matrix is diagonal.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> Activation</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> LinearActivation</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ReLUActivation</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> SigmoidActivation</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> SoftReLUActivation</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> {</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Linear&#39;</span>: LinearActivation(),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;ReLU&#39;</span>: ReLUActivation(),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Sigmoid&#39;</span>: SigmoidActivation(),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Soft ReLU&#39;</span>: SoftReLUActivation()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="figure">
+<div id="activation-functions-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/activation-functions.svg" width="70%" style=" ">
+</object>
+</div>
+<div id="activation-functions-magnify" class="magnify" onclick="magnifyFigure(&#39;activation-functions&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="activation-functions-caption" class="caption-frame">
+<p>Figure: Some different activation functions (solid line) and their gradients (dashed line).</p>
+</div>
+</div>
 <p><span class="math display">\[\frac{\text{d}\mathbf{ f}_\ell}{\text{d}\boldsymbol{ \phi}_{\ell-1}} = \mathbf{W}_\ell\]</span></p>
 <p>Then we have the <em>across layer</em> gradients <span class="math display">\[
 \frac{\text{d}\mathbf{ f}_\ell}{\text{d}\boldsymbol{ \phi}_{\ell-1}} = \mathbf{W}_\ell,
@@ -468,6 +536,312 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 \left[\prod_{i=0}^{k-1} \mathbf{W}_{\ell - i} \boldsymbol{ \Phi}^\prime_{\ell - i -1}\right]
 \boldsymbol{ \phi}_{\ell-k-1}^\top \otimes \mathbf{I}_{d_{\ell-k}}
 \]</span> where <span class="math inline">\(\boldsymbol{ \Phi}^\prime_{\ell - i -1}\)</span> is the derivative matrix for the basis functions at layer <span class="math inline">\(\ell - i -1\)</span>. This gives us the complete gradient computation for any weight matrix in the network.</p>
+<h2 id="gradient-verification">Gradient Verification</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> finite_difference_jacobian</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> verify_gradient_implementation</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test data</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="op">-</span><span class="fl">2.0</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.1</span>])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Linear Activation</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>linear_activation <span class="op">=</span> LinearActivation()</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_func(x):</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> linear_activation.forward(x)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(linear_func, x)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> np.diag(linear_activation.gradient(x))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;Linear&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Linear Activation: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;Linear&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test ReLU Activation</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>relu_activation <span class="op">=</span> ReLUActivation()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu_func(x):</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> relu_activation.forward(x)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(relu_func, x)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> np.diag(relu_activation.gradient(x))</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;ReLU&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;ReLU Activation: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;ReLU&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Sigmoid Activation</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sigmoid_activation <span class="op">=</span> SigmoidActivation()</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sigmoid_func(x):</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sigmoid_activation.forward(x)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(sigmoid_func, x)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> np.diag(sigmoid_activation.gradient(x))</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;Sigmoid&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>numerical_grad)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Sigmoid Activation: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;Sigmoid&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Soft ReLU Activation</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>soft_relu_activation <span class="op">=</span> SoftReLUActivation()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soft_relu_func(x):</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> soft_relu_activation.forward(x)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(soft_relu_func, x)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> np.diag(soft_relu_activation.gradient(x))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;SoftReLU&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>numerical_grad)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Soft ReLU Activation: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;SoftReLU&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h2 id="verify-neural-network-gradients">Verify Neural Network Gradients</h2>
+<p>Testing neural network gradients with finite differences</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test 1: Simple linear network</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Testing simple linear network...&quot;</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [LinearActivation(), LinearActivation()]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create network</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>]])</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass to populate z and a attributes</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>network.predict(x)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Test gradient with respect to first weight matrix</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> network_output_w0(w0_flat):</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    w0 <span class="op">=</span> w0_flat.reshape(network.weights[<span class="dv">0</span>].shape)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    test_network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    test_network.weights[<span class="dv">0</span>] <span class="op">=</span> w0</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    test_network.biases[<span class="dv">0</span>] <span class="op">=</span> network.biases[<span class="dv">0</span>]</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    test_network.weights[<span class="dv">1</span>] <span class="op">=</span> network.weights[<span class="dv">1</span>]</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    test_network.biases[<span class="dv">1</span>] <span class="op">=</span> network.biases[<span class="dv">1</span>]</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> test_network.predict(x).flatten()</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>w0_flat <span class="op">=</span> network.weights[<span class="dv">0</span>].flatten()</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(network_output_w0, w0_flat).flatten()</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>output_gradient <span class="op">=</span> np.array([[<span class="fl">1.0</span>]])</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> network.compute_gradient_for_layer(<span class="dv">0</span>, output_gradient).flatten()</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;Linear_Network&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, </span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>numerical_grad, rtol<span class="op">=</span><span class="fl">1e-4</span>)</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Linear Network: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;Linear_Network&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test 2: Network with ReLU activation</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Testing network with ReLU activation...&quot;</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [ReLUActivation(), LinearActivation()]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass to populate z and a attributes</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>network.predict(x)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> network_output_w0_relu(w0_flat):</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    w0 <span class="op">=</span> w0_flat.reshape(network.weights[<span class="dv">0</span>].shape)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    test_network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    test_network.weights[<span class="dv">0</span>] <span class="op">=</span> w0</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    test_network.biases[<span class="dv">0</span>] <span class="op">=</span> network.biases[<span class="dv">0</span>]</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    test_network.weights[<span class="dv">1</span>] <span class="op">=</span> network.weights[<span class="dv">1</span>]</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    test_network.biases[<span class="dv">1</span>] <span class="op">=</span> network.biases[<span class="dv">1</span>]</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> test_network.predict(x).flatten()</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>w0_flat <span class="op">=</span> network.weights[<span class="dv">0</span>].flatten()</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(network_output_w0_relu, w0_flat).flatten()</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> network.compute_gradient_for_layer(<span class="dv">0</span>, output_gradient).flatten()</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;ReLU_Network&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, </span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>numerical_grad, rtol<span class="op">=</span><span class="fl">1e-4</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;ReLU Network: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;ReLU_Network&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Network with sigmoid activation</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Testing network with sigmoid activation...&quot;</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [SigmoidActivation(), LinearActivation()]</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass to populate z and a attributes</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>network.predict(x)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> network_output_w0_sigmoid(w0_flat):</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    w0 <span class="op">=</span> w0_flat.reshape(network.weights[<span class="dv">0</span>].shape)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    test_network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    test_network.weights[<span class="dv">0</span>] <span class="op">=</span> w0</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    test_network.biases[<span class="dv">0</span>] <span class="op">=</span> network.biases[<span class="dv">0</span>]</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    test_network.weights[<span class="dv">1</span>] <span class="op">=</span> network.weights[<span class="dv">1</span>]</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    test_network.biases[<span class="dv">1</span>] <span class="op">=</span> network.biases[<span class="dv">1</span>]</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> test_network.predict(x).flatten()</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>w0_flat <span class="op">=</span> network.weights[<span class="dv">0</span>].flatten()</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(network_output_w0_sigmoid, w0_flat).flatten()</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> network.compute_gradient_for_layer(<span class="dv">0</span>, output_gradient).flatten()</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;Sigmoid_Network&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, </span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>numerical_grad, rtol<span class="op">=</span><span class="fl">1e-4</span>)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Sigmoid Network: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;Sigmoid_Network&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h2 id="loss-functions">Loss Functions</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/loss-functions.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/loss-functions.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> MeanSquaredError</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> MeanAbsoluteError</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> BinaryCrossEntropyLoss</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> np.array([[<span class="fl">0.8</span>], [<span class="fl">0.3</span>], [<span class="fl">0.9</span>], [<span class="fl">0.1</span>]])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([[<span class="fl">1.0</span>], [<span class="fl">0.0</span>], [<span class="fl">1.0</span>], [<span class="fl">0.0</span>]])</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>losses <span class="op">=</span> {</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;MSE&#39;</span>: MeanSquaredError(),</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;MAE&#39;</span>: MeanAbsoluteError(),</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;BCE&#39;</span>: BinaryCrossEntropyLoss()</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Loss Function Demonstration:&quot;</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Predictions: </span><span class="sc">{</span>y_pred<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;True values: </span><span class="sc">{</span>y_true<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, loss <span class="kw">in</span> losses.items():</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    loss_value <span class="op">=</span> loss.forward(y_pred, y_true)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    gradient <span class="op">=</span> loss.gradient(y_pred, y_true)</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>name<span class="sc">:3}</span><span class="ss">: Loss = </span><span class="sc">{</span>loss_value<span class="sc">:.4f}</span><span class="ss">, Gradient = </span><span class="sc">{</span>gradient<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h2 id="test-loss-function-gradients">Test loss function gradients</h2>
+<p>Testing loss function gradients with finite differences.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> finite_difference_jacobian</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> verify_gradient_implementation</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test data</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>], [<span class="fl">3.0</span>, <span class="fl">4.0</span>], [<span class="fl">5.0</span>, <span class="fl">6.0</span>]])</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([[<span class="fl">1.1</span>, <span class="fl">2.1</span>], [<span class="fl">2.9</span>, <span class="fl">4.1</span>], [<span class="fl">5.1</span>, <span class="fl">5.9</span>]])</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Mean Squared Error</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>mse_loss <span class="op">=</span> MeanSquaredError()</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_func(pred):</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mse_loss.forward(pred.reshape(y_pred.shape), y_true)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(mse_func, y_pred.flatten()).flatten()</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> mse_loss.gradient(y_pred, y_true).flatten()</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;MSE&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Mean Squared Error: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;MSE&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Mean Absolute Error</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>mae_loss <span class="op">=</span> MeanAbsoluteError()</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mae_func(pred):</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mae_loss.forward(pred.reshape(y_pred.shape), y_true)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(mae_func, y_pred.flatten()).flatten()</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> mae_loss.gradient(y_pred, y_true).flatten()</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;MAE&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Mean Absolute Error: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;MAE&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> HuberLoss</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Huber Loss</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>huber_loss <span class="op">=</span> HuberLoss(delta<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> huber_func(pred):</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> huber_loss.forward(pred.reshape(y_pred.shape), y_true)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(huber_func, y_pred.flatten()).flatten()</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> huber_loss.gradient(y_pred, y_true).flatten()</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;Huber&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Huber Loss: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;Huber&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Binary Cross Entropy</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>bce_loss <span class="op">=</span> BinaryCrossEntropyLoss()</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>y_pred_bce <span class="op">=</span> np.array([[<span class="fl">0.8</span>], [<span class="fl">0.3</span>], [<span class="fl">0.9</span>]])</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>y_true_bce <span class="op">=</span> np.array([[<span class="fl">1.0</span>], [<span class="fl">0.0</span>], [<span class="fl">1.0</span>]])</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bce_func(pred):</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> bce_loss.forward(pred.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), y_true_bce)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(bce_func, y_pred_bce.flatten()).flatten()</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> bce_loss.gradient(y_pred_bce, y_true_bce).flatten()</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;BCE&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Binary Cross Entropy: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;BCE&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> CrossEntropyLoss</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Cross Entropy</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>ce_loss <span class="op">=</span> CrossEntropyLoss()</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>y_pred_ce <span class="op">=</span> np.array([[<span class="fl">0.1</span>, <span class="fl">0.9</span>], [<span class="fl">0.8</span>, <span class="fl">0.2</span>], [<span class="fl">0.3</span>, <span class="fl">0.7</span>]])</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>y_true_ce <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>]])</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ce_func(pred):</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ce_loss.forward(pred.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), y_true_ce)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>numerical_grad <span class="op">=</span> finite_difference_jacobian(ce_func, y_pred_ce.flatten()).flatten()</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>analytical_grad <span class="op">=</span> ce_loss.gradient(y_pred_ce, y_true_ce).flatten()</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>results[<span class="st">&#39;CE&#39;</span>] <span class="op">=</span> verify_gradient_implementation(analytical_grad, numerical_grad)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Cross Entropy: </span><span class="sc">{</span><span class="st">&#39;PASS&#39;</span> <span class="cf">if</span> results[<span class="st">&#39;CE&#39;</span>] <span class="cf">else</span> <span class="st">&#39;FAIL&#39;</span><span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h2 id="simple-deep-nn-implementation">Simple Deep NN Implementation</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/simple-deep-nn-implementation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/simple-deep-nn-implementation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
+<h1 id="create-data">Create data</h1>
+<p>X_reg, y_reg = create_synthetic_data(200, ‘regression’) X_cls, y_cls = create_synthetic_data(200, ‘classification’)</p>
+<p>print(f“Regression data: {X_reg.shape} -&gt; {y_reg.shape}”) print(f“Classification data: {X_cls.shape} -&gt; {y_cls.shape}”)</p>
+<h2 id="create-and-test-neural-network">Create and Test Neural Network</h2>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ReLUActivation, LinearActivation, NeuralNetwork</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>]  <span class="co"># 2 inputs, 1 hidden layer (5 neurons), 1 output</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [ReLUActivation(), LinearActivation()]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Test forward pass</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>], [<span class="fl">3.0</span>, <span class="fl">4.0</span>]])</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Neural Network Test:&quot;</span>)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Input: </span><span class="sc">{</span>X_test<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Output: </span><span class="sc">{</span>y_pred<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Network architecture: </span><span class="sc">{</span>dimensions<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Number of parameters: </span><span class="sc">{</span><span class="bu">sum</span>(w.size <span class="cf">for</span> w <span class="kw">in</span> network.weights) <span class="op">+</span> <span class="bu">sum</span>(b.size <span class="cf">for</span> b <span class="kw">in</span> network.biases)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h2 id="test-backpopagation">Test Backpopagation</h2>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> MeanSquaredError()</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([[<span class="fl">1.0</span>], [<span class="fl">2.0</span>]])</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute loss and gradient</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>loss_value <span class="op">=</span> loss_fn.forward(y_pred, y_true)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>loss_gradient <span class="op">=</span> loss_fn.gradient(y_pred, y_true)</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Backward pass</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>gradients <span class="op">=</span> network.backward(loss_gradient)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Backpropagation Test:&quot;</span>)</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Loss value: </span><span class="sc">{</span>loss_value<span class="sc">:.4f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Loss gradient: </span><span class="sc">{</span>loss_gradient<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Weight gradients shapes: </span><span class="sc">{</span>[g.shape <span class="cf">for</span> g <span class="kw">in</span> gradients[<span class="st">&#39;weight_gradients&#39;</span>]]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Bias gradients shapes: </span><span class="sc">{</span>[g.shape <span class="cf">for</span> g <span class="kw">in</span> gradients[<span class="st">&#39;bias_gradients&#39;</span>]]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h2 id="train-network-for-regression">Train Network for Regression</h2>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>X_reg, y_reg <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;regression&#39;</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>network_reg, losses <span class="op">=</span> train_network_regression(X_reg, y_reg)</span></code></pre></div>
+<p>mlai.write_figure(“nn-regression-training-progress.svg,” directory=“./ml”) }</p>
+<div class="figure">
+<div id="-figure" class="figure-frame">
+
+</div>
+<div id="-magnify" class="magnify" onclick="magnifyFigure(&#39;&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="-caption" class="caption-frame">
+<p>Figure:</p>
+</div>
+</div>
+<p>{&lt;object class=“svgplot” data=“https://mlatcl.github.io/mlfc/./slides/diagrams//ml/nn-regression-trainng-progress.”svg" width=“50%” style=" "&gt;</object>}{Neural Network Training Progress for a regression model){nn-regression-training-progress}</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>X_cls, y_cls <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;classification&#39;</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>network_cls, losses_cls, accuracies <span class="op">=</span> train_network_classification(X_cls, y_cls)</span></code></pre></div>
+<div class="figure">
+<div id="classification-training-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/classification-training.svg" width="70%" style=" ">
+</object>
+</div>
+<div id="classification-training-magnify" class="magnify" onclick="magnifyFigure(&#39;classification-training&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="classification-training-caption" class="caption-frame">
+<p>Figure: Training error for the fitting of the neural network. Left is training loss, right is training accuracy</p>
+</div>
+</div>
+<h2 id="visualise-decision-boundary">Visualise Decision Boundary</h2>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="figure">
+<div id="neural-network-decision-boundary-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/neural-network-decision-boundary.svg" width="50%" style=" ">
+</object>
+</div>
+<div id="neural-network-decision-boundary-magnify" class="magnify" onclick="magnifyFigure(&#39;neural-network-decision-boundary&#39;)">
+<img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
+</div>
+<div id="neural-network-decision-boundary-caption" class="caption-frame">
+<p>Figure: Decision boundary for the trained neural network</p>
+</div>
+</div>
 <h2 id="evaluating-derivatives">Evaluating Derivatives</h2>
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_ml/includes/automatic-differentiation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
@@ -533,12 +907,12 @@ d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\e
 <h2 id="computational-graphs-and-pytorch-autodiff">Computational Graphs and PyTorch Autodiff</h2>
 <p>Modern frameworks build a dynamic computational graph as you compute, then traverse it in reverse to accumulate gradients.</p>
 <p>Minimal PyTorch example (CPU/GPU agnostic):</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
 <p>PyTorch attaches <code>grad_fn</code> to results, constructs the graph dynamically during forward, and supports GPU execution via <code>.cuda()</code>. These conveniences, together with autodiff, enable fast deep learning experimentation.</p>
 <h2 id="overparameterised-systems">Overparameterised Systems</h2>
 <p>If we could examine the Hessian of a neural network at its minimum, we can speculate about what we would find. In particular, we would find that it would have very many low (or negative) eigenvalues in many directions. This is indicative of the parameters being <em>badly determined</em> because of the neural network model being heavily <em>overparameterised</em>. So how does it generalise?</p>
@@ -602,14 +976,14 @@ H(\mathbb{w}) = \frac{\text{d}^2}{\text{d}\mathbf{ w}\text{d}\mathbf{ w}^\top} L
 \mathbf{v}^\top H(\mathbf{ w}) = \frac{\text{d}}{\text{d}\mathbf{ w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{ w}) \right)
 \]</span></p>
 <p>Live-coding HVP in PyTorch (mixed-mode via backward-over-backward or autograd.functional). Using a quadratic ensures a non-zero Hessian (2I):</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
 <h2 id="further-reading-1">Further Reading</h2>
 <ul>
 <li>Chapter 8 of Bishop-deeplearning24</li>
