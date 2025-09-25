@@ -21,9 +21,9 @@ date: 2025-09-24
 ---
 
 
+\notes{\installcode{daft-pgm}}
 \notes{\include{_mlfc/includes/mlfc-notebook-setup.md}}
 
-\notes{\installcode{daft-pgm}}
 \section{Review}
 
 \notes{By this point in the course we have covered the foundations sufficiently for you to look at three Cambridge courses.}
