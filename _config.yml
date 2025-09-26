@@ -35,6 +35,12 @@ collections:
     output: true
     sort_by: week
     directory: _practicals
+  projects:
+    permalink: /projects/:title:output_ext
+    output: true
+    sort_by: week
+    directory: _projects
+
 
 ghub:
   edit: true
