@@ -138,4 +138,3 @@ See the repositories at [mlphysical](https://github.com/mlatcl/mlphysical) or [a
 ## Learn More
 
 For more information about LaMD, see [the LaMD documentation](https://inverseprobability.com/lamd).
-
