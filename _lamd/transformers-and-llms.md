@@ -1,18 +1,17 @@
 ---
 layout: lecture
-title: Transformer Architectures
+title: Transformers
 featured_image: slides/diagrams/deepnn/attention-mechanism.svg
 week: 5
 session: 3
 author:
-- given: Neil
+- given: Neil D.
   family: Lawrence
 abstract: >
   This lecture builds on deep neural networks to explore transformer architectures, 
   focusing on how attention mechanisms require sophisticated chain rule applications 
   and how they connect to the overparameterization and generalization themes.
 talkscam:
-venue: Dedan Kimathi University of Technology, Nyeri, Kenya
 youtube: 
 oldyoutube: 
 - code: 
