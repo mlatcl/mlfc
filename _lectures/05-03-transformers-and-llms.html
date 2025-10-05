@@ -306,7 +306,6 @@ sns.set_palette('colorblind')}-->
 <h2 id="training-simple-model">Training Simple Model</h2>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X_seq, y_seq <span class="op">=</span> create_synthetic_sequence_data(<span class="dv">200</span>, <span class="dv">8</span>, <span class="dv">30</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>transformer_model, transformer_losses <span class="op">=</span> train_transformer_model(X_seq, y_seq, vocab_size<span class="op">=</span><span class="dv">30</span>)</span></code></pre></div>
-<p>mlai.write_figure(“simple-transformer-training.svg,” directory=“./deepnn/”)}</p>
 <div class="figure">
 <div id="simple-transformer-training-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/simple-transformer-training.svg" width="50%" style=" ">
