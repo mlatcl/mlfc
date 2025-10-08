@@ -1,5 +1,5 @@
 ---
-title: "Predicting Healthcare-Underserved Regions in Kenya"
+title: "Determinants of Educational Access and Attainment in Kenya"
 venue: "null"
 abstract: "This project investigates educational access and outcomes using household and individual-level survey data from the Kenyan National Household Survey. The analysis follows the Access-Assess-Address framework. The research investigates how demographic characteristics, socio-economic conditions, and infrastructure constraints shape educational opportunities across Kenyan communities. Key areas of focus include analysing school attendance patterns across different population groups, examining educational attainment levels and their determinants, identifying socio-economic factors that influence educational outcomes, and assessing infrastructure-related barriers that limit access to quality education. The study employs exploratory data analysis to uncover spatial and demographic disparities in educational access, with particular attention to rural-urban differences and household-level predictors of educational success."
 author:
@@ -24,25 +24,43 @@ categories:
 - notes
 ---
 
-<h1 id="kenya-education-landscape">A Look at Kenya's Educational Landscape</h1>
+<h3 id="kenya-education-landscape">A Look at Kenya's Educational Landscape</h3>
 
 <p>Every child in Kenya has the right to an education. But the path to the classroom is not the same for everyone. Where you are born, the infrastructure around you, and your family's circumstances can create steep barriers or smooth the way forward.</p>
 
 <p>In this project, I worked with data from the Kenyan National Household Survey to understand these barriers. I wanted to move beyond broad national statistics and uncover the specific, local factors that shape a child's educational journey.</p>
 
-<h2 id="the-story-the-map-tells">The story the map tells</h2>
+<h3 id="the-story-the-map-tells">The story the map tells</h3>
 
 <p>The first thing I did was plot the data on a map.</p>
 
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/macrey/storythemaptells.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Leonard receiving prize">
+  </div>
+</div>
+
 <p>On colouring each county by the percentage of people who have ever attended school, a clear divide emerges. The northern regions, which are also the most sparsely populated, consistently showed lower rates of school attendance. Before looking deeper into the data, the map made one thing clear: your geographic location is a powerful predictor of your educational access.</p>
 
-<h2 id="story-within-household">The story within the household</h2>
+<h3 id="story-within-household">The story within the household</h3>
 
 <p>Beyond geography, the dynamics of one’s household shape their educational destiny. You might assume that parents who never went to school would see their children follow the same path, but the data reveals something contrary. These parents are ensuring that their children get at least some form of education, as a majority of their children have attained at least primary and secondary education. However, they struggle to advance to higher education. The barrier isn't getting them to school but getting them through it. In contrast, children of university-educated parents are far more likely to reach similar academic heights.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/macrey/withinthehousehold.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Leonard receiving prize">
+  </div>
+</div>
 
 <p>Looking at family members' education levels in a household, the older generations are far more likely to have never gone to school or to have only basic education. In contrast, their grandkids are filling primary and secondary classrooms. This contrast indicates that today's youth have significantly better access to learning opportunities than their predecessors ever did.</p>
 
 <p>There is a rural-urban divide in education access. While it's true that a larger number of surveyed individuals lived in rural areas (61.4%), the important findings lies in the proportion. In rural areas, 17.6% of the population reported never attending school, a rate higher than the 10.9% from urban centers. It was also evident that there was a link between electricity and a person's education. Households with power had higher school attendance rates than those without. Think about what electricity enables: light to study after sunset, charged gadgets, and potentially an internet connection. It turns a home into a place where learning can happen. Without it, a child's potential is literally left in the dark.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/macrey/dwellingvalue.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Leonard receiving prize">
+  </div>
+</div>
 
 <p>So, what's the payoff for all this schooling? Since employment data was confidential, I looked at the house value. As the education level of the household head rises, so does the median value of their home. The more educated the head of the household, the higher the rent they can afford and the more valuable their owned home. This is concrete proof that education translates into a better quality of life.</p>
 
@@ -53,3 +71,5 @@ categories:
     <img src="/mlfc/slides/diagrams/projects/macrey/macrey_prize.jpg" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Leonard receiving prize">
   </div>
 </div>
+
+<div style="clear:both;"></div>
