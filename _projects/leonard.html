@@ -1,7 +1,7 @@
 ---
 title: "Predicting Healthcare-Underserved Regions in Kenya"
 venue: "null"
-abstract: "<p>TODO</p>"
+abstract: "null"
 author:
 - given: Leonard
   family: Sanya
@@ -27,7 +27,16 @@ categories:
 <p>By: Leonard Sanya</p>
 
 <h2 id="introduction">Introduction</h2>
-<p>From September 1st to 24th,  2025, Prof. Neil D. Lawrence, a DeepMind Professor of Machine Learning at the University of Cambridge in the Department of Computer Science and Technology, delivered a Machine Learning Foundation Course (MLFC) at Dedan Kimathi University of Technology (DeKUT), Nyeri, Kenya. I am thrilled to share that it was an incredibly enriching experience that offered valuable opportunities to learn, connect and network.</p>
+<p>From September 1st to 24th,  2025, Prof. Neil D. Lawrence, the DeepMind Professor of Machine Learning at the University of Cambridge in the Department of Computer Science and Technology, delivered a Machine Learning Foundation Course (MLFC) at Dedan Kimathi University of Technology (DeKUT), Nyeri, Kenya. I am thrilled to share that it was an incredibly enriching experience that offered valuable opportunities to learn, connect and network.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="neil_presenting.jpg" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Neil Lawrence presenting lecture">
+  </div>
+  <div class="caption-frame">
+    <p>Figure: Prof. Neil D. Lawrence delivering a lecture during MLFC 2025.</p>
+  </div>
+</div>
 
 <h2 id="spotlight-on-the-lectures">Spotlight on the Lectures</h2>
 <p>The lectures started by introducing probability as the mathematical foundation of machine learning, framing uncertainty through distributions, expectations, and independence. It revisits fundamental rules such as the sum rule, product rule, and Bayes’ theorem to show how probabilities can be updated with new data. The session also ties these ideas to the interpretation of models in machine learning, explaining how probabilistic reasoning allows learning systems to manage noise and uncertainty effectively.</p>
@@ -43,11 +52,30 @@ categories:
 
 <p>I’m truly honoured and grateful to have been awarded the Distinction in Final Project prize,  a meaningful recognition of the effort and passion I put into my work.</p>
 
+<div class="figure">
+  <div class="figure-frame">
+    <img src="leonard_prize.jpg" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Leonard receiving prize">
+  </div>
+  <div class="caption-frame">
+    <p>Figure: Leonard receiving the Distinction in Final Project prize.</p>
+  </div>
+</div>
+
 <h2 id="project-summary">Project Summary</h2>
 <p><strong>Title:</strong> Predicting Underserved Regions in Kenya: Machine Learning Approach to Healthcare Facility Distribution.</p>
 
 <h3 id="project-introduction">Introduction</h3>
 <p>According to the Kenya Master Health Facility List (KMHFL), the country has around 16319 registered healthcare facilities, yet their distribution is heavily skewed, with urban areas like  Nairobi and Mombasa hosting most of these facilities, while remote counties such as Turkana remain severely underserved. For instance, Samburu County, which spans more than 20,182 km², has fewer than 5 health facilities per 100,000 people, compared to Meru with 23 facilities per 100,000 people. Leveraging machine learning to predict underserved regions provides an evidence-based approach to inform equitable resource allocation, optimise new facility placement, and support Kenya’s Universal Health Coverage (UHC) 2030 goals.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="Nairobi_facility_distribution.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Nairobi facility distribution">
+    <img src="Nyeri_facility_distribution.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Nyeri facility distribution">
+  </div>
+  <div class="caption-frame">
+    <p>Figure: Distribution of healthcare facilities across Nairobi and Nyeri counties.</p>
+  </div>
+</div>
 
 <h3 id="data-collection">Data Collection</h3>
 <p>We collected healthcare facility data together with the 2019 Kenya population census to evaluate facility distribution at the county level. To measure fairness in distribution, we calculated hospitals per capita. This benchmark is based on WHO guidelines, which recommend at least one hospital per 100,000 people. Using this index, we created a simple binary classification index:</p>
@@ -57,9 +85,36 @@ categories:
 
 <p>This binary index simplifies the complex, multi-dimensional problem of healthcare accessibility into a clear and interpretable framework for machine learning classification. The 0-1 representation enables the model to learn patterns and key determinants that separate underserved from well-served regions. To train the model, we excluded less important features in predicting the target variable and split the dataset into training and testing sets to validate model performance.</p>
 
+<div class="figure">
+  <div class="figure-frame">
+    <img src="Feature_importance_heatmap.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Feature importance heatmap">
+  </div>
+  <div class="caption-frame">
+    <p>Figure: Feature importance heatmap showing the most influential predictors in the model.</p>
+  </div>
+</div>
+
 <h3 id="results">Results</h3>
 <p>We trained two models to predict underserved regions: Logistic Regression and Naive Bayes. The Logistic Regression model achieved an impressive 97% accuracy, correctly classifying nearly every county, while Naive Bayes lagged behind at 69% accuracy. This significant difference explains the importance of choosing the right model for the problem at hand. Logistic Regression, which directly models the probability of a binary outcome based on a linear combination of input features, is particularly well-suited for datasets where relationships between variables are approximately linear and feature independence is limited. In contrast, Naive Bayes assumes that all predictors are conditionally independent, an assumption rarely true in the real world, where variables like population density, Total_population19, and Hospital_per_100k are highly correlated, as shown by the matrix below.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="correlation_matrix.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Correlation matrix">
+  </div>
+  <div class="caption-frame">
+    <p>Figure: Correlation matrix showing relationships between key variables.</p>
+  </div>
+</div>
 
 <p>Drawing from Prof Neil's lectures, we learned that a good model isn’t just one that fits data well, but one whose assumptions match the structure of the data. Logistic Regression captures dependencies and interactions more effectively, allowing it to separate underserved and well-served counties with higher precision. This result reinforces the principle that understanding model assumptions is just as critical as evaluating model performance.</p>
 
 <p>Using GeoPandas and Contextily basemaps, we created choropleth maps of Kenya showing ground truths and model predictions: Counties classified by the model. Counties shaded red are underserved, green are well-served, and yellow outlines highlight misclassifications. One county stood out (Uasin Gishu); it was actually well-served, but the model predicted it as underserved. This is as a result of most geospatial feature entries in the test samples within the county are zero, which is contrary to what the model was trained on, hence making errors in the prediction. Seeing that single misclassification visually highlighted both the model’s strength and its limitations.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="model_mappings.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;" alt="Model predictions map">
+  </div>
+  <div class="caption-frame">
+    <p>Figure: Choropleth maps showing model predictions for underserved and well-served counties.</p>
+  </div>
+</div>
