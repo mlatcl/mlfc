@@ -23,39 +23,24 @@ layout: page
             <span></span>
         </div>
         <div class="projects__grid">
-            {% assign current_date = "now" | date: "%Y-%m-%d" %}
-            {% for item in site.projects %}
-              {% if item.published %}
-                {% assign published = item.published | date: "%Y-%m-%d" %}
-                {% if published <= current_date %}
-                  <a href="{{ item.url | relative_url }}" class="projects__item">
-                      <div class="projects__item-image">
-                          <img src="{% if item.featured_image %}{{ item.featured_image | relative_url }}{% else %}{{ site.featured_image | relative_url }}{%endif%}" alt="Image of {{item.title}}">
-                      </div>
-                      <div class="projects__item-details">
-                          <div>
-                              <h2>{{ item.title }}</h2>
-                              <p>{{ item.author }}</p>
-                          </div>
-                          <span>View project</span>
-                      </div>
-                  </a>
-                {% endif %}
-              {% else %}
-                <a href="{{ item.url | relative_url }}" class="projects__item">
-                      <div class="projects__item-image">
-                          <img src="{% if item.featured_image %}{{ item.featured_image | relative_url }}{% else %}{{ site.featured_image | relative_url }}{%endif%}" alt="Image of {{item.title}}">
-                      </div>
-                      <div class="projects__item-details">
-                          <div>
-                              <h2>{{ item.title }}</h2>
-                              <p>{{ item.date | date: "%Y-%m-%d"}}</p>
-                          </div>
-                          <span>View project</span>
-                      </div>
-                  </a>
-              {% endif %}
-		        {% endfor %}
+		{% assign current_date = "now" | date: "%Y-%m-%d" %}
+		{% for item in site.projects %}
+			{% assign published = item.published | date: "%Y-%m-%d" %}
+			{% if published <= current_date %}
+			  <a href="{{ item.url | relative_url }}" class="projects__item">
+				  <div class="projects__item-image">
+					  <img src="{% if item.featured_image %}{{ item.featured_image | relative_url }}{% else %}{{ site.featured_image | relative_url }}{%endif%}" alt="Image of {{item.title}}">
+				  </div>
+				  <div class="projects__item-details">
+					  <div>
+						  <h2>{{ item.title }}</h2>
+						  <p>{{ item.author }}</p>
+					  </div>
+					  <span>View project</span>
+				  </div>
+			  </a>
+			{% endif %}
+			{% endfor %}
         </div>
     </div>
 </section>
