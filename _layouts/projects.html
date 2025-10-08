@@ -34,9 +34,10 @@ layout: page
 				  <div class="projects__item-details">
 					  <div>
 						  <h2>{{ item.title }}</h2>
-						  <p>{{ item.author }}</p>
+						  <p>{{ item.author.given }} {{ item.author.family }}</p>
 					  </div>
 					  <span>View project</span>
+					  <p style="color: {{ item.prize_color }}; font-weight: bold;">{{ item.prize }}</p>
 				  </div>
 			  </a>
 			{% endif %}
