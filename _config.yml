@@ -38,7 +38,7 @@ collections:
   projects:
     permalink: /projects/:title:output_ext
     output: true
-    sort_by: week
+    sort_by: date
     directory: _projects
 
 
