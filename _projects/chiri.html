@@ -1,0 +1,85 @@
+---
+title: "How School Distribution Shapes Education in Kenya"
+venue: "null"
+abstract: ""
+author:
+- given: Levis Chiri
+  family: Kamau
+  url: 
+  institute: Dedan Kimathi University of Technology
+  twitter: 
+  gscholar: 
+  orcid: 
+edit_url: https://github.com/mlatcl/mlfc/new/gh-pages/_projects/chiri.html
+date: 2025-10-01
+published: 2025-10-01
+time: "12:00"
+featured_image: slides/diagrams/projects/chiri/chiri_presenting.jpg
+prize: "Excellent Overall Performance"
+prize_color: "#6A6A6A"
+transition: None
+ipynb: project_chiri.ipynb
+layout: project
+categories:
+- notes
+---
+
+<h3>How School Distribution Shapes Education in Kenya</h3>
+
+<h3>Introduction</h3>
+<p>I come from Nyandarua, a county in central Kenya that lags behind neighbouring counties such as Nyeri, Kiambu and Nakuru in education. Nyandarua has only two national high schools, a few extra-county schools, and no university. For many students, this means leaving the county to pursue both secondary and higher education elsewhere. Like many other counties in Kenya, quality educational institutions are unevenly distributed. This context inspired me to analyze how school distribution affects educational outcomes at the county level and shapes long-term opportunities across Kenya.
+Working on this project allowed me to apply the analytical methods we explored in the MLFC program to a real-world issue that is important to me. It also strengthened my understanding of how data-driven approaches can be used to inform policy and contribute to improving equity in education.</p>
+
+<h3>Background</h3>
+<p>In September, I undertook the Machine Learning Foundations course led by Professor Neil Lawrence at the Centre for Data Science and Artificial Intelligence Lab, Dedan Kimathi University of Technology. The course provided a broad introduction to machine learning, covering statistical models, probability, Gaussian processes, and other foundational concepts. It also included practical sessions by Radzim Sendyka and Frederick Lawrence, which offered hands-on experience using NumPy and Pandas, building models, and following best practices for organising code with the Fynesse model. These concepts proved particularly important in carrying out this project and interpreting the results.</p>
+
+<h3>The Process: Access, Assess, Address</h3>
+<p>The project follows the Fynesse pipeline in three stages. Access was the most challenging. I initially planned to work at the sub-county level, but reliable data simply was not available. I had to extract school information from multiple websites and PDFs. I also obtained the 2019 Census population and education data from the Kenya National Bureau of Statistics. This process highlighted how desperately Kenya needs better systems for managing educational statistics.
+In Assess, I explored the data to understand patterns in education levels across counties. The variations were striking: some counties had significantly higher proportions of educated residents, while others lagged far behind. As shown in this graph ( Education levels by county.png)</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/chiri/Education_levels_by_county.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;">
+  </div>
+</div>
+
+<h3>What the Data Reveals</h3>
+<p>In the Address stage, I built linear regression models to quantify the impact of different types of schools on county education outcomes. Concepts from Professor Neil’s lectures on statistical modelling were particularly useful in structuring my analysis and interpreting the regression results. The first model used the number of schools per 1,000 people for each category (Primary, Secondary, TVET, University) as inputs, ensuring fair comparison by measuring access rather than raw counts. The target was a weighted average education level, with weights from Primary (1) to University (4), essentially asking, on average, how educated people in each county are. All features were standardized to allow fair comparison across school types.( Impact of schools per capita on county education level.png)
+Results show universities have the strongest positive effect (coefficient: 0.11), while TVET (0.016) and Secondary (0.002) have modest impacts. Primary schools appear negative (-0.021), likely due to multicollinearity, as less educated counties have proportionally more primary schools. The model (R² = 0.68) suggests that school distribution, especially university access, relates to county education outcomes. This doesn't mean residents of counties without universities avoid higher education. Rather, they study elsewhere and often don't return.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/chiri/Impact_of_schools_per_capita_on_county_education_level.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;">
+  </div>
+</div>
+
+<h3>Visualising University Impact</h3>
+<p>To illustrate how universities concentrate educational attainment, I created an interactive map of Kenya. The bubble size represents the proportion of university-educated residents, while colour intensity shows the number of universities in the county. (University distribution and level of education.gif)
+Nairobi and parts of central Kenya (yellow/orange) dominate with both the most universities and the highest-educated populations. Meanwhile, counties like Nyandarua (dark blue) have no universities and correspondingly smaller university graduate  populations. The animation reveals what the regression confirmed: universities do not only educate; they also attract and retain educated people, creating regional disparities that persist across generations.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/chiri/University_distribution_and_level_of_education.gif" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;">
+  </div>
+</div>
+
+<h3>The Secondary School Pipeline</h3>
+<p>(Effect of secondary school type to university enrolment.png)
+I also examined how secondary school quality affects university enrolment. In Kenya, schools range from elite National and Extra County schools to local County and Sub-County schools, plus Private schools with varying standards. The analysis reveals that Private high schools have the strongest impact on university enrollment (coefficient: 3.3), followed by Extra County high schools (1.2) and National high schools (0.7). County and Sub-County schools show minimal effects, confirming that access to higher-quality secondary education significantly shapes pathways to university.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/chiri/Effect_of_secondary_school_type_to_university_enrollement.png" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;">
+  </div>
+</div>
+
+<h3>Why This Matters</h3>
+<p>The data tells a clear story: Kenya's educational inequality is deeply geographic. Without deliberate investment in higher education infrastructure in underserved counties like Nyandarua, the education gap will continue to widen, perpetuating regional inequality for generations.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/chiri/chiri_prize.jpg" width="70%" style="display:block; margin:auto; background:none; border:none; box-shadow:none;">
+  </div>
+</div>
+
+<div style="clear:both;"></div>
