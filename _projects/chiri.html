@@ -35,7 +35,7 @@ Working on this project allowed me to apply the analytical methods we explored i
 
 <h3>The Process: Access, Assess, Address</h3>
 <p>The project follows the Fynesse pipeline in three stages. Access was the most challenging. I initially planned to work at the sub-county level, but reliable data simply was not available. I had to extract school information from multiple websites and PDFs. I also obtained the 2019 Census population and education data from the Kenya National Bureau of Statistics. This process highlighted how desperately Kenya needs better systems for managing educational statistics.
-In Assess, I explored the data to understand patterns in education levels across counties. The variations were striking: some counties had significantly higher proportions of educated residents, while others lagged far behind. As shown in this graph ( Education levels by county.png)</p>
+In Assess, I explored the data to understand patterns in education levels across counties. The variations were striking: some counties had significantly higher proportions of educated residents, while others lagged far behind. As shown in the graph below.</p>
 
 <div class="figure">
   <div class="figure-frame">
@@ -44,8 +44,7 @@ In Assess, I explored the data to understand patterns in education levels across
 </div>
 
 <h3>What the Data Reveals</h3>
-<p>In the Address stage, I built linear regression models to quantify the impact of different types of schools on county education outcomes. Concepts from Professor Neil’s lectures on statistical modelling were particularly useful in structuring my analysis and interpreting the regression results. The first model used the number of schools per 1,000 people for each category (Primary, Secondary, TVET, University) as inputs, ensuring fair comparison by measuring access rather than raw counts. The target was a weighted average education level, with weights from Primary (1) to University (4), essentially asking, on average, how educated people in each county are. All features were standardized to allow fair comparison across school types.( Impact of schools per capita on county education level.png)
-Results show universities have the strongest positive effect (coefficient: 0.11), while TVET (0.016) and Secondary (0.002) have modest impacts. Primary schools appear negative (-0.021), likely due to multicollinearity, as less educated counties have proportionally more primary schools. The model (R² = 0.68) suggests that school distribution, especially university access, relates to county education outcomes. This doesn't mean residents of counties without universities avoid higher education. Rather, they study elsewhere and often don't return.</p>
+<p>In the Address stage, I built linear regression models to quantify the impact of different types of schools on county education outcomes. Concepts from Professor Neil’s lectures on statistical modelling were particularly useful in structuring my analysis and interpreting the regression results. The first model used the number of schools per 1,000 people for each category (Primary, Secondary, TVET, University) as inputs, ensuring fair comparison by measuring access rather than raw counts. The target was a weighted average education level, with weights from Primary (1) to University (4), essentially asking, on average, how educated people in each county are. All features were standardized to allow fair comparison across school types.</p>
 
 <div class="figure">
   <div class="figure-frame">
@@ -53,9 +52,10 @@ Results show universities have the strongest positive effect (coefficient: 0.11)
   </div>
 </div>
 
+<p>Results show universities have the strongest positive effect (coefficient: 0.11), while TVET (0.016) and Secondary (0.002) have modest impacts. Primary schools appear negative (-0.021), likely due to multicollinearity, as less educated counties have proportionally more primary schools. The model (R² = 0.68) suggests that school distribution, especially university access, relates to county education outcomes. This doesn't mean residents of counties without universities avoid higher education. Rather, they study elsewhere and often don't return.</p>
+
 <h3>Visualising University Impact</h3>
-<p>To illustrate how universities concentrate educational attainment, I created an interactive map of Kenya. The bubble size represents the proportion of university-educated residents, while colour intensity shows the number of universities in the county. (University distribution and level of education.gif)
-Nairobi and parts of central Kenya (yellow/orange) dominate with both the most universities and the highest-educated populations. Meanwhile, counties like Nyandarua (dark blue) have no universities and correspondingly smaller university graduate  populations. The animation reveals what the regression confirmed: universities do not only educate; they also attract and retain educated people, creating regional disparities that persist across generations.</p>
+<p>To illustrate how universities concentrate educational attainment, I created an interactive map of Kenya. The bubble size represents the proportion of university-educated residents, while colour intensity shows the number of universities in the county.</p>
 
 <div class="figure">
   <div class="figure-frame">
@@ -63,9 +63,9 @@ Nairobi and parts of central Kenya (yellow/orange) dominate with both the most u
   </div>
 </div>
 
+<p></p>Nairobi and parts of central Kenya (yellow/orange) dominate with both the most universities and the highest-educated populations. Meanwhile, counties like Nyandarua (dark blue) have no universities and correspondingly smaller university graduate  populations. The animation reveals what the regression confirmed: universities do not only educate; they also attract and retain educated people, creating regional disparities that persist across generations.</p>
+
 <h3>The Secondary School Pipeline</h3>
-<p>(Effect of secondary school type to university enrolment.png)
-I also examined how secondary school quality affects university enrolment. In Kenya, schools range from elite National and Extra County schools to local County and Sub-County schools, plus Private schools with varying standards. The analysis reveals that Private high schools have the strongest impact on university enrollment (coefficient: 3.3), followed by Extra County high schools (1.2) and National high schools (0.7). County and Sub-County schools show minimal effects, confirming that access to higher-quality secondary education significantly shapes pathways to university.</p>
 
 <div class="figure">
   <div class="figure-frame">
@@ -74,6 +74,8 @@ I also examined how secondary school quality affects university enrolment. In Ke
 </div>
 
 <div style="clear:both;"></div>
+
+<p>I also examined how secondary school quality affects university enrolment. In Kenya, schools range from elite National and Extra County schools to local County and Sub-County schools, plus Private schools with varying standards. The analysis reveals that Private high schools have the strongest impact on university enrollment (coefficient: 3.3), followed by Extra County high schools (1.2) and National high schools (0.7). County and Sub-County schools show minimal effects, confirming that access to higher-quality secondary education significantly shapes pathways to university.</p>
 
 <h3>Why This Matters</h3>
 <p>The data tells a clear story: Kenya's educational inequality is deeply geographic. Without deliberate investment in higher education infrastructure in underserved counties like Nyandarua, the education gap will continue to widen, perpetuating regional inequality for generations.</p>
