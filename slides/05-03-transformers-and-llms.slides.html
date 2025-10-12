@@ -155,12 +155,21 @@
 <li><strong>Value weights</strong>: <span class="math inline">\(\frac{\partial L}{\partial \valueWeightMatrix} = \mathbf{X}^\top \frac{\partial L}{\partial \valueMatrix}\)</span></li>
 </ul>
 </section>
-<section id="multi-head-attention" class="slide level2">
-<h2>Multi-Head Attention</h2>
+<section id="multi-head-attention-with-layered-architecture" class="slide level2">
+<h2>Multi-Head Attention with Layered Architecture</h2>
 <ul>
 <li><strong>Multiple heads</strong>: <span class="math inline">\(\attentionHead_i = \attentionFunction(\queryMatrix_i, \keyMatrix_i, \valueMatrix_i)\)</span></li>
 <li><strong>Concatenation</strong>: <span class="math inline">\(\multiHeadOutput = (\attentionHead_1, \ldots, \attentionHead_h) \outputWeightMatrix\)</span></li>
-<li><strong>Gradient complexity</strong>: Each head has its own <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(V\)</span> gradients</li>
+<li><strong>Layered implementation</strong>: Each head is an independent <span class="math inline">\(\attentionLayer\)</span> instance</li>
+<li><strong>Gradient flow</strong>: Gradients computed independently for each head, then combined</li>
+</ul>
+</section>
+<section id="cross-attention-and-mixed-attention" class="slide level2">
+<h2>Cross-Attention and Mixed Attention</h2>
+<ul>
+<li><strong>Cross-attention</strong>: <span class="math inline">\(\queryMatrix = \queryInput \queryWeightMatrix\)</span>, <span class="math inline">\(\keyMatrix = \keyValueInput \keyWeightMatrix\)</span>, <span class="math inline">\(\valueMatrix = \keyValueInput \valueWeightMatrix\)</span></li>
+<li><strong>Mixed attention</strong>: <span class="math inline">\(\queryMatrix = \mathbf{X}\queryWeightMatrix\)</span>, <span class="math inline">\(\keyMatrix = \keyValueInput \keyWeightMatrix\)</span>, <span class="math inline">\(\valueMatrix = \keyValueInput \valueWeightMatrix\)</span></li>
+<li><strong>Gradient complexity</strong>: Different input sources create separate gradient paths</li>
 </ul>
 </section>
 <section id="implementation-considerations" class="slide level2">
@@ -171,6 +180,7 @@
 </li>
 <li><strong>Parallel computation</strong>: Each head can be computed independently</li>
 <li><strong>Gradient accumulation</strong>: Sum gradients across heads</li>
+<li><strong>Output projection</strong>: Additional <span class="math inline">\(W_o\)</span> matrix requires gradient computation</li>
 </ul>
 </section>
 <section id="summary" class="slide level2">
@@ -179,7 +189,18 @@
 <li><strong>Three-path chain rule</strong>: Input appears in <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(V\)</span> transformations</li>
 <li><strong>Softmax gradient</strong>: Standard formula with attention weight constraints</li>
 <li><strong>Multi-head complexity</strong>: Each head has independent gradients</li>
-<li><strong>Efficient implementation</strong>: Careful memory and numerical considerations</li>
+<li><strong>Cross/mixed attention</strong>: Different input sources create separate gradient paths</li>
+<li><strong>Layered architecture</strong>: Modular design with independent gradient computation</li>
+<li><strong>Output projection</strong>: Additional gradient path through <span class="math inline">\(W_o\)</span> matrix</li>
+</ul>
+</section>
+<section id="verification-with-our-implementation" class="slide level2">
+<h2>Verification with Our Implementation</h2>
+<ul>
+<li><strong>Gradient testing</strong>: Use <span class="math inline">\(\finiteDifferenceGradient\)</span> to verify analytical gradients</li>
+<li><strong>Three-path verification</strong>: Check that <span class="math inline">\(\gradInput = \gradQuery + \gradKey + \gradValue\)</span></li>
+<li><strong>Cross-attention testing</strong>: Verify separate gradient paths for different inputs</li>
+<li><strong>Multi-head testing</strong>: Each head tested independently with finite differences</li>
 </ul>
 <!-- SECTION Transformer Architecture -->
 </section>
@@ -189,17 +210,20 @@
 <section id="simple-transformer-implementation" class="slide level2">
 <h2>Simple Transformer Implementation</h2>
 </section>
-<section id="create-and-test-basic-attention" class="slide level2">
-<h2>Create and Test Basic Attention</h2>
+<section id="explore-different-sequence-types" class="slide level2">
+<h2>Explore Different Sequence Types</h2>
 </section>
-<section id="test-multi-head-attention" class="slide level2">
-<h2>Test Multi-Head Attention</h2>
+<section id="create-and-test-basic-attention-layer" class="slide level2">
+<h2>Create and Test Basic Attention Layer</h2>
 </section>
-<section id="test-chain-rule-in-attention" class="slide level2">
-<h2>Test Chain Rule in Attention</h2>
+<section id="test-multi-head-attention-layer" class="slide level2">
+<h2>Test Multi-Head Attention Layer</h2>
 </section>
-<section id="train-simple-attention-model" class="slide level2">
-<h2>Train Simple Attention Model</h2>
+<section id="test-chain-rule-in-attention-layer" class="slide level2">
+<h2>Test Chain Rule in Attention Layer</h2>
+</section>
+<section id="train-simple-attention-model-with-layered-architecture" class="slide level2">
+<h2>Train Simple Attention Model with Layered Architecture</h2>
 <div class="figure">
 <div id="transformer-training-progress-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/transformer-training-progress.svg" width="50%" style=" ">
@@ -240,14 +264,14 @@ Attention weights visualisation from the first head showing which positions the 
 Comparison of different attention activation functions showing how they create different attention patterns
 </aside>
 </section>
-<section id="positional-encoding-test" class="slide level2">
-<h2>Positional Encoding Test</h2>
+<section id="positional-encoding-layer-test" class="slide level2">
+<h2>Positional Encoding Layer Test</h2>
 </section>
-<section id="simple-transformer-model" class="slide level2">
-<h2>Simple Transformer Model</h2>
+<section id="build-transformer-with-layered-architecture" class="slide level2">
+<h2>Build Transformer with Layered Architecture</h2>
 </section>
-<section id="training-simple-model" class="slide level2">
-<h2>Training Simple Model</h2>
+<section id="training-layered-transformer-model" class="slide level2">
+<h2>Training Layered Transformer Model</h2>
 <div class="figure">
 <div id="simple-transformer-training-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/simple-transformer-training.svg" width="50%" style=" ">
@@ -257,6 +281,12 @@ Comparison of different attention activation functions showing how they create d
 <aside class="notes">
 Simple Transformer Training Progress
 </aside>
+</section>
+<section id="compare-different-sequence-types" class="slide level2">
+<h2>Compare Different Sequence Types</h2>
+</section>
+<section id="benefits-of-the-new-layered-architecture" class="slide level2">
+<h2>Benefits of the New Layered Architecture</h2>
 <!-- SECTION Training and Generalization -->
 </section>
 <section id="training-and-generalization" class="slide level2">
