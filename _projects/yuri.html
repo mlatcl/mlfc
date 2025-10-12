@@ -20,46 +20,6 @@ categories:
 - notes
 ---
 
-<div class="figure">
-  <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/yuri/neil_pointing_at_slide.jpg" width="35%">
-    <img src="/mlfc/slides/diagrams/projects/yuri/neil_during_lecture.jpg" width="35%">
-  </div>
-</div>
-
-<p>In September of 2025, I had the opportunity to be part of DSA’s Machine Learning Foundations Course led by DeepMind Professor of Machine Learning, Professor Neil Lawrence at Prof. Ciira wa Maina’s DSAIL Lab within Dedan Kimathi University of Technology. The course involved lectures in Probability, Basis Functions and Generalisation, Gaussian Processes, up to Deep Architectures. There were also six associated practical sessions with guidance from Radzim Sendyka, Fred Lawrence, Cedric Kiplimo and Austin Kaburia.</p>
-
-<div class="figure">
-  <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/yuri/guided_afternoon_practicals.jpg" width="70%">
-  </div>
-</div>
-
-<p>The sessions centred on code reusability around the Access-Assess-Address Framework and the importance of having common data variables to merge several datasets, particularly ID, time and geospatial data. The course was intensive as it also required each of the 20 or so participants to instantiate a data science mini-project from scratch using Kenyan data that would be relevant for new data storytelling within the Kenyan context. As someone with mostly engineering experience, I found myself especially benefiting from the computer science-like experience that this course gave me, particularly interacting with Open Street Maps, a deep dive into advanced pandas and the importance of algorithmic efficiency in time and computation. During the course, I experienced several instances where 4 or 5 lines of code that took about 3 minutes to run would be replaced with 1 line that took half a second to run.</p>
-
-<p>I deeply thought about what and how I would formulate my own miniproject around what I was learning from the course. Given my deeper electrical engineering experience, I thought it would be prudent to continue to follow that route. I was encouraged to do so, given the sparsity of electricity data in Kenya.</p>
-
-<div class="figure">
-  <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/yuri/a_moment_of_deep_thought.jpg" width="70%">
-  </div>
-</div>
-
-<p>Despite knowing about the efficiencies of array manipulation with NumPy, being guided in person by professionals with strong computer science backgrounds proved invaluable. Their instruction helped me grasp advanced data science concepts through the lens of objective functions. As Richard Feynman once said, “The thing that doesn't fit is the thing that's the most interesting: the part that doesn't go according to what you expected.”  Moreover, we got to play four rounds of 2-hour football, 1 each Wednesday evening, where I really got to appreciate how fitness, communication, intensity, teamwork and the goal post affect match results. </p>
-
-<div class="figure">
-  <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/yuri/football_action_shot.jpg" width="35%">
-    <img src="/mlfc/slides/diagrams/projects/yuri/blue_team_selfie.jpg" width="35%">
-    <img src="/mlfc/slides/diagrams/projects/yuri/group_selfie_after_match.jpg" width="35%">
-    <img src="/mlfc/slides/diagrams/projects/yuri/dekut_group_photo.jpg" width="35%">
-  </div>
-</div>
-
-<p>Overall, it was quite a good, professional and humanised experience that will have lasting positive effects.</p>
-
-<!-- might break here -->
-
 <p>For my miniproject, I chose the title “Probability of a Blackout in Kenya”. I chose this title especially because my motivation to pursue electrical engineering was inspired by rampant blackouts and power rationing in Kenya in the 2010s. Moreover, an eerie experience on the 10th of December 2023, when a nationwide blackout occurred, has recently given me hope that I can have a positive impact in the sector. It was two months after I had completed my final master's exams, and the undergraduates were having their 1st day of exams on the next day. The blackout occurred at 8 pm and lasted to about  3 pm the next day. I empathised with my fellow students as I felt that the entire experience was an ordeal that the students shouldn’t have had to go through, examinations are already tough. The experience unfortunately isn’t new in Kenya or in many developing countries. Kenya has experienced 7 nationwide blackouts between January 2023 and December 2024, much of this due to the unreliability of wind and solar energy during peak demand which, unlike many other energy sources, can’t be ramped up during peak usage unless energy storage systems are used. Moreover, in Kenya, only 50.4% of households are connected to electricity. So I forged on with the mini-project, basing my work on the fynesse framework. The 1st part of the fynesse framework is data acquisition, typically the hardest part of any data science project. I located the sources of my would-be datasets and converted them to csv format. Specifically, I located 4 sources:</p>
 
 <p><b>1. Percentage of households that use mains electricity from the Kenya 2019 Household type of Lighting Fuel (%) Census Data</b> (pages 338-349). 	The challenge there was how to access that data in non-pdf format, the Kenya National Bureau of Statistics (KNBS) does have a data portal for some of the census data but not for my target data which was type of Lighting Fuel, also one can request data from KNBS via email datarequest@knbs.or.ke. Being aware of bureaucratic processes, I chose to extract directly from the pdf, as a programmer, I also saw this as an interesting challenge. I took the entire 500-page pdf and snipped pages 338 to 349. I then converted that data to Excel using online tools. From there, I conducted manual cleaning. I was interested in per-county data, but subcounty data is also available here. I merged this data with population and census data that was made available to me by my colleague, Samuel Mbatia Gachana. I also added a Kenyan county code column and later ISO-3166-2:KE county codes to make sure merging the data with geospatial data from Open Street Maps. I was a little annoyed that the ISO-3166-2:KE codes differed from the Kenyan County Codes, for example, Nyeri County is county number 19, but its ISO code is KE-36. This initially affected how I could plot data in the maps, but I was able to reconcile the work. This part of the access work is illustrated below.</p>
@@ -165,3 +125,41 @@ categories:
 </div>
 
 <div style="clear:both;"></div>
+<hr style="border: none; border-top: 2px solid #ccc; margin: 2em 0;">
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/yuri/neil_pointing_at_slide.jpg" width="35%"><img src="/mlfc/slides/diagrams/projects/yuri/neil_during_lecture.jpg" width="35%">
+  </div>
+</div>
+
+<p>In September of 2025, I had the opportunity to be part of DSA’s Machine Learning Foundations Course led by DeepMind Professor of Machine Learning, Professor Neil Lawrence at Prof. Ciira wa Maina’s DSAIL Lab within Dedan Kimathi University of Technology. The course involved lectures in Probability, Basis Functions and Generalisation, Gaussian Processes, up to Deep Architectures. There were also six associated practical sessions with guidance from Radzim Sendyka, Fred Lawrence, Cedric Kiplimo and Austin Kaburia.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/yuri/guided_afternoon_practicals.jpg" width="70%">
+  </div>
+</div>
+
+<p>The sessions centred on code reusability around the Access-Assess-Address Framework and the importance of having common data variables to merge several datasets, particularly ID, time and geospatial data. The course was intensive as it also required each of the 20 or so participants to instantiate a data science mini-project from scratch using Kenyan data that would be relevant for new data storytelling within the Kenyan context. As someone with mostly engineering experience, I found myself especially benefiting from the computer science-like experience that this course gave me, particularly interacting with Open Street Maps, a deep dive into advanced pandas and the importance of algorithmic efficiency in time and computation. During the course, I experienced several instances where 4 or 5 lines of code that took about 3 minutes to run would be replaced with 1 line that took half a second to run.</p>
+
+<p>I deeply thought about what and how I would formulate my own miniproject around what I was learning from the course. Given my deeper electrical engineering experience, I thought it would be prudent to continue to follow that route. I was encouraged to do so, given the sparsity of electricity data in Kenya.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/yuri/a_moment_of_deep_thought.jpg" width="70%">
+  </div>
+</div>
+
+<p>Despite knowing about the efficiencies of array manipulation with NumPy, being guided in person by professionals with strong computer science backgrounds proved invaluable. Their instruction helped me grasp advanced data science concepts through the lens of objective functions. As Richard Feynman once said, “The thing that doesn't fit is the thing that's the most interesting: the part that doesn't go according to what you expected.”  Moreover, we got to play four rounds of 2-hour football, 1 each Wednesday evening, where I really got to appreciate how fitness, communication, intensity, teamwork and the goal post affect match results. </p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/yuri/football_action_shot.jpg" width="35%"><img src="/mlfc/slides/diagrams/projects/yuri/blue_team_selfie.jpg" width="35%">
+    <img src="/mlfc/slides/diagrams/projects/yuri/group_selfie_after_match.jpg" width="35%"><img src="/mlfc/slides/diagrams/projects/yuri/dekut_group_photo.jpg" width="35%">
+  </div>
+</div>
+
+<p>Overall, it was quite a good, professional and humanised experience that will have lasting positive effects.</p>
+
+
