@@ -20,9 +20,11 @@ categories:
 - notes
 ---
 
+<h3>Introduction and Accessing Data</h3>
+
 <p>For my miniproject, I chose the title “Probability of a Blackout in Kenya”. I chose this title especially because my motivation to pursue electrical engineering was inspired by rampant blackouts and power rationing in Kenya in the 2010s. Moreover, an eerie experience on the 10th of December 2023, when a nationwide blackout occurred, has recently given me hope that I can have a positive impact in the sector. It was two months after I had completed my final master's exams, and the undergraduates were having their 1st day of exams on the next day. The blackout occurred at 8 pm and lasted to about  3 pm the next day. I empathised with my fellow students as I felt that the entire experience was an ordeal that the students shouldn’t have had to go through, examinations are already tough. The experience unfortunately isn’t new in Kenya or in many developing countries. Kenya has experienced 7 nationwide blackouts between January 2023 and December 2024, much of this due to the unreliability of wind and solar energy during peak demand which, unlike many other energy sources, can’t be ramped up during peak usage unless energy storage systems are used. Moreover, in Kenya, only 50.4% of households are connected to electricity. So I forged on with the mini-project, basing my work on the fynesse framework. The 1st part of the fynesse framework is data acquisition, typically the hardest part of any data science project. I located the sources of my would-be datasets and converted them to csv format. Specifically, I located 4 sources:</p>
 
-<p><b>1. Percentage of households that use mains electricity from the Kenya 2019 Household type of Lighting Fuel (%) Census Data</b> (pages 338-349). 	The challenge there was how to access that data in non-pdf format, the Kenya National Bureau of Statistics (KNBS) does have a data portal for some of the census data but not for my target data which was type of Lighting Fuel, also one can request data from KNBS via email datarequest@knbs.or.ke. Being aware of bureaucratic processes, I chose to extract directly from the pdf, as a programmer, I also saw this as an interesting challenge. I took the entire 500-page pdf and snipped pages 338 to 349. I then converted that data to Excel using online tools. From there, I conducted manual cleaning. I was interested in per-county data, but subcounty data is also available here. I merged this data with population and census data that was made available to me by my colleague, Samuel Mbatia Gachana. I also added a Kenyan county code column and later ISO-3166-2:KE county codes to make sure merging the data with geospatial data from Open Street Maps. I was a little annoyed that the ISO-3166-2:KE codes differed from the Kenyan County Codes, for example, Nyeri County is county number 19, but its ISO code is KE-36. This initially affected how I could plot data in the maps, but I was able to reconcile the work. This part of the access work is illustrated below.</p>
+<p>1. Percentage of households that use mains electricity from the <b>Kenya 2019 Household type of Lighting Fuel (%) Census Data</b> (pages 338-349). 	The challenge there was how to access that data in non-pdf format, the Kenya National Bureau of Statistics (KNBS) does have a data portal for some of the census data but not for my target data which was type of Lighting Fuel, also one can request data from KNBS via email datarequest@knbs.or.ke. Being aware of bureaucratic processes, I chose to extract directly from the pdf, as a programmer, I also saw this as an interesting challenge. I took the entire 500-page pdf and snipped pages 338 to 349. I then converted that data to Excel using online tools. From there, I conducted manual cleaning. I was interested in per-county data, but subcounty data is also available here. I merged this data with population and census data that was made available to me by my colleague, Samuel Mbatia Gachana. I also added a Kenyan county code column and later ISO-3166-2:KE county codes to make sure merging the data with geospatial data from Open Street Maps. I was a little annoyed that the ISO-3166-2:KE codes differed from the Kenyan County Codes, for example, Nyeri County is county number 19, but its ISO code is KE-36. This initially affected how I could plot data in the maps, but I was able to reconcile the work. This part of the access work is illustrated below.</p>
 
 <div class="figure">
   <div class="figure-frame">
@@ -30,9 +32,9 @@ categories:
   </div>
 </div>
 
-<p><b>2. Reliability Index data, that is CAIDI, SAIDI and SAIFI from 2023 to the present.</b> This data I obtained from EPRA reports 2023/24 and 2024/25. This data was more about manually inputting the index data with its respective year and month. This data was only available for the entire nation, not per county.</p>
+<p>2. Reliability Index data, that is <b>CAIDI, SAIDI and SAIFI from 2023 to the present.</b> This data I obtained from EPRA reports 2023/24 and 2024/25. This data was more about manually inputting the index data with its respective year and month. This data was only available for the entire nation, not per county.</p>
 
-<p><b>3. Open Street Maps of Kenya and Kenyan Counties.</b> I used osmnx (the Python module for OpenStreet Maps access) to plot my maps, but I found that calling the API would take about 50 minutes. So to ease my work, I downloaded the maps. The function I use can load from a downloaded map as well as from osmnx, thus, when going through the notebook, it will be quite easy for anyone to use it. </p>
+<p>3. <b>Open Street Maps of Kenya and Kenyan Counties.</b> I used osmnx (the Python module for OpenStreet Maps access) to plot my maps, but I found that calling the API would take about 50 minutes. So to ease my work, I downloaded the maps. The function I use can load from a downloaded map as well as from osmnx, thus, when going through the notebook, it will be quite easy for anyone to use it. </p>
 
 <p>4. Lastly, I obtained data from <b>Kenya Power (KPLC) of all notices available</b>. Initially, I had tried to scrape from X.com (twitter.com), but scraping from the KPLC website was a logical and better option. The notices are in pdf format. I used the BeautifulSoup module to scrape the pdfs from the KPLC Interruptions notice webpage, obtaining about 55 notices and 6 reports. Using the PyPDF2 module, the text in the PDFs was extracted and using regex code, I obtained the county, area, date, start and end time and places affected. This resulted in the 55 notices being part of one csv document. Figure 6 shows a sample pdf and accompanying csv section for that pdf page. Ideally, I should have found a way to link conventional households to the affected places, but instead, I chose for the moment to use per-county data. Unfortunately, based on time and lack of merging data, I proceeded to analysis, data quality checking and date formatting. As in the census data, I added the county codes for merging purposes. I would group this data on a per-county and monthly basis.</p>
 
@@ -49,6 +51,8 @@ categories:
     <img src="/mlfc/slides/diagrams/projects/yuri/access_workflow_diagram.png" width="70%">
   </div>
 </div>
+
+<h3>Data Analysis</h3>
 
 <p>From here, I proceeded on to assess and address. These sections respectively represent the data quality checks and answering questions. Before I explain my address and assessment, I believe the context of Kenya and Kenya’s energy sector would be useful to you. Kenya had a largely centralised government from 1963 to 2010, the counties that I mention started to exist from 2010 onwards. A large portion of the Kenyan economy is centralised around Nairobi, the political and financial capital, Mombasa, the location of Kenya’s main port and gateway to East and Central Africa and Kisumu, the gateway to Lake Victoria. Kenya’s electricity sector has approximately 81% of the electrical energy used coming from clean sources such as geothermal, hydro, wind and solar, 8% of the electrical energy coming from fossil fuel-based generation for maintaining voltage stability during peak demand and 11% from imports mainly from Ethiopia (likely from the Grand Ethiopian Renaissance hydropower Dam(GERD)). As mentioned earlier, having climate-friendly, renewable energy generation has its downsides. Between March and December 2023, Kenya experienced four nationwide blackouts on March 4th, August 25th, November 11th and December 10th caused by system disturbances, transmission failure and the sudden loss of generation from the Lake Turkana Wind Power Plant. In 2024, nationwide and near-nationwide blackouts were recorded on May 2nd, September 6th and December 18th, showing the fragility of the grid’s transmission and balancing capacity. No such blackouts have been recorded in 2025 (as of October), suggesting signs of an improvement in operational control and thus grid resilience.</p>
 
@@ -108,6 +112,8 @@ categories:
   </div>
 </div>
 
+<h3>Conclusions</h3>
+
 <p>I suppose with the nationwide blackouts, we can say <i>"When the well is dry, we know the worth of the water. The same is true for electricity”</i>.</p>
 
 <div class="figure">
@@ -126,6 +132,8 @@ categories:
 
 <div style="clear:both;"></div>
 <hr style="border: none; border-top: 2px solid #ccc; margin: 2em 0;">
+
+<h2>About the course</h2>
 
 <div class="figure">
   <div class="figure-frame">
