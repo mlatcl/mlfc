@@ -11,7 +11,7 @@ author:
   gscholar: 
   orcid: 
 edit_url: https://github.com/mlatcl/mlfc/new/gh-pages/_projects/wilkister.html
-date: 2025-10-06
+date: 2025-10-04
 published: 2025-10-01
 time: "12:00"
 featured_image: slides/diagrams/projects/wilkister/wilkister_presenting.jpg
@@ -26,10 +26,10 @@ categories:
 
 <h3 id="accidents-black-spot-mapping-in-kenya">Accidents Black Spot Mapping in Kenya</h3>
 
-<h4>About The Course</h4>
+<h3>Introduction</h3>
 <p>I was privileged to attend a month-long Machine Learning Foundations Course (MLFC) by Prof. Neil Lawrence. It was an eye-opening experience that deepened my understanding of how machines learn from data. The course took us from the fundamentals of probability and linear algebra to exploring how linear models uncover patterns, how basis functions capture complex relationships, and how techniques like Bayesian regression and Gaussian processes model uncertainty. We also explored unsupervised learning through clustering and concluded with an introduction to neural networks. Beyond the technical lessons, it was an inspiring journey of discovery and collaboration. The knowledge I gained directly inspired my project on Accident Blackspot Mapping in Kenya, where I applied these concepts to identify high-risk roads using real data. Overall, the MLFC was not just an academic experience but a meaningful step toward using data and machine learning to solve real-world problems.</p>
 
-<h4>Abstract</h4>
+<h3>Project Outline</h3>
 <p>Every year, thousands of road users in Kenya are affected by accidents, many of which are preventable. This project’s goal is to identify accident black spots in Kenya by mapping crashes recorded between 2012 and 2023, assigning risk factors to road segments, and ultimately using those insights to recommend safer driving routes. I hope that by doing so, there might be a substantial decline in the number of observed accidents annually.</p>
 
 <p>The work focuses particularly on Nairobi County, where high population density, traffic congestion, and diverse road users make road safety a pressing issue. The dataset powering this project captures reported road crashes from 2012 to 2023 across Kenya, with detailed timestamps, geolocations, and descriptions of the incidents.</p>
@@ -38,46 +38,47 @@ categories:
 
 <p>By mapping crashes to nearest road segments, the roads were assigned risk factors, which aided in the calculation of a safer route to avoid roads which are accident-prone. I then created a graph that, when given user start and destination location within Nairobi, gives both a safe route (red) and a shortest route (blue) — “the shortest route does not take the probability of accidents occurring into account.”</p>
 
-<h4>Results</h4>
-
-<h5>II) Monthly Accident Distribution</h5>
+<h3>Monthly Accident Distribution</h3>
 <p>This information helps us to spot any months that have, over the years, had a higher accident rate than others in order to try and find out why said months are more affected and preferably enforce stricter policies and road traffic monitoring during said months.</p>
 
 <div class="figure">
   <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/accidents/monthly_accident_distribution.png" width="70%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/crash_count_per_month.png" width="70%">
   </div>
 </div>
 
 <p>This shows that there is no particular pattern for accident occurrences over the years — all months are equally prone to accidents and require equal amounts of care.</p>
 
-<h5>III) What Time Do Accidents Occur Most</h5>
+<h3>What Time Do Accidents Occur Most</h3>
 <p>This information will aid us to understand the human and behavioural side of the problem, to what extent human behaviour influences accident occurrences.</p>
 
 <div class="figure" style="text-align:center; margin:2em 0;">
   <div class="figure-frame" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
-    <img src="/mlfc/slides/diagrams/projects/accidents/accidents_by_hour_1.png" width="45%">
-    <img src="/mlfc/slides/diagrams/projects/accidents/accidents_by_hour_2.png" width="45%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/heatmap.png" width="45%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/hourly_crash_count.png" width="45%">
   </div>
 </div>
 
 <p>This tells us that most accidents occur around 7am in the morning and 5pm in the evening from Monday to Friday. This leads to the assumption that the crashes are probably caused by the from- and to-work/school rush at said times. This implies that stricter measures should be taken at this time by the road traffic authority and all alternative routes put to good use in order to decongest main roads at this time, thus reducing accidents.</p>
 
-<h5>IV) Mapped Crash Points</h5>
+<h3>Mapped Crash Points</h3>
 <p>By mapping the crash points to the nearest road segment, we get a visual outlook on which road segments are more accident prone. This is very important especially for the safe route recommendation part, where the number of mapped accidents per segment shall be used to assign a risk factor.</p>
 
 <div class="figure">
   <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/accidents/mapped_crash_points.png" width="70%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/map_1.png" width="45%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/map_2.png" width="45%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/map_3.png" width="45%">
   </div>
 </div>
 
-<h5>V) Recommended Safe Route</h5>
+<h3>Recommended Safe Route</h3>
 <p>These are safe routes, one from Kilimani to Upper Hill and the second from Archives to Uhuru Gardens, along with their shorter route alternatives. The safer routes, though longer, try to avoid high-risk road segments as much as possible, making this a choice between safety and time.</p>
 
 <div class="figure">
   <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/accidents/recommended_safe_routes.png" width="70%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/route_1.png" width="70%">
+    <img src="/mlfc/slides/diagrams/projects/accidents/route_2.png" width="70%">
   </div>
 </div>
 
