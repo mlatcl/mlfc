@@ -1,0 +1,124 @@
+---
+title: "Assessment of Access to Essential Services in Kenya"
+venue: "null"
+abstract: ""
+author:
+- given: Zipporah
+  family: Mutua
+  url: 
+  institute: Dedan Kimathi University of Technology
+  twitter: 
+  gscholar: 
+  orcid: 
+edit_url: https://github.com/mlatcl/mlfc/new/gh-pages/_projects/zipporah.html
+date: 2025-10-05
+published: 2025-10-01
+time: "12:00"
+featured_image: slides/diagrams/projects/wilkister/zipporah_presenting.jpg
+prize: "Excellent Overall Performance"
+prize_color: "#6A6A6A"
+transition: None
+ipynb: project_zipporah.ipynb
+layout: project
+categories:
+- notes
+---
+
+<h3>Introduction</h3>
+<p>Every Kenyan has the right to education and healthcare, yet access to these essential services remains unequal across the country.
+Using data from the 2019 Census and Kenya’s school and hospital registries, I explored whether facilities are distributed fairly relative to population size, and what this means for communities’ everyday lives.</p>
+
+<p>Regions like Kericho, Nandi, and Mandera remain underserved, while urban areas such as Nairobi and Kiambu have dense concentrations of schools and hospitals. This project combines geospatial data, statistical analysis, and visualisation to reveal these disparities and spark conversations around equity in essential infrastructure.</p>
+
+<div class="figure" style="text-align:center; margin:2em 0;">
+  <div class="figure-frame" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/health1.png" width="45%">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/health2.png" width="45%">
+  </div>
+</div>
+
+<h3>Understanding Kenya’s Population Landscape</h3>
+<p>Using county-level census data, we visualised population distribution across Kenya. The map revealed sharp contrasts between densely populated counties like Nairobi and Kiambu, and the sparsely inhabited northern regions such as Turkana and Marsabit. These variations form the backdrop to Kenya’s service delivery challenge — where distance and density shape access.</p>
+
+<h3>Facilities vs Population: A Growing Imbalance</h3>
+<p>When comparing the number of schools and hospitals against population, the disparities become even clearer. Counties with high populations often have relatively fewer public facilities, meaning more people compete for fewer services. To visualise this imbalance, we created a bubble plot where each bubble’s size represents population. Larger bubbles (like Nairobi and Nakuru) show better alignment between population and facilities, while smaller ones highlight underserved regions.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/bubbles_1.jpg" width="70%">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/bubbles_2.jpg" width="70%">
+  </div>
+</div>
+
+<h3>Correlation Analysis</h3>
+
+<p>A correlation matrix revealed:
+- Population is strongly correlated with the number of schools and hospitals.
+- Hospitals correlate strongly with both population and schools.
+- Counties with larger land areas tend to have lower facility density.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/correlation.jpg" width="70%">
+  </div>
+</div>
+
+<h3>What the Data Reveals</h3>
+<p>The bubble plot and correlation analysis tell a clear story: population correlates moderately with the number of schools, but less so with hospitals. This means that while educational facilities have somewhat scaled with growth, healthcare infrastructure has lagged. Counties like Mandera and Wajir, for example, show high population but very few hospitals per capita.</p>
+<p>These patterns echo real-world experiences - families travelling long distances for healthcare, and overcrowded classrooms in fast-growing towns. Such insights underline the value of data-driven planning for equitable access.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/priorities.jpg" width="70%">
+  </div>
+</div>
+
+<h3>Conclusion</h3>
+
+<p>Access to essential facilities in Kenya remains uneven, but data gives us a way forward. By identifying where the gaps are largest, policymakers and communities can target interventions that bring services closer to the people who need them most. Ultimately, building a fairer Kenya requires more than infrastructure — it requires insight, compassion, and collaboration between data and humanity.</p>
+
+<div class="figure">
+  <div class="figure-frame">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/zipporah_certificate.jpg" width="70%">
+  </div>
+</div>
+<div style="clear:both;"></div>
+
+<hr style="border: none; border-top: 2px solid #ccc; margin: 2em 0;">
+
+<h3>About the Machine Learning Foundations Course (MLFC)</h3>
+
+<p>The Machine Learning Foundations Course (MLFC) is a program developed under the guidance of Prof. Neil Lawrence at the University of Cambridge, hosted at Dedan Kimathi University of Technology (DeKUT), Nyeri, Kenya. It prepares learners with essential mathematical and probabilistic foundations to engage with advanced machine learning topics. The course emphasises the application of ML to real-world challenges, empowering students to use data for community-focused problem solving.</p>
+
+<h3>Personal Reflection: Learning from Data and Community</h3>
+
+<p>One of the most rewarding parts of the Machine Learning Foundations Course (MLFC) was how each lecture built up from mathematical ideas into real-world applications.
+What stood out most for me was how Prof. Neil Lawrence showed that machine learning is not just about algorithms,  it’s about reasoning under uncertainty, using data to make informed and responsible decisions.</p>
+
+<p>The lectures began with probability, which forms the foundation of all machine learning.
+We explored how probabilities describe uncertainty, through distributions, expectations, and independence, and how rules like the product and sum rule connect different events.
+For me, this was eye-opening because it explained why models can adapt as new data arrives, which is essential when dealing with real-world datasets like Kenya’s census and facility records that are never perfectly complete.</p>
+
+<p>We then moved into linear algebra, which I had seen before, but never quite this way.
+We used it to understand how data can be represented as matrices and how optimisation works in regression models.
+The link between minimising loss and maximising likelihood made everything click, I could now see how equations translate into decisions a model makes.
+When I later analysed how population size affects the number of schools, this understanding helped me interpret the regression relationships meaningfully, not just technically.</p>
+
+<p>The introduction to Gaussian Processes was another highlight.
+Prof. Neil described them as models that don’t just give predictions, but also tell you how sure they are.
+That idea really stayed with me.
+In the context of my project, if a model predicts that a county is underserved, it’s equally important to know how confident that prediction is, especially when such insights could guide policy or investment.</p>
+
+<p>We also covered unsupervised learning, where the goal isn’t to predict but to discover.
+Learning how clustering algorithms like k-means or hierarchical clustering group data without labels helped me think about how to categorise counties by their level of access to services.
+We also discussed challenges like the “curse of dimensionality”, when too many features make data harder to interpret, and how dimensionality reduction can help reveal clearer structure.</p>
+
+<p>Machine learning starts with mathematics, but it grows into empathy and responsibility.</p>
+
+<div class="figure" style="text-align:center; margin:2em 0;">
+  <div class="figure-frame" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/zipporah_presenting_2.jpg" width="45%">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/neil_presenting.jpg" width="45%">
+  </div>
+</div>
+<div style="clear:both;"></div>
