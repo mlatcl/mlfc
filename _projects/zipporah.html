@@ -41,7 +41,7 @@ Using data from the 2019 Census and Kenya’s school and hospital registries, I 
 <p>Using county-level census data, we visualised population distribution across Kenya. The map revealed sharp contrasts between densely populated counties like Nairobi and Kiambu, and the sparsely inhabited northern regions such as Turkana and Marsabit. These variations form the backdrop to Kenya’s service delivery challenge - where distance and density shape access.</p>
 
 <h3>Facilities vs Population: A Growing Imbalance</h3>
-<p>When comparing the number of schools and hospitals against population, the disparities become even clearer. Counties with high populations often have relatively fewer public facilities, meaning more people compete for fewer services. To visualise this imbalance, we created a bubble plot where each bubble’s size represents population. Larger bubbles (like Nairobi and Nakuru) show better alignment between population and facilities, while smaller ones highlight underserved regions.</p>
+<p>When comparing the number of schools and hospitals against population, the disparities become even clearer. Counties with high populations often have relatively fewer public facilities, meaning more people compete for fewer services. To visualise this imbalance, we created a bubble plot of the number of hospitals and schools, where each bubble’s size represents population. Bubbles towards the top-right show better alignment between population and facilities, while the ones near the origin highlight underserved regions.</p>
 
 <div class="figure">
   <div class="figure-frame">
@@ -57,14 +57,17 @@ Using data from the 2019 Census and Kenya’s school and hospital registries, I 
 
 <h3>Correlation Analysis</h3>
 
-<p>A correlation matrix revealed:<br>
+<p>A correlation study revealed:<br>
 - Population is strongly correlated with the number of schools and hospitals.<br>
-- Hospitals correlate strongly with both population and schools.<br>
-- Counties with larger land areas tend to have lower facility density.</p>
+- Counties with larger land areas tend to have lower facility density.<br>
+- Hospitals correlate strongly with schools.
+- Per-capita school and hospital counts vary between counties.</p>
 
-<div class="figure">
-  <div class="figure-frame">
-    <img src="/mlfc/slides/diagrams/projects/zipporah/correlation.jpg" width="70%">
+<div class="figure" style="text-align:center; margin:2em 0;">
+  <div class="figure-frame" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/pop_schools" width="30%">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/pop_hospitals.png" width="30%">
+    <img src="/mlfc/slides/diagrams/projects/zipporah/correlation.png" width="30%">
   </div>
 </div>
 
