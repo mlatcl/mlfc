@@ -92,7 +92,7 @@ f(\mathbf{ x}; \mathbf{W}) = \mathbf{ w}_4 ^\top\phi\left(\mathbf{W}_3 \phi\left
 f(\mathbf{ x}_i) = \mathbf{ w}^\top \boldsymbol{ \phi}(\mathbf{ x}_i).
 \]</span> We defined a basis, such as the polynomial basis.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.linear_models <span class="im">import</span> polynomial</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cmd <span class="op">=</span> install_command(<span class="st">&#39;daft-pgm&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cmd <span class="op">=</span> install_command(<span class="st">&#39;daft&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>system {cmd}</span></code></pre></div>
 <br />
 
@@ -765,85 +765,88 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/simple-deep-nn-implementation.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/snippets/edit/main/_deepnn/includes/simple-deep-nn-implementation.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>X_reg, y_reg <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;regression&#39;</span>)</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>X_cls, y_cls <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;classification&#39;</span>)</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Regression data: </span><span class="sc">{</span>X_reg<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>y_reg<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Classification data: </span><span class="sc">{</span>X_cls<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>y_cls<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.data <span class="im">import</span> create_synthetic_data</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>X_reg, y_reg <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;regression&#39;</span>)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>X_cls, y_cls <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;classification&#39;</span>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Regression data: </span><span class="sc">{</span>X_reg<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>y_reg<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Classification data: </span><span class="sc">{</span>X_cls<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>y_cls<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <h2 id="create-and-test-neural-network">Create and Test Neural Network</h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> ReLUActivation, LinearActivation, NeuralNetwork, SGD, train_model, MeanSquaredError, BinaryCrossEntropyLoss, SigmoidActivation</span></code></pre></div>
-<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>]  <span class="co"># 2 inputs, 1 hidden layer (5 neurons), 1 output</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [ReLUActivation(), LinearActivation()]</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Test forward pass</span></span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>], [<span class="fl">3.0</span>, <span class="fl">4.0</span>]])</span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
-<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Neural Network Test:&quot;</span>)</span>
-<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Input: </span><span class="sc">{</span>X_test<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Output: </span><span class="sc">{</span>y_pred<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Network architecture: </span><span class="sc">{</span>dimensions<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Number of parameters: </span><span class="sc">{</span><span class="bu">sum</span>(w.size <span class="cf">for</span> w <span class="kw">in</span> network.weights) <span class="op">+</span> <span class="bu">sum</span>(b.size <span class="cf">for</span> b <span class="kw">in</span> network.biases)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.neural_networks <span class="im">import</span> ReLUActivation, LinearActivation, NeuralNetwork, SigmoidActivation</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.loss <span class="im">import</span> MeanSquaredError, BinaryCrossEntropyLoss</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.optimisation <span class="im">import</span> SGD, train_model</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>]  <span class="co"># 2 inputs, 1 hidden layer (5 neurons), 1 output</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [ReLUActivation(), LinearActivation()]</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Test forward pass</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>], [<span class="fl">3.0</span>, <span class="fl">4.0</span>]])</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Neural Network Test:&quot;</span>)</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Input: </span><span class="sc">{</span>X_test<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Output: </span><span class="sc">{</span>y_pred<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Network architecture: </span><span class="sc">{</span>dimensions<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Number of parameters: </span><span class="sc">{</span><span class="bu">sum</span>(w.size <span class="cf">for</span> w <span class="kw">in</span> network.weights) <span class="op">+</span> <span class="bu">sum</span>(b.size <span class="cf">for</span> b <span class="kw">in</span> network.biases)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <h2 id="test-backpopagation">Test Backpopagation</h2>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> MeanSquaredError()</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([[<span class="fl">1.0</span>], [<span class="fl">2.0</span>]])</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute loss and gradient</span></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>loss_value <span class="op">=</span> loss_fn.forward(y_pred, y_true)</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>loss_gradient <span class="op">=</span> loss_fn.gradient(y_pred, y_true)</span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Backward pass</span></span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>gradients <span class="op">=</span> network.backward(loss_gradient)</span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Backpropagation Test:&quot;</span>)</span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Loss value: </span><span class="sc">{</span>loss_value<span class="sc">:.4f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Loss gradient: </span><span class="sc">{</span>loss_gradient<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Weight gradients shapes: </span><span class="sc">{</span>[g.shape <span class="cf">for</span> g <span class="kw">in</span> gradients[<span class="st">&#39;weight_gradients&#39;</span>]]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Bias gradients shapes: </span><span class="sc">{</span>[g.shape <span class="cf">for</span> g <span class="kw">in</span> gradients[<span class="st">&#39;bias_gradients&#39;</span>]]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> MeanSquaredError()</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([[<span class="fl">1.0</span>], [<span class="fl">2.0</span>]])</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute loss and gradient</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>loss_value <span class="op">=</span> loss_fn.forward(y_pred, y_true)</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>loss_gradient <span class="op">=</span> loss_fn.gradient(y_pred, y_true)</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Backward pass</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>gradients <span class="op">=</span> network.backward(loss_gradient)</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Backpropagation Test:&quot;</span>)</span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Loss value: </span><span class="sc">{</span>loss_value<span class="sc">:.4f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Loss gradient: </span><span class="sc">{</span>loss_gradient<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Weight gradients shapes: </span><span class="sc">{</span>[g.shape <span class="cf">for</span> g <span class="kw">in</span> gradients[<span class="st">&#39;weight_gradients&#39;</span>]]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Bias gradients shapes: </span><span class="sc">{</span>[g.shape <span class="cf">for</span> g <span class="kw">in</span> gradients[<span class="st">&#39;bias_gradients&#39;</span>]]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <h2 id="unified-optimisation-interface">Unified Optimisation Interface</h2>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> SGD</span></code></pre></div>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate the SGD optimizer</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>sgd_opt <span class="op">=</span> SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>)</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;SGD optimizer created with learning rate: </span><span class="sc">{</span>sgd_opt<span class="sc">.</span>learning_rate<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SGD implements: parameters = parameters - learning_rate * gradients&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> train_model</span></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate the unified optimization interface with traditional NeuralNetwork</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> NeuralNetwork, ReLUActivation, LinearActivation, MeanSquaredError</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a traditional neural network</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [ReLUActivation(), ReLUActivation(), LinearActivation()]</span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the unified interface</span></span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>], [<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">1.0</span>]])</span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> np.array([[<span class="fl">3.0</span>], [<span class="fl">1.5</span>]])</span>
-<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass</span></span>
-<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
-<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Network output: </span><span class="sc">{</span>y_pred<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up for gradient computation</span></span>
-<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> MeanSquaredError()</span>
-<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> loss_fn.forward(y_pred, y_test)</span>
-<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a>loss_gradient <span class="op">=</span> loss_fn.gradient(y_pred, y_test)</span>
-<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a>network.set_output_gradient(loss_gradient)</span>
-<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gradients using the unified interface</span></span>
-<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a>gradients <span class="op">=</span> network.gradients</span>
-<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Gradients shape: </span><span class="sc">{</span>gradients<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Parameters shape: </span><span class="sc">{</span>network<span class="sc">.</span>parameters<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb66-27"><a href="#cb66-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Gradients and parameters shapes match: </span><span class="sc">{</span>gradients<span class="sc">.</span>shape <span class="op">==</span> network<span class="sc">.</span>parameters<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb66-28"><a href="#cb66-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;This demonstrates the unified optimization interface for traditional neural networks!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.optimisation <span class="im">import</span> SGD</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate the SGD optimizer</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>sgd_opt <span class="op">=</span> SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;SGD optimizer created with learning rate: </span><span class="sc">{</span>sgd_opt<span class="sc">.</span>learning_rate<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;SGD implements: parameters = parameters - learning_rate * gradients&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai.optimisation <span class="im">import</span> train_model</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate the unified optimisation interface with traditional NeuralNetwork</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlai <span class="im">import</span> NeuralNetwork, ReLUActivation, LinearActivation, MeanSquaredError</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a traditional neural network</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>activations <span class="op">=</span> [ReLUActivation(), ReLUActivation(), LinearActivation()]</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> NeuralNetwork(dimensions, activations)</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the unified interface</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">2.0</span>], [<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">1.0</span>]])</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> np.array([[<span class="fl">3.0</span>], [<span class="fl">1.5</span>]])</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward pass</span></span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> network.predict(X_test)</span>
+<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Network output: </span><span class="sc">{</span>y_pred<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb67-16"><a href="#cb67-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-17"><a href="#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up for gradient computation</span></span>
+<span id="cb67-18"><a href="#cb67-18" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> MeanSquaredError()</span>
+<span id="cb67-19"><a href="#cb67-19" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> loss_fn.forward(y_pred, y_test)</span>
+<span id="cb67-20"><a href="#cb67-20" aria-hidden="true" tabindex="-1"></a>loss_gradient <span class="op">=</span> loss_fn.gradient(y_pred, y_test)</span>
+<span id="cb67-21"><a href="#cb67-21" aria-hidden="true" tabindex="-1"></a>network.set_output_gradient(loss_gradient)</span>
+<span id="cb67-22"><a href="#cb67-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-23"><a href="#cb67-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gradients using the unified interface</span></span>
+<span id="cb67-24"><a href="#cb67-24" aria-hidden="true" tabindex="-1"></a>gradients <span class="op">=</span> network.gradients</span>
+<span id="cb67-25"><a href="#cb67-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Gradients shape: </span><span class="sc">{</span>gradients<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb67-26"><a href="#cb67-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Parameters shape: </span><span class="sc">{</span>network<span class="sc">.</span>parameters<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb67-27"><a href="#cb67-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Gradients and parameters shapes match: </span><span class="sc">{</span>gradients<span class="sc">.</span>shape <span class="op">==</span> network<span class="sc">.</span>parameters<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb67-28"><a href="#cb67-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;This demonstrates the unified optimization interface for traditional neural networks!&quot;</span>)</span></code></pre></div>
 <h2 id="train-network-for-regression">Train Network for Regression</h2>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train with SGD optimizer</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>X_reg, y_reg <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;regression&#39;</span>)</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>network_reg, losses <span class="op">=</span> train_network_regression(X_reg, y_reg)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train with SGD optimiser</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>X_reg, y_reg <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;regression&#39;</span>)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>network_reg, losses <span class="op">=</span> train_network_regression(X_reg, y_reg)</span></code></pre></div>
 <p>mlai.write_figure(“nn-regression-training-progress.svg,” directory=“./ml”) }</p>
 <div class="figure">
 <div id="-figure" class="figure-frame">
@@ -857,8 +860,8 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 </div>
 </div>
 <p>{&lt;object class=“svgplot” data=“https://mlatcl.github.io/mlfc/./slides/diagrams//ml/nn-regression-trainng-progress.”svg" width=“50%” style=" "&gt;</object>}{Neural Network Training Progress for a regression model){nn-regression-training-progress}</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>X_cls, y_cls <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;classification&#39;</span>)</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>network_cls, losses_cls, accuracies <span class="op">=</span> train_network_classification(X_cls, y_cls)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>X_cls, y_cls <span class="op">=</span> create_synthetic_data(<span class="dv">200</span>, <span class="st">&#39;classification&#39;</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>network_cls, losses_cls, accuracies <span class="op">=</span> train_network_classification(X_cls, y_cls)</span></code></pre></div>
 <div class="figure">
 <div id="classification-training-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/classification-training.svg" width="70%" style=" ">
@@ -872,10 +875,10 @@ f_1 = \mathbf{W}_1 \mathbf{ x}
 </div>
 </div>
 <h2 id="visualise-decision-boundary">Visualise Decision Boundary</h2>
-<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai.plot</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlai</span></code></pre></div>
 <div class="figure">
 <div id="neural-network-decision-boundary-figure" class="figure-frame">
 <object class="svgplot " data="https://mlatcl.github.io/mlfc/./slides/diagrams//deepnn/neural-network-decision-boundary.svg" width="50%" style=" ">
@@ -953,13 +956,15 @@ d_0 d_1 d_2 + d_0 d_2 d_3 + \ldots + d_0 d_{L-1} d_L= d_0 \sum_{\ell=2}^{L} d_\e
 <h2 id="computational-graphs-and-pytorch-autodiff">Computational Graphs and PyTorch Autodiff</h2>
 <p>Modern frameworks build a dynamic computational graph as you compute, then traverse it in reverse to accumulate gradients.</p>
 <p>Minimal PyTorch example (CPU/GPU agnostic):</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
-<p>PyTorch attaches <code>grad_fn</code> to results, constructs the graph dynamically during forward, and supports GPU execution via <code>.cuda()</code>. These conveniences, together with autodiff, enable fast deep learning experimentation.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>cmd <span class="op">=</span> install_command(<span class="st">&#39;torch&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>system {cmd}</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> th.tensor(<span class="fl">4.0</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> th.tensor(<span class="fl">2.0</span>)</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> x<span class="op">*</span>y)<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>f.backward()</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>x.grad  <span class="co"># == 2*(x + x*y)*(1 + y) = 8.0</span></span></code></pre></div>
+<p>PyTorch attaches <code>grad_fn</code> to results, constructs the graph dynamically during forward, and supports GPU execution via <code>.cuda()</code>. These conveniences, together with automatic differentiation, enable fast deep learning experimentation.</p>
 <h2 id="overparameterised-systems">Overparameterised Systems</h2>
 <p>If we could examine the Hessian of a neural network at its minimum, we can speculate about what we would find. In particular, we would find that it would have very many low (or negative) eigenvalues in many directions. This is indicative of the parameters being <em>badly determined</em> because of the neural network model being heavily <em>overparameterised</em>. So how does it generalise?</p>
 <p>Simply put, there is not enough regularisation encoded in the objective function of the neural network models we are using to explain the generalisation performance. There must be something in the algorithms we are using that causes these highly overparameterised models to generalise well.</p>
@@ -1022,14 +1027,14 @@ H(\mathbb{w}) = \frac{\text{d}^2}{\text{d}\mathbf{ w}\text{d}\mathbf{ w}^\top} L
 \mathbf{v}^\top H(\mathbf{ w}) = \frac{\text{d}}{\text{d}\mathbf{ w}} \left( \mathbf{v}^\top \mathbf{g}(\mathbf{ w}) \right)
 \]</span></p>
 <p>Live-coding HVP in PyTorch (mixed-mode via backward-over-backward or autograd.functional). Using a quadratic ensures a non-zero Hessian (2I):</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
-<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> th</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (w<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()  <span class="co"># toy scalar loss; Hessian = 2I</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> th.randn(<span class="dv">5</span>, requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>g, <span class="op">=</span> th.autograd.grad(f(w), w, create_graph<span class="op">=</span><span class="va">True</span>)  <span class="co"># gradient with graph</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> th.randn_like(w)</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>hv, <span class="op">=</span> th.autograd.grad(g, w, grad_outputs<span class="op">=</span>v)  <span class="co"># Hessian-vector product = 2*v</span></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>hv</span></code></pre></div>
 <h2 id="further-reading-1">Further Reading</h2>
 <ul>
 <li>Chapter 8 of Bishop-deeplearning24</li>
