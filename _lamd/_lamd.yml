@@ -15,7 +15,7 @@ practicalsdir: ../_practicals/ # Where compiled practicals go
 snippetsdir: $HOME/lawrennd/snippets # Directory for reusable content snippets
 writediagramsdir: . # Where to write generated diagrams
 scriptsdir: ../scripts/ # Directory for scripts
-diagramsdir: ./slides/diagrams/ # Directory for diagrams
+diagramsdir: ../slides/diagrams/ # Directory for diagrams (with slidesdir)
 # Layout and styling
 slidesheader: slides-header.html
 notation: talk-notation.tex
