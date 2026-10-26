@@ -1,9 +1,9 @@
 # Author information - update with your details
 author:
-  - given: Your
-    family: Name
-    institution: Your Institution
-    url: http://example.com
+  - given: Neil
+    family: Lawrence
+    institution: University of Cambridge
+    url: http://inverseprobability.com
 # Directory paths
 macrosdir: macros # Macro directory
 bibdir: $HOME/lawrennd/bibliography # Bibliography directory
@@ -15,7 +15,7 @@ practicalsdir: ../_practicals/ # Where compiled practicals go
 snippetsdir: $HOME/lawrennd/snippets # Directory for reusable content snippets
 writediagramsdir: . # Where to write generated diagrams
 scriptsdir: ../scripts/ # Directory for scripts
-diagramsdir: ../slides/diagrams/ # Directory for diagrams (with slidesdir)
+diagramsdir: ../slides/diagrams/
 # Layout and styling
 slidesheader: slides-header.html
 notation: talk-notation.tex
