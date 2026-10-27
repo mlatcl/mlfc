@@ -1,21 +1,22 @@
 # Author information - update with your details
 author:
-  - given: Your
-    family: Name
-    institution: Your Institution
-    url: http://example.com
+  - given: Neil
+    family: Lawrence
+    institution: University of Cambridge
+    url: http://inverseprobability.com
 # Directory paths
 macrosdir: macros # Macro directory
 bibdir: $HOME/lawrennd/bibliography # Bibliography directory
 postsdir: ../_lectures/ # Where compiled lecture HTML files go
-slidesdir: ../slides/ # Where compiled slides go
+slidesdir: ../slides/ # Compiled slide HTML. copy_web_diagrams writes published figures into slides/diagrams/ here
 notesdir: ../_notes/ # Where compiled notes go
 notebooksdir: ../_notebooks/ # Where compiled notebooks go
 practicalsdir: ../_practicals/ # Where compiled practicals go
 snippetsdir: $HOME/lawrennd/snippets # Directory for reusable content snippets
-writediagramsdir: . # Where to write generated diagrams
+writediagramsdir: . # Where the build writes newly created diagrams (not the shared library)
 scriptsdir: ../scripts/ # Directory for scripts
-diagramsdir: ../slides/diagrams/ # Directory for diagrams (with slidesdir)
+diagramsdir: $HOME/lawrennd/slides/diagrams/ # Filesystem SOURCE library. copy_web_diagrams reads from here; not a URL
+diagramswebpath: slides/diagrams/ # Published URL path after url+baseurl. HTML \diagramsDir uses this, not diagramsdir
 # Layout and styling
 slidesheader: slides-header.html
 notation: talk-notation.tex
