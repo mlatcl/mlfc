@@ -35,9 +35,12 @@ _site/
 .bundle/
 Gemfile.lock
 
-# Ignore by default all hidden files except .gitignore
+# Ignore by default all hidden files except .gitignore and CI workflows
 .*
-!.gitignore 
+!.gitignore
+!.github/
+!.github/**
+
 # VibeSafe System Files (Auto-added during installation)
 # These are VibeSafe infrastructure - not your project content
 
@@ -80,3 +83,7 @@ tenets/combine_tenets.py
 docs/whats_next_script.md
 docs/yaml_frontmatter_examples.md
 .cursor/rules/project_tenet_*.mdc
+
+# Local Python env and notebook smoke artefacts
+.venv/
+_notebooks/test-results/
