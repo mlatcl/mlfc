@@ -1,0 +1,20 @@
+# Course-specific notebook smoke defaults (scripts/smoke_notebooks.py).
+# skip: filename prefixes to omit. plot_dirs: extra dirs created under _notebooks.
+# timeout_by_prefix: optional per-prefix cell timeouts in seconds.
+#
+# The runner only selects NN-*.ipynb (e.g. 01-01-probability.ipynb).
+# Project notebooks, Untitled*.ipynb, and Richness_of_ReLU_DNNs.ipynb
+# are therefore excluded by glob, not by this skip list.
+skip:
+  - 01-geospatial-practical
+  - 02-pandas-practical
+  - 02-chimpanzees-clustering
+  - 02-clustering-chimpanzees
+  - 03-dataset-joining-practical
+  - 04-collaborative-filtering-practical
+  - 05-chimpanzees-clustering
+  - 06-ml-power-systems          # guest practical, not a lecture notebook
+plot_dirs:
+  - ./maths
+timeout: 900
+timeout_by_prefix: {}
