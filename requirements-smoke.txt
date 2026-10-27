@@ -10,7 +10,7 @@ ipython>=8.0
 
 # Teaching stack (match lecture %pip install cells)
 GPy>=1.13
-git+https://github.com/lawrennd/mlai.git#egg=mlai
+git+https://github.com/lawrennd/mlai.git@c5c054f#egg=mlai
 git+https://github.com/lawrennd/ods.git#egg=pods
 git+https://github.com/lawrennd/notutils.git#egg=notutils
 
