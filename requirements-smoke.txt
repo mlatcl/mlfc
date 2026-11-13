@@ -8,11 +8,12 @@ ipykernel>=6.29
 ipywidgets>=8.1
 ipython>=8.0
 
-# Teaching stack (match lecture %pip install cells)
+# Teaching stack (match lecture %pip install cells).
+# Pinned to package tips as of 2026-11-13 (uv packaging cutovers + mlai coverage).
 GPy>=1.13
-git+https://github.com/lawrennd/mlai.git@c5c054f#egg=mlai
-git+https://github.com/lawrennd/ods.git#egg=pods
-git+https://github.com/lawrennd/notutils.git#egg=notutils
+git+https://github.com/lawrennd/mlai.git@1c6901d#egg=mlai
+git+https://github.com/lawrennd/ods.git@b8d8a5c#egg=pods
+git+https://github.com/lawrennd/notutils.git@0486f79#egg=notutils
 
 # Used by lecture notebooks
 matplotlib>=3.8
